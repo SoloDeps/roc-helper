@@ -1,0 +1,2318 @@
+{
+  "buildings": [
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Average_Aviary|construction|AF|1",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "cocoa": 75000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 3450
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 2170
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 1330
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Average_Aviary|upgrade|AF|2",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "cocoa": 34000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 775
+          },
+          {
+            "type": "secondary_af",
+            "amount": 385
+          },
+          {
+            "type": "headdress",
+            "amount": 750
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 815
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Average_Aviary|upgrade|AF|3",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "cocoa": 45000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 845
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 425
+          },
+          {
+            "type": "headdress",
+            "amount": 2155
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 2335
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Ceremony_Outfitter|construction|AF|2",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "cocoa": 100000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 3900
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 2250
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 2750
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Jade_Quarry|construction|BE|1",
+      "quantity": 2,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 10000,
+        "goods": [
+          {
+            "type": "goblet",
+            "amount": 625
+          },
+          {
+            "type": "mosaic",
+            "amount": 625
+          },
+          {
+            "type": "cape",
+            "amount": 625
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Jade_Quarry|upgrade|AF|4",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 180000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 1125
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 2015
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 1235
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Jade_Quarry|upgrade|AF|5",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 240000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 555
+          },
+          {
+            "type": "secondary_af",
+            "amount": 275
+          },
+          {
+            "type": "headdress",
+            "amount": 750
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 815
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Jade_Quarry|upgrade|AF|6",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 310000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 605
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 305
+          },
+          {
+            "type": "headdress",
+            "amount": 2155
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 2335
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Jade_Quarry|upgrade|BE|2",
+      "quantity": 2,
+      "maxQty": 3,
+      "costs": {
+        "cocoa": 92000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 430
+          },
+          {
+            "type": "secondary_be",
+            "amount": 215
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 310
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 190
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Jade_Quarry|upgrade|BE|3",
+      "quantity": 2,
+      "maxQty": 3,
+      "costs": {
+        "cocoa": 120000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 475
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 240
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 1920
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 1180
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Obsidian_Quarry|construction|BE|1",
+      "quantity": 2,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 10000,
+        "goods": [
+          {
+            "type": "goblet",
+            "amount": 625
+          },
+          {
+            "type": "mosaic",
+            "amount": 625
+          },
+          {
+            "type": "cape",
+            "amount": 625
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Obsidian_Quarry|upgrade|AF|4",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 180000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 1125
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 2015
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 1235
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Obsidian_Quarry|upgrade|AF|5",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 240000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 555
+          },
+          {
+            "type": "secondary_af",
+            "amount": 275
+          },
+          {
+            "type": "headdress",
+            "amount": 750
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 815
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Obsidian_Quarry|upgrade|AF|6",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "cocoa": 310000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 605
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 305
+          },
+          {
+            "type": "headdress",
+            "amount": 2155
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 2335
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Obsidian_Quarry|upgrade|BE|2",
+      "quantity": 2,
+      "maxQty": 3,
+      "costs": {
+        "cocoa": 92000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 430
+          },
+          {
+            "type": "secondary_be",
+            "amount": 215
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 310
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 190
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Obsidian_Quarry|upgrade|BE|3",
+      "quantity": 2,
+      "maxQty": 3,
+      "costs": {
+        "cocoa": 120000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 475
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 240
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 1920
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 1180
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Priest_Home|construction|BE|1",
+      "quantity": 7,
+      "maxQty": 13,
+      "costs": {
+        "cocoa": 5000,
+        "goods": [
+          {
+            "type": "goblet",
+            "amount": 500
+          },
+          {
+            "type": "mosaic",
+            "amount": 500
+          },
+          {
+            "type": "cape",
+            "amount": 500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Priest_Home|upgrade|AF|4",
+      "quantity": 13,
+      "maxQty": 13,
+      "costs": {
+        "cocoa": 83000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 900
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 1610
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 990
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Priest_Home|upgrade|AF|5",
+      "quantity": 13,
+      "maxQty": 13,
+      "costs": {
+        "cocoa": 110000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 445
+          },
+          {
+            "type": "secondary_af",
+            "amount": 220
+          },
+          {
+            "type": "headdress",
+            "amount": 600
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 650
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Priest_Home|upgrade|AF|6",
+      "quantity": 13,
+      "maxQty": 13,
+      "costs": {
+        "cocoa": 150000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 485
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 240
+          },
+          {
+            "type": "headdress",
+            "amount": 1725
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 1870
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Priest_Home|upgrade|BE|2",
+      "quantity": 6,
+      "maxQty": 6,
+      "costs": {
+        "cocoa": 44000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 345
+          },
+          {
+            "type": "secondary_be",
+            "amount": 170
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 250
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 150
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Priest_Home|upgrade|BE|3",
+      "quantity": 6,
+      "maxQty": 6,
+      "costs": {
+        "cocoa": 58000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 385
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 190
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 1540
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 940
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Ritual_Carver|construction|AF|2",
+      "quantity": 2,
+      "maxQty": 3,
+      "costs": {
+        "cocoa": 150000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 3900
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 2925
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 3575
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Ritual_Sites|construction|BE|2",
+      "quantity": 3,
+      "maxQty": 7,
+      "costs": {
+        "cocoa": 15000,
+        "goods": [
+          {
+            "type": "cape",
+            "amount": 225
+          },
+          {
+            "type": "mosaic",
+            "amount": 225
+          },
+          {
+            "type": "goblet",
+            "amount": 225
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Ritual_Sites|construction|BE|3",
+      "quantity": 3,
+      "maxQty": 7,
+      "costs": {
+        "cocoa": 30000,
+        "goods": [
+          {
+            "type": "cape",
+            "amount": 350
+          },
+          {
+            "type": "mosaic",
+            "amount": 350
+          },
+          {
+            "type": "goblet",
+            "amount": 350
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Worker_Home|construction|BE|1",
+      "quantity": 8,
+      "maxQty": 23,
+      "costs": {
+        "cocoa": 2500,
+        "goods": [
+          {
+            "type": "goblet",
+            "amount": 250
+          },
+          {
+            "type": "mosaic",
+            "amount": 250
+          },
+          {
+            "type": "cape",
+            "amount": 250
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Worker_Home|upgrade|AF|4",
+      "quantity": 23,
+      "maxQty": 23,
+      "costs": {
+        "cocoa": 23000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 450
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 405
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 245
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Worker_Home|upgrade|AF|5",
+      "quantity": 23,
+      "maxQty": 23,
+      "costs": {
+        "cocoa": 32000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 220
+          },
+          {
+            "type": "secondary_af",
+            "amount": 110
+          },
+          {
+            "type": "headdress",
+            "amount": 150
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 165
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Worker_Home|upgrade|AF|6",
+      "quantity": 23,
+      "maxQty": 23,
+      "costs": {
+        "cocoa": 41000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 245
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 120
+          },
+          {
+            "type": "headdress",
+            "amount": 430
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 470
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Worker_Home|upgrade|BE|2",
+      "quantity": 8,
+      "maxQty": 15,
+      "costs": {
+        "cocoa": 12000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 175
+          },
+          {
+            "type": "secondary_be",
+            "amount": 87
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 62
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 38
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Maya_Empire/Worker_Home|upgrade|BE|3",
+      "quantity": 8,
+      "maxQty": 15,
+      "costs": {
+        "cocoa": 16000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 190
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 95
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 385
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 235
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Cavalry_Barracks|upgrade|AF|8",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 4000000,
+        "food": 2560000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 2700
+          },
+          {
+            "type": "parchment",
+            "amount": 2700
+          },
+          {
+            "type": "pepper",
+            "amount": 2700
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Heavy_Infantry_Barracks|upgrade|AF|8",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 4600000,
+        "food": 3260000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 3100
+          },
+          {
+            "type": "parchment",
+            "amount": 3100
+          },
+          {
+            "type": "pepper",
+            "amount": 3100
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Infantry_Barracks|upgrade|AF|8",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "coins": 2930000,
+        "food": 1750000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 2250
+          },
+          {
+            "type": "parchment",
+            "amount": 2250
+          },
+          {
+            "type": "pepper",
+            "amount": 2250
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Ranged_Barracks|upgrade|AF|8",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 3600000,
+        "food": 2190000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 2470
+          },
+          {
+            "type": "parchment",
+            "amount": 2470
+          },
+          {
+            "type": "pepper",
+            "amount": 2470
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Siege_Barracks|upgrade|AF|8",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 5700000,
+        "food": 4000000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 3880
+          },
+          {
+            "type": "parchment",
+            "amount": 3880
+          },
+          {
+            "type": "pepper",
+            "amount": 3880
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Compact_Culture_Site|upgrade|AF|8",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 330000,
+        "food": 205000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Large_Culture_Site|upgrade|AF|8",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 2390000,
+        "food": 1470000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Little_Culture_Site|upgrade|AF|8",
+      "quantity": 7,
+      "maxQty": 7,
+      "costs": {
+        "coins": 193000,
+        "food": 122000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Moderate_Culture_Site|upgrade|AF|8",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "coins": 700000,
+        "food": 440000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|AF|22",
+      "quantity": 8,
+      "maxQty": 8,
+      "costs": {
+        "coins": 800000,
+        "food": 350000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 1610
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 2385
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 1465
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|AF|23",
+      "quantity": 8,
+      "maxQty": 8,
+      "costs": {
+        "coins": 870000,
+        "food": 380000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 750
+          },
+          {
+            "type": "secondary_af",
+            "amount": 750
+          },
+          {
+            "type": "headdress",
+            "amount": 1080
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 1170
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|AF|24",
+      "quantity": 8,
+      "maxQty": 8,
+      "costs": {
+        "coins": 960000,
+        "food": 420000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 820
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 820
+          },
+          {
+            "type": "headdress",
+            "amount": 3105
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 3365
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|construction|AF|22",
+      "quantity": 1,
+      "maxQty": 10,
+      "costs": {
+        "coins": 4600000,
+        "food": 2000000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 14150
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 4540
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 2785
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|AF|22",
+      "quantity": 9,
+      "maxQty": 10,
+      "costs": {
+        "coins": 560000,
+        "food": 240000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 1135
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 1590
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 975
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|AF|23",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "coins": 610000,
+        "food": 260000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 530
+          },
+          {
+            "type": "secondary_af",
+            "amount": 530
+          },
+          {
+            "type": "headdress",
+            "amount": 720
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 780
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|AF|24",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "coins": 670000,
+        "food": 290000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 580
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 580
+          },
+          {
+            "type": "headdress",
+            "amount": 2070
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 2245
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|construction|AF|22",
+      "quantity": 1,
+      "maxQty": 9,
+      "costs": {
+        "coins": 1800000,
+        "food": 4100000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 11800
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 3790
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 2320
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|AF|22",
+      "quantity": 8,
+      "maxQty": 9,
+      "costs": {
+        "coins": 210000,
+        "food": 480000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 945
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 1325
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 815
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|AF|23",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 230000,
+        "food": 530000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 440
+          },
+          {
+            "type": "secondary_af",
+            "amount": 440
+          },
+          {
+            "type": "headdress",
+            "amount": 600
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 650
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|AF|24",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 260000,
+        "food": 580000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 485
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 485
+          },
+          {
+            "type": "headdress",
+            "amount": 1725
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 1870
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|construction|AF|22",
+      "quantity": 1,
+      "maxQty": 25,
+      "costs": {
+        "coins": 660000,
+        "food": 1600000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 4725
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 1515
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 925
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|AF|22",
+      "quantity": 24,
+      "maxQty": 25,
+      "costs": {
+        "coins": 80000,
+        "food": 190000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 375
+          },
+          {
+            "type": "ancestor_mask",
+            "amount": 530
+          },
+          {
+            "type": "calendar_stone",
+            "amount": 325
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|AF|23",
+      "quantity": 25,
+      "maxQty": 25,
+      "costs": {
+        "coins": 87000,
+        "food": 210000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 175
+          },
+          {
+            "type": "secondary_af",
+            "amount": 175
+          },
+          {
+            "type": "headdress",
+            "amount": 240
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 260
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|AF|24",
+      "quantity": 25,
+      "maxQty": 25,
+      "costs": {
+        "coins": 96000,
+        "food": 230000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 195
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 195
+          },
+          {
+            "type": "headdress",
+            "amount": 690
+          },
+          {
+            "type": "ritual_dagger",
+            "amount": 750
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Carpenter|upgrade|AF|2",
+      "quantity": 1,
+      "maxQty": 4,
+      "costs": {
+        "coins": 3600000,
+        "food": 2100000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 1350
+          },
+          {
+            "type": "parchment",
+            "amount": 1350
+          },
+          {
+            "type": "pepper",
+            "amount": 1350
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Scribe|construction|AF|2",
+      "quantity": 1,
+      "maxQty": 4,
+      "costs": {
+        "coins": 11000000,
+        "food": 6400000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 4720
+          },
+          {
+            "type": "parchment",
+            "amount": 4720
+          },
+          {
+            "type": "pepper",
+            "amount": 4720
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Scribe|upgrade|AF|2",
+      "quantity": 3,
+      "maxQty": 4,
+      "costs": {
+        "coins": 3600000,
+        "food": 2100000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 1350
+          },
+          {
+            "type": "parchment",
+            "amount": 1350
+          },
+          {
+            "type": "pepper",
+            "amount": 1350
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Spice_Merchant|upgrade|AF|2",
+      "quantity": 1,
+      "maxQty": 4,
+      "costs": {
+        "coins": 3600000,
+        "food": 2100000,
+        "goods": [
+          {
+            "type": "planks",
+            "amount": 1350
+          },
+          {
+            "type": "parchment",
+            "amount": 1350
+          },
+          {
+            "type": "pepper",
+            "amount": 1350
+          }
+        ]
+      }
+    }
+  ],
+  "technos": [
+    {
+      "id": "techno_age_of_the_franks_0",
+      "costs": {
+        "research_points": 52,
+        "coins": 806000,
+        "food": 645000,
+        "goods": [
+          {
+            "type": "tertiary_er",
+            "amount": 1500
+          },
+          {
+            "type": "secondary_be",
+            "amount": 2020
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 4850
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_1",
+      "costs": {
+        "research_points": 39,
+        "coins": 760000,
+        "food": 603000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 4650
+          },
+          {
+            "type": "primary_re",
+            "amount": 1860
+          },
+          {
+            "type": "primary_be",
+            "amount": 5580
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_10",
+      "costs": {
+        "research_points": 49,
+        "coins": 1000000,
+        "food": 791000,
+        "goods": [
+          {
+            "type": "tertiary_cg",
+            "amount": 3930
+          },
+          {
+            "type": "secondary_be",
+            "amount": 4720
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 1180
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_11",
+      "costs": {
+        "research_points": 54,
+        "coins": 1000000,
+        "food": 542000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 2230
+          },
+          {
+            "type": "secondary_af",
+            "amount": 890
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 3570
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_12",
+      "costs": {
+        "research_points": 57,
+        "coins": 1600000,
+        "food": 735000,
+        "goods": [
+          {
+            "type": "tertiary_re",
+            "amount": 3170
+          },
+          {
+            "type": "secondary_be",
+            "amount": 5700
+          },
+          {
+            "type": "primary_af",
+            "amount": 950
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_13",
+      "costs": {
+        "research_points": 50,
+        "coins": 1300000,
+        "food": 1500000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 1320
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 5260
+          },
+          {
+            "type": "primary_af",
+            "amount": 1460
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_14",
+      "costs": {
+        "research_points": 70,
+        "coins": 1300000,
+        "food": 1400000,
+        "goods": [
+          {
+            "type": "primary_re",
+            "amount": 6350
+          },
+          {
+            "type": "primary_be",
+            "amount": 1190
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1320
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_15",
+      "costs": {
+        "research_points": 52,
+        "coins": 1400000,
+        "food": 1100000,
+        "goods": [
+          {
+            "type": "headdress",
+            "amount": 1000
+          },
+          {
+            "type": "primary_af",
+            "amount": 4480
+          },
+          {
+            "type": "secondary_af",
+            "amount": 1920
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_16",
+      "costs": {
+        "research_points": 48,
+        "coins": 1400000,
+        "food": 1000000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 2300
+          },
+          {
+            "type": "primary_af",
+            "amount": 920
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 3680
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_17",
+      "costs": {
+        "research_points": 71,
+        "coins": 974000,
+        "food": 575000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 6220
+          },
+          {
+            "type": "secondary_be",
+            "amount": 1560
+          },
+          {
+            "type": "primary_af",
+            "amount": 1730
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_18",
+      "costs": {
+        "research_points": 64,
+        "coins": 592000,
+        "food": 735000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 1810
+          },
+          {
+            "type": "primary_af",
+            "amount": 2890
+          },
+          {
+            "type": "secondary_af",
+            "amount": 720
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_19",
+      "costs": {
+        "research_points": 68,
+        "coins": 742000,
+        "food": 1300000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 1190
+          },
+          {
+            "type": "secondary_af",
+            "amount": 1320
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 3160
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_2",
+      "costs": {
+        "research_points": 52,
+        "coins": 713000,
+        "food": 942000,
+        "goods": [
+          {
+            "type": "secondary_re",
+            "amount": 7530
+          },
+          {
+            "type": "primary_be",
+            "amount": 2360
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 1410
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_20",
+      "costs": {
+        "research_points": 58,
+        "coins": 1500000,
+        "food": 617000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 4510
+          },
+          {
+            "type": "primary_af",
+            "amount": 750
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1250
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_21",
+      "costs": {
+        "research_points": 69,
+        "coins": 870000,
+        "food": 1700000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 2850
+          },
+          {
+            "type": "secondary_af",
+            "amount": 4560
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1140
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_22",
+      "costs": {
+        "research_points": 54,
+        "coins": 2100000,
+        "food": 509000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 2030
+          },
+          {
+            "type": "primary_af",
+            "amount": 810
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 3250
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_23",
+      "costs": {
+        "research_points": 68,
+        "coins": 1700000,
+        "food": 1000000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 1410
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 5650
+          },
+          {
+            "type": "primary_af",
+            "amount": 1570
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_24",
+      "costs": {
+        "research_points": 56,
+        "coins": 853000,
+        "food": 1100000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 3420
+          },
+          {
+            "type": "secondary_af",
+            "amount": 860
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1430
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_25",
+      "costs": {
+        "research_points": 50,
+        "coins": 1100000,
+        "food": 1500000,
+        "goods": [
+          {
+            "type": "primary_re",
+            "amount": 2650
+          },
+          {
+            "type": "primary_be",
+            "amount": 1190
+          },
+          {
+            "type": "secondary_af",
+            "amount": 3180
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_26",
+      "costs": {
+        "research_points": 56,
+        "coins": 1800000,
+        "food": 1700000,
+        "goods": [
+          {
+            "type": "secondary_er",
+            "amount": 2990
+          },
+          {
+            "type": "secondary_af",
+            "amount": 2870
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 720
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_27",
+      "costs": {
+        "research_points": 56,
+        "coins": 1500000,
+        "food": 1100000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 6240
+          },
+          {
+            "type": "primary_af",
+            "amount": 1740
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1040
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_28",
+      "costs": {
+        "research_points": 57,
+        "coins": 690000,
+        "food": 1200000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 1290
+          },
+          {
+            "type": "secondary_af",
+            "amount": 3430
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1430
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_29",
+      "costs": {
+        "research_points": 64,
+        "coins": 1100000,
+        "food": 603000,
+        "goods": [
+          {
+            "type": "ritual_dagger",
+            "amount": 800
+          },
+          {
+            "type": "secondary_af",
+            "amount": 2010
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 4700
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_3",
+      "costs": {
+        "research_points": 45,
+        "coins": 563000,
+        "food": 1000000,
+        "goods": [
+          {
+            "type": "secondary_er",
+            "amount": 3350
+          },
+          {
+            "type": "secondary_be",
+            "amount": 1210
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 4830
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_30",
+      "costs": {
+        "research_points": 70,
+        "coins": 1300000,
+        "food": 1500000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 5470
+          },
+          {
+            "type": "primary_af",
+            "amount": 910
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1520
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_31",
+      "costs": {
+        "research_points": 65,
+        "coins": 2300000,
+        "food": 100000,
+        "goods": [
+          {
+            "type": "headdress",
+            "amount": 2500
+          },
+          {
+            "type": "secondary_af",
+            "amount": 2050
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 4780
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_32",
+      "costs": {
+        "research_points": 77,
+        "coins": 1100000,
+        "food": 1200000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 1280
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 2130
+          },
+          {
+            "type": "primary_af",
+            "amount": 3400
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_33",
+      "costs": {
+        "research_points": 65,
+        "coins": 696000,
+        "food": 1100000,
+        "goods": [
+          {
+            "type": "secondary_re",
+            "amount": 5740
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 1800
+          },
+          {
+            "type": "secondary_af",
+            "amount": 720
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_34",
+      "costs": {
+        "research_points": 69,
+        "coins": 1600000,
+        "food": 787000,
+        "goods": [
+          {
+            "type": "secondary_re",
+            "amount": 3150
+          },
+          {
+            "type": "secondary_be",
+            "amount": 1420
+          },
+          {
+            "type": "secondary_af",
+            "amount": 3780
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_35",
+      "costs": {
+        "research_points": 68,
+        "coins": 1200000,
+        "food": 1300000,
+        "goods": [
+          {
+            "type": "tertiary_re",
+            "amount": 6920
+          },
+          {
+            "type": "primary_af",
+            "amount": 870
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1440
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_36",
+      "costs": {
+        "research_points": 58,
+        "coins": 1300000,
+        "food": 1600000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 5220
+          },
+          {
+            "type": "primary_af",
+            "amount": 1450
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 870
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_37",
+      "costs": {
+        "research_points": 58,
+        "coins": 1500000,
+        "food": 881000,
+        "goods": [
+          {
+            "type": "primary_er",
+            "amount": 3180
+          },
+          {
+            "type": "secondary_af",
+            "amount": 3050
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 770
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_38",
+      "costs": {
+        "research_points": 48,
+        "coins": 1700000,
+        "food": 843000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 2580
+          },
+          {
+            "type": "primary_af",
+            "amount": 4130
+          },
+          {
+            "type": "secondary_af",
+            "amount": 1030
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_39",
+      "costs": {
+        "research_points": 77,
+        "coins": 840000,
+        "food": 1200000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 1110
+          },
+          {
+            "type": "secondary_af",
+            "amount": 2940
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1230
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_4",
+      "costs": {
+        "research_points": 32,
+        "coins": 1500000,
+        "food": 495000,
+        "goods": [
+          {
+            "type": "primary_re",
+            "amount": 3950
+          },
+          {
+            "type": "primary_af",
+            "amount": 4610
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_40",
+      "costs": {
+        "research_points": 60,
+        "coins": 1700000,
+        "food": 848000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 910
+          },
+          {
+            "type": "secondary_af",
+            "amount": 1520
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 3650
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_41",
+      "costs": {
+        "research_points": 63,
+        "coins": 2000000,
+        "food": 838000,
+        "goods": [
+          {
+            "type": "ritual_dagger",
+            "amount": 2400
+          },
+          {
+            "type": "primary_af",
+            "amount": 4020
+          },
+          {
+            "type": "secondary_af",
+            "amount": 1730
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_42",
+      "costs": {
+        "research_points": 105,
+        "coins": 2100000,
+        "food": 1200000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 1600
+          },
+          {
+            "type": "secondary_af",
+            "amount": 960
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 3830
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_5",
+      "costs": {
+        "research_points": 60,
+        "coins": 1500000,
+        "food": 777000,
+        "goods": [
+          {
+            "type": "secondary_cg",
+            "amount": 4560
+          },
+          {
+            "type": "primary_be",
+            "amount": 5470
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 1370
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_6",
+      "costs": {
+        "research_points": 67,
+        "coins": 2100000,
+        "food": 1800000,
+        "goods": [
+          {
+            "type": "tertiary_er",
+            "amount": 3940
+          },
+          {
+            "type": "tertiary_re",
+            "amount": 7560
+          },
+          {
+            "type": "primary_af",
+            "amount": 950
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_7",
+      "costs": {
+        "research_points": 55,
+        "coins": 1100000,
+        "food": 1600000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 2260
+          },
+          {
+            "type": "secondary_be",
+            "amount": 5260
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_8",
+      "costs": {
+        "research_points": 57,
+        "coins": 1700000,
+        "food": 1100000,
+        "goods": [
+          {
+            "type": "primary_re",
+            "amount": 2510
+          },
+          {
+            "type": "primary_be",
+            "amount": 1130
+          },
+          {
+            "type": "primary_af",
+            "amount": 3010
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_age_of_the_franks_9",
+      "costs": {
+        "research_points": 61,
+        "coins": 1400000,
+        "food": 1600000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 1990
+          },
+          {
+            "type": "secondary_af",
+            "amount": 3180
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 800
+          }
+        ]
+      }
+    }
+  ]
+}

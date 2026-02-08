@@ -1,0 +1,3547 @@
+{
+  "buildings": [
+    {
+      "id": "/wiki/Allied_Cultures/Ottoman_Empire/Ottoman_Empire_Ship|upgrade|EG|2",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "aspers": 30000,
+        "goods": [
+          {
+            "type": "wheat",
+            "amount": 10000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 10000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1500
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 1200
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 750
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Cavalry_Barracks|upgrade|LG|14",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 14700000,
+        "food": 8500000,
+        "goods": [
+          {
+            "type": "lead_glass",
+            "amount": 8670
+          },
+          {
+            "type": "fine_jewelry",
+            "amount": 8670
+          },
+          {
+            "type": "ointment",
+            "amount": 8670
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Heavy_Infantry_Barracks|upgrade|LG|14",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 17800000,
+        "food": 11900000,
+        "goods": [
+          {
+            "type": "lead_glass",
+            "amount": 9870
+          },
+          {
+            "type": "fine_jewelry",
+            "amount": 9870
+          },
+          {
+            "type": "ointment",
+            "amount": 9870
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Infantry_Barracks|upgrade|LG|14",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "coins": 10700000,
+        "food": 5900000,
+        "goods": [
+          {
+            "type": "lead_glass",
+            "amount": 5560
+          },
+          {
+            "type": "fine_jewelry",
+            "amount": 5560
+          },
+          {
+            "type": "ointment",
+            "amount": 5560
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Ranged_Barracks|upgrade|LG|14",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 13700000,
+        "food": 6800000,
+        "goods": [
+          {
+            "type": "lead_glass",
+            "amount": 7115
+          },
+          {
+            "type": "fine_jewelry",
+            "amount": 7115
+          },
+          {
+            "type": "ointment",
+            "amount": 7115
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Siege_Barracks|upgrade|LG|14",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 21400000,
+        "food": 13500000,
+        "goods": [
+          {
+            "type": "lead_glass",
+            "amount": 12340
+          },
+          {
+            "type": "fine_jewelry",
+            "amount": 12340
+          },
+          {
+            "type": "ointment",
+            "amount": 12340
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Compact_Culture_Site|upgrade|EG|13",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 1100000,
+        "food": 600000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Large_Culture_Site|upgrade|EG|13",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 8000000,
+        "food": 4300000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Little_Culture_Site|construction|EG|13",
+      "quantity": 1,
+      "maxQty": 9,
+      "costs": {
+        "coins": 3400000,
+        "food": 1900000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Little_Culture_Site|upgrade|EG|13",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 650000,
+        "food": 350000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Moderate_Culture_Site|construction|EG|13",
+      "quantity": 1,
+      "maxQty": 6,
+      "costs": {
+        "coins": 11800000,
+        "food": 7000000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Moderate_Culture_Site|upgrade|EG|13",
+      "quantity": 5,
+      "maxQty": 6,
+      "costs": {
+        "coins": 2300000,
+        "food": 1300000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|construction|EG|37",
+      "quantity": 1,
+      "maxQty": 11,
+      "costs": {
+        "coins": 35000000,
+        "food": 15000000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 8000
+          },
+          {
+            "type": "grimoire",
+            "amount": 8000
+          },
+          {
+            "type": "cinnamon",
+            "amount": 8000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|EG|37",
+      "quantity": 10,
+      "maxQty": 11,
+      "costs": {
+        "coins": 2650000,
+        "food": 1020000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 2000
+          },
+          {
+            "type": "grimoire",
+            "amount": 2000
+          },
+          {
+            "type": "cinnamon",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|EG|38",
+      "quantity": 11,
+      "maxQty": 11,
+      "costs": {
+        "coins": 2800000,
+        "food": 1080000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 1500
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1500
+          },
+          {
+            "type": "wheat",
+            "amount": 10000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 10000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|EG|39",
+      "quantity": 11,
+      "maxQty": 11,
+      "costs": {
+        "coins": 2950000,
+        "food": 1150000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 2000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 2000
+          },
+          {
+            "type": "confection",
+            "amount": 7500
+          },
+          {
+            "type": "syrup",
+            "amount": 7500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|construction|EG|37",
+      "quantity": 1,
+      "maxQty": 13,
+      "costs": {
+        "coins": 25000000,
+        "food": 10000000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 6000
+          },
+          {
+            "type": "grimoire",
+            "amount": 6000
+          },
+          {
+            "type": "cinnamon",
+            "amount": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|EG|37",
+      "quantity": 12,
+      "maxQty": 13,
+      "costs": {
+        "coins": 1850000,
+        "food": 720000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 1200
+          },
+          {
+            "type": "grimoire",
+            "amount": 1200
+          },
+          {
+            "type": "cinnamon",
+            "amount": 1200
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|EG|38",
+      "quantity": 13,
+      "maxQty": 13,
+      "costs": {
+        "coins": 2000000,
+        "food": 780000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 1000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1000
+          },
+          {
+            "type": "wheat",
+            "amount": 8500
+          },
+          {
+            "type": "pomegranate",
+            "amount": 8500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|EG|39",
+      "quantity": 13,
+      "maxQty": 13,
+      "costs": {
+        "coins": 2150000,
+        "food": 850000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 1800
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1800
+          },
+          {
+            "type": "confection",
+            "amount": 6000
+          },
+          {
+            "type": "syrup",
+            "amount": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Harbor_Houses/Seafarer_House|construction|EG|1",
+      "quantity": 14,
+      "maxQty": 14,
+      "costs": {
+        "coins": 250000,
+        "food": 100000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 1000
+          },
+          {
+            "type": "grimoire",
+            "amount": 1000
+          },
+          {
+            "type": "cinnamon",
+            "amount": 1000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Harbor_Houses/Seafarer_House|upgrade|EG|2",
+      "quantity": 14,
+      "maxQty": 14,
+      "costs": {
+        "food": 75000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 1000
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 750
+          },
+          {
+            "type": "wheat",
+            "amount": 5000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|construction|EG|37",
+      "quantity": 1,
+      "maxQty": 14,
+      "costs": {
+        "coins": 9800000,
+        "food": 21000000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 5000
+          },
+          {
+            "type": "grimoire",
+            "amount": 5000
+          },
+          {
+            "type": "cinnamon",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|EG|37",
+      "quantity": 13,
+      "maxQty": 14,
+      "costs": {
+        "coins": 710000,
+        "food": 1350000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 1400
+          },
+          {
+            "type": "grimoire",
+            "amount": 1400
+          },
+          {
+            "type": "cinnamon",
+            "amount": 1400
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|EG|38",
+      "quantity": 14,
+      "maxQty": 14,
+      "costs": {
+        "coins": 750000,
+        "food": 1400000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 1000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1000
+          },
+          {
+            "type": "wheat",
+            "amount": 6500
+          },
+          {
+            "type": "pomegranate",
+            "amount": 6500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|EG|39",
+      "quantity": 14,
+      "maxQty": 14,
+      "costs": {
+        "coins": 790000,
+        "food": 1450000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 1400
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1400
+          },
+          {
+            "type": "confection",
+            "amount": 4500
+          },
+          {
+            "type": "syrup",
+            "amount": 4500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|construction|EG|37",
+      "quantity": 1,
+      "maxQty": 30,
+      "costs": {
+        "coins": 3500000,
+        "food": 8200000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 2500
+          },
+          {
+            "type": "grimoire",
+            "amount": 2500
+          },
+          {
+            "type": "cinnamon",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|EG|37",
+      "quantity": 29,
+      "maxQty": 30,
+      "costs": {
+        "coins": 275000,
+        "food": 550000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 700
+          },
+          {
+            "type": "grimoire",
+            "amount": 700
+          },
+          {
+            "type": "cinnamon",
+            "amount": 700
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|EG|38",
+      "quantity": 30,
+      "maxQty": 30,
+      "costs": {
+        "coins": 290000,
+        "food": 580000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 500
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 500
+          },
+          {
+            "type": "wheat",
+            "amount": 3500
+          },
+          {
+            "type": "pomegranate",
+            "amount": 3500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|EG|39",
+      "quantity": 30,
+      "maxQty": 30,
+      "costs": {
+        "coins": 305000,
+        "food": 610000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 800
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 800
+          },
+          {
+            "type": "confection",
+            "amount": 1500
+          },
+          {
+            "type": "syrup",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Ships/Shipyard|construction|EG|1",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 1500000,
+        "food": 750000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 2500
+          },
+          {
+            "type": "grimoire",
+            "amount": 2500
+          },
+          {
+            "type": "cinnamon",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Warehouses/Common_Warehouse|construction|EG|1",
+      "quantity": 8,
+      "maxQty": 8,
+      "costs": {
+        "coins": 750000,
+        "food": 250000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 1500
+          },
+          {
+            "type": "grimoire",
+            "amount": 1500
+          },
+          {
+            "type": "cinnamon",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Alchemist|construction|EG|1",
+      "quantity": 1,
+      "maxQty": 3,
+      "costs": {
+        "coins": 50000000,
+        "food": 30000000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 5500
+          },
+          {
+            "type": "grimoire",
+            "amount": 5500
+          },
+          {
+            "type": "cinnamon",
+            "amount": 5500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Glassblower|construction|EG|1",
+      "quantity": 1,
+      "maxQty": 3,
+      "costs": {
+        "coins": 50000000,
+        "food": 30000000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 5500
+          },
+          {
+            "type": "grimoire",
+            "amount": 5500
+          },
+          {
+            "type": "cinnamon",
+            "amount": 5500
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Jeweler|construction|EG|1",
+      "quantity": 3,
+      "maxQty": 3,
+      "costs": {
+        "coins": 50000000,
+        "food": 30000000,
+        "goods": [
+          {
+            "type": "secretary_desk",
+            "amount": 5500
+          },
+          {
+            "type": "grimoire",
+            "amount": 5500
+          },
+          {
+            "type": "cinnamon",
+            "amount": 5500
+          }
+        ]
+      }
+    }
+  ],
+  "technos": [
+    {
+      "id": "techno_early_gothic_era_0",
+      "costs": {
+        "research_points": 100,
+        "coins": 2900000,
+        "food": 3500000,
+        "goods": [
+          {
+            "type": "tertiary_hm",
+            "amount": 13500
+          },
+          {
+            "type": "primary_hm",
+            "amount": 5700
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_1",
+      "costs": {
+        "research_points": 110,
+        "coins": 5900000,
+        "food": 3200000,
+        "goods": [
+          {
+            "type": "primary_hm",
+            "amount": 13000
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 5350
+          },
+          {
+            "type": "primary_ks",
+            "amount": 4300
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_10",
+      "costs": {
+        "research_points": 115,
+        "coins": 5500000,
+        "food": 3400000,
+        "goods": [
+          {
+            "type": "primary_hm",
+            "amount": 12100
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 6800
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_11",
+      "costs": {
+        "research_points": 110,
+        "coins": 7300000,
+        "food": 3200000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 7000
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 4500
+          },
+          {
+            "type": "primary_ks",
+            "amount": 3500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_12",
+      "costs": {
+        "research_points": 150,
+        "coins": 8800000,
+        "food": 7200000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 8000
+          },
+          {
+            "type": "primary_ks",
+            "amount": 6600
+          },
+          {
+            "type": "primary_eg",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_13",
+      "costs": {
+        "research_points": 120,
+        "coins": 7200000,
+        "food": 7500000,
+        "goods": [
+          {
+            "type": "tertiary_ks",
+            "amount": 27000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 5000
+          },
+          {
+            "type": "wheat",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_14",
+      "costs": {
+        "research_points": 125,
+        "coins": 3100000,
+        "food": 7200000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 11000
+          },
+          {
+            "type": "wheat",
+            "amount": 7500
+          },
+          {
+            "type": "pomegranate",
+            "amount": 7500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_15",
+      "costs": {
+        "research_points": 90,
+        "coins": 2500000,
+        "food": 2600000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 6500
+          },
+          {
+            "type": "primary_hm",
+            "amount": 4050
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1650
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_16",
+      "costs": {
+        "research_points": 92,
+        "coins": 7600000,
+        "food": 4200000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 7200
+          },
+          {
+            "type": "tertiary_hm",
+            "amount": 4500
+          },
+          {
+            "type": "secondary_ks",
+            "amount": 3600
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_17",
+      "costs": {
+        "research_points": 110,
+        "coins": 9400000,
+        "food": 4700000,
+        "goods": [
+          {
+            "type": "secondary_hm",
+            "amount": 13500
+          },
+          {
+            "type": "secondary_ks",
+            "amount": 7650
+          },
+          {
+            "type": "pomegranate",
+            "amount": 10000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_18",
+      "costs": {
+        "research_points": 105,
+        "coins": 3700000,
+        "food": 6500000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 7250
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 4550
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 3650
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_19",
+      "costs": {
+        "research_points": 110,
+        "coins": 7600000,
+        "food": 2700000,
+        "goods": [
+          {
+            "type": "tertiary_hm",
+            "amount": 9250
+          },
+          {
+            "type": "primary_eg",
+            "amount": 2550
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1550
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_2",
+      "costs": {
+        "research_points": 28,
+        "coins": 5900000,
+        "food": 4000000,
+        "goods": [
+          {
+            "type": "secondary_hm",
+            "amount": 10000
+          },
+          {
+            "type": "tertiary_hm",
+            "amount": 4250
+          },
+          {
+            "type": "primary_ie",
+            "amount": 4250
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_20",
+      "costs": {
+        "research_points": 185,
+        "coins": 8400000,
+        "food": 4100000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 7150
+          },
+          {
+            "type": "primary_ks",
+            "amount": 6000
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 1800
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_21",
+      "costs": {
+        "research_points": 120,
+        "coins": 5200000,
+        "food": 2500000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 7500
+          },
+          {
+            "type": "primary_hm",
+            "amount": 4700
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 3750
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_22",
+      "costs": {
+        "research_points": 115,
+        "coins": 7500000,
+        "food": 4300000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 8000
+          },
+          {
+            "type": "primary_ie",
+            "amount": 8500
+          },
+          {
+            "type": "wheat",
+            "amount": 15000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_23",
+      "costs": {
+        "research_points": 180,
+        "coins": 3300000,
+        "food": 6600000,
+        "goods": [
+          {
+            "type": "secondary_ie",
+            "amount": 23750
+          },
+          {
+            "type": "tertiary_hm",
+            "amount": 6200
+          },
+          {
+            "type": "pomegranate",
+            "amount": 15000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_24",
+      "costs": {
+        "research_points": 140,
+        "coins": 8100000,
+        "food": 6400000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 7750
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 4850
+          },
+          {
+            "type": "primary_ks",
+            "amount": 4000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_25",
+      "costs": {
+        "research_points": 140,
+        "coins": 5400000,
+        "food": 5600000,
+        "goods": [
+          {
+            "type": "secondary_ks",
+            "amount": 13750
+          },
+          {
+            "type": "tertiary_ie",
+            "amount": 7150
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1750
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_26",
+      "costs": {
+        "research_points": 180,
+        "coins": 9000000,
+        "food": 5300000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 6700
+          },
+          {
+            "type": "primary_hm",
+            "amount": 4200
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 3350
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_27",
+      "costs": {
+        "research_points": 140,
+        "coins": 7900000,
+        "food": 2200000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 6850
+          },
+          {
+            "type": "secondary_ks",
+            "amount": 5700
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1700
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_28",
+      "costs": {
+        "research_points": 120,
+        "coins": 3000000,
+        "food": 3700000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 8700
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 3600
+          },
+          {
+            "type": "tertiary_ie",
+            "amount": 5450
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_29",
+      "costs": {
+        "research_points": 100,
+        "coins": 4600000,
+        "food": 5500000,
+        "goods": [
+          {
+            "type": "primary_hm",
+            "amount": 13200
+          },
+          {
+            "type": "secondary_ks",
+            "amount": 7550
+          },
+          {
+            "type": "confection",
+            "amount": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_3",
+      "costs": {
+        "research_points": 140,
+        "coins": 9900000,
+        "food": 3900000,
+        "goods": [
+          {
+            "type": "tertiary_hm",
+            "amount": 14500
+          },
+          {
+            "type": "secondary_ie",
+            "amount": 10500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_30",
+      "costs": {
+        "research_points": 145,
+        "coins": 8500000,
+        "food": 3300000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 9000
+          },
+          {
+            "type": "tertiary_hm",
+            "amount": 5550
+          },
+          {
+            "type": "primary_eg",
+            "amount": 2200
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_31",
+      "costs": {
+        "research_points": 125,
+        "coins": 3800000,
+        "food": 4900000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 8850
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 7350
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 2200
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_32",
+      "costs": {
+        "research_points": 110,
+        "coins": 2300000,
+        "food": 3800000,
+        "goods": [
+          {
+            "type": "tertiary_ie",
+            "amount": 20100
+          },
+          {
+            "type": "primary_hm",
+            "amount": 5200
+          },
+          {
+            "type": "syrup",
+            "amount": 7500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_33",
+      "costs": {
+        "research_points": 190,
+        "coins": 3800000,
+        "food": 4300000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 7500
+          },
+          {
+            "type": "primary_ie",
+            "amount": 7600
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 1800
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_34",
+      "costs": {
+        "research_points": 105,
+        "coins": 7600000,
+        "food": 4700000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 8750
+          },
+          {
+            "type": "secondary_ks",
+            "amount": 7300
+          },
+          {
+            "type": "primary_ks",
+            "amount": 4400
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_35",
+      "costs": {
+        "research_points": 110,
+        "coins": 6400000,
+        "food": 2100000,
+        "goods": [
+          {
+            "type": "primary_hm",
+            "amount": 10450
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 4350
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1750
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_36",
+      "costs": {
+        "research_points": 105,
+        "coins": 8100000,
+        "food": 6000000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 9750
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 8350
+          },
+          {
+            "type": "syrup",
+            "amount": 9000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_37",
+      "costs": {
+        "research_points": 135,
+        "coins": 3100000,
+        "food": 3900000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 6700
+          },
+          {
+            "type": "tertiary_hm",
+            "amount": 4200
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_38",
+      "costs": {
+        "research_points": 140,
+        "coins": 3800000,
+        "food": 3900000,
+        "goods": [
+          {
+            "type": "tertiary_hm",
+            "amount": 14850
+          },
+          {
+            "type": "tertiary_ie",
+            "amount": 10500
+          },
+          {
+            "type": "confection",
+            "amount": 9000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_39",
+      "costs": {
+        "research_points": 105,
+        "coins": 3100000,
+        "food": 6000000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 8000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 3300
+          },
+          {
+            "type": "secondary_ks",
+            "amount": 4000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_4",
+      "costs": {
+        "research_points": 69,
+        "coins": 3200000,
+        "food": 3100000,
+        "goods": [
+          {
+            "type": "primary_ie",
+            "amount": 19000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 3300
+          },
+          {
+            "type": "carpet",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_40",
+      "costs": {
+        "research_points": 125,
+        "coins": 4500000,
+        "food": 2800000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 7500
+          },
+          {
+            "type": "tertiary_hm",
+            "amount": 4750
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 3000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_41",
+      "costs": {
+        "research_points": 135,
+        "coins": 3900000,
+        "food": 5200000,
+        "goods": [
+          {
+            "type": "primary_ks",
+            "amount": 16500
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 3500
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 4100
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_42",
+      "costs": {
+        "research_points": 115,
+        "coins": 9700000,
+        "food": 6400000,
+        "goods": [
+          {
+            "type": "tertiary_eg",
+            "amount": 7600
+          },
+          {
+            "type": "primary_eg",
+            "amount": 3100
+          },
+          {
+            "type": "primary_hm",
+            "amount": 2750
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_43",
+      "costs": {
+        "research_points": 150,
+        "coins": 7000000,
+        "food": 6800000,
+        "goods": [
+          {
+            "type": "secondary_ks",
+            "amount": 17000
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 5350
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 2150
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_5",
+      "costs": {
+        "research_points": 150,
+        "coins": 3400000,
+        "food": 7000000,
+        "goods": [
+          {
+            "type": "primary_ks",
+            "amount": 12000
+          },
+          {
+            "type": "secondary_hm",
+            "amount": 3800
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_6",
+      "costs": {
+        "research_points": 85,
+        "coins": 6300000,
+        "food": 5000000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 6050
+          },
+          {
+            "type": "primary_hm",
+            "amount": 4000
+          },
+          {
+            "type": "secondary_ks",
+            "amount": 3000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_7",
+      "costs": {
+        "research_points": 130,
+        "coins": 7000000,
+        "food": 6600000,
+        "goods": [
+          {
+            "type": "secondary_hm",
+            "amount": 11000
+          },
+          {
+            "type": "primary_ks",
+            "amount": 6200
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 1850
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_8",
+      "costs": {
+        "research_points": 185,
+        "coins": 2400000,
+        "food": 2300000,
+        "goods": [
+          {
+            "type": "secondary_eg",
+            "amount": 7600
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 3200
+          },
+          {
+            "type": "secondary_ie",
+            "amount": 4750
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_early_gothic_era_9",
+      "costs": {
+        "research_points": 150,
+        "coins": 3100000,
+        "food": 1800000,
+        "goods": [
+          {
+            "type": "primary_eg",
+            "amount": 8200
+          },
+          {
+            "type": "tertiary_hm",
+            "amount": 5200
+          },
+          {
+            "type": "tertiary_ks",
+            "amount": 4100
+          }
+        ]
+      }
+    }
+  ],
+  "ottomanAreas": [
+    {
+      "id": "area_1",
+      "areaIndex": 1,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 50000
+          },
+          {
+            "type": "wheat",
+            "amount": 5000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_10",
+      "areaIndex": 10,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 500000
+          },
+          {
+            "type": "confection",
+            "amount": 10000
+          },
+          {
+            "type": "syrup",
+            "amount": 10000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_2",
+      "areaIndex": 2,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 75000
+          },
+          {
+            "type": "wheat",
+            "amount": 15000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 15000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_3",
+      "areaIndex": 3,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 90000
+          },
+          {
+            "type": "wheat",
+            "amount": 15000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 15000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_4",
+      "areaIndex": 4,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 160000
+          },
+          {
+            "type": "wheat",
+            "amount": 20000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 20000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_5",
+      "areaIndex": 5,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 250000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 20000
+          },
+          {
+            "type": "confection",
+            "amount": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_6",
+      "areaIndex": 6,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 300000
+          },
+          {
+            "type": "wheat",
+            "amount": 20000
+          },
+          {
+            "type": "syrup",
+            "amount": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_7",
+      "areaIndex": 7,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 350000
+          },
+          {
+            "type": "confection",
+            "amount": 7500
+          },
+          {
+            "type": "syrup",
+            "amount": 7500
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_8",
+      "areaIndex": 8,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 400000
+          },
+          {
+            "type": "confection",
+            "amount": 9000
+          },
+          {
+            "type": "syrup",
+            "amount": 9000
+          }
+        ]
+      }
+    },
+    {
+      "id": "area_9",
+      "areaIndex": 9,
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 450000
+          },
+          {
+            "type": "confection",
+            "amount": 10000
+          },
+          {
+            "type": "syrup",
+            "amount": 10000
+          }
+        ]
+      }
+    }
+  ],
+  "ottomanTradePosts": [
+    {
+      "id": "tradepost_aenos_village",
+      "name": "Aenos Village",
+      "hidden": true,
+      "area": 3,
+      "resource": "pomegranate",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [],
+        "gems": 2950
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 390,
+              "resource": "gems"
+            }
+          ],
+          "2": [
+            {
+              "amount": 490,
+              "resource": "gems"
+            }
+          ],
+          "3": [
+            {
+              "amount": 590,
+              "resource": "gems"
+            }
+          ],
+          "4": [
+            {
+              "amount": 690,
+              "resource": "gems"
+            }
+          ],
+          "5": [
+            {
+              "amount": 790,
+              "resource": "gems"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_amasra_city",
+      "name": "Amasra City",
+      "hidden": true,
+      "area": 6,
+      "resource": "confection",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [],
+        "gems": 3450
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 490,
+              "resource": "gems"
+            }
+          ],
+          "2": [
+            {
+              "amount": 590,
+              "resource": "gems"
+            }
+          ],
+          "3": [
+            {
+              "amount": 690,
+              "resource": "gems"
+            }
+          ],
+          "4": [
+            {
+              "amount": 790,
+              "resource": "gems"
+            }
+          ],
+          "5": [
+            {
+              "amount": 890,
+              "resource": "gems"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_babakale_village",
+      "name": "Babakale Village",
+      "area": 7,
+      "resource": "wheat",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 40000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_bozcaada_village",
+      "name": "Bozcaada Village",
+      "area": 1,
+      "resource": "pomegranate",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 40000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_bursa_city",
+      "name": "Bursa City",
+      "area": 10,
+      "resource": "confection",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 220000
+          },
+          {
+            "type": "wheat",
+            "amount": 15000
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 2000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 2000
+          }
+        ],
+        "trade_city_silver_upkey": 1,
+        "trade_city_gold_upkey": 1,
+        "trade_city_platinum_upkey": 1,
+        "trade_city_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 20000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 15000,
+              "resource": "wheat"
+            }
+          ],
+          "2": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_cesme_city",
+      "name": "Cesme City",
+      "area": 4,
+      "resource": "confection",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 210000
+          },
+          {
+            "type": "wheat",
+            "amount": 10000
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 2000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 2000
+          }
+        ],
+        "trade_city_silver_upkey": 1,
+        "trade_city_gold_upkey": 1,
+        "trade_city_platinum_upkey": 1,
+        "trade_city_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 10000,
+              "resource": "wheat"
+            }
+          ],
+          "2": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_cunda_village",
+      "name": "Cunda Village",
+      "area": 0,
+      "resource": "wheat",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 40000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_hadrianopolis_city",
+      "name": "Hadrianopolis City",
+      "area": 3,
+      "resource": "syrup",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 235000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 15000
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 2000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 2000
+          }
+        ],
+        "trade_city_silver_upkey": 1,
+        "trade_city_gold_upkey": 1,
+        "trade_city_platinum_upkey": 1,
+        "trade_city_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 35000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 15000,
+              "resource": "pomegranate"
+            }
+          ],
+          "2": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_kalkan_village",
+      "name": "Kalkan Village",
+      "area": 1,
+      "resource": "wheat",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 65000
+          },
+          {
+            "type": "pomegranate",
+            "amount": 10000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 25000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 10000,
+              "resource": "pomegranate"
+            }
+          ],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_karatas_village",
+      "name": "Karatas Village",
+      "hidden": true,
+      "area": 2,
+      "resource": "wheat",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [],
+        "gems": 2950
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 390,
+              "resource": "gems"
+            }
+          ],
+          "2": [
+            {
+              "amount": 490,
+              "resource": "gems"
+            }
+          ],
+          "3": [
+            {
+              "amount": 590,
+              "resource": "gems"
+            }
+          ],
+          "4": [
+            {
+              "amount": 690,
+              "resource": "gems"
+            }
+          ],
+          "5": [
+            {
+              "amount": 790,
+              "resource": "gems"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_kavala_village",
+      "name": "Kavala Village",
+      "area": 6,
+      "resource": "pomegranate",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 65000
+          },
+          {
+            "type": "syrup",
+            "amount": 5000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 25000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 5000,
+              "resource": "syrup"
+            }
+          ],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_marmara_village",
+      "name": "Marmara Village",
+      "area": 8,
+      "resource": "pomegranate",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 40000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_smyrna_city",
+      "name": "Smyrna City",
+      "hidden": true,
+      "area": 9,
+      "resource": "syrup",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [],
+        "gems": 3450
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 490,
+              "resource": "gems"
+            }
+          ],
+          "2": [
+            {
+              "amount": 590,
+              "resource": "gems"
+            }
+          ],
+          "3": [
+            {
+              "amount": 690,
+              "resource": "gems"
+            }
+          ],
+          "4": [
+            {
+              "amount": 790,
+              "resource": "gems"
+            }
+          ],
+          "5": [
+            {
+              "amount": 890,
+              "resource": "gems"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_sultaniye_village",
+      "name": "Sultaniye Village",
+      "area": 2,
+      "resource": "pomegranate",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 40000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_susarmia_village",
+      "name": "Susarmia Village",
+      "area": 10,
+      "resource": "wheat",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 40000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_tarsus_city",
+      "name": "Tarsus City",
+      "area": 5,
+      "resource": "syrup",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 200000
+          },
+          {
+            "type": "secondary_eg",
+            "amount": 2000
+          },
+          {
+            "type": "tertiary_eg",
+            "amount": 2000
+          }
+        ],
+        "trade_city_silver_upkey": 1,
+        "trade_city_gold_upkey": 1,
+        "trade_city_platinum_upkey": 1,
+        "trade_city_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 50000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 500,
+              "resource": "secondary_eg"
+            },
+            {
+              "amount": 500,
+              "resource": "tertiary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_city_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_urla_village",
+      "name": "Urla Village",
+      "area": 0,
+      "resource": "pomegranate",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 45000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [
+            {
+              "amount": 5000,
+              "resource": "aspers"
+            }
+          ],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tradepost_zalifra_village",
+      "name": "Zalifra Village",
+      "area": 9,
+      "resource": "wheat",
+      "levels": {
+        "unlock": true,
+        "lvl2": true,
+        "lvl3": true,
+        "lvl4": true,
+        "lvl5": true
+      },
+      "costs": {
+        "goods": [
+          {
+            "type": "aspers",
+            "amount": 40000
+          },
+          {
+            "type": "primary_eg",
+            "amount": 1200
+          }
+        ],
+        "trade_village_silver_upkey": 1,
+        "trade_village_gold_upkey": 1,
+        "trade_village_platinum_upkey": 1,
+        "trade_village_diamond_upkey": 1
+      },
+      "sourceData": {
+        "levels": {
+          "1": [],
+          "2": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_silver_upkey"
+            }
+          ],
+          "3": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_gold_upkey"
+            }
+          ],
+          "4": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_platinum_upkey"
+            }
+          ],
+          "5": [
+            {
+              "amount": 10000,
+              "resource": "aspers"
+            },
+            {
+              "amount": 300,
+              "resource": "primary_eg"
+            },
+            {
+              "amount": 1,
+              "resource": "trade_village_diamond_upkey"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

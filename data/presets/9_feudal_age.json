@@ -1,0 +1,1801 @@
+{
+  "buildings": [
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Beehive|construction|FA|1",
+      "quantity": 11,
+      "maxQty": 21,
+      "costs": {
+        "pennies": 2000,
+        "goods": [
+          {
+            "type": "ink",
+            "amount": 590
+          },
+          {
+            "type": "salt",
+            "amount": 590
+          },
+          {
+            "type": "cartwheel",
+            "amount": 590
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Beehive|upgrade|FA|2",
+      "quantity": 11,
+      "maxQty": 11,
+      "costs": {
+        "pennies": 15000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 985
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 490
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 225
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 275
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Beehive|upgrade|FA|3",
+      "quantity": 11,
+      "maxQty": 11,
+      "costs": {
+        "pennies": 48000,
+        "goods": [
+          {
+            "type": "secondary_fa",
+            "amount": 1065
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 535
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 450
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 550
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Expedition_Pier|construction|FA|1",
+      "quantity": 3,
+      "maxQty": 3,
+      "costs": {
+        "pennies": 7500,
+        "goods": [
+          {
+            "type": "ink",
+            "amount": 1770
+          },
+          {
+            "type": "salt",
+            "amount": 1770
+          },
+          {
+            "type": "cartwheel",
+            "amount": 1770
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Fishing_Pier|construction|FA|1",
+      "quantity": 6,
+      "maxQty": 11,
+      "costs": {
+        "pennies": 1500,
+        "goods": [
+          {
+            "type": "ink",
+            "amount": 1180
+          },
+          {
+            "type": "salt",
+            "amount": 1180
+          },
+          {
+            "type": "cartwheel",
+            "amount": 1180
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Fishing_Pier|upgrade|FA|2",
+      "quantity": 6,
+      "maxQty": 6,
+      "costs": {
+        "pennies": 20000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 1965
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 985
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 525
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 225
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Fishing_Pier|upgrade|FA|3",
+      "quantity": 6,
+      "maxQty": 6,
+      "costs": {
+        "pennies": 76000,
+        "goods": [
+          {
+            "type": "secondary_fa",
+            "amount": 2135
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 1065
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 1050
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 450
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Sailor_Home|construction|FA|1",
+      "quantity": 10,
+      "maxQty": 20,
+      "costs": {
+        "pennies": 3500,
+        "goods": [
+          {
+            "type": "ink",
+            "amount": 470
+          },
+          {
+            "type": "salt",
+            "amount": 470
+          },
+          {
+            "type": "cartwheel",
+            "amount": 470
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Sailor_Home|upgrade|FA|2",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "pennies": 15000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 785
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 395
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 270
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 330
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Sailor_Home|upgrade|FA|3",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "pennies": 42000,
+        "goods": [
+          {
+            "type": "secondary_fa",
+            "amount": 855
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 425
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 540
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 660
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Tavern|construction|FA|1",
+      "quantity": 5,
+      "maxQty": 9,
+      "costs": {
+        "pennies": 4000,
+        "goods": [
+          {
+            "type": "ink",
+            "amount": 885
+          },
+          {
+            "type": "salt",
+            "amount": 885
+          },
+          {
+            "type": "cartwheel",
+            "amount": 885
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Worker_Home|construction|FA|1",
+      "quantity": 15,
+      "maxQty": 30,
+      "costs": {
+        "pennies": 1000,
+        "goods": [
+          {
+            "type": "ink",
+            "amount": 235
+          },
+          {
+            "type": "salt",
+            "amount": 235
+          },
+          {
+            "type": "cartwheel",
+            "amount": 235
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Worker_Home|upgrade|FA|2",
+      "quantity": 15,
+      "maxQty": 15,
+      "costs": {
+        "pennies": 5000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 395
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 195
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 280
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 120
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Viking_Kingdom/Worker_Home|upgrade|FA|3",
+      "quantity": 15,
+      "maxQty": 15,
+      "costs": {
+        "pennies": 12000,
+        "goods": [
+          {
+            "type": "secondary_fa",
+            "amount": 425
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 215
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 560
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 240
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Cavalry_Barracks|upgrade|FA|9",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 5500000,
+        "food": 3400000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 3485
+          },
+          {
+            "type": "ink",
+            "amount": 3485
+          },
+          {
+            "type": "salt",
+            "amount": 3485
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Heavy_Infantry_Barracks|upgrade|FA|9",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 6200000,
+        "food": 4400000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 4005
+          },
+          {
+            "type": "ink",
+            "amount": 4005
+          },
+          {
+            "type": "salt",
+            "amount": 4005
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Infantry_Barracks|upgrade|FA|9",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "coins": 4000000,
+        "food": 2400000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 2900
+          },
+          {
+            "type": "ink",
+            "amount": 2900
+          },
+          {
+            "type": "salt",
+            "amount": 2900
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Ranged_Barracks|upgrade|FA|9",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 5000000,
+        "food": 3050000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 3195
+          },
+          {
+            "type": "ink",
+            "amount": 3195
+          },
+          {
+            "type": "salt",
+            "amount": 3195
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Siege_Barracks|upgrade|FA|9",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 7800000,
+        "food": 5500000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 5005
+          },
+          {
+            "type": "ink",
+            "amount": 5005
+          },
+          {
+            "type": "salt",
+            "amount": 5005
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Compact_Culture_Site|upgrade|FA|9",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 470000,
+        "food": 283000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Large_Culture_Site|upgrade|FA|9",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 3360000,
+        "food": 2010000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Little_Culture_Site|upgrade|FA|9",
+      "quantity": 7,
+      "maxQty": 7,
+      "costs": {
+        "coins": 263000,
+        "food": 167000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Moderate_Culture_Site|upgrade|FA|9",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "coins": 960000,
+        "food": 600000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|construction|FA|25",
+      "quantity": 1,
+      "maxQty": 9,
+      "costs": {
+        "coins": 10000000,
+        "food": 4500000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 6725
+          },
+          {
+            "type": "ink",
+            "amount": 6725
+          },
+          {
+            "type": "salt",
+            "amount": 6725
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|FA|25",
+      "quantity": 8,
+      "maxQty": 9,
+      "costs": {
+        "coins": 1200000,
+        "food": 500000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 900
+          },
+          {
+            "type": "ink",
+            "amount": 900
+          },
+          {
+            "type": "salt",
+            "amount": 900
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|FA|26",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 1300000,
+        "food": 570000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 975
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 975
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 540
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 360
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|FA|27",
+      "quantity": 9,
+      "maxQty": 9,
+      "costs": {
+        "coins": 1400000,
+        "food": 610000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 1060
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 1060
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 1080
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 720
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|FA|25",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "coins": 810000,
+        "food": 350000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 635
+          },
+          {
+            "type": "ink",
+            "amount": 635
+          },
+          {
+            "type": "salt",
+            "amount": 635
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|FA|26",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "coins": 920000,
+        "food": 390000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 690
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 690
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 360
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 240
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|FA|27",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "coins": 990000,
+        "food": 420000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 750
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 750
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 720
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 480
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|construction|FA|25",
+      "quantity": 1,
+      "maxQty": 10,
+      "costs": {
+        "coins": 2700000,
+        "food": 6200000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 3975
+          },
+          {
+            "type": "ink",
+            "amount": 3975
+          },
+          {
+            "type": "salt",
+            "amount": 3975
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|FA|25",
+      "quantity": 9,
+      "maxQty": 10,
+      "costs": {
+        "coins": 310000,
+        "food": 690000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 530
+          },
+          {
+            "type": "ink",
+            "amount": 530
+          },
+          {
+            "type": "salt",
+            "amount": 530
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|FA|26",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "coins": 350000,
+        "food": 790000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 575
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 575
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 300
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 200
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|FA|27",
+      "quantity": 10,
+      "maxQty": 10,
+      "costs": {
+        "coins": 380000,
+        "food": 850000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 625
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 625
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 600
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 400
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|construction|FA|25",
+      "quantity": 1,
+      "maxQty": 26,
+      "costs": {
+        "coins": 1000000,
+        "food": 2400000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 1600
+          },
+          {
+            "type": "ink",
+            "amount": 1600
+          },
+          {
+            "type": "salt",
+            "amount": 1600
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|FA|25",
+      "quantity": 25,
+      "maxQty": 26,
+      "costs": {
+        "coins": 120000,
+        "food": 270000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 210
+          },
+          {
+            "type": "ink",
+            "amount": 210
+          },
+          {
+            "type": "salt",
+            "amount": 210
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|FA|26",
+      "quantity": 26,
+      "maxQty": 26,
+      "costs": {
+        "coins": 130000,
+        "food": 310000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 230
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 230
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 120
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 80
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|FA|27",
+      "quantity": 26,
+      "maxQty": 26,
+      "costs": {
+        "coins": 140000,
+        "food": 330000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 250
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 250
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 240
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 160
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Carpenter|upgrade|FA|3",
+      "quantity": 1,
+      "maxQty": 4,
+      "costs": {
+        "coins": 5000000,
+        "food": 2870000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 1740
+          },
+          {
+            "type": "ink",
+            "amount": 1740
+          },
+          {
+            "type": "salt",
+            "amount": 1740
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Scribe|upgrade|FA|3",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "coins": 5000000,
+        "food": 2870000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 1740
+          },
+          {
+            "type": "ink",
+            "amount": 1740
+          },
+          {
+            "type": "salt",
+            "amount": 1740
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Spice_Merchant|upgrade|FA|3",
+      "quantity": 1,
+      "maxQty": 4,
+      "costs": {
+        "coins": 5000000,
+        "food": 2870000,
+        "goods": [
+          {
+            "type": "cartwheel",
+            "amount": 1740
+          },
+          {
+            "type": "ink",
+            "amount": 1740
+          },
+          {
+            "type": "salt",
+            "amount": 1740
+          }
+        ]
+      }
+    }
+  ],
+  "technos": [
+    {
+      "id": "techno_feudal_age_0",
+      "costs": {
+        "research_points": 62,
+        "coins": 1200000,
+        "food": 1000000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 3680
+          },
+          {
+            "type": "primary_af",
+            "amount": 6620
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1660
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_1",
+      "costs": {
+        "research_points": 97,
+        "coins": 3400000,
+        "food": 2500000,
+        "goods": [
+          {
+            "type": "primary_re",
+            "amount": 2590
+          },
+          {
+            "type": "primary_af",
+            "amount": 2590
+          },
+          {
+            "type": "secondary_af",
+            "amount": 6210
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_10",
+      "costs": {
+        "research_points": 22,
+        "coins": 1700000,
+        "food": 1600000,
+        "goods": [
+          {
+            "type": "tertiary_re",
+            "amount": 2840
+          },
+          {
+            "type": "primary_fa",
+            "amount": 680
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 2730
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_11",
+      "costs": {
+        "research_points": 110,
+        "coins": 1700000,
+        "food": 2200000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 5300
+          },
+          {
+            "type": "primary_af",
+            "amount": 2380
+          },
+          {
+            "type": "primary_fa",
+            "amount": 6360
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_12",
+      "costs": {
+        "research_points": 74,
+        "coins": 1500000,
+        "food": 2900000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 2450
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 7350
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 2040
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_13",
+      "costs": {
+        "research_points": 61,
+        "coins": 2400000,
+        "food": 2600000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 1640
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 1820
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 4360
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_14",
+      "costs": {
+        "research_points": 84,
+        "coins": 3600000,
+        "food": 1900000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 3030
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 1820
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 3630
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_15",
+      "costs": {
+        "research_points": 89,
+        "coins": 2300000,
+        "food": 1400000,
+        "goods": [
+          {
+            "type": "secondary_er",
+            "amount": 3530
+          },
+          {
+            "type": "secondary_re",
+            "amount": 4900
+          },
+          {
+            "type": "primary_af",
+            "amount": 7050
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_16",
+      "costs": {
+        "research_points": 120,
+        "coins": 5200000,
+        "food": 851000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 2210
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 3690
+          },
+          {
+            "type": "primary_fa",
+            "amount": 5900
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_17",
+      "costs": {
+        "research_points": 62,
+        "coins": 1300000,
+        "food": 1300000,
+        "goods": [
+          {
+            "type": "primary_re",
+            "amount": 5660
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 2720
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 5430
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_18",
+      "costs": {
+        "research_points": 75,
+        "coins": 2900000,
+        "food": 1200000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 8670
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 2480
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 250
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_19",
+      "costs": {
+        "research_points": 62,
+        "coins": 2500000,
+        "food": 2500000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 2260
+          },
+          {
+            "type": "primary_fa",
+            "amount": 1890
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 4520
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_2",
+      "costs": {
+        "research_points": 88,
+        "coins": 4800000,
+        "food": 1800000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 2670
+          },
+          {
+            "type": "secondary_be",
+            "amount": 4450
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 8010
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_20",
+      "costs": {
+        "research_points": 64,
+        "coins": 4800000,
+        "food": 1000000,
+        "goods": [
+          {
+            "type": "primary_er",
+            "amount": 3610
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 4010
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 4810
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_21",
+      "costs": {
+        "research_points": 125,
+        "coins": 2400000,
+        "food": 3300000,
+        "goods": [
+          {
+            "type": "tertiary_re",
+            "amount": 6620
+          },
+          {
+            "type": "secondary_af",
+            "amount": 2380
+          },
+          {
+            "type": "primary_fa",
+            "amount": 6360
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_22",
+      "costs": {
+        "research_points": 65,
+        "coins": 3600000,
+        "food": 1500000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 2600
+          },
+          {
+            "type": "primary_fa",
+            "amount": 2170
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 5190
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_23",
+      "costs": {
+        "research_points": 71,
+        "coins": 3900000,
+        "food": 1300000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 1870
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 4360
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 200
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_24",
+      "costs": {
+        "research_points": 59,
+        "coins": 1300000,
+        "food": 1600000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 2340
+          },
+          {
+            "type": "secondary_af",
+            "amount": 2930
+          },
+          {
+            "type": "primary_fa",
+            "amount": 4690
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_25",
+      "costs": {
+        "research_points": 65,
+        "coins": 5100000,
+        "food": 2000000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 3440
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1550
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 4120
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_26",
+      "costs": {
+        "research_points": 80,
+        "coins": 4000000,
+        "food": 2400000,
+        "goods": [
+          {
+            "type": "secondary_er",
+            "amount": 4180
+          },
+          {
+            "type": "secondary_af",
+            "amount": 8360
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 2320
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_27",
+      "costs": {
+        "research_points": 74,
+        "coins": 3200000,
+        "food": 2900000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 10600
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 2270
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_28",
+      "costs": {
+        "research_points": 96,
+        "coins": 3400000,
+        "food": 1100000,
+        "goods": [
+          {
+            "type": "tertiary_re",
+            "amount": 4330
+          },
+          {
+            "type": "primary_af",
+            "amount": 1560
+          },
+          {
+            "type": "primary_fa",
+            "amount": 4160
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_29",
+      "costs": {
+        "research_points": 68,
+        "coins": 1400000,
+        "food": 2900000,
+        "goods": [
+          {
+            "type": "primary_fa",
+            "amount": 2260
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 5280
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 400
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_3",
+      "costs": {
+        "research_points": 73,
+        "coins": 1400000,
+        "food": 1200000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 9800
+          },
+          {
+            "type": "primary_af",
+            "amount": 1840
+          },
+          {
+            "type": "secondary_af",
+            "amount": 3070
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_30",
+      "costs": {
+        "research_points": 140,
+        "coins": 1600000,
+        "food": 3300000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 3090
+          },
+          {
+            "type": "tertiary_be",
+            "amount": 5150
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 6170
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_31",
+      "costs": {
+        "research_points": 65,
+        "coins": 1500000,
+        "food": 2200000,
+        "goods": [
+          {
+            "type": "tertiary_er",
+            "amount": 8280
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 6440
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 1000
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_32",
+      "costs": {
+        "research_points": 88,
+        "coins": 4300000,
+        "food": 1500000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 12150
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 2610
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 800
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_33",
+      "costs": {
+        "research_points": 74,
+        "coins": 3500000,
+        "food": 1400000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 3720
+          },
+          {
+            "type": "secondary_af",
+            "amount": 1680
+          },
+          {
+            "type": "primary_fa",
+            "amount": 4470
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_34",
+      "costs": {
+        "research_points": 68,
+        "coins": 2900000,
+        "food": 2600000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 2330
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 2920
+          },
+          {
+            "type": "primary_fa",
+            "amount": 4670
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_35",
+      "costs": {
+        "research_points": 75,
+        "coins": 5100000,
+        "food": 873000,
+        "goods": [
+          {
+            "type": "secondary_be",
+            "amount": 4360
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1960
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 5230
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_36",
+      "costs": {
+        "research_points": 83,
+        "coins": 1300000,
+        "food": 2200000,
+        "goods": [
+          {
+            "type": "tertiary_af",
+            "amount": 7970
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 2280
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_37",
+      "costs": {
+        "research_points": 81,
+        "coins": 4099999.9999999995,
+        "food": 910000,
+        "goods": [
+          {
+            "type": "primary_af",
+            "amount": 3600
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 5590
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 1200
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_38",
+      "costs": {
+        "research_points": 91,
+        "coins": 5100000,
+        "food": 3000000,
+        "goods": [
+          {
+            "type": "secondary_fa",
+            "amount": 8380
+          },
+          {
+            "type": "ceramic_treasure",
+            "amount": 2000
+          },
+          {
+            "type": "gold_treasure",
+            "amount": 1600
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_4",
+      "costs": {
+        "research_points": 85,
+        "coins": 5100000,
+        "food": 969000,
+        "goods": [
+          {
+            "type": "primary_er",
+            "amount": 2820
+          },
+          {
+            "type": "primary_af",
+            "amount": 5640
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 2350
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_5",
+      "costs": {
+        "research_points": 11,
+        "coins": 1700000,
+        "food": 1600000,
+        "goods": [
+          {
+            "type": "primary_be",
+            "amount": 1520
+          },
+          {
+            "type": "secondary_be",
+            "amount": 910
+          },
+          {
+            "type": "secondary_af",
+            "amount": 2730
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_6",
+      "costs": {
+        "research_points": 61,
+        "coins": 1300000,
+        "food": 1300000,
+        "goods": [
+          {
+            "type": "secondary_af",
+            "amount": 1840
+          },
+          {
+            "type": "primary_fa",
+            "amount": 4900
+          },
+          {
+            "type": "tertiary_fa",
+            "amount": 2040
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_7",
+      "costs": {
+        "research_points": 65,
+        "coins": 3700000,
+        "food": 1800000,
+        "goods": [
+          {
+            "type": "secondary_re",
+            "amount": 9760
+          },
+          {
+            "type": "primary_be",
+            "amount": 1950
+          },
+          {
+            "type": "primary_fa",
+            "amount": 1630
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_8",
+      "costs": {
+        "research_points": 16,
+        "coins": 3900000,
+        "food": 777000,
+        "goods": [
+          {
+            "type": "primary_re",
+            "amount": 2840
+          },
+          {
+            "type": "tertiary_af",
+            "amount": 1020
+          },
+          {
+            "type": "primary_fa",
+            "amount": 2730
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_feudal_age_9",
+      "costs": {
+        "research_points": 105,
+        "coins": 3000000,
+        "food": 2900000,
+        "goods": [
+          {
+            "type": "tertiary_be",
+            "amount": 2440
+          },
+          {
+            "type": "primary_af",
+            "amount": 7330
+          },
+          {
+            "type": "secondary_fa",
+            "amount": 2040
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -45,6 +45,31 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Custom brand colors */
+  --color-roc-blue: var(--roc-blue);
+
+  /* Background scale */
+  --color-background-100: var(--background-100);
+  --color-background-200: var(--background-200);
+  --color-background-300: var(--background-300);
+
+  /* Gray scale */
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+
+  /* Alpha transparency scale */
+  --color-alpha-100: var(--alpha-100);
+  --color-alpha-200: var(--alpha-200);
+  --color-alpha-300: var(--alpha-300);
+  --color-alpha-400: var(--alpha-400);
+  --color-alpha-500: var(--alpha-500);
+
+  /* Custom spacing */
+  --header-height: 3.2rem;
 }
 
 :root {
@@ -80,6 +105,32 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Brand colors */
+  --roc-blue: oklch(0.533 0.088 234.661);
+
+  /* Background scale */
+  --background-100: oklch(100% 0 0);
+  --background-200: oklch(98% 0 0);
+  --background-300: oklch(100% 0 0);
+
+  /* Gray scale */
+  --gray-100: oklch(96.1% 0 0);
+  --gray-200: oklch(94% 0 0);
+  --gray-300: oklch(92.5% 0 0);
+  --gray-400: oklch(93.7% 0 0);
+  --gray-500: oklch(83.6% 0 0);
+
+  /* Alpha transparency */
+  --alpha-100: oklch(0% 0 0 / 0.051);
+  --alpha-200: oklch(0% 0 0 / 0.082);
+  --alpha-300: oklch(0% 0 0 / 0.102);
+  --alpha-400: oklch(0% 0 0 / 0.078);
+  --alpha-500: oklch(0% 0 0 / 0.212);
+
+  /* Beta badge */
+  --beta-badge-bg: oklch(0.951 0.039 251.423);
+  --beta-badge-color: oklch(0.518 0.166 251.792);
 }
 
 .dark {
@@ -114,6 +165,32 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* Brand colors */
+  --roc-blue: oklch(14.5% 0 0);
+
+  /* Background scale */
+  --background-100: oklch(14.5% 0 0);
+  --background-200: oklch(0% 0 0);
+  --background-300: oklch(18.2% 0 0);
+
+  /* Gray scale */
+  --gray-100: oklch(21.8% 0 0);
+  --gray-200: oklch(23.9% 0 0);
+  --gray-300: oklch(28.1% 0 0);
+  --gray-400: oklch(30.1% 0 0);
+  --gray-500: oklch(39% 0 0);
+
+  /* Alpha transparency */
+  --alpha-100: oklch(100% 0 0 / 0.067);
+  --alpha-200: oklch(100% 0 0 / 0.086);
+  --alpha-300: oklch(100% 0 0 / 0.125);
+  --alpha-400: oklch(100% 0 0 / 0.145);
+  --alpha-500: oklch(100% 0 0 / 0.239);
+
+  /* Beta badge */
+  --beta-badge-bg: oklch(0.219 0.045 251.423);
+  --beta-badge-color: oklch(0.722 0.114 251.792);
 }
 
 @layer base {
@@ -123,4 +200,80 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  *,
+  ::before,
+  ::after {
+    @apply border-border;
+  }
+
+  * {
+    @apply outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer components {
+  .container-wrapper {
+    @apply mx-auto w-full max-w-[1620px] px-2 sm:px-4 max-xl:max-w-4xl;
+  }
+
+  .material-medium {
+    @apply rounded-md border border-border bg-background-100;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.04), 0 -8px 8px -8px rgba(0, 0, 0, 0.04);
+  }
+
+  .material-medium:where(.dark, .dark *) {
+    @apply border-gray-300;
+  }
+
+  .beta-badge {
+    background-color: var(--beta-badge-bg) !important;
+    color: var(--beta-badge-color) !important;
+  }
+
+  .popup {
+    @apply flex min-h-[600px] h-full flex-col items-stretch justify-start overflow-hidden;
+  }
+}
+
+@layer utilities {
+  .min-h-screen-patched {
+    min-height: 100dvh;
+  }
+
+  .max-h-screen-patched {
+    max-height: 100dvh;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+/* Custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-300) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply rounded-[5px] bg-gray-300;
 }

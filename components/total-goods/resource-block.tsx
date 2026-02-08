@@ -1,0 +1,142 @@
+import { memo, useMemo } from "react";
+import { ResourceItem } from "./resource-item";
+import { slugify } from "@/lib/utils";
+import {
+  eras,
+  eraColors,
+  alliedCityColors,
+  RESOURCE_COLORS,
+} from "@/lib/constants";
+
+interface ResourceBlockProps {
+  title: string;
+  resources: Array<{
+    icon: string;
+    name: string;
+    amount: number;
+    difference?: number;
+  }>;
+  type: "main" | "era" | "other";
+  className?: string;
+  compareMode?: boolean;
+  getDifferenceColor?: (difference: number) => string;
+}
+
+const getEraColor = (eraName: string): string => {
+  const era = eras.find((e) => e.name === eraName);
+  if (!era) return "";
+  return eraColors[era.abbr] || "";
+};
+
+const getCityColor = (cityName: string): string => {
+  if (cityName === "ITEMS") return RESOURCE_COLORS.ITEMS;
+
+  // Slugify the incoming city name and use it directly as the key
+  const slugifiedCityName = slugify(cityName);
+
+  // Direct lookup in alliedCityColors
+  return (
+    alliedCityColors[slugifiedCityName as keyof typeof alliedCityColors] || ""
+  );
+};
+
+const getBlockStyles = (
+  type: ResourceBlockProps["type"],
+  title: string,
+  compareMode: boolean,
+  resources: ResourceBlockProps["resources"],
+  getDifferenceColor?: (diff: number) => string,
+) => {
+  let bgRgb = "";
+
+  if (compareMode && getDifferenceColor && resources.length > 0) {
+    const totalDiff = resources.reduce(
+      (sum, r) => sum + (r.difference ?? r.amount),
+      0,
+    );
+    bgRgb = getDifferenceColor(totalDiff);
+  } else {
+    switch (type) {
+      case "main":
+        bgRgb = RESOURCE_COLORS.MAIN;
+        break;
+      case "era":
+        bgRgb = getEraColor(title);
+        break;
+      case "other":
+        bgRgb = getCityColor(title);
+        break;
+      default:
+        bgRgb = "128, 128, 128";
+    }
+  }
+
+  const defaultGridClass = "grid-cols-3";
+
+  return { bgRgb, defaultGridClass };
+};
+
+export const ResourceBlock = memo(
+  ({
+    title,
+    resources,
+    type,
+    className,
+    compareMode = false,
+    getDifferenceColor,
+  }: ResourceBlockProps) => {
+    const { bgRgb, defaultGridClass } = useMemo(
+      () =>
+        getBlockStyles(type, title, compareMode, resources, getDifferenceColor),
+      [type, title, compareMode, resources, getDifferenceColor],
+    );
+
+    const gridClass = className || defaultGridClass;
+
+    const hasResources = useMemo(() => {
+      if (compareMode) {
+        return resources.length > 0;
+      }
+      return resources.length > 0 && resources.some((r) => r.amount > 0);
+    }, [resources, compareMode]);
+
+    const paddedResources = useMemo(() => {
+      if (type !== "era") return resources;
+
+      const padded = [...resources];
+      while (padded.length < 3) padded.push({ icon: "", name: "", amount: 0 });
+      return padded;
+    }, [resources, type]);
+
+    // ✅ Tous les hooks sont appelés AVANT le return conditionnel
+    if (!hasResources) {
+      return null;
+    }
+
+    return (
+      <section className="rounded-sm overflow-hidden border">
+        <header
+          className="py-1 px-2 border-b text-white"
+          style={{
+            background: `linear-gradient(
+            to right,
+            rgb(${bgRgb}),
+            rgba(${bgRgb}, 0.4)
+          )`,
+          }}
+        >
+          <h3 className="text-xs font-bold uppercase tracking-wide">{title}</h3>
+        </header>
+        <div className={`grid ${gridClass} bg-background-300`}>
+          {paddedResources.map((r, i) => (
+            <ResourceItem
+              key={`${title}-${r.name || r.icon || i}`}
+              {...r}
+              compareMode={compareMode}
+            />
+          ))}
+        </div>
+      </section>
+    );
+  },
+);

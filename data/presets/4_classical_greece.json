@@ -1,0 +1,1883 @@
+{
+  "buildings": [
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Average_Home|construction|ME|1",
+      "quantity": 2,
+      "maxQty": 6,
+      "costs": {
+        "deben": 600
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Average_Home|upgrade|CG|4",
+      "quantity": 6,
+      "maxQty": 6,
+      "costs": {
+        "deben": 25000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 180
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 90
+          },
+          {
+            "type": "ankh",
+            "amount": 90
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Average_Home|upgrade|CG|5",
+      "quantity": 6,
+      "maxQty": 6,
+      "costs": {
+        "deben": 32000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 40
+          },
+          {
+            "type": "ankh",
+            "amount": 40
+          },
+          {
+            "type": "primary_cg",
+            "amount": 170
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 94
+          },
+          {
+            "type": "golden_mask",
+            "amount": 94
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Average_Home|upgrade|CG|6",
+      "quantity": 6,
+      "maxQty": 6,
+      "costs": {
+        "deben": 43000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 18
+          },
+          {
+            "type": "ankh",
+            "amount": 18
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 240
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 160
+          },
+          {
+            "type": "golden_mask",
+            "amount": 160
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Average_Home|upgrade|ME|2",
+      "quantity": 2,
+      "maxQty": 4,
+      "costs": {
+        "deben": 5600,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 33
+          },
+          {
+            "type": "secondary_me",
+            "amount": 17
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Average_Home|upgrade|ME|3",
+      "quantity": 2,
+      "maxQty": 4,
+      "costs": {
+        "deben": 16000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 61
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 30
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 45
+          },
+          {
+            "type": "ankh",
+            "amount": 45
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Gold_Mine|construction|ME|1",
+      "quantity": 2,
+      "maxQty": 4,
+      "costs": {
+        "deben": 1200
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Gold_Mine|upgrade|CG|4",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "deben": 41000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 220
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 115
+          },
+          {
+            "type": "ankh",
+            "amount": 115
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Gold_Mine|upgrade|CG|5",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "deben": 53000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 51
+          },
+          {
+            "type": "ankh",
+            "amount": 51
+          },
+          {
+            "type": "primary_cg",
+            "amount": 210
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 120
+          },
+          {
+            "type": "golden_mask",
+            "amount": 120
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Gold_Mine|upgrade|CG|6",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "deben": 71000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 22
+          },
+          {
+            "type": "ankh",
+            "amount": 22
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 300
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 200
+          },
+          {
+            "type": "golden_mask",
+            "amount": 200
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Gold_Mine|upgrade|ME|2",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "deben": 9300,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 42
+          },
+          {
+            "type": "secondary_me",
+            "amount": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Gold_Mine|upgrade|ME|3",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "deben": 26000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 77
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 38
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 58
+          },
+          {
+            "type": "ankh",
+            "amount": 58
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Goldsmith|construction|ME|1",
+      "quantity": 1,
+      "maxQty": 3,
+      "costs": {
+        "deben": 2500
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Goldsmith|upgrade|CG|2",
+      "quantity": 3,
+      "maxQty": 3,
+      "costs": {
+        "deben": 78.5,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 320
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 320
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 250
+          },
+          {
+            "type": "ankh",
+            "amount": 250
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Field|construction|ME|1",
+      "quantity": 2,
+      "maxQty": 4,
+      "costs": {
+        "deben": 1000
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Field|upgrade|CG|4",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "deben": 33000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 235
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 120
+          },
+          {
+            "type": "ankh",
+            "amount": 120
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Field|upgrade|CG|5",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "deben": 42000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 54
+          },
+          {
+            "type": "ankh",
+            "amount": 54
+          },
+          {
+            "type": "primary_cg",
+            "amount": 225
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 125
+          },
+          {
+            "type": "golden_mask",
+            "amount": 125
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Field|upgrade|CG|6",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "deben": 57000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 24
+          },
+          {
+            "type": "ankh",
+            "amount": 24
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 325
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 210
+          },
+          {
+            "type": "golden_mask",
+            "amount": 210
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Field|upgrade|ME|2",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "deben": 7400,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 45
+          },
+          {
+            "type": "secondary_me",
+            "amount": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Field|upgrade|ME|3",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "deben": 21000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 80
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 40
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 60
+          },
+          {
+            "type": "ankh",
+            "amount": 60
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Press|construction|ME|1",
+      "quantity": 1,
+      "maxQty": 3,
+      "costs": {
+        "deben": 2000
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Papyrus_Press|upgrade|CG|2",
+      "quantity": 3,
+      "maxQty": 3,
+      "costs": {
+        "deben": 64800,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 320
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 320
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 250
+          },
+          {
+            "type": "ankh",
+            "amount": 250
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Small_Home|construction|ME|1",
+      "quantity": 4,
+      "maxQty": 12,
+      "costs": {
+        "deben": 100
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Small_Home|upgrade|CG|4",
+      "quantity": 12,
+      "maxQty": 12,
+      "costs": {
+        "deben": 8300,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 88
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 45
+          },
+          {
+            "type": "ankh",
+            "amount": 45
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Small_Home|upgrade|CG|5",
+      "quantity": 12,
+      "maxQty": 12,
+      "costs": {
+        "deben": 11000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 20
+          },
+          {
+            "type": "ankh",
+            "amount": 20
+          },
+          {
+            "type": "primary_cg",
+            "amount": 84
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 47
+          },
+          {
+            "type": "golden_mask",
+            "amount": 47
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Small_Home|upgrade|CG|6",
+      "quantity": 12,
+      "maxQty": 12,
+      "costs": {
+        "deben": 14000,
+        "goods": [
+          {
+            "type": "papyrus_scroll",
+            "amount": 9
+          },
+          {
+            "type": "ankh",
+            "amount": 9
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 120
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 79
+          },
+          {
+            "type": "golden_mask",
+            "amount": 79
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Small_Home|upgrade|ME|2",
+      "quantity": 4,
+      "maxQty": 8,
+      "costs": {
+        "deben": 1900,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 17
+          },
+          {
+            "type": "secondary_me",
+            "amount": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Allied_Cultures/Egypt/Small_Home|upgrade|ME|3",
+      "quantity": 4,
+      "maxQty": 8,
+      "costs": {
+        "deben": 5300,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 30
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 15
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 22
+          },
+          {
+            "type": "ankh",
+            "amount": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Cavalry_Barracks|upgrade|CG|4",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 440000,
+        "food": 278000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 1060
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 370
+          },
+          {
+            "type": "ankh",
+            "amount": 370
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Heavy_Infantry_Barracks|construction|CG|4",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 850000,
+        "food": 590000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 1815
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 685
+          },
+          {
+            "type": "ankh",
+            "amount": 685
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Infantry_Barracks|upgrade|CG|4",
+      "quantity": 2,
+      "maxQty": 2,
+      "costs": {
+        "coins": 324000,
+        "food": 190000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 885
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 305
+          },
+          {
+            "type": "ankh",
+            "amount": 305
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Barracks/Ranged_Barracks|upgrade|CG|4",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 393000,
+        "food": 236000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 975
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 345
+          },
+          {
+            "type": "ankh",
+            "amount": 345
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Compact_Culture_Site|construction|CG|4",
+      "quantity": 1,
+      "maxQty": 7,
+      "costs": {
+        "coins": 63000,
+        "food": 38000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Compact_Culture_Site|upgrade|CG|4",
+      "quantity": 6,
+      "maxQty": 7,
+      "costs": {
+        "coins": 36700,
+        "food": 22100
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Large_Culture_Site|construction|CG|4",
+      "quantity": 1,
+      "maxQty": 1,
+      "costs": {
+        "coins": 440000,
+        "food": 270000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Little_Culture_Site|upgrade|CG|4",
+      "quantity": 4,
+      "maxQty": 4,
+      "costs": {
+        "coins": 21100,
+        "food": 13100
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Culture_Sites/Moderate_Culture_Site|upgrade|CG|4",
+      "quantity": 3,
+      "maxQty": 3,
+      "costs": {
+        "coins": 77000,
+        "food": 47000
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|construction|CG|10",
+      "quantity": 1,
+      "maxQty": 5,
+      "costs": {
+        "coins": 400000,
+        "food": 180000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 1125
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 345
+          },
+          {
+            "type": "ankh",
+            "amount": 345
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|CG|10",
+      "quantity": 4,
+      "maxQty": 5,
+      "costs": {
+        "coins": 100000,
+        "food": 44000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 360
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 135
+          },
+          {
+            "type": "ankh",
+            "amount": 135
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|CG|11",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "coins": 150000,
+        "food": 64000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 170
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 170
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 225
+          },
+          {
+            "type": "golden_mask",
+            "amount": 225
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Domestic_Farm|upgrade|CG|12",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "coins": 200000,
+        "food": 87000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 245
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 245
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 270
+          },
+          {
+            "type": "golden_mask",
+            "amount": 270
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|construction|CG|10",
+      "quantity": 2,
+      "maxQty": 7,
+      "costs": {
+        "coins": 280000,
+        "food": 120000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 795
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 230
+          },
+          {
+            "type": "ankh",
+            "amount": 230
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|CG|10",
+      "quantity": 5,
+      "maxQty": 7,
+      "costs": {
+        "coins": 71000,
+        "food": 30000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 255
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 90
+          },
+          {
+            "type": "ankh",
+            "amount": 90
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|CG|11",
+      "quantity": 7,
+      "maxQty": 7,
+      "costs": {
+        "coins": 100000,
+        "food": 45000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 120
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 120
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 150
+          },
+          {
+            "type": "golden_mask",
+            "amount": 150
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Farms/Rural_Farm|upgrade|CG|12",
+      "quantity": 7,
+      "maxQty": 7,
+      "costs": {
+        "coins": 140000,
+        "food": 60000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 170
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 170
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 180
+          },
+          {
+            "type": "golden_mask",
+            "amount": 180
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|construction|CG|10",
+      "quantity": 1,
+      "maxQty": 5,
+      "costs": {
+        "coins": 110000,
+        "food": 240000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 670
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 190
+          },
+          {
+            "type": "ankh",
+            "amount": 190
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|CG|10",
+      "quantity": 4,
+      "maxQty": 5,
+      "costs": {
+        "coins": 27000,
+        "food": 61000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 210
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 75
+          },
+          {
+            "type": "ankh",
+            "amount": 75
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|CG|11",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "coins": 40000,
+        "food": 89000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 100
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 100
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 125
+          },
+          {
+            "type": "golden_mask",
+            "amount": 125
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Average_Home|upgrade|CG|12",
+      "quantity": 5,
+      "maxQty": 5,
+      "costs": {
+        "coins": 54000,
+        "food": 120000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 145
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 145
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 150
+          },
+          {
+            "type": "golden_mask",
+            "amount": 150
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|construction|CG|10",
+      "quantity": 4,
+      "maxQty": 18,
+      "costs": {
+        "coins": 40000,
+        "food": 94000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 265
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 75
+          },
+          {
+            "type": "ankh",
+            "amount": 75
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|CG|10",
+      "quantity": 14,
+      "maxQty": 18,
+      "costs": {
+        "coins": 10000,
+        "food": 24000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 84
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 30
+          },
+          {
+            "type": "ankh",
+            "amount": 30
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|CG|11",
+      "quantity": 18,
+      "maxQty": 18,
+      "costs": {
+        "coins": 15000,
+        "food": 35000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 40
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 40
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 50
+          },
+          {
+            "type": "golden_mask",
+            "amount": 50
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Homes/Small_Home|upgrade|CG|12",
+      "quantity": 18,
+      "maxQty": 18,
+      "costs": {
+        "coins": 20000,
+        "food": 47000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 58
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 58
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 60
+          },
+          {
+            "type": "golden_mask",
+            "amount": 60
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Artisan|construction|CG|3",
+      "quantity": 1,
+      "maxQty": 3,
+      "costs": {
+        "coins": 670000,
+        "food": 380000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 795
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 230
+          },
+          {
+            "type": "ankh",
+            "amount": 230
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Artisan|upgrade|CG|3",
+      "quantity": 2,
+      "maxQty": 3,
+      "costs": {
+        "coins": 393000,
+        "food": 226000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 535
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 155
+          },
+          {
+            "type": "ankh",
+            "amount": 155
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Stone_Mason|upgrade|CG|3",
+      "quantity": 1,
+      "maxQty": 3,
+      "costs": {
+        "coins": 393000,
+        "food": 226000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 535
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 155
+          },
+          {
+            "type": "ankh",
+            "amount": 155
+          }
+        ]
+      }
+    },
+    {
+      "id": "/wiki/Home_Cultures/Workshops/Tailor|upgrade|CG|3",
+      "quantity": 1,
+      "maxQty": 3,
+      "costs": {
+        "coins": 393000,
+        "food": 226000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 535
+          },
+          {
+            "type": "papyrus_scroll",
+            "amount": 155
+          },
+          {
+            "type": "ankh",
+            "amount": 155
+          }
+        ]
+      }
+    }
+  ],
+  "technos": [
+    {
+      "id": "techno_classical_greece_0",
+      "costs": {
+        "research_points": 13,
+        "coins": 148000,
+        "food": 102000,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 605
+          },
+          {
+            "type": "secondary_me",
+            "amount": 250
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 150
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_1",
+      "costs": {
+        "research_points": 16,
+        "coins": 178000,
+        "food": 122000,
+        "goods": [
+          {
+            "type": "tertiary_ba",
+            "amount": 250
+          },
+          {
+            "type": "primary_me",
+            "amount": 755
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 315
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_10",
+      "costs": {
+        "research_points": 18,
+        "coins": 207000,
+        "food": 142000,
+        "goods": [
+          {
+            "type": "primary_ba",
+            "amount": 940
+          },
+          {
+            "type": "secondary_ba",
+            "amount": 565
+          },
+          {
+            "type": "primary_cg",
+            "amount": 1125
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_11",
+      "costs": {
+        "research_points": 18,
+        "coins": 207000,
+        "food": 142000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 705
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 1640
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_12",
+      "costs": {
+        "research_points": 20,
+        "coins": 229000,
+        "food": 157000,
+        "goods": [
+          {
+            "type": "tertiary_ba",
+            "amount": 805
+          },
+          {
+            "type": "secondary_me",
+            "amount": 1005
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1610
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_13",
+      "costs": {
+        "research_points": 18,
+        "coins": 207000,
+        "food": 142000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 1125
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 470
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 280
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_14",
+      "costs": {
+        "research_points": 26,
+        "coins": 296000,
+        "food": 203000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 635
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1690
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 705
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_15",
+      "costs": {
+        "research_points": 21,
+        "coins": 237000,
+        "food": 163000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 965
+          },
+          {
+            "type": "golden_mask",
+            "amount": 2000
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_16",
+      "costs": {
+        "research_points": 18,
+        "coins": 207000,
+        "food": 142000,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 420
+          },
+          {
+            "type": "primary_cg",
+            "amount": 470
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1125
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_17",
+      "costs": {
+        "research_points": 21,
+        "coins": 237000,
+        "food": 163000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 1055
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 1640
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_18",
+      "costs": {
+        "research_points": 20,
+        "coins": 229000,
+        "food": 157000,
+        "goods": [
+          {
+            "type": "tertiary_ba",
+            "amount": 1205
+          },
+          {
+            "type": "primary_cg",
+            "amount": 2410
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1005
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_19",
+      "costs": {
+        "research_points": 20,
+        "coins": 222000,
+        "food": 152000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 905
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 2000
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1405
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_2",
+      "costs": {
+        "research_points": 13,
+        "coins": 148000,
+        "food": 102000,
+        "goods": [
+          {
+            "type": "secondary_ba",
+            "amount": 300
+          },
+          {
+            "type": "primary_me",
+            "amount": 905
+          },
+          {
+            "type": "secondary_me",
+            "amount": 375
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_20",
+      "costs": {
+        "research_points": 26,
+        "coins": 296000,
+        "food": 203000,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 605
+          },
+          {
+            "type": "primary_cg",
+            "amount": 670
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1610
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_21",
+      "costs": {
+        "research_points": 42,
+        "coins": 481000,
+        "food": 330000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 1175
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 705
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 2815
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_22",
+      "costs": {
+        "research_points": 25,
+        "coins": 281000,
+        "food": 193000,
+        "goods": [
+          {
+            "type": "secondary_ba",
+            "amount": 765
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 955
+          },
+          {
+            "type": "primary_cg",
+            "amount": 1530
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_23",
+      "costs": {
+        "research_points": 20,
+        "coins": 222000,
+        "food": 152000,
+        "goods": [
+          {
+            "type": "golden_mask",
+            "amount": 5000
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1405
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 605
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_24",
+      "costs": {
+        "research_points": 29,
+        "coins": 326000,
+        "food": 224000,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 755
+          },
+          {
+            "type": "primary_cg",
+            "amount": 840
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 2010
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_25",
+      "costs": {
+        "research_points": 26,
+        "coins": 296000,
+        "food": 203000,
+        "goods": [
+          {
+            "type": "primary_cg",
+            "amount": 400
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1610
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 670
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_26",
+      "costs": {
+        "research_points": 24,
+        "coins": 274000,
+        "food": 188000,
+        "goods": [
+          {
+            "type": "tertiary_me",
+            "amount": 905
+          },
+          {
+            "type": "primary_cg",
+            "amount": 2410
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 1005
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_27",
+      "costs": {
+        "research_points": 27,
+        "coins": 311000,
+        "food": 213000,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 1265
+          },
+          {
+            "type": "ceremonial_dress",
+            "amount": 5000
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1970
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_28",
+      "costs": {
+        "research_points": 52,
+        "coins": 592000,
+        "food": 406000,
+        "goods": [
+          {
+            "type": "tertiary_ba",
+            "amount": 1610
+          },
+          {
+            "type": "primary_cg",
+            "amount": 1340
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 3215
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_29",
+      "costs": {
+        "research_points": 27,
+        "coins": 303000,
+        "food": 208000,
+        "goods": [
+          {
+            "type": "secondary_me",
+            "amount": 620
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 1650
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 685
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_3",
+      "costs": {
+        "research_points": 14,
+        "coins": 163000,
+        "food": 112000,
+        "goods": [
+          {
+            "type": "tertiary_ba",
+            "amount": 585
+          },
+          {
+            "type": "primary_me",
+            "amount": 265
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 1055
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_4",
+      "costs": {
+        "research_points": 17,
+        "coins": 192000,
+        "food": 132000,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 450
+          },
+          {
+            "type": "secondary_me",
+            "amount": 1055
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_5",
+      "costs": {
+        "research_points": 17,
+        "coins": 192000,
+        "food": 132000,
+        "goods": [
+          {
+            "type": "secondary_ba",
+            "amount": 400
+          },
+          {
+            "type": "primary_me",
+            "amount": 725
+          },
+          {
+            "type": "secondary_me",
+            "amount": 180
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_6",
+      "costs": {
+        "research_points": 13,
+        "coins": 148000,
+        "food": 102000,
+        "goods": [
+          {
+            "type": "primary_me",
+            "amount": 545
+          },
+          {
+            "type": "secondary_me",
+            "amount": 1265
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_7",
+      "costs": {
+        "research_points": 13,
+        "coins": 148000,
+        "food": 102000,
+        "goods": [
+          {
+            "type": "primary_ba",
+            "amount": 100
+          },
+          {
+            "type": "primary_me",
+            "amount": 125
+          },
+          {
+            "type": "secondary_cg",
+            "amount": 200
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_8",
+      "costs": {
+        "research_points": 17,
+        "coins": 192000,
+        "food": 132000,
+        "goods": [
+          {
+            "type": "secondary_ba",
+            "amount": 300
+          },
+          {
+            "type": "secondary_me",
+            "amount": 375
+          },
+          {
+            "type": "tertiary_cg",
+            "amount": 605
+          }
+        ]
+      }
+    },
+    {
+      "id": "techno_classical_greece_9",
+      "costs": {
+        "research_points": 20,
+        "coins": 229000,
+        "food": 157000,
+        "goods": [
+          {
+            "type": "tertiary_ba",
+            "amount": 625
+          },
+          {
+            "type": "tertiary_me",
+            "amount": 780
+          },
+          {
+            "type": "primary_cg",
+            "amount": 1245
+          }
+        ]
+      }
+    }
+  ]
+}
