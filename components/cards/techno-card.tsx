@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ResourceBadge } from "@/components/items/resource-badge";
 import { cn } from "@/lib/utils";
 import {
-  questsFormatNumber,
+  formatNumber,
   slugify,
   getGoodNameFromPriorityEra,
   getItemIconLocal,
@@ -102,7 +102,7 @@ export function TechnoCard({
         <ResourceBadge
           key={`${g.type}-${i}`}
           icon={`/goods/${slugify(goodName)}.webp`}
-          value={questsFormatNumber(g.amount)}
+          value={formatNumber(g.amount)}
           alt={g.type}
         />
       );
@@ -221,7 +221,7 @@ export function TechnoCard({
               <ResourceBadge
                 key={r.type}
                 icon={r.icon}
-                value={questsFormatNumber(r.value)}
+                value={formatNumber(r.value)}
                 alt={r.type}
               />
             ))}

@@ -3,7 +3,7 @@ import { getEraForLevel, getMaxQtyForEra, getPrevEra } from "@/data/config";
 
 function generateDynamicLevels(
   startLevel: 40,
-  maxLevel: number = 43,
+  maxLevel: number = 42,
 ): BuildingLevel[] {
   const levels: BuildingLevel[] = [];
 
@@ -65,7 +65,7 @@ export const smallHome: BuildingData = {
   name: "Small Home",
   category: "capital",
   subcategory: "homes",
-  image: "/buildings/small-home.webp",
+  imageName: "Capital_Small_Home_Lv",
   levels: [
     {
       level: 1,
@@ -1166,6 +1166,6 @@ export const smallHome: BuildingData = {
       },
     },
 
-    ...generateDynamicLevels(40, 43),
+    ...generateDynamicLevels(40, 42),
   ],
 };

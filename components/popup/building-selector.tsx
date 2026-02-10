@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { getGoodsImg } from "@/lib/utils";
 import { RotateCw } from "lucide-react";
+import Image from "next/image";
 
 type BuildingSelectorType = {
   title: string;
@@ -38,14 +39,14 @@ export function BuildingSelector({
   const updateSelectionsLocal = async (
     pri: string,
     sec: string,
-    ter: string
+    ter: string,
   ) => {
     const newSelections = [...selections];
     newSelections[index] = [pri, sec, ter];
 
     await localStorage.setItem(
       "local:buildingSelections",
-      JSON.stringify(newSelections)
+      JSON.stringify(newSelections),
     );
   };
 
@@ -115,10 +116,12 @@ export function BuildingSelector({
             {buildings.map((name) => (
               <SelectItem key={name} value={name}>
                 <div className="flex items-center gap-2 text-xs">
-                  <img
+                  <Image
                     src={getGoodsImg(name)}
                     alt=""
-                    className="size-[1.4rem] brightness-110 select-none"
+                    className="size-6 brightness-110 select-none"
+                    width={24}
+                    height={24}
                   />
                   {name}
                 </div>
@@ -141,10 +144,12 @@ export function BuildingSelector({
             {secondaryOptions.map((name) => (
               <SelectItem key={name} value={name}>
                 <div className="flex items-center gap-2 text-xs">
-                  <img
+                  <Image
                     src={getGoodsImg(name)}
                     alt=""
-                    className="size-[1.4rem] brightness-110 select-none"
+                    className="size-6 brightness-110 select-none"
+                    width={24}
+                    height={24}
                   />
                   {name}
                 </div>
@@ -155,7 +160,10 @@ export function BuildingSelector({
 
         {/* TERTIARY (read-only) */}
         <Select value={tertiary} disabled={!secondary}>
-          <SelectTrigger className="md:min-w-44 w-full h-8 text-xs pointer-events-none hover:cursor-not-allowed shadow-none" tabIndex={-1}>
+          <SelectTrigger
+            className="md:min-w-44 w-full h-8 text-xs pointer-events-none hover:cursor-not-allowed shadow-none"
+            tabIndex={-1}
+          >
             <SelectValue placeholder="Select Tertiary" />
           </SelectTrigger>
 
@@ -163,10 +171,12 @@ export function BuildingSelector({
             {tertiary && (
               <SelectItem value={tertiary}>
                 <div className="flex items-center gap-2 text-xs">
-                  <img
+                  <Image
                     src={getGoodsImg(tertiary)}
                     alt=""
-                    className="size-[1.4rem] brightness-110 select-none"
+                    className="size-6 brightness-110 select-none"
+                    width={24}
+                    height={24}
                   />
                   {tertiary}
                 </div>

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { questsFormatNumber } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
 
 interface ResourceItemProps {
   icon?: string;
@@ -53,7 +53,7 @@ export const ResourceItem = memo(
               }`}
             >
               {compareMode && displayAmount > 0 ? "+" : ""}
-              {questsFormatNumber(displayAmount)}
+              {formatNumber(displayAmount)}
             </span>
           )}
         </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { getAllResources, type UserResource } from "@/lib/roc/rocApi";
-import { questsFormatNumber } from "@/lib/shadcn-utils";
+import { formatNumber } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "../ui/badge";
 
@@ -71,7 +71,7 @@ export const UserItemsDisplay = () => {
                   </div>
                   <div className="text-right">
                     <div className="text-2xl font-bold text-blue-500">
-                      {questsFormatNumber(totalKitsRP)}
+                      {formatNumber(totalKitsRP)}
                     </div>
                     <div className="text-xs text-muted-foreground">RP</div>
                   </div>
@@ -132,7 +132,7 @@ export const UserItemsDisplay = () => {
                           Total:
                         </span>
                         <span className="font-bold">
-                          {questsFormatNumber(totalRP)} RP
+                          {formatNumber(totalRP)} RP
                         </span>
                       </div>
                     </div>

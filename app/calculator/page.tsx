@@ -1,15 +1,17 @@
-'use client'
+"use client";
 
-import { ButtonGroupBuilding } from "@/components/buttons/button-group-building"
-import { ButtonGroupTotal } from "@/components/buttons/button-group-total"
-import { AddModal } from "@/components/modals/add-modal"
-import { BuildingWizard } from "@/components/modals/building-wizard/building-wizard"
+import { ButtonGroupBuilding } from "@/components/buttons/button-group-building";
+import { ItemList } from "@/components/items/item-list";
+// import { ButtonGroupTotal } from "@/components/buttons/button-group-total"
+// import { ItemsList } from "@/components/items/items-list"
+import { AddElementModal } from "@/components/modals/add-element/add-element-modal";
+import { WorkshopModal } from "@/components/modals/workshop-modal";
+// import { BuildingWizard } from "@/components/modals/building-wizard/building-wizard"
 
 // import { useState, useDeferredValue, useRef } from 'react'
 // import { WorkshopModal } from '@/components/modals/workshop-modal'
 // import { PresetListModal } from '@/components/modals/preset-list-modal'
 // import { CompareButton } from '@/components/buttons/compare-button'
-// // import { BuildingList, type BuildingListRef } from '@/components/items/building-list'
 // import { TotalGoodsDisplay } from '@/components/total-goods/total-goods-display'
 // import { ButtonFilter } from '@/components/buttons/button-filter'
 // import { ButtonGroupBuilding } from '@/components/buttons/button-group-building'
@@ -22,7 +24,6 @@ export default function HomePage() {
   // const { filters, updateFilters, activeCount } = useBuildingFilters()
   // const [compareMode, setCompareMode] = useState(false)
   // const deferredFilters = useDeferredValue(filters)
-  // const buildingListRef = useRef<BuildingListRef>(null)
 
   // // ✅ Pas besoin de useCallback avec React Compiler
   // const handleFiltersChange = (newFilters: typeof filters) => {
@@ -34,10 +35,6 @@ export default function HomePage() {
   // })
 
   // const handleToggleFilters = () => filterComponents.button.props.onClick()
-
-  // const handleExpandAll = () => buildingListRef.current?.expandAll()
-
-  // const handleCollapseAll = () => buildingListRef.current?.collapseAll?.()
 
   // const handleDeleteAll = async () => {
   //   try {
@@ -60,8 +57,8 @@ export default function HomePage() {
             </h2>
             <div className="flex gap-2">
               {/* <CompareButton enabled={compareMode} onToggle={setCompareMode} />
-              <WorkshopModal />
               <PresetListModal /> */}
+              <WorkshopModal />
             </div>
           </div>
         </header>
@@ -75,8 +72,10 @@ export default function HomePage() {
               <div className="flex shrink-0 w-full justify-between items-center gap-3 px-3 h-12 sm:mx-0">
                 {/* <div className="max-xl:hidden">
                 </div> */}
-                {/* <AddModal variant="outline" /> */}
-                <BuildingWizard variant="outline" />
+                <AddElementModal variant="outline" />
+                <WorkshopModal />
+
+                {/* <BuildingWizard variant="outline" /> */}
                 <div className="block xl:hidden">
                   {/* <ButtonGroupTotal /> */}
                 </div>
@@ -90,11 +89,12 @@ export default function HomePage() {
             {/* {filterComponents.panel} */}
 
             <div className="size-full overflow-y-auto no-scrollbar flex flex-col">
-              {/* <BuildingList ref={buildingListRef} filters={deferredFilters} /> */}
+              <ItemList />
+              {/* <ItemsList userSelections={[["Tailor","Artisan","Stone Mason"],["Spice Merchant","Scribe","Carpenter"],["Jeweler","Alchemist","Glassblower"]]} /> */}
             </div>
           </div>
         </main>
       </div>
     </div>
-  )
+  );
 }

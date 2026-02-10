@@ -2,78 +2,116 @@
 
 import Dexie, { type Table } from "dexie";
 
-export type GoodsEntry = {
-  type: string;
-  amount: number;
-};
+// ============================================================================
+// OPTIMIZED ENTITIES - Version 2
+// ============================================================================
 
-// ✅ Interface pour les métadonnées parsées
-export interface ParsedBuildingMetadata {
-  section1: string;
-  section2: string;
-  section3: string;
-  buildingName: string;
-  tableType: "construction" | "upgrade";
-  era: string;
-  level: string;
-  location?: string; // Ville/location du building
-}
-
-export interface ParsedTechnoMetadata {
-  mainSection: string;
-  subSection: string;
-  thirdSection: string;
-  era: string;
-  index: string;
-}
-
+/**
+ * Building Entity - Optimized flat structure
+ * Pas de `parsed` redondant, tout est direct
+ */
 export interface BuildingEntity {
-  id: string;
-  name: string; // ✅ Ajouté : nom du building
-  image: string; // ✅ Ajouté : chemin de l'image
+  // Identifiants
+  id: string; // Format: {category}_{elementId}_{type}_{era}_{level} (ex: capital_small_home_upgrade_LG_41)
+
+  // Display (accès direct, pas de parsing)
+  name: string; // "Small Home"
+  imageName: string; // wiki image name
+  imgLvl: boolean; // true if img name have _Lv (ex: Capital_Small_Home_Lv1)
+
+  // Classification (pour filtres - remplace `parsed`)
+  category: string; // "capital" | "egypt" | "china" | etc.
+  subcategory: string; // "homes" | "farms" | "barracks" | etc.
+  elementId: string; // "small_home"
+
+  // Configuration du niveau
+  type: "construction" | "upgrade";
+  era: string; // "BA", "SA", "ME", etc.
+  level: number; // 1, 2, 3...
+
+  // Coûts UNITAIRES (pas multipliés par quantity)
   costs: {
-    [key: string]: number | Array<{ type: string; amount: number }>;
+    resources: Record<string, number>; // { coins: 100, food: 50, aspers: 20 }
+    goods: Array<{
+      type: string; // "bronze_bracelet" ou "Primary_BA"
+      amount: number;
+    }>;
   };
-  maxQty: number;
-  quantity: number;
+
+  // Quantité
+  quantity: number; // Quantité sélectionnée par l'utilisateur
+  maxQty: number; // Max autorisé pour cet era
+
+  // État
   hidden: boolean;
-  parsed: ParsedBuildingMetadata; // ✅ Ajouté
+
+  // Metadata
+  createdAt: number;
   updatedAt: number;
 }
 
+/**
+ * Technology Entity - Optimized
+ */
 export interface TechnoEntity {
   id: string;
+
+  // Classification
+  category: "technology"; // Toujours "technology"
+  era: string; // "bronze_age", "stone_age", etc.
+  index: number; // Position dans l'ère (pour tri)
+
+  // Coûts
   costs: {
-    [key: string]: number | Array<{ type: string; amount: number }>;
+    resources: Record<string, number>;
+    goods: Array<{ type: string; amount: number }>;
   };
+
+  // État
   hidden: boolean;
-  parsed?: ParsedTechnoMetadata; // ✅ Ajouté (optionnel pour rétrocompatibilité)
+
+  // Metadata
+  createdAt: number;
   updatedAt: number;
 }
 
-export interface UserResourceEntity {
-  id: string;
-  amount: number;
-  type: string;
-  lastUpdated: string;
-  updatedAt: number;
-}
-
+/**
+ * Ottoman Area Entity
+ */
 export interface OttomanAreaEntity {
   id: string;
+
+  // Classification
   areaIndex: number;
+
+  // Coûts
   costs: {
-    [key: string]: number | Array<{ type: string; amount: number }>;
+    resources: Record<string, number>;
+    goods: Array<{ type: string; amount: number }>;
   };
+
+  // État
   hidden: boolean;
+
+  // Metadata
+  createdAt: number;
   updatedAt: number;
 }
 
+/**
+ * Ottoman Trade Post Entity
+ */
 export interface OttomanTradePostEntity {
   id: string;
+
+  // Display
   name: string;
+
+  // Classification
   area: number;
-  resource: string;
+  resource: string; // Type de ressource produite
+
+  // Configuration des niveaux
   levels: {
     unlock: boolean;
     lvl2: boolean;
@@ -81,19 +119,32 @@ export interface OttomanTradePostEntity {
     lvl4: boolean;
     lvl5: boolean;
   };
+
+  // Coûts (calculés selon les niveaux activés)
   costs: {
-    [key: string]: number | Array<{ type: string; amount: number }>;
+    resources: Record<string, number>;
+    goods: Array<{ type: string; amount: number }>;
   };
+
+  // Données source pour recalcul
   sourceData?: {
     levels: {
       [key: number]: Array<{ resource: string; amount: number }>;
     };
   };
+
+  // État
   hidden: boolean;
+
+  // Metadata
+  createdAt: number;
   updatedAt: number;
 }
 
-// Wiki DB - buildings, technologies, and Ottoman
+// ============================================================================
+// DATABASE SCHEMA
+// ============================================================================
+
 export class RocWikiDB extends Dexie {
   buildings!: Table<BuildingEntity, string>;
   technos!: Table<TechnoEntity, string>;
@@ -103,82 +154,35 @@ export class RocWikiDB extends Dexie {
   constructor() {
     super("roc_wiki_db");
 
-    // Version 1: Original tables
+    // Version 1: Tables initiales
     this.version(1).stores({
-      buildings: "id,updatedAt",
-      technos: "id,updatedAt",
+      buildings: "id,createdAt,updatedAt",
+      technos: "id,createdAt,updatedAt",
     });
 
-    // Version 2: Add Ottoman tables
+    // Version 2: Ottoman tables
     this.version(2).stores({
-      buildings: "id,updatedAt",
-      technos: "id,updatedAt",
-      ottomanAreas: "id,areaIndex,updatedAt",
-      ottomanTradePosts: "id,name,updatedAt",
+      buildings: "id,createdAt,updatedAt",
+      technos: "id,createdAt,updatedAt",
+      ottomanAreas: "id,areaIndex,createdAt,updatedAt",
+      ottomanTradePosts: "id,area,createdAt,updatedAt",
     });
 
-    // ✅ Version 3: Add parsed metadata
-    this.version(3)
-      .stores({
-        buildings: "id,updatedAt,parsed.tableType,parsed.location",
-        technos: "id,updatedAt,parsed.era",
-        ottomanAreas: "id,areaIndex,updatedAt",
-        ottomanTradePosts: "id,name,updatedAt",
-      })
-      .upgrade((trans) => {
-        // Migration: parser les IDs existants pour ajouter parsed
-        return trans
-          .table("buildings")
-          .toCollection()
-          .modify((building) => {
-            if (!building.parsed) {
-              building.parsed = parseBuildingIdFromEntity(building.id);
-            }
-            if (!building.name) {
-              building.name = building.parsed.buildingName;
-            }
-            if (!building.image) {
-              building.image = `/buildings/${building.parsed.section3.toLowerCase()}.webp`;
-            }
-          });
-      });
-  }
-}
-
-// Game DB - user resources
-export class RocGameDB extends Dexie {
-  userResources!: Table<UserResourceEntity, string>;
-
-  constructor() {
-    super("roc_game_db");
-
-    this.version(1).stores({
-      userResources: "id,type,updatedAt",
+    // Version 3: Index optimisés pour filtres
+    this.version(3).stores({
+      buildings: "id,category,subcategory,type,era,hidden,createdAt,updatedAt",
+      technos: "id,category,era,hidden,createdAt,updatedAt",
+      ottomanAreas: "id,areaIndex,hidden,createdAt,updatedAt",
+      ottomanTradePosts: "id,area,hidden,createdAt,updatedAt",
     });
   }
 }
 
-// ✅ Helper pour parser l'ID (migration)
-function parseBuildingIdFromEntity(id: string): ParsedBuildingMetadata {
-  const [rawPath, tableType, era, level] = id.split("|");
-  const pathParts = rawPath.replace(/^\/+/, "").split("/");
-  const [, section1, section2, section3] = pathParts;
+// ============================================================================
+// SINGLETON INSTANCE
+// ============================================================================
 
-  return {
-    section1: section1 || "",
-    section2: section2 || "",
-    section3: section3 || "",
-    buildingName: section3?.replace(/_/g, " ") || "",
-    tableType: (tableType as "construction" | "upgrade") || "construction",
-    era: era || "",
-    level: level || "",
-    location: section1 || "",
-  };
-}
-
-// ✅ Singleton instances
 let wikiDbInstance: RocWikiDB | null = null;
-let gameDbInstance: RocGameDB | null = null;
 
 export function getWikiDB(): RocWikiDB {
   if (typeof window === "undefined") {
@@ -195,20 +199,80 @@ export function getWikiDB(): RocWikiDB {
   return wikiDbInstance;
 }
 
-export function getGameDB(): RocGameDB {
-  if (typeof window === "undefined") {
-    throw new Error("Database can only be accessed on client side");
-  }
+// Export legacy pour compatibilité
+export const db = typeof window !== "undefined" ? getWikiDB() : null;
 
-  if (!gameDbInstance) {
-    gameDbInstance = new RocGameDB();
-    gameDbInstance.open().catch((err) => {
-      console.error("Failed to open roc_game_db:", err);
-    });
-  }
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
 
-  return gameDbInstance;
+/**
+ * Génère un ID unique et prévisible pour une entité
+ * Format: {category}_{elementId}_{type}_{era}_{level}
+ * Exemple: capital_small_home_upgrade_LG_41
+ *
+ * ✅ Cet ID permet de détecter facilement les doublons
+ */
+export function generateEntityId(
+  category: string,
+  elementId: string,
+  era: string,
+  level: number,
+  type: "construction" | "upgrade",
+): string {
+  return `${category}_${elementId}_${type}_${era}_${level}`;
 }
 
-export const db = typeof window !== "undefined" ? getWikiDB() : null;
-export const gameDb = typeof window !== "undefined" ? getGameDB() : null;
+/**
+ * Parse les coûts depuis le format data vers le format entity
+ */
+export function parseCostsToEntity(rawCosts: any): BuildingEntity["costs"] {
+  const resources: Record<string, number> = {};
+  const goodsArray: Array<{ type: string; amount: number }> = [];
+
+  Object.entries(rawCosts).forEach(([key, value]) => {
+    if (key === "goods" && Array.isArray(value)) {
+      // Format des goods depuis les data files
+      value.forEach((item: any) => {
+        goodsArray.push({
+          type: item.resource || item.type,
+          amount: item.amount,
+        });
+      });
+    } else if (typeof value === "number") {
+      // Ressources simples
+      resources[key] = value;
+    }
+  });
+
+  return { resources, goods: goodsArray };
+}
+
+/**
+ * Calcule les coûts totaux (resources × quantity)
+ */
+export function calculateTotalCosts(
+  entity: BuildingEntity | TechnoEntity,
+  quantity: number = 1,
+): {
+  resources: Record<string, number>;
+  goods: Array<{ type: string; amount: number }>;
+} {
+  const totalResources: Record<string, number> = {};
+  const totalGoods: Array<{ type: string; amount: number }> = [];
+
+  // Resources
+  Object.entries(entity.costs.resources).forEach(([type, amount]) => {
+    totalResources[type] = amount * quantity;
+  });
+
+  // Goods
+  entity.costs.goods.forEach((good) => {
+    totalGoods.push({
+      type: good.type,
+      amount: good.amount * quantity,
+    });
+  });
+
+  return { resources: totalResources, goods: totalGoods };
+}

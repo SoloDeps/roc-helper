@@ -3,10 +3,7 @@ export interface CategoryMeta {
   label?: string; // Label custom si différent du nom
 }
 
-// Helper pour générer l'URL complète
-export function getWikiImageUrl(imageName: string, size: number = 400): string {
-  return `https://riseofcultures.wiki.gg/images/thumb/${imageName}.png/${size}px-${imageName}.png`;
-}
+
 
 // Métadonnées pour les catégories principales
 export const CATEGORY_META: Record<string, CategoryMeta> = {

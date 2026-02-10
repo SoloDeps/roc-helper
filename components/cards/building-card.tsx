@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { X, EyeOff, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ResourceBadge } from "@/components/items/resource-badge";
 import BuildingCounter from "@/components/items/building-counter";
-import { cn } from "@/lib/utils";
+import { cn, getWikiImageUrl } from "@/lib/utils";
 import {
   getItemIconLocal,
-  questsFormatNumber,
+  formatNumber,
   slugify,
   getGoodNameFromPriorityEra,
 } from "@/lib/utils";
+import { useBuilding } from "@/hooks/use-database"; // ✅ Dexie hook
 
 interface BuildingCardProps {
   buildingId: string;
@@ -32,41 +34,41 @@ export function BuildingCard({
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Utiliser un selector pour ne récupérer que ce building
-  const building = useBuildingsStore((state) =>
-    state.getBuildingById(buildingId),
-  );
+  // ✅ Get building from Dexie (live query)
+  const building = useBuilding(buildingId);
 
   if (!building) return null;
 
-  const { id, name, image, costs, quantity, maxQty, parsed, hidden } = building;
+  const {
+    id,
+    name,
+    imageName,
+    imgLvl,
+    costs,
+    quantity,
+    maxQty,
+    type,
+    level,
+    hidden,
+  } = building;
 
-  // Calculer les resources à afficher
-  const mainResources = Object.entries(costs)
-    .filter(
-      (entry): entry is [string, number] =>
-        entry[0] !== "goods" && typeof entry[1] === "number",
-    )
-    .map(([type, unitValue]) => ({
-      type,
-      value: unitValue * quantity,
-      icon: getItemIconLocal(type),
-    }));
+  // ✅ CALCULATE qty × costs HERE IN THE CARD (with new structure)
+  const mainResources = Object.entries(costs.resources || {}).map(
+    ([resourceType, unitValue]) => ({
+      type: resourceType,
+      value: unitValue * quantity, // ✅ Multiplication qty × unit cost
+      icon: getItemIconLocal(resourceType),
+    }),
+  );
 
   const goodsBadges = (() => {
-    const goods = costs.goods as
-      | Array<{ type: string; amount: number }>
-      | undefined;
+    const goods = costs.goods;
     if (!goods?.length) return null;
 
-    const combined = goods.reduce((map, g) => {
-      map.set(g.type, (map.get(g.type) || 0) + g.amount * quantity);
-      return map;
-    }, new Map<string, number>());
-
-    return Array.from(combined.entries()).map(([type, amount]) => {
-      const match = type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
-      let goodName = type;
+    // ✅ Multiply each good by quantity
+    return goods.map((g) => {
+      const match = g.type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
+      let goodName = g.type;
 
       if (match) {
         const [, priority, era] = match;
@@ -80,16 +82,16 @@ export function BuildingCard({
 
       return (
         <ResourceBadge
-          key={type}
+          key={g.type}
           icon={`/goods/${slugify(goodName)}.webp`}
-          value={questsFormatNumber(amount)}
-          alt={type}
+          value={formatNumber(g.amount * quantity)} // ✅ Multiplication qty × unit cost
+          alt={g.type}
         />
       );
     });
   })();
 
-  const isConstruction = parsed.tableType === "construction";
+  const isConstruction = type === "construction";
 
   return (
     <div
@@ -134,12 +136,13 @@ export function BuildingCard({
         ) : (
           <div className="size-full flex items-center justify-center">
             <Image
-              src={image}
+              src={getWikiImageUrl(imageName, imgLvl, level)}
               alt={name}
               draggable={false}
               className="size-full object-cover brightness-105 select-none"
-              width={80}
-              height={80}
+              width={200}
+              height={200}
+              priority={true}
               onError={() => setImageError(true)}
             />
           </div>
@@ -154,6 +157,7 @@ export function BuildingCard({
             <div className="flex items-center gap-2">
               <h3 className="text-sm lg:text-[15px] font-medium truncate capitalize">
                 {name}
+                {level && <span> — Lvl {level}</span>}
               </h3>
 
               <Badge
@@ -216,7 +220,7 @@ export function BuildingCard({
                 <ResourceBadge
                   key={r.type}
                   icon={r.icon}
-                  value={questsFormatNumber(r.value)}
+                  value={formatNumber(r.value)}
                   alt={r.type}
                 />
               ))}
@@ -238,7 +242,3 @@ export function BuildingCard({
     </div>
   );
 }
-
-// Import du store
-import { useBuildingsStore } from "@/lib/stores/buildings-store";
-import Image from "next/image";

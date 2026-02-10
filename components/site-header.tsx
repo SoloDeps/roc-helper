@@ -11,11 +11,11 @@ export function SiteHeader() {
       <div className="flex items-center gap-2">
         <Link href="/" className="flex items-center gap-2 ">
           <Image
-            src="/icon/24.png"
+            src="/icon/48.png"
             width={24}
             height={24}
             alt="logo"
-            className="shrink-0"
+            className="shrink-0 object-cover"
           />
           <span className="hidden md:block text-sm font-semibold">
             RoC Wiki Goods
@@ -23,12 +23,12 @@ export function SiteHeader() {
         </Link>
         <Badge className="h-6 rounded-sm beta-badge">Beta</Badge>
 
-        <Button variant="outline" size="sm" asChild>
+        <Button variant="outline" size="sm" className="hidden md:block" asChild>
           <Link href="/user-data">
             <span>My Game Data</span>
           </Link>
         </Button>
-        <Button variant="outline" size="sm" asChild>
+        <Button variant="outline" size="sm" className="hidden md:block" asChild>
           <Link href="/calculator">
             <span>Calculator</span>
           </Link>

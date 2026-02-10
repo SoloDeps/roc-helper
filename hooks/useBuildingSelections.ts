@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { storage } from "#imports";
 import { buildingsAbbr } from "@/lib/constants";
 import { isValidData } from "@/lib/utils";
 
@@ -18,51 +17,36 @@ function parse(raw: string): BuildingSelections | null {
   }
 }
 
-// cache management
-let cache: BuildingSelections = DEFAULT;
-let initPromise: Promise<void> | null = null;
+function loadFromStorage(): BuildingSelections {
+  if (typeof window === "undefined") return DEFAULT;
 
-async function initCache() {
-  if (initPromise) return initPromise;
+  const stored = localStorage.getItem(KEY);
+  if (!stored) return DEFAULT;
 
-  initPromise = Promise.resolve().then(() => {
-    const stored = localStorage.getItem(KEY);
-    if (stored) {
-      const parsed = parse(stored);
-      if (parsed) cache = parsed;
-    }
-  });
-
-  return initPromise;
+  const parsed = parse(stored);
+  return parsed || DEFAULT;
 }
 
-initCache(); // initialize
-
+/**
+ * ✅ Hook that syncs with localStorage and listens for changes
+ */
 export function useBuildingSelections() {
-  const [selections, setSelections] = useState(cache);
+  const [selections, setSelections] =
+    useState<BuildingSelections>(loadFromStorage);
 
   useEffect(() => {
-    let mounted = true;
-
-    // sync cache
-    initCache().then(() => {
-      if (mounted) setSelections(cache);
-    });
-
-    // watch storage
-    const unwatch = () => {
-      const stored = localStorage.getItem(KEY);
-      if (!stored || !mounted) return;
-      const parsed = parse(stored);
-      if (parsed) {
-        cache = parsed;
-        setSelections(parsed);
-      }
+    // ✅ Listen for storage events (sync across tabs/components)
+    const handleStorageChange = () => {
+      // ✅ Use queueMicrotask to defer setState and avoid render conflicts
+      queueMicrotask(() => {
+        setSelections(loadFromStorage());
+      });
     };
 
+    window.addEventListener("storage", handleStorageChange);
+
     return () => {
-      mounted = false;
-      unwatch();
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 

@@ -45,7 +45,7 @@ export interface BuildingData {
   name: string;
   category: string;
   subcategory: string;
-  image: string;
+  imageName: string;
   levels: BuildingLevel[]; // TOUS les niveaux, même 40+
 }
 

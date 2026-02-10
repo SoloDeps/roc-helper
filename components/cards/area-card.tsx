@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ResourceBadge } from "@/components/items/resource-badge";
 import { cn } from "@/lib/utils";
 import {
-  questsFormatNumber,
+  formatNumber,
   slugify,
   getGoodNameFromPriorityEra,
   getItemIconLocal,
@@ -31,21 +31,18 @@ export function AreaCard({
   const [isHovered, setIsHovered] = useState(false);
   const { id, areaIndex, costs, hidden } = area;
 
-  const mainResources = Object.entries(costs)
-    .filter(
-      (entry): entry is [string, number] =>
-        entry[0] !== "goods" && typeof entry[1] === "number",
-    )
-    .map(([type, value]) => ({
+  // ✅ Use new structure: costs.resources
+  const mainResources = Object.entries(costs.resources || {}).map(
+    ([type, value]) => ({
       type,
       value,
       icon: getItemIconLocal(type),
-    }));
+    }),
+  );
 
+  // ✅ Use new structure: costs.goods
   const goodsBadges = (() => {
-    const goods = costs.goods as
-      | Array<{ type: string; amount: number }>
-      | undefined;
+    const goods = costs.goods;
     if (!goods?.length) return null;
 
     return goods.map((g, i) => {
@@ -66,7 +63,7 @@ export function AreaCard({
         <ResourceBadge
           key={`${g.type}-${i}`}
           icon={`/goods/${slugify(goodName)}.webp`}
-          value={questsFormatNumber(g.amount)}
+          value={formatNumber(g.amount)}
           alt={g.type}
         />
       );
@@ -184,7 +181,7 @@ export function AreaCard({
               <ResourceBadge
                 key={r.type}
                 icon={r.icon}
-                value={questsFormatNumber(r.value)}
+                value={formatNumber(r.value)}
                 alt={r.type}
               />
             ))}

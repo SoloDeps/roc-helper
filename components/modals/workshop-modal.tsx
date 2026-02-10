@@ -1,88 +1,329 @@
-import { useState } from "react";
-import { Store } from "lucide-react";
-import {
-  Dialog,
-  DialogHeader,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+"use client";
+
+import { useState, useCallback, useEffect, memo, useRef } from "react";
+import { Store, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { BuildingSelectorGroup } from "@/components/popup/building-selector-group";
+import { ResponsiveModal } from "./responsive-modal";
+import { ResponsiveSelect } from "./responsive-select";
+import { buildingsAbbr } from "@/lib/constants";
+import { getGoodsImg } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
-export function WorkshopModal({
-  variant = "outline",
-}: {
+interface WorkshopModalProps {
   variant?: "default" | "outline" | "ghost";
-}) {
-  const [open, setOpen] = useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+}
 
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button size="sm" variant={variant} className="cursor-pointer">
-            <Store /> Workshops
-          </Button>
-        </DialogTrigger>
+// ============================================================================
+// TYPES
+// ============================================================================
 
-        <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] w-full sm:max-w-[660px] bg-background-100 shadow-lg">
-          <DialogHeader className="px-4 py-4 text-left gap-1 ">
-            <DialogTitle className="text-base">Manage Workshops</DialogTitle>
-            <DialogDescription className="text-left text-sm">
-              Update your workshop selections here. All changes are saved
-              automatically.
-            </DialogDescription>
-          </DialogHeader>
-          <BuildingSelectorGroup />
-        </DialogContent>
-      </Dialog>
-    );
+type BuildingSelections = string[][];
+
+const STORAGE_KEY = "local:buildingSelections";
+const DEFAULT_SELECTIONS = buildingsAbbr.map(() => ["", "", ""]);
+
+// ============================================================================
+// STORAGE HELPERS
+// ============================================================================
+
+function loadSelections(): BuildingSelections {
+  if (typeof window === "undefined") return DEFAULT_SELECTIONS;
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return DEFAULT_SELECTIONS;
+
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : DEFAULT_SELECTIONS;
+  } catch {
+    return DEFAULT_SELECTIONS;
   }
+}
+
+function saveSelections(selections: BuildingSelections) {
+  if (typeof window === "undefined") return;
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
+
+    // ✅ Defer storage event to avoid setState during render
+    queueMicrotask(() => {
+      window.dispatchEvent(new Event("storage"));
+    });
+  } catch (error) {
+    console.error("Failed to save selections:", error);
+  }
+}
+
+// ============================================================================
+// WORKSHOP ROW COMPONENT
+// ============================================================================
+
+interface WorkshopRowProps {
+  title: string;
+  buildings: string[];
+  index: number;
+  selections: BuildingSelections;
+  onUpdate: (
+    index: number,
+    primary: string,
+    secondary: string,
+    tertiary: string,
+  ) => void;
+}
+
+const WorkshopRow = memo(
+  ({ title, buildings, index, selections, onUpdate }: WorkshopRowProps) => {
+    // ✅ Use selections directly as source of truth for initialization
+    const currentSelection = selections[index] || ["", "", ""];
+    const [primary, setPrimary] = useState(currentSelection[0]);
+    const [secondary, setSecondary] = useState(currentSelection[1]);
+    const [tertiary, setTertiary] = useState(currentSelection[2]);
+
+    // ✅ Track the last values we sent via onUpdate to avoid syncing our own changes
+    const lastUpdateRef = useRef({ primary, secondary, tertiary });
+
+    // ✅ Derive options from current state
+    const secondaryOptions = primary
+      ? buildings.filter((b) => b !== primary)
+      : [];
+
+    const tertiaryOptions = secondary
+      ? buildings.filter((b) => b !== primary && b !== secondary)
+      : [];
+
+    const handlePrimaryChange = useCallback(
+      (value: string) => {
+        setPrimary(value);
+        setSecondary("");
+        setTertiary("");
+        lastUpdateRef.current = { primary: value, secondary: "", tertiary: "" };
+        onUpdate(index, value, "", "");
+      },
+      [index, onUpdate],
+    );
+
+    const handleSecondaryChange = useCallback(
+      (value: string) => {
+        setSecondary(value);
+
+        // ✅ Calculate tertiary synchronously based on new secondary
+        const newTertiaryOptions = value
+          ? buildings.filter((b) => b !== primary && b !== value)
+          : [];
+        const newTertiary =
+          newTertiaryOptions.length > 0 ? newTertiaryOptions[0] : "";
+
+        setTertiary(newTertiary);
+        lastUpdateRef.current = {
+          primary,
+          secondary: value,
+          tertiary: newTertiary,
+        };
+        onUpdate(index, primary, value, newTertiary);
+      },
+      [index, primary, buildings, onUpdate],
+    );
+
+    const handleReset = useCallback(() => {
+      setPrimary("");
+      setSecondary("");
+      setTertiary("");
+      lastUpdateRef.current = { primary: "", secondary: "", tertiary: "" };
+      onUpdate(index, "", "", "");
+    }, [index, onUpdate]);
+
+    // ✅ Sync with external changes only (from storage events in other tabs/components)
+    useEffect(() => {
+      const externalPrimary = currentSelection[0];
+      const externalSecondary = currentSelection[1];
+      const externalTertiary = currentSelection[2];
+
+      // Only update if this change came from external source (not our own update)
+      const isOurUpdate =
+        lastUpdateRef.current.primary === externalPrimary &&
+        lastUpdateRef.current.secondary === externalSecondary &&
+        lastUpdateRef.current.tertiary === externalTertiary;
+
+      if (!isOurUpdate) {
+        // Schedule state updates in next render cycle to avoid cascading
+        const timeoutId = setTimeout(() => {
+          setPrimary(externalPrimary);
+          setSecondary(externalSecondary);
+          setTertiary(externalTertiary);
+          lastUpdateRef.current = {
+            primary: externalPrimary,
+            secondary: externalSecondary,
+            tertiary: externalTertiary,
+          };
+        }, 0);
+
+        return () => clearTimeout(timeoutId);
+      }
+    }, [currentSelection[0], currentSelection[1], currentSelection[2]]);
+
+    const primaryOptions = buildings.map((name) => ({
+      value: name,
+      label: name,
+      imageUrl: getGoodsImg(name),
+    }));
+
+    const secondarySelectOptions = secondaryOptions.map((name) => ({
+      value: name,
+      label: name,
+      imageUrl: getGoodsImg(name),
+    }));
+
+    return (
+      <div className="pt-0 pb-4 border-b border-alpha-400 last:border-b-0">
+        {/* Title + Reset */}
+        <div className="flex justify-between items-center h-8 mb-2">
+          <h3 className="text-sm font-medium">{title}</h3>
+          {primary && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleReset}
+              className="h-7 gap-1.5 text-muted-foreground hover:text-foreground"
+            >
+              <RotateCw className="size-4" />
+              <span className="text-[13px]">Reset</span>
+            </Button>
+          )}
+        </div>
+
+        {/* Selectors */}
+        <div className="grid grid-col-1 md:grid-cols-3 size-full gap-2">
+          {/* Primary */}
+          <ResponsiveSelect
+            value={primary}
+            onValueChange={handlePrimaryChange}
+            options={primaryOptions}
+            placeholder="Select Primary"
+            drawerClassName="h-[35vh]"
+            nested
+          />
+
+          {/* Secondary */}
+          <ResponsiveSelect
+            value={secondary}
+            onValueChange={handleSecondaryChange}
+            options={secondarySelectOptions}
+            placeholder="Select Secondary"
+            disabled={!primary}
+            drawerClassName="h-[35vh]"
+            nested
+          />
+
+          {/* Tertiary (display only with same design) */}
+          <ResponsiveSelect
+            value={tertiary}
+            onValueChange={() => {}} // No-op since it's disabled
+            options={tertiaryOptions.map((name) => ({
+              value: name,
+              label: name,
+              imageUrl: getGoodsImg(name),
+            }))}
+            disabled={!secondary}
+            placeholder="Tertiary Good"
+            readOnly={true}
+            hideChevron={true}
+            drawerClassName="h-[35vh]"
+            nested
+          />
+        </div>
+      </div>
+    );
+  },
+);
+
+WorkshopRow.displayName = "WorkshopRow";
+
+// ============================================================================
+// MODAL CONTENT
+// ============================================================================
+
+const WorkshopContent = memo(() => {
+  const [selections, setSelections] =
+    useState<BuildingSelections>(loadSelections);
+
+  // ✅ Listen for storage changes (sync across tabs/components)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setSelections(loadSelections());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const handleUpdate = useCallback(
+    (index: number, primary: string, secondary: string, tertiary: string) => {
+      setSelections((prev) => {
+        const newSelections = [...prev];
+        newSelections[index] = [primary, secondary, tertiary];
+        saveSelections(newSelections);
+        return newSelections;
+      });
+    },
+    [],
+  );
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button size="sm" variant={variant} className="cursor-pointer">
-          <Store /> Workshops
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent className="bg-background-100">
-        <DrawerHeader className="">
-          <div className="w-full sm:mx-auto">
-            <DrawerTitle className="text-left text-base">
-              Manage Workshops
-            </DrawerTitle>
-            <DrawerDescription className="text-left text-sm">
-              Update your workshop selections here. All changes are saved
-              automatically.
-            </DrawerDescription>
-          </div>
-        </DrawerHeader>
-        <div className="w-full sm:mx-auto">
-          <BuildingSelectorGroup />
-          <DrawerFooter className="pt-2">
-            <DrawerClose asChild>
-              <Button variant="outline" className="rounded-sm">
-                Close
-              </Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </div>
-      </DrawerContent>
-    </Drawer>
+    <div className="flex flex-col h-full max-h-full">
+      {/* Header */}
+      <div className="flex-shrink-0 sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background px-4 py-1.5 md:py-3">
+        <h2 className="text-base font-semibold">Manage Workshops</h2>
+        <p className="text-sm text-muted-foreground md:mt-1">
+          Update your workshop selections.
+        </p>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto min-h-0 p-4 space-y-4">
+        {buildingsAbbr.map((group, index) => (
+          <WorkshopRow
+            key={index}
+            title={group.title}
+            buildings={group.buildings}
+            index={index}
+            selections={selections}
+            onUpdate={handleUpdate}
+          />
+        ))}
+      </div>
+    </div>
+  );
+});
+
+WorkshopContent.displayName = "WorkshopContent";
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
+export function WorkshopModal({ variant = "outline" }: WorkshopModalProps) {
+  const [open, setOpen] = useState(false);
+
+  const trigger = (
+    <Button size="sm" variant={variant}>
+      <Store className="size-4 mr-1" />
+      Workshops
+    </Button>
+  );
+
+  return (
+    <ResponsiveModal
+      trigger={trigger}
+      open={open}
+      onOpenChange={setOpen}
+      className={cn(
+        "p-0 gap-0 flex flex-col overflow-hidden",
+        "md:h-[min(600px,50vh)] md:w-full md:max-w-[600px]",
+        "h-[80vh]",
+      )}
+    >
+      <WorkshopContent />
+    </ResponsiveModal>
   );
 }

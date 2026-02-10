@@ -11,11 +11,7 @@ import {
   makePriorityKey,
   isAlliedCityResource,
 } from "@/lib/constants";
-import {
-  getBuildingFromLocal,
-  slugify,
-  getItemIconLocal,
-} from "@/lib/shadcn-utils";
+import { getBuildingFromLocal, slugify, getItemIconLocal } from "@/lib/utils";
 import { ResourceBlock } from "@/components/total-goods/resource-block";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
