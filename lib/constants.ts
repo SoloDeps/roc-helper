@@ -8,9 +8,6 @@ export type alliedCity =
   | "arabia"
   | "ottoman_empire";
 
-export const WIKI_URL = "https://riseofcultures.wiki.gg";
-export const WIKI_DISPLAY = "riseofcultures.wiki.gg";
-
 export const eras = [
   {
     name: "Stone Age",
@@ -182,21 +179,21 @@ export const buildingsAbbr = [
   },
 ];
 
-export const itemsUrl = {
-  default: "/images/thumb/3/36/Goods.png/32px-Goods.png",
-  coins: "/images/thumb/Coin.png/32px-Coin.png",
-  food: "/images/thumb/Food.png/32px-Food.png",
-  research_points: "/images/thumb/Research.png/32px-Research.png",
-  gems: "/images/thumb/Gems.png/32px-Gems.png",
-  // others
-  aspers: "/images/thumb/Asper.png/32px-Asper.png",
-  cocoa: "/images/thumb/Cocoa.png/32px-Cocoa.png",
-  deben: "/images/thumb/Deben.png/32px-Deben.png",
-  dirham: "/images/thumb/Dirham.png/32px-Dirham.png",
-  pennies: "/images/thumb/Pennies.png/32px-Pennies.png",
-  rice: "/images/thumb/Rice.png/32px-Rice.png",
-  wu_zhu: "/images/thumb/Wu_Zhu.png/32px-Wu_Zhu.png",
-} as const;
+// export const itemsUrl = {
+//   default: "/images/thumb/3/36/Goods.png/32px-Goods.png",
+//   coins: "/images/thumb/Coin.png/32px-Coin.png",
+//   food: "/images/thumb/Food.png/32px-Food.png",
+//   research_points: "/images/thumb/Research.png/32px-Research.png",
+//   gems: "/images/thumb/Gems.png/32px-Gems.png",
+//   // others
+//   aspers: "/images/thumb/Asper.png/32px-Asper.png",
+//   cocoa: "/images/thumb/Cocoa.png/32px-Cocoa.png",
+//   deben: "/images/thumb/Deben.png/32px-Deben.png",
+//   dirham: "/images/thumb/Dirham.png/32px-Dirham.png",
+//   pennies: "/images/thumb/Pennies.png/32px-Pennies.png",
+//   rice: "/images/thumb/Rice.png/32px-Rice.png",
+//   wu_zhu: "/images/thumb/Wu_Zhu.png/32px-Wu_Zhu.png",
+// } as const;
 
 export const goodsUrlByEra: Record<
   EraAbbr,

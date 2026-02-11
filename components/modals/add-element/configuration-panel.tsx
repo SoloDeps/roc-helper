@@ -2,7 +2,7 @@
 
 import { memo, useMemo, useEffect } from "react";
 import { Label } from "@/components/ui/label";
-import { Check, Loader2, AlertCircle } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   getBuildingData,
@@ -16,12 +16,11 @@ import type {
   ElementConfig,
   NavigationPath,
 } from "@/lib/stores/add-element-store";
-import { useDuplicateErrors } from "@/lib/stores/add-element-store";
+import { useLastUsedEra } from "@/lib/stores/add-element-store";
 import { Button } from "@/components/ui/button";
 import { ResponsiveSelect } from "@/components/modals/responsive-select";
 import { QtySlider } from "./quantity-slider";
 import { ERAS } from "@/lib/catalog";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 /**
  * Era selector - Now using ResponsiveSelect
@@ -82,7 +81,7 @@ const TypeSelector = memo<TypeSelectorProps>(
             disabled={!hasConstruction}
             className={cn(
               selectedType === "construction" && hasConstruction
-                ? "border-2 bg-green-500 dark:bg-green-700/20 text-white border-green-600 shadow-lg"
+                ? "border-2 construction-badge shadow-lg"
                 : "border bg-background-100 hover:bg-accent border-alpha-300",
             )}
           >
@@ -96,7 +95,7 @@ const TypeSelector = memo<TypeSelectorProps>(
             disabled={!hasUpgrade}
             className={cn(
               selectedType === "upgrade" && hasUpgrade
-                ? "border-2 bg-blue-500 dark:bg-blue-700/20 text-white border-blue-600 shadow-lg"
+                ? "border-2 upgrade-badge shadow-lg"
                 : "border bg-background-100 hover:bg-accent border-alpha-300",
             )}
           >
@@ -202,8 +201,8 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
     isLoading = false,
     nested = true,
   }) => {
-    // ✅ Get duplicate errors array from store
-    const duplicateErrors = useDuplicateErrors();
+    // ✅ Get last used era for smart defaults
+    const lastUsedEra = useLastUsedEra();
 
     const elementData = useMemo(
       () => (path.elementId ? getBuildingData(path.elementId) : null),
@@ -215,12 +214,17 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
       [elementData],
     );
 
-    // Initialize era if not set
+    // ✅ Initialize era with lastUsedEra if available, otherwise use last era
     useEffect(() => {
       if (availableEras.length > 0 && !config.selectedEra) {
-        onEraChange(availableEras[availableEras.length - 1]);
+        // Check if lastUsedEra is available for this element
+        const defaultEra = availableEras.includes(lastUsedEra)
+          ? lastUsedEra
+          : availableEras[availableEras.length - 1];
+
+        onEraChange(defaultEra);
       }
-    }, [availableEras, config.selectedEra, onEraChange]);
+    }, [availableEras, config.selectedEra, lastUsedEra, onEraChange]);
 
     const availableLevels = useMemo(() => {
       if (!elementData || !config.selectedEra) return [];
@@ -320,25 +324,6 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
             </div>
           </div>
         </div>
-
-        {/* ✅ Duplicate Errors Alert with bulleted list */}
-        {duplicateErrors.length > 0 && (
-          <Alert variant="destructive" className="my-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              <div className="font-medium mb-1">
-                Elements already in the list:
-              </div>
-              <ul className="list-disc list-inside space-y-0.5">
-                {duplicateErrors.map((error, index) => (
-                  <li key={index} className="text-sm">
-                    {error}
-                  </li>
-                ))}
-              </ul>
-            </AlertDescription>
-          </Alert>
-        )}
 
         {onAddElement && (
           <div className="pb-8 md:pb-0 mt-5 flex justify-end">

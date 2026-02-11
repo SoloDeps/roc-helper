@@ -17,7 +17,7 @@ export const ResourceBadge = memo(function ResourceBadge({
   }, [icon]);
 
   return (
-    <div className="flex items-center justify-between px-2 rounded-md bg-background-100 border border-alpha-200 h-8 shrink-0">
+    <div className="flex items-center justify-between px-2 rounded-md bg-background-100 border border-alpha-200 h-9 shrink-0">
       <Image
         src={src}
         alt={alt}
@@ -27,7 +27,7 @@ export const ResourceBadge = memo(function ResourceBadge({
         width={25}
         height={25}
       />
-      <span className="text-[13px] font-medium font-sans">{value}</span>
+      <span className="text-sm font-medium">{value}</span>
     </div>
   );
 });

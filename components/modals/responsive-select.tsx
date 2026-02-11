@@ -10,7 +10,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
+  // SelectValue,
 } from "@/components/ui/select";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import Image from "next/image";
@@ -59,7 +59,7 @@ const DrawerSelectContent = React.memo<{
   return (
     <div className="flex flex-col max-h-full h-full">
       {/* Header */}
-      <div className="sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background flex-shrink-0">
+      <div className="sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background shrink-0">
         <div className="flex items-center justify-center h-10 px-4">
           <h3 className="text-sm font-semibold">
             {placeholder || "Select an option"}
@@ -157,23 +157,40 @@ export function ResponsiveSelect({
             )}
             onClick={readOnly ? (e) => e.preventDefault() : undefined}
           >
-            <SelectValue placeholder={placeholder} />
+            {selectedOption ? (
+              <div className="flex items-center gap-2">
+                {selectedOption.imageUrl && (
+                  <Image
+                    src={selectedOption.imageUrl}
+                    alt={selectedOption.value}
+                    className="size-5 brightness-110"
+                    width={20}
+                    height={20}
+                  />
+                )}
+                <span>{selectedOption.label}</span>
+              </div>
+            ) : (
+              <span className="text-muted-foreground">{placeholder}</span>
+            )}
           </SelectTrigger>
 
           {!readOnly && (
             <SelectContent position="popper">
               {options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
-                  {option.imageUrl ? (
-                    <Image
-                      src={option.imageUrl}
-                      alt={option.value}
-                      className="size-6 brightness-110"
-                      width={24}
-                      height={24}
-                    />
-                  ) : null}
-                  {option.label}
+                  <div className="flex items-center gap-2">
+                    {option.imageUrl && (
+                      <Image
+                        src={option.imageUrl}
+                        alt={option.value}
+                        className="size-5 brightness-110"
+                        width={20}
+                        height={20}
+                      />
+                    )}
+                    <span>{option.label}</span>
+                  </div>
                 </SelectItem>
               ))}
             </SelectContent>

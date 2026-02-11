@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { X } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
@@ -8,7 +9,6 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { CompareButton } from "@/components/buttons/compare-button";
 import { TotalGoodsDisplay } from "@/components/total-goods/total-goods-display";
 
 interface TotalDrawerProps {
@@ -18,7 +18,6 @@ interface TotalDrawerProps {
 
 export function TotalDrawer({
   compareMode = false,
-  onToggleCompare,
 }: TotalDrawerProps) {
   const [open, setOpen] = useState(false);
   const isXL = useMediaQuery("(min-width: 1280px)");
@@ -32,23 +31,31 @@ export function TotalDrawer({
           Resources Total
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="bg-background-100 size-full">
-        <DrawerHeader className="border border-x-0 border-alpha-400 border-t-transparent py-1.5 px-0">
-          <div className="w-full max-w-[870px] mx-auto px-4">
-            <div className="flex justify-between items-center">
-              <DrawerTitle className="text-left text-base pb-1">
+
+      <DrawerContent className="bg-background-200 h-[95vh] flex flex-col">
+        {/* Header sticky */}
+        <DrawerHeader className="border-b border-alpha-400 py-3 px-4 shrink-0">
+          <div className="w-full max-w-[870px] mx-auto">
+            <div className="flex justify-between items-center h-5">
+              <DrawerTitle className="text-left text-base">
                 Resources Total
               </DrawerTitle>
 
-              <CompareButton
-                variant="outline"
-                enabled={compareMode}
-                onToggle={onToggleCompare}
-              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setOpen(false)}
+                className="rounded-full"
+              >
+                <X className="size-5" />
+                <span className="sr-only">Close</span>
+              </Button>
             </div>
           </div>
         </DrawerHeader>
-        <div className="size-full sm:mx-auto pb-5">
+
+        {/* Content area - utilise le même composant TotalGoodsDisplay */}
+        <div className="flex-1 overflow-hidden">
           <TotalGoodsDisplay compareMode={compareMode} />
         </div>
       </DrawerContent>

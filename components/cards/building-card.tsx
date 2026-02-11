@@ -11,13 +11,14 @@ import { cn, getWikiImageUrl } from "@/lib/utils";
 import {
   getItemIconLocal,
   formatNumber,
-  slugify,
   getGoodNameFromPriorityEra,
 } from "@/lib/utils";
-import { useBuilding } from "@/hooks/use-database"; // ✅ Dexie hook
+import { useBuilding } from "@/hooks/use-database";
+import type { BuildingEntity } from "@/lib/db/schema";
 
 interface BuildingCardProps {
-  buildingId: string;
+  buildingId?: string;
+  building?: BuildingEntity;
   userSelections: string[][];
   onRemove: (id: string) => void;
   onUpdateQuantity: (id: string, quantity: number) => void;
@@ -26,6 +27,7 @@ interface BuildingCardProps {
 
 export function BuildingCard({
   buildingId,
+  building: buildingProp,
   userSelections,
   onRemove,
   onUpdateQuantity,
@@ -34,8 +36,9 @@ export function BuildingCard({
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // ✅ Get building from Dexie (live query)
-  const building = useBuilding(buildingId);
+  // ✅ Use provided building OR fetch from Dexie
+  const fetchedBuilding = useBuilding(buildingProp ? undefined : buildingId);
+  const building = buildingProp || fetchedBuilding;
 
   if (!building) return null;
 
@@ -83,7 +86,7 @@ export function BuildingCard({
       return (
         <ResourceBadge
           key={g.type}
-          icon={`/goods/${slugify(goodName)}.webp`}
+          icon={getItemIconLocal(goodName)}
           value={formatNumber(g.amount * quantity)} // ✅ Multiplication qty × unit cost
           alt={g.type}
         />
@@ -150,12 +153,12 @@ export function BuildingCard({
       </div>
 
       {/* Content */}
-      <div className="flex p-3 size-full relative">
+      <div className="flex px-2 py-3 md:px-3 size-full relative">
         <div className="flex-1">
           {/* Header */}
           <div className="flex mb-3 justify-between">
             <div className="flex items-center gap-2">
-              <h3 className="text-sm lg:text-[15px] font-medium truncate capitalize">
+              <h3 className="text-sm lg:text-[15px] font-medium max-w-44 truncate capitalize">
                 {name}
                 {level && <span> — Lvl {level}</span>}
               </h3>
@@ -163,10 +166,8 @@ export function BuildingCard({
               <Badge
                 variant="outline"
                 className={cn(
-                  "rounded-sm border-alpha-100 border",
-                  isConstruction
-                    ? "bg-green-300 dark:bg-green-400 text-green-950"
-                    : "bg-blue-200 dark:bg-blue-300 text-blue-950",
+                  "rounded-sm border-alpha-100 border shrink-0",
+                  isConstruction ? "construction-badge" : "upgrade-badge",
                 )}
               >
                 {isConstruction ? "Construction" : "Upgrade"}
@@ -174,7 +175,7 @@ export function BuildingCard({
 
               <div
                 className={cn(
-                  "transition-opacity duration-200",
+                  "transition-opacity duration-200 hidden md:block",
                   hidden || isHovered
                     ? "opacity-100"
                     : "opacity-0 pointer-events-none",
@@ -214,8 +215,8 @@ export function BuildingCard({
           </div>
 
           {/* Resources & Counter */}
-          <div className="flex gap-2 justify-between items-stretch min-h-[70px]">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-60 sm:w-80 content-start">
+          <div className="flex flex-col md:flex-row w-full gap-2 justify-between items-stretch min-h-[70px]">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-full content-start">
               {mainResources.map((r) => (
                 <ResourceBadge
                   key={r.type}
@@ -227,7 +228,37 @@ export function BuildingCard({
               {goodsBadges}
             </div>
 
-            <div className="flex items-end">
+            {/* Desktop: Counter only */}
+            <div className="hidden md:flex justify-end items-end">
+              <BuildingCounter
+                value={quantity}
+                onChange={(qty) => onUpdateQuantity(id, qty)}
+                min={1}
+                max={maxQty}
+                disabled={hidden}
+              />
+            </div>
+
+            {/* Mobile: Hide button + Counter */}
+            <div className="flex md:hidden justify-between items-end gap-2">
+              <Button
+                variant="outline"
+                className="rounded-sm h-[34px]"
+                onClick={() => onToggleHidden(id)}
+                title={
+                  hidden
+                    ? "Include in total calculation"
+                    : "Exclude from total calculation"
+                }
+              >
+                {hidden ? (
+                  <Eye className="size-4" />
+                ) : (
+                  <EyeOff className="size-4" />
+                )}
+                <span>{hidden ? "Show" : "Hide"}</span>
+              </Button>
+
               <BuildingCounter
                 value={quantity}
                 onChange={(qty) => onUpdateQuantity(id, qty)}

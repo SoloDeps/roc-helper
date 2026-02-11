@@ -6,6 +6,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Providers } from "./providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
               <SiteHeader />
               {children}
             </div>
+            <Toaster />
           </Providers>
         </ThemeProvider>
       </body>

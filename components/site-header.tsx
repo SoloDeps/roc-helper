@@ -18,17 +18,22 @@ export function SiteHeader() {
             className="shrink-0 object-cover"
           />
           <span className="hidden md:block text-sm font-semibold">
-            RoC Wiki Goods
+            RoC Helper
           </span>
         </Link>
         <Badge className="h-6 rounded-sm beta-badge">Beta</Badge>
 
-        <Button variant="outline" size="sm" className="hidden md:block" asChild>
+        {/* <Button variant="outline" size="sm" className="hidden md:flex" asChild>
           <Link href="/user-data">
             <span>My Game Data</span>
           </Link>
+        </Button> */}
+        <Button variant="outline" size="sm" className="hidden md:flex" asChild>
+          <Link href="/technologies">
+            <span>Technologies</span>
+          </Link>
         </Button>
-        <Button variant="outline" size="sm" className="hidden md:block" asChild>
+        <Button variant="outline" size="sm" className="hidden md:flex" asChild>
           <Link href="/calculator">
             <span>Calculator</span>
           </Link>

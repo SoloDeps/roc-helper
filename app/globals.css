@@ -197,6 +197,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -221,13 +222,28 @@
     @apply mx-auto w-full max-w-[1620px] px-2 sm:px-4 max-xl:max-w-4xl;
   }
 
-  .material-medium {
-    @apply rounded-md border border-border bg-background-100;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.04), 0 -8px 8px -8px rgba(0, 0, 0, 0.04);
+  /* 📱 Mobile - max-width: 767px */
+  @media (max-width: 767px) {
+    .material-medium {
+      @apply -mx-2 sm:-mx-4 rounded-none border-t bg-background-100;
+      /* box-shadow: 0 2px 2px rgba(0, 0, 0, 0.04), 0 -8px 8px -8px rgba(0, 0, 0, 0.04); */
+    }
+
+    .material-medium:where(.dark, .dark *) {
+      @apply border-gray-300;
+    }
   }
 
-  .material-medium:where(.dark, .dark *) {
-    @apply border-gray-300;
+  /* 💻 Desktop - min-width: 768px */
+  @media (min-width: 768px) {
+    .material-medium {
+      @apply rounded-md border border-border bg-background-100;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.04), 0 -8px 8px -8px rgba(0, 0, 0, 0.04);
+    }
+
+    .material-medium:where(.dark, .dark *) {
+      @apply border-gray-300;
+    }
   }
 
   .beta-badge {
@@ -237,6 +253,13 @@
 
   .popup {
     @apply flex min-h-[600px] h-full flex-col items-stretch justify-start overflow-hidden;
+  }
+
+  .construction-badge {
+    @apply !bg-green-300 dark:!bg-green-400 !text-green-950;
+  }
+  .upgrade-badge {
+    @apply !bg-blue-200 dark:!bg-blue-300 !text-blue-950;
   }
 }
 

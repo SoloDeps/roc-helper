@@ -8,7 +8,7 @@ interface MaxQtyByEra {
 }
 
 // eracode a partir de LG et plus : exclude others era except LG
-export const MAX_QTY_BY_ERA: Record<PostLGEra, MaxQtyByEra> = {
+const MAX_QTY_BY_ERA: Record<PostLGEra, MaxQtyByEra> = {
   LG: {
     homes: 31,
     farms: 13,

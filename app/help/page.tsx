@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function Help() {
   return (
     <div className="flex min-h-0 flex-1 container-wrapper gap-4">
-      <div className="sticky top-0 origin-left mb-2 material-medium w-full xl:max-w-4xl overflow-hidden mx-auto">
+      <div className="sticky top-0 origin-left mb-2 md:material-medium w-full xl:max-w-4xl overflow-hidden mx-auto">
         <header className="flex shrink-0 flex-col w-full transition-colors bg-roc-blue">
           <div className="flex shrink-0 w-full justify-between items-center gap-3 pl-4 pr-3 sm:pl-3 sm:pr-2 h-12 sm:mx-0">
             <h2 className="text-[15px] font-bold text-white">Help Page</h2>

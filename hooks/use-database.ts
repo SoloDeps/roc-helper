@@ -9,6 +9,12 @@ import type {
   OttomanAreaEntity,
   OttomanTradePostEntity,
 } from "@/lib/db/schema";
+import {
+  toggleHideAllBuildings,
+  toggleHideAllTechnosByEra,
+  toggleHideAllOttomanAreas,
+  toggleHideAllOttomanTradePosts,
+} from "@/lib/db/hide-show-utils";
 
 // ============================================================================
 // QUERY KEYS
@@ -41,7 +47,7 @@ export function useBuildings() {
 export function useVisibleBuildings() {
   return useLiveQuery(async () => {
     const db = getWikiDB();
-    return await db.buildings.where("hidden").equals(false).toArray();
+    return await db.buildings.where("hidden").equals(0).toArray();
   }, []);
 }
 
@@ -49,14 +55,11 @@ export function useVisibleBuildings() {
  * Get building by ID
  */
 export function useBuilding(id: string | undefined) {
-  return useLiveQuery(
-    async () => {
-      if (!id) return null;
-      const db = getWikiDB();
-      return await db.buildings.get(id);
-    },
-    [id]
-  );
+  return useLiveQuery(async () => {
+    if (!id) return null;
+    const db = getWikiDB();
+    return await db.buildings.get(id);
+  }, [id]);
 }
 
 /**
@@ -198,7 +201,7 @@ export function useTechnos() {
 export function useVisibleTechnos() {
   return useLiveQuery(async () => {
     const db = getWikiDB();
-    return await db.technos.where("hidden").equals(false).toArray();
+    return await db.technos.where("hidden").equals(0).toArray();
   }, []);
 }
 
@@ -206,13 +209,10 @@ export function useVisibleTechnos() {
  * Get technos by era
  */
 export function useTechnosByEra(era: string) {
-  return useLiveQuery(
-    async () => {
-      const db = getWikiDB();
-      return await db.technos.where("era").equals(era).toArray();
-    },
-    [era]
-  );
+  return useLiveQuery(async () => {
+    const db = getWikiDB();
+    return await db.technos.where("era").equals(era).toArray();
+  }, [era]);
 }
 
 // ============================================================================
@@ -257,7 +257,7 @@ export function useToggleTechnosByEra() {
           ...t,
           hidden: newHiddenState,
           updatedAt: timestamp,
-        }))
+        })),
       );
     },
     onSuccess: () => {
@@ -304,7 +304,7 @@ export function useOttomanAreas() {
 export function useVisibleOttomanAreas() {
   return useLiveQuery(async () => {
     const db = getWikiDB();
-    return await db.ottomanAreas.where("hidden").equals(false).toArray();
+    return await db.ottomanAreas.where("hidden").equals(0).toArray();
   }, []);
 }
 
@@ -390,7 +390,7 @@ export function useOttomanTradePosts() {
 export function useVisibleOttomanTradePosts() {
   return useLiveQuery(async () => {
     const db = getWikiDB();
-    return await db.ottomanTradePosts.where("hidden").equals(false).toArray();
+    return await db.ottomanTradePosts.where("hidden").equals(0).toArray();
   }, []);
 }
 
@@ -504,7 +504,7 @@ export function useRemoveOttomanTradePost() {
 
 function calculateTradePostCosts(
   sourceData: NonNullable<OttomanTradePostEntity["sourceData"]>,
-  levels: OttomanTradePostEntity["levels"]
+  levels: OttomanTradePostEntity["levels"],
 ): OttomanTradePostEntity["costs"] {
   const resources: Record<string, number> = {};
   const goodsMap = new Map<string, number>();
@@ -558,4 +558,60 @@ function calculateTradePostCosts(
   }));
 
   return { resources, goods };
+}
+
+/**
+ * Hook to toggle hide/show all buildings in a group
+ */
+export function useToggleHideAllBuildings() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (buildingIds: string[]) => toggleHideAllBuildings(buildingIds),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["buildings"] });
+    },
+  });
+}
+
+/**
+ * Hook to toggle hide/show all technos in an era
+ */
+export function useToggleHideAllTechnosByEra() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (eraPath: string) => toggleHideAllTechnosByEra(eraPath),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["technos"] });
+    },
+  });
+}
+
+/**
+ * Hook to toggle hide/show all Ottoman areas
+ */
+export function useToggleHideAllOttomanAreas() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => toggleHideAllOttomanAreas(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["ottomanAreas"] });
+    },
+  });
+}
+
+/**
+ * Hook to toggle hide/show all Ottoman trade posts
+ */
+export function useToggleHideAllOttomanTradePosts() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => toggleHideAllOttomanTradePosts(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["ottomanTradePosts"] });
+    },
+  });
 }

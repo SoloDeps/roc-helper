@@ -5,27 +5,43 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { buttonVariants } from "@/components/ui/button";
 import { useFiltersStore } from "@/lib/stores/filters-store";
-import { useBuildingsStore } from "@/lib/stores/buildings-store";
-import { useId } from "react";
+import { useBuildings } from "@/hooks/use-database";
+import { useId, useMemo } from "react";
+import { Filter, X } from "lucide-react";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
-export function PanelFilters() {
+export function FiltersDrawer() {
   const hideHiddenId = useId();
   const hideTechnosId = useId();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // Store
   const filters = useFiltersStore();
-  const allBuildings = useBuildingsStore((state) =>
-    Array.from(state.buildings.values()),
-  );
+  const buildings = useBuildings() ?? [];
 
   // Extract unique values
-  const availableTypes = Array.from(
-    new Set(allBuildings.map((b) => b.parsed?.tableType).filter(Boolean)),
-  ) as ("construction" | "upgrade")[];
+  const { availableTypes, availableLocations } = useMemo(() => {
+    const types = Array.from(
+      new Set(buildings.map((b) => b.type).filter(Boolean)),
+    ) as ("construction" | "upgrade")[];
 
-  const availableLocations = Array.from(
-    new Set(allBuildings.map((b) => b.parsed?.location).filter(Boolean)),
-  );
+    const locations = Array.from(
+      new Set(buildings.map((b) => b.category).filter(Boolean)),
+    );
+
+    return {
+      availableTypes: types,
+      availableLocations: locations,
+    };
+  }, [buildings]);
 
   const locations = ["all", ...availableLocations];
   const types = ["all", ...availableTypes];
@@ -39,9 +55,20 @@ export function PanelFilters() {
     filters.hideHidden ||
     filters.hideTechnos;
 
-  return (
-    <div>
-      <div className="w-full flex p-3 gap-6">
+  // Count active filters
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+    if (tableType !== "all") count++;
+    if (location !== "all") count++;
+    if (filters.hideHidden) count++;
+    if (filters.hideTechnos) count++;
+    return count;
+  }, [tableType, location, filters.hideHidden, filters.hideTechnos]);
+
+  // Filter content (shared between desktop and mobile)
+  const FilterContent = () => (
+    <>
+      <div className="w-full flex flex-col md:flex-row p-3 gap-6">
         {/* Left section */}
         <div className="flex-1 space-y-4">
           <div className="space-y-2">
@@ -90,7 +117,7 @@ export function PanelFilters() {
         </div>
 
         {/* Right section */}
-        <div className="w-56 space-y-4 border-l pl-5">
+        <div className="md:w-56 space-y-4 md:border-l md:pl-5">
           <div className="space-y-2">
             <h4 className="text-sm font-medium">
               Hide &quot;hidden&quot; cards
@@ -173,6 +200,7 @@ export function PanelFilters() {
         </div>
       </div>
 
+      {/* Active Filters Summary */}
       {hasActiveFilters && (
         <div className="flex gap-1.5 items-center py-2 px-3 border-t">
           <span className="text-sm text-muted-foreground">Active filters:</span>
@@ -201,6 +229,43 @@ export function PanelFilters() {
           </Button>
         </div>
       )}
-    </div>
+    </>
+  );
+
+  return (
+    <Drawer direction={isDesktop ? "right" : "bottom"}>
+      <DrawerTrigger asChild>
+        <Button size="sm" variant="outline" className="flex items-center gap-2">
+          <Filter className="size-4" />
+          Filters
+          {activeFiltersCount > 0 && (
+            <Badge variant="default" className="h-5 px-1.5 text-xs">
+              {activeFiltersCount}
+            </Badge>
+          )}
+        </Button>
+      </DrawerTrigger>
+
+      <DrawerContent
+        className={
+          isDesktop
+            ? "w-full max-w-md h-full"
+            : "max-h-[85vh]"
+        }
+      >
+        <DrawerHeader className="flex flex-row items-center justify-between border-b pb-4">
+          <DrawerTitle>Filters</DrawerTitle>
+          <DrawerClose asChild>
+            <Button variant="ghost" size="icon" className="h-8 w-8">
+              <X className="h-4 w-4" />
+            </Button>
+          </DrawerClose>
+        </DrawerHeader>
+
+        <div className="overflow-y-auto flex-1">
+          <FilterContent />
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }

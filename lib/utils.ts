@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { buildingsAbbr, itemsUrl, EraAbbr, goodsUrlByEra } from "./constants";
+import { buildingsAbbr, EraAbbr, goodsUrlByEra } from "./constants";
 
 export const selectorGoods: Record<string, string> = {
   default: "/goods/default.webp",
@@ -110,51 +110,51 @@ export function getGoodsImg(buildingName: string) {
   return selectorGoods[nameFormatted] || selectorGoods.default;
 }
 
-export const buildingNoLvl = [
-  // arabia
-  "camel_farm",
-  "coffee_brewer",
-  "incense_maker",
-  "carpet_factory",
-  "oil_lamp_crafter",
-  // maya
-  "chronicler",
-  "mask_sculptor",
-  "ceremony_outfitter",
-  "luxurious_aviary",
-  "ritual_carver",
-  "ritual_sites",
-  // viking
-  "market",
-  "expedition_pier",
-];
+// export const buildingNoLvl = [
+//   // arabia
+//   "camel_farm",
+//   "coffee_brewer",
+//   "incense_maker",
+//   "carpet_factory",
+//   "oil_lamp_crafter",
+//   // maya
+//   "chronicler",
+//   "mask_sculptor",
+//   "ceremony_outfitter",
+//   "luxurious_aviary",
+//   "ritual_carver",
+//   "ritual_sites",
+//   // viking
+//   "market",
+//   "expedition_pier",
+// ];
 
-export function getGoodImageUrlFromType(
-  type: string,
-  userSelections: string[][],
-): string {
-  const match = type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
+// export function getGoodImageUrlFromType(
+//   type: string,
+//   userSelections: string[][],
+// ): string {
+//   const match = type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
 
-  if (match) {
-    const [, priorityRaw, eraRaw] = match;
-    const priority = priorityRaw.toLowerCase() as
-      | "primary"
-      | "secondary"
-      | "tertiary";
-    const era = eraRaw as EraAbbr;
+//   if (match) {
+//     const [, priorityRaw, eraRaw] = match;
+//     const priority = priorityRaw.toLowerCase() as
+//       | "primary"
+//       | "secondary"
+//       | "tertiary";
+//     const era = eraRaw as EraAbbr;
 
-    const building = getBuildingFromLocal(priority, era, userSelections);
+//     const building = getBuildingFromLocal(priority, era, userSelections);
 
-    if (building) {
-      const normalized = slugify(building);
-      return `/goods/${normalized}.webp`;
-    }
+//     if (building) {
+//       const normalized = slugify(building);
+//       return `/goods/${normalized}.webp`;
+//     }
 
-    return "/goods/default.webp";
-  }
+//     return "/goods/default.webp";
+//   }
 
-  return `/goods/${slugify(type)}.webp`;
-}
+//   return `/goods/${slugify(type)}.webp`;
+// }
 
 export function getGoodNameFromPriorityEra(
   priority: string,

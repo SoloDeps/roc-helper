@@ -1,13 +1,14 @@
 "use client";
 
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 import { getCatalogItem } from "@/lib/catalog";
 import { getBuildingData } from "@/lib/element-data-loader";
 import { generateEntityId, parseCostsToEntity } from "@/lib/db/schema";
 import type { BuildingEntity } from "@/lib/db/schema";
 import { useAddBuilding } from "@/hooks/use-database";
 import { getWikiDB } from "@/lib/db/schema";
+import { toast } from "sonner";
 
 // ============================================================================
 // TYPES
@@ -56,8 +57,8 @@ interface AddElementState {
   // ✅ Track last added element ID for opening accordion
   lastAddedElementId: string | null;
 
-  // ✅ Error state for duplicate detection - now an array of strings
-  duplicateErrors: string[];
+  // ✅ Last used era for default selection
+  lastUsedEra: string;
 
   // Actions - Modal
   openModal: () => void;
@@ -77,9 +78,6 @@ interface AddElementState {
   setSelectedEra: (era: string) => void;
   setBuildingType: (type: "construction" | "upgrade") => void;
 
-  // ✅ Clear duplicate errors
-  clearDuplicateErrors: () => void;
-
   // Helpers
   isTechnologyPath: () => boolean;
   updateBreadcrumbTrail: () => void;
@@ -98,234 +96,228 @@ const DEFAULT_CONFIG: ElementConfig = {
 
 export const useAddElementStore = create<AddElementState>()(
   devtools(
-    (set, get) => ({
-      // Initial state
-      isOpen: false,
-      currentStep: "category",
-      path: {},
-      config: DEFAULT_CONFIG,
-      breadcrumbTrail: [],
-      lastAddedElementId: null,
-      duplicateErrors: [],
+    persist(
+      (set, get) => ({
+        // Initial state
+        isOpen: false,
+        currentStep: "category",
+        path: {},
+        config: DEFAULT_CONFIG,
+        breadcrumbTrail: [],
+        lastAddedElementId: null,
+        lastUsedEra: "LG", // ✅ Default to Late Gothic Era
 
-      // UI actions
-      openModal: () => set({ isOpen: true }),
+        // UI actions
+        openModal: () => set({ isOpen: true }),
 
-      closeModal: () => {
-        set({ isOpen: false });
-        setTimeout(() => get().resetFlow(), 300);
-      },
+        closeModal: () => {
+          set({ isOpen: false });
+          setTimeout(() => get().resetFlow(), 300);
+        },
 
-      resetFlow: () => {
-        set({
-          currentStep: "category",
-          path: {},
-          config: DEFAULT_CONFIG,
-          breadcrumbTrail: [],
-          duplicateErrors: [],
-        });
-      },
+        resetFlow: () => {
+          set({
+            currentStep: "category",
+            path: {},
+            config: DEFAULT_CONFIG,
+            breadcrumbTrail: [],
+          });
+        },
 
-      clearDuplicateErrors: () => set({ duplicateErrors: [] }),
+        isTechnologyPath: () => {
+          const { path } = get();
+          return path.categoryId === "technology";
+        },
 
-      isTechnologyPath: () => {
-        const { path } = get();
-        return path.categoryId === "technology";
-      },
+        selectCategory: (categoryId) => {
+          const isTech = categoryId === "technology";
 
-      selectCategory: (categoryId) => {
-        const isTech = categoryId === "technology";
+          set({
+            path: { categoryId },
+            currentStep: isTech ? "element" : "subcategory",
+          });
 
-        set({
-          path: { categoryId },
-          currentStep: isTech ? "element" : "subcategory",
-          duplicateErrors: [],
-        });
+          get().updateBreadcrumbTrail();
+        },
 
-        get().updateBreadcrumbTrail();
-      },
+        selectSubcategory: (subcategoryId) => {
+          set((state) => ({
+            path: { ...state.path, subcategoryId },
+            currentStep: "element",
+          }));
+          get().updateBreadcrumbTrail();
+        },
 
-      selectSubcategory: (subcategoryId) => {
-        set((state) => ({
-          path: { ...state.path, subcategoryId },
-          currentStep: "element",
-          duplicateErrors: [],
-        }));
-        get().updateBreadcrumbTrail();
-      },
+        selectElement: (elementId) => {
+          set((state) => ({
+            path: { ...state.path, elementId },
+            currentStep: "configuration",
+          }));
+          get().updateBreadcrumbTrail();
+        },
 
-      selectElement: (elementId) => {
-        set((state) => ({
-          path: { ...state.path, elementId },
-          currentStep: "configuration",
-          duplicateErrors: [],
-        }));
-        get().updateBreadcrumbTrail();
-      },
+        goBack: () => {
+          set((state) => {
+            const isTech = state.path.categoryId === "technology";
 
-      goBack: () => {
-        set((state) => {
-          const isTech = state.path.categoryId === "technology";
-
-          switch (state.currentStep) {
-            case "subcategory":
-              return {
-                currentStep: "category",
-                path: {},
-                duplicateErrors: [],
-              };
-
-            case "element":
-              if (isTech) {
+            switch (state.currentStep) {
+              case "subcategory":
                 return {
                   currentStep: "category",
                   path: {},
-                  duplicateErrors: [],
                 };
-              }
-              return {
-                currentStep: "subcategory",
-                path: { categoryId: state.path.categoryId },
-                duplicateErrors: [],
-              };
 
-            case "configuration":
-              if (isTech) {
+              case "element":
+                if (isTech) {
+                  return {
+                    currentStep: "category",
+                    path: {},
+                  };
+                }
+                return {
+                  currentStep: "subcategory",
+                  path: { categoryId: state.path.categoryId },
+                };
+
+              case "configuration":
+                if (isTech) {
+                  return {
+                    currentStep: "element",
+                    path: { categoryId: state.path.categoryId },
+                  };
+                }
                 return {
                   currentStep: "element",
-                  path: { categoryId: state.path.categoryId },
-                  duplicateErrors: [],
+                  path: {
+                    categoryId: state.path.categoryId,
+                    subcategoryId: state.path.subcategoryId,
+                  },
                 };
-              }
+
+              default:
+                return state;
+            }
+          });
+          get().updateBreadcrumbTrail();
+        },
+
+        navigateToBreadcrumb: (stepIndex) => {
+          set((state) => {
+            const isTech = state.path.categoryId === "technology";
+
+            if (stepIndex === 0) {
+              return {
+                currentStep: isTech ? "element" : "subcategory",
+                path: { categoryId: state.path.categoryId },
+              };
+            }
+
+            if (stepIndex === 1 && !isTech) {
               return {
                 currentStep: "element",
                 path: {
                   categoryId: state.path.categoryId,
-                  subcategory: state.path.subcategoryId,
+                  subcategoryId: state.path.subcategoryId,
                 },
-                duplicateErrors: [],
               };
+            }
 
-            default:
-              return state;
+            return state;
+          });
+          get().updateBreadcrumbTrail();
+        },
+
+        updateBreadcrumbTrail: () => {
+          const { path } = get();
+          const items: Array<{ id: string; name: string; step: FlowStep }> = [];
+
+          if (path.categoryId) {
+            const cat = getCatalogItem(path.categoryId);
+            if (cat && "name" in cat) {
+              items.push({
+                id: cat.id,
+                name: cat.name,
+                step: "category",
+              });
+            }
           }
-        });
-        get().updateBreadcrumbTrail();
-      },
 
-      navigateToBreadcrumb: (stepIndex) => {
-        set((state) => {
-          const isTech = state.path.categoryId === "technology";
-
-          if (stepIndex === 0) {
-            return {
-              currentStep: isTech ? "element" : "subcategory",
-              path: { categoryId: state.path.categoryId },
-              duplicateErrors: [],
-            };
+          if (path.subcategoryId) {
+            const sub = getCatalogItem(path.subcategoryId);
+            if (sub && "name" in sub) {
+              items.push({
+                id: sub.id,
+                name: sub.name,
+                step: "subcategory",
+              });
+            }
           }
 
-          if (stepIndex === 1 && !isTech) {
+          if (path.elementId) {
+            const elem = getCatalogItem(path.elementId);
+            if (elem && "name" in elem) {
+              items.push({
+                id: elem.id,
+                name: elem.name,
+                step: "element",
+              });
+            }
+          }
+
+          set({ breadcrumbTrail: items });
+        },
+
+        // Configuration actions
+        updateConfig: (configUpdate) =>
+          set((state) => ({
+            config: { ...state.config, ...configUpdate },
+          })),
+
+        toggleLevel: (level) =>
+          set((state) => {
+            const levels = [...state.config.selectedLevels];
+            const index = levels.findIndex((l) => l.level === level);
+
+            if (index >= 0) {
+              levels[index] = {
+                ...levels[index],
+                selected: !levels[index].selected,
+              };
+            } else {
+              levels.push({
+                level,
+                type: state.config.buildingType,
+                era: state.config.selectedEra,
+                selected: true,
+              });
+            }
+
             return {
-              currentStep: "element",
-              path: {
-                categoryId: state.path.categoryId,
-                subcategoryId: state.path.subcategoryId,
+              config: {
+                ...state.config,
+                selectedLevels: levels,
               },
-              duplicateErrors: [],
             };
-          }
+          }),
 
-          return state;
-        });
-        get().updateBreadcrumbTrail();
-      },
+        setSelectedEra: (era) =>
+          set((state) => ({
+            config: { ...state.config, selectedEra: era, selectedLevels: [] },
+            lastUsedEra: era, // ✅ Persist the selected era
+          })),
 
-      updateBreadcrumbTrail: () => {
-        const { path } = get();
-        const items: Array<{ id: string; name: string; step: FlowStep }> = [];
-
-        if (path.categoryId) {
-          const cat = getCatalogItem(path.categoryId);
-          if (cat && "name" in cat) {
-            items.push({
-              id: cat.id,
-              name: cat.name,
-              step: "category",
-            });
-          }
-        }
-
-        if (path.subcategoryId) {
-          const sub = getCatalogItem(path.subcategoryId);
-          if (sub && "name" in sub) {
-            items.push({
-              id: sub.id,
-              name: sub.name,
-              step: "subcategory",
-            });
-          }
-        }
-
-        if (path.elementId) {
-          const elem = getCatalogItem(path.elementId);
-          if (elem && "name" in elem) {
-            items.push({
-              id: elem.id,
-              name: elem.name,
-              step: "element",
-            });
-          }
-        }
-
-        set({ breadcrumbTrail: items });
-      },
-
-      // Configuration actions
-      updateConfig: (configUpdate) =>
-        set((state) => ({
-          config: { ...state.config, ...configUpdate },
-        })),
-
-      toggleLevel: (level) =>
-        set((state) => {
-          const levels = [...state.config.selectedLevels];
-          const index = levels.findIndex((l) => l.level === level);
-
-          if (index >= 0) {
-            levels[index] = {
-              ...levels[index],
-              selected: !levels[index].selected,
-            };
-          } else {
-            levels.push({
-              level,
-              type: state.config.buildingType,
-              era: state.config.selectedEra,
-              selected: true,
-            });
-          }
-
-          return {
-            config: {
-              ...state.config,
-              selectedLevels: levels,
-            },
-          };
+        setBuildingType: (type) =>
+          set((state) => ({
+            config: { ...state.config, buildingType: type, selectedLevels: [] },
+          })),
+      }),
+      {
+        name: "add-element-storage",
+        partialize: (state) => ({
+          lastUsedEra: state.lastUsedEra, // ✅ Only persist lastUsedEra
         }),
-
-      setSelectedEra: (era) =>
-        set((state) => ({
-          config: { ...state.config, selectedEra: era, selectedLevels: [] },
-          duplicateErrors: [],
-        })),
-
-      setBuildingType: (type) =>
-        set((state) => ({
-          config: { ...state.config, buildingType: type, selectedLevels: [] },
-          duplicateErrors: [],
-        })),
-    }),
+      },
+    ),
     { name: "AddElementStore" },
   ),
 );
@@ -390,8 +382,16 @@ export function useSubmitElement() {
     }
 
     if (duplicateItems.length > 0) {
-      // ✅ Set array of duplicate items (not throwing error anymore)
-      useAddElementStore.setState({ duplicateErrors: duplicateItems });
+      // ✅ Show toast error with list of duplicates (each item on new line)
+      const description = duplicateItems.map((item) => `• ${item}`).join("\n");
+      toast.error("Elements already in the list", {
+        description: description,
+        position: "top-center",
+        duration: 6000,
+        style: {
+          whiteSpace: "pre-line",
+        },
+      });
       return; // Don't proceed with insertion
     }
 
@@ -466,6 +466,27 @@ export function useSubmitElement() {
 
       console.log(`✅ ${selectedLevels.length} building(s) added to database`);
 
+      // ✅ Build list of added items for success toast
+      const addedItems = selectedLevels.map((levelConfig) => {
+        const typeLabel =
+          config.buildingType.charAt(0).toUpperCase() +
+          config.buildingType.slice(1);
+        return `${catalogItem.name} Lvl ${levelConfig.level} ${typeLabel}`;
+      });
+
+      // ✅ Show success toast with list of added elements
+      const successDescription = addedItems
+        .map((item) => `• ${item}`)
+        .join("\n");
+      toast.success("Elements added successfully", {
+        description: successDescription,
+        position: "top-center",
+        duration: 4000,
+        style: {
+          whiteSpace: "pre-line",
+        },
+      });
+
       // ✅ Set the last added element ID for accordion opening
       useAddElementStore.setState({ lastAddedElementId: firstElementId });
 
@@ -508,5 +529,5 @@ export const useBreadcrumbTrail = () =>
 export const useLastAddedElementId = () =>
   useAddElementStore((state) => state.lastAddedElementId);
 
-export const useDuplicateErrors = () =>
-  useAddElementStore((state) => state.duplicateErrors);
+export const useLastUsedEra = () =>
+  useAddElementStore((state) => state.lastUsedEra);

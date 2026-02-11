@@ -1,7 +1,4 @@
-// ============================================================================
-// TYPES
-// ============================================================================
-
+// #region TYPES
 export type ItemType = "category" | "subcategory" | "building" | "era";
 export type CatalogItem = Category | Subcategory | Building | Era;
 
@@ -48,6 +45,7 @@ export interface NavigableItem {
   image?: string;
   invertColor?: boolean;
 }
+// #endregion
 
 // ============================================================================
 // CONSTANTS
@@ -183,6 +181,7 @@ export const imagesUrl = {
 // ============================================================================
 
 export const CATALOG: Category[] = [
+  // capital
   {
     id: "capital",
     name: "Capital",
@@ -213,10 +212,26 @@ export const CATALOG: Category[] = [
         name: "Barracks",
         imgType: "barracks",
         buildings: [
-          { id: "infantry_barracks", name: "Infantry Barracks", imgType: "barracks" },
-          { id: "ranged_barracks", name: "Ranged Barracks", imgType: "barracks" },
-          { id: "cavalry_barracks", name: "Cavalry Barracks", imgType: "barracks" },
-          { id: "heavy_infantry_barracks", name: "Heavy Infantry Barracks", imgType: "barracks" },
+          {
+            id: "infantry_barracks",
+            name: "Infantry Barracks",
+            imgType: "barracks",
+          },
+          {
+            id: "ranged_barracks",
+            name: "Ranged Barracks",
+            imgType: "barracks",
+          },
+          {
+            id: "cavalry_barracks",
+            name: "Cavalry Barracks",
+            imgType: "barracks",
+          },
+          {
+            id: "heavy_infantry_barracks",
+            name: "Heavy Infantry Barracks",
+            imgType: "barracks",
+          },
           { id: "siege_barracks", name: "Siege Barracks", imgType: "barracks" },
         ],
       },
@@ -238,14 +253,34 @@ export const CATALOG: Category[] = [
       },
       {
         id: "culture_site",
-        name: "Cultural Sites", 
+        name: "Cultural Sites",
         imgType: "cultureSite",
         buildings: [
-          { id: "little_culture_site", name: "Little Cultural Site", imgType: "cultureSite" },
-          { id: "compact_culture_site", name: "Compact Cultural Site", imgType: "cultureSite" },
-          { id: "moderate_culture_site", name: "Moderate Cultural Site", imgType: "cultureSite" },
-          { id: "large_culture_site", name: "Large Cultural Site", imgType: "cultureSite" },
-          { id: "luxurious_culture_site", name: "Luxurious Cultural Site", imgType: "cultureSite" },
+          {
+            id: "little_culture_site",
+            name: "Little Cultural Site",
+            imgType: "cultureSite",
+          },
+          {
+            id: "compact_culture_site",
+            name: "Compact Cultural Site",
+            imgType: "cultureSite",
+          },
+          {
+            id: "moderate_culture_site",
+            name: "Moderate Cultural Site",
+            imgType: "cultureSite",
+          },
+          {
+            id: "large_culture_site",
+            name: "Large Cultural Site",
+            imgType: "cultureSite",
+          },
+          {
+            id: "luxurious_culture_site",
+            name: "Luxurious Cultural Site",
+            imgType: "cultureSite",
+          },
         ],
       },
       {
@@ -253,35 +288,51 @@ export const CATALOG: Category[] = [
         name: "Harbor Houses",
         imgType: "sailorHome",
         buildings: [
-          { id: "seafarer_house", name: "Seafarer House", imgType: "sailorHome" },
-          { id: "luxurious_seafarer_house", name: "Luxurious Seafarer House", imgType: "sailorHome" },
+          {
+            id: "seafarer_house",
+            name: "Seafarer House",
+            imgType: "sailorHome",
+          },
+          {
+            id: "luxurious_seafarer_house",
+            name: "Luxurious Seafarer House",
+            imgType: "sailorHome",
+          },
         ],
       },
       {
         id: "ships",
         name: "Ships",
         imgType: "shipyard",
-        buildings: [
-          { id: "shipyard", name: "Shipyard", imgType: "shipyard" },
-        ],
+        buildings: [{ id: "shipyard", name: "Shipyard", imgType: "shipyard" }],
       },
       {
         id: "warehouses",
         name: "Warehouses",
         imgType: "warehouse",
         buildings: [
-          { id: "common_warehouse", name: "Common Warehouse", imgType: "warehouse" },
-          { id: "large_warehouse", name: "Large Warehouse", imgType: "warehouse" },
+          {
+            id: "common_warehouse",
+            name: "Common Warehouse",
+            imgType: "warehouse",
+          },
+          {
+            id: "large_warehouse",
+            name: "Large Warehouse",
+            imgType: "warehouse",
+          },
         ],
       },
     ],
   },
+  // technos
   {
     id: "technology",
     name: "Technology",
     imgType: "research",
     items: "@eras", // Special case: use eras instead of subcategories
   },
+  // egypt
   {
     id: "egypt",
     name: "Egypt",
@@ -293,23 +344,74 @@ export const CATALOG: Category[] = [
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "small_home", name: "Small Home", imgType: "home" },
-          { id: "average_home", name: "Average Home", imgType: "home" },
-          { id: "luxurious_home", name: "Luxurious Home", imgType: "home" },
+          { id: "egypt_small_home", name: "Small Home", imgType: "home" },
+          { id: "egypt_average_home", name: "Average Home", imgType: "home" },
+          {
+            id: "egypt_luxurious_home",
+            name: "Luxurious Home",
+            imgType: "home",
+          },
         ],
       },
       {
-        id: "farms",
-        name: "Farms",
-        imgType: "farm",
+        id: "papyrus_fields",
+        name: "Papyrus Fields",
+        imgType: "papyrusField",
         buildings: [
-          { id: "rural_farm", name: "Rural Farm", imgType: "farm" },
-          { id: "domestic_farm", name: "Domestic Farm", imgType: "farm" },
-          { id: "luxurious_farm", name: "Luxurious Farm", imgType: "farm" },
+          {
+            id: "papyrus_field",
+            name: "Papyrus Field",
+            imgType: "papyrusField",
+          },
+          {
+            id: "luxurious_papyrus_field",
+            name: "Luxurious Papyrus Field",
+            imgType: "papyrusField",
+          },
+        ],
+      },
+      {
+        id: "gold_mines",
+        name: "Gold Mines",
+        imgType: "goldMine",
+        buildings: [
+          { id: "gold_mine", name: "Gold Mine", imgType: "goldMine" },
+          {
+            id: "luxurious_gold_mine",
+            name: "Luxurious Gold Mine",
+            imgType: "goldMine",
+          },
+        ],
+      },
+      {
+        id: "egypt_workshops",
+        name: "Workshops",
+        imgType: "workshop",
+        buildings: [
+          { id: "papyrus_press", name: "Papyrus Press", imgType: "workshop" },
+          { id: "goldsmith", name: "Goldsmith", imgType: "workshop" },
+        ],
+      },
+      {
+        id: "irrigations",
+        name: "Irrigations",
+        imgType: "irrigation",
+        buildings: [
+          {
+            id: "irrigation_station",
+            name: "Irrigation Station",
+            imgType: "irrigation",
+          },
+          { id: "small_well", name: "Small Well", imgType: "irrigation" },
+          { id: "channel", name: "Channel", imgType: "irrigation" },
+          { id: "water_pump", name: "Water Pump", imgType: "irrigation" },
+          { id: "oasis", name: "Oasis", imgType: "irrigation" },
+          { id: "fountain", name: "Fountain", imgType: "irrigation" },
         ],
       },
     ],
   },
+  // china
   {
     id: "china",
     name: "China",
@@ -321,23 +423,58 @@ export const CATALOG: Category[] = [
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "small_home", name: "Small Home", imgType: "home" },
-          { id: "average_home", name: "Average Home", imgType: "home" },
-          { id: "luxurious_home", name: "Luxurious Home", imgType: "home" },
+          { id: "china_small_home", name: "Small Home", imgType: "home" },
+          { id: "china_average_home", name: "Average Home", imgType: "home" },
+          {
+            id: "china_luxurious_home",
+            name: "Luxurious Home",
+            imgType: "home",
+          },
         ],
       },
       {
-        id: "farms",
-        name: "Farms",
-        imgType: "farm",
+        id: "rice_farms",
+        name: "Rice Farms",
+        imgType: "riceFarm",
         buildings: [
-          { id: "rural_farm", name: "Rural Farm", imgType: "farm" },
-          { id: "domestic_farm", name: "Domestic Farm", imgType: "farm" },
-          { id: "luxurious_farm", name: "Luxurious Farm", imgType: "farm" },
+          { id: "rice_farm", name: "Rice Farm", imgType: "riceFarm" },
+          {
+            id: "luxurious_rice_farm",
+            name: "Luxurious Rice Farm",
+            imgType: "riceFarm",
+          },
+        ],
+      },
+      {
+        id: "china_workshops",
+        name: "Workshops",
+        imgType: "workshop",
+        buildings: [
+          {
+            id: "china_thread_processor",
+            name: "Thread Processor",
+            imgType: "workshop",
+          },
+          {
+            id: "china_silk_workshop",
+            name: "Silk Workshop",
+            imgType: "workshop",
+          },
+          {
+            id: "china_clay_processor",
+            name: "Clay Processor",
+            imgType: "workshop",
+          },
+          {
+            id: "china_porcelain_workshop",
+            name: "Porcelain Workshop",
+            imgType: "workshop",
+          },
         ],
       },
     ],
   },
+  // maya
   {
     id: "maya",
     name: "Maya",
@@ -345,27 +482,108 @@ export const CATALOG: Category[] = [
     invertColor: false,
     subcategories: [
       {
-        id: "homes",
+        id: "maya_homes",
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "small_home", name: "Small Home", imgType: "home" },
-          { id: "average_home", name: "Average Home", imgType: "home" },
-          { id: "luxurious_home", name: "Luxurious Home", imgType: "home" },
+          { id: "maya_worker_home", name: "Worker Home", imgType: "home" },
+          { id: "maya_priest_home", name: "Priest Home", imgType: "home" },
+          {
+            id: "maya_luxurious_home",
+            name: "Luxurious Home",
+            imgType: "home",
+          },
         ],
       },
       {
-        id: "farms",
-        name: "Farms",
-        imgType: "farm",
+        id: "maya_quarries",
+        name: "Quarries",
+        imgType: "quarry",
         buildings: [
-          { id: "rural_farm", name: "Rural Farm", imgType: "farm" },
-          { id: "domestic_farm", name: "Domestic Farm", imgType: "farm" },
-          { id: "luxurious_farm", name: "Luxurious Farm", imgType: "farm" },
+          {
+            id: "maya_obsidian_quarry",
+            name: "Obsidian Quarry",
+            imgType: "quarry",
+          },
+          { id: "maya_jade_quarry", name: "Jade Quarry", imgType: "quarry" },
+          {
+            id: "maya_luxurious_quarry",
+            name: "Luxurious Quarry",
+            imgType: "quarry",
+          },
+        ],
+      },
+      {
+        id: "maya_aviaries",
+        name: "Aviaries",
+        imgType: "aviary",
+        buildings: [
+          {
+            id: "maya_average_aviary",
+            name: "Average Aviary",
+            imgType: "aviary",
+          },
+          {
+            id: "maya_luxurious_aviary",
+            name: "Luxurious Aviary",
+            imgType: "aviary",
+          },
+        ],
+      },
+      {
+        id: "maya_workshops",
+        name: "Workshops",
+        imgType: "workshop",
+        buildings: [
+          { id: "maya_chronicler", name: "Chronicler", imgType: "workshop" },
+          {
+            id: "maya_mask_sculptor",
+            name: "Mask Sculptor",
+            imgType: "workshop",
+          },
+          {
+            id: "maya_ceremony_outfitter",
+            name: "Ceremony Outfitter",
+            imgType: "workshop",
+          },
+          {
+            id: "maya_ritual_carver",
+            name: "Ritual Carver",
+            imgType: "workshop",
+          },
+          {
+            id: "maya_luxurious_workshop",
+            name: "Luxurious Workshop",
+            imgType: "workshop",
+          },
+        ],
+      },
+
+      {
+        id: "maya_ritual_sites",
+        name: "Ritual Sites",
+        imgType: "ritualSite",
+        buildings: [
+          {
+            id: "maya_small_ritual_site",
+            name: "Small Ritual Site",
+            imgType: "ritualSite",
+          },
+          {
+            id: "maya_average_ritual_site",
+            name: "Average Ritual Site",
+            imgType: "ritualSite",
+          },
+          {
+            id: "maya_luxurious_ritual_site",
+            name: "Luxurious Ritual Site",
+            imgType: "ritualSite",
+          },
         ],
       },
     ],
   },
+  // vikings
   {
     id: "vikings",
     name: "Vikings",
@@ -373,27 +591,92 @@ export const CATALOG: Category[] = [
     invertColor: false,
     subcategories: [
       {
-        id: "homes",
+        id: "vikings_homes",
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "small_home", name: "Small Home", imgType: "home" },
-          { id: "average_home", name: "Average Home", imgType: "home" },
-          { id: "luxurious_home", name: "Luxurious Home", imgType: "home" },
+          { id: "vikings_worker_home", name: "Worker Home", imgType: "home" },
+          { id: "vikings_sailor_home", name: "Sailor Home", imgType: "home" },
+          {
+            id: "vikings_luxurious_home",
+            name: "Luxurious Home",
+            imgType: "home",
+          },
         ],
       },
       {
-        id: "farms",
-        name: "Farms",
-        imgType: "farm",
+        id: "vikings_beehives",
+        name: "Beehives",
+        imgType: "beehive",
         buildings: [
-          { id: "rural_farm", name: "Rural Farm", imgType: "farm" },
-          { id: "domestic_farm", name: "Domestic Farm", imgType: "farm" },
-          { id: "luxurious_farm", name: "Luxurious Farm", imgType: "farm" },
+          { id: "vikings_beehive", name: "Beehive", imgType: "beehive" },
+        ],
+      },
+      {
+        id: "vikings_fishing_piers",
+        name: "Fishing Piers",
+        imgType: "fishingPier",
+        buildings: [
+          {
+            id: "vikings_fishing_pier",
+            name: "Fishing Pier",
+            imgType: "fishingPier",
+          },
+          {
+            id: "vikings_luxurious_fishing_pier",
+            name: "Luxurious Fishing Pier",
+            imgType: "fishingPier",
+          },
+        ],
+      },
+      {
+        id: "vikings_workshops",
+        name: "Workshops",
+        imgType: "workshop",
+        buildings: [
+          { id: "vikings_tavern", name: "Tavern", imgType: "workshop" },
+          {
+            id: "vikings_expedition_pier",
+            name: "Expedition Pier",
+            imgType: "workshop",
+          },
+          {
+            id: "vikings_sailor_port",
+            name: "Sailor Port",
+            imgType: "workshop",
+          },
+          {
+            id: "vikings_luxurious_sailor_port",
+            name: "Luxurious Sailor Port",
+            imgType: "workshop",
+          },
+        ],
+      },
+      {
+        id: "vikings_runestones",
+        name: "Runestones",
+        imgType: "runestone",
+        buildings: [
+          {
+            id: "vikings_home_runestone",
+            name: "Home Runestone",
+            imgType: "runestone",
+          },
+          {
+            id: "vikings_beehive_runestone",
+            name: "Beehive Runestone",
+            imgType: "runestone",
+          },
+          {
+            id: "vikings_tavern_runestone",
+            name: "Tavern Runestone",
+            imgType: "runestone",
+          },
         ],
       },
     ],
   },
+  // arabia
   {
     id: "arabia",
     name: "Arabia",
@@ -401,27 +684,90 @@ export const CATALOG: Category[] = [
     invertColor: false,
     subcategories: [
       {
-        id: "homes",
+        id: "arabia_homes",
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "small_home", name: "Small Home", imgType: "home" },
-          { id: "average_home", name: "Average Home", imgType: "home" },
-          { id: "luxurious_home", name: "Luxurious Home", imgType: "home" },
+          { id: "arabia_medium_home", name: "Medium Home", imgType: "home" },
+          {
+            id: "arabia_luxurious_home",
+            name: "Luxurious Home",
+            imgType: "home",
+          },
         ],
       },
       {
-        id: "farms",
-        name: "Farms",
-        imgType: "farm",
+        id: "arabia_merchant",
+        name: "Merchant",
+        imgType: "merchant",
         buildings: [
-          { id: "rural_farm", name: "Rural Farm", imgType: "farm" },
-          { id: "domestic_farm", name: "Domestic Farm", imgType: "farm" },
-          { id: "luxurious_farm", name: "Luxurious Farm", imgType: "farm" },
+          { id: "arabia_merchant", name: "Merchant", imgType: "merchant" },
+          {
+            id: "arabia_luxurious_merchant",
+            name: "Luxurious Merchant",
+            imgType: "merchant",
+          },
+        ],
+      },
+      {
+        id: "arabia_farms",
+        name: "Farms",
+        imgType: "camelFarm",
+        buildings: [
+          { id: "arabia_camelFarm", name: "Camel Farm", imgType: "camelFarm" },
+        ],
+      },
+      {
+        id: "arabia_workshops",
+        name: "Workshops",
+        imgType: "workshop",
+        buildings: [
+          {
+            id: "arabia_coffee_brewer",
+            name: "Coffee Brewer",
+            imgType: "workshop",
+          },
+          {
+            id: "arabia_incense_maker",
+            name: "Incense Maker",
+            imgType: "workshop",
+          },
+          {
+            id: "arabia_carpet_factory",
+            name: "Carpet Factory",
+            imgType: "workshop",
+          },
+          {
+            id: "arabia_oil_lamp_crafter",
+            name: "Oil Lamp Crafter",
+            imgType: "workshop",
+          },
+          {
+            id: "arabia_luxurious_workshop",
+            name: "Luxurious Workshop",
+            imgType: "workshop",
+          },
+        ],
+      },
+      {
+        id: "arabia_irrigation",
+        name: "Irrigation",
+        imgType: "irrigation",
+        buildings: [
+          {
+            id: "arabia_small_well",
+            name: "Small Well",
+            imgType: "irrigation",
+          },
+          { id: "arabia_channel", name: "Channel", imgType: "irrigation" },
+          { id: "arabia_noria", name: "Noria", imgType: "irrigation" },
+          { id: "arabia_oasis", name: "Oasis", imgType: "irrigation" },
+          { id: "arabia_deep_well", name: "Deep Well", imgType: "irrigation" },
         ],
       },
     ],
   },
+  // ottoman
   {
     id: "ottoman",
     name: "Ottoman",
@@ -429,24 +775,16 @@ export const CATALOG: Category[] = [
     invertColor: false,
     subcategories: [
       {
-        id: "homes",
-        name: "Homes",
-        imgType: "home",
-        buildings: [
-          { id: "small_home", name: "Small Home", imgType: "home" },
-          { id: "average_home", name: "Average Home", imgType: "home" },
-          { id: "luxurious_home", name: "Luxurious Home", imgType: "home" },
-        ],
+        id: "ottoman_areas",
+        name: "Areas",
+        imgType: "scout",
+        buildings: [],
       },
       {
-        id: "farms",
-        name: "Farms",
-        imgType: "farm",
-        buildings: [
-          { id: "rural_farm", name: "Rural Farm", imgType: "farm" },
-          { id: "domestic_farm", name: "Domestic Farm", imgType: "farm" },
-          { id: "luxurious_farm", name: "Luxurious Farm", imgType: "farm" },
-        ],
+        id: "ottoman_tradeposts",
+        name: "Trade Posts",
+        imgType: "shipyard",
+        buildings: [],
       },
     ],
   },

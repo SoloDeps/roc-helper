@@ -255,7 +255,7 @@ export function AddElementModal({ variant = "default" }: AddElementModalProps) {
 
   const trigger = (
     <Button size="sm" variant={variant}>
-      <Plus className="h-4 w-4 mr-1.5" />
+      <Plus className="h-4 w-4" />
       Add
     </Button>
   );

@@ -56,10 +56,30 @@ export function calculateTotalCosts(
 
 function accumulateCosts(
   totals: ResourceTotals,
-  costs: Record<string, number | Array<{ type: string; amount: number }>>,
+  costs: Record<string, any>,
   multiplier: number,
 ) {
+  // Traiter costs.resources (coins, food, etc.)
+  if (costs.resources && typeof costs.resources === "object") {
+    for (const [key, value] of Object.entries(costs.resources)) {
+      if (typeof value === "number") {
+        totals.main[key] = (totals.main[key] ?? 0) + value * multiplier;
+      }
+    }
+  }
+
+  // Traiter costs.goods (array de {type, amount})
+  if (costs.goods && Array.isArray(costs.goods)) {
+    for (const good of costs.goods) {
+      const current = totals.goods.get(good.type) ?? 0;
+      totals.goods.set(good.type, current + good.amount * multiplier);
+    }
+  }
+
+  // Fallback: traiter les anciennes structures plates
   for (const [key, value] of Object.entries(costs)) {
+    if (key === "resources" || key === "goods") continue; // Déjà traités ci-dessus
+
     if (key === "goods" && Array.isArray(value)) {
       for (const good of value) {
         const current = totals.goods.get(good.type) ?? 0;

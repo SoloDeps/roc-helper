@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 import { ResourceItem } from "./resource-item";
 import { slugify } from "@/lib/utils";
 import {
@@ -76,67 +76,64 @@ const getBlockStyles = (
   return { bgRgb, defaultGridClass };
 };
 
-export const ResourceBlock = memo(
-  ({
-    title,
-    resources,
-    type,
-    className,
-    compareMode = false,
-    getDifferenceColor,
-  }: ResourceBlockProps) => {
-    const { bgRgb, defaultGridClass } = useMemo(
-      () =>
-        getBlockStyles(type, title, compareMode, resources, getDifferenceColor),
-      [type, title, compareMode, resources, getDifferenceColor],
-    );
+export function ResourceBlock({
+  title,
+  resources,
+  type,
+  className,
+  compareMode = false,
+  getDifferenceColor,
+}: ResourceBlockProps) {
+  const { bgRgb, defaultGridClass } = useMemo(
+    () =>
+      getBlockStyles(type, title, compareMode, resources, getDifferenceColor),
+    [type, title, compareMode, resources, getDifferenceColor],
+  );
 
-    const gridClass = className || defaultGridClass;
+  const gridClass = className || defaultGridClass;
 
-    const hasResources = useMemo(() => {
-      if (compareMode) {
-        return resources.length > 0;
-      }
-      return resources.length > 0 && resources.some((r) => r.amount > 0);
-    }, [resources, compareMode]);
-
-    const paddedResources = useMemo(() => {
-      if (type !== "era") return resources;
-
-      const padded = [...resources];
-      while (padded.length < 3) padded.push({ icon: "", name: "", amount: 0 });
-      return padded;
-    }, [resources, type]);
-
-    // ✅ Tous les hooks sont appelés AVANT le return conditionnel
-    if (!hasResources) {
-      return null;
+  const hasResources = useMemo(() => {
+    if (compareMode) {
+      return resources.length > 0;
     }
+    return resources.length > 0 && resources.some((r) => r.amount > 0);
+  }, [resources, compareMode]);
 
-    return (
-      <section className="rounded-sm overflow-hidden border">
-        <header
-          className="py-1 px-2 border-b text-white"
-          style={{
-            background: `linear-gradient(
+  const paddedResources = useMemo(() => {
+    if (type !== "era") return resources;
+
+    const padded = [...resources];
+    while (padded.length < 3) padded.push({ icon: "", name: "", amount: 0 });
+    return padded;
+  }, [resources, type]);
+
+  if (!hasResources) {
+    return null;
+  }
+
+  return (
+    <section className="rounded-sm overflow-hidden border">
+      <header
+        className="py-1 px-2 border-b text-white"
+        style={{
+          background: `linear-gradient(
             to right,
             rgb(${bgRgb}),
             rgba(${bgRgb}, 0.4)
           )`,
-          }}
-        >
-          <h3 className="text-xs font-bold uppercase tracking-wide">{title}</h3>
-        </header>
-        <div className={`grid ${gridClass} bg-background-300`}>
-          {paddedResources.map((r, i) => (
-            <ResourceItem
-              key={`${title}-${r.name || r.icon || i}`}
-              {...r}
-              compareMode={compareMode}
-            />
-          ))}
-        </div>
-      </section>
-    );
-  },
-);
+        }}
+      >
+        <h3 className="text-xs font-bold uppercase tracking-wide">{title}</h3>
+      </header>
+      <div className={`grid ${gridClass} bg-background-300`}>
+        {paddedResources.map((r, i) => (
+          <ResourceItem
+            key={`${title}-${r.name || r.icon || i}`}
+            {...r}
+            compareMode={compareMode}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}

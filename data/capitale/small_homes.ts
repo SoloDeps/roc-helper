@@ -14,8 +14,6 @@ function generateDynamicLevels(
     const upgrade =
       level === 40
         ? {
-            duration: 24600,
-            workers: 1,
             coins: 320000,
             food: 640000,
             goods: [
@@ -26,8 +24,6 @@ function generateDynamicLevels(
             ],
           }
         : {
-            duration: (level + 2) * 600,
-            workers: 1,
             coins: level * 15000 - 265000,
             food: level * 30000 - 530000,
             goods: [
