@@ -358,10 +358,8 @@ export function ItemList() {
   // Afficher l'empty state seulement après le chargement
   if (!hasAnyData) {
     return (
-      <div className="p-8 size-full m-auto flex items-center justify-center">
-        <div className="-mt-12">
-          <EmptyOutline perso="male" type="building" />
-        </div>
+      <div className="p-3 size-full bg-background-200 flex items-center justify-center">
+        <EmptyOutline perso="male" type="building" />
       </div>
     );
   }
