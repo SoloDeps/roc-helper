@@ -23,7 +23,7 @@ import {
 } from "@/lib/constants";
 import { getBuildingFromLocal, slugify, getItemIconLocal } from "@/lib/utils";
 import { ResourceBlock } from "./resource-block";
-import { Loader2Icon } from "lucide-react";
+import { TotalResourcesSkeleton } from "@/components/loading-skeletons";
 import { EmptyOutline } from "@/components/cards/empty-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -61,16 +61,22 @@ function getDifferenceColor(difference: number): string {
  * Hook pour charger toutes les données depuis Dexie
  */
 function useAllEntities() {
-  const buildings = useBuildings() ?? [];
-  const technos = useTechnos() ?? [];
-  const areas = useOttomanAreas() ?? [];
-  const tradePosts = useOttomanTradePosts() ?? [];
+  const buildingsData = useBuildings();
+  const technosData = useTechnos();
+  const areasData = useOttomanAreas();
+  const tradePostsData = useOttomanTradePosts();
 
+  // ✅ AMÉLIORATION: Détection plus précise du loading
   const isLoading =
-    buildings === undefined ||
-    technos === undefined ||
-    areas === undefined ||
-    tradePosts === undefined;
+    buildingsData === undefined ||
+    technosData === undefined ||
+    areasData === undefined ||
+    tradePostsData === undefined;
+
+  const buildings = buildingsData ?? [];
+  const technos = technosData ?? [];
+  const areas = areasData ?? [];
+  const tradePosts = tradePostsData ?? [];
 
   return { buildings, technos, areas, tradePosts, isLoading };
 }
@@ -270,15 +276,17 @@ function useEraBlocks(
             difference: amounts.tertiary,
           },
         ],
-        shouldHide: Object.values(amounts).every((v) => v === 0),
+        shouldHide:
+          amounts.primary === 0 &&
+          amounts.secondary === 0 &&
+          amounts.tertiary === 0,
       };
     });
   }, [selections, normalizedPriorityGoods]);
 }
 
 /**
- * Hook pour grouper les goods par civilisation
- * ✅ CORRECTION: Ajoute maintenant les ressources alliées (deben, aspers, wu_zhu, etc.)
+ * Hook pour grouper les other goods par civilisation
  */
 function useOtherGoodsByCiv(
   otherGoods: Map<string, number>,
@@ -415,9 +423,10 @@ function useMainResources(mainResources: Record<string, number>) {
 /**
  * TotalGoodsDisplay - Composant optimisé pour Next.js 16 + React Compiler
  *
- * ✅ Utilise Dexie + React Query pour charger les données
- * ✅ Calcule les totaux avec calculateTotalCosts
- * ✅ Hooks customs pour une meilleure optimisation
+ * ✅ AMÉLIORATIONS:
+ * - Affiche un skeleton pendant le chargement initial
+ * - Évite le flash de l'EmptyCard
+ * - Meilleure UX avec états de chargement
  */
 export function TotalGoodsDisplay({
   compareMode = false,
@@ -467,14 +476,17 @@ export function TotalGoodsDisplay({
   // ========================================
   // RENDER
   // ========================================
+
+  // ✅ AMÉLIORATION: Afficher le skeleton pendant le chargement
   if (isLoading) {
     return (
-      <div className="bg-background-200 p-4 flex items-center justify-center">
-        <Loader2Icon className="size-5 animate-spin" />
+      <div className="size-full overflow-y-auto bg-background-200">
+        <TotalResourcesSkeleton />
       </div>
     );
   }
 
+  // ✅ AMÉLIORATION: EmptyCard apparaît seulement après le chargement
   if (!hasAnyResources) {
     return (
       <div className="p-8 size-full m-auto flex items-center justify-center bg-background-200">

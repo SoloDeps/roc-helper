@@ -9,6 +9,7 @@ import { EmptyOutline } from "@/components/cards/empty-card";
 import { Accordion } from "@/components/ui/accordion";
 import { ReusableAccordion } from "@/components/items/reusable-accordion";
 import { AccordionActionsDrawer } from "@/components/modals/accordion-actions-drawer";
+import { ItemListSkeleton } from "@/components/loading-skeletons";
 import { useFiltersStore } from "@/lib/stores/filters-store";
 import { useUIStore } from "@/lib/stores/ui-store";
 import {
@@ -55,10 +56,18 @@ export function ItemList() {
   // État pour gérer les drawers mobiles
   const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
 
+  // États de chargement individuels
   const buildingsData = useBuildings();
   const technosData = useTechnos();
   const areasData = useOttomanAreas();
   const tradePostsData = useOttomanTradePosts();
+
+  // ✅ Détection du chargement initial
+  const isInitialLoading =
+    buildingsData === undefined ||
+    technosData === undefined ||
+    areasData === undefined ||
+    tradePostsData === undefined;
 
   const buildings = useMemo(() => buildingsData ?? [], [buildingsData]);
   const technos = useMemo(() => technosData ?? [], [technosData]);
@@ -229,66 +238,51 @@ export function ItemList() {
     addToAccordionsState,
   ]);
 
-  // CHECK IF EMPTY
-  const hasAnyData =
-    buildingsByElement.size > 0 ||
-    technosByEra.size > 0 ||
-    filteredAreas.length > 0 ||
-    filteredTradePosts.length > 0;
-
-  if (!hasAnyData) {
+  // ✅ Vérifier s'il y a des données à afficher
+  const hasAnyData = useMemo(() => {
     return (
-      <div className="flex items-center p-3 justify-center size-full bg-background-200">
-        <EmptyOutline perso="male" type="building" />
-      </div>
+      buildings.length > 0 ||
+      technos.length > 0 ||
+      areas.length > 0 ||
+      tradePosts.length > 0
     );
-  }
+  }, [buildings.length, technos.length, areas.length, tradePosts.length]);
 
-  // Créer un objet avec toutes les données pour les drawers
-  const drawerData: Record<
-    string,
-    {
-      title: string;
-      allHidden: boolean;
-      onToggleAllHidden: () => void;
-      onDeleteAll?: () => Promise<void>;
-      deleteConfirmMessage?: React.ReactNode;
+  // Drawer data memoization
+  const drawerData = useMemo(() => {
+    const data: Record<string, any> = {};
+
+    // Technologies drawer
+    if (technosByEra.size > 0 && !hideTechnos) {
+      data["all-technologies"] = {
+        title: "Technologies",
+        allHidden: technos.length > 0 && technos.every((t) => t.hidden),
+        onToggleAllHidden: () => {
+          Array.from(technosByEra.keys()).forEach((era) => {
+            toggleTechnosByEra.mutate(era);
+          });
+        },
+        onDeleteAll: async () => {
+          await deleteAllTechnologies();
+        },
+        deleteConfirmMessage: (
+          <>
+            This action cannot be <b>undone</b>.
+            <br />
+            This will permanently delete <b>all technologies</b> from all eras.
+          </>
+        ),
+      };
     }
-  > = {};
 
-  // Technologies drawer data
-  if (technosByEra.size > 0 && !hideTechnos) {
-    drawerData["all-technologies"] = {
-      title: "Technologies",
-      allHidden: technos.length > 0 && technos.every((t) => t.hidden),
-      onToggleAllHidden: () => {
-        Array.from(technosByEra.keys()).forEach((era) => {
-          toggleTechnosByEra.mutate(era);
-        });
-      },
-      onDeleteAll: async () => {
-        await deleteAllTechnologies();
-      },
-      deleteConfirmMessage: (
-        <>
-          This action cannot be <b>undone</b>.
-          <br />
-          This will permanently delete <b>all technologies</b> from all eras.
-        </>
-      ),
-    };
-  }
-
-  // Buildings drawer data
-  Array.from(buildingsByElement.entries()).forEach(
-    ([groupKey, buildingsInElement]) => {
-      const firstBuilding = buildingsInElement[0];
+    // Buildings drawers
+    buildingsByElement.forEach((buildingsInElement, groupKey) => {
       const accordionId = `element-${groupKey}`;
+      const firstBuilding = buildingsInElement[0];
       const buildingIds = buildingsInElement.map((b) => b.id);
-      const displayName = firstBuilding.name;
 
-      drawerData[accordionId] = {
-        title: displayName,
+      data[accordionId] = {
+        title: `${firstBuilding.category} — ${firstBuilding.name}`,
         allHidden: buildingsInElement.every((b) => b.hidden),
         onToggleAllHidden: () => toggleHideAllBuildings(buildingIds),
         onDeleteAll: async () => {
@@ -298,49 +292,78 @@ export function ItemList() {
           <>
             This action cannot be <b>undone</b>.
             <br />
-            This will permanently delete <b>all {displayName}</b> buildings.
+            This will permanently delete <b>all {firstBuilding.name}</b>{" "}
+            buildings.
           </>
         ),
       };
-    },
-  );
+    });
 
-  // Ottoman Areas drawer data
-  if (filteredAreas.length > 0) {
-    drawerData["ottoman-areas"] = {
-      title: "Areas",
-      allHidden: areas.every((a) => a.hidden),
-      onToggleAllHidden: toggleHideAllOttomanAreas,
-      onDeleteAll: async () => {
-        await deleteAllOttomanAreas();
-      },
-      deleteConfirmMessage: (
-        <>
-          This action cannot be <b>undone</b>.
-          <br />
-          This will permanently delete <b>all Ottoman areas</b>.
-        </>
-      ),
-    };
+    // Ottoman areas drawer
+    if (filteredAreas.length > 0) {
+      data["ottoman-areas"] = {
+        title: "Ottoman Empire — Areas",
+        allHidden: areas.every((a) => a.hidden),
+        onToggleAllHidden: toggleHideAllOttomanAreas,
+        onDeleteAll: async () => {
+          await deleteAllOttomanAreas();
+        },
+        deleteConfirmMessage: (
+          <>
+            This action cannot be <b>undone</b>.
+            <br />
+            This will permanently delete <b>all Ottoman areas</b>.
+          </>
+        ),
+      };
+    }
+
+    // Ottoman trade posts drawer
+    if (filteredTradePosts.length > 0) {
+      data["ottoman-tradeposts"] = {
+        title: "Ottoman Empire — Trade Posts",
+        allHidden: tradePosts.every((tp) => tp.hidden),
+        onToggleAllHidden: toggleHideAllOttomanTradePosts,
+        onDeleteAll: async () => {
+          await deleteAllOttomanTradePosts();
+        },
+        deleteConfirmMessage: (
+          <>
+            This action cannot be <b>undone</b>.
+            <br />
+            This will permanently delete <b>all Ottoman trade posts</b>.
+          </>
+        ),
+      };
+    }
+
+    return data;
+  }, [
+    technosByEra,
+    hideTechnos,
+    technos,
+    buildingsByElement,
+    filteredAreas,
+    areas,
+    filteredTradePosts,
+    tradePosts,
+    toggleTechnosByEra,
+  ]);
+
+  // Afficher le skeleton pendant le chargement initial
+  if (isInitialLoading) {
+    return <ItemListSkeleton />;
   }
 
-  // Ottoman Trade Posts drawer data
-  if (filteredTradePosts.length > 0) {
-    drawerData["ottoman-tradeposts"] = {
-      title: "Trade Posts",
-      allHidden: tradePosts.every((tp) => tp.hidden),
-      onToggleAllHidden: toggleHideAllOttomanTradePosts,
-      onDeleteAll: async () => {
-        await deleteAllOttomanTradePosts();
-      },
-      deleteConfirmMessage: (
-        <>
-          This action cannot be <b>undone</b>.
-          <br />
-          This will permanently delete <b>all Ottoman trade posts</b>.
-        </>
-      ),
-    };
+  // Afficher l'empty state seulement après le chargement
+  if (!hasAnyData) {
+    return (
+      <div className="p-8 size-full m-auto flex items-center justify-center">
+        <div className="-mt-12">
+          <EmptyOutline perso="male" type="building" />
+        </div>
+      </div>
+    );
   }
 
   return (
