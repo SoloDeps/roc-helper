@@ -53,22 +53,30 @@ export interface BuildingEntity {
 /**
  * Technology Entity - Optimized
  */
+
 export interface TechnoEntity {
-  id: string;
+  id: string; // Format: "techno_early_gothic_era_0"
+
+  // Display
+  name: string; // "Flying Buttresses"
 
   // Classification
   category: "technology"; // Toujours "technology"
-  era: string; // "bronze_age", "stone_age", etc.
-  index: number; // Position dans l'ère (pour tri)
+  era: string; // Abbreviation de l'ère: "EG", "LG", "SA", etc.
+  eraId: string; // ID complet: "early_gothic_era", "late_gothic_era"
+  column: number; // Position dans l'arbre tech (0, 1, 2...)
 
-  // Coûts
+  // Allied City (optionnel)
+  allied?: string; // "ottoman", "egypt", etc.
+
+  // Coûts INDIVIDUELS (pas la somme)
   costs: {
-    resources: Record<string, number>;
-    goods: Array<{ type: string; amount: number }>;
+    resources: Record<string, number>; // { research_points: 100, coins: 2900000, food: 3500000 }
+    goods: Array<{ type: string; amount: number }>; // [{ type: "tertiary_hm", amount: 13500 }]
   };
 
-  // État
-  hidden: boolean;
+  // Progression (pour future page tracker)
+  hidden: boolean; // true = techno complétée/cachée (n'apparaît plus dans la somme)
 
   // Metadata
   createdAt: number;

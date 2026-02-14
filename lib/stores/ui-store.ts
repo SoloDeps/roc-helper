@@ -3,13 +3,6 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-// ============================================================================
-// UI STATE ONLY - Pas de données entities
-// ============================================================================
-
-/**
- * Filters appliqués à la vue overview
- */
 export interface ViewFilters {
   tableType?: "construction" | "upgrade";
   location?: string;
@@ -17,10 +10,10 @@ export interface ViewFilters {
   hideTechnos: boolean;
 }
 
-/**
- * Store UI - Gère uniquement l'état de l'interface
- */
 interface UIStore {
+  // Accordions state
+  accordionsState: string[];
+
   // Modal state
   isAddModalOpen: boolean;
 
@@ -38,6 +31,16 @@ interface UIStore {
   setHideHidden: (hide: boolean) => void;
   setHideTechnos: (hide: boolean) => void;
   resetFilters: () => void;
+
+  // Actions - Accordions
+  // ✅ Support des callbacks ET des valeurs directes
+  setAccordionsState: (
+    idsOrUpdater: string[] | ((prev: string[]) => string[]),
+  ) => void;
+  addToAccordionsState: (ids: string[]) => void;
+  removeFromAccordionsState: (ids: string[]) => void;
+  expandAllAccordions: () => void;
+  collapseAllAccordions: () => void;
 }
 
 const DEFAULT_FILTERS: ViewFilters = {
@@ -47,14 +50,12 @@ const DEFAULT_FILTERS: ViewFilters = {
   hideTechnos: false,
 };
 
-/**
- * UI Store - Zustand
- */
 export const useUIStore = create<UIStore>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         // Initial state
+        accordionsState: [],
         isAddModalOpen: false,
         filters: DEFAULT_FILTERS,
 
@@ -89,22 +90,56 @@ export const useUIStore = create<UIStore>()(
           })),
 
         resetFilters: () => set({ filters: DEFAULT_FILTERS }),
+
+        // Accordion actions
+        // ✅ Accepte soit un tableau, soit une fonction callback
+        setAccordionsState: (idsOrUpdater) => {
+          if (typeof idsOrUpdater === "function") {
+            set((state) => ({
+              accordionsState: idsOrUpdater(state.accordionsState),
+            }));
+          } else {
+            set({ accordionsState: idsOrUpdater });
+          }
+        },
+
+        // ✅ Helper pour ajouter des IDs sans écraser
+        addToAccordionsState: (ids) =>
+          set((state) => ({
+            accordionsState: Array.from(
+              new Set([...state.accordionsState, ...ids]),
+            ),
+          })),
+
+        // ✅ Helper pour retirer des IDs
+        removeFromAccordionsState: (ids) =>
+          set((state) => ({
+            accordionsState: state.accordionsState.filter(
+              (id) => !ids.includes(id),
+            ),
+          })),
+
+        expandAllAccordions: () => {
+          // Will be handled by ItemList to get all accordion IDs
+          set({ accordionsState: ["__expand_all__"] });
+        },
+
+        collapseAllAccordions: () => {
+          set({ accordionsState: [] });
+        },
       }),
       {
         name: "roc-ui-storage",
         partialize: (state) => ({
-          filters: state.filters, // Persister uniquement les filtres
+          filters: state.filters,
         }),
-      }
+      },
     ),
-    { name: "UIStore" }
-  )
+    { name: "UIStore" },
+  ),
 );
 
-// ============================================================================
-// SELECTOR HOOKS (Optimized)
-// ============================================================================
-
+// Selector Hooks
 export const useIsAddModalOpen = () =>
   useUIStore((state) => state.isAddModalOpen);
 

@@ -5,7 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { buttonVariants } from "@/components/ui/button";
 import { useFiltersStore } from "@/lib/stores/filters-store";
-import { useBuildings } from "@/hooks/use-database";
+import {
+  useBuildings,
+  useOttomanAreas,
+  useOttomanTradePosts,
+} from "@/hooks/use-database";
 import { useId, useMemo } from "react";
 import { Filter, X } from "lucide-react";
 import {
@@ -26,6 +30,8 @@ export function FiltersDrawer() {
   // Store
   const filters = useFiltersStore();
   const buildings = useBuildings() ?? [];
+  const areas = useOttomanAreas() ?? [];
+  const tradePosts = useOttomanTradePosts() ?? [];
 
   // Extract unique values
   const { availableTypes, availableLocations } = useMemo(() => {
@@ -37,11 +43,19 @@ export function FiltersDrawer() {
       new Set(buildings.map((b) => b.category).filter(Boolean)),
     );
 
+    // Add "ottoman" if there are areas or trade posts
+    if (
+      (areas.length > 0 || tradePosts.length > 0) &&
+      !locations.includes("ottoman")
+    ) {
+      locations.push("ottoman");
+    }
+
     return {
       availableTypes: types,
       availableLocations: locations,
     };
-  }, [buildings]);
+  }, [buildings, areas, tradePosts]);
 
   const locations = ["all", ...availableLocations];
   const types = ["all", ...availableTypes];
@@ -65,12 +79,109 @@ export function FiltersDrawer() {
     return count;
   }, [tableType, location, filters.hideHidden, filters.hideTechnos]);
 
-  // Filter content (shared between desktop and mobile)
-  const FilterContent = () => (
-    <>
-      <div className="w-full flex flex-col md:flex-row p-3 gap-6">
-        {/* Left section */}
-        <div className="flex-1 space-y-4">
+  // Active filters component
+  const ActiveFilters = ({ className = "" }: { className?: string }) => {
+    if (!hasActiveFilters) return null;
+
+    const badgeSize = isDesktop ? "sm" : "default";
+
+    return (
+      <div className={`flex flex-col gap-2 ${className}`}>
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-muted-foreground">Active filters:</span>
+          <Button
+            variant="ghost"
+            size={isDesktop ? "sm" : "default"}
+            onClick={() => filters.reset()}
+          >
+            Clear all
+          </Button>
+        </div>
+        <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory md:flex-wrap md:overflow-visible">
+          {tableType !== "all" && (
+            <Badge
+              variant="secondary"
+              className={`rounded-md flex items-center gap-1.5 shrink-0 snap-start capitalize ${
+                badgeSize === "sm" ? "h-6 px-2 text-xs" : "h-7 px-2"
+              }`}
+            >
+              {tableType === "construction" ? "Construction" : "Upgrade"}
+              <button
+                onClick={() => filters.setTableType(undefined)}
+                className="hover:bg-muted rounded-sm p-0.5"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </Badge>
+          )}
+          {location !== "all" && (
+            <Badge
+              variant="secondary"
+              className={`rounded-md flex items-center gap-1.5 shrink-0 snap-start capitalize ${
+                badgeSize === "sm" ? "h-6 px-2 text-xs" : "h-7 px-2"
+              }`}
+            >
+              {location}
+              <button
+                onClick={() => filters.setLocation(undefined)}
+                className="hover:bg-muted rounded-sm p-0.5"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </Badge>
+          )}
+          {filters.hideHidden && (
+            <Badge
+              variant="secondary"
+              className={`rounded-md flex items-center gap-1.5 shrink-0 snap-start ${
+                badgeSize === "sm" ? "h-6 px-2 text-xs" : "h-7 px-2"
+              }`}
+            >
+              Hide Hidden
+              <button
+                onClick={() => filters.setHideHidden(false)}
+                className="hover:bg-muted rounded-sm p-0.5"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </Badge>
+          )}
+          {filters.hideTechnos && (
+            <Badge
+              variant="secondary"
+              className={`rounded-md flex items-center gap-1.5 shrink-0 snap-start ${
+                badgeSize === "sm" ? "h-6 px-2 text-xs" : "h-7 px-2"
+              }`}
+            >
+              Hide Technos
+              <button
+                onClick={() => filters.setHideTechnos(false)}
+                className="hover:bg-muted rounded-sm p-0.5"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </Badge>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Filter content (vertical layout)
+  const FilterContent = () => {
+    const buttonSize = isDesktop ? "sm" : "default";
+
+    return (
+      <>
+        {/* Active Filters - Top on mobile/drawer, bottom on desktop */}
+        {!isDesktop && hasActiveFilters && (
+          <div className="p-4 border-b">
+            <ActiveFilters />
+          </div>
+        )}
+
+        <div className="w-full flex flex-col px-4 pt-4 pb-10 md:py-4 gap-6">
+          {/* Building Type */}
           <div className="space-y-2">
             <h4 className="text-sm font-medium">Building Type</h4>
             <div className="flex gap-2">
@@ -78,7 +189,7 @@ export function FiltersDrawer() {
                 <Button
                   key={type}
                   variant={tableType === type ? "default" : "outline"}
-                  size="sm"
+                  size={buttonSize}
                   onClick={() =>
                     filters.setTableType(
                       type === "all"
@@ -86,6 +197,7 @@ export function FiltersDrawer() {
                         : (type as "construction" | "upgrade"),
                     )
                   }
+                  className="capitalize"
                 >
                   {type === "all"
                     ? "All"
@@ -97,6 +209,7 @@ export function FiltersDrawer() {
             </div>
           </div>
 
+          {/* City */}
           <div className="space-y-2">
             <h4 className="text-sm font-medium">City</h4>
             <div className="flex flex-wrap gap-2">
@@ -104,20 +217,19 @@ export function FiltersDrawer() {
                 <Button
                   key={loc}
                   variant={location === loc ? "default" : "outline"}
-                  size="sm"
+                  size={buttonSize}
                   onClick={() =>
                     filters.setLocation(loc === "all" ? undefined : loc)
                   }
+                  className="capitalize"
                 >
                   {loc === "all" ? "All" : loc}
                 </Button>
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Right section */}
-        <div className="md:w-56 space-y-4 md:border-l md:pl-5">
+          {/* Hide "hidden" cards */}
           <div className="space-y-2">
             <h4 className="text-sm font-medium">
               Hide &quot;hidden&quot; cards
@@ -130,7 +242,7 @@ export function FiltersDrawer() {
               <label
                 className={buttonVariants({
                   variant: !filters.hideHidden ? "default" : "outline",
-                  size: "sm",
+                  size: buttonSize,
                 })}
               >
                 <RadioGroupItem
@@ -144,7 +256,7 @@ export function FiltersDrawer() {
               <label
                 className={buttonVariants({
                   variant: filters.hideHidden ? "default" : "outline",
-                  size: "sm",
+                  size: buttonSize,
                 })}
               >
                 <RadioGroupItem
@@ -157,6 +269,7 @@ export function FiltersDrawer() {
             </RadioGroup>
           </div>
 
+          {/* Hide "Technologies" */}
           <div className="space-y-2">
             <h4 className="text-sm font-medium">
               Hide &quot;Technologies&quot;
@@ -171,7 +284,7 @@ export function FiltersDrawer() {
               <label
                 className={buttonVariants({
                   variant: !filters.hideTechnos ? "default" : "outline",
-                  size: "sm",
+                  size: buttonSize,
                 })}
               >
                 <RadioGroupItem
@@ -185,7 +298,7 @@ export function FiltersDrawer() {
               <label
                 className={buttonVariants({
                   variant: filters.hideTechnos ? "default" : "outline",
-                  size: "sm",
+                  size: buttonSize,
                 })}
               >
                 <RadioGroupItem
@@ -198,39 +311,16 @@ export function FiltersDrawer() {
             </RadioGroup>
           </div>
         </div>
-      </div>
 
-      {/* Active Filters Summary */}
-      {hasActiveFilters && (
-        <div className="flex gap-1.5 items-center py-2 px-3 border-t">
-          <span className="text-sm text-muted-foreground">Active filters:</span>
-          {tableType !== "all" && (
-            <Badge variant="secondary" className="rounded-md h-6">
-              {tableType === "construction" ? "Construction" : "Upgrade"}
-            </Badge>
-          )}
-          {location !== "all" && (
-            <Badge variant="secondary" className="rounded-md h-6">
-              {location}
-            </Badge>
-          )}
-          {filters.hideHidden && (
-            <Badge variant="secondary" className="rounded-md h-6">
-              Hide Hidden
-            </Badge>
-          )}
-          {filters.hideTechnos && (
-            <Badge variant="secondary" className="rounded-md h-6">
-              Hide Technos
-            </Badge>
-          )}
-          <Button variant="ghost" size="sm" onClick={() => filters.reset()}>
-            Clear
-          </Button>
-        </div>
-      )}
-    </>
-  );
+        {/* Active Filters - Bottom on desktop */}
+        {isDesktop && hasActiveFilters && (
+          <div className="p-4 border-t mt-auto">
+            <ActiveFilters />
+          </div>
+        )}
+      </>
+    );
+  };
 
   return (
     <Drawer direction={isDesktop ? "right" : "bottom"}>
@@ -239,7 +329,7 @@ export function FiltersDrawer() {
           <Filter className="size-4" />
           Filters
           {activeFiltersCount > 0 && (
-            <Badge variant="default" className="h-5 px-1.5 text-xs">
+            <Badge variant="default" className="size-5 px-1 text-[13px]">
               {activeFiltersCount}
             </Badge>
           )}
@@ -247,22 +337,27 @@ export function FiltersDrawer() {
       </DrawerTrigger>
 
       <DrawerContent
-        className={
-          isDesktop
-            ? "w-full max-w-md h-full"
-            : "max-h-[85vh]"
-        }
+        className={isDesktop ? "w-full max-w-md h-full" : "max-h-[85vh]"}
       >
-        <DrawerHeader className="flex flex-row items-center justify-between border-b pb-4">
-          <DrawerTitle>Filters</DrawerTitle>
-          <DrawerClose asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <X className="h-4 w-4" />
-            </Button>
-          </DrawerClose>
+        {/* Header compact comme total-drawer */}
+        <DrawerHeader className="border-b py-3 px-4 shrink-0">
+          <div className="w-full max-w-[870px] mx-auto">
+            <div className="flex justify-between items-center h-5">
+              <DrawerTitle className="text-left text-base">Filters</DrawerTitle>
+              <DrawerClose asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full h-8 w-8"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </DrawerClose>
+            </div>
+          </div>
         </DrawerHeader>
 
-        <div className="overflow-y-auto flex-1">
+        <div className="overflow-y-auto flex-1 flex flex-col">
           <FilterContent />
         </div>
       </DrawerContent>

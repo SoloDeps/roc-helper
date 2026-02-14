@@ -28,7 +28,7 @@ export function TotalDrawer({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button size="sm" variant="outline" className="cursor-pointer">
-          Resources Total
+          View Total
         </Button>
       </DrawerTrigger>
 
@@ -38,7 +38,7 @@ export function TotalDrawer({
           <div className="w-full max-w-[870px] mx-auto">
             <div className="flex justify-between items-center h-5">
               <DrawerTitle className="text-left text-base">
-                Resources Total
+                Total Resources
               </DrawerTitle>
 
               <Button

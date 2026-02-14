@@ -278,6 +278,7 @@ function useEraBlocks(
 
 /**
  * Hook pour grouper les goods par civilisation
+ * ✅ CORRECTION: Ajoute maintenant les ressources alliées (deben, aspers, wu_zhu, etc.)
  */
 function useOtherGoodsByCiv(
   otherGoods: Map<string, number>,
@@ -285,13 +286,14 @@ function useOtherGoodsByCiv(
 ) {
   return useMemo(() => {
     const grouped: Record<string, ResourceItem[]> = {};
+    const processedTypes = new Set<string>(); // ✅ Track déjà traités pour éviter doublons
 
     // Initialiser les groupes
     Object.keys(goodsByCivilization).forEach((civ) => (grouped[civ] = []));
 
     const itemsList = getExcludedItems();
 
-    // Traiter les ITEMS depuis mainResources
+    // ✅ 1. Traiter les ITEMS depuis mainResources
     Object.entries(mainResources).forEach(([type, amount]) => {
       if (itemsList.includes(type)) {
         const item = {
@@ -303,11 +305,38 @@ function useOtherGoodsByCiv(
 
         if (!grouped.ITEMS) grouped.ITEMS = [];
         grouped.ITEMS.push(item);
+        processedTypes.add(type); // ✅ Marquer comme traité
       }
     });
 
-    // Traiter tous les autres goods
+    // ✅ 2. NOUVEAU : Traiter les ALLIED CITY RESOURCES depuis mainResources
+    Object.entries(mainResources).forEach(([type, amount]) => {
+      // ✅ Skip si déjà traité dans ITEMS
+      if (processedTypes.has(type)) return;
+
+      // Vérifier si c'est une ressource alliée (deben, aspers, wu_zhu, etc.)
+      for (const [civKey, civData] of Object.entries(goodsByCivilization)) {
+        if (civData.goods.includes(type)) {
+          const item = {
+            icon: getItemIconLocal(type),
+            name: type.replace(/_/g, " "),
+            amount,
+            difference: amount,
+          };
+
+          if (!grouped[civKey]) grouped[civKey] = [];
+          grouped[civKey].push(item);
+          processedTypes.add(type); // ✅ Marquer comme traité
+          break; // Sortir dès qu'on a trouvé la civilisation
+        }
+      }
+    });
+
+    // ✅ 3. Traiter tous les autres goods (goods map)
     otherGoods.forEach((amount, type) => {
+      // ✅ Skip si déjà traité
+      if (processedTypes.has(type)) return;
+
       const displayName = type.replace(/_/g, " ");
       const normalized = slugify(displayName);
       let foundCiv: string | null = null;
@@ -332,6 +361,7 @@ function useOtherGoodsByCiv(
         if (!grouped.OTHERS) grouped.OTHERS = [];
         grouped.OTHERS.push(item);
       }
+      processedTypes.add(type); // ✅ Marquer comme traité
     });
 
     // Retourner uniquement les groupes non vides
@@ -457,7 +487,7 @@ export function TotalGoodsDisplay({
 
   return (
     <ScrollArea className="size-full overflow-y-auto bg-background-200">
-      <div className="px-2 py-4 md:p-4 pb-16 max-w-[870px] mx-auto">
+      <div className="px-2 py-4 md:p-4 mb-4 md:mb-16 max-w-[870px] mx-auto">
         {/* Main Resources */}
         <div className="grid grid-cols-1 md:grid-cols-6 xl:grid-cols-1 2xl:grid-cols-6 gap-3">
           <div className="col-span-4 md:col-start-2 xl:col-start-1 2xl:col-start-2">
@@ -470,7 +500,9 @@ export function TotalGoodsDisplay({
               resources={mainResources}
               type="main"
               className={
-                mainResources.length > 3 ? "grid-cols-4" : "grid-cols-3"
+                mainResources.length > 3
+                  ? "grid-cols-3 md:grid-cols-4"
+                  : "grid-cols-3"
               }
               compareMode={compareMode}
               getDifferenceColor={getDifferenceColor}

@@ -160,7 +160,8 @@ const WorkshopRow = memo(
 
         return () => clearTimeout(timeoutId);
       }
-    }, [currentSelection[0], currentSelection[1], currentSelection[2]]);
+    }, [currentSelection]);
+    // }, [currentSelection[0], currentSelection[1], currentSelection[2]]);
 
     const primaryOptions = buildings.map((name) => ({
       value: name,

@@ -25,7 +25,7 @@ export function getMaxQtyForEra(era: EraCode, buildingType: keyof MaxQtyByEra): 
   return undefined;
 }
 
-const ERA_ORDER: EraCode[] = [
+export const ERA_ORDER: EraCode[] = [
   "SA",
   "BA",
   "ME",

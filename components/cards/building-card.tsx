@@ -14,6 +14,7 @@ import {
   getGoodNameFromPriorityEra,
 } from "@/lib/utils";
 import { useBuilding } from "@/hooks/use-database";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import type { BuildingEntity } from "@/lib/db/schema";
 
 interface BuildingCardProps {
@@ -33,6 +34,7 @@ export function BuildingCard({
   onUpdateQuantity,
   onToggleHidden,
 }: BuildingCardProps) {
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -59,7 +61,7 @@ export function BuildingCard({
   const mainResources = Object.entries(costs.resources || {}).map(
     ([resourceType, unitValue]) => ({
       type: resourceType,
-      value: unitValue * quantity, // ✅ Multiplication qty × unit cost
+      value: unitValue * quantity,
       icon: getItemIconLocal(resourceType),
     }),
   );
@@ -68,7 +70,6 @@ export function BuildingCard({
     const goods = costs.goods;
     if (!goods?.length) return null;
 
-    // ✅ Multiply each good by quantity
     return goods.map((g) => {
       const match = g.type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
       let goodName = g.type;
@@ -80,14 +81,14 @@ export function BuildingCard({
           era,
           userSelections,
         );
-        if (resolvedName) goodName = resolvedName;
+        goodName = resolvedName || "default";
       }
 
       return (
         <ResourceBadge
           key={g.type}
           icon={getItemIconLocal(goodName)}
-          value={formatNumber(g.amount * quantity)} // ✅ Multiplication qty × unit cost
+          value={formatNumber(g.amount * quantity)}
           alt={g.type}
         />
       );
@@ -100,15 +101,14 @@ export function BuildingCard({
     <div
       className={cn(
         "group flex justify-center rounded-sm bg-background-300 border min-h-32 pl-1 relative",
-        hidden && "opacity-60",
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Hidden overlay */}
+      {/* Hidden overlay - z-0 pour rester en arrière-plan */}
       {hidden && (
         <div
-          className="absolute inset-0 opacity-60 pointer-events-none select-none rounded-sm"
+          className="absolute inset-0 pointer-events-none opacity-50 rounded-sm z-0"
           style={{
             backgroundImage: `repeating-linear-gradient(
               45deg,
@@ -118,7 +118,6 @@ export function BuildingCard({
               transparent 50%
             )`,
             backgroundSize: "10px 10px",
-            backgroundAttachment: "fixed",
           }}
         />
       )}
@@ -152,27 +151,35 @@ export function BuildingCard({
         )}
       </div>
 
-      {/* Content */}
+      {/* Content - relative pour être au-dessus de l'overlay */}
       <div className="flex px-2 py-3 md:px-3 size-full relative">
         <div className="flex-1">
           {/* Header */}
           <div className="flex mb-3 justify-between">
             <div className="flex items-center gap-2">
-              <h3 className="text-sm lg:text-[15px] font-medium max-w-44 truncate capitalize">
-                {name}
-                {level && <span> — Lvl {level}</span>}
-              </h3>
-
-              <Badge
-                variant="outline"
+              <h3
                 className={cn(
-                  "rounded-sm border-alpha-100 border shrink-0",
-                  isConstruction ? "construction-badge" : "upgrade-badge",
+                  "text-sm lg:text-[15px] font-medium max-w-44 truncate capitalize",
+                  hidden && "opacity-50",
                 )}
               >
-                {isConstruction ? "Construction" : "Upgrade"}
-              </Badge>
+                {name}
+                {level && <span> – Lvl {level}</span>}
+              </h3>
 
+              <div className={hidden ? "opacity-50" : ""}>
+                <Badge
+                  variant="outline"
+                  className={cn(
+                    "rounded-sm border-alpha-100 border shrink-0",
+                    isConstruction ? "construction-badge" : "upgrade-badge",
+                  )}
+                >
+                  {isConstruction ? "Construction" : "Upgrade"}
+                </Badge>
+              </div>
+
+              {/* Hide/Show button - visible on hover (desktop) or always (mobile) */}
               <div
                 className={cn(
                   "transition-opacity duration-200 hidden md:block",
@@ -184,7 +191,7 @@ export function BuildingCard({
                 <Button
                   size="sm"
                   variant={hidden ? "outline" : "ghost"}
-                  className="rounded-sm h-6"
+                  className="rounded-sm h-6 w-20"
                   onClick={() => onToggleHidden(id)}
                   title={
                     hidden
@@ -197,9 +204,7 @@ export function BuildingCard({
                   ) : (
                     <EyeOff className="size-4" />
                   )}
-                  <span className="hidden md:inline-block">
-                    {hidden ? "Show" : "Hide"}
-                  </span>
+                  <span>{hidden ? "Show" : "Hide"}</span>
                 </Button>
               </div>
             </div>
@@ -216,7 +221,12 @@ export function BuildingCard({
 
           {/* Resources & Counter */}
           <div className="flex flex-col md:flex-row w-full gap-2 justify-between items-stretch min-h-[70px]">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-full content-start">
+            <div
+              className={cn(
+                "grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-full content-start",
+                hidden && "opacity-60 pointer-events-none select-none",
+              )}
+            >
               {mainResources.map((r) => (
                 <ResourceBadge
                   key={r.type}
@@ -243,7 +253,10 @@ export function BuildingCard({
             <div className="flex md:hidden justify-between items-end gap-2">
               <Button
                 variant="outline"
-                className="rounded-sm h-[34px]"
+                className={cn(
+                  "rounded-sm h-[34px]",
+                  !hidden && "text-muted-foreground border-transparent",
+                )}
                 onClick={() => onToggleHidden(id)}
                 title={
                   hidden

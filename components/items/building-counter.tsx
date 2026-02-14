@@ -86,7 +86,7 @@ function MobileQuantityDrawer({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <ShadcnButton variant="outline" disabled={disabled} className="h-[34px] gap-3">
+        <ShadcnButton variant="outline" disabled={disabled} className="gap-3">
           <span>Quantity:</span>
           <span>{value}</span>
           <Edit2 className="size-3.5" />
@@ -140,7 +140,7 @@ function DesktopCounter({
       isDisabled={disabled}
       aria-label="Building quantity"
     >
-      <Group className="relative inline-flex h-9 items-center overflow-hidden whitespace-nowrap rounded-sm border border-input text-sm shadow-sm">
+      <Group className="relative inline-flex h-9 items-center overflow-hidden whitespace-nowrap rounded-md border border-input text-sm shadow-sm">
         <Button
           slot="decrement"
           className="flex aspect-square h-[inherit] items-center justify-center border-r border-input bg-background-300 text-muted-foreground hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 transition-colors"

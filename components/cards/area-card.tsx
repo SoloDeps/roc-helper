@@ -8,12 +8,12 @@ import { ResourceBadge } from "@/components/items/resource-badge";
 import { cn } from "@/lib/utils";
 import {
   formatNumber,
-  slugify,
   getGoodNameFromPriorityEra,
   getItemIconLocal,
 } from "@/lib/utils";
 import type { OttomanAreaEntity } from "@/lib/db/schema";
 import Image from "next/image";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface AreaCardProps {
   area: OttomanAreaEntity;
@@ -28,6 +28,7 @@ export function AreaCard({
   onRemove,
   onToggleHidden,
 }: AreaCardProps) {
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const [isHovered, setIsHovered] = useState(false);
   const { id, areaIndex, costs, hidden } = area;
 
@@ -56,13 +57,14 @@ export function AreaCard({
           era,
           userSelections,
         );
-        if (resolvedName) goodName = resolvedName;
+        // ✅ Use resolved name if found, otherwise fallback to "default"
+        goodName = resolvedName || "default";
       }
 
       return (
         <ResourceBadge
           key={`${g.type}-${i}`}
-          icon={`/goods/${slugify(goodName)}.webp`}
+          icon={getItemIconLocal(goodName)}
           value={formatNumber(g.amount)}
           alt={g.type}
         />
@@ -80,7 +82,7 @@ export function AreaCard({
     >
       {hidden && (
         <div
-          className="absolute inset-0 pointer-events-none opacity-50 rounded-sm"
+          className="absolute inset-0 pointer-events-none opacity-50 rounded-sm z-0"
           style={{
             backgroundImage: `repeating-linear-gradient(
               45deg,
@@ -90,7 +92,6 @@ export function AreaCard({
               transparent 50%
             )`,
             backgroundSize: "10px 10px",
-            backgroundAttachment: "fixed",
           }}
         />
       )}
@@ -133,15 +134,15 @@ export function AreaCard({
               <div
                 className={cn(
                   "transition-opacity duration-200",
-                  hidden || isHovered
+                  hidden || isHovered || isMobile
                     ? "opacity-100"
                     : "opacity-0 pointer-events-none",
                 )}
               >
                 <Button
                   size="sm"
-                  variant={hidden ? "outline" : "ghost"}
-                  className="rounded-sm h-6"
+                  variant={hidden || isMobile ? "outline" : "ghost"}
+                  className={cn("rounded-sm h-6 w-20", isMobile && !hidden && "text-muted-foreground border-transparent")}
                   onClick={() => onToggleHidden(id)}
                   title={
                     hidden
@@ -154,9 +155,7 @@ export function AreaCard({
                   ) : (
                     <EyeOff className="size-4" />
                   )}
-                  <span className="hidden md:inline-block">
-                    {hidden ? "Show" : "Hide"}
-                  </span>
+                  <span>{hidden ? "Show" : "Hide"}</span>
                 </Button>
               </div>
             </div>
@@ -171,21 +170,24 @@ export function AreaCard({
             </Button>
           </div>
 
-          <div
-            className={cn(
-              "grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-60 sm:w-80",
-              hidden && "opacity-60 pointer-events-none select-none",
-            )}
-          >
-            {mainResources.map((r) => (
-              <ResourceBadge
-                key={r.type}
-                icon={r.icon}
-                value={formatNumber(r.value)}
-                alt={r.type}
-              />
-            ))}
-            {goodsBadges}
+          <div className="flex gap-2">
+            <div
+              className={cn(
+                "grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-full",
+                hidden && "opacity-60 pointer-events-none select-none",
+              )}
+            >
+              {mainResources.map((r) => (
+                <ResourceBadge
+                  key={r.type}
+                  icon={r.icon}
+                  value={formatNumber(r.value)}
+                  alt={r.type}
+                />
+              ))}
+              {goodsBadges}
+            </div>
+            <div className="w-[110px] shrink-0 hidden md:block" />
           </div>
         </div>
       </div>

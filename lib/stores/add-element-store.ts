@@ -14,12 +14,23 @@ import { toast } from "sonner";
 // TYPES
 // ============================================================================
 
-export type FlowStep = "category" | "subcategory" | "element" | "configuration";
+export type FlowStep =
+  | "category"
+  | "subcategory"
+  | "element"
+  | "configuration"
+  | "ottoman_selection"; // New: Multi-selection for areas/tradeposts
 
 export interface NavigationPath {
   categoryId?: string;
   subcategoryId?: string;
   elementId?: string;
+}
+
+// Ottoman-specific selection state
+export interface OttomanSelection {
+  selectedAreas: Set<number>; // Area indices (1-18)
+  selectedTradePosts: Set<string>; // Trade post names
 }
 
 export interface LevelConfig {
@@ -51,13 +62,16 @@ interface AddElementState {
   // Configuration
   config: ElementConfig;
 
+  // Ottoman Selection State
+  ottomanSelection: OttomanSelection;
+
   // Breadcrumb
   breadcrumbTrail: Array<{ id: string; name: string; step: FlowStep }>;
 
-  // ✅ Track last added element ID for opening accordion
+  // Track last added element ID for opening accordion
   lastAddedElementId: string | null;
 
-  // ✅ Last used era for default selection
+  // Last used era for default selection
   lastUsedEra: string;
 
   // Actions - Modal
@@ -78,8 +92,14 @@ interface AddElementState {
   setSelectedEra: (era: string) => void;
   setBuildingType: (type: "construction" | "upgrade") => void;
 
+  // Actions - Ottoman Selection
+  toggleOttomanArea: (areaIndex: number) => void;
+  toggleOttomanTradePost: (tradePostName: string) => void;
+  clearOttomanSelection: () => void;
+
   // Helpers
   isTechnologyPath: () => boolean;
+  isOttomanPath: () => boolean;
   updateBreadcrumbTrail: () => void;
 }
 
@@ -103,9 +123,13 @@ export const useAddElementStore = create<AddElementState>()(
         currentStep: "category",
         path: {},
         config: DEFAULT_CONFIG,
+        ottomanSelection: {
+          selectedAreas: new Set(),
+          selectedTradePosts: new Set(),
+        },
         breadcrumbTrail: [],
         lastAddedElementId: null,
-        lastUsedEra: "LG", // ✅ Default to Late Gothic Era
+        lastUsedEra: "LG", // Default to Late Gothic Era
 
         // UI actions
         openModal: () => set({ isOpen: true }),
@@ -120,6 +144,10 @@ export const useAddElementStore = create<AddElementState>()(
             currentStep: "category",
             path: {},
             config: DEFAULT_CONFIG,
+            ottomanSelection: {
+              selectedAreas: new Set(),
+              selectedTradePosts: new Set(),
+            },
             breadcrumbTrail: [],
           });
         },
@@ -129,11 +157,20 @@ export const useAddElementStore = create<AddElementState>()(
           return path.categoryId === "technology";
         },
 
+        isOttomanPath: () => {
+          const { path } = get();
+          return path.categoryId === "ottoman";
+        },
+
         selectCategory: (categoryId) => {
           const isTech = categoryId === "technology";
+          const isOttoman = categoryId === "ottoman";
 
           set({
             path: { categoryId },
+            // Pour Technology, aller directement à "element" (liste des eras)
+            // Pour Ottoman, aller à "subcategory" (areas/tradeposts)
+            // Pour les autres, aller à "subcategory" (sous-catégories normales)
             currentStep: isTech ? "element" : "subcategory",
           });
 
@@ -141,10 +178,25 @@ export const useAddElementStore = create<AddElementState>()(
         },
 
         selectSubcategory: (subcategoryId) => {
-          set((state) => ({
-            path: { ...state.path, subcategoryId },
-            currentStep: "element",
-          }));
+          const { path } = get();
+          const isOttoman = path.categoryId === "ottoman";
+
+          // For Ottoman areas/tradeposts, go directly to selection step
+          if (
+            isOttoman &&
+            (subcategoryId === "ottoman_areas" ||
+              subcategoryId === "ottoman_tradeposts")
+          ) {
+            set((state) => ({
+              path: { ...state.path, subcategoryId },
+              currentStep: "ottoman_selection",
+            }));
+          } else {
+            set((state) => ({
+              path: { ...state.path, subcategoryId },
+              currentStep: "element",
+            }));
+          }
           get().updateBreadcrumbTrail();
         },
 
@@ -156,9 +208,57 @@ export const useAddElementStore = create<AddElementState>()(
           get().updateBreadcrumbTrail();
         },
 
+        toggleOttomanArea: (areaIndex) => {
+          set((state) => {
+            const newSelectedAreas = new Set(
+              state.ottomanSelection.selectedAreas,
+            );
+            if (newSelectedAreas.has(areaIndex)) {
+              newSelectedAreas.delete(areaIndex);
+            } else {
+              newSelectedAreas.add(areaIndex);
+            }
+            return {
+              ottomanSelection: {
+                ...state.ottomanSelection,
+                selectedAreas: newSelectedAreas,
+              },
+            };
+          });
+        },
+
+        toggleOttomanTradePost: (tradePostName) => {
+          set((state) => {
+            const newSelectedTradePosts = new Set(
+              state.ottomanSelection.selectedTradePosts,
+            );
+            if (newSelectedTradePosts.has(tradePostName)) {
+              newSelectedTradePosts.delete(tradePostName);
+            } else {
+              newSelectedTradePosts.add(tradePostName);
+            }
+            return {
+              ottomanSelection: {
+                ...state.ottomanSelection,
+                selectedTradePosts: newSelectedTradePosts,
+              },
+            };
+          });
+        },
+
+        clearOttomanSelection: () => {
+          set({
+            ottomanSelection: {
+              selectedAreas: new Set(),
+              selectedTradePosts: new Set(),
+            },
+          });
+        },
+
         goBack: () => {
           set((state) => {
             const isTech = state.path.categoryId === "technology";
+            const isOttoman = state.path.categoryId === "ottoman";
 
             switch (state.currentStep) {
               case "subcategory":
@@ -168,6 +268,8 @@ export const useAddElementStore = create<AddElementState>()(
                 };
 
               case "element":
+                // Si on est dans technology, revenir à category
+                // Sinon revenir à subcategory
                 if (isTech) {
                   return {
                     currentStep: "category",
@@ -177,6 +279,17 @@ export const useAddElementStore = create<AddElementState>()(
                 return {
                   currentStep: "subcategory",
                   path: { categoryId: state.path.categoryId },
+                };
+
+              case "ottoman_selection":
+                // Clear selection when going back
+                return {
+                  currentStep: "subcategory",
+                  path: { categoryId: state.path.categoryId },
+                  ottomanSelection: {
+                    selectedAreas: new Set(),
+                    selectedTradePosts: new Set(),
+                  },
                 };
 
               case "configuration":
@@ -303,7 +416,7 @@ export const useAddElementStore = create<AddElementState>()(
         setSelectedEra: (era) =>
           set((state) => ({
             config: { ...state.config, selectedEra: era, selectedLevels: [] },
-            lastUsedEra: era, // ✅ Persist the selected era
+            lastUsedEra: era, // Persist the selected era
           })),
 
         setBuildingType: (type) =>
@@ -314,7 +427,7 @@ export const useAddElementStore = create<AddElementState>()(
       {
         name: "add-element-storage",
         partialize: (state) => ({
-          lastUsedEra: state.lastUsedEra, // ✅ Only persist lastUsedEra
+          lastUsedEra: state.lastUsedEra, // Only persist lastUsedEra
         }),
       },
     ),
@@ -339,7 +452,8 @@ export function useSubmitElement() {
     }
 
     // Get element data
-    const elementData = getBuildingData(path.elementId);
+    const id = `${path.categoryId}_${path.elementId}`;
+    const elementData = getBuildingData(id);
     if (!elementData) {
       throw new Error("Element data not found");
     }
@@ -356,7 +470,7 @@ export function useSubmitElement() {
       throw new Error("No levels selected");
     }
 
-    // ✅ CHECK FOR DUPLICATES BEFORE INSERTING
+    // CHECK FOR DUPLICATES BEFORE INSERTING
     const db = getWikiDB();
     const duplicateItems: string[] = [];
 
@@ -371,7 +485,7 @@ export function useSubmitElement() {
 
       const existing = await db.buildings.get(id);
       if (existing) {
-        // ✅ Format: "Small Home Lvl 7 Construction"
+        // Format: "Small Home Lvl 7 Construction"
         const typeLabel =
           config.buildingType.charAt(0).toUpperCase() +
           config.buildingType.slice(1);
@@ -382,12 +496,12 @@ export function useSubmitElement() {
     }
 
     if (duplicateItems.length > 0) {
-      // ✅ Show toast error with list of duplicates (each item on new line)
+      // Show toast error with list of duplicates (each item on new line)
       const description = duplicateItems.map((item) => `• ${item}`).join("\n");
       toast.error("Elements already in the list", {
         description: description,
         position: "top-center",
-        duration: 6000,
+        duration: 3500,
         style: {
           whiteSpace: "pre-line",
         },
@@ -396,7 +510,7 @@ export function useSubmitElement() {
     }
 
     try {
-      // ✅ Track the first element ID for accordion opening
+      // Track the first element ID for accordion opening
       let firstElementId: string | null = null;
 
       // Create one entity per selected level
@@ -432,9 +546,9 @@ export function useSubmitElement() {
           config.buildingType,
         );
 
-        // ✅ Store first ID
+        // Store first ID with format: category_elementId (matches groupKey in item-list)
         if (!firstElementId) {
-          firstElementId = path.elementId!;
+          firstElementId = `${path.categoryId}_${path.elementId}`;
         }
 
         // Build entity
@@ -464,30 +578,33 @@ export function useSubmitElement() {
       // Wait for all inserts
       await Promise.all(promises);
 
-      console.log(`✅ ${selectedLevels.length} building(s) added to database`);
+      // console.log(`${selectedLevels.length} building(s) added to database`);
 
-      // ✅ Build list of added items for success toast
-      const addedItems = selectedLevels.map((levelConfig) => {
-        const typeLabel =
-          config.buildingType.charAt(0).toUpperCase() +
-          config.buildingType.slice(1);
-        return `${catalogItem.name} Lvl ${levelConfig.level} ${typeLabel}`;
-      });
+      // Build list of added items for success toast
+      // const addedItems = selectedLevels.map((levelConfig) => {
+      //   const typeLabel =
+      //     config.buildingType.charAt(0).toUpperCase() +
+      //     config.buildingType.slice(1);
+      //   return `${catalogItem.name} Lvl ${levelConfig.level} ${typeLabel}`;
+      // });
 
-      // ✅ Show success toast with list of added elements
-      const successDescription = addedItems
-        .map((item) => `• ${item}`)
-        .join("\n");
-      toast.success("Elements added successfully", {
-        description: successDescription,
-        position: "top-center",
-        duration: 4000,
-        style: {
-          whiteSpace: "pre-line",
-        },
-      });
+      // Show success toast with list of added elements
+      toast.success(
+        `${selectedLevels.length} ${catalogItem.name} added successfully`,
+      );
 
-      // ✅ Set the last added element ID for accordion opening
+      // const successDescription = addedItems
+      //   .map((item) => `• ${item}`)
+      //   .join("\n");
+      // toast.success("Elements added successfully", {
+      //   description: successDescription,
+      //   duration: 3500,
+      //   style: {
+      //     whiteSpace: "pre-line",
+      //   },
+      // });
+
+      // Set the last added element ID for accordion opening
       useAddElementStore.setState({ lastAddedElementId: firstElementId });
 
       // Close modal
@@ -523,11 +640,14 @@ export const useModalState = () => useAddElementStore((state) => state.isOpen);
 export const useIsTechnologyPath = () =>
   useAddElementStore((state) => state.isTechnologyPath());
 
+export const useIsOttomanPath = () =>
+  useAddElementStore((state) => state.isOttomanPath());
+
+export const useOttomanSelection = () =>
+  useAddElementStore((state) => state.ottomanSelection);
+
 export const useBreadcrumbTrail = () =>
   useAddElementStore((state) => state.breadcrumbTrail);
-
-export const useLastAddedElementId = () =>
-  useAddElementStore((state) => state.lastAddedElementId);
 
 export const useLastUsedEra = () =>
   useAddElementStore((state) => state.lastUsedEra);

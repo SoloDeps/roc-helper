@@ -24,21 +24,27 @@ import { ERAS } from "@/lib/catalog";
 
 /**
  * Era selector - Now using ResponsiveSelect
+ * Only shows eras that are available in the building data
  */
 interface EraSelectorProps {
   selectedEra: string;
+  availableEras: string[];
   onEraChange: (era: string) => void;
   nested?: boolean;
 }
 
 const EraSelector = memo<EraSelectorProps>(
-  ({ selectedEra, onEraChange, nested = false }) => {
-    if (ERAS.length <= 1) return null;
+  ({ selectedEra, availableEras, onEraChange, nested = false }) => {
+    // Don't show selector if only one era available
+    if (availableEras.length <= 1) return null;
 
-    const options = ERAS.map((era) => ({
-      value: era.abbr,
-      label: era.name,
-    }));
+    const options = availableEras.map((eraAbbr) => {
+      const era = ERAS.find((e) => e.abbr === eraAbbr);
+      return {
+        value: eraAbbr,
+        label: era?.name || eraAbbr,
+      };
+    });
 
     return (
       <ResponsiveSelect
@@ -205,8 +211,8 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
     const lastUsedEra = useLastUsedEra();
 
     const elementData = useMemo(
-      () => (path.elementId ? getBuildingData(path.elementId) : null),
-      [path.elementId],
+      () => (path.elementId ? getBuildingData(path.categoryId + "_" + path.elementId) : null),
+      [path.elementId, path.categoryId],
     );
 
     const availableEras = useMemo(
@@ -214,17 +220,30 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
       [elementData],
     );
 
-    // ✅ Initialize era with lastUsedEra if available, otherwise use last era
+    // ✅ Initialize era with intelligent fallback
     useEffect(() => {
       if (availableEras.length > 0 && !config.selectedEra) {
         // Check if lastUsedEra is available for this element
         const defaultEra = availableEras.includes(lastUsedEra)
           ? lastUsedEra
-          : availableEras[availableEras.length - 1];
+          : availableEras[availableEras.length - 1]; // Use last available era as fallback
 
         onEraChange(defaultEra);
       }
     }, [availableEras, config.selectedEra, lastUsedEra, onEraChange]);
+
+    // ✅ If current era is not available in this building, switch to a valid one
+    useEffect(() => {
+      if (
+        config.selectedEra &&
+        availableEras.length > 0 &&
+        !availableEras.includes(config.selectedEra)
+      ) {
+        // Current era not available, switch to the last available era
+        const fallbackEra = availableEras[availableEras.length - 1];
+        onEraChange(fallbackEra);
+      }
+    }, [availableEras, config.selectedEra, onEraChange]);
 
     const availableLevels = useMemo(() => {
       if (!elementData || !config.selectedEra) return [];
@@ -284,6 +303,7 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
         <div className="space-y-4">
           <EraSelector
             selectedEra={config.selectedEra}
+            availableEras={availableEras}
             onEraChange={onEraChange}
             nested={nested}
           />

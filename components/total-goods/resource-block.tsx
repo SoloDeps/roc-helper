@@ -126,13 +126,14 @@ export function ResourceBlock({
         <h3 className="text-xs font-bold uppercase tracking-wide">{title}</h3>
       </header>
       <div className={`grid ${gridClass} bg-background-300`}>
-        {paddedResources.map((r, i) => (
-          <ResourceItem
-            key={`${title}-${r.name || r.icon || i}`}
-            {...r}
-            compareMode={compareMode}
-          />
-        ))}
+        {paddedResources.map((r, i) => {
+          // Générer une clé unique combinant plusieurs propriétés
+          const uniqueKey = `${title}-${r.name || "empty"}-${r.icon || "noicon"}-${i}-${r.amount || 0}`;
+
+          return (
+            <ResourceItem key={uniqueKey} {...r} compareMode={compareMode} />
+          );
+        })}
       </div>
     </section>
   );

@@ -268,3 +268,96 @@ export async function toggleHideAllOttomanTradePosts(): Promise<void> {
     await hideAllOttomanTradePosts();
   }
 }
+
+// ============================================================================
+// GLOBAL HIDE/SHOW ALL ENTITIES
+// ============================================================================
+
+/**
+ * Hide all entities (buildings, technos, areas, trade posts)
+ * Only updates visible items to hidden
+ */
+export async function hideAllEntities(): Promise<void> {
+  const db = getWikiDB();
+  const timestamp = now();
+
+  const [buildings, technos, areas, tradePosts] = await Promise.all([
+    db.buildings.toArray(),
+    db.technos.toArray(),
+    db.ottomanAreas.toArray(),
+    db.ottomanTradePosts.toArray(),
+  ]);
+
+  const buildingUpdates = buildings
+    .filter((b) => !b.hidden)
+    .map((b) => ({ ...b, hidden: true, updatedAt: timestamp }));
+
+  const technoUpdates = technos
+    .filter((t) => !t.hidden)
+    .map((t) => ({ ...t, hidden: true, updatedAt: timestamp }));
+
+  const areaUpdates = areas
+    .filter((a) => !a.hidden)
+    .map((a) => ({ ...a, hidden: true, updatedAt: timestamp }));
+
+  const tradePostUpdates = tradePosts
+    .filter((tp) => !tp.hidden)
+    .map((tp) => ({ ...tp, hidden: true, updatedAt: timestamp }));
+
+  await Promise.all(
+    [
+      buildingUpdates.length > 0 && db.buildings.bulkPut(buildingUpdates),
+      technoUpdates.length > 0 && db.technos.bulkPut(technoUpdates),
+      areaUpdates.length > 0 && db.ottomanAreas.bulkPut(areaUpdates),
+      tradePostUpdates.length > 0 &&
+        db.ottomanTradePosts.bulkPut(tradePostUpdates),
+    ].filter(Boolean),
+  );
+}
+
+/**
+ * Show all entities (buildings, technos, areas, trade posts)
+ * Sets all items to visible
+ */
+export async function showAllEntities(): Promise<void> {
+  const db = getWikiDB();
+  const timestamp = now();
+
+  const [buildings, technos, areas, tradePosts] = await Promise.all([
+    db.buildings.toArray(),
+    db.technos.toArray(),
+    db.ottomanAreas.toArray(),
+    db.ottomanTradePosts.toArray(),
+  ]);
+
+  const buildingUpdates = buildings.map((b) => ({
+    ...b,
+    hidden: false,
+    updatedAt: timestamp,
+  }));
+
+  const technoUpdates = technos.map((t) => ({
+    ...t,
+    hidden: false,
+    updatedAt: timestamp,
+  }));
+
+  const areaUpdates = areas.map((a) => ({
+    ...a,
+    hidden: false,
+    updatedAt: timestamp,
+  }));
+
+  const tradePostUpdates = tradePosts.map((tp) => ({
+    ...tp,
+    hidden: false,
+    updatedAt: timestamp,
+  }));
+
+  await Promise.all([
+    db.buildings.bulkPut(buildingUpdates),
+    db.technos.bulkPut(technoUpdates),
+    db.ottomanAreas.bulkPut(areaUpdates),
+    db.ottomanTradePosts.bulkPut(tradePostUpdates),
+  ]);
+}

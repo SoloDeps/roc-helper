@@ -249,7 +249,10 @@ export function useToggleTechnosByEra() {
 
       if (technos.length === 0) return;
 
-      const newHiddenState = !technos[0].hidden;
+      // ✅ Check if ALL technos are hidden
+      const allHidden = technos.every((t) => t.hidden);
+      // If all are hidden, show them. Otherwise, hide them all.
+      const newHiddenState = !allHidden;
       const timestamp = Date.now();
 
       await db.technos.bulkPut(
@@ -502,6 +505,10 @@ export function useRemoveOttomanTradePost() {
 // HELPER FUNCTIONS
 // ============================================================================
 
+/**
+ * Calcule les coûts d'un trade post en fonction des niveaux NON cochés
+ * LOGIQUE INVERSÉE: afficher tous les coûts sauf ceux qui sont cochés (hidden)
+ */
 function calculateTradePostCosts(
   sourceData: NonNullable<OttomanTradePostEntity["sourceData"]>,
   levels: OttomanTradePostEntity["levels"],
@@ -517,8 +524,10 @@ function calculateTradePostCosts(
     lvl5: 5,
   };
 
-  Object.entries(levels).forEach(([levelKey, isEnabled]) => {
-    if (!isEnabled) return;
+  // ✅ LOGIQUE INVERSÉE: On traite les niveaux qui ne sont PAS cochés
+  Object.entries(levels).forEach(([levelKey, isChecked]) => {
+    // Si le niveau est coché, on le SKIP (on ne l'affiche pas)
+    if (isChecked) return;
 
     const levelNum =
       levelMapping[levelKey as keyof OttomanTradePostEntity["levels"]];

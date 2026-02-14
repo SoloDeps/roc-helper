@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useEffect, useRef, useState } from "react";
 import { BuildingCard } from "@/components/cards/building-card";
 import { TechnoCard } from "@/components/cards/techno-card";
 import { AreaCard } from "@/components/cards/area-card";
@@ -8,7 +8,9 @@ import { TradePostCard } from "@/components/cards/trade-post-card";
 import { EmptyOutline } from "@/components/cards/empty-card";
 import { Accordion } from "@/components/ui/accordion";
 import { ReusableAccordion } from "@/components/items/reusable-accordion";
+import { AccordionActionsDrawer } from "@/components/modals/accordion-actions-drawer";
 import { useFiltersStore } from "@/lib/stores/filters-store";
+import { useUIStore } from "@/lib/stores/ui-store";
 import {
   useBuildings,
   useTechnos,
@@ -18,6 +20,7 @@ import {
   useUpdateBuildingQuantity,
   useToggleBuildingHidden,
   useRemoveTechnosByEra,
+  useToggleTechnosByEra,
   useRemoveOttomanArea,
   useToggleOttomanAreaHidden,
   useRemoveOttomanTradePost,
@@ -26,22 +29,31 @@ import {
 } from "@/hooks/use-database";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
 import {
-  useLastAddedElementId,
-  useAddElementStore,
-} from "@/lib/stores/add-element-store";
-import {
   toggleHideAllBuildings,
-  toggleHideAllTechnosByEra,
   toggleHideAllOttomanAreas,
   toggleHideAllOttomanTradePosts,
 } from "@/lib/db/hide-show-utils";
+import {
+  deleteAllBuildings,
+  deleteAllTechnologies,
+  deleteAllOttomanAreas,
+  deleteAllOttomanTradePosts,
+} from "@/lib/db/delete-utils";
+import { ERA_ORDER } from "@/data/config";
+import { EraCode } from "@/types/shared";
+import type { TechnoEntity } from "@/lib/db/schema";
 
 export function ItemList() {
   const userSelections = useBuildingSelections();
-  const [openAccordions, setOpenAccordions] = useState<string[]>([]);
-  const lastAddedElementId = useLastAddedElementId();
+
+  // Use UI Store for accordion state
+  const { accordionsState, setAccordionsState, addToAccordionsState } =
+    useUIStore();
 
   const { tableType, location, hideHidden, hideTechnos } = useFiltersStore();
+
+  // État pour gérer les drawers mobiles
+  const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
 
   const buildingsData = useBuildings();
   const technosData = useTechnos();
@@ -53,10 +65,14 @@ export function ItemList() {
   const areas = useMemo(() => areasData ?? [], [areasData]);
   const tradePosts = useMemo(() => tradePostsData ?? [], [tradePostsData]);
 
+  // ✅ Track previous counts to detect new items
+  const previousCountsRef = useRef<Map<string, number>>(new Map());
+
   const removeBuilding = useRemoveBuilding();
   const updateQuantity = useUpdateBuildingQuantity();
   const toggleHidden = useToggleBuildingHidden();
   const removeTechnosByEra = useRemoveTechnosByEra();
+  const toggleTechnosByEra = useToggleTechnosByEra();
   const removeArea = useRemoveOttomanArea();
   const toggleAreaHidden = useToggleOttomanAreaHidden();
   const removeTradePost = useRemoveOttomanTradePost();
@@ -81,22 +97,30 @@ export function ItemList() {
 
   // FILTER OTTOMAN
   const filteredAreas = useMemo(() => {
-    if (hideHidden) return areas.filter((a) => !a.hidden);
-    return areas;
-  }, [areas, hideHidden]);
+    let filtered = [...areas];
+    if (location && location !== "ottoman") {
+      filtered = [];
+    }
+    if (hideHidden) filtered = filtered.filter((a) => !a.hidden);
+    return filtered;
+  }, [areas, location, hideHidden]);
 
   const filteredTradePosts = useMemo(() => {
-    if (hideHidden) return tradePosts.filter((tp) => !tp.hidden);
-    return tradePosts;
-  }, [tradePosts, hideHidden]);
+    let filtered = [...tradePosts];
+    if (location && location !== "ottoman") {
+      filtered = [];
+    }
+    if (hideHidden) filtered = filtered.filter((tp) => !tp.hidden);
+    return filtered;
+  }, [tradePosts, location, hideHidden]);
 
-  // GROUP BUILDINGS BY ELEMENT
+  // GROUP BUILDINGS BY CATEGORY + ELEMENT
   const buildingsByElement = useMemo(() => {
     const groups = new Map<string, typeof filteredBuildings>();
     filteredBuildings.forEach((building) => {
-      const elementId = building.elementId;
-      if (!groups.has(elementId)) groups.set(elementId, []);
-      groups.get(elementId)!.push(building);
+      const groupKey = `${building.category}_${building.elementId}`;
+      if (!groups.has(groupKey)) groups.set(groupKey, []);
+      groups.get(groupKey)!.push(building);
     });
     groups.forEach((buildings) => {
       buildings.sort((a, b) => a.level - b.level);
@@ -104,64 +128,106 @@ export function ItemList() {
     return groups;
   }, [filteredBuildings]);
 
-  // AGGREGATE TECHNOS BY ERA
+  // GROUP TECHNOS BY ERA
   const technosByEra = useMemo(() => {
-    const groups = new Map<
-      string,
-      {
-        totalResearch: number;
-        totalCoins: number;
-        totalFood: number;
-        goods: Array<{ type: string; amount: number }>;
-        technoCount: number;
-        hidden: boolean;
-      }
-    >();
-
-    filteredTechnos.forEach((techno) => {
+    const groups = new Map<string, TechnoEntity[]>();
+    technos.forEach((techno) => {
       if (!groups.has(techno.era)) {
-        groups.set(techno.era, {
-          totalResearch: 0,
-          totalCoins: 0,
-          totalFood: 0,
-          goods: [],
-          technoCount: 0,
-          hidden: techno.hidden,
-        });
+        groups.set(techno.era, []);
       }
+      groups.get(techno.era)!.push(techno);
+    });
+    return groups;
+  }, [technos]);
 
-      const group = groups.get(techno.era)!;
-      group.technoCount++;
+  // Get all accordion IDs
+  const allAccordionIds = useMemo(() => {
+    const ids: string[] = [];
 
-      Object.entries(techno.costs.resources).forEach(([key, value]) => {
-        if (key === "research_points") group.totalResearch += value;
-        else if (key === "coins") group.totalCoins += value;
-        else if (key === "food") group.totalFood += value;
-      });
+    if (technosByEra.size > 0 && !hideTechnos) {
+      ids.push("all-technologies");
+    }
 
-      techno.costs.goods.forEach((good) => {
-        const existing = group.goods.find((g) => g.type === good.type);
-        if (existing) existing.amount += good.amount;
-        else group.goods.push({ type: good.type, amount: good.amount });
-      });
+    buildingsByElement.forEach((_, groupKey) => {
+      ids.push(`element-${groupKey}`);
     });
 
-    return groups;
-  }, [filteredTechnos]);
-
-  // AUTO-OPEN ACCORDION WHEN NEW ELEMENT IS ADDED
-  React.useEffect(() => {
-    if (lastAddedElementId) {
-      const accordionId = `element-${lastAddedElementId}`;
-      const timeoutId = setTimeout(() => {
-        setOpenAccordions((prev) =>
-          prev.includes(accordionId) ? prev : [...prev, accordionId],
-        );
-        useAddElementStore.setState({ lastAddedElementId: null });
-      }, 100);
-      return () => clearTimeout(timeoutId);
+    if (filteredAreas.length > 0) {
+      ids.push("ottoman-areas");
     }
-  }, [lastAddedElementId]);
+
+    if (filteredTradePosts.length > 0) {
+      ids.push("ottoman-tradeposts");
+    }
+
+    return ids;
+  }, [
+    technosByEra,
+    hideTechnos,
+    buildingsByElement,
+    filteredAreas,
+    filteredTradePosts,
+  ]);
+
+  // ✅ Handle expand all trigger
+  useEffect(() => {
+    if (accordionsState.includes("__expand_all__")) {
+      setAccordionsState(allAccordionIds);
+    }
+  }, [accordionsState, allAccordionIds, setAccordionsState]);
+
+  // ✅ AUTO-EXPAND: Detect new items and expand their accordions
+  useEffect(() => {
+    const currentCounts = new Map<string, number>();
+
+    // Count technologies
+    if (technosByEra.size > 0 && !hideTechnos) {
+      currentCounts.set("all-technologies", technos.length);
+    }
+
+    // Count buildings by element
+    buildingsByElement.forEach((buildingsInElement, groupKey) => {
+      const accordionId = `element-${groupKey}`;
+      currentCounts.set(accordionId, buildingsInElement.length);
+    });
+
+    // Count ottoman areas
+    if (filteredAreas.length > 0) {
+      currentCounts.set("ottoman-areas", areas.length);
+    }
+
+    // Count ottoman trade posts
+    if (filteredTradePosts.length > 0) {
+      currentCounts.set("ottoman-tradeposts", tradePosts.length);
+    }
+
+    // Detect which accordions have new items
+    const accordionsToExpand: string[] = [];
+    currentCounts.forEach((count, id) => {
+      const prevCount = previousCountsRef.current.get(id) || 0;
+      if (count > prevCount) {
+        accordionsToExpand.push(id);
+      }
+    });
+
+    // ✅ Expand accordions with new items using the helper
+    if (accordionsToExpand.length > 0) {
+      addToAccordionsState(accordionsToExpand);
+    }
+
+    // Update ref for next comparison
+    previousCountsRef.current = currentCounts;
+  }, [
+    technos.length,
+    technosByEra,
+    hideTechnos,
+    buildingsByElement,
+    filteredAreas.length,
+    areas.length,
+    filteredTradePosts.length,
+    tradePosts.length,
+    addToAccordionsState,
+  ]);
 
   // CHECK IF EMPTY
   const hasAnyData =
@@ -172,144 +238,324 @@ export function ItemList() {
 
   if (!hasAnyData) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex items-center p-3 justify-center size-full bg-background-200">
         <EmptyOutline perso="male" type="building" />
       </div>
     );
   }
 
-  // ✅ RENDER - PATTERN WXT : Tout inline, pas de ReusableAccordion
+  // Créer un objet avec toutes les données pour les drawers
+  const drawerData: Record<
+    string,
+    {
+      title: string;
+      allHidden: boolean;
+      onToggleAllHidden: () => void;
+      onDeleteAll?: () => Promise<void>;
+      deleteConfirmMessage?: React.ReactNode;
+    }
+  > = {};
+
+  // Technologies drawer data
+  if (technosByEra.size > 0 && !hideTechnos) {
+    drawerData["all-technologies"] = {
+      title: "Technologies",
+      allHidden: technos.length > 0 && technos.every((t) => t.hidden),
+      onToggleAllHidden: () => {
+        Array.from(technosByEra.keys()).forEach((era) => {
+          toggleTechnosByEra.mutate(era);
+        });
+      },
+      onDeleteAll: async () => {
+        await deleteAllTechnologies();
+      },
+      deleteConfirmMessage: (
+        <>
+          This action cannot be <b>undone</b>.
+          <br />
+          This will permanently delete <b>all technologies</b> from all eras.
+        </>
+      ),
+    };
+  }
+
+  // Buildings drawer data
+  Array.from(buildingsByElement.entries()).forEach(
+    ([groupKey, buildingsInElement]) => {
+      const firstBuilding = buildingsInElement[0];
+      const accordionId = `element-${groupKey}`;
+      const buildingIds = buildingsInElement.map((b) => b.id);
+      const displayName = firstBuilding.name;
+
+      drawerData[accordionId] = {
+        title: displayName,
+        allHidden: buildingsInElement.every((b) => b.hidden),
+        onToggleAllHidden: () => toggleHideAllBuildings(buildingIds),
+        onDeleteAll: async () => {
+          await deleteAllBuildings(buildingIds);
+        },
+        deleteConfirmMessage: (
+          <>
+            This action cannot be <b>undone</b>.
+            <br />
+            This will permanently delete <b>all {displayName}</b> buildings.
+          </>
+        ),
+      };
+    },
+  );
+
+  // Ottoman Areas drawer data
+  if (filteredAreas.length > 0) {
+    drawerData["ottoman-areas"] = {
+      title: "Areas",
+      allHidden: areas.every((a) => a.hidden),
+      onToggleAllHidden: toggleHideAllOttomanAreas,
+      onDeleteAll: async () => {
+        await deleteAllOttomanAreas();
+      },
+      deleteConfirmMessage: (
+        <>
+          This action cannot be <b>undone</b>.
+          <br />
+          This will permanently delete <b>all Ottoman areas</b>.
+        </>
+      ),
+    };
+  }
+
+  // Ottoman Trade Posts drawer data
+  if (filteredTradePosts.length > 0) {
+    drawerData["ottoman-tradeposts"] = {
+      title: "Trade Posts",
+      allHidden: tradePosts.every((tp) => tp.hidden),
+      onToggleAllHidden: toggleHideAllOttomanTradePosts,
+      onDeleteAll: async () => {
+        await deleteAllOttomanTradePosts();
+      },
+      deleteConfirmMessage: (
+        <>
+          This action cannot be <b>undone</b>.
+          <br />
+          This will permanently delete <b>all Ottoman trade posts</b>.
+        </>
+      ),
+    };
+  }
+
   return (
-    <div className="space-y-4 py-3 px-2 md:p-3">
-      <Accordion
-        type="multiple"
-        className="space-y-2"
-        value={openAccordions}
-        onValueChange={setOpenAccordions}
-      >
-        {/* TECHNOLOGIES ACCORDION */}
-        {technosByEra.size > 0 &&
-          Array.from(technosByEra.entries()).map(([era, data]) => {
-            const accordionId = `techno-${era}`;
-            const eraTechnos = technos.filter((t) => t.era === era);
-            const hiddenCount = eraTechnos.filter((t) => t.hidden).length;
-            const allHidden = eraTechnos.every((t) => t.hidden);
+    <>
+      <div className="space-y-4 py-3 px-2 pb-28 md:p-3">
+        <Accordion
+          type="multiple"
+          className="space-y-2"
+          value={accordionsState}
+          onValueChange={setAccordionsState}
+        >
+          {/* TECHNOLOGIES ACCORDION */}
+          {technosByEra.size > 0 && !hideTechnos && (
+            <ReusableAccordion
+              id="all-technologies"
+              title="Technologies"
+              selectedCount={technos.filter((t) => !t.hidden).length}
+              hiddenCount={technos.filter((t) => t.hidden).length}
+              allHidden={technos.length > 0 && technos.every((t) => t.hidden)}
+              onToggleAllHidden={() => {
+                Array.from(technosByEra.keys()).forEach((era) => {
+                  toggleTechnosByEra.mutate(era);
+                });
+              }}
+              onDeleteAll={async () => {
+                await deleteAllTechnologies();
+              }}
+              deleteConfirmMessage={
+                <>
+                  This action cannot be <b>undone</b>.
+                  <br />
+                  This will permanently delete <b>all technologies</b> from all
+                  eras.
+                </>
+              }
+              onOpenMobileActions={() => setActiveDrawer("all-technologies")}
+            >
+              <div className="space-y-3">
+                {Array.from(technosByEra.entries())
+                  .sort(([eraA], [eraB]) => {
+                    return (
+                      ERA_ORDER.indexOf(eraA as EraCode) -
+                      ERA_ORDER.indexOf(eraB as EraCode)
+                    );
+                  })
+                  .map(([era, eraTechnos]) => {
+                    return (
+                      <TechnoCard
+                        key={era}
+                        era={era}
+                        technos={eraTechnos}
+                        userSelections={userSelections}
+                        onRemoveAll={() => removeTechnosByEra.mutate(era)}
+                        onToggleHidden={() => toggleTechnosByEra.mutate(era)}
+                      />
+                    );
+                  })}
+              </div>
+            </ReusableAccordion>
+          )}
 
-            return (
-              <ReusableAccordion
-                key={accordionId}
-                id={accordionId}
-                title={era}
-                selectedCount={data.technoCount}
-                hiddenCount={hiddenCount}
-                allHidden={allHidden}
-                onToggleAllHidden={() => toggleHideAllTechnosByEra(era)}
-              >
-                <TechnoCard
-                  aggregatedTechnos={data}
+          {/* BUILDINGS ACCORDION */}
+          {Array.from(buildingsByElement.entries())
+            .sort(([keyA, buildingsA], [keyB, buildingsB]) => {
+              const categoryCompare = buildingsA[0].category.localeCompare(
+                buildingsB[0].category,
+              );
+              if (categoryCompare !== 0) return categoryCompare;
+              return buildingsA[0].name.localeCompare(buildingsB[0].name);
+            })
+            .map(([groupKey, buildingsInElement]) => {
+              const firstBuilding = buildingsInElement[0];
+              const accordionId = `element-${groupKey}`;
+              const selectedCount = buildingsInElement.length;
+              const hiddenCount = buildingsInElement.filter(
+                (b) => b.hidden,
+              ).length;
+              const allHidden = buildingsInElement.every((b) => b.hidden);
+              const displayName = firstBuilding.name;
+              const subtitle = firstBuilding.category;
+              const buildingIds = buildingsInElement.map((b) => b.id);
+
+              return (
+                <ReusableAccordion
+                  key={accordionId}
+                  id={accordionId}
+                  title={displayName}
+                  subtitle={subtitle}
+                  selectedCount={selectedCount}
+                  hiddenCount={hiddenCount}
+                  allHidden={allHidden}
+                  onToggleAllHidden={() => toggleHideAllBuildings(buildingIds)}
+                  onDeleteAll={async () => {
+                    await deleteAllBuildings(buildingIds);
+                  }}
+                  deleteConfirmMessage={
+                    <>
+                      This action cannot be <b>undone</b>.
+                      <br />
+                      This will permanently delete <b>all {displayName}</b>{" "}
+                      buildings.
+                    </>
+                  }
+                  inlineSubtitle
+                  onOpenMobileActions={() => setActiveDrawer(accordionId)}
+                >
+                  {buildingsInElement.map((building) => (
+                    <BuildingCard
+                      key={building.id}
+                      building={building}
+                      userSelections={userSelections}
+                      onRemove={(id) => removeBuilding.mutate(id)}
+                      onUpdateQuantity={(id, qty) =>
+                        updateQuantity.mutate({ id, quantity: qty })
+                      }
+                      onToggleHidden={(id) => toggleHidden.mutate(id)}
+                    />
+                  ))}
+                </ReusableAccordion>
+              );
+            })}
+
+          {/* OTTOMAN AREAS ACCORDION */}
+          {filteredAreas.length > 0 && (
+            <ReusableAccordion
+              id="ottoman-areas"
+              title="Areas"
+              subtitle="Ottoman Empire"
+              selectedCount={filteredAreas.length}
+              hiddenCount={areas.filter((a) => a.hidden).length}
+              allHidden={areas.every((a) => a.hidden)}
+              onToggleAllHidden={toggleHideAllOttomanAreas}
+              onDeleteAll={async () => {
+                await deleteAllOttomanAreas();
+              }}
+              deleteConfirmMessage={
+                <>
+                  This action cannot be <b>undone</b>.
+                  <br />
+                  This will permanently delete <b>all Ottoman areas</b>.
+                </>
+              }
+              inlineSubtitle
+              onOpenMobileActions={() => setActiveDrawer("ottoman-areas")}
+            >
+              {filteredAreas.map((area) => (
+                <AreaCard
+                  key={area.id}
+                  area={area}
                   userSelections={userSelections}
-                  onRemoveAll={() => removeTechnosByEra.mutate(era)}
-                  onToggleHidden={() => toggleHideAllTechnosByEra(era)}
-                  era={era}
+                  onRemove={(id) => removeArea.mutate(id)}
+                  onToggleHidden={(id) => toggleAreaHidden.mutate(id)}
                 />
-              </ReusableAccordion>
-            );
-          })}
+              ))}
+            </ReusableAccordion>
+          )}
 
-        {/* BUILDINGS ACCORDION - GROUPED BY ELEMENT */}
-        {Array.from(buildingsByElement.entries()).map(
-          ([elementId, buildingsInElement]) => {
-            const firstBuilding = buildingsInElement[0];
-            const accordionId = `element-${elementId}`;
-            const selectedCount = buildingsInElement.length;
-            const hiddenCount = buildingsInElement.filter(
-              (b) => b.hidden,
-            ).length;
-            const allHidden = buildingsInElement.every((b) => b.hidden);
-            const displayName = firstBuilding.name;
-            const subtitle = firstBuilding.category;
-            const buildingIds = buildingsInElement.map((b) => b.id);
+          {/* OTTOMAN TRADE POSTS ACCORDION */}
+          {filteredTradePosts.length > 0 && (
+            <ReusableAccordion
+              id="ottoman-tradeposts"
+              title="Trade Posts"
+              subtitle="Ottoman Empire"
+              selectedCount={filteredTradePosts.length}
+              hiddenCount={tradePosts.filter((tp) => tp.hidden).length}
+              allHidden={tradePosts.every((tp) => tp.hidden)}
+              onToggleAllHidden={toggleHideAllOttomanTradePosts}
+              onDeleteAll={async () => {
+                await deleteAllOttomanTradePosts();
+              }}
+              deleteConfirmMessage={
+                <>
+                  This action cannot be <b>undone</b>.
+                  <br />
+                  This will permanently delete <b>all Ottoman trade posts</b>.
+                </>
+              }
+              helpText="Check the level checkboxes on cards to mark as completed or hidden"
+              inlineSubtitle
+              onOpenMobileActions={() => setActiveDrawer("ottoman-tradeposts")}
+            >
+              {filteredTradePosts.map((tp) => (
+                <TradePostCard
+                  key={tp.id}
+                  tradePost={tp}
+                  userSelections={userSelections}
+                  onRemove={(id) => removeTradePost.mutate(id)}
+                  onToggleHidden={(id) => toggleTradePostHidden.mutate(id)}
+                  onToggleLevel={(id, level) =>
+                    toggleTradePostLevel.mutate({ id, level })
+                  }
+                />
+              ))}
+            </ReusableAccordion>
+          )}
+        </Accordion>
+      </div>
 
-            return (
-              <ReusableAccordion
-                key={accordionId}
-                id={accordionId}
-                title={displayName}
-                subtitle={subtitle}
-                selectedCount={selectedCount}
-                hiddenCount={hiddenCount}
-                allHidden={allHidden}
-                onToggleAllHidden={() => toggleHideAllBuildings(buildingIds)}
-                inlineSubtitle
-              >
-                {buildingsInElement.map((building) => (
-                  <BuildingCard
-                    key={building.id}
-                    building={building}
-                    userSelections={userSelections}
-                    onRemove={(id) => removeBuilding.mutate(id)}
-                    onUpdateQuantity={(id, qty) =>
-                      updateQuantity.mutate({ id, quantity: qty })
-                    }
-                    onToggleHidden={(id) => toggleHidden.mutate(id)}
-                  />
-                ))}
-              </ReusableAccordion>
-            );
-          },
-        )}
-
-        {/* OTTOMAN AREAS ACCORDION */}
-        {filteredAreas.length > 0 && (
-          <ReusableAccordion
-            id="ottoman-areas"
-            title="Areas"
-            subtitle="Ottoman Empire"
-            selectedCount={filteredAreas.length}
-            hiddenCount={areas.filter((a) => a.hidden).length}
-            allHidden={areas.every((a) => a.hidden)}
-            onToggleAllHidden={toggleHideAllOttomanAreas}
-            inlineSubtitle
-          >
-            {filteredAreas.map((area) => (
-              <AreaCard
-                key={area.id}
-                area={area}
-                userSelections={userSelections}
-                onRemove={(id) => removeArea.mutate(id)}
-                onToggleHidden={(id) => toggleAreaHidden.mutate(id)}
-              />
-            ))}
-          </ReusableAccordion>
-        )}
-
-        {/* OTTOMAN TRADE POSTS ACCORDION */}
-        {filteredTradePosts.length > 0 && (
-          <ReusableAccordion
-            id="ottoman-tradeposts"
-            title="Trade Posts"
-            subtitle="Ottoman Empire"
-            selectedCount={filteredTradePosts.length}
-            hiddenCount={tradePosts.filter((tp) => tp.hidden).length}
-            allHidden={tradePosts.every((tp) => tp.hidden)}
-            onToggleAllHidden={toggleHideAllOttomanTradePosts}
-            inlineSubtitle
-          >
-            {filteredTradePosts.map((tp) => (
-              <TradePostCard
-                key={tp.id}
-                tradePost={tp}
-                userSelections={userSelections}
-                onRemove={(id) => removeTradePost.mutate(id)}
-                onToggleHidden={(id) => toggleTradePostHidden.mutate(id)}
-                onToggleLevel={(id, level) =>
-                  toggleTradePostLevel.mutate({ id, level })
-                }
-              />
-            ))}
-          </ReusableAccordion>
-        )}
-      </Accordion>
-    </div>
+      {/* DRAWERS - Complètement séparés des accordions */}
+      {Object.entries(drawerData).map(([id, data]) => (
+        <AccordionActionsDrawer
+          key={`drawer-${id}`}
+          title={data.title}
+          allHidden={data.allHidden}
+          onToggleAllHidden={data.onToggleAllHidden}
+          onDeleteAll={data.onDeleteAll}
+          deleteConfirmMessage={data.deleteConfirmMessage}
+          open={activeDrawer === id}
+          onOpenChange={(open) => {
+            if (!open) {
+              setActiveDrawer(null);
+            }
+          }}
+        />
+      ))}
+    </>
   );
 }

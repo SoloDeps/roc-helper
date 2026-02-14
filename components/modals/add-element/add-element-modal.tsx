@@ -12,6 +12,7 @@ import {
   useElementConfig,
   useModalState,
   useIsTechnologyPath,
+  useIsOttomanPath,
   useSubmitElement,
 } from "@/lib/stores/add-element-store";
 import {
@@ -21,6 +22,8 @@ import {
 } from "@/lib/catalog-helper";
 import { ElementGrid } from "./modal-components";
 import { ConfigurationPanel } from "./configuration-panel";
+import { TechnologySelection } from "../technology-selection-component";
+import { OttomanAreasSelection, OttomanTradePostsSelection } from "../ottoman-selection-components";
 
 /**
  * Modal Header - Centré avec Back à gauche et Close à droite
@@ -177,6 +180,15 @@ const ElementStep = memo(() => {
     return parentId ? getChildren(parentId) : [];
   }, [path.categoryId, path.subcategoryId, isTech]);
 
+  // ✅ For technology path, show technologies with direct add button
+  if (isTech && path.categoryId === "technology") {
+    return (
+      <div className="space-y-4 pb-20 md:pb-0">
+        <TechnologySelection />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4 pb-20 md:pb-0">
       <ElementGrid items={elements} onSelect={selectElement} columns={1} />
@@ -221,6 +233,37 @@ const ConfigurationStep = memo(() => {
 ConfigurationStep.displayName = "ConfigurationStep";
 
 /**
+ * Ottoman Selection Step - Multi-select for areas/tradeposts
+ */
+const OttomanSelectionStep = memo(() => {
+  const path = useNavigationPath();
+
+  // Determine if we're selecting areas or trade posts
+  const isAreas = path.subcategoryId === "ottoman_areas";
+  const isTradePosts = path.subcategoryId === "ottoman_tradeposts";
+
+  if (isAreas) {
+    return (
+      <div className="h-full pb-20 md:pb-0">
+        <OttomanAreasSelection />
+      </div>
+    );
+  }
+
+  if (isTradePosts) {
+    return (
+      <div className="h-full pb-20 md:pb-0">
+        <OttomanTradePostsSelection />
+      </div>
+    );
+  }
+
+  return null;
+});
+
+OttomanSelectionStep.displayName = "OttomanSelectionStep";
+
+/**
  * Modal content router
  */
 const ModalContent = memo(() => {
@@ -234,6 +277,7 @@ const ModalContent = memo(() => {
         {currentStep === "category" && <CategoryStep />}
         {currentStep === "subcategory" && <SubcategoryStep />}
         {currentStep === "element" && <ElementStep />}
+        {currentStep === "ottoman_selection" && <OttomanSelectionStep />}
         {currentStep === "configuration" && <ConfigurationStep />}
       </div>
     </div>

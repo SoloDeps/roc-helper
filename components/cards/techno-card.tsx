@@ -1,113 +1,142 @@
 "use client";
 
-import { useState } from "react";
-import { X, ExternalLink, EyeOff, Eye } from "lucide-react";
+import { useState, useMemo } from "react";
+import { X, EyeOff, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ResourceBadge } from "@/components/items/resource-badge";
 import { cn } from "@/lib/utils";
 import {
   formatNumber,
-  slugify,
   getGoodNameFromPriorityEra,
   getItemIconLocal,
 } from "@/lib/utils";
-import { eras } from "@/lib/constants";
-
-interface AggregatedTechnoData {
-  totalResearch: number;
-  totalCoins: number;
-  totalFood: number;
-  goods: Array<{ type: string; amount: number }>;
-  technoCount: number;
-  hidden: boolean;
-}
+import { useMediaQuery } from "@/hooks/use-media-query";
+import type { TechnoEntity } from "@/lib/db/schema";
+import { getEraName } from "@/lib/element-data-loader";
 
 interface TechnoCardProps {
-  aggregatedTechnos: AggregatedTechnoData;
+  era: string;
+  technos: TechnoEntity[];
   userSelections: string[][];
   onRemoveAll: () => void;
   onToggleHidden: () => void;
-  era?: string;
 }
 
 export function TechnoCard({
-  aggregatedTechnos,
+  era,
+  technos,
   userSelections,
   onRemoveAll,
   onToggleHidden,
-  era,
 }: TechnoCardProps) {
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const [isHovered, setIsHovered] = useState(false);
-  const { hidden } = aggregatedTechnos;
 
-  const wikiUrl = (() => {
-    if (!era) return "";
-    const eraData = eras.find((e) => e.id === era);
-    const eraName = eraData
-      ? eraData.name.replace(/ /g, "_")
-      : era.replace(/_/g, " ");
-    return `https://riseofcultures.wiki.gg/wiki/Home_Cultures/${eraName}`;
-  })();
+  // ✅ Aggregate costs - ALWAYS aggregate ALL technos in the era (visible AND hidden)
+  // This ensures costs are always displayed, even when the card is hidden
+  const aggregatedData = useMemo(() => {
+    if (technos.length === 0) {
+      return {
+        totalResearch: 0,
+        totalCoins: 0,
+        totalFood: 0,
+        goods: [] as Array<{ type: string; amount: number }>,
+        technoCount: 0,
+      };
+    }
 
-  const mainResources = (() => {
+    // Aggregate resources from ALL technos (don't filter by hidden state)
+    const resources: Record<string, number> = {};
+    const goodsMap = new Map<string, number>();
+
+    technos.forEach((techno) => {
+      // Aggregate main resources
+      Object.entries(techno.costs.resources).forEach(([key, value]) => {
+        resources[key] = (resources[key] || 0) + value;
+      });
+
+      // Aggregate goods
+      techno.costs.goods.forEach((good) => {
+        const existing = goodsMap.get(good.type);
+        goodsMap.set(good.type, (existing || 0) + good.amount);
+      });
+    });
+
+    return {
+      totalResearch: resources.research_points || 0,
+      totalCoins: resources.coins || 0,
+      totalFood: resources.food || 0,
+      goods: Array.from(goodsMap.entries()).map(([type, amount]) => ({
+        type,
+        amount,
+      })),
+      technoCount: technos.length,
+    };
+  }, [technos]);
+
+  const allHidden = technos.length > 0 && technos.every((t) => t.hidden);
+
+  // Get era display name
+  const eraDisplayName = getEraName(era);
+
+  const mainResources = useMemo(() => {
     const resources = [];
 
-    if (aggregatedTechnos.totalResearch > 0) {
+    if (aggregatedData.totalResearch > 0) {
       resources.push({
         type: "research_points",
-        value: aggregatedTechnos.totalResearch,
+        value: aggregatedData.totalResearch,
         icon: getItemIconLocal("research_points"),
       });
     }
 
-    if (aggregatedTechnos.totalCoins > 0) {
+    if (aggregatedData.totalCoins > 0) {
       resources.push({
         type: "coins",
-        value: aggregatedTechnos.totalCoins,
+        value: aggregatedData.totalCoins,
         icon: getItemIconLocal("coins"),
       });
     }
 
-    if (aggregatedTechnos.totalFood > 0) {
+    if (aggregatedData.totalFood > 0) {
       resources.push({
         type: "food",
-        value: aggregatedTechnos.totalFood,
+        value: aggregatedData.totalFood,
         icon: getItemIconLocal("food"),
       });
     }
 
     return resources;
-  })();
+  }, [aggregatedData]);
 
-  const goodsBadges = (() => {
-    if (!aggregatedTechnos.goods || aggregatedTechnos.goods.length === 0)
-      return null;
+  const goodsBadges = useMemo(() => {
+    if (!aggregatedData.goods || aggregatedData.goods.length === 0) return null;
 
-    return aggregatedTechnos.goods.map((g, i) => {
+    return aggregatedData.goods.map((g, i) => {
       const match = g.type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
       let goodName = g.type;
 
       if (match) {
-        const [, priority, era] = match;
+        const [, priority, eraCode] = match;
         const resolvedName = getGoodNameFromPriorityEra(
           priority,
-          era,
+          eraCode,
           userSelections,
         );
-        if (resolvedName) goodName = resolvedName;
+        goodName = resolvedName || "default";
       }
 
       return (
         <ResourceBadge
           key={`${g.type}-${i}`}
-          icon={`/goods/${slugify(goodName)}.webp`}
+          icon={getItemIconLocal(goodName)}
           value={formatNumber(g.amount)}
           alt={g.type}
         />
       );
     });
-  })();
+  }, [aggregatedData.goods, userSelections]);
 
   return (
     <div
@@ -115,9 +144,10 @@ export function TechnoCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {hidden && (
+      {/* Hidden overlay - z-0 pour rester en arrière-plan */}
+      {allHidden && (
         <div
-          className="absolute inset-0 pointer-events-none opacity-50 rounded-sm"
+          className="absolute inset-0 pointer-events-none opacity-50 rounded-sm z-0"
           style={{
             backgroundImage: `repeating-linear-gradient(
               45deg,
@@ -127,11 +157,11 @@ export function TechnoCard({
               transparent 50%
             )`,
             backgroundSize: "10px 10px",
-            backgroundAttachment: "fixed",
           }}
         />
       )}
 
+      {/* Content - relative pour être au-dessus de l'overlay */}
       <div className="flex p-3 gap-2 lg:gap-4 size-full relative">
         <div className="flex-1">
           <div className="flex justify-between items-center mb-3">
@@ -139,53 +169,59 @@ export function TechnoCard({
               <h3
                 className={cn(
                   "text-sm lg:text-[15px] font-medium truncate capitalize pl-1",
-                  hidden && "opacity-50",
+                  allHidden && "opacity-50",
                 )}
               >
-                {era ? `${era.replace(/_/g, " ")} ` : "Era"}
+                {eraDisplayName}
               </h3>
 
-              <div className={hidden ? "opacity-50" : ""}>
+              <div className={allHidden ? "opacity-50" : ""}>
                 <Badge
                   variant="outline"
                   className="bg-blue-200 dark:bg-blue-300 text-blue-950 border-alpha-100 border rounded-sm"
                 >
-                  {aggregatedTechnos.technoCount} techno
-                  {aggregatedTechnos.technoCount > 1 ? "s" : ""}
+                  {technos.length} techno{technos.length > 1 ? "s" : ""}
                 </Badge>
               </div>
 
+              {/* Hide/Show button - visible on hover (desktop) or always (mobile) */}
               <div
                 className={cn(
                   "transition-opacity duration-200",
-                  hidden || isHovered
+                  allHidden || isHovered || isMobile
                     ? "opacity-100"
                     : "opacity-0 pointer-events-none",
                 )}
               >
                 <Button
                   size="sm"
-                  variant={hidden ? "outline" : "ghost"}
-                  className="rounded-sm h-6"
+                  variant={allHidden || isMobile ? "outline" : "ghost"}
+                  className={cn(
+                    "rounded-sm h-6 w-20",
+                    isMobile &&
+                      !allHidden &&
+                      "text-muted-foreground border-transparent",
+                  )}
                   onClick={onToggleHidden}
                   title={
-                    hidden
+                    allHidden
                       ? "Include in total calculation"
                       : "Exclude from total calculation"
                   }
                 >
-                  {hidden ? (
+                  {allHidden ? (
                     <Eye className="size-4" />
                   ) : (
                     <EyeOff className="size-4" />
                   )}
-                  {hidden ? "Show" : "Hide"}
+                  <span>{allHidden ? "Show" : "Hide"}</span>
                 </Button>
               </div>
 
+              {/* Wiki link button - only on hover (desktop) */}
               <div
                 className={cn(
-                  "ml-auto transition-opacity duration-200",
+                  "ml-auto transition-opacity duration-200 hidden md:block",
                   isHovered ? "opacity-100" : "opacity-0 pointer-events-none",
                 )}
               >
@@ -193,10 +229,9 @@ export function TechnoCard({
                   size="sm"
                   variant="ghost"
                   className="rounded-sm h-6"
-                  onClick={() => window.open(wikiUrl, "_blank")}
                   title="Go to the wiki page"
                 >
-                  Link <ExternalLink className="size-4" />
+                  Customize
                 </Button>
               </div>
             </div>
@@ -213,19 +248,29 @@ export function TechnoCard({
 
           <div
             className={cn(
-              "grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5 text-sm w-full",
-              hidden && "opacity-50",
+              "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5 text-sm w-full",
+              allHidden && "opacity-60 pointer-events-none select-none",
             )}
           >
-            {mainResources.map((r) => (
+            {!mainResources.length && !goodsBadges?.length ? (
               <ResourceBadge
-                key={r.type}
-                icon={r.icon}
-                value={formatNumber(r.value)}
-                alt={r.type}
+                icon="/goods/default.webp"
+                value="0"
+                alt="No resources"
               />
-            ))}
-            {goodsBadges}
+            ) : (
+              <>
+                {mainResources.map((r) => (
+                  <ResourceBadge
+                    key={r.type}
+                    icon={r.icon}
+                    value={formatNumber(r.value)}
+                    alt={r.type}
+                  />
+                ))}
+                {goodsBadges}
+              </>
+            )}
           </div>
         </div>
       </div>

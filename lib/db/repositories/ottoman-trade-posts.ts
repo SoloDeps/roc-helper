@@ -213,13 +213,17 @@ export async function countVisibleOttomanTradePosts(): Promise<number> {
 }
 
 /**
- * Helper: Calcule les coûts d'un poste de commerce basé sur les niveaux actifs
+ * Helper: Calcule les coûts d'un poste de commerce basé sur les niveaux NON cochés
+ * LOGIQUE INVERSÉE: On affiche TOUS les coûts par défaut, et on retire ceux qui sont cochés (hidden)
  */
 function calculateTradePostCosts(
   tradePostData: NonNullable<OttomanTradePostEntity["sourceData"]>,
-  enabledLevels: OttomanTradePostEntity["levels"],
+  checkedLevels: OttomanTradePostEntity["levels"],
 ): OttomanTradePostEntity["costs"] {
-  const costs: OttomanTradePostEntity["costs"] = { goods: [], aspers: 0 };
+  const costs: OttomanTradePostEntity["costs"] = {
+    resources: {},
+    goods: [],
+  };
   const goodsMap = new Map<string, number>();
 
   const ottomanGoods = [
@@ -241,8 +245,10 @@ function calculateTradePostCosts(
     lvl5: 5,
   };
 
-  Object.entries(enabledLevels).forEach(([levelKey, isEnabled]) => {
-    if (!isEnabled) return;
+  // ✅ LOGIQUE INVERSÉE: On traite les niveaux qui ne sont PAS cochés
+  Object.entries(checkedLevels).forEach(([levelKey, isChecked]) => {
+    // Si le niveau est coché, on le SKIP (on ne l'affiche pas)
+    if (isChecked) return;
 
     const levelNum =
       levelMapping[levelKey as keyof OttomanTradePostEntity["levels"]];
@@ -266,7 +272,8 @@ function calculateTradePostCosts(
         const normalized = slugify(resource);
         goodsMap.set(normalized, (goodsMap.get(normalized) || 0) + amount);
       } else {
-        costs[resource] = ((costs[resource] as number) || 0) + amount;
+        costs.resources[resource] =
+          ((costs.resources[resource] as number) || 0) + amount;
       }
     });
   });
@@ -302,7 +309,7 @@ export async function recalculateAllTradePostsCosts(): Promise<void> {
 }
 
 /**
- * Active tous les niveaux d'un poste de commerce
+ * Coche tous les niveaux d'un poste de commerce (cache tous les coûts)
  */
 export async function enableAllLevels(id: string): Promise<void> {
   const db = getWikiDB();
@@ -310,7 +317,7 @@ export async function enableAllLevels(id: string): Promise<void> {
 
   if (!tradePost) return;
 
-  const allEnabled: OttomanTradePostEntity["levels"] = {
+  const allChecked: OttomanTradePostEntity["levels"] = {
     unlock: true,
     lvl2: true,
     lvl3: true,
@@ -320,18 +327,18 @@ export async function enableAllLevels(id: string): Promise<void> {
 
   let updatedCosts = tradePost.costs;
   if (tradePost.sourceData) {
-    updatedCosts = calculateTradePostCosts(tradePost.sourceData, allEnabled);
+    updatedCosts = calculateTradePostCosts(tradePost.sourceData, allChecked);
   }
 
   await db.ottomanTradePosts.update(id, {
-    levels: allEnabled,
+    levels: allChecked,
     costs: updatedCosts,
     updatedAt: now(),
   });
 }
 
 /**
- * Désactive tous les niveaux sauf unlock
+ * Décoche tous les niveaux sauf unlock (affiche tous les coûts sauf unlock)
  */
 export async function resetToUnlockOnly(id: string): Promise<void> {
   const db = getWikiDB();
@@ -339,7 +346,7 @@ export async function resetToUnlockOnly(id: string): Promise<void> {
 
   if (!tradePost) return;
 
-  const onlyUnlock: OttomanTradePostEntity["levels"] = {
+  const onlyUnlockChecked: OttomanTradePostEntity["levels"] = {
     unlock: true,
     lvl2: false,
     lvl3: false,
@@ -349,11 +356,14 @@ export async function resetToUnlockOnly(id: string): Promise<void> {
 
   let updatedCosts = tradePost.costs;
   if (tradePost.sourceData) {
-    updatedCosts = calculateTradePostCosts(tradePost.sourceData, onlyUnlock);
+    updatedCosts = calculateTradePostCosts(
+      tradePost.sourceData,
+      onlyUnlockChecked,
+    );
   }
 
   await db.ottomanTradePosts.update(id, {
-    levels: onlyUnlock,
+    levels: onlyUnlockChecked,
     costs: updatedCosts,
     updatedAt: now(),
   });

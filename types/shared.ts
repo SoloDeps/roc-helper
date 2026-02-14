@@ -13,9 +13,16 @@ export type PreLGEra =
   | "HM"
   | "EG";
 
+export type PreAlliedCity =
+  | "egypt"
+  | "china"
+  | "maya"
+  | "vikings"
+  | "arabia"
+  | "ottoman";
+
 export type PostLGEra = "LG"; // next eras
 export type EraCode = PreLGEra | PostLGEra;
-
 
 export interface Good {
   amount: number;
@@ -26,9 +33,11 @@ export interface Costs {
   coins?: number;
   food?: number;
   gems?: number;
-  aspers?: number;
   goods?: Good[];
   research_points?: number; // Pour technos
+  // allied
+  aspers?: number;
+  deben?: number;
 }
 
 // BUILDINGS
@@ -54,6 +63,7 @@ export interface TechnoData {
   id: string;
   name: string;
   column: number;
+  allied?: PreAlliedCity;
   // image: string; // utilisation de icon_[id].webp a la place
   costs: Costs;
   required?: string[]; // IDs des technos nécessaires

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMediaQuery } from "@/hooks/use-media-query";
 import {
   CircleCheckIcon,
   InfoIcon,
@@ -12,19 +13,26 @@ import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme();
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   return (
     <Sonner
       richColors
-      position="top-center"
+      duration={2000}
+      position={isMobile ? "top-center" : "bottom-left"}
+      visibleToasts={1}
       theme={theme as ToasterProps["theme"]}
-      className="toaster group"
+      className="toaster group items-start"
       icons={{
-        success: <CircleCheckIcon className="size-4" />,
-        info: <InfoIcon className="size-4" />,
-        warning: <TriangleAlertIcon className="size-4" />,
-        error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        success: <CircleCheckIcon className="size-[18px]" />,
+        info: <InfoIcon className="size-[18px]" />,
+        warning: <TriangleAlertIcon className="size-[18px]" />,
+        error: <OctagonXIcon className="size-[18px]" />,
+        loading: <Loader2Icon className="size-[18px] animate-spin" />,
+      }}
+      toastOptions={{
+        className: "items-start",
+        style: { alignItems: "start" },
       }}
       style={
         {
