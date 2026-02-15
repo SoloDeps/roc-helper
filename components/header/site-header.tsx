@@ -30,8 +30,8 @@ export function SiteHeader() {
         </Badge>
 
         <Button variant="outline" size="sm" className="hidden md:flex" asChild>
-          <Link href="/technologies">
-            <span>Technologies</span>
+          <Link href="/research-tree">
+            <span>Research Tree</span>
           </Link>
         </Button>
         <Button variant="outline" size="sm" className="hidden md:flex" asChild>

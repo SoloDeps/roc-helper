@@ -152,7 +152,7 @@ export function ResponsiveSelect({
         >
           <SelectTrigger
             className={cn(
-              "w-full h-10! font-medium text-sm rounded-sm",
+              "w-full font-medium text-sm",
               readOnly && "cursor-default",
             )}
             onClick={readOnly ? (e) => e.preventDefault() : undefined}
@@ -208,11 +208,10 @@ export function ResponsiveSelect({
       <Drawer open={open} onOpenChange={handleOpenChange} nested={nested}>
         <DrawerTrigger asChild disabled={readOnly}>
           <Button
-            size="lg"
             variant="outline"
             disabled={disabled}
             className={cn(
-              "w-full justify-between",
+              "w-full justify-between h-12",
               readOnly && "cursor-default",
             )}
             onClick={readOnly ? (e) => e.preventDefault() : undefined}

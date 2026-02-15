@@ -23,7 +23,10 @@ import {
 import { ElementGrid } from "./modal-components";
 import { ConfigurationPanel } from "./configuration-panel";
 import { TechnologySelection } from "../technology-selection-component";
-import { OttomanAreasSelection, OttomanTradePostsSelection } from "../ottoman-selection-components";
+import {
+  OttomanAreasSelection,
+  OttomanTradePostsSelection,
+} from "../ottoman-selection-components";
 
 /**
  * Modal Header - Centré avec Back à gauche et Close à droite
@@ -31,9 +34,12 @@ import { OttomanAreasSelection, OttomanTradePostsSelection } from "../ottoman-se
 const ModalHeader = memo(() => {
   const currentStep = useCurrentStep();
   const path = useNavigationPath();
-  const { closeModal, goBack } = useAddElementStore();
+  const { closeModal, goBack, directTechnologyMode } = useAddElementStore();
 
-  const showBack = currentStep !== "category";
+  const isTechPath = path.categoryId === "technology";
+  const showBack =
+    currentStep !== "category" &&
+    !(directTechnologyMode && isTechPath && currentStep === "element");
 
   const getHeaderTitle = useCallback(() => {
     if (currentStep === "category") {
@@ -50,6 +56,10 @@ const ModalHeader = memo(() => {
       currentItemId = path.elementId;
     }
 
+    if (directTechnologyMode && isTechPath && currentStep === "element") {
+      return "Add New Era";
+    }
+
     if (currentItemId) {
       const item = getCatalogItem(currentItemId);
       if (item && "name" in item) {
@@ -58,7 +68,7 @@ const ModalHeader = memo(() => {
     }
 
     return "Add Element";
-  }, [currentStep, path]);
+  }, [currentStep, path, directTechnologyMode, isTechPath]);
 
   const title = useMemo(() => getHeaderTitle(), [getHeaderTitle]);
 

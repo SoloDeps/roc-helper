@@ -17,6 +17,7 @@ import { getAreaData, getTradePostByName } from "@/lib/ottoman-data-loader";
 import { slugify } from "@/lib/utils";
 import { ERAS } from "@/lib/catalog";
 import { getTechnologiesByEra } from "@/data/technos-registry";
+import { useSelectEra } from "./technology-page-store";
 
 // ============================================================================
 // TECHNO SUBMISSION
@@ -28,6 +29,7 @@ import { getTechnologiesByEra } from "@/data/technos-registry";
 export function useSubmitTechno() {
   const { closeModal } = useAddElementStore();
   const addTechno = useAddTechno();
+  const selectEra = useSelectEra();
 
   const submit = async (eraId: string) => {
     if (!eraId) {
@@ -113,6 +115,9 @@ export function useSubmitTechno() {
         await Promise.all(toAdd.map((techno) => addTechno.mutateAsync(techno)));
         toast.success(`${era.name} technologies added`);
 
+        // Auto-select the newly added era
+        selectEra(eraId);
+
         closeModal();
       } catch (error) {
         console.error("❌ Failed to add technologies:", error);
@@ -122,6 +127,10 @@ export function useSubmitTechno() {
       // All technologies already exist
       toast.info(`All technologies from ${era.name} are already added`);
     }
+
+    // Auto-select even if already present
+    selectEra(eraId);
+    closeModal();
   };
 
   return {

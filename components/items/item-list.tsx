@@ -191,7 +191,8 @@ export function ItemList() {
 
     // Count technologies
     if (technosByEra.size > 0 && !hideTechnos) {
-      currentCounts.set("all-technologies", technos.length);
+      currentCounts.set("all-technologies", technosByEra.size);
+      // currentCounts.set("all-technologies", technos.length);
     }
 
     // Count buildings by element

@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { buildingsAbbr, EraAbbr, goodsUrlByEra } from "./constants";
+import { imagesUrl } from "./catalog";
 
 export const selectorGoods: Record<string, string> = {
   default: "/goods/default.webp",
@@ -175,6 +176,14 @@ export function getItemIconLocal(type: string): string {
   const normalized = slugify(type);
   if (normalized) {
     return `/goods/${normalized}.webp`;
+  }
+  return `/goods/default.webp`;
+}
+
+export function getCityCrestIconLocal(type: string): string {
+  const normalized = slugify(type);
+  if (normalized) {
+    return imagesUrl[normalized as keyof typeof imagesUrl];
   }
   return `/goods/default.webp`;
 }

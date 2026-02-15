@@ -14,8 +14,8 @@ export const siteConfig = {
       label: "Calculator",
     },
     {
-      href: "/technologies",
-      label: "Technologies",
+      href: "/research-tree",
+      label: "Research Tree",
     },
     {
       href: "/help",

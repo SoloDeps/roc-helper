@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { X, EyeOff, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +15,7 @@ import {
 import { useMediaQuery } from "@/hooks/use-media-query";
 import type { TechnoEntity } from "@/lib/db/schema";
 import { getEraName } from "@/lib/element-data-loader";
+import { useSelectEra } from "@/lib/stores/technology-page-store";
 
 interface TechnoCardProps {
   era: string;
@@ -30,11 +32,12 @@ export function TechnoCard({
   onRemoveAll,
   onToggleHidden,
 }: TechnoCardProps) {
+  const router = useRouter();
+  const selectEra = useSelectEra();
   const isMobile = useMediaQuery("(max-width: 767px)");
   const [isHovered, setIsHovered] = useState(false);
 
   // ✅ Aggregate costs - ALWAYS aggregate ALL technos in the era (visible AND hidden)
-  // This ensures costs are always displayed, even when the card is hidden
   const aggregatedData = useMemo(() => {
     if (technos.length === 0) {
       return {
@@ -46,17 +49,14 @@ export function TechnoCard({
       };
     }
 
-    // Aggregate resources from ALL technos (don't filter by hidden state)
     const resources: Record<string, number> = {};
     const goodsMap = new Map<string, number>();
 
     technos.forEach((techno) => {
-      // Aggregate main resources
       Object.entries(techno.costs.resources).forEach(([key, value]) => {
         resources[key] = (resources[key] || 0) + value;
       });
 
-      // Aggregate goods
       techno.costs.goods.forEach((good) => {
         const existing = goodsMap.get(good.type);
         goodsMap.set(good.type, (existing || 0) + good.amount);
@@ -79,6 +79,19 @@ export function TechnoCard({
 
   // Get era display name
   const eraDisplayName = getEraName(era);
+
+  // ✅ FIX 4: Get eraId from first techno (needed for navigation)
+  const eraId = technos.length > 0 ? technos[0].eraId : null;
+
+  // ✅ FIX 4: Handle customize click - Navigate to research tree with this era
+  const handleCustomize = () => {
+    if (eraId) {
+      // Set this era as selected in the research tree store
+      selectEra(eraId);
+      // Navigate to research tree page
+      router.push("/research-tree");
+    }
+  };
 
   const mainResources = useMemo(() => {
     const resources = [];
@@ -144,7 +157,7 @@ export function TechnoCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Hidden overlay - z-0 pour rester en arrière-plan */}
+      {/* Hidden overlay */}
       {allHidden && (
         <div
           className="absolute inset-0 pointer-events-none opacity-50 rounded-sm z-0"
@@ -161,7 +174,7 @@ export function TechnoCard({
         />
       )}
 
-      {/* Content - relative pour être au-dessus de l'overlay */}
+      {/* Content */}
       <div className="flex p-3 gap-2 lg:gap-4 size-full relative">
         <div className="flex-1">
           <div className="flex justify-between items-center mb-3">
@@ -184,7 +197,7 @@ export function TechnoCard({
                 </Badge>
               </div>
 
-              {/* Hide/Show button - visible on hover (desktop) or always (mobile) */}
+              {/* Hide/Show button */}
               <div
                 className={cn(
                   "transition-opacity duration-200",
@@ -218,7 +231,7 @@ export function TechnoCard({
                 </Button>
               </div>
 
-              {/* Wiki link button - only on hover (desktop) */}
+              {/* ✅ FIX 4: Customize button - Navigate to research tree */}
               <div
                 className={cn(
                   "ml-auto transition-opacity duration-200 hidden md:block",
@@ -229,7 +242,8 @@ export function TechnoCard({
                   size="sm"
                   variant="ghost"
                   className="rounded-sm h-6"
-                  title="Go to the wiki page"
+                  onClick={handleCustomize}
+                  title="View in research tree"
                 >
                   Customize
                 </Button>

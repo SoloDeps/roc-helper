@@ -67,6 +67,7 @@ export interface TechnoData {
   // image: string; // utilisation de icon_[id].webp a la place
   costs: Costs;
   required?: string[]; // IDs des technos nécessaires
+  rewards?: string[]; // Textes des récompenses
 }
 
 // OTTOMAN - AREAS

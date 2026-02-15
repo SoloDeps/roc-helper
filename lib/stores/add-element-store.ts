@@ -55,6 +55,7 @@ interface AddElementState {
   // UI State
   isOpen: boolean;
   currentStep: FlowStep;
+  directTechnologyMode: boolean;
 
   // Navigation
   path: NavigationPath;
@@ -78,6 +79,7 @@ interface AddElementState {
   openModal: () => void;
   closeModal: () => void;
   resetFlow: () => void;
+  setDirectTechnologyMode: (enabled: boolean) => void;
 
   // Actions - Navigation
   selectCategory: (categoryId: string) => void;
@@ -121,6 +123,7 @@ export const useAddElementStore = create<AddElementState>()(
         // Initial state
         isOpen: false,
         currentStep: "category",
+        directTechnologyMode: false,
         path: {},
         config: DEFAULT_CONFIG,
         ottomanSelection: {
@@ -142,6 +145,7 @@ export const useAddElementStore = create<AddElementState>()(
         resetFlow: () => {
           set({
             currentStep: "category",
+            directTechnologyMode: false,
             path: {},
             config: DEFAULT_CONFIG,
             ottomanSelection: {
@@ -150,6 +154,10 @@ export const useAddElementStore = create<AddElementState>()(
             },
             breadcrumbTrail: [],
           });
+        },
+
+        setDirectTechnologyMode: (enabled) => {
+          set({ directTechnologyMode: enabled });
         },
 
         isTechnologyPath: () => {
@@ -268,6 +276,13 @@ export const useAddElementStore = create<AddElementState>()(
                 };
 
               case "element":
+                // SI directTechnologyMode est activé, fermer le modal au lieu de revenir en arrière
+                if (isTech && state.directTechnologyMode) {
+                  return {
+                    ...state,
+                    isOpen: false, // Ferme le modal
+                  };
+                }
                 // Si on est dans technology, revenir à category
                 // Sinon revenir à subcategory
                 if (isTech) {
