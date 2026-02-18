@@ -20,7 +20,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function slugify(str: string): string {
+export function slugify(str: string | undefined | null): string {
+  // Protection: retourner "default" si str est undefined/null
+  if (!str || typeof str !== "string") {
+    return "default";
+  }
+
   return str
     .toLowerCase()
     .trim()
@@ -111,52 +116,6 @@ export function getGoodsImg(buildingName: string) {
   return selectorGoods[nameFormatted] || selectorGoods.default;
 }
 
-// export const buildingNoLvl = [
-//   // arabia
-//   "camel_farm",
-//   "coffee_brewer",
-//   "incense_maker",
-//   "carpet_factory",
-//   "oil_lamp_crafter",
-//   // maya
-//   "chronicler",
-//   "mask_sculptor",
-//   "ceremony_outfitter",
-//   "luxurious_aviary",
-//   "ritual_carver",
-//   "ritual_sites",
-//   // viking
-//   "market",
-//   "expedition_pier",
-// ];
-
-// export function getGoodImageUrlFromType(
-//   type: string,
-//   userSelections: string[][],
-// ): string {
-//   const match = type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
-
-//   if (match) {
-//     const [, priorityRaw, eraRaw] = match;
-//     const priority = priorityRaw.toLowerCase() as
-//       | "primary"
-//       | "secondary"
-//       | "tertiary";
-//     const era = eraRaw as EraAbbr;
-
-//     const building = getBuildingFromLocal(priority, era, userSelections);
-
-//     if (building) {
-//       const normalized = slugify(building);
-//       return `/goods/${normalized}.webp`;
-//     }
-
-//     return "/goods/default.webp";
-//   }
-
-//   return `/goods/${slugify(type)}.webp`;
-// }
-
 export function getGoodNameFromPriorityEra(
   priority: string,
   era: string,
@@ -174,7 +133,7 @@ export function getGoodNameFromPriorityEra(
 
 export function getItemIconLocal(type: string): string {
   const normalized = slugify(type);
-  if (normalized) {
+  if (normalized && normalized !== "default") {
     return `/goods/${normalized}.webp`;
   }
   return `/goods/default.webp`;
@@ -182,7 +141,7 @@ export function getItemIconLocal(type: string): string {
 
 export function getCityCrestIconLocal(type: string): string {
   const normalized = slugify(type);
-  if (normalized) {
+  if (normalized && normalized !== "default") {
     return imagesUrl[normalized as keyof typeof imagesUrl];
   }
   return `/goods/default.webp`;

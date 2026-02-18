@@ -1,224 +1,19 @@
 import type { TechnoData } from "@/types/shared";
 
-/**
- * Technology Registry - Toutes les technologies par ère
- * 
- * Structure:
- * - Chaque ère a une liste de TechnoData[]
- * - Quand on ajoute une ère, TOUTES les technos sont ajoutées individuellement en DB
- * - La card affiche la SOMME des technos non-hidden
- * - Future page "Technology Tracker" : permet de cocher/décocher individuellement
- */
-
-// ============================================================================
-// STONE AGE (SA)
-// ============================================================================
-export const technos_SA: TechnoData[] = [
-  {
-    id: "techno_stone_age_0",
-    name: "Wheel",
-    column: 0,
-    costs: {
-      research_points: 20,
-      coins: 200,
-      food: 150,
-    },
-  },
-  {
-    id: "techno_stone_age_1",
-    name: "Pictographs",
-    column: 1,
-    costs: {
-      research_points: 20,
-      coins: 250,
-      food: 200,
-    },
-  },
-  {
-    id: "techno_stone_age_2",
-    name: "Smelting",
-    column: 1,
-    costs: {
-      research_points: 30,
-      coins: 350,
-      food: 250,
-    },
-  },
-  {
-    id: "techno_stone_age_3",
-    name: "Pottery",
-    column: 2,
-    costs: {
-      research_points: 50,
-      coins: 400,
-      food: 200,
-    },
-  },
-];
-
-// ============================================================================
-// BRONZE AGE (BA)
-// ============================================================================
-export const technos_BA: TechnoData[] = [
-  {
-    id: "techno_bronze_age_0",
-    name: "Alphabet",
-    column: 0,
-    costs: {
-      research_points: 80,
-      coins: 1200,
-      food: 800,
-      goods: [
-        { resource: "wool", amount: 50 },
-        { resource: "alabaster_idol", amount: 50 },
-      ],
-    },
-  },
-  {
-    id: "techno_bronze_age_1",
-    name: "Arithmetic",
-    column: 1,
-    costs: {
-      research_points: 100,
-      coins: 1500,
-      food: 1000,
-      goods: [
-        { resource: "bronze_bracelet", amount: 50 },
-        { resource: "wool", amount: 50 },
-      ],
-    },
-  },
-  {
-    id: "techno_bronze_age_2",
-    name: "Irrigation",
-    column: 1,
-    costs: {
-      research_points: 120,
-      coins: 2000,
-      food: 1200,
-      goods: [
-        { resource: "alabaster_idol", amount: 50 },
-        { resource: "bronze_bracelet", amount: 50 },
-      ],
-    },
-  },
-  {
-    id: "techno_bronze_age_3",
-    name: "Geometry",
-    column: 2,
-    costs: {
-      research_points: 180,
-      coins: 2500,
-      food: 1800,
-      goods: [
-        { resource: "wool", amount: 50 },
-        { resource: "alabaster_idol", amount: 50 },
-        { resource: "bronze_bracelet", amount: 50 },
-      ],
-    },
-  },
-];
-
-// ============================================================================
-// EARLY GOTHIC ERA (EG)
-// ============================================================================
-export const technos_EG: TechnoData[] = [
-  {
-    id: "techno_early_gothic_era_0",
-    name: "Flying Buttresses",
-    column: 0,
-    costs: {
-      research_points: 100,
-      coins: 2900000,
-      food: 3500000,
-      goods: [
-        { resource: "tertiary_hm", amount: 13500 },
-        { resource: "primary_hm", amount: 5700 },
-      ],
-    },
-  },
-  {
-    id: "techno_early_gothic_era_1",
-    name: "Carrucas",
-    column: 1,
-    costs: {
-      research_points: 110,
-      coins: 5900000,
-      food: 3200000,
-      goods: [
-        { resource: "primary_hm", amount: 13000 },
-        { resource: "secondary_hm", amount: 5350 },
-        { resource: "primary_ks", amount: 4300 },
-      ],
-    },
-  },
-  {
-    id: "techno_early_gothic_era_2",
-    name: "Deep Sea Ports",
-    allied: "ottoman",
-    column: 1,
-    costs: {
-      research_points: 28,
-      coins: 5900000,
-      food: 4000000,
-      goods: [
-        { resource: "secondary_hm", amount: 10000 },
-        { resource: "tertiary_hm", amount: 4250 },
-        { resource: "primary_ie", amount: 4250 },
-      ],
-    },
-  },
-];
-
-// ============================================================================
-// LATE GOTHIC ERA (LG)
-// ============================================================================
-export const technos_LG: TechnoData[] = [
-  {
-    id: "techno_late_gothic_era_0",
-    name: "Printing Press",
-    column: 0,
-    costs: {
-      research_points: 120,
-      coins: 4200000,
-      food: 5000000,
-      goods: [
-        { resource: "stained_glass", amount: 18000 },
-        { resource: "embellishments", amount: 7500 },
-      ],
-    },
-  },
-  {
-    id: "techno_late_gothic_era_1",
-    name: "Astronomy",
-    column: 1,
-    costs: {
-      research_points: 130,
-      coins: 8500000,
-      food: 4500000,
-      goods: [
-        { resource: "embellishments", amount: 18000 },
-        { resource: "elixirs", amount: 7500 },
-        { resource: "stained_glass", amount: 6000 },
-      ],
-    },
-  },
-  {
-    id: "techno_late_gothic_era_2",
-    name: "Compass",
-    column: 1,
-    costs: {
-      research_points: 35,
-      coins: 8500000,
-      food: 5700000,
-      goods: [
-        { resource: "elixirs", amount: 14000 },
-        { resource: "stained_glass", amount: 6000 },
-        { resource: "embellishments", amount: 6000 },
-      ],
-    },
-  },
-];
+import { technos_SA } from "./technos/1_stone_age";
+import { technos_BA } from "./technos/2_bronze_age";
+import { technos_ME } from "./technos/3_minoan_era";
+import { technos_CG } from "./technos/4_classical_greece";
+import { technos_ER } from "./technos/5_early_rome";
+import { technos_RE } from "./technos/6_roman_empire";
+import { technos_BE } from "./technos/7_byzantine_era";
+import { technos_AF } from "./technos/8_age_of_the_franks";
+import { technos_FA } from "./technos/9_feudal_age";
+import { technos_IE } from "./technos/10_iberian_era";
+import { technos_KS } from "./technos/11_kingdom_of_sicily";
+import { technos_HM } from "./technos/12_high_middle_ages";
+import { technos_EG } from "./technos/13_early_gothic_era";
+import { technos_LG } from "./technos/14_late_gothic_era";
 
 // ============================================================================
 // REGISTRY - Mapping eraId → TechnoData[]
@@ -226,7 +21,16 @@ export const technos_LG: TechnoData[] = [
 export const TECHNOLOGY_REGISTRY: Record<string, TechnoData[]> = {
   stone_age: technos_SA,
   bronze_age: technos_BA,
-  // ... ajouter toutes les autres ères
+  minoan_era: technos_ME,
+  classical_greece: technos_CG,
+  early_rome: technos_ER,
+  roman_empire: technos_RE,
+  byzantine_era: technos_BE,
+  age_of_the_franks: technos_AF,
+  feudal_age: technos_FA,
+  iberian_era: technos_IE,
+  kingdom_of_sicily: technos_KS,
+  high_middle_ages: technos_HM,
   early_gothic_era: technos_EG,
   late_gothic_era: technos_LG,
 };
@@ -251,7 +55,7 @@ export function getAvailableTechEras(): string[] {
  */
 export function calculateTotalTechnoCosts(technos: TechnoData[]): {
   resources: Record<string, number>;
-  goods: Array<{ type: string; amount: number }>;
+  goods: Array<{ resource: string; amount: number }>;
 } {
   const resources: Record<string, number> = {};
   const goodsMap = new Map<string, number>();
@@ -272,10 +76,13 @@ export function calculateTotalTechnoCosts(technos: TechnoData[]): {
     });
   });
 
-  const goods = Array.from(goodsMap.entries()).map(([type, amount]) => ({
-    type,
+  const goods = Array.from(goodsMap.entries()).map(([resource, amount]) => ({
+    resource,
     amount,
   }));
 
   return { resources, goods };
 }
+
+
+

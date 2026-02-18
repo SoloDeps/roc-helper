@@ -2,22 +2,14 @@
 
 import { toast } from "sonner";
 import { useAddElementStore } from "./add-element-store";
-import {
-  useAddTechno,
-  useAddOttomanArea,
-  useAddOttomanTradePost,
-} from "@/hooks/use-database";
 import { getWikiDB } from "@/lib/db/schema";
-import type {
-  TechnoEntity,
-  OttomanAreaEntity,
-  OttomanTradePostEntity,
-} from "@/lib/db/schema";
-import { getAreaData, getTradePostByName } from "@/lib/ottoman-data-loader";
 import { slugify } from "@/lib/utils";
 import { ERAS } from "@/lib/catalog";
 import { getTechnologiesByEra } from "@/data/technos-registry";
 import { useSelectEra } from "./technology-page-store";
+import { useQueryClient } from "@tanstack/react-query";
+
+const now = () => Date.now();
 
 // ============================================================================
 // TECHNO SUBMISSION
@@ -28,8 +20,8 @@ import { useSelectEra } from "./technology-page-store";
  */
 export function useSubmitTechno() {
   const { closeModal } = useAddElementStore();
-  const addTechno = useAddTechno();
   const selectEra = useSelectEra();
+  const queryClient = useQueryClient();
 
   const submit = async (eraId: string) => {
     if (!eraId) {
@@ -44,7 +36,7 @@ export function useSubmitTechno() {
       return;
     }
 
-    // ✅ Get ALL technologies for this era
+    // Get ALL technologies for this era
     const technologies = getTechnologiesByEra(eraId);
 
     if (technologies.length === 0) {
@@ -54,48 +46,21 @@ export function useSubmitTechno() {
 
     const db = getWikiDB();
     const duplicates: string[] = [];
-    const toAdd: TechnoEntity[] = [];
+    const toAdd: Array<{ id: string; hidden: boolean; updatedAt: number }> = [];
 
-    // ✅ Check for duplicates for each technology
+    // Check for duplicates for each technology
     for (const technoData of technologies) {
       const existing = await db.technos.get(technoData.id);
 
       if (existing) {
         duplicates.push(technoData.name);
       } else {
-        // ✅ Parse costs to entity format
-        const resources: Record<string, number> = {};
-        const goods: Array<{ type: string; amount: number }> = [];
-
-        Object.entries(technoData.costs).forEach(([key, value]) => {
-          if (key === "goods" && Array.isArray(value)) {
-            value.forEach((good) => {
-              goods.push({
-                type: slugify(good.resource),
-                amount: good.amount,
-              });
-            });
-          } else if (typeof value === "number") {
-            resources[key] = value;
-          }
-        });
-
-        // ✅ Create individual techno entity
-        const techno: TechnoEntity = {
+        // Create minimal techno entity
+        toAdd.push({
           id: technoData.id,
-          name: technoData.name,
-          category: "technology",
-          era: era.abbr, // "EG", "LG", etc.
-          eraId: eraId, // "early_gothic_era"
-          column: technoData.column,
-          allied: technoData.allied,
-          costs: { resources, goods },
-          hidden: false, // ✅ Par défaut non-caché
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        };
-
-        toAdd.push(techno);
+          hidden: false,
+          updatedAt: now(),
+        });
       }
     }
 
@@ -109,10 +74,11 @@ export function useSubmitTechno() {
       });
     }
 
-    // ✅ Add all new technologies
+    // Add all new technologies
     if (toAdd.length > 0) {
       try {
-        await Promise.all(toAdd.map((techno) => addTechno.mutateAsync(techno)));
+        await db.technos.bulkPut(toAdd);
+        queryClient.invalidateQueries({ queryKey: ["technos"] });
         toast.success(`${era.name} technologies added`);
 
         // Auto-select the newly added era
@@ -135,7 +101,7 @@ export function useSubmitTechno() {
 
   return {
     submit,
-    isLoading: addTechno.isPending,
+    isLoading: false,
   };
 }
 
@@ -149,7 +115,7 @@ export function useSubmitTechno() {
 export function useSubmitOttomanAreas() {
   const { ottomanSelection, closeModal, clearOttomanSelection } =
     useAddElementStore();
-  const addArea = useAddOttomanArea();
+  const queryClient = useQueryClient();
 
   const submit = async () => {
     const selectedAreas = Array.from(ottomanSelection.selectedAreas);
@@ -161,7 +127,7 @@ export function useSubmitOttomanAreas() {
 
     const db = getWikiDB();
     const duplicates: number[] = [];
-    const toAdd: OttomanAreaEntity[] = [];
+    const toAdd: Array<{ id: string; hidden: boolean; updatedAt: number }> = [];
 
     // Check for duplicates
     for (const areaIndex of selectedAreas) {
@@ -171,47 +137,11 @@ export function useSubmitOttomanAreas() {
       if (existing) {
         duplicates.push(areaIndex);
       } else {
-        // Get area data
-        const areaData = getAreaData(areaIndex);
-        if (!areaData) continue;
-
-        // Parse costs
-        const resources: Record<string, number> = {};
-        const goods: Array<{ type: string; amount: number }> = [];
-
-        areaData.forEach((item) => {
-          const resource = item.resource.toLowerCase();
-          if (
-            [
-              "wheat",
-              "pomegranate",
-              "confection",
-              "syrup",
-              "mohair",
-              "apricot",
-              "tea",
-              "brocade",
-            ].includes(resource)
-          ) {
-            goods.push({
-              type: slugify(resource),
-              amount: item.amount,
-            });
-          } else {
-            resources[resource] = item.amount;
-          }
-        });
-
-        const area: OttomanAreaEntity = {
+        toAdd.push({
           id: areaId,
-          areaIndex,
-          costs: { resources, goods },
           hidden: false,
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        };
-
-        toAdd.push(area);
+          updatedAt: now(),
+        });
       }
     }
 
@@ -229,7 +159,8 @@ export function useSubmitOttomanAreas() {
     // Add new areas
     if (toAdd.length > 0) {
       try {
-        await Promise.all(toAdd.map((area) => addArea.mutateAsync(area)));
+        await db.ottomanAreas.bulkPut(toAdd);
+        queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
         toast.success(`${toAdd.length} areas added successfully`);
 
         clearOttomanSelection();
@@ -246,7 +177,7 @@ export function useSubmitOttomanAreas() {
 
   return {
     submit,
-    isLoading: addArea.isPending,
+    isLoading: false,
   };
 }
 
@@ -260,7 +191,7 @@ export function useSubmitOttomanAreas() {
 export function useSubmitOttomanTradePosts() {
   const { ottomanSelection, closeModal, clearOttomanSelection } =
     useAddElementStore();
-  const addTradePost = useAddOttomanTradePost();
+  const queryClient = useQueryClient();
 
   const submit = async () => {
     const selectedTradePosts = Array.from(ottomanSelection.selectedTradePosts);
@@ -272,7 +203,18 @@ export function useSubmitOttomanTradePosts() {
 
     const db = getWikiDB();
     const duplicates: string[] = [];
-    const toAdd: OttomanTradePostEntity[] = [];
+    const toAdd: Array<{
+      id: string;
+      levels: {
+        unlock: boolean;
+        lvl2: boolean;
+        lvl3: boolean;
+        lvl4: boolean;
+        lvl5: boolean;
+      };
+      hidden: boolean;
+      updatedAt: number;
+    }> = [];
 
     // Check for duplicates
     for (const tradePostName of selectedTradePosts) {
@@ -282,94 +224,19 @@ export function useSubmitOttomanTradePosts() {
       if (existing) {
         duplicates.push(tradePostName);
       } else {
-        // Get trade post data
-        const tradePostData = getTradePostByName(tradePostName);
-        if (!tradePostData) continue;
-
         // Default levels: all unchecked (false = show costs)
-        const levels = {
-          unlock: false,
-          lvl2: false,
-          lvl3: false,
-          lvl4: false,
-          lvl5: false,
-        };
-
-        // ✅ Calculate costs using the same logic as ottoman-trade-posts.ts
-        const resources: Record<string, number> = {};
-        const goodsMap = new Map<string, number>();
-
-        const ottomanGoods = [
-          "wheat",
-          "pomegranate",
-          "confection",
-          "syrup",
-          "mohair",
-          "apricot",
-          "tea",
-          "brocade",
-        ];
-
-        // Process all levels (1-5) since all checkboxes are unchecked
-        [1, 2, 3, 4, 5].forEach((levelNum) => {
-          const levelData = (
-            tradePostData.levels as unknown as {
-              [key: number]: Array<{ resource: string; amount: number }>;
-            }
-          )[levelNum];
-          if (!levelData || !Array.isArray(levelData)) return;
-
-          levelData.forEach((item: { resource: string; amount: number }) => {
-            const resource = item.resource.toLowerCase();
-            const amount = item.amount;
-
-            let normalizedResource = resource;
-            if (
-              resource.includes("_eg") ||
-              resource.includes("lategothicera")
-            ) {
-              normalizedResource = slugify(resource);
-            }
-
-            if (
-              ottomanGoods.includes(resource) ||
-              normalizedResource.match(/^(primary|secondary|tertiary)_/i)
-            ) {
-              const normalized = slugify(resource);
-              goodsMap.set(
-                normalized,
-                (goodsMap.get(normalized) || 0) + amount,
-              );
-            } else {
-              resources[resource] =
-                ((resources[resource] as number) || 0) + amount;
-            }
-          });
-        });
-
-        const goods = Array.from(goodsMap.entries()).map(([type, amount]) => ({
-          type,
-          amount,
-        }));
-
-        const tradePost: OttomanTradePostEntity = {
+        toAdd.push({
           id: tradePostId,
-          name: tradePostData.name,
-          area: tradePostData.area,
-          resource: tradePostData.resource,
-          levels,
-          costs: { resources, goods },
-          sourceData: {
-            levels: tradePostData.levels as unknown as {
-              [key: number]: Array<{ resource: string; amount: number }>;
-            },
+          levels: {
+            unlock: false,
+            lvl2: false,
+            lvl3: false,
+            lvl4: false,
+            lvl5: false,
           },
           hidden: false,
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        };
-
-        toAdd.push(tradePost);
+          updatedAt: now(),
+        });
       }
     }
 
@@ -387,7 +254,8 @@ export function useSubmitOttomanTradePosts() {
     // Add new trade posts
     if (toAdd.length > 0) {
       try {
-        await Promise.all(toAdd.map((tp) => addTradePost.mutateAsync(tp)));
+        await db.ottomanTradePosts.bulkPut(toAdd);
+        queryClient.invalidateQueries({ queryKey: ["ottoman-tradeposts"] });
         toast.success(`${toAdd.length} trade posts added successfully`);
 
         clearOttomanSelection();
@@ -404,6 +272,6 @@ export function useSubmitOttomanTradePosts() {
 
   return {
     submit,
-    isLoading: addTradePost.isPending,
+    isLoading: false,
   };
 }

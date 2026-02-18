@@ -7,34 +7,12 @@ import type {
   OttomanAreaEntity,
   OttomanTradePostEntity,
 } from "../schema";
-import { slugify } from "@/lib/utils";
 
 const now = () => Date.now();
 
 /**
- * Helper pour normaliser les costs (goods uniquement)
- */
-function normalizeCosts(
-  costs:
-    | BuildingEntity["costs"]
-    | TechnoEntity["costs"]
-    | OttomanAreaEntity["costs"]
-    | OttomanTradePostEntity["costs"],
-) {
-  const normalized = { ...costs };
-
-  if (Array.isArray(normalized.goods)) {
-    normalized.goods = normalized.goods.map((g) => ({
-      type: slugify(g.type),
-      amount: g.amount,
-    }));
-  }
-
-  return normalized;
-}
-
-/**
  * Exporte toutes les données au format JSON (presets)
+ * Version optimisée - exporte seulement l'état utilisateur
  */
 export async function exportPresetsJSON(): Promise<void> {
   try {
@@ -48,42 +26,13 @@ export async function exportPresetsJSON(): Promise<void> {
         db.ottomanTradePosts.toArray(),
       ]);
 
-    const cleanBuildings = buildings.map(({ id, quantity, maxQty, costs }) => ({
-      id,
-      quantity,
-      maxQty,
-      costs: normalizeCosts(costs),
-    }));
-
-    const cleanTechnos = technos.map(({ id, costs }) => ({
-      id,
-      costs: normalizeCosts(costs),
-    }));
-
-    const cleanOttomanAreas = ottomanAreas.map(({ id, areaIndex, costs }) => ({
-      id,
-      areaIndex,
-      costs: normalizeCosts(costs),
-    }));
-
-    const cleanOttomanTradePosts = ottomanTradePosts.map(
-      ({ id, name, hidden, area, resource, levels, costs, sourceData }) => ({
-        id,
-        name,
-        hidden,
-        area,
-        resource,
-        levels,
-        costs: normalizeCosts(costs),
-        sourceData,
-      }),
-    );
-
+    // Les données sont déjà minimales, pas besoin de nettoyage
     const json = {
-      buildings: cleanBuildings,
-      technos: cleanTechnos,
-      ottomanAreas: cleanOttomanAreas,
-      ottomanTradePosts: cleanOttomanTradePosts,
+      version: 1,
+      buildings,
+      technos,
+      ottomanAreas,
+      ottomanTradePosts,
     };
 
     const blob = new Blob([JSON.stringify(json, null, 2)], {
@@ -101,7 +50,7 @@ export async function exportPresetsJSON(): Promise<void> {
     URL.revokeObjectURL(a.href);
 
     console.log(
-      `✅ Exported ${cleanBuildings.length} buildings, ${cleanTechnos.length} technos, ${cleanOttomanAreas.length} areas, ${cleanOttomanTradePosts.length} trade posts`,
+      `✅ Exported ${buildings.length} buildings, ${technos.length} technos, ${ottomanAreas.length} areas, ${ottomanTradePosts.length} trade posts`,
     );
   } catch (error) {
     console.error("Export presets failed:", error);
@@ -121,9 +70,10 @@ export async function importPresetsJSON(jsonData: string): Promise<void> {
     // Import buildings
     if (Array.isArray(data.buildings)) {
       await db.buildings.bulkPut(
-        data.buildings.map((b: any) => ({
-          ...b,
-          hidden: false,
+        data.buildings.map((b: BuildingEntity) => ({
+          id: b.id,
+          quantity: b.quantity ?? 1,
+          hidden: b.hidden ?? false,
           updatedAt: timestamp,
         })),
       );
@@ -132,9 +82,9 @@ export async function importPresetsJSON(jsonData: string): Promise<void> {
     // Import technos
     if (Array.isArray(data.technos)) {
       await db.technos.bulkPut(
-        data.technos.map((t: any) => ({
-          ...t,
-          hidden: false,
+        data.technos.map((t: TechnoEntity) => ({
+          id: t.id,
+          hidden: t.hidden ?? false,
           updatedAt: timestamp,
         })),
       );
@@ -143,9 +93,9 @@ export async function importPresetsJSON(jsonData: string): Promise<void> {
     // Import ottoman areas
     if (Array.isArray(data.ottomanAreas)) {
       await db.ottomanAreas.bulkPut(
-        data.ottomanAreas.map((a: any) => ({
-          ...a,
-          hidden: false,
+        data.ottomanAreas.map((a: OttomanAreaEntity) => ({
+          id: a.id,
+          hidden: a.hidden ?? false,
           updatedAt: timestamp,
         })),
       );
@@ -154,8 +104,15 @@ export async function importPresetsJSON(jsonData: string): Promise<void> {
     // Import ottoman trade posts
     if (Array.isArray(data.ottomanTradePosts)) {
       await db.ottomanTradePosts.bulkPut(
-        data.ottomanTradePosts.map((tp: any) => ({
-          ...tp,
+        data.ottomanTradePosts.map((tp: OttomanTradePostEntity) => ({
+          id: tp.id,
+          levels: tp.levels ?? {
+            unlock: false,
+            lvl2: false,
+            lvl3: false,
+            lvl4: false,
+            lvl5: false,
+          },
           hidden: tp.hidden ?? false,
           updatedAt: timestamp,
         })),
@@ -167,29 +124,6 @@ export async function importPresetsJSON(jsonData: string): Promise<void> {
     console.error("Import presets failed:", error);
     throw new Error("Failed to import presets. Please check the file format.");
   }
-}
-
-/**
- * Sauvegarde en batch pour n'importe quelle table
- */
-export async function saveBatch<
-  T extends { updatedAt?: number; hidden?: boolean },
->(
-  table: "buildings" | "technos" | "ottomanAreas" | "ottomanTradePosts",
-  items: Omit<T, "updatedAt" | "hidden">[],
-): Promise<T[]> {
-  const db = getWikiDB();
-  const timestamp = now();
-
-  const itemsWithMeta = items.map((item) => ({
-    ...item,
-    hidden: false,
-    updatedAt: timestamp,
-  })) as T[];
-
-  await db[table].bulkPut(itemsWithMeta as any);
-
-  return itemsWithMeta;
 }
 
 /**
@@ -252,7 +186,7 @@ export async function getAllStats(): Promise<{
 }
 
 /**
- * Clone toutes les données vers une nouvelle base (backup)
+ * Clone toutes les données vers un backup
  */
 export async function backupAllData(): Promise<string> {
   const db = getWikiDB();
@@ -267,7 +201,7 @@ export async function backupAllData(): Promise<string> {
 
   const backup = {
     timestamp: new Date().toISOString(),
-    version: 2, // DB version
+    version: 1,
     data: {
       buildings,
       technos,
@@ -300,7 +234,7 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
 
     if (backup.data.buildings) {
       await db.buildings.bulkPut(
-        backup.data.buildings.map((b: any) => ({
+        backup.data.buildings.map((b: BuildingEntity) => ({
           ...b,
           updatedAt: timestamp,
         })),
@@ -309,7 +243,7 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
 
     if (backup.data.technos) {
       await db.technos.bulkPut(
-        backup.data.technos.map((t: any) => ({
+        backup.data.technos.map((t: TechnoEntity) => ({
           ...t,
           updatedAt: timestamp,
         })),
@@ -318,7 +252,7 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
 
     if (backup.data.ottomanAreas) {
       await db.ottomanAreas.bulkPut(
-        backup.data.ottomanAreas.map((a: any) => ({
+        backup.data.ottomanAreas.map((a: OttomanAreaEntity) => ({
           ...a,
           updatedAt: timestamp,
         })),
@@ -327,7 +261,7 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
 
     if (backup.data.ottomanTradePosts) {
       await db.ottomanTradePosts.bulkPut(
-        backup.data.ottomanTradePosts.map((tp: any) => ({
+        backup.data.ottomanTradePosts.map((tp: OttomanTradePostEntity) => ({
           ...tp,
           updatedAt: timestamp,
         })),

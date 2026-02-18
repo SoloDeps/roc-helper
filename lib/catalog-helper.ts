@@ -8,7 +8,6 @@ import {
   getBuildings,
   getCatalogItem,
   getImageForItem,
-  ERAS,
   type NavigableItem,
 } from "@/lib/catalog";
 

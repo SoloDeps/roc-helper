@@ -2,7 +2,8 @@
 
 import React, { memo } from "react";
 import { Handle, Position } from "@xyflow/react";
-import { cn } from "@/lib/utils";
+import { cn, getCityCrestIconLocal } from "@/lib/utils";
+import Image from "next/image";
 
 interface TechNodeData {
   name: string;
@@ -14,7 +15,9 @@ interface TechNodeData {
   };
   allied?: string;
   hidden?: boolean;
-  completed?: boolean; // ✅ NEW: Track completion status
+  completed?: boolean;
+  highlighted?: boolean; // ✅ Connected to selected node
+  dimmed?: boolean; // ✅ Not connected to selected node
 }
 
 interface TechNodeProps {
@@ -23,17 +26,35 @@ interface TechNodeProps {
 }
 
 export const TechNode = memo<TechNodeProps>(({ data, selected }) => {
-  const { name, allied, hidden } = data;
+  const { name, allied, hidden, highlighted, dimmed } = data;
 
   return (
     <div
       className={cn(
         "relative bg-card border rounded-sm p-3",
-        "min-w-[180px] max-w-[200px]",
+        "w-56",
         "transition-all duration-200 cursor-pointer",
-        selected && "border-primary shadow-xl scale-105",
+
+        // Selected: primary color highlight
+        selected && "border-primary shadow-xl scale-105 ring-2 ring-primary/40",
+
+        // Highlighted (connected): subtle blue ring
+        !selected &&
+          highlighted &&
+          "border-blue-400/70 ring-1 ring-blue-400/30 bg-blue-500/5",
+
+        // Dimmed (not connected when something is selected)
+        dimmed && "opacity-30",
+
+        // Normal state
+        !selected &&
+          !highlighted &&
+          !dimmed &&
+          !hidden &&
+          "border-border hover:border-primary/50",
+
+        // Completed/hidden
         hidden && "opacity-40",
-        !selected && !hidden && "border-border hover:border-primary/50",
       )}
     >
       <Handle
@@ -44,8 +65,15 @@ export const TechNode = memo<TechNodeProps>(({ data, selected }) => {
 
       {/* Allied badge (top-right) */}
       {allied && (
-        <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium shadow-md">
-          {allied}
+        <div className="absolute -top-2 -right-2">
+          {/* {allied} */}
+          <Image
+            src={getCityCrestIconLocal(allied)}
+            className="h-10 w-auto"
+            width={40}
+            height={40}
+            alt={allied}
+          />
         </div>
       )}
 
@@ -59,13 +87,6 @@ export const TechNode = memo<TechNodeProps>(({ data, selected }) => {
         position={Position.Right}
         className="!bg-primary !border-2 !border-background"
       />
-
-      {/* Hover hint */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-        <div className="bg-black/80 text-white text-xs px-2 py-1 rounded">
-          Click for details
-        </div>
-      </div>
     </div>
   );
 });

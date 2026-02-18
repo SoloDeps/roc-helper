@@ -1,11 +1,12 @@
 "use client";
 
 import { getWikiDB } from "@/lib/db/schema";
+import { getEraAbbr } from "@/lib/era-mappings";
 
 const now = () => Date.now();
 
 // ============================================================================
-// HIDE/SHOW ALL UTILITIES - FIXED VERSION
+// HIDE/SHOW ALL UTILITIES - Adapté au nouveau format tech_eg_0
 // ============================================================================
 
 /**
@@ -60,15 +61,16 @@ export async function showAllBuildings(buildingIds: string[]): Promise<void> {
 
 /**
  * Hide all technos in an era
- * ✅ FIXED: Keep already hidden items hidden, hide visible ones
+ * ✅ Adapté au nouveau format: tech_eg_0
  */
-export async function hideAllTechnosByEra(eraPath: string): Promise<void> {
+export async function hideAllTechnosByEra(eraId: string): Promise<void> {
   const db = getWikiDB();
   const timestamp = now();
+  const eraAbbr = getEraAbbr(eraId); // "early_gothic_era" → "eg"
 
   const technos = await db.technos
     .where("id")
-    .startsWith(`techno_${eraPath}`)
+    .startsWith(`tech_${eraAbbr}_`)
     .toArray();
 
   // Update only visible ones
@@ -87,14 +89,16 @@ export async function hideAllTechnosByEra(eraPath: string): Promise<void> {
 
 /**
  * Show all technos in an era
+ * ✅ Adapté au nouveau format: tech_eg_0
  */
-export async function showAllTechnosByEra(eraPath: string): Promise<void> {
+export async function showAllTechnosByEra(eraId: string): Promise<void> {
   const db = getWikiDB();
   const timestamp = now();
+  const eraAbbr = getEraAbbr(eraId); // "early_gothic_era" → "eg"
 
   const technos = await db.technos
     .where("id")
-    .startsWith(`techno_${eraPath}`)
+    .startsWith(`tech_${eraAbbr}_`)
     .toArray();
 
   const updates = technos.map((t) => ({
@@ -217,23 +221,23 @@ export async function toggleHideAllBuildings(
 
 /**
  * Toggle hide/show for technos in an era
+ * ✅ Adapté au nouveau format: tech_eg_0
  */
-export async function toggleHideAllTechnosByEra(
-  eraPath: string,
-): Promise<void> {
+export async function toggleHideAllTechnosByEra(eraId: string): Promise<void> {
   const db = getWikiDB();
+  const eraAbbr = getEraAbbr(eraId);
 
   const technos = await db.technos
     .where("id")
-    .startsWith(`techno_${eraPath}`)
+    .startsWith(`tech_${eraAbbr}_`)
     .toArray();
 
   const allHidden = technos.every((t) => t.hidden);
 
   if (allHidden) {
-    await showAllTechnosByEra(eraPath);
+    await showAllTechnosByEra(eraId);
   } else {
-    await hideAllTechnosByEra(eraPath);
+    await hideAllTechnosByEra(eraId);
   }
 }
 

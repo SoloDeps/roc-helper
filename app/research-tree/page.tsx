@@ -4,6 +4,7 @@ import React, { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB } from "@/lib/db/schema";
+import { ABBR_TO_ERA_ID } from "@/lib/era-mappings";
 import { ERAS } from "@/lib/catalog";
 import { getTechnologiesByEra } from "@/data/technos-registry";
 import {
@@ -34,7 +35,24 @@ export default function ResearchTreePage() {
   const availableEras = useMemo(() => {
     if (!technosInDB || technosInDB.length === 0) return [];
 
-    const eraIds = new Set(technosInDB.map((t) => t.eraId));
+    // ✅ Extract era abbreviations from techno IDs (format: tech_[abbr]_[index])
+    const eraAbbrs = new Set<string>();
+    technosInDB.forEach((t) => {
+      const match = t.id.match(/^tech_([a-z]{2})_\d+$/);
+      if (match) {
+        eraAbbrs.add(match[1]); // Extract era abbreviation (eg, lg, etc.)
+      }
+    });
+
+    // ✅ Map abbreviations back to full era IDs using ABBR_TO_ERA_ID
+    const eraIds = new Set<string>();
+    eraAbbrs.forEach((abbr) => {
+      const eraId = ABBR_TO_ERA_ID[abbr];
+      if (eraId) {
+        eraIds.add(eraId);
+      }
+    });
+
     return ERAS.filter((era) => eraIds.has(era.id));
   }, [technosInDB]);
 

@@ -5,6 +5,7 @@ export interface TechNode {
   id: string;
   name: string;
   column: number;
+  required?: string[];
   costs: {
     research_points?: number;
     coins?: number;
@@ -15,9 +16,6 @@ export interface TechNode {
   hidden?: boolean;
 }
 
-/**
- * Convert TechnoData to React Flow nodes and edges
- */
 export function buildGraphData(technos: TechNode[]): {
   nodes: Node[];
   edges: Edge[];
@@ -25,7 +23,7 @@ export function buildGraphData(technos: TechNode[]): {
   const nodes: Node[] = technos.map((techno) => ({
     id: techno.id,
     type: "custom",
-    position: { x: 0, y: 0 }, // Will be calculated by dagre
+    position: { x: 0, y: 0 },
     data: {
       name: techno.name,
       costs: techno.costs,
@@ -34,27 +32,14 @@ export function buildGraphData(technos: TechNode[]): {
     },
   }));
 
-  // Build edges based on column relationships
   const edges: Edge[] = [];
-  const technosByColumn = new Map<number, TechNode[]>();
-
-  // Group by column
   technos.forEach((techno) => {
-    if (!technosByColumn.has(techno.column)) {
-      technosByColumn.set(techno.column, []);
-    }
-    technosByColumn.get(techno.column)!.push(techno);
-  });
-
-  // Create edges from column N to column N+1
-  technos.forEach((techno) => {
-    const nextColumn = technosByColumn.get(techno.column + 1);
-    if (nextColumn) {
-      nextColumn.forEach((nextTechno) => {
+    if (techno.required?.length) {
+      techno.required.forEach((reqId) => {
         edges.push({
-          id: `${techno.id}-${nextTechno.id}`,
-          source: techno.id,
-          target: nextTechno.id,
+          id: `${reqId}-${techno.id}`,
+          source: reqId,
+          target: techno.id,
           type: "smoothstep",
           animated: false,
         });
@@ -65,50 +50,83 @@ export function buildGraphData(technos: TechNode[]): {
   return { nodes, edges };
 }
 
-/**
- * Apply Dagre layout to nodes
- */
 export function layoutGraph(
   nodes: Node[],
   edges: Edge[],
-  direction: "LR" | "TB" = "LR"
+  direction: "LR" | "TB" = "LR",
+  technos?: TechNode[],
 ): Node[] {
+  const NODE_WIDTH = 180;
+  const NODE_HEIGHT = 50;
+  const NODESEP = 30; // vertical gap between nodes in same column
+  const RANKSEP = 100; // horizontal gap between columns
+
+  // Build column map from techno data if available
+  const columnMap = new Map<string, number>();
+  if (technos) {
+    technos.forEach((t) => columnMap.set(t.id, t.column));
+  }
+
+  // --- Group nodes by column ---
+  const columnGroups = new Map<number, string[]>(); // column → node ids
+  nodes.forEach((node) => {
+    const col = columnMap.get(node.id) ?? 0;
+    if (!columnGroups.has(col)) columnGroups.set(col, []);
+    columnGroups.get(col)!.push(node.id);
+  });
+
+  // Sort columns
+  const sortedColumns = Array.from(columnGroups.keys()).sort((a, b) => a - b);
+
+  // Map column index → X position (use sorted index for clean spacing)
+  const columnToX = new Map<number, number>();
+  sortedColumns.forEach((col, i) => {
+    columnToX.set(col, i * (NODE_WIDTH + RANKSEP));
+  });
+
+  // --- Use dagre only to get a good vertical ordering within each column ---
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-  // Configure graph layout
   dagreGraph.setGraph({
-    rankdir: direction, // Left to Right
-    nodesep: 80, // Vertical spacing between nodes
-    ranksep: 200, // Horizontal spacing between columns
-    edgesep: 50,
+    rankdir: direction,
+    nodesep: NODESEP,
+    ranksep: RANKSEP,
+    edgesep: 10,
   });
-
-  // Add nodes to dagre
   nodes.forEach((node) => {
-    dagreGraph.setNode(node.id, {
-      width: 200,
-      height: 120,
-    });
+    dagreGraph.setNode(node.id, { width: NODE_WIDTH, height: NODE_HEIGHT });
   });
-
-  // Add edges to dagre
   edges.forEach((edge) => {
     dagreGraph.setEdge(edge.source, edge.target);
   });
-
-  // Calculate layout
   dagre.layout(dagreGraph);
 
-  // Apply calculated positions to nodes
-  return nodes.map((node) => {
-    const position = dagreGraph.node(node.id);
-    return {
-      ...node,
-      position: {
-        x: position.x - 100, // Center the node (width / 2)
-        y: position.y - 60, // Center the node (height / 2)
-      },
-    };
+  // --- For each column, center nodes vertically, sorted by dagre Y order ---
+  const positions = new Map<string, { x: number; y: number }>();
+
+  sortedColumns.forEach((col) => {
+    const ids = columnGroups.get(col)!;
+    const x = columnToX.get(col)!;
+
+    // Sort by dagre Y to preserve a clean top→bottom order within the column
+    const sorted = [...ids].sort((a, b) => {
+      return dagreGraph.node(a).y - dagreGraph.node(b).y;
+    });
+
+    const totalHeight =
+      sorted.length * NODE_HEIGHT + (sorted.length - 1) * NODESEP;
+    const startY = -totalHeight / 2;
+
+    sorted.forEach((id, i) => {
+      positions.set(id, {
+        x,
+        y: startY + i * (NODE_HEIGHT + NODESEP),
+      });
+    });
   });
+
+  return nodes.map((node) => ({
+    ...node,
+    position: positions.get(node.id) ?? { x: 0, y: 0 },
+  }));
 }

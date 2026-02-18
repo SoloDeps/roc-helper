@@ -13,22 +13,24 @@ import { useTechnos } from "@/hooks/use-database";
  * Technology selection - Direct add from era list
  * Layout: [Icon] Era Name [Add Button]
  */
-interface TechnologySelectionProps {}
 
-export const TechnologySelection = memo<TechnologySelectionProps>(() => {
+export const TechnologySelection = memo(() => {
   const { submit, isLoading } = useSubmitTechno();
-  
-  // Get already added technos from DB (useLiveQuery returns data directly)
+
+  // Get already added technos from DB
   const existingTechnos = useTechnos();
-  const existingEraAbbrs = useMemo(
+
+  // ✅ Extract era IDs (full IDs, not abbreviations)
+  // existingTechnos contain { era: "early_gothic_era", ... }
+  const existingEraIds = useMemo(
     () => new Set((existingTechnos || []).map((t) => t.era)),
     [existingTechnos],
   );
 
-  // Filter out already added eras
+  // ✅ Filter out already added eras using full IDs
   const availableEras = useMemo(() => {
-    return ERAS.filter((era) => !existingEraAbbrs.has(era.abbr));
-  }, [existingEraAbbrs]);
+    return ERAS.filter((era) => !existingEraIds.has(era.id));
+  }, [existingEraIds]);
 
   if (availableEras.length === 0) {
     return (
@@ -45,7 +47,7 @@ export const TechnologySelection = memo<TechnologySelectionProps>(() => {
   return (
     <div className="space-y-2 pb-20 md:pb-0">
       {availableEras.map((era) => {
-        const isAdded = existingEraAbbrs.has(era.abbr);
+        const isAdded = existingEraIds.has(era.id); // ✅ Use era.id instead of era.abbr
 
         return (
           <Button

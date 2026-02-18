@@ -1,6 +1,7 @@
 "use client";
 
 import { getWikiDB } from "@/lib/db/schema";
+import { getEraAbbr } from "@/lib/era-mappings";
 
 // ============================================================================
 // DELETE UTILITIES - Pour les accordions
@@ -16,12 +17,15 @@ export async function deleteAllBuildings(buildingIds: string[]): Promise<void> {
 
 /**
  * Delete all technos in an era
+ * ✅ Adapté au nouveau format: tech_eg_0
  */
-export async function deleteAllTechnosByEra(eraPath: string): Promise<void> {
+export async function deleteAllTechnosByEra(eraId: string): Promise<void> {
   const db = getWikiDB();
+  const eraAbbr = getEraAbbr(eraId); // "early_gothic_era" → "eg"
+
   const technos = await db.technos
     .where("id")
-    .startsWith(`techno_${eraPath}`)
+    .startsWith(`tech_${eraAbbr}_`)
     .toArray();
 
   if (technos.length > 0) {

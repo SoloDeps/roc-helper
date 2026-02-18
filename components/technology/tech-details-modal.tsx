@@ -33,7 +33,7 @@ export function TechDetailsModal({
   const mainResources = Object.entries(tech.costs || {})
     .filter(([type]) => type !== "goods")
     .map(([type, value]) => ({
-      type,
+      resource: type, // ✅ Changed from 'type' to 'resource' for consistency
       value,
       icon: getItemIconLocal(type),
     }));
@@ -112,10 +112,10 @@ export function TechDetailsModal({
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-full">
             {mainResources.map((r) => (
               <ResourceBadge
-                key={r.type}
+                key={r.resource}
                 icon={r.icon}
                 value={formatNumber(r.value)}
-                alt={r.type}
+                alt={r.resource}
               />
             ))}
             {goodsBadges}

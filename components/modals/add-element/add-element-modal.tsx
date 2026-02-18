@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { Plus, X, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -12,7 +12,6 @@ import {
   useElementConfig,
   useModalState,
   useIsTechnologyPath,
-  useIsOttomanPath,
   useSubmitElement,
 } from "@/lib/stores/add-element-store";
 import {

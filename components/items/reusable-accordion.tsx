@@ -87,7 +87,6 @@ export const ReusableAccordion = memo(function ReusableAccordion({
   allHidden,
   onToggleAllHidden,
   onDeleteAll,
-  deleteConfirmMessage,
   children,
   className,
   inlineSubtitle = false,

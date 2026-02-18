@@ -205,10 +205,10 @@ export function calculateTechnoCost(techno: TechnoEntity): {
     if (Array.isArray(value)) {
       // Si c'est un array de ressources (goods)
       for (const resource of value) {
-        if (totalCosts[resource.type]) {
-          totalCosts[resource.type] += resource.amount;
+        if (totalCosts[resource.resource]) {
+          totalCosts[resource.resource] += resource.amount;
         } else {
-          totalCosts[resource.type] = resource.amount;
+          totalCosts[resource.resource] = resource.amount;
         }
       }
     } else if (typeof value === "number") {

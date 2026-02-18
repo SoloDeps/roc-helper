@@ -36,7 +36,7 @@ export function FiltersDrawer() {
   // Extract unique values
   const { availableTypes, availableLocations } = useMemo(() => {
     const types = Array.from(
-      new Set(buildings.map((b) => b.type).filter(Boolean)),
+      new Set(buildings.map((b) => b.resource).filter(Boolean)),
     ) as ("construction" | "upgrade")[];
 
     const locations = Array.from(

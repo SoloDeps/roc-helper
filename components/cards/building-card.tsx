@@ -15,11 +15,11 @@ import {
 } from "@/lib/utils";
 import { useBuilding } from "@/hooks/use-database";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import type { BuildingEntity } from "@/lib/db/schema";
+import type { HydratedBuilding } from "@/lib/db/data-hydration";
 
 interface BuildingCardProps {
   buildingId?: string;
-  building?: BuildingEntity;
+  building?: HydratedBuilding;
   userSelections: string[][];
   onRemove: (id: string) => void;
   onUpdateQuantity: (id: string, quantity: number) => void;
@@ -60,7 +60,7 @@ export function BuildingCard({
   // ✅ CALCULATE qty × costs HERE IN THE CARD (with new structure)
   const mainResources = Object.entries(costs.resources || {}).map(
     ([resourceType, unitValue]) => ({
-      type: resourceType,
+      resource: resourceType,
       value: unitValue * quantity,
       icon: getItemIconLocal(resourceType),
     }),
@@ -71,8 +71,10 @@ export function BuildingCard({
     if (!goods?.length) return null;
 
     return goods.map((g) => {
-      const match = g.type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
-      let goodName = g.type;
+      const match = g.resource.match(
+        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
+      );
+      let goodName = g.resource;
 
       if (match) {
         const [, priority, era] = match;
@@ -86,10 +88,10 @@ export function BuildingCard({
 
       return (
         <ResourceBadge
-          key={g.type}
+          key={`${g.resource}-${quantity}`}
           icon={getItemIconLocal(goodName)}
           value={formatNumber(g.amount * quantity)}
-          alt={g.type}
+          alt={g.resource}
         />
       );
     });
@@ -229,10 +231,10 @@ export function BuildingCard({
             >
               {mainResources.map((r) => (
                 <ResourceBadge
-                  key={r.type}
+                  key={r.resource}
                   icon={r.icon}
                   value={formatNumber(r.value)}
-                  alt={r.type}
+                  alt={r.resource}
                 />
               ))}
               {goodsBadges}

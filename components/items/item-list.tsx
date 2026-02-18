@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { BuildingCard } from "@/components/cards/building-card";
 import { TechnoCard } from "@/components/cards/techno-card";
 import { AreaCard } from "@/components/cards/area-card";
@@ -42,16 +43,18 @@ import {
 } from "@/lib/db/delete-utils";
 import { ERA_ORDER } from "@/data/config";
 import { EraCode } from "@/types/shared";
-import type { TechnoEntity } from "@/lib/db/schema";
+// import type { TechnoEntity } from "@/lib/db/schema";
+import type { HydratedTechno } from "@/lib/db/data-hydration";
 
 export function ItemList() {
+  const queryClient = useQueryClient();
   const userSelections = useBuildingSelections();
 
   // Use UI Store for accordion state
   const { accordionsState, setAccordionsState, addToAccordionsState } =
     useUIStore();
 
-  const { tableType, location, hideHidden, hideTechnos } = useFiltersStore();
+  const { location, hideHidden, hideTechnos } = useFiltersStore();
 
   // État pour gérer les drawers mobiles
   const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
@@ -91,11 +94,11 @@ export function ItemList() {
   // FILTER BUILDINGS
   const filteredBuildings = useMemo(() => {
     let filtered = [...buildings];
-    if (tableType) filtered = filtered.filter((b) => b.type === tableType);
+    // ✅ Removed tableType filter - property 'resource' no longer exists on HydratedBuilding
     if (location) filtered = filtered.filter((b) => b.category === location);
     if (hideHidden) filtered = filtered.filter((b) => !b.hidden);
     return filtered;
-  }, [buildings, tableType, location, hideHidden]);
+  }, [buildings, location, hideHidden]);
 
   // FILTER TECHNOS
   const filteredTechnos = useMemo(() => {
@@ -139,7 +142,7 @@ export function ItemList() {
 
   // GROUP TECHNOS BY ERA
   const technosByEra = useMemo(() => {
-    const groups = new Map<string, TechnoEntity[]>();
+    const groups = new Map<string, HydratedTechno[]>();
     technos.forEach((techno) => {
       if (!groups.has(techno.era)) {
         groups.set(techno.era, []);
@@ -265,6 +268,7 @@ export function ItemList() {
         },
         onDeleteAll: async () => {
           await deleteAllTechnologies();
+          queryClient.invalidateQueries({ queryKey: ["technos"] });
         },
         deleteConfirmMessage: (
           <>
@@ -285,9 +289,13 @@ export function ItemList() {
       data[accordionId] = {
         title: `${firstBuilding.category} — ${firstBuilding.name}`,
         allHidden: buildingsInElement.every((b) => b.hidden),
-        onToggleAllHidden: () => toggleHideAllBuildings(buildingIds),
+        onToggleAllHidden: async () => {
+          await toggleHideAllBuildings(buildingIds);
+          queryClient.invalidateQueries({ queryKey: ["buildings"] });
+        },
         onDeleteAll: async () => {
           await deleteAllBuildings(buildingIds);
+          queryClient.invalidateQueries({ queryKey: ["buildings"] });
         },
         deleteConfirmMessage: (
           <>
@@ -305,9 +313,13 @@ export function ItemList() {
       data["ottoman-areas"] = {
         title: "Ottoman Empire — Areas",
         allHidden: areas.every((a) => a.hidden),
-        onToggleAllHidden: toggleHideAllOttomanAreas,
+        onToggleAllHidden: async () => {
+          await toggleHideAllOttomanAreas();
+          queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
+        },
         onDeleteAll: async () => {
           await deleteAllOttomanAreas();
+          queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
         },
         deleteConfirmMessage: (
           <>
@@ -324,9 +336,13 @@ export function ItemList() {
       data["ottoman-tradeposts"] = {
         title: "Ottoman Empire — Trade Posts",
         allHidden: tradePosts.every((tp) => tp.hidden),
-        onToggleAllHidden: toggleHideAllOttomanTradePosts,
+        onToggleAllHidden: async () => {
+          await toggleHideAllOttomanTradePosts();
+          queryClient.invalidateQueries({ queryKey: ["ottoman-tradeposts"] });
+        },
         onDeleteAll: async () => {
           await deleteAllOttomanTradePosts();
+          queryClient.invalidateQueries({ queryKey: ["ottoman-tradeposts"] });
         },
         deleteConfirmMessage: (
           <>
@@ -340,6 +356,7 @@ export function ItemList() {
 
     return data;
   }, [
+    queryClient, // ✅ Add queryClient to dependencies
     technosByEra,
     hideTechnos,
     technos,
@@ -389,6 +406,7 @@ export function ItemList() {
               }}
               onDeleteAll={async () => {
                 await deleteAllTechnologies();
+                queryClient.invalidateQueries({ queryKey: ["technos"] });
               }}
               deleteConfirmMessage={
                 <>
@@ -402,10 +420,24 @@ export function ItemList() {
             >
               <div className="space-y-3">
                 {Array.from(technosByEra.entries())
-                  .sort(([eraA], [eraB]) => {
+                  .sort(([eraIdA], [eraIdB]) => {
+                    // ✅ Convert era IDs to abbreviations for sorting
+                    // early_gothic_era → EG, late_gothic_era → LG
+                    const getAbbrFromId = (eraId: string): string => {
+                      return eraId
+                        .split("_")
+                        .filter((word) => word !== "era")
+                        .map((word) => word[0])
+                        .join("")
+                        .toUpperCase();
+                    };
+
+                    const abbrA = getAbbrFromId(eraIdA);
+                    const abbrB = getAbbrFromId(eraIdB);
+
                     return (
-                      ERA_ORDER.indexOf(eraA as EraCode) -
-                      ERA_ORDER.indexOf(eraB as EraCode)
+                      ERA_ORDER.indexOf(abbrA as EraCode) -
+                      ERA_ORDER.indexOf(abbrB as EraCode)
                     );
                   })
                   .map(([era, eraTechnos]) => {
@@ -454,9 +486,13 @@ export function ItemList() {
                   selectedCount={selectedCount}
                   hiddenCount={hiddenCount}
                   allHidden={allHidden}
-                  onToggleAllHidden={() => toggleHideAllBuildings(buildingIds)}
+                  onToggleAllHidden={async () => {
+                    await toggleHideAllBuildings(buildingIds);
+                    queryClient.invalidateQueries({ queryKey: ["buildings"] });
+                  }}
                   onDeleteAll={async () => {
                     await deleteAllBuildings(buildingIds);
+                    queryClient.invalidateQueries({ queryKey: ["buildings"] });
                   }}
                   deleteConfirmMessage={
                     <>
@@ -494,9 +530,13 @@ export function ItemList() {
               selectedCount={filteredAreas.length}
               hiddenCount={areas.filter((a) => a.hidden).length}
               allHidden={areas.every((a) => a.hidden)}
-              onToggleAllHidden={toggleHideAllOttomanAreas}
+              onToggleAllHidden={async () => {
+                await toggleHideAllOttomanAreas();
+                queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
+              }}
               onDeleteAll={async () => {
                 await deleteAllOttomanAreas();
+                queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
               }}
               deleteConfirmMessage={
                 <>
@@ -529,9 +569,17 @@ export function ItemList() {
               selectedCount={filteredTradePosts.length}
               hiddenCount={tradePosts.filter((tp) => tp.hidden).length}
               allHidden={tradePosts.every((tp) => tp.hidden)}
-              onToggleAllHidden={toggleHideAllOttomanTradePosts}
+              onToggleAllHidden={async () => {
+                await toggleHideAllOttomanTradePosts();
+                queryClient.invalidateQueries({
+                  queryKey: ["ottoman-tradeposts"],
+                });
+              }}
               onDeleteAll={async () => {
                 await deleteAllOttomanTradePosts();
+                queryClient.invalidateQueries({
+                  queryKey: ["ottoman-tradeposts"],
+                });
               }}
               deleteConfirmMessage={
                 <>

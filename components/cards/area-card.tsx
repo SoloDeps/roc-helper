@@ -11,12 +11,12 @@ import {
   getGoodNameFromPriorityEra,
   getItemIconLocal,
 } from "@/lib/utils";
-import type { OttomanAreaEntity } from "@/lib/db/schema";
+import type { HydratedOttomanArea } from "@/lib/db/data-hydration";
 import Image from "next/image";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface AreaCardProps {
-  area: OttomanAreaEntity;
+  area: HydratedOttomanArea;
   userSelections: string[][];
   onRemove: (id: string) => void;
   onToggleHidden: (id: string) => void;
@@ -34,10 +34,10 @@ export function AreaCard({
 
   // ✅ Use new structure: costs.resources
   const mainResources = Object.entries(costs.resources || {}).map(
-    ([type, value]) => ({
-      type,
+    ([resource, value]) => ({
+      resource,
       value,
-      icon: getItemIconLocal(type),
+      icon: getItemIconLocal(resource),
     }),
   );
 
@@ -47,8 +47,10 @@ export function AreaCard({
     if (!goods?.length) return null;
 
     return goods.map((g, i) => {
-      const match = g.type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
-      let goodName = g.type;
+      const match = g.resource.match(
+        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
+      );
+      let goodName = g.resource;
 
       if (match) {
         const [, priority, era] = match;
@@ -63,10 +65,10 @@ export function AreaCard({
 
       return (
         <ResourceBadge
-          key={`${g.type}-${i}`}
+          key={`${g.resource}-${i}`}
           icon={getItemIconLocal(goodName)}
           value={formatNumber(g.amount)}
-          alt={g.type}
+          alt={g.resource}
         />
       );
     });
@@ -142,7 +144,12 @@ export function AreaCard({
                 <Button
                   size="sm"
                   variant={hidden || isMobile ? "outline" : "ghost"}
-                  className={cn("rounded-sm h-6 w-20", isMobile && !hidden && "text-muted-foreground border-transparent")}
+                  className={cn(
+                    "rounded-sm h-6 w-20",
+                    isMobile &&
+                      !hidden &&
+                      "text-muted-foreground border-transparent",
+                  )}
                   onClick={() => onToggleHidden(id)}
                   title={
                     hidden
@@ -179,10 +186,10 @@ export function AreaCard({
             >
               {mainResources.map((r) => (
                 <ResourceBadge
-                  key={r.type}
+                  key={r.resource}
                   icon={r.icon}
                   value={formatNumber(r.value)}
-                  alt={r.type}
+                  alt={r.resource}
                 />
               ))}
               {goodsBadges}

@@ -20,18 +20,17 @@ import {
   getGoodNameFromPriorityEra,
   getItemIconLocal,
 } from "@/lib/utils";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import type { OttomanTradePostEntity } from "@/lib/db/schema";
+import type { HydratedOttomanTradePost } from "@/lib/db/data-hydration";
 import Image from "next/image";
 
 interface TradePostCardProps {
-  tradePost: OttomanTradePostEntity;
+  tradePost: HydratedOttomanTradePost;
   userSelections: string[][];
   onRemove: (id: string) => void;
   onToggleHidden: (id: string) => void;
   onToggleLevel: (
     id: string,
-    level: keyof OttomanTradePostEntity["levels"],
+    level: keyof HydratedOttomanTradePost["levels"],
   ) => void;
 }
 
@@ -42,7 +41,6 @@ export function TradePostCard({
   onToggleHidden,
   onToggleLevel,
 }: TradePostCardProps) {
-  const isMobile = useMediaQuery("(max-width: 767px)");
   const [isHovered, setIsHovered] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -51,10 +49,10 @@ export function TradePostCard({
 
   // ✅ Use new structure: costs.resources
   const mainResources = Object.entries(costs.resources || {}).map(
-    ([type, value]) => ({
-      type,
+    ([resource, value]) => ({
+      resource,
       value,
-      icon: getItemIconLocal(type),
+      icon: getItemIconLocal(resource),
     }),
   );
 
@@ -64,8 +62,10 @@ export function TradePostCard({
     if (!goods?.length) return [];
 
     return goods.map((g, i) => {
-      const match = g.type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
-      let goodName = g.type;
+      const match = g.resource.match(
+        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
+      );
+      let goodName = g.resource;
 
       if (match) {
         const [, priority, era] = match;
@@ -79,10 +79,10 @@ export function TradePostCard({
 
       return (
         <ResourceBadge
-          key={`${g.type}-${i}`}
+          key={`${g.resource}-${i}`}
           icon={getItemIconLocal(goodName)}
           value={formatNumber(g.amount)}
-          alt={g.type}
+          alt={g.resource}
         />
       );
     });
@@ -232,10 +232,10 @@ export function TradePostCard({
               <>
                 {mainResources.map((r) => (
                   <ResourceBadge
-                    key={r.type}
+                    key={r.resource}
                     icon={r.icon}
                     value={formatNumber(r.value)}
-                    alt={r.type}
+                    alt={r.resource}
                   />
                 ))}
                 {goodsBadges}

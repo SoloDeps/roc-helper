@@ -68,11 +68,22 @@ function accumulateCosts(
     }
   }
 
-  // Traiter costs.goods (array de {type, amount})
+  // ✅ Traiter costs.goods avec format { resource: "...", amount: ... }
   if (costs.goods && Array.isArray(costs.goods)) {
     for (const good of costs.goods) {
-      const current = totals.goods.get(good.type) ?? 0;
-      totals.goods.set(good.type, current + good.amount * multiplier);
+      // ✅ Protection: vérifier que resource existe
+      if (!good.resource || typeof good.resource !== "string") {
+        console.warn("⚠️ Invalid good detected in costs:", good);
+        continue;
+      }
+
+      if (typeof good.amount !== "number") {
+        console.warn("⚠️ Invalid amount in good:", good);
+        continue;
+      }
+
+      const current = totals.goods.get(good.resource) ?? 0;
+      totals.goods.set(good.resource, current + good.amount * multiplier);
     }
   }
 
@@ -82,8 +93,10 @@ function accumulateCosts(
 
     if (key === "goods" && Array.isArray(value)) {
       for (const good of value) {
-        const current = totals.goods.get(good.type) ?? 0;
-        totals.goods.set(good.type, current + good.amount * multiplier);
+        if (!good.resource || typeof good.resource !== "string") continue;
+
+        const current = totals.goods.get(good.resource) ?? 0;
+        totals.goods.set(good.resource, current + good.amount * multiplier);
       }
     } else if (typeof value === "number") {
       totals.main[key] = (totals.main[key] ?? 0) + value * multiplier;
@@ -97,8 +110,14 @@ export function groupGoodsByEra(
 ): Map<string, Map<string, number>> {
   const byEra = new Map<string, Map<string, number>>();
 
-  goods.forEach((amount, type) => {
-    const match = type.match(/^(primary|secondary|tertiary)_([a-z]{2})$/i);
+  goods.forEach((amount, resource) => {
+    // ✅ Protection: vérifier que resource est valide
+    if (!resource || typeof resource !== "string") {
+      console.warn("⚠️ Invalid good resource in grouping:", resource);
+      return;
+    }
+
+    const match = resource.match(/^(primary|secondary|tertiary)_([a-z]{2})$/i);
 
     if (match) {
       const [, priority, era] = match;
@@ -108,7 +127,7 @@ export function groupGoodsByEra(
         byEra.set(eraKey, new Map());
       }
 
-      byEra.get(eraKey)!.set(type, amount);
+      byEra.get(eraKey)!.set(resource, amount);
     }
   });
 
@@ -131,12 +150,18 @@ export function groupGoodsByCity(
     "brocade",
   ];
 
-  goods.forEach((amount, type) => {
-    if (ottomanGoods.includes(type.toLowerCase())) {
+  goods.forEach((amount, resource) => {
+    // ✅ Protection: vérifier que resource est valide
+    if (!resource || typeof resource !== "string") {
+      console.warn("⚠️ Invalid good resource in city grouping:", resource);
+      return;
+    }
+
+    if (ottomanGoods.includes(resource.toLowerCase())) {
       if (!byCity.has("OTTOMAN")) {
         byCity.set("OTTOMAN", new Map());
       }
-      byCity.get("OTTOMAN")!.set(type, amount);
+      byCity.get("OTTOMAN")!.set(resource, amount);
     }
   });
 

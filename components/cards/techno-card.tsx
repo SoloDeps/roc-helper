@@ -13,13 +13,12 @@ import {
   getItemIconLocal,
 } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import type { TechnoEntity } from "@/lib/db/schema";
-import { getEraName } from "@/lib/element-data-loader";
+import type { HydratedTechno } from "@/lib/db/data-hydration";
 import { useSelectEra } from "@/lib/stores/technology-page-store";
 
 interface TechnoCardProps {
   era: string;
-  technos: TechnoEntity[];
+  technos: HydratedTechno[];
   userSelections: string[][];
   onRemoveAll: () => void;
   onToggleHidden: () => void;
@@ -44,7 +43,7 @@ export function TechnoCard({
         totalResearch: 0,
         totalCoins: 0,
         totalFood: 0,
-        goods: [] as Array<{ type: string; amount: number }>,
+        goods: [] as Array<{ resource: string; amount: number }>, // ✅ Changed type to resource
         technoCount: 0,
       };
     }
@@ -53,13 +52,18 @@ export function TechnoCard({
     const goodsMap = new Map<string, number>();
 
     technos.forEach((techno) => {
-      Object.entries(techno.costs.resources).forEach(([key, value]) => {
-        resources[key] = (resources[key] || 0) + value;
-      });
-
-      techno.costs.goods.forEach((good) => {
-        const existing = goodsMap.get(good.type);
-        goodsMap.set(good.type, (existing || 0) + good.amount);
+      // ✅ Handle flat costs structure from registry
+      Object.entries(techno.costs).forEach(([key, value]) => {
+        if (key === "goods" && Array.isArray(value)) {
+          // Aggregate goods
+          value.forEach((good) => {
+            const existing = goodsMap.get(good.resource);
+            goodsMap.set(good.resource, (existing || 0) + good.amount);
+          });
+        } else if (typeof value === "number") {
+          // Aggregate numeric resources (research_points, coins, food, etc.)
+          resources[key] = (resources[key] || 0) + value;
+        }
       });
     });
 
@@ -67,8 +71,8 @@ export function TechnoCard({
       totalResearch: resources.research_points || 0,
       totalCoins: resources.coins || 0,
       totalFood: resources.food || 0,
-      goods: Array.from(goodsMap.entries()).map(([type, amount]) => ({
-        type,
+      goods: Array.from(goodsMap.entries()).map(([resource, amount]) => ({
+        resource,
         amount,
       })),
       technoCount: technos.length,
@@ -77,13 +81,10 @@ export function TechnoCard({
 
   const allHidden = technos.length > 0 && technos.every((t) => t.hidden);
 
-  // Get era display name
-  const eraDisplayName = getEraName(era);
+  // ✅ Extract eraId from era prop (era prop is already the eraId in snake_case)
+  const eraId = era;
 
-  // ✅ FIX 4: Get eraId from first techno (needed for navigation)
-  const eraId = technos.length > 0 ? technos[0].eraId : null;
-
-  // ✅ FIX 4: Handle customize click - Navigate to research tree with this era
+  // ✅ Handle customize click - Navigate to research tree with this era
   const handleCustomize = () => {
     if (eraId) {
       // Set this era as selected in the research tree store
@@ -98,7 +99,7 @@ export function TechnoCard({
 
     if (aggregatedData.totalResearch > 0) {
       resources.push({
-        type: "research_points",
+        resource: "research_points",
         value: aggregatedData.totalResearch,
         icon: getItemIconLocal("research_points"),
       });
@@ -106,7 +107,7 @@ export function TechnoCard({
 
     if (aggregatedData.totalCoins > 0) {
       resources.push({
-        type: "coins",
+        resource: "coins",
         value: aggregatedData.totalCoins,
         icon: getItemIconLocal("coins"),
       });
@@ -114,7 +115,7 @@ export function TechnoCard({
 
     if (aggregatedData.totalFood > 0) {
       resources.push({
-        type: "food",
+        resource: "food",
         value: aggregatedData.totalFood,
         icon: getItemIconLocal("food"),
       });
@@ -127,8 +128,10 @@ export function TechnoCard({
     if (!aggregatedData.goods || aggregatedData.goods.length === 0) return null;
 
     return aggregatedData.goods.map((g, i) => {
-      const match = g.type.match(/^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i);
-      let goodName = g.type;
+      const match = g.resource.match(
+        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
+      );
+      let goodName = g.resource;
 
       if (match) {
         const [, priority, eraCode] = match;
@@ -142,10 +145,10 @@ export function TechnoCard({
 
       return (
         <ResourceBadge
-          key={`${g.type}-${i}`}
+          key={`${g.resource}-${i}`}
           icon={getItemIconLocal(goodName)}
           value={formatNumber(g.amount)}
-          alt={g.type}
+          alt={g.resource}
         />
       );
     });
@@ -177,7 +180,8 @@ export function TechnoCard({
       {/* Content */}
       <div className="flex p-3 gap-2 lg:gap-4 size-full relative">
         <div className="flex-1">
-          <div className="flex justify-between items-center mb-3">
+          {/* Header */}
+          <div className="flex mb-3 justify-between">
             <div className="flex items-center gap-2">
               <h3
                 className={cn(
@@ -185,7 +189,7 @@ export function TechnoCard({
                   allHidden && "opacity-50",
                 )}
               >
-                {eraDisplayName}
+                {era.replace(/_/g, " ")}
               </h3>
 
               <div className={allHidden ? "opacity-50" : ""}>
@@ -197,24 +201,19 @@ export function TechnoCard({
                 </Badge>
               </div>
 
-              {/* Hide/Show button */}
+              {/* Hide/Show button - visible on hover (desktop) */}
               <div
                 className={cn(
-                  "transition-opacity duration-200",
-                  allHidden || isHovered || isMobile
+                  "transition-opacity duration-200 hidden md:block",
+                  allHidden || isHovered
                     ? "opacity-100"
                     : "opacity-0 pointer-events-none",
                 )}
               >
                 <Button
                   size="sm"
-                  variant={allHidden || isMobile ? "outline" : "ghost"}
-                  className={cn(
-                    "rounded-sm h-6 w-20",
-                    isMobile &&
-                      !allHidden &&
-                      "text-muted-foreground border-transparent",
-                  )}
+                  variant={allHidden ? "outline" : "ghost"}
+                  className="rounded-sm h-6 w-20"
                   onClick={onToggleHidden}
                   title={
                     allHidden
@@ -231,10 +230,10 @@ export function TechnoCard({
                 </Button>
               </div>
 
-              {/* ✅ FIX 4: Customize button - Navigate to research tree */}
+              {/* Customize button - visible on hover (desktop) */}
               <div
                 className={cn(
-                  "ml-auto transition-opacity duration-200 hidden md:block",
+                  "transition-opacity duration-200 hidden md:block",
                   isHovered ? "opacity-100" : "opacity-0 pointer-events-none",
                 )}
               >
@@ -260,31 +259,97 @@ export function TechnoCard({
             </Button>
           </div>
 
-          <div
-            className={cn(
-              "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5 text-sm w-full",
-              allHidden && "opacity-60 pointer-events-none select-none",
-            )}
-          >
-            {!mainResources.length && !goodsBadges?.length ? (
-              <ResourceBadge
-                icon="/goods/default.webp"
-                value="0"
-                alt="No resources"
-              />
-            ) : (
-              <>
-                {mainResources.map((r) => (
-                  <ResourceBadge
-                    key={r.type}
-                    icon={r.icon}
-                    value={formatNumber(r.value)}
-                    alt={r.type}
-                  />
-                ))}
-                {goodsBadges}
-              </>
-            )}
+          {/* Resources & Buttons */}
+          <div className="flex flex-col md:flex-row w-full gap-2 justify-between items-stretch min-h-[70px]">
+            <div
+              className={cn(
+                "grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-full content-start",
+                allHidden && "opacity-60 pointer-events-none select-none",
+              )}
+            >
+              {!mainResources.length && !goodsBadges?.length ? (
+                <ResourceBadge
+                  icon="/goods/default.webp"
+                  value="0"
+                  alt="No resources"
+                />
+              ) : (
+                <>
+                  {mainResources.map((r) => (
+                    <ResourceBadge
+                      key={r.resource}
+                      icon={r.icon}
+                      value={formatNumber(r.value)}
+                      alt={r.resource}
+                    />
+                  ))}
+                  {goodsBadges}
+                </>
+              )}
+            </div>
+
+            {/* Desktop: Hide + Customize buttons */}
+            <div className="hidden md:flex justify-end items-end gap-2">
+              <Button
+                variant="outline"
+                className="rounded-sm h-[34px]"
+                onClick={onToggleHidden}
+                title={
+                  allHidden
+                    ? "Include in total calculation"
+                    : "Exclude from total calculation"
+                }
+              >
+                {allHidden ? (
+                  <Eye className="size-4" />
+                ) : (
+                  <EyeOff className="size-4" />
+                )}
+                <span>{allHidden ? "Show" : "Hide"}</span>
+              </Button>
+
+              <Button
+                variant="outline"
+                className="rounded-sm h-[34px]"
+                onClick={handleCustomize}
+                title="View in research tree"
+              >
+                Customize
+              </Button>
+            </div>
+
+            {/* Mobile: Hide + Customize buttons */}
+            <div className="flex md:hidden justify-between items-end gap-2">
+              <Button
+                variant="outline"
+                className={cn(
+                  "rounded-sm h-[34px]",
+                  !allHidden && "text-muted-foreground border-transparent",
+                )}
+                onClick={onToggleHidden}
+                title={
+                  allHidden
+                    ? "Include in total calculation"
+                    : "Exclude from total calculation"
+                }
+              >
+                {allHidden ? (
+                  <Eye className="size-4" />
+                ) : (
+                  <EyeOff className="size-4" />
+                )}
+                <span>{allHidden ? "Show" : "Hide"}</span>
+              </Button>
+
+              <Button
+                variant="outline"
+                className="rounded-sm h-[34px]"
+                onClick={handleCustomize}
+                title="View in research tree"
+              >
+                Customize
+              </Button>
+            </div>
           </div>
         </div>
       </div>
