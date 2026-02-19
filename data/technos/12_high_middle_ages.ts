@@ -36,7 +36,7 @@ export const technos_HM: TechnoData[] = [
     id: "tech_hm_1",
     name: "Clearing",
     column: 1,
-    required: ["tech_hm_"],
+    required: ["tech_hm_0"],
     costs: {
       research_points: 89,
       coins: 5100000,
@@ -64,8 +64,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_2",
     name: "Infantrymen",
-    column: 2,
-    required: ["tech_hm_"],
+    column: 1,
+    required: ["tech_hm_0"],
     costs: {
       research_points: 145,
       coins: 5100000,
@@ -90,8 +90,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_3",
     name: "Early Medicine",
-    column: 3,
-    required: ["tech_hm_"],
+    column: 1,
+    required: ["tech_hm_0"],
     costs: {
       research_points: 115,
       coins: 8700000,
@@ -121,8 +121,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_4",
     name: "Enhanced Timber Framing",
-    column: 4,
-    required: ["tech_hm_"],
+    column: 2,
+    required: ["tech_hm_1"],
     costs: {
       research_points: 56,
       coins: 2800000,
@@ -147,8 +147,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_5",
     name: "Primary Workshop",
-    column: 5,
-    required: ["tech_hm_"],
+    column: 2,
+    required: ["tech_hm_2"],
     costs: {
       research_points: 125,
       coins: 2900000,
@@ -177,8 +177,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_6",
     name: "Central Bazaars",
-    column: 6,
-    required: ["tech_hm_"],
+    column: 2,
+    required: ["tech_hm_3"],
     costs: {
       research_points: 34,
       coins: 5500000,
@@ -208,8 +208,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_7",
     name: "Religious Orders",
-    column: 7,
-    required: ["tech_hm_"],
+    column: 3,
+    required: ["tech_hm_4", "tech_hm_5"],
     costs: {
       research_points: 22,
       coins: 6200000,
@@ -237,8 +237,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_8",
     name: "Arbalest Weapons",
-    column: 8,
-    required: ["tech_hm_"],
+    column: 3,
+    required: ["tech_hm_5"],
     costs: {
       research_points: 155,
       coins: 2100000,
@@ -263,8 +263,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_9",
     name: "Oil Lamps",
-    column: 9,
-    required: ["tech_hm_"],
+    column: 3,
+    required: ["tech_hm_6"],
     costs: {
       research_points: 125,
       coins: 2700000,
@@ -293,8 +293,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_10",
     name: "Surgical Instruments",
-    column: 10,
-    required: ["tech_hm_"],
+    column: 3,
+    required: ["tech_hm_6"],
     costs: {
       research_points: 92,
       coins: 4800000,
@@ -324,8 +324,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_11",
     name: "Pointed Archs",
-    column: 11,
-    required: ["tech_hm_"],
+    column: 4,
+    required: ["tech_hm_7", "tech_hm_8"],
     costs: {
       research_points: 90,
       coins: 6400000,
@@ -353,8 +353,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_12",
     name: "Carpets",
-    column: 12,
-    required: ["tech_hm_"],
+    column: 4,
+    required: ["tech_hm_9"],
     costs: {
       research_points: 125,
       coins: 7800000,
@@ -384,8 +384,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_13",
     name: "Bookkeeping Systems",
-    column: 13,
-    required: ["tech_hm_"],
+    column: 4,
+    required: ["tech_hm_9", "tech_hm_10"],
     costs: {
       research_points: 99,
       coins: 6300000,
@@ -414,8 +414,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_14",
     name: "Experimental Science",
-    column: 14,
-    required: ["tech_hm_"],
+    column: 4,
+    required: ["tech_hm_10"],
     costs: {
       research_points: 105,
       coins: 2700000,
@@ -445,8 +445,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_15",
     name: "Simple Spinning Wheels",
-    column: 15,
-    required: ["tech_hm_"],
+    column: 5,
+    required: ["tech_hm_11"],
     costs: {
       research_points: 73,
       coins: 2200000,
@@ -471,8 +471,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_16",
     name: "Non-Latin Books",
-    column: 16,
-    required: ["tech_hm_"],
+    column: 5,
+    required: ["tech_hm_11", "tech_hm_12"],
     costs: {
       research_points: 75,
       coins: 6700000,
@@ -500,11 +500,11 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_17",
     name: "Ornamented Vaulting",
-    column: 17,
-    required: ["tech_hm_"],
+    column: 5,
+    required: ["tech_hm_12", "tech_hm_13"],
     costs: {
       research_points: 91,
-      coins: 8199999.999999999,
+      coins: 8200000,
       food: 3700000,
       goods: [
         {
@@ -531,8 +531,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_18",
     name: "Improved Irrigation",
-    column: 18,
-    required: ["tech_hm_"],
+    column: 5,
+    required: ["tech_hm_13", "tech_hm_14"],
     costs: {
       research_points: 86,
       coins: 3200000,
@@ -562,8 +562,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_19",
     name: "Cartography",
-    column: 19,
-    required: ["tech_hm_"],
+    column: 6,
+    required: ["tech_hm_15"],
     costs: {
       research_points: 91,
       coins: 6600000,
@@ -588,8 +588,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_20",
     name: "Knighthood",
-    column: 20,
-    required: ["tech_hm_"],
+    column: 6,
+    required: ["tech_hm_16"],
     costs: {
       research_points: 155,
       coins: 7400000,
@@ -614,8 +614,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_21",
     name: "Romantic Poetry",
-    column: 21,
-    required: ["tech_hm_"],
+    column: 6,
+    required: ["tech_hm_17"],
     costs: {
       research_points: 97,
       coins: 4600000,
@@ -645,8 +645,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_22",
     name: "Hyperbolic Geometry",
-    column: 22,
-    required: ["tech_hm_"],
+    column: 6,
+    required: ["tech_hm_17", "tech_hm_18"],
     costs: {
       research_points: 94,
       coins: 6600000,
@@ -676,8 +676,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_23",
     name: "Quality Products",
-    column: 23,
-    required: ["tech_hm_"],
+    column: 7,
+    required: ["tech_hm_19", "tech_hm_20"],
     costs: {
       research_points: 145,
       coins: 2900000,
@@ -702,8 +702,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_24",
     name: "Weaving Techniques",
-    column: 24,
-    required: ["tech_hm_"],
+    column: 7,
+    required: ["tech_hm_21"],
     costs: {
       research_points: 115,
       coins: 7100000,
@@ -733,8 +733,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_25",
     name: "Kerosine Destillation",
-    column: 25,
-    required: ["tech_hm_"],
+    column: 7,
+    required: ["tech_hm_22"],
     costs: {
       research_points: 115,
       coins: 4800000,
@@ -764,8 +764,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_26",
     name: "Billmen",
-    column: 26,
-    required: ["tech_hm_"],
+    column: 8,
+    required: ["tech_hm_23"],
     costs: {
       research_points: 150,
       coins: 7900000,
@@ -792,8 +792,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_27",
     name: "Guilds",
-    column: 27,
-    required: ["tech_hm_"],
+    column: 8,
+    required: ["tech_hm_23", "tech_hm_24"],
     costs: {
       research_points: 115,
       coins: 6900000,
@@ -818,8 +818,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_28",
     name: "Tesselation",
-    column: 28,
-    required: ["tech_hm_"],
+    column: 8,
+    required: ["tech_hm_24", "tech_hm_25"],
     costs: {
       research_points: 99,
       coins: 2600000,
@@ -849,8 +849,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_29",
     name: "Bridge Mills",
-    column: 29,
-    required: ["tech_hm_"],
+    column: 8,
+    required: ["tech_hm_25"],
     costs: {
       research_points: 83,
       coins: 4000000,
@@ -880,8 +880,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_30",
     name: "Secondary Workshop",
-    column: 30,
-    required: ["tech_hm_"],
+    column: 9,
+    required: ["tech_hm_26", "tech_hm_27"],
     costs: {
       research_points: 115,
       coins: 7500000,
@@ -909,8 +909,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_31",
     name: "Staufer Architecture",
-    column: 31,
-    required: ["tech_hm_"],
+    column: 9,
+    required: ["tech_hm_27"],
     costs: {
       research_points: 105,
       coins: 3300000,
@@ -938,8 +938,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_32",
     name: "Banks",
-    column: 32,
-    required: ["tech_hm_"],
+    column: 9,
+    required: ["tech_hm_28", "tech_hm_29"],
     costs: {
       research_points: 91,
       coins: 2000000,
@@ -969,8 +969,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_33",
     name: "Medieval Catapults",
-    column: 33,
-    required: ["tech_hm_"],
+    column: 10,
+    required: ["tech_hm_30", "tech_hm_31", "tech_hm_32"],
     costs: {
       research_points: 155,
       coins: 3400000,
@@ -995,8 +995,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_34",
     name: "Disinfectants",
-    column: 34,
-    required: ["tech_hm_"],
+    column: 10,
+    required: ["tech_hm_31", "tech_hm_32"],
     costs: {
       research_points: 86,
       coins: 6700000,
@@ -1026,8 +1026,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_35",
     name: "Combination Locks",
-    column: 35,
-    required: ["tech_hm_"],
+    column: 10,
+    required: ["tech_hm_32"],
     costs: {
       research_points: 90,
       coins: 5600000,
@@ -1057,8 +1057,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_36",
     name: "Precautions",
-    column: 36,
-    required: ["tech_hm_"],
+    column: 11,
+    required: ["tech_hm_33"],
     costs: {
       research_points: 86,
       coins: 7100000,
@@ -1083,8 +1083,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_37",
     name: "Tertiary Workshop",
-    column: 37,
-    required: ["tech_hm_"],
+    column: 11,
+    required: ["tech_hm_33"],
     costs: {
       research_points: 110,
       coins: 2700000,
@@ -1112,8 +1112,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_38",
     name: "Flying Contraption",
-    column: 38,
-    required: ["tech_hm_"],
+    column: 11,
+    required: ["tech_hm_34"],
     costs: {
       research_points: 115,
       coins: 3300000,
@@ -1142,8 +1142,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_39",
     name: "Weight-Driven Clocks",
-    column: 39,
-    required: ["tech_hm_"],
+    column: 11,
+    required: ["tech_hm_35"],
     costs: {
       research_points: 88,
       coins: 2800000,
@@ -1173,8 +1173,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_40",
     name: "Universities",
-    column: 40,
-    required: ["tech_hm_"],
+    column: 12,
+    required: ["tech_hm_36", "tech_hm_37", "tech_hm_38"],
     costs: {
       research_points: 105,
       coins: 4000000,
@@ -1199,8 +1199,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_41",
     name: "Metabolism Theory",
-    column: 41,
-    required: ["tech_hm_"],
+    column: 12,
+    required: ["tech_hm_38", "tech_hm_39"],
     costs: {
       research_points: 110,
       coins: 3400000,
@@ -1229,8 +1229,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_42",
     name: "Shale Oil",
-    column: 42,
-    required: ["tech_hm_"],
+    column: 12,
+    required: ["tech_hm_39"],
     costs: {
       research_points: 93,
       coins: 8500000,
@@ -1259,8 +1259,8 @@ export const technos_HM: TechnoData[] = [
   {
     id: "tech_hm_43",
     name: "Early Gothic Decorations",
-    column: 43,
-    required: ["tech_hm_"],
+    column: 13,
+    required: ["tech_hm_40", "tech_hm_41", "tech_hm_42"],
     costs: {
       research_points: 120,
       coins: 6100000,

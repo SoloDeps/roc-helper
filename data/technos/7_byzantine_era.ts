@@ -36,7 +36,7 @@ export const technos_BE: TechnoData[] = [
     id: "tech_be_1",
     name: "Bucellarii",
     column: 1,
-    required: ["tech_be_"],
+    required: ["tech_be_0"],
     costs: {
       research_points: 21,
       coins: 364000,
@@ -64,8 +64,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_2",
     name: "Rise of the Mayas",
-    column: 2,
-    required: ["tech_be_"],
+    column: 1,
+    required: ["tech_be_0"],
     costs: {
       research_points: 18,
       coins: 303000,
@@ -96,8 +96,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_3",
     name: "Primary Workshop",
-    column: 3,
-    required: ["tech_be_"],
+    column: 2,
+    required: ["tech_be_1"],
     costs: {
       research_points: 33,
       coins: 561000,
@@ -126,8 +126,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_4",
     name: "Ritual Sites",
-    column: 4,
-    required: ["tech_be_"],
+    column: 2,
+    required: ["tech_be_2"],
     costs: {
       research_points: 17,
       coins: 288000,
@@ -158,8 +158,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_5",
     name: "Stone Carving",
-    column: 5,
-    required: ["tech_be_"],
+    column: 2,
+    required: ["tech_be_2"],
     costs: {
       research_points: 20,
       coins: 333000,
@@ -190,8 +190,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_6",
     name: "Pendentive Dome",
-    column: 6,
-    required: ["tech_be_"],
+    column: 3,
+    required: ["tech_be_3"],
     costs: {
       research_points: 36,
       coins: 606000,
@@ -219,8 +219,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_7",
     name: "Forquier",
-    column: 7,
-    required: ["tech_be_"],
+    column: 3,
+    required: ["tech_be_3"],
     costs: {
       research_points: 40,
       coins: 682000,
@@ -248,8 +248,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_8",
     name: "Sacrificial Offerings",
-    column: 8,
-    required: ["tech_be_"],
+    column: 3,
+    required: ["tech_be_4", "tech_be_5"],
     costs: {
       research_points: 31,
       coins: 530000,
@@ -278,8 +278,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_9",
     name: "Saracen Archers",
-    column: 9,
-    required: ["tech_be_"],
+    column: 4,
+    required: ["tech_be_6"],
     costs: {
       research_points: 40,
       coins: 682000,
@@ -304,8 +304,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_10",
     name: "Architekton",
-    column: 10,
-    required: ["tech_be_"],
+    column: 4,
+    required: ["tech_be_7"],
     costs: {
       research_points: 25,
       coins: 432000,
@@ -332,8 +332,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_11",
     name: "Shamanism",
-    column: 11,
-    required: ["tech_be_"],
+    column: 4,
+    required: ["tech_be_8"],
     costs: {
       research_points: 23,
       coins: 394000,
@@ -362,8 +362,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_12",
     name: "Etched Landmarks",
-    column: 12,
-    required: ["tech_be_"],
+    column: 4,
+    required: ["tech_be_8"],
     costs: {
       research_points: 25,
       coins: 424000,
@@ -392,8 +392,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_13",
     name: "Theodosian Walls",
-    column: 13,
-    required: ["tech_be_"],
+    column: 5,
+    required: ["tech_be_9", "tech_be_10"],
     costs: {
       research_points: 33,
       coins: 561000,
@@ -421,8 +421,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_14",
     name: "Xocolatl",
-    column: 14,
-    required: ["tech_be_"],
+    column: 5,
+    required: ["tech_be_11", "tech_be_12"],
     costs: {
       research_points: 39,
       coins: 667000,
@@ -451,8 +451,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_15",
     name: "Polyculture",
-    column: 15,
-    required: ["tech_be_"],
+    column: 6,
+    required: ["tech_be_13"],
     costs: {
       research_points: 23,
       coins: 394000,
@@ -481,8 +481,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_16",
     name: "Crossgroined Vault",
-    column: 16,
-    required: ["tech_be_"],
+    column: 6,
+    required: ["tech_be_13", "tech_be_14"],
     costs: {
       research_points: 30,
       coins: 515000,
@@ -510,8 +510,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_17",
     name: "Obsidian Prospecting",
-    column: 17,
-    required: ["tech_be_"],
+    column: 6,
+    required: ["tech_be_13", "tech_be_14"],
     costs: {
       research_points: 34,
       coins: 576000,
@@ -537,8 +537,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_18",
     name: "Jade Prospecting",
-    column: 18,
-    required: ["tech_be_"],
+    column: 6,
+    required: ["tech_be_13", "tech_be_14"],
     costs: {
       research_points: 28,
       coins: 485000,
@@ -564,8 +564,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_19",
     name: "Catapult",
-    column: 19,
-    required: ["tech_be_"],
+    column: 7,
+    required: ["tech_be_15", "tech_be_16"],
     costs: {
       research_points: 53,
       coins: 909000,
@@ -590,8 +590,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_20",
     name: "Divining",
-    column: 20,
-    required: ["tech_be_"],
+    column: 7,
+    required: ["tech_be_17", "tech_be_18"],
     costs: {
       research_points: 33,
       coins: 568000,
@@ -620,8 +620,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_21",
     name: "Wheeled Plough",
-    column: 21,
-    required: ["tech_be_"],
+    column: 8,
+    required: ["tech_be_19"],
     costs: {
       research_points: 39,
       coins: 670000,
@@ -649,8 +649,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_22",
     name: "Spiritual Ancestry",
-    column: 22,
-    required: ["tech_be_"],
+    column: 8,
+    required: ["tech_be_20"],
     costs: {
       research_points: 35,
       coins: 595000,
@@ -679,8 +679,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_23",
     name: "Precise Chronicle",
-    column: 23,
-    required: ["tech_be_"],
+    column: 8,
+    required: ["tech_be_20"],
     costs: {
       research_points: 37,
       coins: 636000,
@@ -709,8 +709,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_24",
     name: "Mortar",
-    column: 24,
-    required: ["tech_be_"],
+    column: 9,
+    required: ["tech_be_21"],
     costs: {
       research_points: 55,
       coins: 945000,
@@ -738,8 +738,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_25",
     name: "Solar Rituals",
-    column: 25,
-    required: ["tech_be_"],
+    column: 9,
+    required: ["tech_be_22"],
     costs: {
       research_points: 41,
       coins: 708000,
@@ -768,8 +768,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_26",
     name: "Chocolate Making",
-    column: 26,
-    required: ["tech_be_"],
+    column: 9,
+    required: ["tech_be_23"],
     costs: {
       research_points: 49,
       coins: 833000,
@@ -798,8 +798,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_27",
     name: "Gregorian Calendar",
-    column: 27,
-    required: ["tech_be_"],
+    column: 10,
+    required: ["tech_be_24", "tech_be_25", "tech_be_26"],
     costs: {
       research_points: 39,
       coins: 667000,
@@ -826,8 +826,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_28",
     name: "Trapezites",
-    column: 28,
-    required: ["tech_be_"],
+    column: 10,
+    required: ["tech_be_24", "tech_be_25", "tech_be_26"],
     costs: {
       research_points: 61,
       coins: 1000000,
@@ -852,8 +852,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_29",
     name: "Nature Spirits",
-    column: 29,
-    required: ["tech_be_"],
+    column: 10,
+    required: ["tech_be_24", "tech_be_25", "tech_be_26"],
     costs: {
       research_points: 55,
       coins: 947000,
@@ -882,8 +882,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_30",
     name: "Domical Vault",
-    column: 30,
-    required: ["tech_be_"],
+    column: 11,
+    required: ["tech_be_27"],
     costs: {
       research_points: 51,
       coins: 864000,
@@ -908,8 +908,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_31",
     name: "Tillage",
-    column: 31,
-    required: ["tech_be_"],
+    column: 11,
+    required: ["tech_be_28"],
     costs: {
       research_points: 60,
       coins: 1000000,
@@ -934,8 +934,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_32",
     name: "Jade Deposits",
-    column: 32,
-    required: ["tech_be_"],
+    column: 11,
+    required: ["tech_be_29"],
     costs: {
       research_points: 54,
       coins: 924000,
@@ -963,8 +963,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_33",
     name: "Obsidian Deposits",
-    column: 33,
-    required: ["tech_be_"],
+    column: 11,
+    required: ["tech_be_29"],
     costs: {
       research_points: 55,
       coins: 939000,
@@ -993,8 +993,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_34",
     name: "Jovians",
-    column: 34,
-    required: ["tech_be_"],
+    column: 12,
+    required: ["tech_be_30", "tech_be_31"],
     costs: {
       research_points: 71,
       coins: 1200000,
@@ -1021,8 +1021,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_35",
     name: "Better Jade Extraction",
-    column: 35,
-    required: ["tech_be_"],
+    column: 12,
+    required: ["tech_be_32"],
     costs: {
       research_points: 61,
       coins: 1000000,
@@ -1048,8 +1048,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_36",
     name: "Better Obsidian Extraction",
-    column: 36,
-    required: ["tech_be_"],
+    column: 12,
+    required: ["tech_be_33"],
     costs: {
       research_points: 67,
       coins: 1100000,
@@ -1075,8 +1075,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_37",
     name: "Secondary Workshop",
-    column: 37,
-    required: ["tech_be_"],
+    column: 13,
+    required: ["tech_be_34"],
     costs: {
       research_points: 59,
       coins: 1000000,
@@ -1104,8 +1104,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_38",
     name: "Water Cistern",
-    column: 38,
-    required: ["tech_be_"],
+    column: 13,
+    required: ["tech_be_34"],
     costs: {
       research_points: 60,
       coins: 1000000,
@@ -1130,8 +1130,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_39",
     name: "State Laws",
-    column: 39,
-    required: ["tech_be_"],
+    column: 13,
+    required: ["tech_be_35"],
     costs: {
       research_points: 65,
       coins: 1100000,
@@ -1159,8 +1159,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_40",
     name: "Curative Rituals",
-    column: 40,
-    required: ["tech_be_"],
+    column: 13,
+    required: ["tech_be_36"],
     costs: {
       research_points: 60,
       coins: 1000000,
@@ -1188,8 +1188,8 @@ export const technos_BE: TechnoData[] = [
   {
     id: "tech_be_41",
     name: "Tertiary Workshop",
-    column: 41,
-    required: ["tech_be_"],
+    column: 14,
+    required: ["tech_be_37", "tech_be_38", "tech_be_39", "tech_be_40"],
     costs: {
       research_points: 72,
       coins: 1200000,

@@ -34,7 +34,7 @@ export const technos_EG: TechnoData[] = [
     id: "tech_eg_1",
     name: "Carrucas",
     column: 1,
-    required: ["tech_eg_"],
+    required: ["tech_eg_0"],
     costs: {
       research_points: 110,
       coins: 5900000,
@@ -62,8 +62,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_2",
     name: "Deep Sea Ports",
-    column: 2,
-    required: ["tech_eg_"],
+    column: 1,
+    required: ["tech_eg_0"],
     costs: {
       research_points: 28,
       coins: 5900000,
@@ -92,8 +92,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_3",
     name: "Primary Workshop",
-    column: 3,
-    required: ["tech_eg_"],
+    column: 2,
+    required: ["tech_eg_1"],
     costs: {
       research_points: 140,
       coins: 9900000,
@@ -117,8 +117,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_4",
     name: "Routiers",
-    column: 4,
-    required: ["tech_eg_"],
+    column: 2,
+    required: ["tech_eg_1"],
     costs: {
       research_points: 69,
       coins: 3200000,
@@ -143,8 +143,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_5",
     name: "Knot Refinement",
-    column: 5,
-    required: ["tech_eg_"],
+    column: 2,
+    required: ["tech_eg_2"],
     costs: {
       research_points: 150,
       coins: 3400000,
@@ -172,8 +172,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_6",
     name: "Shipwright Guilds",
-    column: 6,
-    required: ["tech_eg_"],
+    column: 2,
+    required: ["tech_eg_2"],
     costs: {
       research_points: 85,
       coins: 6300000,
@@ -202,8 +202,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_7",
     name: "Gothic Bridge Building",
-    column: 7,
-    required: ["tech_eg_"],
+    column: 3,
+    required: ["tech_eg_3", "tech_eg_4"],
     costs: {
       research_points: 130,
       coins: 7000000,
@@ -231,8 +231,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_8",
     name: "Navigational Charts",
-    column: 8,
-    required: ["tech_eg_"],
+    column: 3,
+    required: ["tech_eg_4", "tech_eg_5", "tech_eg_6"],
     costs: {
       research_points: 185,
       coins: 2400000,
@@ -262,8 +262,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_9",
     name: "Dry Dock Construction",
-    column: 9,
-    required: ["tech_eg_"],
+    column: 3,
+    required: ["tech_eg_5", "tech_eg_6"],
     costs: {
       research_points: 150,
       coins: 3100000,
@@ -292,8 +292,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_10",
     name: "Wharf Construction",
-    column: 10,
-    required: ["tech_eg_"],
+    column: 3,
+    required: ["tech_eg_6"],
     costs: {
       research_points: 115,
       coins: 5500000,
@@ -322,8 +322,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_11",
     name: "Masonry Techniques",
-    column: 11,
-    required: ["tech_eg_"],
+    column: 4,
+    required: ["tech_eg_7"],
     costs: {
       research_points: 110,
       coins: 7300000,
@@ -351,8 +351,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_12",
     name: "Crossbow Engineering",
-    column: 12,
-    required: ["tech_eg_"],
+    column: 4,
+    required: ["tech_eg_7", "tech_eg_8"],
     costs: {
       research_points: 150,
       coins: 8800000,
@@ -377,8 +377,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_13",
     name: "Lateen Sails",
-    column: 13,
-    required: ["tech_eg_"],
+    column: 4,
+    required: ["tech_eg_8", "tech_eg_9"],
     costs: {
       research_points: 120,
       coins: 7200000,
@@ -407,8 +407,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_14",
     name: "Port Warehouse Innovations",
-    column: 14,
-    required: ["tech_eg_"],
+    column: 4,
+    required: ["tech_eg_9", "tech_eg_10"],
     costs: {
       research_points: 125,
       coins: 3100000,
@@ -437,8 +437,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_15",
     name: "Civic Self-Government",
-    column: 15,
-    required: ["tech_eg_"],
+    column: 5,
+    required: ["tech_eg_11"],
     costs: {
       research_points: 90,
       coins: 2500000,
@@ -466,8 +466,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_16",
     name: "Horse Collar Improvements",
-    column: 16,
-    required: ["tech_eg_"],
+    column: 5,
+    required: ["tech_eg_11", "tech_eg_12", "tech_eg_13"],
     costs: {
       research_points: 92,
       coins: 7600000,
@@ -495,8 +495,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_17",
     name: "Cartography Innovations",
-    column: 17,
-    required: ["tech_eg_"],
+    column: 5,
+    required: ["tech_eg_12", "tech_eg_13"],
     costs: {
       research_points: 110,
       coins: 9400000,
@@ -525,8 +525,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_18",
     name: "Hull Clinker Construction",
-    column: 18,
-    required: ["tech_eg_"],
+    column: 5,
+    required: ["tech_eg_14"],
     costs: {
       research_points: 105,
       coins: 3700000,
@@ -555,8 +555,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_19",
     name: "Three-Field Crop Rotation",
-    column: 19,
-    required: ["tech_eg_"],
+    column: 6,
+    required: ["tech_eg_15"],
     costs: {
       research_points: 110,
       coins: 7600000,
@@ -581,8 +581,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_20",
     name: "Secondary Workshop",
-    column: 20,
-    required: ["tech_eg_"],
+    column: 6,
+    required: ["tech_eg_15", "tech_eg_16"],
     costs: {
       research_points: 185,
       coins: 8400000,
@@ -610,8 +610,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_21",
     name: "Mercantile Code",
-    column: 21,
-    required: ["tech_eg_"],
+    column: 6,
+    required: ["tech_eg_17", "tech_eg_18"],
     costs: {
       research_points: 120,
       coins: 5200000,
@@ -640,8 +640,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_22",
     name: "Cavalrymen",
-    column: 22,
-    required: ["tech_eg_"],
+    column: 7,
+    required: ["tech_eg_19", "tech_eg_20"],
     costs: {
       research_points: 115,
       coins: 7500000,
@@ -666,8 +666,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_23",
     name: "Maritime Schools",
-    column: 23,
-    required: ["tech_eg_"],
+    column: 7,
+    required: ["tech_eg_20", "tech_eg_21"],
     costs: {
       research_points: 180,
       coins: 3300000,
@@ -697,8 +697,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_24",
     name: "Caravel Design",
-    column: 24,
-    required: ["tech_eg_"],
+    column: 7,
+    required: ["tech_eg_21"],
     costs: {
       research_points: 140,
       coins: 8100000,
@@ -727,8 +727,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_25",
     name: "Veterinary Science",
-    column: 25,
-    required: ["tech_eg_"],
+    column: 8,
+    required: ["tech_eg_22"],
     costs: {
       research_points: 140,
       coins: 5400000,
@@ -756,8 +756,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_26",
     name: "Windmill Expansions",
-    column: 26,
-    required: ["tech_eg_"],
+    column: 8,
+    required: ["tech_eg_22"],
     costs: {
       research_points: 180,
       coins: 9000000,
@@ -782,8 +782,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_27",
     name: "Trade Guild Formations",
-    column: 27,
-    required: ["tech_eg_"],
+    column: 8,
+    required: ["tech_eg_23"],
     costs: {
       research_points: 140,
       coins: 7900000,
@@ -812,8 +812,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_28",
     name: "Stowage Planning",
-    column: 28,
-    required: ["tech_eg_"],
+    column: 8,
+    required: ["tech_eg_23", "tech_eg_24"],
     costs: {
       research_points: 120,
       coins: 3000000,
@@ -842,8 +842,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_29",
     name: "Gargoyle Drainage Systems",
-    column: 29,
-    required: ["tech_eg_"],
+    column: 9,
+    required: ["tech_eg_25"],
     costs: {
       research_points: 100,
       coins: 4600000,
@@ -871,8 +871,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_30",
     name: "Noble Knights",
-    column: 30,
-    required: ["tech_eg_"],
+    column: 9,
+    required: ["tech_eg_26", "tech_eg_27"],
     costs: {
       research_points: 145,
       coins: 8500000,
@@ -899,8 +899,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_31",
     name: "Pintle-And-Gudgeon Rudder",
-    column: 31,
-    required: ["tech_eg_"],
+    column: 9,
+    required: ["tech_eg_27"],
     costs: {
       research_points: 125,
       coins: 3800000,
@@ -929,8 +929,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_32",
     name: "Tidal Calculation Tables",
-    column: 32,
-    required: ["tech_eg_"],
+    column: 9,
+    required: ["tech_eg_28"],
     costs: {
       research_points: 110,
       coins: 2300000,
@@ -960,8 +960,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_33",
     name: "Paper Milling Processes",
-    column: 33,
-    required: ["tech_eg_"],
+    column: 10,
+    required: ["tech_eg_29"],
     costs: {
       research_points: 190,
       coins: 3800000,
@@ -988,8 +988,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_34",
     name: "Heraldry",
-    column: 34,
-    required: ["tech_eg_"],
+    column: 10,
+    required: ["tech_eg_29", "tech_eg_30"],
     costs: {
       research_points: 105,
       coins: 7600000,
@@ -1014,8 +1014,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_35",
     name: "Harbor Crane Systems",
-    column: 35,
-    required: ["tech_eg_"],
+    column: 10,
+    required: ["tech_eg_31", "tech_eg_32"],
     costs: {
       research_points: 110,
       coins: 6400000,
@@ -1045,8 +1045,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_36",
     name: "Wheeled Towers",
-    column: 36,
-    required: ["tech_eg_"],
+    column: 11,
+    required: ["tech_eg_33", "tech_eg_34", "tech_eg_35"],
     costs: {
       research_points: 105,
       coins: 8100000,
@@ -1071,8 +1071,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_37",
     name: "Foreign Trade Links",
-    column: 37,
-    required: ["tech_eg_"],
+    column: 11,
+    required: ["tech_eg_34", "tech_eg_35"],
     costs: {
       research_points: 135,
       coins: 3100000,
@@ -1098,8 +1098,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_38",
     name: "Anchorage Techniques",
-    column: 38,
-    required: ["tech_eg_"],
+    column: 11,
+    required: ["tech_eg_35"],
     costs: {
       research_points: 140,
       coins: 3800000,
@@ -1129,8 +1129,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_39",
     name: "Baronial Hall Design",
-    column: 39,
-    required: ["tech_eg_"],
+    column: 12,
+    required: ["tech_eg_36"],
     costs: {
       research_points: 105,
       coins: 3100000,
@@ -1155,8 +1155,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_40",
     name: "Tertiary Workshop",
-    column: 40,
-    required: ["tech_eg_"],
+    column: 12,
+    required: ["tech_eg_36", "tech_eg_37"],
     costs: {
       research_points: 125,
       coins: 4500000,
@@ -1184,8 +1184,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_41",
     name: "Port Authority Systems",
-    column: 41,
-    required: ["tech_eg_"],
+    column: 12,
+    required: ["tech_eg_37", "tech_eg_38"],
     costs: {
       research_points: 135,
       coins: 3900000,
@@ -1215,8 +1215,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_42",
     name: "Mechanical Clock",
-    column: 42,
-    required: ["tech_eg_"],
+    column: 13,
+    required: ["tech_eg_39", "tech_eg_40"],
     costs: {
       research_points: 115,
       coins: 9700000,
@@ -1241,8 +1241,8 @@ export const technos_EG: TechnoData[] = [
   {
     id: "tech_eg_43",
     name: "Ottoman Naval Power",
-    column: 43,
-    required: ["tech_eg_"],
+    column: 13,
+    required: ["tech_eg_40", "tech_eg_41"],
     costs: {
       research_points: 150,
       coins: 7000000,

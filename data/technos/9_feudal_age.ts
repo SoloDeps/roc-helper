@@ -35,7 +35,7 @@ export const technos_FA: TechnoData[] = [
     id: "tech_fa_1",
     name: "Axemen",
     column: 1,
-    required: ["tech_fa_"],
+    required: ["tech_fa_0"],
     costs: {
       research_points: 97,
       coins: 3400000,
@@ -63,8 +63,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_2",
     name: "Rise of the Vikings",
-    column: 2,
-    required: ["tech_fa_"],
+    column: 1,
+    required: ["tech_fa_0"],
     costs: {
       research_points: 88,
       coins: 4800000,
@@ -94,8 +94,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_3",
     name: "Myths and Legends",
-    column: 3,
-    required: ["tech_fa_"],
+    column: 2,
+    required: ["tech_fa_1"],
     costs: {
       research_points: 73,
       coins: 1400000,
@@ -123,8 +123,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_4",
     name: "Primary Workshop",
-    column: 4,
-    required: ["tech_fa_"],
+    column: 2,
+    required: ["tech_fa_1"],
     costs: {
       research_points: 85,
       coins: 5100000,
@@ -153,8 +153,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_5",
     name: "Seafaring",
-    column: 5,
-    required: ["tech_fa_"],
+    column: 2,
+    required: ["tech_fa_2"],
     costs: {
       research_points: 11,
       coins: 1700000,
@@ -185,8 +185,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_6",
     name: "Domestic Sheep",
-    column: 6,
-    required: ["tech_fa_"],
+    column: 3,
+    required: ["tech_fa_3", "tech_fa_4"],
     costs: {
       research_points: 61,
       coins: 1300000,
@@ -214,8 +214,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_7",
     name: "Repurposed Ruins",
-    column: 7,
-    required: ["tech_fa_"],
+    column: 3,
+    required: ["tech_fa_4"],
     costs: {
       research_points: 65,
       coins: 3700000,
@@ -243,8 +243,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_8",
     name: "Mead Brewery",
-    column: 8,
-    required: ["tech_fa_"],
+    column: 3,
+    required: ["tech_fa_5"],
     costs: {
       research_points: 16,
       coins: 3900000,
@@ -276,8 +276,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_9",
     name: "Longbowmen",
-    column: 9,
-    required: ["tech_fa_"],
+    column: 4,
+    required: ["tech_fa_6", "tech_fa_7", "tech_fa_8"],
     costs: {
       research_points: 105,
       coins: 3000000,
@@ -302,8 +302,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_10",
     name: "Plundering Raids",
-    column: 10,
-    required: ["tech_fa_"],
+    column: 4,
+    required: ["tech_fa_8"],
     costs: {
       research_points: 22,
       coins: 1700000,
@@ -335,8 +335,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_11",
     name: "Tafl Games",
-    column: 11,
-    required: ["tech_fa_"],
+    column: 4,
+    required: ["tech_fa_8"],
     costs: {
       research_points: 110,
       coins: 1700000,
@@ -366,8 +366,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_12",
     name: "Open Field System",
-    column: 12,
-    required: ["tech_fa_"],
+    column: 5,
+    required: ["tech_fa_9"],
     costs: {
       research_points: 74,
       coins: 1500000,
@@ -392,8 +392,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_13",
     name: "Peaked Roofs",
-    column: 13,
-    required: ["tech_fa_"],
+    column: 5,
+    required: ["tech_fa_9"],
     costs: {
       research_points: 61,
       coins: 2400000,
@@ -418,8 +418,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_14",
     name: "Thralls and Jarls",
-    column: 14,
-    required: ["tech_fa_"],
+    column: 5,
+    required: ["tech_fa_10", "tech_fa_11"],
     costs: {
       research_points: 84,
       coins: 3600000,
@@ -449,8 +449,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_15",
     name: "Jarldom",
-    column: 15,
-    required: ["tech_fa_"],
+    column: 5,
+    required: ["tech_fa_10", "tech_fa_11"],
     costs: {
       research_points: 89,
       coins: 2300000,
@@ -480,8 +480,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_16",
     name: "Knights",
-    column: 16,
-    required: ["tech_fa_"],
+    column: 6,
+    required: ["tech_fa_12", "tech_fa_13", "tech_fa_14", "tech_fa_15"],
     costs: {
       research_points: 120,
       coins: 5200000,
@@ -506,8 +506,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_17",
     name: "Beekeeping",
-    column: 17,
-    required: ["tech_fa_"],
+    column: 6,
+    required: ["tech_fa_14", "tech_fa_15"],
     costs: {
       research_points: 62,
       coins: 1300000,
@@ -533,8 +533,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_18",
     name: "Tar Ovens",
-    column: 18,
-    required: ["tech_fa_"],
+    column: 6,
+    required: ["tech_fa_14", "tech_fa_15"],
     costs: {
       research_points: 75,
       coins: 2900000,
@@ -563,8 +563,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_19",
     name: "Manorialism",
-    column: 19,
-    required: ["tech_fa_"],
+    column: 7,
+    required: ["tech_fa_16", "tech_fa_17"],
     costs: {
       research_points: 62,
       coins: 2500000,
@@ -592,8 +592,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_20",
     name: "Fishing Nets",
-    column: 20,
-    required: ["tech_fa_"],
+    column: 7,
+    required: ["tech_fa_17", "tech_fa_18"],
     costs: {
       research_points: 64,
       coins: 4800000,
@@ -623,8 +623,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_21",
     name: "Trebuchets",
-    column: 21,
-    required: ["tech_fa_"],
+    column: 8,
+    required: ["tech_fa_19"],
     costs: {
       research_points: 125,
       coins: 2400000,
@@ -649,8 +649,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_22",
     name: "Pictograms",
-    column: 22,
-    required: ["tech_fa_"],
+    column: 8,
+    required: ["tech_fa_20"],
     costs: {
       research_points: 65,
       coins: 3600000,
@@ -680,8 +680,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_23",
     name: "Timber Framing",
-    column: 23,
-    required: ["tech_fa_"],
+    column: 9,
+    required: ["tech_fa_21", "tech_fa_22"],
     costs: {
       research_points: 71,
       coins: 3900000,
@@ -706,8 +706,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_24",
     name: "Sheep Herds",
-    column: 24,
-    required: ["tech_fa_"],
+    column: 9,
+    required: ["tech_fa_21", "tech_fa_22"],
     costs: {
       research_points: 59,
       coins: 1300000,
@@ -732,8 +732,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_25",
     name: "Burial Sites",
-    column: 25,
-    required: ["tech_fa_"],
+    column: 9,
+    required: ["tech_fa_22"],
     costs: {
       research_points: 65,
       coins: 5100000,
@@ -763,8 +763,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_26",
     name: "Sagas",
-    column: 26,
-    required: ["tech_fa_"],
+    column: 9,
+    required: ["tech_fa_22"],
     costs: {
       research_points: 80,
       coins: 4000000,
@@ -795,8 +795,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_27",
     name: "Ridge and Furrow",
-    column: 27,
-    required: ["tech_fa_"],
+    column: 10,
+    required: ["tech_fa_23", "tech_fa_24"],
     costs: {
       research_points: 74,
       coins: 3200000,
@@ -821,8 +821,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_28",
     name: "Castle",
-    column: 28,
-    required: ["tech_fa_"],
+    column: 10,
+    required: ["tech_fa_23", "tech_fa_24"],
     costs: {
       research_points: 96,
       coins: 3400000,
@@ -850,8 +850,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_29",
     name: "Runic Writing",
-    column: 29,
-    required: ["tech_fa_"],
+    column: 10,
+    required: ["tech_fa_25", "tech_fa_26"],
     costs: {
       research_points: 68,
       coins: 1400000,
@@ -880,8 +880,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_30",
     name: "Kings Guard",
-    column: 30,
-    required: ["tech_fa_"],
+    column: 11,
+    required: ["tech_fa_27", "tech_fa_28"],
     costs: {
       research_points: 140,
       coins: 1600000,
@@ -908,8 +908,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_31",
     name: "Improved Beekeeping",
-    column: 31,
-    required: ["tech_fa_"],
+    column: 11,
+    required: ["tech_fa_29"],
     costs: {
       research_points: 65,
       coins: 1500000,
@@ -938,8 +938,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_32",
     name: "Faering Mastery",
-    column: 32,
-    required: ["tech_fa_"],
+    column: 11,
+    required: ["tech_fa_29"],
     costs: {
       research_points: 88,
       coins: 4300000,
@@ -969,8 +969,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_33",
     name: "Secondary Workshop",
-    column: 33,
-    required: ["tech_fa_"],
+    column: 12,
+    required: ["tech_fa_30"],
     costs: {
       research_points: 74,
       coins: 3500000,
@@ -998,8 +998,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_34",
     name: "Tertiary Workshop",
-    column: 34,
-    required: ["tech_fa_"],
+    column: 12,
+    required: ["tech_fa_30"],
     costs: {
       research_points: 68,
       coins: 2900000,
@@ -1027,8 +1027,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_35",
     name: "Skaldic Poetry",
-    column: 35,
-    required: ["tech_fa_"],
+    column: 12,
+    required: ["tech_fa_31", "tech_fa_32"],
     costs: {
       research_points: 75,
       coins: 5100000,
@@ -1058,8 +1058,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_36",
     name: "Funeral at Sea",
-    column: 36,
-    required: ["tech_fa_"],
+    column: 12,
+    required: ["tech_fa_31", "tech_fa_32"],
     costs: {
       research_points: 83,
       coins: 1300000,
@@ -1088,11 +1088,11 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_37",
     name: "Transhumance",
-    column: 37,
-    required: ["tech_fa_"],
+    column: 13,
+    required: ["tech_fa_33", "tech_fa_34"],
     costs: {
       research_points: 81,
-      coins: 4099999.9999999995,
+      coins: 410000,
       food: 910000,
       goods: [
         {
@@ -1114,8 +1114,8 @@ export const technos_FA: TechnoData[] = [
   {
     id: "tech_fa_38",
     name: "Healing Mead",
-    column: 38,
-    required: ["tech_fa_"],
+    column: 13,
+    required: ["tech_fa_35", "tech_fa_36"],
     costs: {
       research_points: 91,
       coins: 5100000,

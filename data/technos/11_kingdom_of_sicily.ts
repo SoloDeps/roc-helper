@@ -33,7 +33,7 @@ export const technos_KS: TechnoData[] = [
     id: "tech_ks_1",
     name: "Vegetable Gardens",
     column: 1,
-    required: ["tech_ks_"],
+    required: ["tech_ks_0"],
     costs: {
       research_points: 82,
       coins: 4400000,
@@ -58,8 +58,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_2",
     name: "Primary Workshop",
-    column: 2,
-    required: ["tech_ks_"],
+    column: 1,
+    required: ["tech_ks_0"],
     costs: {
       research_points: 77,
       coins: 4400000,
@@ -88,8 +88,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_3",
     name: "Rise of Arabia",
-    column: 3,
-    required: ["tech_ks_"],
+    column: 1,
+    required: ["tech_ks_0"],
     costs: {
       research_points: 105,
       coins: 7500000,
@@ -115,8 +115,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_4",
     name: "Orchards",
-    column: 4,
-    required: ["tech_ks_"],
+    column: 2,
+    required: ["tech_ks_1"],
     costs: {
       research_points: 89,
       coins: 2400000,
@@ -137,8 +137,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_5",
     name: "Pedites",
-    column: 5,
-    required: ["tech_ks_"],
+    column: 2,
+    required: ["tech_ks_2"],
     costs: {
       research_points: 115,
       coins: 2500000,
@@ -163,8 +163,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_6",
     name: "Bazaar",
-    column: 6,
-    required: ["tech_ks_"],
+    column: 2,
+    required: ["tech_ks_3"],
     costs: {
       research_points: 31,
       coins: 4700000,
@@ -195,8 +195,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_7",
     name: "Camel Husbandry",
-    column: 7,
-    required: ["tech_ks_"],
+    column: 2,
+    required: ["tech_ks_3"],
     costs: {
       research_points: 21,
       coins: 5300000,
@@ -225,8 +225,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_8",
     name: "Improved Roof Tiles",
-    column: 8,
-    required: ["tech_ks_"],
+    column: 3,
+    required: ["tech_ks_4", "tech_ks_5"],
     costs: {
       research_points: 95,
       coins: 1800000,
@@ -251,8 +251,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_9",
     name: "Coffee",
-    column: 9,
-    required: ["tech_ks_"],
+    column: 3,
+    required: ["tech_ks_6"],
     costs: {
       research_points: 73,
       coins: 2300000,
@@ -282,11 +282,11 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_10",
     name: "Incense",
-    column: 10,
-    required: ["tech_ks_"],
+    column: 3,
+    required: ["tech_ks_6"],
     costs: {
       research_points: 98,
-      coins: 4099999.9999999995,
+      coins: 4100000,
       food: 2400000,
       goods: [
         {
@@ -314,8 +314,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_11",
     name: "Basic Irrigation Network",
-    column: 11,
-    required: ["tech_ks_"],
+    column: 3,
+    required: ["tech_ks_7"],
     costs: {
       research_points: 96,
       coins: 5500000,
@@ -345,8 +345,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_12",
     name: "Windmill",
-    column: 12,
-    required: ["tech_ks_"],
+    column: 4,
+    required: ["tech_ks_8"],
     costs: {
       research_points: 77,
       coins: 6700000,
@@ -374,8 +374,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_13",
     name: "Armored Crossbowmen",
-    column: 13,
-    required: ["tech_ks_"],
+    column: 4,
+    required: ["tech_ks_8"],
     costs: {
       research_points: 125,
       coins: 5400000,
@@ -400,8 +400,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_14",
     name: "Refined Tools",
-    column: 14,
-    required: ["tech_ks_"],
+    column: 4,
+    required: ["tech_ks_8"],
     costs: {
       research_points: 96,
       coins: 2300000,
@@ -426,8 +426,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_15",
     name: "Channels",
-    column: 15,
-    required: ["tech_ks_"],
+    column: 4,
+    required: ["tech_ks_8", "tech_ks_9", "tech_ks_10", "tech_ks_11"],
     costs: {
       research_points: 110,
       coins: 1800000,
@@ -458,8 +458,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_16",
     name: "Domed Sanctuary",
-    column: 16,
-    required: ["tech_ks_"],
+    column: 5,
+    required: ["tech_ks_12", "tech_ks_13", "tech_ks_15"],
     costs: {
       research_points: 105,
       coins: 5800000,
@@ -487,8 +487,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_17",
     name: "Polychrome Inlays",
-    column: 17,
-    required: ["tech_ks_"],
+    column: 5,
+    required: ["tech_ks_14", "tech_ks_15"],
     costs: {
       research_points: 84,
       coins: 7100000,
@@ -513,8 +513,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_18",
     name: "Maskan House",
-    column: 18,
-    required: ["tech_ks_"],
+    column: 5,
+    required: ["tech_ks_15"],
     costs: {
       research_points: 81,
       coins: 2700000,
@@ -543,8 +543,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_19",
     name: "Improved Market Stands",
-    column: 19,
-    required: ["tech_ks_"],
+    column: 5,
+    required: ["tech_ks_15"],
     costs: {
       research_points: 84,
       coins: 5700000,
@@ -575,8 +575,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_20",
     name: "Pavilions",
-    column: 20,
-    required: ["tech_ks_"],
+    column: 6,
+    required: ["tech_ks_16", "tech_ks_17"],
     costs: {
       research_points: 80,
       coins: 6300000,
@@ -601,8 +601,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_21",
     name: "Fountain Pen",
-    column: 21,
-    required: ["tech_ks_"],
+    column: 6,
+    required: ["tech_ks_18"],
     costs: {
       research_points: 97,
       coins: 3900000,
@@ -634,8 +634,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_22",
     name: "Hard Soap",
-    column: 22,
-    required: ["tech_ks_"],
+    column: 6,
+    required: ["tech_ks_19"],
     costs: {
       research_points: 86,
       coins: 5700000,
@@ -664,8 +664,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_23",
     name: "Melites",
-    column: 23,
-    required: ["tech_ks_"],
+    column: 7,
+    required: ["tech_ks_20"],
     costs: {
       research_points: 135,
       coins: 2400000,
@@ -690,8 +690,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_24",
     name: "Law of Cotangents",
-    column: 24,
-    required: ["tech_ks_"],
+    column: 7,
+    required: ["tech_ks_21", "tech_ks_22"],
     costs: {
       research_points: 105,
       coins: 6100000,
@@ -721,11 +721,11 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_25",
     name: "Automatic Controls",
-    column: 25,
-    required: ["tech_ks_"],
+    column: 7,
+    required: ["tech_ks_21", "tech_ks_22"],
     costs: {
       research_points: 105,
-      coins: 4099999.9999999995,
+      coins: 4100000,
       food: 3900000,
       goods: [
         {
@@ -752,8 +752,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_26",
     name: "Improved Sails",
-    column: 26,
-    required: ["tech_ks_"],
+    column: 8,
+    required: ["tech_ks_23"],
     costs: {
       research_points: 89,
       coins: 6800000,
@@ -778,8 +778,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_27",
     name: "Conservation",
-    column: 27,
-    required: ["tech_ks_"],
+    column: 8,
+    required: ["tech_ks_23"],
     costs: {
       research_points: 105,
       coins: 5900000,
@@ -804,8 +804,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_28",
     name: "Windpump",
-    column: 28,
-    required: ["tech_ks_"],
+    column: 8,
+    required: ["tech_ks_24"],
     costs: {
       research_points: 92,
       coins: 2200000,
@@ -834,8 +834,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_29",
     name: "Building Extensions",
-    column: 29,
-    required: ["tech_ks_"],
+    column: 8,
+    required: ["tech_ks_25"],
     costs: {
       research_points: 76,
       coins: 3500000,
@@ -864,8 +864,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_30",
     name: "Familia Regis",
-    column: 30,
-    required: ["tech_ks_"],
+    column: 9,
+    required: ["tech_ks_26", "tech_ks_27", "tech_ks_28"],
     costs: {
       research_points: 140,
       coins: 6400000,
@@ -892,8 +892,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_31",
     name: "Paper Packaging",
-    column: 31,
-    required: ["tech_ks_"],
+    column: 9,
+    required: ["tech_ks_28"],
     costs: {
       research_points: 95,
       coins: 2800000,
@@ -923,8 +923,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_32",
     name: "Market Economics",
-    column: 32,
-    required: ["tech_ks_"],
+    column: 9,
+    required: ["tech_ks_29"],
     costs: {
       research_points: 84,
       coins: 1700000,
@@ -955,8 +955,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_33",
     name: "Monasteries",
-    column: 33,
-    required: ["tech_ks_"],
+    column: 10,
+    required: ["tech_ks_30"],
     costs: {
       research_points: 95,
       coins: 2900000,
@@ -984,8 +984,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_34",
     name: "Marble Decorations",
-    column: 34,
-    required: ["tech_ks_"],
+    column: 10,
+    required: ["tech_ks_30"],
     costs: {
       research_points: 110,
       coins: 5800000,
@@ -1014,8 +1014,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_35",
     name: "Sine Quadrant",
-    column: 35,
-    required: ["tech_ks_"],
+    column: 10,
+    required: ["tech_ks_31", "tech_ks_32"],
     costs: {
       research_points: 125,
       coins: 4800000,
@@ -1044,8 +1044,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_36",
     name: "Secondary Workshop",
-    column: 36,
-    required: ["tech_ks_"],
+    column: 11,
+    required: ["tech_ks_33", "tech_ks_35"],
     costs: {
       research_points: 80,
       coins: 6100000,
@@ -1073,8 +1073,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_37",
     name: "Piazza",
-    column: 37,
-    required: ["tech_ks_"],
+    column: 11,
+    required: ["tech_ks_34", "tech_ks_35"],
     costs: {
       research_points: 100,
       coins: 2300000,
@@ -1099,8 +1099,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_38",
     name: "Lusterware",
-    column: 38,
-    required: ["tech_ks_"],
+    column: 11,
+    required: ["tech_ks_35"],
     costs: {
       research_points: 105,
       coins: 2800000,
@@ -1129,8 +1129,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_39",
     name: "Water Clock",
-    column: 39,
-    required: ["tech_ks_"],
+    column: 11,
+    required: ["tech_ks_35"],
     costs: {
       research_points: 81,
       coins: 2300000,
@@ -1159,8 +1159,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_40",
     name: "Siege Tower",
-    column: 40,
-    required: ["tech_ks_"],
+    column: 12,
+    required: ["tech_ks_36", "tech_ks_37"],
     costs: {
       research_points: 145,
       coins: 3400000,
@@ -1181,8 +1181,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_41",
     name: "Magnifying Glass",
-    column: 41,
-    required: ["tech_ks_"],
+    column: 12,
+    required: ["tech_ks_38"],
     costs: {
       research_points: 105,
       coins: 2900000,
@@ -1211,8 +1211,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_42",
     name: "Astronomical Instruments",
-    column: 42,
-    required: ["tech_ks_"],
+    column: 12,
+    required: ["tech_ks_39"],
     costs: {
       research_points: 83,
       coins: 7300000,
@@ -1240,8 +1240,8 @@ export const technos_KS: TechnoData[] = [
   {
     id: "tech_ks_43",
     name: "Tertiary Workshop",
-    column: 43,
-    required: ["tech_ks_"],
+    column: 13,
+    required: ["tech_ks_40", "tech_ks_41", "tech_ks_42"],
     costs: {
       research_points: 115,
       coins: 5200000,

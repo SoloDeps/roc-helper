@@ -36,7 +36,7 @@ export const technos_AF: TechnoData[] = [
     id: "tech_af_1",
     name: "Skirmishers",
     column: 1,
-    required: ["tech_af_"],
+    required: ["tech_af_0"],
     costs: {
       research_points: 39,
       coins: 760000,
@@ -64,8 +64,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_2",
     name: "Primary Workshop",
-    column: 2,
-    required: ["tech_af_"],
+    column: 1,
+    required: ["tech_af_0"],
     costs: {
       research_points: 52,
       coins: 713000,
@@ -94,8 +94,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_3",
     name: "Birdkeeping",
-    column: 3,
-    required: ["tech_af_"],
+    column: 1,
+    required: ["tech_af_0"],
     costs: {
       research_points: 45,
       coins: 563000,
@@ -125,8 +125,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_4",
     name: "Villers",
-    column: 4,
-    required: ["tech_af_"],
+    column: 2,
+    required: ["tech_af_1", "tech_af_2"],
     costs: {
       research_points: 32,
       coins: 1500000,
@@ -150,8 +150,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_5",
     name: "Headdress Craft",
-    column: 5,
-    required: ["tech_af_"],
+    column: 2,
+    required: ["tech_af_3"],
     costs: {
       research_points: 60,
       coins: 1500000,
@@ -181,8 +181,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_6",
     name: "Astral Rituals",
-    column: 6,
-    required: ["tech_af_"],
+    column: 2,
+    required: ["tech_af_3"],
     costs: {
       research_points: 67,
       coins: 2100000,
@@ -212,8 +212,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_7",
     name: "Aristocracy",
-    column: 7,
-    required: ["tech_af_"],
+    column: 3,
+    required: ["tech_af_4"],
     costs: {
       research_points: 55,
       coins: 1100000,
@@ -237,8 +237,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_8",
     name: "Franc Axe Throwers",
-    column: 8,
-    required: ["tech_af_"],
+    column: 3,
+    required: ["tech_af_4"],
     costs: {
       research_points: 57,
       coins: 1700000,
@@ -263,8 +263,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_9",
     name: "Ritual Daggers",
-    column: 9,
-    required: ["tech_af_"],
+    column: 3,
+    required: ["tech_af_5", "tech_af_6"],
     costs: {
       research_points: 61,
       coins: 1400000,
@@ -293,8 +293,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_10",
     name: "Lingua Franca",
-    column: 10,
-    required: ["tech_af_"],
+    column: 4,
+    required: ["tech_af_7", "tech_af_8", "tech_af_9"],
     costs: {
       research_points: 49,
       coins: 1000000,
@@ -322,8 +322,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_11",
     name: "Advanced Jade Mining",
-    column: 11,
-    required: ["tech_af_"],
+    column: 4,
+    required: ["tech_af_9"],
     costs: {
       research_points: 54,
       coins: 1000000,
@@ -352,8 +352,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_12",
     name: "Advanced Obsidian Mining",
-    column: 12,
-    required: ["tech_af_"],
+    column: 4,
+    required: ["tech_af_9"],
     costs: {
       research_points: 57,
       coins: 1600000,
@@ -382,8 +382,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_13",
     name: "Spades",
-    column: 13,
-    required: ["tech_af_"],
+    column: 5,
+    required: ["tech_af_10"],
     costs: {
       research_points: 50,
       coins: 1300000,
@@ -408,8 +408,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_14",
     name: "Aviculture",
-    column: 14,
-    required: ["tech_af_"],
+    column: 5,
+    required: ["tech_af_11", "tech_af_12"],
     costs: {
       research_points: 70,
       coins: 1300000,
@@ -438,8 +438,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_15",
     name: "Perfected Headdresses",
-    column: 15,
-    required: ["tech_af_"],
+    column: 5,
+    required: ["tech_af_11", "tech_af_12"],
     costs: {
       research_points: 52,
       coins: 1400000,
@@ -467,8 +467,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_16",
     name: "Production Boom",
-    column: 16,
-    required: ["tech_af_"],
+    column: 6,
+    required: ["tech_af_13"],
     costs: {
       research_points: 48,
       coins: 1400000,
@@ -495,8 +495,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_17",
     name: "Caballarii",
-    column: 17,
-    required: ["tech_af_"],
+    column: 6,
+    required: ["tech_af_13"],
     costs: {
       research_points: 71,
       coins: 974000,
@@ -521,8 +521,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_18",
     name: "Maya Glyphs",
-    column: 18,
-    required: ["tech_af_"],
+    column: 6,
+    required: ["tech_af_14", "tech_af_15"],
     costs: {
       research_points: 64,
       coins: 592000,
@@ -552,8 +552,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_19",
     name: "Priest Schooling",
-    column: 19,
-    required: ["tech_af_"],
+    column: 6,
+    required: ["tech_af_14", "tech_af_15"],
     costs: {
       research_points: 68,
       coins: 742000,
@@ -582,8 +582,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_20",
     name: "Advanced Fodder",
-    column: 20,
-    required: ["tech_af_"],
+    column: 7,
+    required: ["tech_af_16", "tech_af_17", "tech_af_18"],
     costs: {
       research_points: 58,
       coins: 1500000,
@@ -608,8 +608,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_21",
     name: "Pottery Wheel",
-    column: 21,
-    required: ["tech_af_"],
+    column: 7,
+    required: ["tech_af_16", "tech_af_17", "tech_af_18", "tech_af_19"],
     costs: {
       research_points: 69,
       coins: 870000,
@@ -634,8 +634,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_22",
     name: "Sustainable Mining",
-    column: 22,
-    required: ["tech_af_"],
+    column: 7,
+    required: ["tech_af_18", "tech_af_19"],
     costs: {
       research_points: 54,
       coins: 2100000,
@@ -664,8 +664,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_23",
     name: "Improved Daggers",
-    column: 23,
-    required: ["tech_af_"],
+    column: 7,
+    required: ["tech_af_18", "tech_af_19"],
     costs: {
       research_points: 68,
       coins: 1700000,
@@ -693,8 +693,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_24",
     name: "Halberds",
-    column: 24,
-    required: ["tech_af_"],
+    column: 8,
+    required: ["tech_af_20", "tech_af_21"],
     costs: {
       research_points: 56,
       coins: 853000,
@@ -721,8 +721,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_25",
     name: "Sacred Shrines",
-    column: 25,
-    required: ["tech_af_"],
+    column: 8,
+    required: ["tech_af_22", "tech_af_23"],
     costs: {
       research_points: 50,
       coins: 1100000,
@@ -750,8 +750,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_26",
     name: "Population Growth",
-    column: 26,
-    required: ["tech_af_"],
+    column: 8,
+    required: ["tech_af_22", "tech_af_23"],
     costs: {
       research_points: 56,
       coins: 1800000,
@@ -780,8 +780,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_27",
     name: "Patrimony",
-    column: 27,
-    required: ["tech_af_"],
+    column: 9,
+    required: ["tech_af_24"],
     costs: {
       research_points: 56,
       coins: 1500000,
@@ -806,8 +806,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_28",
     name: "Scythes",
-    column: 28,
-    required: ["tech_af_"],
+    column: 9,
+    required: ["tech_af_24"],
     costs: {
       research_points: 57,
       coins: 690000,
@@ -835,8 +835,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_29",
     name: "Feather Mastery",
-    column: 29,
-    required: ["tech_af_"],
+    column: 9,
+    required: ["tech_af_25", "tech_af_26"],
     costs: {
       research_points: 64,
       coins: 1100000,
@@ -865,8 +865,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_30",
     name: "Dagger Perfection",
-    column: 30,
-    required: ["tech_af_"],
+    column: 9,
+    required: ["tech_af_25", "tech_af_26"],
     costs: {
       research_points: 70,
       coins: 1300000,
@@ -894,8 +894,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_31",
     name: "Goat Herds",
-    column: 31,
-    required: ["tech_af_"],
+    column: 10,
+    required: ["tech_af_27", "tech_af_28"],
     costs: {
       research_points: 65,
       coins: 2300000,
@@ -920,8 +920,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_32",
     name: "Divine Ascension",
-    column: 32,
-    required: ["tech_af_"],
+    column: 10,
+    required: ["tech_af_29", "tech_af_30"],
     costs: {
       research_points: 77,
       coins: 1100000,
@@ -950,8 +950,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_33",
     name: "Ritual Mastery",
-    column: 33,
-    required: ["tech_af_"],
+    column: 10,
+    required: ["tech_af_29", "tech_af_30"],
     costs: {
       research_points: 65,
       coins: 696000,
@@ -979,8 +979,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_34",
     name: "Carolingian Catapult",
-    column: 34,
-    required: ["tech_af_"],
+    column: 11,
+    required: ["tech_af_31", "tech_af_32", "tech_af_33"],
     costs: {
       research_points: 69,
       coins: 1600000,
@@ -1005,8 +1005,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_35",
     name: "Leges Salica",
-    column: 35,
-    required: ["tech_af_"],
+    column: 11,
+    required: ["tech_af_31", "tech_af_32", "tech_af_33"],
     costs: {
       research_points: 68,
       coins: 1200000,
@@ -1034,8 +1034,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_36",
     name: "Xocolatl Virtuoso",
-    column: 36,
-    required: ["tech_af_"],
+    column: 11,
+    required: ["tech_af_31", "tech_af_32", "tech_af_33"],
     costs: {
       research_points: 58,
       coins: 1300000,
@@ -1064,8 +1064,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_37",
     name: "Secondary Workshop",
-    column: 37,
-    required: ["tech_af_"],
+    column: 12,
+    required: ["tech_af_34", "tech_af_35"],
     costs: {
       research_points: 58,
       coins: 1500000,
@@ -1093,8 +1093,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_38",
     name: "Jade Mastery",
-    column: 38,
-    required: ["tech_af_"],
+    column: 12,
+    required: ["tech_af_36"],
     costs: {
       research_points: 48,
       coins: 1700000,
@@ -1123,8 +1123,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_39",
     name: "Obsidian Mastery",
-    column: 39,
-    required: ["tech_af_"],
+    column: 12,
+    required: ["tech_af_36"],
     costs: {
       research_points: 77,
       coins: 840000,
@@ -1153,8 +1153,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_40",
     name: "Tertiary Workshop",
-    column: 40,
-    required: ["tech_af_"],
+    column: 13,
+    required: ["tech_af_37"],
     costs: {
       research_points: 60,
       coins: 1700000,
@@ -1182,8 +1182,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_41",
     name: "Astral Alignment",
-    column: 41,
-    required: ["tech_af_"],
+    column: 13,
+    required: ["tech_af_38", "tech_af_39"],
     costs: {
       research_points: 63,
       coins: 2000000,
@@ -1212,8 +1212,8 @@ export const technos_AF: TechnoData[] = [
   {
     id: "tech_af_42",
     name: "Mayan Consensus",
-    column: 42,
-    required: ["tech_af_"],
+    column: 14,
+    required: ["tech_af_40", "tech_af_41"],
     costs: {
       research_points: 105,
       coins: 2100000,

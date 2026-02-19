@@ -33,7 +33,7 @@ export const technos_IE: TechnoData[] = [
     id: "tech_ie_1",
     name: "Primary Workshop",
     column: 1,
-    required: ["tech_ie_"],
+    required: ["tech_ie_0"],
     costs: {
       research_points: 100,
       coins: 6800000,
@@ -59,8 +59,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_2",
     name: "Almogavars",
-    column: 2,
-    required: ["tech_ie_"],
+    column: 1,
+    required: ["tech_ie_0"],
     costs: {
       research_points: 115,
       coins: 5600000,
@@ -85,8 +85,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_3",
     name: "Glacier Mastery",
-    column: 3,
-    required: ["tech_ie_"],
+    column: 1,
+    required: ["tech_ie_0"],
     costs: {
       research_points: 71,
       coins: 1900000,
@@ -119,8 +119,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_4",
     name: "Masia",
-    column: 4,
-    required: ["tech_ie_"],
+    column: 2,
+    required: ["tech_ie_1", "tech_ie_2"],
     costs: {
       research_points: 57,
       coins: 5400000,
@@ -148,8 +148,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_5",
     name: "Drift Nets",
-    column: 5,
-    required: ["tech_ie_"],
+    column: 2,
+    required: ["tech_ie_3"],
     costs: {
       research_points: 77,
       coins: 2100000,
@@ -181,12 +181,12 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_6",
     name: "Mead Halls",
-    column: 6,
-    required: ["tech_ie_"],
+    column: 2,
+    required: ["tech_ie_3"],
     costs: {
       research_points: 105,
       coins: 7200000,
-      food: 4099999.9999999995,
+      food: 4100000,
       goods: [
         {
           amount: 4440,
@@ -213,8 +213,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_7",
     name: "Domesticated Donkeys",
-    column: 7,
-    required: ["tech_ie_"],
+    column: 3,
+    required: ["tech_ie_4"],
     costs: {
       research_points: 90,
       coins: 2400000,
@@ -239,12 +239,12 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_8",
     name: "Patios",
-    column: 8,
-    required: ["tech_ie_"],
+    column: 3,
+    required: ["tech_ie_4"],
     costs: {
       research_points: 88,
       coins: 3200000,
-      food: 4099999.9999999995,
+      food: 4100000,
       goods: [
         {
           amount: 6170,
@@ -265,8 +265,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_9",
     name: "Dragon Boats",
-    column: 9,
-    required: ["tech_ie_"],
+    column: 3,
+    required: ["tech_ie_5", "tech_ie_6"],
     costs: {
       research_points: 135,
       coins: 3300000,
@@ -297,8 +297,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_10",
     name: "Crossbowmen",
-    column: 10,
-    required: ["tech_ie_"],
+    column: 4,
+    required: ["tech_ie_7", "tech_ie_8"],
     costs: {
       research_points: 120,
       coins: 3800000,
@@ -323,8 +323,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_11",
     name: "Tattoos",
-    column: 11,
-    required: ["tech_ie_"],
+    column: 4,
+    required: ["tech_ie_9"],
     costs: {
       research_points: 88,
       coins: 2200000,
@@ -354,8 +354,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_12",
     name: "Superior Beekeeping",
-    column: 12,
-    required: ["tech_ie_"],
+    column: 4,
+    required: ["tech_ie_9"],
     costs: {
       research_points: 67,
       coins: 5300000,
@@ -385,8 +385,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_13",
     name: "Orange Plantation",
-    column: 13,
-    required: ["tech_ie_"],
+    column: 5,
+    required: ["tech_ie_10"],
     costs: {
       research_points: 89,
       coins: 6800000,
@@ -415,8 +415,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_14",
     name: "Eyeglasses",
-    column: 14,
-    required: ["tech_ie_"],
+    column: 5,
+    required: ["tech_ie_10"],
     costs: {
       research_points: 63,
       coins: 3500000,
@@ -444,8 +444,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_15",
     name: "Tavern Brawls",
-    column: 15,
-    required: ["tech_ie_"],
+    column: 5,
+    required: ["tech_ie_11", "tech_ie_12"],
     costs: {
       research_points: 92,
       coins: 5700000,
@@ -475,8 +475,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_16",
     name: "Improved Fishing",
-    column: 16,
-    required: ["tech_ie_"],
+    column: 5,
+    required: ["tech_ie_11", "tech_ie_12"],
     costs: {
       research_points: 82,
       coins: 4200000,
@@ -505,8 +505,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_17",
     name: "Jinete",
-    column: 17,
-    required: ["tech_ie_"],
+    column: 6,
+    required: ["tech_ie_13", "tech_ie_14"],
     costs: {
       research_points: 125,
       coins: 4700000,
@@ -531,8 +531,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_18",
     name: "Sun Compass",
-    column: 18,
-    required: ["tech_ie_"],
+    column: 6,
+    required: ["tech_ie_15", "tech_ie_16"],
     costs: {
       research_points: 80,
       coins: 5100000,
@@ -560,8 +560,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_19",
     name: "Long-Distance Seafaring",
-    column: 19,
-    required: ["tech_ie_"],
+    column: 6,
+    required: ["tech_ie_15", "tech_ie_16"],
     costs: {
       research_points: 110,
       coins: 1900000,
@@ -590,8 +590,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_20",
     name: "Horseshoe Arches",
-    column: 20,
-    required: ["tech_ie_"],
+    column: 7,
+    required: ["tech_ie_17"],
     costs: {
       research_points: 92,
       coins: 4200000,
@@ -616,8 +616,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_21",
     name: "Félag Partnerships",
-    column: 21,
-    required: ["tech_ie_"],
+    column: 7,
+    required: ["tech_ie_18", "tech_ie_19"],
     costs: {
       research_points: 78,
       coins: 3200000,
@@ -646,8 +646,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_22",
     name: "Donkey Herds",
-    column: 22,
-    required: ["tech_ie_"],
+    column: 8,
+    required: ["tech_ie_20", "tech_ie_21"],
     costs: {
       research_points: 92,
       coins: 5600000,
@@ -672,8 +672,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_23",
     name: "Toledo Steel",
-    column: 23,
-    required: ["tech_ie_"],
+    column: 8,
+    required: ["tech_ie_20"],
     costs: {
       research_points: 75,
       coins: 2500000,
@@ -698,8 +698,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_24",
     name: "Norse Hamlets",
-    column: 24,
-    required: ["tech_ie_"],
+    column: 8,
+    required: ["tech_ie_20", "tech_ie_21"],
     costs: {
       research_points: 92,
       coins: 4400000,
@@ -728,8 +728,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_25",
     name: "Beekeeping Mastery",
-    column: 25,
-    required: ["tech_ie_"],
+    column: 8,
+    required: ["tech_ie_21"],
     costs: {
       research_points: 57,
       coins: 2300000,
@@ -758,8 +758,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_26",
     name: "Advanced Trebuchet",
-    column: 26,
-    required: ["tech_ie_"],
+    column: 9,
+    required: ["tech_ie_22", "tech_ie_23"],
     costs: {
       research_points: 130,
       coins: 2800000,
@@ -784,12 +784,12 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_27",
     name: "Mead Mastery",
-    column: 27,
-    required: ["tech_ie_"],
+    column: 9,
+    required: ["tech_ie_24", "tech_ie_25"],
     costs: {
       research_points: 99,
       coins: 5800000,
-      food: 4099999.9999999995,
+      food: 4100000,
       goods: [
         {
           amount: 2080,
@@ -813,8 +813,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_28",
     name: "Viking Homesteads",
-    column: 28,
-    required: ["tech_ie_"],
+    column: 9,
+    required: ["tech_ie_24", "tech_ie_25"],
     costs: {
       research_points: 77,
       coins: 1700000,
@@ -843,8 +843,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_29",
     name: "Distillation",
-    column: 29,
-    required: ["tech_ie_"],
+    column: 10,
+    required: ["tech_ie_26"],
     costs: {
       research_points: 84,
       coins: 4800000,
@@ -869,8 +869,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_30",
     name: "Botany",
-    column: 30,
-    required: ["tech_ie_"],
+    column: 10,
+    required: ["tech_ie_26"],
     costs: {
       research_points: 69,
       coins: 5800000,
@@ -898,8 +898,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_31",
     name: "Magnetic Compass",
-    column: 31,
-    required: ["tech_ie_"],
+    column: 10,
+    required: ["tech_ie_27"],
     costs: {
       research_points: 105,
       coins: 2900000,
@@ -927,8 +927,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_32",
     name: "Fishing Mastery",
-    column: 32,
-    required: ["tech_ie_"],
+    column: 10,
+    required: ["tech_ie_28"],
     costs: {
       research_points: 94,
       coins: 1700000,
@@ -957,8 +957,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_33",
     name: "Order of Calatrava",
-    column: 33,
-    required: ["tech_ie_"],
+    column: 11,
+    required: ["tech_ie_29", "tech_ie_30", "tech_ie_31"],
     costs: {
       research_points: 135,
       coins: 3000000,
@@ -985,8 +985,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_34",
     name: "Glima Fighting",
-    column: 34,
-    required: ["tech_ie_"],
+    column: 11,
+    required: ["tech_ie_31", "tech_ie_32"],
     costs: {
       research_points: 67,
       coins: 2200000,
@@ -1015,8 +1015,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_35",
     name: "Perfected Honey",
-    column: 35,
-    required: ["tech_ie_"],
+    column: 11,
+    required: ["tech_ie_31", "tech_ie_32"],
     costs: {
       research_points: 91,
       coins: 6000000,
@@ -1044,8 +1044,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_36",
     name: "Secondary Workshop",
-    column: 36,
-    required: ["tech_ie_"],
+    column: 12,
+    required: ["tech_ie_33"],
     costs: {
       research_points: 100,
       coins: 4600000,
@@ -1073,8 +1073,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_37",
     name: "Donkey Farms",
-    column: 37,
-    required: ["tech_ie_"],
+    column: 12,
+    required: ["tech_ie_33"],
     costs: {
       research_points: 105,
       coins: 6100000,
@@ -1099,8 +1099,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_38",
     name: "Fjord Dominion",
-    column: 38,
-    required: ["tech_ie_"],
+    column: 12,
+    required: ["tech_ie_34", "tech_ie_35"],
     costs: {
       research_points: 77,
       coins: 3900000,
@@ -1129,8 +1129,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_39",
     name: "Harbor Economics",
-    column: 39,
-    required: ["tech_ie_"],
+    column: 12,
+    required: ["tech_ie_34", "tech_ie_35"],
     costs: {
       research_points: 90,
       coins: 4200000,
@@ -1158,8 +1158,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_40",
     name: "Tertiary Workshop",
-    column: 40,
-    required: ["tech_ie_"],
+    column: 13,
+    required: ["tech_ie_36", "tech_ie_37", "tech_ie_38", "tech_ie_39"],
     costs: {
       research_points: 82,
       coins: 6200000,
@@ -1187,8 +1187,8 @@ export const technos_IE: TechnoData[] = [
   {
     id: "tech_ie_41",
     name: "Viking Consensus",
-    column: 41,
-    required: ["tech_ie_"],
+    column: 14,
+    required: ["tech_ie_40"],
     costs: {
       research_points: 100,
       coins: 4900000,
