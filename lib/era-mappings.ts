@@ -5,7 +5,7 @@
 export const ERA_ID_TO_ABBR: Record<string, string> = {
   stone_age: "sa",
   bronze_age: "ba",
-  middle_ages: "me",
+  minoan_era: "me",
   classical_greece: "cg",
   early_rome: "er",
   roman_empire: "re",

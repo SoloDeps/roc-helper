@@ -42,6 +42,7 @@ import {
   deleteAllOttomanTradePosts,
 } from "@/lib/db/delete-utils";
 import { ERA_ORDER } from "@/data/config";
+import { ERA_ID_TO_ABBR } from "@/lib/era-mappings";
 import { EraCode } from "@/types/shared";
 // import type { TechnoEntity } from "@/lib/db/schema";
 import type { HydratedTechno } from "@/lib/db/data-hydration";
@@ -449,24 +450,14 @@ export function ItemList() {
               <div className="space-y-3">
                 {Array.from(technosByEra.entries())
                   .sort(([eraIdA], [eraIdB]) => {
-                    // ✅ Convert era IDs to abbreviations for sorting
-                    // early_gothic_era → EG, late_gothic_era → LG
-                    const getAbbrFromId = (eraId: string): string => {
-                      return eraId
-                        .split("_")
-                        .filter((word) => word !== "era")
-                        .map((word) => word[0])
-                        .join("")
-                        .toUpperCase();
-                    };
+                    const abbrA = ERA_ID_TO_ABBR[
+                      eraIdA
+                    ]?.toUpperCase() as EraCode;
+                    const abbrB = ERA_ID_TO_ABBR[
+                      eraIdB
+                    ]?.toUpperCase() as EraCode;
 
-                    const abbrA = getAbbrFromId(eraIdA);
-                    const abbrB = getAbbrFromId(eraIdB);
-
-                    return (
-                      ERA_ORDER.indexOf(abbrA as EraCode) -
-                      ERA_ORDER.indexOf(abbrB as EraCode)
-                    );
+                    return ERA_ORDER.indexOf(abbrA) - ERA_ORDER.indexOf(abbrB);
                   })
                   .map(([era, eraTechnos]) => {
                     return (

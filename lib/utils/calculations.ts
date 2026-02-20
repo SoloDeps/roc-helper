@@ -1,11 +1,11 @@
 "use client";
 
-import type {
-  BuildingEntity,
-  TechnoEntity,
-  OttomanAreaEntity,
-  OttomanTradePostEntity,
-} from "@/lib/db/schema";
+import {
+  HydratedBuilding,
+  HydratedOttomanArea,
+  HydratedOttomanTradePost,
+  HydratedTechno,
+} from "@/lib/db/data-hydration";
 
 export interface ResourceTotals {
   main: Record<string, number>;
@@ -15,10 +15,10 @@ export interface ResourceTotals {
 }
 
 export function calculateTotalCosts(
-  buildings: BuildingEntity[],
-  technos: TechnoEntity[],
-  areas: OttomanAreaEntity[],
-  tradePosts: OttomanTradePostEntity[],
+  buildings: HydratedBuilding[],
+  technos: HydratedTechno[],
+  areas: HydratedOttomanArea[],
+  tradePosts: HydratedOttomanTradePost[],
 ): ResourceTotals {
   const totals: ResourceTotals = {
     main: {},

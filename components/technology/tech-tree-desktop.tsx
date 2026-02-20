@@ -619,7 +619,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           {selectedTech && mode === "select" && (
             <Panel
               position="top-right"
-              className="m-2 w-80 rounded-lg! overflow-hidden!"
+              className="m-2 w-[360px] rounded-lg! overflow-hidden!"
             >
               <TechDetailsPanel
                 tech={selectedTech}
@@ -633,7 +633,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           {isPathMode && pathFound && pathToTech && (
             <Panel
               position="top-right"
-              className="m-2 w-80 rounded-lg! overflow-hidden!"
+              className="m-2 w-[360px] rounded-lg! overflow-hidden!"
             >
               <TechPathPanel
                 fromTech={mode === "ancestors-result" ? null : pathFromTech}

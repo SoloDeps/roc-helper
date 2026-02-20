@@ -420,14 +420,6 @@ function useMainResources(mainResources: Record<string, number>) {
 // MAIN COMPONENT
 // ============================================================================
 
-/**
- * TotalGoodsDisplay - Composant optimisé pour Next.js 16 + React Compiler
- *
- * ✅ AMÉLIORATIONS:
- * - Affiche un skeleton pendant le chargement initial
- * - Évite le flash de l'EmptyCard
- * - Meilleure UX avec états de chargement
- */
 export function TotalGoodsDisplay({
   compareMode = false,
 }: TotalGoodsDisplayProps) {
@@ -473,6 +465,21 @@ export function TotalGoodsDisplay({
     [mainResources.length, visibleEras.length, hasOtherGoods],
   );
 
+  const allDataHidden = useMemo(() => {
+    const hasData =
+      buildings.length > 0 ||
+      technos.length > 0 ||
+      areas.length > 0 ||
+      tradePosts.length > 0;
+    if (!hasData) return false;
+    return (
+      buildings.every((b) => b.hidden) &&
+      technos.every((t) => t.hidden) &&
+      areas.every((a) => a.hidden) &&
+      tradePosts.every((tp) => tp.hidden)
+    );
+  }, [buildings, technos, areas, tradePosts]);
+
   // ========================================
   // RENDER
   // ========================================
@@ -482,6 +489,18 @@ export function TotalGoodsDisplay({
     return (
       <div className="size-full overflow-y-auto bg-background-200">
         <TotalResourcesSkeleton />
+      </div>
+    );
+  }
+
+  // Toutes les données sont cachées → priorité sur hasAnyResources
+  // (les entités hidden sont exclues du calcul, donc totals = vide aussi)
+  if (allDataHidden) {
+    return (
+      <div className="p-8 size-full m-auto flex items-center justify-center bg-background-200">
+        <div className="-mt-12">
+          <EmptyOutline perso="male2" type="all-hidden" />
+        </div>
       </div>
     );
   }

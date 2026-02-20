@@ -30,8 +30,8 @@ export default function HomePage() {
       </aside>
 
       {/* RIGHT PANEL - Buildings List */}
-      <div className="relative flex min-w-0 flex-1 flex-col 2xl:w-5/11 lg:w-6/11">
-        <main className="md:mx-0 material-medium relative mb-0 md:mb-2 mt-0 flex-1 grow overflow-hidden">
+      <div className="relative flex min-w-0 mx-auto flex-1 flex-col 2xl:w-5/11 lg:w-6/11">
+        <main className="material-medium relative mb-0 md:mb-2 mt-0 flex-1 grow overflow-hidden">
           <div className="@container/page-layout relative flex size-full min-h-0 flex-col">
             {/* Header with actions */}
             <header className="flex shrink-0 flex-col w-full transition-colors border-b bg-roc-blue">
@@ -46,6 +46,10 @@ export default function HomePage() {
                   {/* Mobile: Total Drawer */}
                   <div className="block xl:hidden">
                     <TotalDrawer />
+                  </div>
+
+                  <div className="hidden md:block xl:hidden">
+                    <WorkshopModal />
                   </div>
                 </div>
 

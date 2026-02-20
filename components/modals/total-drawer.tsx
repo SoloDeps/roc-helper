@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Sigma, X } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
@@ -28,6 +28,7 @@ export function TotalDrawer({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button size="sm" variant="outline" className="cursor-pointer">
+          <Sigma className="size-[18px]" />
           View Total
         </Button>
       </DrawerTrigger>

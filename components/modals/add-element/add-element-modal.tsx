@@ -300,16 +300,25 @@ ModalContent.displayName = "ModalContent";
  */
 interface AddElementModalProps {
   variant?: "default" | "outline" | "ghost";
+  long?: boolean;
+  hideTrigger?: boolean;
 }
 
-export function AddElementModal({ variant = "default" }: AddElementModalProps) {
+export function AddElementModal({
+  variant = "default",
+  long = false,
+  hideTrigger = false,
+}: AddElementModalProps) {
   const isOpen = useModalState();
   const { openModal, closeModal } = useAddElementStore();
 
-  const trigger = (
+  const trigger = hideTrigger ? (
+    // Trigger invisible mais monté pour que ResponsiveModal fonctionne
+    <span className="sr-only" aria-hidden />
+  ) : (
     <Button size="sm" variant={variant}>
       <Plus className="h-4 w-4" />
-      Add
+      Add {long ? "an element" : ""}
     </Button>
   );
 

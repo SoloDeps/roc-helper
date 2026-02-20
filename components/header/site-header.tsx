@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ModeToggle } from "./mode-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,6 +12,7 @@ import { MobileNav } from "./mobile-nav";
 import { siteConfig } from "@/lib/config";
 
 export function SiteHeader() {
+  const pathname = usePathname();
   return (
     <header className="relative z-20 flex w-full shrink-0 items-center justify-between h-[50px] container-wrapper">
       <div className="flex items-center gap-2">
@@ -25,20 +29,31 @@ export function SiteHeader() {
             RoC Helper
           </span>
         </Link>
-        <Badge className="h-6 hidden md:inline-block rounded-sm beta-badge">
-          Beta
-        </Badge>
 
-        <Button variant="outline" size="sm" className="hidden md:flex" asChild>
-          <Link href="/research-tree">
-            <span>Research Tree</span>
-          </Link>
-        </Button>
-        <Button variant="outline" size="sm" className="hidden md:flex" asChild>
-          <Link href="/calculator">
-            <span>Calculator</span>
-          </Link>
-        </Button>
+        {pathname !== "/research-tree" && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden md:flex"
+            asChild
+          >
+            <Link href="/research-tree">
+              <span>Research Tree</span>
+            </Link>
+          </Button>
+        )}
+        {pathname !== "/calculator" && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden md:flex"
+            asChild
+          >
+            <Link href="/calculator">
+              <span>Calculator</span>
+            </Link>
+          </Button>
+        )}
       </div>
 
       <div className="flex items-center gap-1.5">

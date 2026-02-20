@@ -56,7 +56,7 @@ export function TechPathPanel({
         amount,
       })),
     };
-  }, [pathTechs, toTech.id]);
+  }, [pathTechs]);
 
   const goodsBadges = totalGoods.map((g, i) => {
     const match = g.resource.match(

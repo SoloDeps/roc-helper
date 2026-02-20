@@ -1,12 +1,18 @@
-// import { AddBuildingSheet } from "./add-building-sheet";
+"use client";
+
+import Image from "next/image";
+import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
+import { showAllEntities } from "@/lib/db/hide-show-utils";
+
+import { Button } from "@/components/ui/button";
 import { WorkshopModal } from "@/components/modals/workshop-modal";
 import { PresetListModal } from "@/components/modals/preset-list-modal";
 import { AddElementModal } from "../modals/add-element/add-element-modal";
-import Image from "next/image";
 
 interface EmptyType {
   perso: "male" | "female" | "male2";
-  type: "total" | "building" | "no-data";
+  type: "total" | "building" | "no-data" | "all-hidden";
 }
 
 interface ContentItem {
@@ -38,13 +44,29 @@ const content: Record<"male" | "female" | "male2", ContentItem> = {
     imgClass: "h-56 left-28 hidden md:block",
     image: "/characters/male2_lge.png",
     textClass: "ps-12 md:ps-52",
-    text: "No Game Data Found",
+    text: "What are you up to, Chief?",
     description:
-      "Please export your game data first!\nOpen the game and use the extension\nto export your resources.",
+      "Everything's hidden here...\nUnhide some items to see your resources!",
   },
 };
 
 export function EmptyOutline({ perso, type }: EmptyType) {
+  const queryClient = useQueryClient();
+
+  const invalidateAll = () => {
+    queryClient.invalidateQueries({ refetchType: "all" });
+  };
+
+  const handleShowAll = async () => {
+    try {
+      await showAllEntities();
+      invalidateAll();
+    } catch (error) {
+      console.error("Failed to show all:", error);
+      toast.error("Failed to show all items");
+    }
+  };
+
   return (
     <div className="relative max-w-xl w-full h-48 border rounded-xl border-alpha-400 bg-background-300 shadow-xs">
       <div
@@ -56,13 +78,17 @@ export function EmptyOutline({ perso, type }: EmptyType) {
         </p>
         {type !== "no-data" && (
           <div className="pt-1">
-            {type === "building" ? (
+            {type === "building" && (
               <div className="flex justify-center items-center gap-2">
-                <AddElementModal variant="default" />
-                <PresetListModal variant="default" />
+                <AddElementModal variant="default" long />
+                {/* <PresetListModal variant="default" /> */}
               </div>
-            ) : (
-              <WorkshopModal variant="default" />
+            )}
+            {type === "total" && <WorkshopModal variant="default" />}
+            {type === "all-hidden" && (
+              <Button variant="default" size="sm" onClick={handleShowAll}>
+                Show all
+              </Button>
             )}
           </div>
         )}

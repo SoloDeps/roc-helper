@@ -9,6 +9,7 @@ import {
   Eye,
   X,
   Trash2Icon,
+  Settings2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -230,6 +231,7 @@ export function ButtonGroupBuilding() {
       <Drawer open={drawerOpen} onOpenChange={setDrawerOpen} nested>
         <DrawerTrigger asChild>
           <Button size="sm" variant="outline">
+            <Settings2 />
             Actions
           </Button>
         </DrawerTrigger>

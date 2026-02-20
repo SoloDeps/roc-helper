@@ -219,8 +219,9 @@
 
 @layer components {
   .container-wrapper {
-    @apply mx-auto w-full max-w-[1620px] px-2 sm:px-4 max-xl:max-w-4xl;
+    @apply mx-auto w-full max-w-[1620px] px-2 sm:px-4;
   }
+  /*  max-xl:max-w-4xl; */
 
   /* 📱 Mobile - max-width: 767px */
   @media (max-width: 767px) {
@@ -237,7 +238,7 @@
   /* 💻 Desktop - min-width: 768px */
   @media (min-width: 768px) {
     .material-medium {
-      @apply rounded-md border border-border bg-background-100;
+      @apply rounded-md border border-border bg-background-100 mx-auto w-full max-xl:max-w-4xl;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.04), 0 -8px 8px -8px rgba(0, 0, 0, 0.04);
     }
 
