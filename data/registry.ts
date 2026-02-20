@@ -20,6 +20,18 @@ import { cavalryBarracks } from "@/data/capital/barracks/calvary_barracks";
 import { heavyInfantryBarracks } from "@/data/capital/barracks/heavy_infantry_barracks";
 import { siegeBarracks } from "@/data/capital/barracks/siege_barracks";
 
+import { artisanWorkshop } from "@/data/capital/workshops/artisan";
+import { stoneMasonWorkshop } from "@/data/capital/workshops/stone_mason";
+import { tailorWorkshop } from "@/data/capital/workshops/tailor";
+
+import { scribeWorkshop } from "@/data/capital/workshops/scribe";
+import { carpenterWorkshop } from "@/data/capital/workshops/carpenter";
+import { spiceMerchantWorkshop } from "@/data/capital/workshops/spice_merchant";
+
+import { alchemistWorkshop } from "@/data/capital/workshops/alchemist";
+import { jewelerWorkshop } from "@/data/capital/workshops/jeweler";
+import { glassblowerWorkshop } from "@/data/capital/workshops/glassblower";
+
 import { seafarerHouse } from "@/data/capital/harbor_houses/seafarer_house";
 import { luxuriousSeafarerHouse } from "@/data/capital/harbor_houses/luxurious_seafarer_house";
 
@@ -182,6 +194,16 @@ export const ELEMENT_DATA_REGISTRY: Record<string, BuildingData> = {
   capital_cavalry_barracks: cavalryBarracks,
   capital_heavy_infantry_barracks: heavyInfantryBarracks,
   capital_siege_barracks: siegeBarracks,
+  // capital - workshops
+  capital_artisan: artisanWorkshop,
+  capital_tailor: tailorWorkshop,
+  capital_stone_mason: stoneMasonWorkshop,
+  capital_scribe: scribeWorkshop,
+  capital_carpenter: carpenterWorkshop,
+  capital_spice_merchant: spiceMerchantWorkshop,
+  capital_alchemist: alchemistWorkshop,
+  capital_jeweler: jewelerWorkshop,
+  capital_glassblower: glassblowerWorkshop,
   // capital - harbor houses
   capital_seafarer_house: seafarerHouse,
   capital_luxurious_seafarer_house: luxuriousSeafarerHouse,
