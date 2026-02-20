@@ -3,52 +3,35 @@
 import Dexie, { type Table } from "dexie";
 
 // ============================================================================
-// OPTIMIZED ENTITIES - Version Finale (sans migration)
+// OPTIMIZED ENTITIES — hidden: 0|1 partout, levels: 0|1, qty pour buildings
 // ============================================================================
 
-/**
- * TechnoEntity - Stocke UNIQUEMENT l'état utilisateur
- * Les données statiques restent dans technos-registry.ts
- */
 export interface TechnoEntity {
-  id: string; // "tech_eg_0" (nouveau format court)
-  hidden: boolean; // Seule donnée qui change !
-  updatedAt?: number; // Optionnel pour sync/debug
+  id: string; // "eg_0" (sans préfixe "tech_")
+  hidden: number; // 0 | 1
 }
 
-/**
- * BuildingEntity - État utilisateur minimal
- */
 export interface BuildingEntity {
-  id: string; // "capital_small_home_upgrade_LG_41"
-  quantity: number; // Quantité sélectionnée
-  hidden: boolean; // Visible/caché
-  updatedAt?: number;
+  id: string;
+  qty: number; // ex-quantity
+  hidden: number; // 0 | 1
 }
 
-/**
- * OttomanAreaEntity - État minimal
- */
 export interface OttomanAreaEntity {
-  id: string; // "ottoman_area_1"
-  hidden: boolean;
-  updatedAt?: number;
+  id: string; // "oa_{index}" ex: "oa_1"
+  hidden: number; // 0 | 1
 }
 
-/**
- * OttomanTradePostEntity - Niveaux + état
- */
 export interface OttomanTradePostEntity {
-  id: string; // "ottoman_tp_wheat_trader"
+  id: string; // "otp_{index}" ex: "otp_5"
   levels: {
-    unlock: boolean;
-    lvl2: boolean;
-    lvl3: boolean;
-    lvl4: boolean;
-    lvl5: boolean;
+    unlock: number; // 0 | 1
+    lvl2: number; // 0 | 1
+    lvl3: number; // 0 | 1
+    lvl4: number; // 0 | 1
+    lvl5: number; // 0 | 1
   };
-  hidden: boolean;
-  updatedAt?: number;
+  hidden: number; // 0 | 1
 }
 
 // ============================================================================
@@ -64,12 +47,11 @@ export class RocWikiDB extends Dexie {
   constructor() {
     super("roc_wiki_db");
 
-    // Version 1: Schéma optimisé minimal (clean start)
     this.version(1).stores({
-      buildings: "id,hidden,updatedAt",
-      technos: "id,hidden,updatedAt",
-      ottomanAreas: "id,hidden,updatedAt",
-      ottomanTradePosts: "id,hidden,updatedAt",
+      buildings: "id,hidden",
+      technos: "id,hidden",
+      ottomanAreas: "id,hidden",
+      ottomanTradePosts: "id,hidden",
     });
   }
 }
@@ -96,3 +78,33 @@ export function getWikiDB(): RocWikiDB {
 }
 
 export const db = typeof window !== "undefined" ? getWikiDB() : null;
+
+// ============================================================================
+// HELPERS — Conversion id techno
+// ============================================================================
+
+/** "oa_1" helpers */
+export function areaIndexToId(index: number): string {
+  return `oa_${index}`;
+}
+export function idToAreaIndex(id: string): number {
+  return parseInt(id.replace("oa_", ""));
+}
+
+/** "otp_5" helpers */
+export function tradePostIndexToId(index: number): string {
+  return `otp_${index}`;
+}
+export function idToTradePostIndex(id: string): number {
+  return parseInt(id.replace("otp_", ""));
+}
+
+/** "tech_eg_0" → "eg_0" (pour stocker en DB) */
+export function techIdToDbId(fullId: string): string {
+  return fullId.replace(/^tech_/, "");
+}
+
+/** "eg_0" → "tech_eg_0" (pour reconstruire depuis la DB) */
+export function dbIdToTechId(dbId: string): string {
+  return `tech_${dbId}`;
+}

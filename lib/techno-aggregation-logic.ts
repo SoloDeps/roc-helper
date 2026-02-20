@@ -1,24 +1,16 @@
 /**
  * Logique d'agrégation pour la TechnoCard
- *
- * La card affiche la SOMME de toutes les technos NON-HIDDEN d'une ère
- *
- * Exemple pour Early Gothic Era:
- * - 3 technos au total
- * - Si techno_0 est hidden=true (complétée)
- * - La card affiche seulement la somme de techno_1 + techno_2
+ * hidden: 0 = visible (inclus dans les calculs)
+ * hidden: 1 = caché (exclu des calculs, barré dans l'UI)
  */
 
 import { useMemo } from "react";
-import { getWikiDB, type TechnoEntity } from "@/lib/db/schema";
+import { getWikiDB } from "@/lib/db/schema";
+import { getEraAbbr } from "@/lib/era-mappings";
+import type { HydratedTechno } from "@/lib/db/data-hydration";
 
-/**
- * Hook pour agréger les coûts des technos d'une ère
- * Filtre automatiquement les technos hidden
- */
-export function useAggregatedTechnoCosts(technos: TechnoEntity[]) {
+export function useAggregatedTechnoCosts(technos: HydratedTechno[]) {
   return useMemo(() => {
-    // ✅ Filter out hidden technos
     const visibleTechnos = technos.filter((t) => !t.hidden);
 
     if (visibleTechnos.length === 0) {
@@ -28,24 +20,25 @@ export function useAggregatedTechnoCosts(technos: TechnoEntity[]) {
         totalFood: 0,
         goods: [],
         technoCount: 0,
-        allHidden: technos.length > 0, // true if all technos are hidden
+        allHidden: technos.length > 0,
       };
     }
 
-    // ✅ Aggregate costs
     const resources: Record<string, number> = {};
     const goodsMap = new Map<string, number>();
 
     visibleTechnos.forEach((techno) => {
-      // Aggregate resources
-      Object.entries(techno.costs.resources).forEach(([key, value]) => {
+      // ✅ costs.resources est un Record<string, number>
+      Object.entries(techno.costs?.resources ?? {}).forEach(([key, value]) => {
         resources[key] = (resources[key] || 0) + value;
       });
 
-      // Aggregate goods
-      techno.costs.goods.forEach((good) => {
-        const existing = goodsMap.get(good.resource);
-        goodsMap.set(good.resource, (existing || 0) + good.amount);
+      // ✅ costs.goods est un Array<{ resource: string; amount: number }>
+      (techno.costs?.goods ?? []).forEach((good) => {
+        goodsMap.set(
+          good.resource,
+          (goodsMap.get(good.resource) || 0) + good.amount,
+        );
       });
     });
 
@@ -65,83 +58,35 @@ export function useAggregatedTechnoCosts(technos: TechnoEntity[]) {
   }, [technos]);
 }
 
-/**
- * Exemple d'utilisation dans item-list.tsx:
- *
- * // Dans le composant
- * const technosByEra = useMemo(() => {
- *   const groups = new Map<string, TechnoEntity[]>();
- *
- *   technos.forEach((techno) => {
- *     if (!groups.has(techno.era)) groups.set(techno.era, []);
- *     groups.get(techno.era)!.push(techno);
- *   });
- *
- *   return groups;
- * }, [technos]);
- *
- * // Dans le render
- * {Array.from(technosByEra.entries()).map(([era, eraTechnos]) => {
- *   const aggregated = useAggregatedTechnoCosts(eraTechnos);
- *
- *   return (
- *     <TechnoCard
- *       key={era}
- *       era={era}
- *       aggregatedData={aggregated}
- *       technos={eraTechnos}
- *       onRemoveAll={() => removeTechnosByEra.mutate(era)}
- *     />
- *   );
- * })}
- */
-
-/**
- * Helper: Remove all technos from an era
- */
-export async function removeAllTechnosFromEra(era: string) {
+export async function removeAllTechnosFromEra(eraId: string) {
   const db = getWikiDB();
-  const technosToRemove = await db.technos.where("era").equals(era).toArray();
-
-  await Promise.all(
-    technosToRemove.map((techno) => db.technos.delete(techno.id)),
-  );
+  const eraAbbr = getEraAbbr(eraId);
+  const technos = await db.technos
+    .where("id")
+    .startsWith(`${eraAbbr}_`)
+    .toArray();
+  if (technos.length > 0) {
+    await db.technos.bulkDelete(technos.map((t) => t.id));
+  }
 }
 
-/**
- * Helper: Toggle hidden status for all technos in an era
- */
-export async function toggleAllTechnosInEra(era: string) {
+export async function toggleAllTechnosInEra(eraId: string) {
   const db = getWikiDB();
-  const eraTechnos = await db.technos.where("era").equals(era).toArray();
-
+  const eraAbbr = getEraAbbr(eraId);
+  const eraTechnos = await db.technos
+    .where("id")
+    .startsWith(`${eraAbbr}_`)
+    .toArray();
   if (eraTechnos.length === 0) return;
-
-  // Toggle: if all hidden, show all. Otherwise hide all.
-  const allHidden = eraTechnos.every((t) => t.hidden);
-  const newHiddenState = !allHidden;
-
-  await Promise.all(
-    eraTechnos.map((techno) =>
-      db.technos.update(techno.id, {
-        hidden: newHiddenState,
-        updatedAt: Date.now(),
-      }),
-    ),
+  const allHidden = eraTechnos.every((t) => !!t.hidden);
+  await db.technos.bulkPut(
+    eraTechnos.map((t) => ({ ...t, hidden: allHidden ? 0 : 1 })),
   );
 }
 
-/**
- * Helper: Toggle individual techno (pour future Technology Tracker page)
- */
 export async function toggleIndividualTechno(technoId: string) {
   const db = getWikiDB();
   const techno = await db.technos.get(technoId);
-
   if (!techno) return;
-
-  await db.technos.update(technoId, {
-    hidden: !techno.hidden,
-    updatedAt: Date.now(),
-  });
+  await db.technos.update(technoId, { hidden: techno.hidden ? 0 : 1 });
 }

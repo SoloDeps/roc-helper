@@ -8,16 +8,9 @@ import type {
   OttomanTradePostEntity,
 } from "../schema";
 
-const now = () => Date.now();
-
-/**
- * Exporte toutes les données au format JSON (presets)
- * Version optimisée - exporte seulement l'état utilisateur
- */
 export async function exportPresetsJSON(): Promise<void> {
   try {
     const db = getWikiDB();
-
     const [buildings, technos, ottomanAreas, ottomanTradePosts] =
       await Promise.all([
         db.buildings.toArray(),
@@ -25,33 +18,21 @@ export async function exportPresetsJSON(): Promise<void> {
         db.ottomanAreas.toArray(),
         db.ottomanTradePosts.toArray(),
       ]);
-
-    // Les données sont déjà minimales, pas besoin de nettoyage
     const json = {
-      version: 1,
+      version: 2,
       buildings,
       technos,
       ottomanAreas,
       ottomanTradePosts,
     };
-
     const blob = new Blob([JSON.stringify(json, null, 2)], {
       type: "application/json",
     });
-
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-
-    const timestamp = new Date().toISOString().slice(0, 10);
-    a.download = `preset_${timestamp}.json`;
-
+    a.download = `preset_${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
-
     URL.revokeObjectURL(a.href);
-
-    console.log(
-      `✅ Exported ${buildings.length} buildings, ${technos.length} technos, ${ottomanAreas.length} areas, ${ottomanTradePosts.length} trade posts`,
-    );
   } catch (error) {
     console.error("Export presets failed:", error);
     throw error;
@@ -59,92 +40,75 @@ export async function exportPresetsJSON(): Promise<void> {
 }
 
 /**
- * Importe des données depuis un preset JSON
+ * Import — compat v1 (boolean hidden, boolean levels, "tech_eg_0", quantity)
+ *       et v2 (0|1 hidden, 0|1 levels, "eg_0", qty)
  */
 export async function importPresetsJSON(jsonData: string): Promise<void> {
   try {
     const data = JSON.parse(jsonData);
     const db = getWikiDB();
-    const timestamp = now();
+    const isV1 = !data.version || data.version < 2;
 
-    // Import buildings
     if (Array.isArray(data.buildings)) {
       await db.buildings.bulkPut(
         data.buildings.map((b: BuildingEntity) => ({
           id: b.id,
-          quantity: b.quantity ?? 1,
-          hidden: b.hidden ?? false,
-          updatedAt: timestamp,
+          qty: b.qty ?? b.qty ?? 1,
+          hidden: b.hidden ? 1 : 0,
         })),
       );
     }
 
-    // Import technos
     if (Array.isArray(data.technos)) {
       await db.technos.bulkPut(
         data.technos.map((t: TechnoEntity) => ({
-          id: t.id,
-          hidden: t.hidden ?? false,
-          updatedAt: timestamp,
+          id: isV1 ? t.id.replace(/^tech_/, "") : t.id,
+          hidden: t.hidden ? 1 : 0,
         })),
       );
     }
 
-    // Import ottoman areas
     if (Array.isArray(data.ottomanAreas)) {
       await db.ottomanAreas.bulkPut(
         data.ottomanAreas.map((a: OttomanAreaEntity) => ({
           id: a.id,
-          hidden: a.hidden ?? false,
-          updatedAt: timestamp,
+          hidden: a.hidden ? 1 : 0,
         })),
       );
     }
 
-    // Import ottoman trade posts
     if (Array.isArray(data.ottomanTradePosts)) {
       await db.ottomanTradePosts.bulkPut(
         data.ottomanTradePosts.map((tp: OttomanTradePostEntity) => ({
           id: tp.id,
-          levels: tp.levels ?? {
-            unlock: false,
-            lvl2: false,
-            lvl3: false,
-            lvl4: false,
-            lvl5: false,
+          // ✅ Compat v1 (boolean levels) et v2 (0|1 levels)
+          levels: {
+            unlock: tp.levels?.unlock ? 1 : 0,
+            lvl2: tp.levels?.lvl2 ? 1 : 0,
+            lvl3: tp.levels?.lvl3 ? 1 : 0,
+            lvl4: tp.levels?.lvl4 ? 1 : 0,
+            lvl5: tp.levels?.lvl5 ? 1 : 0,
           },
-          hidden: tp.hidden ?? false,
-          updatedAt: timestamp,
+          hidden: tp.hidden ? 1 : 0,
         })),
       );
     }
-
-    console.log("✅ Import completed successfully");
   } catch (error) {
     console.error("Import presets failed:", error);
     throw new Error("Failed to import presets. Please check the file format.");
   }
 }
 
-/**
- * Efface toutes les données de la base
- */
 export async function clearAllData(): Promise<void> {
   const db = getWikiDB();
-
   await Promise.all([
     db.buildings.clear(),
     db.technos.clear(),
     db.ottomanAreas.clear(),
     db.ottomanTradePosts.clear(),
   ]);
-
-  console.log("✅ All data cleared");
 }
 
-/**
- * Récupère des statistiques sur toutes les données
- */
 export async function getAllStats(): Promise<{
   buildings: { total: number; visible: number; hidden: number };
   technos: { total: number; visible: number; hidden: number };
@@ -152,7 +116,6 @@ export async function getAllStats(): Promise<{
   ottomanTradePosts: { total: number; visible: number; hidden: number };
 }> {
   const db = getWikiDB();
-
   const [buildings, technos, ottomanAreas, ottomanTradePosts] =
     await Promise.all([
       db.buildings.toArray(),
@@ -160,37 +123,32 @@ export async function getAllStats(): Promise<{
       db.ottomanAreas.toArray(),
       db.ottomanTradePosts.toArray(),
     ]);
-
   return {
     buildings: {
       total: buildings.length,
       visible: buildings.filter((b) => !b.hidden).length,
-      hidden: buildings.filter((b) => b.hidden).length,
+      hidden: buildings.filter((b) => !!b.hidden).length,
     },
     technos: {
       total: technos.length,
       visible: technos.filter((t) => !t.hidden).length,
-      hidden: technos.filter((t) => t.hidden).length,
+      hidden: technos.filter((t) => !!t.hidden).length,
     },
     ottomanAreas: {
       total: ottomanAreas.length,
       visible: ottomanAreas.filter((a) => !a.hidden).length,
-      hidden: ottomanAreas.filter((a) => a.hidden).length,
+      hidden: ottomanAreas.filter((a) => !!a.hidden).length,
     },
     ottomanTradePosts: {
       total: ottomanTradePosts.length,
       visible: ottomanTradePosts.filter((tp) => !tp.hidden).length,
-      hidden: ottomanTradePosts.filter((tp) => tp.hidden).length,
+      hidden: ottomanTradePosts.filter((tp) => !!tp.hidden).length,
     },
   };
 }
 
-/**
- * Clone toutes les données vers un backup
- */
 export async function backupAllData(): Promise<string> {
   const db = getWikiDB();
-
   const [buildings, technos, ottomanAreas, ottomanTradePosts] =
     await Promise.all([
       db.buildings.toArray(),
@@ -198,45 +156,33 @@ export async function backupAllData(): Promise<string> {
       db.ottomanAreas.toArray(),
       db.ottomanTradePosts.toArray(),
     ]);
-
-  const backup = {
-    timestamp: new Date().toISOString(),
-    version: 1,
-    data: {
-      buildings,
-      technos,
-      ottomanAreas,
-      ottomanTradePosts,
+  return JSON.stringify(
+    {
+      timestamp: new Date().toISOString(),
+      version: 2,
+      data: { buildings, technos, ottomanAreas, ottomanTradePosts },
     },
-  };
-
-  return JSON.stringify(backup, null, 2);
+    null,
+    2,
+  );
 }
 
-/**
- * Restaure les données depuis un backup
- */
 export async function restoreFromBackup(backupJson: string): Promise<void> {
   try {
     const backup = JSON.parse(backupJson);
-
-    if (!backup.data) {
-      throw new Error("Invalid backup format");
-    }
+    if (!backup.data) throw new Error("Invalid backup format");
 
     const db = getWikiDB();
+    const isV1 = !backup.version || backup.version < 2;
 
-    // Clear existing data
     await clearAllData();
-
-    // Restore data
-    const timestamp = now();
 
     if (backup.data.buildings) {
       await db.buildings.bulkPut(
         backup.data.buildings.map((b: BuildingEntity) => ({
-          ...b,
-          updatedAt: timestamp,
+          id: b.id,
+          qty: b.qty ?? b.qty ?? 1,
+          hidden: b.hidden ? 1 : 0,
         })),
       );
     }
@@ -244,8 +190,8 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
     if (backup.data.technos) {
       await db.technos.bulkPut(
         backup.data.technos.map((t: TechnoEntity) => ({
-          ...t,
-          updatedAt: timestamp,
+          id: isV1 ? t.id.replace(/^tech_/, "") : t.id,
+          hidden: t.hidden ? 1 : 0,
         })),
       );
     }
@@ -253,8 +199,8 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
     if (backup.data.ottomanAreas) {
       await db.ottomanAreas.bulkPut(
         backup.data.ottomanAreas.map((a: OttomanAreaEntity) => ({
-          ...a,
-          updatedAt: timestamp,
+          id: a.id,
+          hidden: a.hidden ? 1 : 0,
         })),
       );
     }
@@ -262,13 +208,18 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
     if (backup.data.ottomanTradePosts) {
       await db.ottomanTradePosts.bulkPut(
         backup.data.ottomanTradePosts.map((tp: OttomanTradePostEntity) => ({
-          ...tp,
-          updatedAt: timestamp,
+          id: tp.id,
+          levels: {
+            unlock: tp.levels?.unlock ? 1 : 0,
+            lvl2: tp.levels?.lvl2 ? 1 : 0,
+            lvl3: tp.levels?.lvl3 ? 1 : 0,
+            lvl4: tp.levels?.lvl4 ? 1 : 0,
+            lvl5: tp.levels?.lvl5 ? 1 : 0,
+          },
+          hidden: tp.hidden ? 1 : 0,
         })),
       );
     }
-
-    console.log("✅ Backup restored successfully");
   } catch (error) {
     console.error("Restore from backup failed:", error);
     throw new Error("Failed to restore backup. Please check the file format.");

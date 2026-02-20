@@ -1,60 +1,12 @@
-import { BuildingData, BuildingLevel } from "@/types/shared";
-import { getEraForLevel, getMaxQtyForEra, getPrevEra } from "@/data/config";
+import { BuildingData } from "@/types/shared";
+import { generateLuxuryLevels } from "@/data/generateDynamicLevels";
 
-function generateDynamicLevels(
-  startLevel: 40,
-  maxLevel: number = 42,
-): BuildingLevel[] {
-  const levels: BuildingLevel[] = [];
-
-  for (let level = startLevel; level <= maxLevel; level++) {
-    const era = getEraForLevel(level);
-    const prevEra = getPrevEra(era);
-
-    const upgrade =
-      level === 40
-        ? {
-            coins: 320000,
-            food: 640000,
-            goods: [
-              { amount: 1500, resource: "primary_eg" }, // EarlyGothicEra_Good1
-              { amount: 1500, resource: "secondary_eg" }, // EarlyGothicEra_Good2
-              { amount: 1500, resource: "tertiary_eg" }, // EarlyGothicEra_Good3
-              { amount: 3000, resource: "confection" },
-            ],
-          }
-        : {
-            coins: level * 15000 - 265000,
-            food: level * 30000 - 530000,
-            goods: [
-              { amount: 600, resource: `primary_${prevEra}` },
-              { amount: 600, resource: `secondary_${prevEra}` },
-              { amount: 600, resource: `tertiary_${prevEra}` },
-            ],
-          };
-
-    levels.push({
-      level,
-      era,
-      max_qty: getMaxQtyForEra(era, "homes") ?? 31,
-      upgrade,
-
-      ...(level % 3 === 1 && {
-        construction: {
-          coins: level * 100000,
-          food: level * 220000,
-          goods: [
-            { amount: 2500, resource: `primary_${prevEra}` },
-            { amount: 2500, resource: `secondary_${prevEra}` },
-            { amount: 2500, resource: `tertiary_${prevEra}` },
-          ],
-        },
-      }),
-    });
-  }
-
-  return levels;
-}
+export const luxuriousHomeDynamic = generateLuxuryLevels({
+  buildingId: "luxurious_home",
+  defaultMaxQty: 12,
+  upgrade: { gems: 50 },
+  construction: { gems: (l) => Math.ceil(l / 3) * 50 + 700 },
+});
 
 export const luxuriousHome: BuildingData = {
   id: "capital-homes-luxurious-home",
@@ -203,6 +155,6 @@ export const luxuriousHome: BuildingData = {
         gems: 50,
       },
     },
-    ...generateDynamicLevels(40, 42),
+    ...luxuriousHomeDynamic,
   ],
 };

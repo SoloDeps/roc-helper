@@ -21,7 +21,7 @@ import { TechDetailsPanel } from "./tech-details-panel";
 import { TechPathPanel } from "./tech-path-panel";
 import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
-import { getWikiDB } from "@/lib/db/schema";
+import { getWikiDB, techIdToDbId, dbIdToTechId } from "@/lib/db/schema";
 import { Handle, Position } from "@xyflow/react";
 import { cn } from "@/lib/utils";
 import { GitFork, X, Target, Check } from "lucide-react";
@@ -260,7 +260,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
     const db = getWikiDB();
     return await db.technos
       .where("id")
-      .anyOf(technologies.map((t) => t.id))
+      .anyOf(technologies.map((t) => techIdToDbId(t.id)))
       .toArray();
   }, [technologies]);
 
@@ -268,7 +268,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
-      if (t.hidden) ids.add(t.id);
+      if (t.hidden) ids.add(dbIdToTechId(t.id));
     });
     return ids;
   }, [technosInDB]);
@@ -286,7 +286,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           ...collectAncestorIds(techId, technologies),
         ];
         await db.technos.bulkPut(
-          idsToComplete.map((id) => ({ id, hidden: true, updatedAt: now })),
+          idsToComplete.map((id) => ({ id: techIdToDbId(id), hidden: 1 })),
         );
       } else {
         const idsToUncheck = [
@@ -294,7 +294,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           ...collectDescendantIds(techId, technologies),
         ];
         await db.technos.bulkPut(
-          idsToUncheck.map((id) => ({ id, hidden: false, updatedAt: now })),
+          idsToUncheck.map((id) => ({ id: techIdToDbId(id), hidden: 0 })),
         );
       }
     },
@@ -304,7 +304,9 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
   const { baseNodes, baseEdges } = useMemo(() => {
     const enriched = technologies.map((tech) => ({
       ...tech,
-      completed: technosInDB?.find((t) => t.id === tech.id)?.hidden ?? false,
+      completed:
+        technosInDB?.find((t) => t.id === techIdToDbId(tech.id))?.hidden ??
+        false,
     }));
     const { nodes, edges } = buildGraphData(enriched as any);
     return {

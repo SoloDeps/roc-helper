@@ -1,69 +1,27 @@
-import { BuildingData, BuildingLevel } from "@/types/shared";
-import { getEraForLevel, getMaxQtyForEra, getPrevEra } from "@/data/config";
+import { BuildingData } from "@/types/shared";
+import { generateStandardLevels } from "@/data/generateDynamicLevels";
 
-// a corriger
-function generateDynamicLevels(
-  startLevel: 40,
-  maxLevel: number = 42,
-): BuildingLevel[] {
-  const levels: BuildingLevel[] = [];
-
-  for (let level = startLevel; level <= maxLevel; level++) {
-    const era = getEraForLevel(level);
-    const prevEra = getPrevEra(era);
-
-    const upgrade =
-      level === 40
-        ? {
-            coins: 320000,
-            food: 640000,
-            goods: [
-              { amount: 1500, resource: "primary_eg" }, // EarlyGothicEra_Good1
-              { amount: 1500, resource: "secondary_eg" }, // EarlyGothicEra_Good2
-              { amount: 1500, resource: "tertiary_eg" }, // EarlyGothicEra_Good3
-              { amount: 3000, resource: "confection" },
-            ],
-          }
-        : {
-            coins: level * 15000 - 265000,
-            food: level * 30000 - 530000,
-            goods: [
-              { amount: 600, resource: `primary_${prevEra}` },
-              { amount: 600, resource: `secondary_${prevEra}` },
-              { amount: 600, resource: `tertiary_${prevEra}` },
-            ],
-          };
-
-    levels.push({
-      level,
-      era,
-      max_qty: getMaxQtyForEra(era, "homes") ?? 31,
-      upgrade,
-
-      // Construction pour level 40 et tous les levels divisibles par 3 (40, 43, 46, etc.)
-      ...((level === 40 || level % 3 === 1) && {
-        construction: {
-          coins: level === 40 ? 4000000 : level * 100000,
-          food: level === 40 ? 8800000 : level * 220000,
-          goods:
-            level === 40
-              ? [
-                  { amount: 5000, resource: "lead_glass" },
-                  { amount: 5000, resource: "fine_jewelry" },
-                  { amount: 5000, resource: "ointment" },
-                ]
-              : [
-                  { amount: 2500, resource: `primary_${prevEra}` },
-                  { amount: 2500, resource: `secondary_${prevEra}` },
-                  { amount: 2500, resource: `tertiary_${prevEra}` },
-                ],
-        },
-      }),
-    });
-  }
-
-  return levels;
-}
+export const averageHomeDynamic = generateStandardLevels({
+  buildingId: "average_home",
+  defaultMaxQty: 15,
+  goodsAmounts: [1200, 1600, 2000],
+  constructionGoodsAmount: 5000,
+  upgrade: {
+    coins: (l) => l * 40000 - 730000,
+    food: (l) => l * 50000 - 450000,
+  },
+  construction: {
+    coins: (l) => l * 100000,
+    food: (l) => l * 220000,
+  },
+  level40Upgrade: {
+    goodsSource: "previous",
+    goodsAmount: 1800,
+    coins: 830000,
+    food: 1500000,
+    extraGoods: [{ amount: 6000, resource: "syrup" }],
+  },
+});
 
 export const averageHome: BuildingData = {
   id: "capital-homes-average-home",
@@ -1148,6 +1106,6 @@ export const averageHome: BuildingData = {
         ],
       },
     },
-    ...generateDynamicLevels(40, 42),
+    ...averageHomeDynamic,
   ],
 };

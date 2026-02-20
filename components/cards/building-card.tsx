@@ -161,7 +161,7 @@ export function BuildingCard({
             <div className="flex items-center gap-2">
               <h3
                 className={cn(
-                  "text-sm lg:text-[15px] font-medium max-w-44 truncate capitalize",
+                  "text-sm lg:text-[15px] font-medium max-sm:max-w-44 truncate capitalize",
                   hidden && "opacity-50",
                 )}
               >
@@ -254,7 +254,7 @@ export function BuildingCard({
             {/* Mobile: Hide button + Counter */}
             <div className="flex md:hidden justify-between items-end gap-2">
               <Button
-                variant="outline"
+                variant={hidden ? "outline" : "ghost"}
                 className={cn(
                   "rounded-sm h-[34px]",
                   !hidden && "text-muted-foreground border-transparent",

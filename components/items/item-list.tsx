@@ -268,7 +268,10 @@ export function ItemList() {
         },
         onDeleteAll: async () => {
           await deleteAllTechnologies();
-          queryClient.invalidateQueries({ queryKey: ["technos"] });
+          queryClient.invalidateQueries({
+            queryKey: ["technos"],
+            refetchType: "all",
+          });
         },
         deleteConfirmMessage: (
           <>
@@ -291,11 +294,17 @@ export function ItemList() {
         allHidden: buildingsInElement.every((b) => b.hidden),
         onToggleAllHidden: async () => {
           await toggleHideAllBuildings(buildingIds);
-          queryClient.invalidateQueries({ queryKey: ["buildings"] });
+          queryClient.invalidateQueries({
+            queryKey: ["buildings"],
+            refetchType: "all",
+          });
         },
         onDeleteAll: async () => {
           await deleteAllBuildings(buildingIds);
-          queryClient.invalidateQueries({ queryKey: ["buildings"] });
+          queryClient.invalidateQueries({
+            queryKey: ["buildings"],
+            refetchType: "all",
+          });
         },
         deleteConfirmMessage: (
           <>
@@ -315,11 +324,17 @@ export function ItemList() {
         allHidden: areas.every((a) => a.hidden),
         onToggleAllHidden: async () => {
           await toggleHideAllOttomanAreas();
-          queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
+          queryClient.invalidateQueries({
+            queryKey: ["ottoman-areas"],
+            refetchType: "all",
+          });
         },
         onDeleteAll: async () => {
           await deleteAllOttomanAreas();
-          queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
+          queryClient.invalidateQueries({
+            queryKey: ["ottoman-areas"],
+            refetchType: "all",
+          });
         },
         deleteConfirmMessage: (
           <>
@@ -338,11 +353,17 @@ export function ItemList() {
         allHidden: tradePosts.every((tp) => tp.hidden),
         onToggleAllHidden: async () => {
           await toggleHideAllOttomanTradePosts();
-          queryClient.invalidateQueries({ queryKey: ["ottoman-tradeposts"] });
+          queryClient.invalidateQueries({
+            queryKey: ["ottoman-tradeposts"],
+            refetchType: "all",
+          });
         },
         onDeleteAll: async () => {
           await deleteAllOttomanTradePosts();
-          queryClient.invalidateQueries({ queryKey: ["ottoman-tradeposts"] });
+          queryClient.invalidateQueries({
+            queryKey: ["ottoman-tradeposts"],
+            refetchType: "all",
+          });
         },
         deleteConfirmMessage: (
           <>
@@ -396,8 +417,12 @@ export function ItemList() {
             <ReusableAccordion
               id="all-technologies"
               title="Technologies"
-              selectedCount={technos.filter((t) => !t.hidden).length}
-              hiddenCount={technos.filter((t) => t.hidden).length}
+              selectedCount={technosByEra.size}
+              hiddenCount={
+                Array.from(technosByEra.values()).filter((eraTechnos) =>
+                  eraTechnos.every((t) => t.hidden),
+                ).length
+              }
               allHidden={technos.length > 0 && technos.every((t) => t.hidden)}
               onToggleAllHidden={() => {
                 Array.from(technosByEra.keys()).forEach((era) => {
@@ -406,7 +431,10 @@ export function ItemList() {
               }}
               onDeleteAll={async () => {
                 await deleteAllTechnologies();
-                queryClient.invalidateQueries({ queryKey: ["technos"] });
+                queryClient.invalidateQueries({
+                  queryKey: ["technos"],
+                  refetchType: "all",
+                });
               }}
               deleteConfirmMessage={
                 <>
@@ -488,11 +516,17 @@ export function ItemList() {
                   allHidden={allHidden}
                   onToggleAllHidden={async () => {
                     await toggleHideAllBuildings(buildingIds);
-                    queryClient.invalidateQueries({ queryKey: ["buildings"] });
+                    queryClient.invalidateQueries({
+                      queryKey: ["buildings"],
+                      refetchType: "all",
+                    });
                   }}
                   onDeleteAll={async () => {
                     await deleteAllBuildings(buildingIds);
-                    queryClient.invalidateQueries({ queryKey: ["buildings"] });
+                    queryClient.invalidateQueries({
+                      queryKey: ["buildings"],
+                      refetchType: "all",
+                    });
                   }}
                   deleteConfirmMessage={
                     <>
@@ -532,11 +566,17 @@ export function ItemList() {
               allHidden={areas.every((a) => a.hidden)}
               onToggleAllHidden={async () => {
                 await toggleHideAllOttomanAreas();
-                queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
+                queryClient.invalidateQueries({
+                  queryKey: ["ottoman-areas"],
+                  refetchType: "all",
+                });
               }}
               onDeleteAll={async () => {
                 await deleteAllOttomanAreas();
-                queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
+                queryClient.invalidateQueries({
+                  queryKey: ["ottoman-areas"],
+                  refetchType: "all",
+                });
               }}
               deleteConfirmMessage={
                 <>
@@ -573,12 +613,14 @@ export function ItemList() {
                 await toggleHideAllOttomanTradePosts();
                 queryClient.invalidateQueries({
                   queryKey: ["ottoman-tradeposts"],
+                  refetchType: "all",
                 });
               }}
               onDeleteAll={async () => {
                 await deleteAllOttomanTradePosts();
                 queryClient.invalidateQueries({
                   queryKey: ["ottoman-tradeposts"],
+                  refetchType: "all",
                 });
               }}
               deleteConfirmMessage={

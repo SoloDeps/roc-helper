@@ -38,6 +38,14 @@ export interface Costs {
   // allied
   aspers?: number;
   deben?: number;
+  wu_zhu?: number;
+  rice?: number;
+  cocoa?: number;
+  pennies?: number;
+  dirham?: number;
+  // culture sites
+  culture_range?: number;
+  culture_bonus?: number;
 }
 
 // BUILDINGS
@@ -89,4 +97,21 @@ export interface TradePostData {
   name: string;
   resource: string; // "wheat", "pomegranate", etc.
   levels: TradePostLevels; // 5 niveaux fixes
+}
+
+// ERA GOODS
+/** Ressources d'une ère : [good1, good2, good3] */
+export type EraGoods = [string, string, string];
+
+/** Map era code → ses 3 goods. Centralisée dans config.ts. */
+export type EraGoodsMap = Partial<Record<EraCode, EraGoods>>;
+
+// data types
+export interface EraDetail {
+  /** Nom interne utilisé comme clé dans building_table.era (ex: "LateGothicEra") */
+  internalName: string;
+  /** Code court utilisé pour max_qty_by_era (ex: "LG") */
+  code: string;
+  /** Exactement 3 ressources de biens pour cette ère */
+  goods: [string, string, string];
 }

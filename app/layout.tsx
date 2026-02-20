@@ -11,7 +11,7 @@ const fontSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "RoC Wiki Goods Calculator",
+  title: "RoC Helper",
   description: "Resource calculator and building planner for Rise of Cultures",
 };
 

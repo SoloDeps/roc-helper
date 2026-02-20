@@ -1,60 +1,27 @@
-import { BuildingData, BuildingLevel } from "@/types/shared";
-import { getEraForLevel, getMaxQtyForEra, getPrevEra } from "@/data/config";
+import { BuildingData } from "@/types/shared";
+import { generateStandardLevels } from "@/data/generateDynamicLevels";
 
-function generateDynamicLevels(
-  startLevel: 40,
-  maxLevel: number = 42,
-): BuildingLevel[] {
-  const levels: BuildingLevel[] = [];
-
-  for (let level = startLevel; level <= maxLevel; level++) {
-    const era = getEraForLevel(level);
-    const prevEra = getPrevEra(era);
-
-    const upgrade =
-      level === 40
-        ? {
-            coins: 320000,
-            food: 640000,
-            goods: [
-              { amount: 1500, resource: "primary_eg" }, // EarlyGothicEra_Good1
-              { amount: 1500, resource: "secondary_eg" }, // EarlyGothicEra_Good2
-              { amount: 1500, resource: "tertiary_eg" }, // EarlyGothicEra_Good3
-              { amount: 3000, resource: "confection" },
-            ],
-          }
-        : {
-            coins: level * 15000 - 265000,
-            food: level * 30000 - 530000,
-            goods: [
-              { amount: 600, resource: `primary_${prevEra}` },
-              { amount: 600, resource: `secondary_${prevEra}` },
-              { amount: 600, resource: `tertiary_${prevEra}` },
-            ],
-          };
-
-    levels.push({
-      level,
-      era,
-      max_qty: getMaxQtyForEra(era, "homes") ?? 31,
-      upgrade,
-
-      ...(level % 3 === 1 && {
-        construction: {
-          coins: level * 100000,
-          food: level * 220000,
-          goods: [
-            { amount: 2500, resource: `primary_${prevEra}` },
-            { amount: 2500, resource: `secondary_${prevEra}` },
-            { amount: 2500, resource: `tertiary_${prevEra}` },
-          ],
-        },
-      }),
-    });
-  }
-
-  return levels;
-}
+export const ruralFarmDynamic = generateStandardLevels({
+  buildingId: "rural_farm",
+  defaultMaxQty: 13,
+  goodsAmounts: [1200, 1800, 2500],
+  constructionGoodsAmount: 6000,
+  upgrade: {
+    coins: (l) => l * 150000 - 3550000,
+    food: (l) => l * 70000 - 1810000,
+  },
+  construction: {
+    coins: (l) => l * 5000000 - 170000000,
+    food: (l) => l * 2000000 - 68000000,
+  },
+  level40Upgrade: {
+    goodsSource: "previous",
+    goodsAmount: 2500,
+    coins: 2300000,
+    food: 920000,
+    extraGoods: [{ amount: 10000, resource: "wheat" }],
+  },
+});
 
 export const ruralFarm: BuildingData = {
   id: "capital-farms-rural-farm",
@@ -1169,29 +1136,6 @@ export const ruralFarm: BuildingData = {
         ],
       },
     },
-    {
-      level: 40,
-      era: "LG",
-      max_qty: 13,
-      construction: {
-        coins: 30000000,
-        food: 12000000,
-        goods: [
-          {
-            amount: 6000,
-            resource: "lead_glass",
-          },
-          {
-            amount: 6000,
-            resource: "fine_jewelry",
-          },
-          {
-            amount: 6000,
-            resource: "ointment",
-          },
-        ],
-      },
-    },
-    ...generateDynamicLevels(40, 42),
+    ...ruralFarmDynamic,
   ],
 };

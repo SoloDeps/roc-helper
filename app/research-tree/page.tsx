@@ -32,25 +32,20 @@ export default function ResearchTreePage() {
   }, []);
 
   // Get available eras (eras that have at least one techno in DB)
+  // ✅ New DB format: "eg_0" (sans préfixe "tech_")
   const availableEras = useMemo(() => {
     if (!technosInDB || technosInDB.length === 0) return [];
 
-    // ✅ Extract era abbreviations from techno IDs (format: tech_[abbr]_[index])
     const eraAbbrs = new Set<string>();
     technosInDB.forEach((t) => {
-      const match = t.id.match(/^tech_([a-z]{2})_\d+$/);
-      if (match) {
-        eraAbbrs.add(match[1]); // Extract era abbreviation (eg, lg, etc.)
-      }
+      const match = t.id.match(/^([a-z]{2})_\d+$/);
+      if (match) eraAbbrs.add(match[1]);
     });
 
-    // ✅ Map abbreviations back to full era IDs using ABBR_TO_ERA_ID
     const eraIds = new Set<string>();
     eraAbbrs.forEach((abbr) => {
       const eraId = ABBR_TO_ERA_ID[abbr];
-      if (eraId) {
-        eraIds.add(eraId);
-      }
+      if (eraId) eraIds.add(eraId);
     });
 
     return ERAS.filter((era) => eraIds.has(era.id));
@@ -69,27 +64,28 @@ export default function ResearchTreePage() {
     return getTechnologiesByEra(selectedEraId);
   }, [selectedEraId]);
 
-  // Get techno entities from DB to check hidden status
+  // Merge registry data with DB hidden status
+  // ✅ DB id "eg_0" vs registry id "tech_eg_0" — strip prefix to match
   const technosWithStatus = useMemo(() => {
     if (!technosInDB || !selectedEraTechnologies.length) return [];
 
     return selectedEraTechnologies.map((tech) => {
-      const dbTech = technosInDB.find((t) => t.id === tech.id);
+      const dbId = tech.id.replace(/^tech_/, ""); // "tech_eg_0" → "eg_0"
+      const dbTech = technosInDB.find((t) => t.id === dbId);
       return {
         ...tech,
-        hidden: dbTech?.hidden ?? false,
+        hidden: dbTech ? !!dbTech.hidden : false,
       };
     });
   }, [selectedEraTechnologies, technosInDB]);
 
-  // ✅ FIX 1 & 2: Open modal in direct technology mode (skip category selection, hide back button)
   const handleAddNewEra = () => {
-    setDirectTechnologyMode(true); // ✅ Enable direct mode
+    setDirectTechnologyMode(true);
     selectCategory("technology");
     openModal();
   };
 
-  // No technologies in DB - Empty state
+  // Empty state
   if (!technosInDB || technosInDB.length === 0) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -120,7 +116,6 @@ export default function ResearchTreePage() {
     );
   }
 
-  // ✅ FIX 3: UX improved - "Saved Eras" dropdown + "Add New Era" button
   const eraOptions = availableEras.map((era) => ({
     value: era.id,
     label: era.name,
@@ -128,9 +123,7 @@ export default function ResearchTreePage() {
 
   return (
     <div className="size-full mx-auto p-4">
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        {/* <h1 className="text-2xl font-bold">Research Tree</h1> */}
         <Link href="/calculator">
           <Button variant="ghost" size="sm">
             ← Calculator
@@ -139,24 +132,18 @@ export default function ResearchTreePage() {
       </div>
 
       <div className="flex gap-2 items-center">
-        {/* ✅ NEW UX: Saved Eras + Add New Era */}
         <div className="space-y-3 mb-6">
-          {/* Saved Eras Selector */}
           <div className="flex items-center gap-3">
             <div className="w-56">
               <ResponsiveSelect
                 label="Saved Eras"
                 value={selectedEraId || ""}
-                onValueChange={(newEraId) => {
-                  selectEra(newEraId);
-                }}
+                onValueChange={(newEraId) => selectEra(newEraId)}
                 options={eraOptions}
                 placeholder="Select an era"
               />
             </div>
           </div>
-
-          {/* Add New Era Button */}
         </div>
         <Button
           variant="outline"
@@ -168,22 +155,17 @@ export default function ResearchTreePage() {
         </Button>
       </div>
 
-      {/* Tech tree display */}
       {selectedEraId && technosWithStatus.length > 0 && (
         <>
-          {/* Desktop: React Flow */}
           <div className="hidden md:block" key={`desktop-${selectedEraId}`}>
             <TechTreeDesktop technologies={technosWithStatus} />
           </div>
-
-          {/* Mobile: Vertical list */}
           <div className="md:hidden" key={`mobile-${selectedEraId}`}>
             <TechTreeMobile technologies={technosWithStatus} />
           </div>
         </>
       )}
 
-      {/* No technologies for selected era */}
       {selectedEraId && technosWithStatus.length === 0 && (
         <div className="flex flex-col items-center justify-center py-16 space-y-4 border border-dashed border-border rounded-lg">
           <AlertCircle className="size-12 text-muted-foreground" />

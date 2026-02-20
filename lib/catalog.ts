@@ -323,6 +323,23 @@ export const CATALOG: Category[] = [
           },
         ],
       },
+      {
+        id: "port_facilities",
+        name: "Port Facilities",
+        imgType: "shipyard",
+        buildings: [
+          {
+            id: "lighthouse",
+            name: "Lighthouse",
+            imgType: "shipyard",
+          },
+          {
+            id: "pier",
+            name: "Pier",
+            imgType: "shipyard",
+          },
+        ],
+      },
     ],
   },
   // technos
@@ -451,22 +468,22 @@ export const CATALOG: Category[] = [
         imgType: "workshop",
         buildings: [
           {
-            id: "china_thread_processor",
+            id: "thread_processor",
             name: "Thread Processor",
             imgType: "workshop",
           },
           {
-            id: "china_silk_workshop",
+            id: "silk_workshop",
             name: "Silk Workshop",
             imgType: "workshop",
           },
           {
-            id: "china_clay_processor",
+            id: "clay_processor",
             name: "Clay Processor",
             imgType: "workshop",
           },
           {
-            id: "china_porcelain_workshop",
+            id: "porcelain_workshop",
             name: "Porcelain Workshop",
             imgType: "workshop",
           },
@@ -486,10 +503,10 @@ export const CATALOG: Category[] = [
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "maya_worker_home", name: "Worker Home", imgType: "home" },
-          { id: "maya_priest_home", name: "Priest Home", imgType: "home" },
+          { id: "worker_home", name: "Worker Home", imgType: "home" },
+          { id: "priest_home", name: "Priest Home", imgType: "home" },
           {
-            id: "maya_luxurious_home",
+            id: "luxurious_home",
             name: "Luxurious Home",
             imgType: "home",
           },
@@ -501,13 +518,13 @@ export const CATALOG: Category[] = [
         imgType: "quarry",
         buildings: [
           {
-            id: "maya_obsidian_quarry",
+            id: "obsidian_quarry",
             name: "Obsidian Quarry",
             imgType: "quarry",
           },
-          { id: "maya_jade_quarry", name: "Jade Quarry", imgType: "quarry" },
+          { id: "jade_quarry", name: "Jade Quarry", imgType: "quarry" },
           {
-            id: "maya_luxurious_quarry",
+            id: "luxurious_quarry",
             name: "Luxurious Quarry",
             imgType: "quarry",
           },
@@ -519,12 +536,12 @@ export const CATALOG: Category[] = [
         imgType: "aviary",
         buildings: [
           {
-            id: "maya_average_aviary",
+            id: "average_aviary",
             name: "Average Aviary",
             imgType: "aviary",
           },
           {
-            id: "maya_luxurious_aviary",
+            id: "luxurious_aviary",
             name: "Luxurious Aviary",
             imgType: "aviary",
           },
@@ -535,24 +552,24 @@ export const CATALOG: Category[] = [
         name: "Workshops",
         imgType: "workshop",
         buildings: [
-          { id: "maya_chronicler", name: "Chronicler", imgType: "workshop" },
+          { id: "chronicler", name: "Chronicler", imgType: "workshop" },
           {
-            id: "maya_mask_sculptor",
+            id: "mask_sculptor",
             name: "Mask Sculptor",
             imgType: "workshop",
           },
           {
-            id: "maya_ceremony_outfitter",
+            id: "ceremony_outfitter",
             name: "Ceremony Outfitter",
             imgType: "workshop",
           },
           {
-            id: "maya_ritual_carver",
+            id: "ritual_carver",
             name: "Ritual Carver",
             imgType: "workshop",
           },
           {
-            id: "maya_luxurious_workshop",
+            id: "luxurious_workshop",
             name: "Luxurious Workshop",
             imgType: "workshop",
           },
@@ -565,17 +582,17 @@ export const CATALOG: Category[] = [
         imgType: "ritualSite",
         buildings: [
           {
-            id: "maya_small_ritual_site",
+            id: "small_ritual_site",
             name: "Small Ritual Site",
             imgType: "ritualSite",
           },
           {
-            id: "maya_average_ritual_site",
+            id: "average_ritual_site",
             name: "Average Ritual Site",
             imgType: "ritualSite",
           },
           {
-            id: "maya_luxurious_ritual_site",
+            id: "luxurious_ritual_site",
             name: "Luxurious Ritual Site",
             imgType: "ritualSite",
           },
@@ -595,10 +612,10 @@ export const CATALOG: Category[] = [
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "vikings_worker_home", name: "Worker Home", imgType: "home" },
-          { id: "vikings_sailor_home", name: "Sailor Home", imgType: "home" },
+          { id: "worker_home", name: "Worker Home", imgType: "home" },
+          { id: "sailor_home", name: "Sailor Home", imgType: "home" },
           {
-            id: "vikings_luxurious_home",
+            id: "luxurious_home",
             name: "Luxurious Home",
             imgType: "home",
           },
@@ -609,7 +626,7 @@ export const CATALOG: Category[] = [
         name: "Beehives",
         imgType: "beehive",
         buildings: [
-          { id: "vikings_beehive", name: "Beehive", imgType: "beehive" },
+          { id: "beehive", name: "Beehive", imgType: "beehive" },
         ],
       },
       {
@@ -618,12 +635,12 @@ export const CATALOG: Category[] = [
         imgType: "fishingPier",
         buildings: [
           {
-            id: "vikings_fishing_pier",
+            id: "fishing_pier",
             name: "Fishing Pier",
             imgType: "fishingPier",
           },
           {
-            id: "vikings_luxurious_fishing_pier",
+            id: "luxurious_fishing_pier",
             name: "Luxurious Fishing Pier",
             imgType: "fishingPier",
           },
@@ -634,19 +651,19 @@ export const CATALOG: Category[] = [
         name: "Workshops",
         imgType: "workshop",
         buildings: [
-          { id: "vikings_tavern", name: "Tavern", imgType: "workshop" },
+          { id: "tavern", name: "Tavern", imgType: "workshop" },
           {
-            id: "vikings_expedition_pier",
+            id: "expedition_pier",
             name: "Expedition Pier",
             imgType: "workshop",
           },
           {
-            id: "vikings_sailor_port",
+            id: "sailor_port",
             name: "Sailor Port",
             imgType: "workshop",
           },
           {
-            id: "vikings_luxurious_sailor_port",
+            id: "luxurious_sailor_port",
             name: "Luxurious Sailor Port",
             imgType: "workshop",
           },
@@ -658,17 +675,17 @@ export const CATALOG: Category[] = [
         imgType: "runestone",
         buildings: [
           {
-            id: "vikings_home_runestone",
+            id: "home_runestone",
             name: "Home Runestone",
             imgType: "runestone",
           },
           {
-            id: "vikings_beehive_runestone",
+            id: "beehive_runestone",
             name: "Beehive Runestone",
             imgType: "runestone",
           },
           {
-            id: "vikings_tavern_runestone",
+            id: "tavern_runestone",
             name: "Tavern Runestone",
             imgType: "runestone",
           },
@@ -688,9 +705,9 @@ export const CATALOG: Category[] = [
         name: "Homes",
         imgType: "home",
         buildings: [
-          { id: "arabia_medium_home", name: "Medium Home", imgType: "home" },
+          { id: "medium_home", name: "Medium Home", imgType: "home" },
           {
-            id: "arabia_luxurious_home",
+            id: "luxurious_home",
             name: "Luxurious Home",
             imgType: "home",
           },
@@ -701,9 +718,9 @@ export const CATALOG: Category[] = [
         name: "Merchant",
         imgType: "merchant",
         buildings: [
-          { id: "arabia_merchant", name: "Merchant", imgType: "merchant" },
+          { id: "merchant", name: "Merchant", imgType: "merchant" },
           {
-            id: "arabia_luxurious_merchant",
+            id: "luxurious_merchant",
             name: "Luxurious Merchant",
             imgType: "merchant",
           },
@@ -714,7 +731,7 @@ export const CATALOG: Category[] = [
         name: "Farms",
         imgType: "camelFarm",
         buildings: [
-          { id: "arabia_camelFarm", name: "Camel Farm", imgType: "camelFarm" },
+          { id: "camel_farm", name: "Camel Farm", imgType: "camelFarm" },
         ],
       },
       {
@@ -723,27 +740,27 @@ export const CATALOG: Category[] = [
         imgType: "workshop",
         buildings: [
           {
-            id: "arabia_coffee_brewer",
+            id: "coffee_brewer",
             name: "Coffee Brewer",
             imgType: "workshop",
           },
           {
-            id: "arabia_incense_maker",
+            id: "incense_maker",
             name: "Incense Maker",
             imgType: "workshop",
           },
           {
-            id: "arabia_carpet_factory",
+            id: "carpet_factory",
             name: "Carpet Factory",
             imgType: "workshop",
           },
           {
-            id: "arabia_oil_lamp_crafter",
+            id: "oil_lamp_crafter",
             name: "Oil Lamp Crafter",
             imgType: "workshop",
           },
           {
-            id: "arabia_luxurious_workshop",
+            id: "luxurious_workshop",
             name: "Luxurious Workshop",
             imgType: "workshop",
           },
@@ -755,14 +772,14 @@ export const CATALOG: Category[] = [
         imgType: "irrigation",
         buildings: [
           {
-            id: "arabia_small_well",
+            id: "small_well",
             name: "Small Well",
             imgType: "irrigation",
           },
-          { id: "arabia_channel", name: "Channel", imgType: "irrigation" },
-          { id: "arabia_noria", name: "Noria", imgType: "irrigation" },
-          { id: "arabia_oasis", name: "Oasis", imgType: "irrigation" },
-          { id: "arabia_deep_well", name: "Deep Well", imgType: "irrigation" },
+          { id: "channel", name: "Channel", imgType: "irrigation" },
+          { id: "noria", name: "Noria", imgType: "irrigation" },
+          { id: "oasis", name: "Oasis", imgType: "irrigation" },
+          { id: "deep_well", name: "Deep Well", imgType: "irrigation" },
         ],
       },
     ],

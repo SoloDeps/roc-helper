@@ -156,3 +156,8 @@ export function getWikiImageUrl(
   const lvlSuffix = imgLvl ? level : "";
   return `https://riseofcultures.wiki.gg/images/thumb/${imageName}${lvlSuffix}.png/${size}px-${imageName}${lvlSuffix}.png`;
 }
+
+export function getEraBuildingLevel(level: number): 1 | 2 | 3 {
+  const pos = ((level - 1) % 3) + 1;
+  return pos as 1 | 2 | 3;
+}

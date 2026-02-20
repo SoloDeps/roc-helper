@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   ListChevronsDownUp,
   ListChevronsUpDown,
@@ -44,7 +45,12 @@ import { ButtonGroup } from "../ui/button-group";
 export function ButtonGroupBuilding() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false); // État pour le drawer principal
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const queryClient = useQueryClient();
+
+  const invalidateAll = () => {
+    queryClient.invalidateQueries({ refetchType: "all" });
+  };
 
   const { expandAllAccordions, collapseAllAccordions } = useUIStore();
 
@@ -59,6 +65,7 @@ export function ButtonGroupBuilding() {
   const handleHideAll = async () => {
     try {
       await hideAllEntities();
+      invalidateAll();
     } catch (error) {
       console.error("Failed to hide all:", error);
       toast.error("Failed to hide all items");
@@ -68,6 +75,7 @@ export function ButtonGroupBuilding() {
   const handleShowAll = async () => {
     try {
       await showAllEntities();
+      invalidateAll();
     } catch (error) {
       console.error("Failed to show all:", error);
       toast.error("Failed to show all items");
@@ -85,6 +93,7 @@ export function ButtonGroupBuilding() {
         db.ottomanTradePosts.clear(),
       ]);
 
+      invalidateAll();
       toast.success("All data deleted successfully");
     } catch (error) {
       console.error("Failed to delete all data:", error);

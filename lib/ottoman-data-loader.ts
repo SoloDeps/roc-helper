@@ -1,6 +1,6 @@
 "use client";
 
-import { areas_table, trade_post_table } from "@/data/ottoman";
+import { areas_table, trade_post_table } from "@/data/allieds/ottoman";
 import type { OttomanAreaData, TradePostData } from "@/types/shared";
 
 /**
@@ -34,6 +34,13 @@ export function getAllTradePosts(): TradePostData[] {
  */
 export function getTradePostsByArea(area: number): TradePostData[] {
   return trade_post_table.filter((tp) => tp.area === area);
+}
+
+/**
+ * Get trade post by index (used for otp_{index} IDs)
+ */
+export function getTradePostByIndex(index: number): TradePostData | undefined {
+  return trade_post_table[index];
 }
 
 /**

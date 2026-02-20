@@ -1,5 +1,5 @@
 import { goodsByCivilization } from "@/lib/constants";
-import { areas_table } from "@/data/ottoman";
+import { areas_table } from "@/data/allieds/ottoman";
 import { saveOttomanArea, saveOttomanTradePost } from "@/lib/overview/storage";
 import { slugify } from "@/lib/utils";
 import type {

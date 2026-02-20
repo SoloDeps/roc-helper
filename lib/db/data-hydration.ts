@@ -1,27 +1,37 @@
 "use client";
 
-import { getWikiDB } from "./schema";
+import {
+  getWikiDB,
+  dbIdToTechId,
+  areaIndexToId,
+  idToAreaIndex,
+  tradePostIndexToId,
+  idToTradePostIndex,
+} from "./schema";
 import {
   getTechnologiesByEra,
   TECHNOLOGY_REGISTRY,
 } from "@/data/technos-registry";
 import { getBuildingData } from "@/lib/element-data-loader";
-import { getAreaData, getAllTradePosts } from "@/lib/ottoman-data-loader";
+import {
+  getAreaData,
+  getAllTradePosts,
+  getTradePostByIndex,
+} from "@/lib/ottoman-data-loader";
+import { getEraAbbr } from "@/lib/era-mappings";
 import { slugify } from "@/lib/utils";
-import type { TechnoData, BuildingData } from "@/types/shared";
+import type { TechnoData } from "@/types/shared";
 
 // ============================================================================
-// TYPES HYDRATÉS (avec données complètes)
+// TYPES HYDRATÉS
 // ============================================================================
 
 export interface HydratedTechno extends TechnoData {
-  era: string; // ✅ Add era for grouping by era in item-list
+  era: string;
   hidden: boolean;
-  updatedAt?: number;
 }
 
 export interface HydratedBuilding {
-  // Données statiques
   id: string;
   name: string;
   imageName: string;
@@ -35,13 +45,10 @@ export interface HydratedBuilding {
   maxQty: number;
   costs: {
     resources: Record<string, number>;
-    goods: Array<{ resource: string; amount: number }>; // ✅ resource
+    goods: Array<{ resource: string; amount: number }>;
   };
-
-  // État utilisateur
   quantity: number;
   hidden: boolean;
-  updatedAt?: number;
 }
 
 export interface HydratedOttomanArea {
@@ -49,10 +56,9 @@ export interface HydratedOttomanArea {
   areaIndex: number;
   costs: {
     resources: Record<string, number>;
-    goods: Array<{ resource: string; amount: number }>; // ✅ resource
+    goods: Array<{ resource: string; amount: number }>;
   };
   hidden: boolean;
-  updatedAt?: number;
 }
 
 export interface HydratedOttomanTradePost {
@@ -60,6 +66,7 @@ export interface HydratedOttomanTradePost {
   name: string;
   area: number;
   resource: string;
+  // levels exposés en boolean aux composants (converti depuis 0|1)
   levels: {
     unlock: boolean;
     lvl2: boolean;
@@ -69,95 +76,58 @@ export interface HydratedOttomanTradePost {
   };
   costs: {
     resources: Record<string, number>;
-    goods: Array<{ resource: string; amount: number }>; // ✅ resource
+    goods: Array<{ resource: string; amount: number }>;
   };
   sourceData?: {
-    levels: {
-      [key: number]: Array<{ resource: string; amount: number }>;
-    };
+    levels: { [key: number]: Array<{ resource: string; amount: number }> };
   };
   hidden: boolean;
-  updatedAt?: number;
 }
 
 // ============================================================================
-// TECHNOS - Hydratation
+// TECHNOS
 // ============================================================================
 
-/**
- * Récupère les technos d'une ère avec données complètes
- * Fusion : registry (statique) + DB (état utilisateur)
- */
 export async function getHydratedTechnos(
   eraId: string,
 ): Promise<HydratedTechno[]> {
   const db = getWikiDB();
   const staticData = getTechnologiesByEra(eraId);
+  const eraAbbr = getEraAbbr(eraId);
+  const userStates = await db.technos
+    .where("id")
+    .startsWith(`${eraAbbr}_`)
+    .toArray();
+  const stateMap = new Map(userStates.map((s) => [s.id, s]));
 
-  // ✅ NOUVEAU FORMAT: tech_eg_0 (au lieu de techno_early_gothic_era_0)
-  // Récupérer états utilisateur avec le nouveau préfixe
-  const userStates = await db.technos.where("id").startsWith(`tech_`).toArray();
-
-  // Filtrer pour cette ère uniquement (les IDs matchent maintenant tech_[eraAbbr]_[index])
-  const eraAbbr = eraId
-    .split("_")
-    .map((w) => w[0])
-    .join(""); // early_gothic_era → eg
-  const filteredStates = userStates.filter((s) => {
-    const match = s.id.match(/^tech_([a-z]{2})_\d+$/);
-    return match && match[1] === eraAbbr;
+  return staticData.map((techno) => {
+    const dbId = techno.id.replace(/^tech_/, "");
+    const state = stateMap.get(dbId);
+    return { ...techno, era: eraId, hidden: state ? !!state.hidden : false };
   });
-
-  const stateMap = new Map(filteredStates.map((s) => [s.id, s]));
-
-  // Hydratation
-  return staticData.map((techno) => ({
-    ...techno,
-    era: eraId, // ✅ Include era for grouping
-    hidden: stateMap.get(techno.id)?.hidden ?? false,
-    updatedAt: stateMap.get(techno.id)?.updatedAt,
-  }));
 }
 
-/**
- * Récupère toutes les technos hydratées (tous les états utilisateur)
- */
 export async function getAllHydratedTechnos(): Promise<HydratedTechno[]> {
   const db = getWikiDB();
   const userStates = await db.technos.toArray();
-
   const result: HydratedTechno[] = [];
 
   for (const state of userStates) {
-    // ✅ NOUVEAU FORMAT: tech_eg_0
-    // Extraire l'abréviation de l'ère depuis l'ID
-    const match = state.id.match(/^tech_([a-z]{2})_\d+$/);
-    if (!match) continue;
-
-    const eraAbbr = match[1]; // "eg", "lg", etc.
-
-    // Trouver l'eraId complet depuis l'abréviation
-    // On doit parcourir le registry pour trouver quelle ère a cette techno
-    const allEraIds = Object.keys(TECHNOLOGY_REGISTRY);
+    if (!state.id.match(/^([a-z]{2})_(\d+)$/)) continue;
+    const fullId = dbIdToTechId(state.id);
     let techno: TechnoData | undefined;
     let foundEraId: string | undefined;
 
-    for (const eraId of allEraIds) {
-      const staticData = getTechnologiesByEra(eraId);
-      techno = staticData.find((t) => t.id === state.id);
+    for (const eraId of Object.keys(TECHNOLOGY_REGISTRY)) {
+      techno = getTechnologiesByEra(eraId).find((t) => t.id === fullId);
       if (techno) {
-        foundEraId = eraId; // ✅ Capture the eraId
+        foundEraId = eraId;
         break;
       }
     }
 
     if (techno && foundEraId) {
-      result.push({
-        ...techno,
-        era: foundEraId, // ✅ Include era
-        hidden: state.hidden,
-        updatedAt: state.updatedAt,
-      });
+      result.push({ ...techno, era: foundEraId, hidden: !!state.hidden });
     }
   }
 
@@ -165,33 +135,23 @@ export async function getAllHydratedTechnos(): Promise<HydratedTechno[]> {
 }
 
 // ============================================================================
-// BUILDINGS - Hydratation
+// BUILDINGS
 // ============================================================================
 
-/**
- * Récupère un building avec données complètes
- */
 export async function getHydratedBuilding(
   id: string,
 ): Promise<HydratedBuilding | null> {
   const db = getWikiDB();
   const userState = await db.buildings.get(id);
-
   if (!userState) return null;
 
-  // Parser l'ID pour extraire les infos
   const parts = id.split("_");
-  // Format: {category}_{elementId}_{type}_{era}_{level}
-
   const level = parseInt(parts[parts.length - 1]);
   const era = parts[parts.length - 2];
   const type = parts[parts.length - 3] as "construction" | "upgrade";
   const category = parts[0];
-
-  // Reconstruire elementId
   const elementId = parts.slice(1, -3).join("_");
 
-  // Récupérer données statiques
   const buildingData = getBuildingData(`${category}_${elementId}`);
   if (!buildingData) return null;
 
@@ -203,20 +163,14 @@ export async function getHydratedBuilding(
   const costs = levelData[type];
   if (!costs) return null;
 
-  // Parser costs
   const resources: Record<string, number> = {};
-  const goods: Array<{ resource: string; amount: number }> = []; // ✅ resource
+  const goods: Array<{ resource: string; amount: number }> = [];
 
   Object.entries(costs).forEach(([key, value]) => {
     if (key === "goods" && Array.isArray(value)) {
       value.forEach((g: { resource: string; amount: number }) => {
-        const resourceName = g.resource;
-        if (resourceName) {
-          goods.push({
-            resource: slugify(resourceName), // ✅ resource
-            amount: g.amount,
-          });
-        }
+        if (g.resource)
+          goods.push({ resource: slugify(g.resource), amount: g.amount });
       });
     } else if (typeof value === "number") {
       resources[key] = value;
@@ -236,49 +190,38 @@ export async function getHydratedBuilding(
     level,
     maxQty: levelData.max_qty || 40,
     costs: { resources, goods },
-    quantity: userState.quantity,
-    hidden: userState.hidden,
-    updatedAt: userState.updatedAt,
+    quantity: userState.qty ?? 1,
+    hidden: !!userState.hidden,
   };
 }
 
-/**
- * Récupère tous les buildings hydratés
- */
 export async function getAllHydratedBuildings(): Promise<HydratedBuilding[]> {
   const db = getWikiDB();
   const userStates = await db.buildings.toArray();
-
   const result: HydratedBuilding[] = [];
-
   for (const state of userStates) {
     const hydrated = await getHydratedBuilding(state.id);
-    if (hydrated) {
-      result.push(hydrated);
-    }
+    if (hydrated) result.push(hydrated);
   }
-
   return result;
 }
 
 // ============================================================================
-// OTTOMAN AREAS - Hydratation
+// OTTOMAN AREAS
 // ============================================================================
 
 export async function getHydratedOttomanArea(
   areaIndex: number,
 ): Promise<HydratedOttomanArea | null> {
   const db = getWikiDB();
-  const id = `ottoman_area_${areaIndex}`;
+  const id = areaIndexToId(areaIndex);
   const userState = await db.ottomanAreas.get(id);
 
   const areaData = getAreaData(areaIndex);
   if (!areaData) return null;
 
-  // Parser costs
   const resources: Record<string, number> = {};
-  const goods: Array<{ resource: string; amount: number }> = []; // ✅ resource
-
+  const goods: Array<{ resource: string; amount: number }> = [];
   const ottomanGoods = [
     "wheat",
     "pomegranate",
@@ -293,7 +236,7 @@ export async function getHydratedOttomanArea(
   areaData.forEach((item) => {
     const resourceName = item.resource.toLowerCase();
     if (ottomanGoods.includes(resourceName)) {
-      goods.push({ resource: slugify(resourceName), amount: item.amount }); // ✅ resource
+      goods.push({ resource: slugify(resourceName), amount: item.amount });
     } else {
       resources[resourceName] = item.amount;
     }
@@ -303,8 +246,7 @@ export async function getHydratedOttomanArea(
     id,
     areaIndex,
     costs: { resources, goods },
-    hidden: userState?.hidden ?? false,
-    updatedAt: userState?.updatedAt,
+    hidden: userState ? !!userState.hidden : false,
   };
 }
 
@@ -313,43 +255,31 @@ export async function getAllHydratedOttomanAreas(): Promise<
 > {
   const db = getWikiDB();
   const userStates = await db.ottomanAreas.toArray();
-
   const result: HydratedOttomanArea[] = [];
 
   for (const state of userStates) {
-    const match = state.id.match(/^ottoman_area_(\d+)$/);
+    const match = state.id.match(/^oa_(\d+)$/);
     if (!match) continue;
-
-    const areaIndex = parseInt(match[1]);
-    const hydrated = await getHydratedOttomanArea(areaIndex);
-
-    if (hydrated) {
-      result.push(hydrated);
-    }
+    const hydrated = await getHydratedOttomanArea(parseInt(match[1]));
+    if (hydrated) result.push(hydrated);
   }
 
   return result;
 }
 
 // ============================================================================
-// OTTOMAN TRADE POSTS - Hydratation
+// OTTOMAN TRADE POSTS
 // ============================================================================
 
-/**
- * Helper: Calcule les coûts d'un poste de commerce basé sur les niveaux NON cochés
- */
 function calculateTradePostCosts(
   tradePostData: {
     levels: { [key: number]: Array<{ resource: string; amount: number }> };
   },
+  // ✅ checkedLevels en boolean (déjà converti depuis 0|1 avant appel)
   checkedLevels: HydratedOttomanTradePost["levels"],
 ): HydratedOttomanTradePost["costs"] {
-  const costs: HydratedOttomanTradePost["costs"] = {
-    resources: {},
-    goods: [],
-  };
+  const costs: HydratedOttomanTradePost["costs"] = { resources: {}, goods: [] };
   const goodsMap = new Map<string, number>();
-
   const ottomanGoods = [
     "wheat",
     "pomegranate",
@@ -360,7 +290,6 @@ function calculateTradePostCosts(
     "tea",
     "brocade",
   ];
-
   const levelMapping: Record<keyof HydratedOttomanTradePost["levels"], number> =
     {
       unlock: 1,
@@ -370,20 +299,15 @@ function calculateTradePostCosts(
       lvl5: 5,
     };
 
-  // LOGIQUE INVERSÉE: On traite les niveaux qui ne sont PAS cochés
   Object.entries(checkedLevels).forEach(([levelKey, isChecked]) => {
-    if (isChecked) return;
-
+    if (isChecked) return; // niveau déjà complété → exclure du calcul
     const levelNum =
       levelMapping[levelKey as keyof HydratedOttomanTradePost["levels"]];
     const levelData = tradePostData.levels?.[levelNum];
-
     if (!levelData || !Array.isArray(levelData)) return;
 
-    levelData.forEach((item: { resource: string; amount: number }) => {
+    levelData.forEach((item) => {
       const resourceName = item.resource.toLowerCase();
-      const amount = item.amount;
-
       let normalizedResource = resourceName;
       if (
         resourceName.includes("_eg") ||
@@ -391,25 +315,23 @@ function calculateTradePostCosts(
       ) {
         normalizedResource = slugify(resourceName);
       }
-
       if (
         ottomanGoods.includes(resourceName) ||
         normalizedResource.match(/^(primary|secondary|tertiary)_/i)
       ) {
         const normalized = slugify(resourceName);
-        goodsMap.set(normalized, (goodsMap.get(normalized) || 0) + amount);
+        goodsMap.set(normalized, (goodsMap.get(normalized) || 0) + item.amount);
       } else {
         costs.resources[resourceName] =
-          ((costs.resources[resourceName] as number) || 0) + amount;
+          ((costs.resources[resourceName] as number) || 0) + item.amount;
       }
     });
   });
 
   costs.goods = Array.from(goodsMap.entries()).map(([resource, amount]) => ({
-    resource, // ✅ resource
+    resource,
     amount,
   }));
-
   return costs;
 }
 
@@ -418,28 +340,28 @@ export async function getHydratedOttomanTradePost(
 ): Promise<HydratedOttomanTradePost | null> {
   const db = getWikiDB();
   const userState = await db.ottomanTradePosts.get(id);
-
-  // Extraire le nom du trade post depuis l'ID
-  const match = id.match(/^ottoman_tp_(.+)$/);
+  const match = id.match(/^otp_(\d+)$/);
   if (!match) return null;
 
-  const nameSlug = match[1];
-
-  // Récupérer les données statiques
   const allTradePosts = getAllTradePosts();
-  const tradePostData = allTradePosts.find(
-    (tp) => slugify(tp.name) === nameSlug,
-  );
-
+  const tradePostIndex = parseInt(match[1]);
+  const tradePostData = getTradePostByIndex(tradePostIndex);
   if (!tradePostData) return null;
 
-  // Default levels: all unchecked (false = show costs)
-  const levels = userState?.levels ?? {
-    unlock: false,
-    lvl2: false,
-    lvl3: false,
-    lvl4: false,
-    lvl5: false,
+  // ✅ Convertir levels 0|1 → boolean pour les composants
+  const rawLevels = userState?.levels ?? {
+    unlock: 0,
+    lvl2: 0,
+    lvl3: 0,
+    lvl4: 0,
+    lvl5: 0,
+  };
+  const levels: HydratedOttomanTradePost["levels"] = {
+    unlock: !!rawLevels.unlock,
+    lvl2: !!rawLevels.lvl2,
+    lvl3: !!rawLevels.lvl3,
+    lvl4: !!rawLevels.lvl4,
+    lvl5: !!rawLevels.lvl5,
   };
 
   const sourceData = {
@@ -448,18 +370,15 @@ export async function getHydratedOttomanTradePost(
     },
   };
 
-  const costs = calculateTradePostCosts(sourceData, levels);
-
   return {
     id,
     name: tradePostData.name,
     area: tradePostData.area,
     resource: tradePostData.resource,
     levels,
-    costs,
+    costs: calculateTradePostCosts(sourceData, levels),
     sourceData,
-    hidden: userState?.hidden ?? false,
-    updatedAt: userState?.updatedAt,
+    hidden: userState ? !!userState.hidden : false,
   };
 }
 
@@ -468,14 +387,11 @@ export async function getAllHydratedOttomanTradePosts(): Promise<
 > {
   const db = getWikiDB();
   const userStates = await db.ottomanTradePosts.toArray();
-
   const result: HydratedOttomanTradePost[] = [];
 
   for (const state of userStates) {
     const hydrated = await getHydratedOttomanTradePost(state.id);
-    if (hydrated) {
-      result.push(hydrated);
-    }
+    if (hydrated) result.push(hydrated);
   }
 
   return result;

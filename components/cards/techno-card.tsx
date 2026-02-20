@@ -12,7 +12,6 @@ import {
   getGoodNameFromPriorityEra,
   getItemIconLocal,
 } from "@/lib/utils";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import type { HydratedTechno } from "@/lib/db/data-hydration";
 import { useSelectEra } from "@/lib/stores/technology-page-store";
 
@@ -33,7 +32,6 @@ export function TechnoCard({
 }: TechnoCardProps) {
   const router = useRouter();
   const selectEra = useSelectEra();
-  const isMobile = useMediaQuery("(max-width: 767px)");
   const [isHovered, setIsHovered] = useState(false);
 
   // ✅ Aggregate costs - ALWAYS aggregate ALL technos in the era (visible AND hidden)
@@ -197,7 +195,16 @@ export function TechnoCard({
                   variant="outline"
                   className="bg-blue-200 dark:bg-blue-300 text-blue-950 border-alpha-100 border rounded-sm"
                 >
-                  {technos.length} techno{technos.length > 1 ? "s" : ""}
+                  {(() => {
+                    const visibleCount = technos.filter(
+                      (t) => !t.hidden,
+                    ).length;
+                    const totalCount = technos.length;
+                    const hasHidden = visibleCount < totalCount;
+                    return hasHidden
+                      ? `${visibleCount}/${totalCount} technos`
+                      : `${totalCount} techno${totalCount > 1 ? "s" : ""}`;
+                  })()}
                 </Badge>
               </div>
 
@@ -263,7 +270,7 @@ export function TechnoCard({
           <div className="flex flex-col md:flex-row w-full gap-2 justify-between items-stretch min-h-[70px]">
             <div
               className={cn(
-                "grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-sm w-full content-start",
+                "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5 text-sm w-full content-start",
                 allHidden && "opacity-60 pointer-events-none select-none",
               )}
             >
@@ -288,40 +295,10 @@ export function TechnoCard({
               )}
             </div>
 
-            {/* Desktop: Hide + Customize buttons */}
-            <div className="hidden md:flex justify-end items-end gap-2">
-              <Button
-                variant="outline"
-                className="rounded-sm h-[34px]"
-                onClick={onToggleHidden}
-                title={
-                  allHidden
-                    ? "Include in total calculation"
-                    : "Exclude from total calculation"
-                }
-              >
-                {allHidden ? (
-                  <Eye className="size-4" />
-                ) : (
-                  <EyeOff className="size-4" />
-                )}
-                <span>{allHidden ? "Show" : "Hide"}</span>
-              </Button>
-
-              <Button
-                variant="outline"
-                className="rounded-sm h-[34px]"
-                onClick={handleCustomize}
-                title="View in research tree"
-              >
-                Customize
-              </Button>
-            </div>
-
             {/* Mobile: Hide + Customize buttons */}
             <div className="flex md:hidden justify-between items-end gap-2">
               <Button
-                variant="outline"
+                variant={allHidden ? "outline" : "ghost"}
                 className={cn(
                   "rounded-sm h-[34px]",
                   !allHidden && "text-muted-foreground border-transparent",
