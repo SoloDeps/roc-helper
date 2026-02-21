@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_SA: TechnoData[] = [
   {
-    id: "tech_sa_0",
+    id: "sa_0",
     name: "Tribal Settlement",
     column: 0,
     required: [],
@@ -15,10 +15,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_1",
+    id: "sa_1",
     name: "Cultivation",
     column: 1,
-    required: ["tech_sa_0"],
+    required: ["sa_0"],
     costs: {
       research_points: 1,
       coins: 1,
@@ -26,10 +26,10 @@ export const technos_SA: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_sa_2",
+    id: "sa_2",
     name: "Spear Fighting",
     column: 2,
-    required: ["tech_sa_1"],
+    required: ["sa_1"],
     costs: {
       research_points: 2,
       coins: 15,
@@ -38,10 +38,10 @@ export const technos_SA: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks the Infantry Barracks"],
   },
   {
-    id: "tech_sa_3",
+    id: "sa_3",
     name: "Firemaker",
     column: 3,
-    required: ["tech_sa_2"],
+    required: ["sa_2"],
     costs: {
       research_points: 2,
       coins: 60,
@@ -53,10 +53,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_4",
+    id: "sa_4",
     name: "Cave Paintings",
     column: 4,
-    required: ["tech_sa_3"],
+    required: ["sa_3"],
     costs: {
       research_points: 2,
       coins: 100,
@@ -68,10 +68,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_5",
+    id: "sa_5",
     name: "Goat Pens",
     column: 5,
-    required: ["tech_sa_4"],
+    required: ["sa_4"],
     costs: {
       research_points: 3,
       coins: 300,
@@ -80,10 +80,10 @@ export const technos_SA: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks the Domestic Farm"],
   },
   {
-    id: "tech_sa_6",
+    id: "sa_6",
     name: "Agriculture",
     column: 6,
-    required: ["tech_sa_5"],
+    required: ["sa_5"],
     costs: {
       research_points: 2,
       coins: 520,
@@ -95,10 +95,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_7",
+    id: "sa_7",
     name: "Slingshots",
     column: 6,
-    required: ["tech_sa_5"],
+    required: ["sa_5"],
     costs: {
       research_points: 1,
       coins: 900,
@@ -107,10 +107,10 @@ export const technos_SA: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks the Ranged Barracks"],
   },
   {
-    id: "tech_sa_8",
+    id: "sa_8",
     name: "Tribal Celebrations",
     column: 7,
-    required: ["tech_sa_6", "tech_sa_7"],
+    required: ["sa_6", "sa_7"],
     costs: {
       research_points: 5,
       coins: 1800,
@@ -123,10 +123,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_9",
+    id: "sa_9",
     name: "Herding",
     column: 8,
-    required: ["tech_sa_8"],
+    required: ["sa_8"],
     costs: {
       research_points: 6,
       coins: 3150,
@@ -138,10 +138,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_10",
+    id: "sa_10",
     name: "Combat Drills",
     column: 8,
-    required: ["tech_sa_8"],
+    required: ["sa_8"],
     costs: {
       research_points: 5,
       coins: 4950,
@@ -152,10 +152,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_11",
+    id: "sa_11",
     name: "Baby Boom",
     column: 8,
-    required: ["tech_sa_8"],
+    required: ["sa_8"],
     costs: {
       research_points: 6,
       coins: 7560,
@@ -167,10 +167,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_12",
+    id: "sa_12",
     name: "The Wheel",
     column: 9,
-    required: ["tech_sa_9"],
+    required: ["sa_9"],
     costs: {
       research_points: 6,
       coins: 12600,
@@ -179,10 +179,10 @@ export const technos_SA: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_sa_13",
+    id: "sa_13",
     name: "Sacred Sites",
     column: 9,
-    required: ["tech_sa_10"],
+    required: ["sa_10"],
     costs: {
       research_points: 5,
       coins: 15300,
@@ -194,10 +194,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_14",
+    id: "sa_14",
     name: "Rural Community",
     column: 9,
-    required: ["tech_sa_11"],
+    required: ["sa_11"],
     costs: {
       research_points: 6,
       coins: 18000,
@@ -208,10 +208,10 @@ export const technos_SA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_sa_15",
+    id: "sa_15",
     name: "Domesticated Goats",
     column: 10,
-    required: ["tech_sa_12", "tech_sa_13", "tech_sa_14"],
+    required: ["sa_12", "sa_13", "sa_14"],
     costs: {
       research_points: 7,
       coins: 25200,

@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_RE: TechnoData[] = [
   {
-    id: "tech_re_0",
+    id: "re_0",
     name: "Urbs Aeterna",
     column: 0,
     required: [],
@@ -30,10 +30,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_1",
+    id: "re_1",
     name: "Fountains",
     column: 1,
-    required: ["tech_re_0"],
+    required: ["re_0"],
     costs: {
       research_points: 34,
       coins: 570000,
@@ -59,10 +59,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_2",
+    id: "re_2",
     name: "Princeps",
     column: 1,
-    required: ["tech_re_0"],
+    required: ["re_0"],
     costs: {
       research_points: 48,
       coins: 798000,
@@ -85,10 +85,10 @@ export const technos_RE: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_re_3",
+    id: "re_3",
     name: "Dedicated Workforce",
     column: 1,
-    required: ["tech_re_0"],
+    required: ["re_0"],
     costs: {
       research_points: 32,
       coins: 524000,
@@ -117,10 +117,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_4",
+    id: "re_4",
     name: "Swinery",
     column: 2,
-    required: ["tech_re_1"],
+    required: ["re_1"],
     costs: {
       research_points: 21,
       coins: 342000,
@@ -147,10 +147,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_5",
+    id: "re_5",
     name: "Primary Workshop",
     column: 2,
-    required: ["tech_re_2"],
+    required: ["re_2"],
     costs: {
       research_points: 36,
       coins: 593000,
@@ -176,10 +176,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_6",
+    id: "re_6",
     name: "Kaolin Processing",
     column: 2,
-    required: ["tech_re_3"],
+    required: ["re_3"],
     costs: {
       research_points: 40,
       coins: 661000,
@@ -203,10 +203,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_7",
+    id: "re_7",
     name: "Iron Plough",
     column: 2,
-    required: ["tech_re_3"],
+    required: ["re_3"],
     costs: {
       research_points: 34,
       coins: 570000,
@@ -234,10 +234,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_8",
+    id: "re_8",
     name: "Forums",
     column: 3,
-    required: ["tech_re_4"],
+    required: ["re_4"],
     costs: {
       research_points: 49,
       coins: 821000,
@@ -263,10 +263,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_9",
+    id: "re_9",
     name: "Tenant Farming",
     column: 3,
-    required: ["tech_re_4"],
+    required: ["re_4"],
     costs: {
       research_points: 43,
       coins: 707000,
@@ -289,10 +289,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_10",
+    id: "re_10",
     name: "Sagittarii",
     column: 3,
-    required: ["tech_re_5"],
+    required: ["re_5"],
     costs: {
       research_points: 54,
       coins: 889000,
@@ -318,10 +318,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_11",
+    id: "re_11",
     name: "Porcelain Production",
     column: 3,
-    required: ["tech_re_6", "tech_re_7"],
+    required: ["re_6", "re_7"],
     costs: {
       research_points: 52,
       coins: 866000,
@@ -349,10 +349,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_12",
+    id: "re_12",
     name: "Ballistas",
     column: 4,
-    required: ["tech_re_8", "tech_re_9", "tech_re_10"],
+    required: ["re_8", "re_9", "re_10"],
     costs: {
       research_points: 51,
       coins: 844000,
@@ -375,10 +375,10 @@ export const technos_RE: TechnoData[] = [
     rewards: ["Siege Barracks: Unlocks the Siege Barracks"],
   },
   {
-    id: "tech_re_13",
+    id: "re_13",
     name: "Deep Foundations",
     column: 4,
-    required: ["tech_re_11"],
+    required: ["re_11"],
     costs: {
       research_points: 55,
       coins: 912000,
@@ -406,10 +406,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_14",
+    id: "re_14",
     name: "Labor Duties",
     column: 4,
-    required: ["tech_re_11"],
+    required: ["re_11"],
     costs: {
       research_points: 44,
       coins: 730000,
@@ -435,10 +435,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_15",
+    id: "re_15",
     name: "Villa Rustica",
     column: 5,
-    required: ["tech_re_12", "tech_re_13"],
+    required: ["re_12", "re_13"],
     costs: {
       research_points: 26,
       coins: 433000,
@@ -464,10 +464,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_16",
+    id: "re_16",
     name: "Terracing",
     column: 5,
-    required: ["tech_re_13"],
+    required: ["re_13"],
     costs: {
       research_points: 49,
       coins: 821000,
@@ -494,10 +494,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_17",
+    id: "re_17",
     name: "Floor Plans",
     column: 5,
-    required: ["tech_re_14"],
+    required: ["re_14"],
     costs: {
       research_points: 55,
       coins: 912000,
@@ -523,10 +523,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_18",
+    id: "re_18",
     name: "Public Gardens",
     column: 6,
-    required: ["tech_re_15"],
+    required: ["re_15"],
     costs: {
       research_points: 52,
       coins: 866000,
@@ -552,10 +552,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_19",
+    id: "re_19",
     name: "Villa Urbana",
     column: 6,
-    required: ["tech_re_15"],
+    required: ["re_15"],
     costs: {
       research_points: 30,
       coins: 502000,
@@ -578,10 +578,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_20",
+    id: "re_20",
     name: "Turmae",
     column: 6,
-    required: ["tech_re_15"],
+    required: ["re_15"],
     costs: {
       research_points: 60,
       coins: 1000000,
@@ -604,10 +604,10 @@ export const technos_RE: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
   },
   {
-    id: "tech_re_21",
+    id: "re_21",
     name: "Advanced Clayworks",
     column: 6,
-    required: ["tech_re_16", "tech_re_17"],
+    required: ["re_16", "re_17"],
     costs: {
       research_points: 30,
       coins: 502000,
@@ -634,10 +634,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_22",
+    id: "re_22",
     name: "Underfloor Heating",
     column: 7,
-    required: ["tech_re_18", "tech_re_19"],
+    required: ["re_18", "re_19"],
     costs: {
       research_points: 62,
       coins: 1000000,
@@ -664,10 +664,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_23",
+    id: "re_23",
     name: "Circus Maximus",
     column: 7,
-    required: ["tech_re_20"],
+    required: ["re_20"],
     costs: {
       research_points: 29,
       coins: 479000,
@@ -690,10 +690,10 @@ export const technos_RE: TechnoData[] = [
     rewards: ["Large Culture Site: Unlocks a Large Culture Site upgrade"],
   },
   {
-    id: "tech_re_24",
+    id: "re_24",
     name: "Urban Management",
     column: 7,
-    required: ["tech_re_21"],
+    required: ["re_21"],
     costs: {
       research_points: 63,
       coins: 1000000,
@@ -717,10 +717,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_25",
+    id: "re_25",
     name: "Dryland Farming",
     column: 7,
-    required: ["tech_re_21"],
+    required: ["re_21"],
     costs: {
       research_points: 70,
       coins: 1100000,
@@ -747,10 +747,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_26",
+    id: "re_26",
     name: "Secondary Workshop",
     column: 8,
-    required: ["tech_re_22"],
+    required: ["re_22"],
     costs: {
       research_points: 36,
       coins: 593000,
@@ -776,10 +776,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_27",
+    id: "re_27",
     name: "Legionary",
     column: 8,
-    required: ["tech_re_23"],
+    required: ["re_23"],
     costs: {
       research_points: 47,
       coins: 775000,
@@ -804,10 +804,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_28",
+    id: "re_28",
     name: "Porcelain Mastery",
     column: 8,
-    required: ["tech_re_24", "tech_re_25"],
+    required: ["re_24", "re_25"],
     costs: {
       research_points: 29,
       coins: 479000,
@@ -834,10 +834,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_29",
+    id: "re_29",
     name: "Tertiary Workshop",
     column: 9,
-    required: ["tech_re_26", "tech_re_27", "tech_re_28"],
+    required: ["re_26", "re_27", "re_28"],
     costs: {
       research_points: 78,
       coins: 1300000,
@@ -863,10 +863,10 @@ export const technos_RE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_re_30",
+    id: "re_30",
     name: "Chinese Consensus",
     column: 30,
-    required: ["tech_re_29"],
+    required: ["re_29"],
     costs: {
       research_points: 37,
       coins: 616000,

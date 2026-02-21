@@ -4,7 +4,6 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   getWikiDB,
-  techIdToDbId,
   areaIndexToId,
   tradePostIndexToId,
 } from "@/lib/db/schema";
@@ -99,7 +98,7 @@ export function useAddTechno() {
   return useMutation({
     mutationFn: async ({ technoId }: { technoId: string }) => {
       const db = getWikiDB();
-      await db.technos.put({ id: techIdToDbId(technoId), hidden: 0 });
+      await db.technos.put({ id: technoId, hidden: 0 });
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["technos"] }),
   });

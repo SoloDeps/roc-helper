@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_HM: TechnoData[] = [
   {
-    id: "tech_hm_0",
+    id: "hm_0",
     name: "Sandstone Foundations",
     column: 0,
     required: [],
@@ -33,10 +33,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_1",
+    id: "hm_1",
     name: "Clearing",
     column: 1,
-    required: ["tech_hm_0"],
+    required: ["hm_0"],
     costs: {
       research_points: 89,
       coins: 5100000,
@@ -62,10 +62,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_2",
+    id: "hm_2",
     name: "Infantrymen",
     column: 1,
-    required: ["tech_hm_0"],
+    required: ["hm_0"],
     costs: {
       research_points: 145,
       coins: 5100000,
@@ -88,10 +88,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_hm_3",
+    id: "hm_3",
     name: "Early Medicine",
     column: 1,
-    required: ["tech_hm_0"],
+    required: ["hm_0"],
     costs: {
       research_points: 115,
       coins: 8700000,
@@ -119,10 +119,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_4",
+    id: "hm_4",
     name: "Enhanced Timber Framing",
     column: 2,
-    required: ["tech_hm_1"],
+    required: ["hm_1"],
     costs: {
       research_points: 56,
       coins: 2800000,
@@ -145,10 +145,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_hm_5",
+    id: "hm_5",
     name: "Primary Workshop",
     column: 2,
-    required: ["tech_hm_2"],
+    required: ["hm_2"],
     costs: {
       research_points: 125,
       coins: 2900000,
@@ -175,10 +175,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_6",
+    id: "hm_6",
     name: "Central Bazaars",
     column: 2,
-    required: ["tech_hm_3"],
+    required: ["hm_3"],
     costs: {
       research_points: 34,
       coins: 5500000,
@@ -206,10 +206,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_7",
+    id: "hm_7",
     name: "Religious Orders",
     column: 3,
-    required: ["tech_hm_4", "tech_hm_5"],
+    required: ["hm_4", "hm_5"],
     costs: {
       research_points: 22,
       coins: 6200000,
@@ -235,10 +235,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_8",
+    id: "hm_8",
     name: "Arbalest Weapons",
     column: 3,
-    required: ["tech_hm_5"],
+    required: ["hm_5"],
     costs: {
       research_points: 155,
       coins: 2100000,
@@ -261,10 +261,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_hm_9",
+    id: "hm_9",
     name: "Oil Lamps",
     column: 3,
-    required: ["tech_hm_6"],
+    required: ["hm_6"],
     costs: {
       research_points: 125,
       coins: 2700000,
@@ -291,10 +291,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_10",
+    id: "hm_10",
     name: "Surgical Instruments",
     column: 3,
-    required: ["tech_hm_6"],
+    required: ["hm_6"],
     costs: {
       research_points: 92,
       coins: 4800000,
@@ -322,10 +322,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_11",
+    id: "hm_11",
     name: "Pointed Archs",
     column: 4,
-    required: ["tech_hm_7", "tech_hm_8"],
+    required: ["hm_7", "hm_8"],
     costs: {
       research_points: 90,
       coins: 6400000,
@@ -351,10 +351,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_12",
+    id: "hm_12",
     name: "Carpets",
     column: 4,
-    required: ["tech_hm_9"],
+    required: ["hm_9"],
     costs: {
       research_points: 125,
       coins: 7800000,
@@ -382,10 +382,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_13",
+    id: "hm_13",
     name: "Bookkeeping Systems",
     column: 4,
-    required: ["tech_hm_9", "tech_hm_10"],
+    required: ["hm_9", "hm_10"],
     costs: {
       research_points: 99,
       coins: 6300000,
@@ -412,10 +412,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_14",
+    id: "hm_14",
     name: "Experimental Science",
     column: 4,
-    required: ["tech_hm_10"],
+    required: ["hm_10"],
     costs: {
       research_points: 105,
       coins: 2700000,
@@ -443,10 +443,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_15",
+    id: "hm_15",
     name: "Simple Spinning Wheels",
     column: 5,
-    required: ["tech_hm_11"],
+    required: ["hm_11"],
     costs: {
       research_points: 73,
       coins: 2200000,
@@ -469,10 +469,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_hm_16",
+    id: "hm_16",
     name: "Non-Latin Books",
     column: 5,
-    required: ["tech_hm_11", "tech_hm_12"],
+    required: ["hm_11", "hm_12"],
     costs: {
       research_points: 75,
       coins: 6700000,
@@ -498,10 +498,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_17",
+    id: "hm_17",
     name: "Ornamented Vaulting",
     column: 5,
-    required: ["tech_hm_12", "tech_hm_13"],
+    required: ["hm_12", "hm_13"],
     costs: {
       research_points: 91,
       coins: 8200000,
@@ -529,10 +529,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_18",
+    id: "hm_18",
     name: "Improved Irrigation",
     column: 5,
-    required: ["tech_hm_13", "tech_hm_14"],
+    required: ["hm_13", "hm_14"],
     costs: {
       research_points: 86,
       coins: 3200000,
@@ -560,10 +560,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_19",
+    id: "hm_19",
     name: "Cartography",
     column: 6,
-    required: ["tech_hm_15"],
+    required: ["hm_15"],
     costs: {
       research_points: 91,
       coins: 6600000,
@@ -586,10 +586,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Moderate Culture Site: Unlocks a Moderate Culture Site upgrade"],
   },
   {
-    id: "tech_hm_20",
+    id: "hm_20",
     name: "Knighthood",
     column: 6,
-    required: ["tech_hm_16"],
+    required: ["hm_16"],
     costs: {
       research_points: 155,
       coins: 7400000,
@@ -612,10 +612,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
   },
   {
-    id: "tech_hm_21",
+    id: "hm_21",
     name: "Romantic Poetry",
     column: 6,
-    required: ["tech_hm_17"],
+    required: ["hm_17"],
     costs: {
       research_points: 97,
       coins: 4600000,
@@ -643,10 +643,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_22",
+    id: "hm_22",
     name: "Hyperbolic Geometry",
     column: 6,
-    required: ["tech_hm_17", "tech_hm_18"],
+    required: ["hm_17", "hm_18"],
     costs: {
       research_points: 94,
       coins: 6600000,
@@ -674,10 +674,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_23",
+    id: "hm_23",
     name: "Quality Products",
     column: 7,
-    required: ["tech_hm_19", "tech_hm_20"],
+    required: ["hm_19", "hm_20"],
     costs: {
       research_points: 145,
       coins: 2900000,
@@ -700,10 +700,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_hm_24",
+    id: "hm_24",
     name: "Weaving Techniques",
     column: 7,
-    required: ["tech_hm_21"],
+    required: ["hm_21"],
     costs: {
       research_points: 115,
       coins: 7100000,
@@ -731,10 +731,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_25",
+    id: "hm_25",
     name: "Kerosine Destillation",
     column: 7,
-    required: ["tech_hm_22"],
+    required: ["hm_22"],
     costs: {
       research_points: 115,
       coins: 4800000,
@@ -762,10 +762,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_26",
+    id: "hm_26",
     name: "Billmen",
     column: 8,
-    required: ["tech_hm_23"],
+    required: ["hm_23"],
     costs: {
       research_points: 150,
       coins: 7900000,
@@ -790,10 +790,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_27",
+    id: "hm_27",
     name: "Guilds",
     column: 8,
-    required: ["tech_hm_23", "tech_hm_24"],
+    required: ["hm_23", "hm_24"],
     costs: {
       research_points: 115,
       coins: 6900000,
@@ -816,10 +816,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_hm_28",
+    id: "hm_28",
     name: "Tesselation",
     column: 8,
-    required: ["tech_hm_24", "tech_hm_25"],
+    required: ["hm_24", "hm_25"],
     costs: {
       research_points: 99,
       coins: 2600000,
@@ -847,10 +847,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_29",
+    id: "hm_29",
     name: "Bridge Mills",
     column: 8,
-    required: ["tech_hm_25"],
+    required: ["hm_25"],
     costs: {
       research_points: 83,
       coins: 4000000,
@@ -878,10 +878,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_30",
+    id: "hm_30",
     name: "Secondary Workshop",
     column: 9,
-    required: ["tech_hm_26", "tech_hm_27"],
+    required: ["hm_26", "hm_27"],
     costs: {
       research_points: 115,
       coins: 7500000,
@@ -907,10 +907,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_31",
+    id: "hm_31",
     name: "Staufer Architecture",
     column: 9,
-    required: ["tech_hm_27"],
+    required: ["hm_27"],
     costs: {
       research_points: 105,
       coins: 3300000,
@@ -936,10 +936,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_32",
+    id: "hm_32",
     name: "Banks",
     column: 9,
-    required: ["tech_hm_28", "tech_hm_29"],
+    required: ["hm_28", "hm_29"],
     costs: {
       research_points: 91,
       coins: 2000000,
@@ -967,10 +967,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_33",
+    id: "hm_33",
     name: "Medieval Catapults",
     column: 10,
-    required: ["tech_hm_30", "tech_hm_31", "tech_hm_32"],
+    required: ["hm_30", "hm_31", "hm_32"],
     costs: {
       research_points: 155,
       coins: 3400000,
@@ -993,10 +993,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
   },
   {
-    id: "tech_hm_34",
+    id: "hm_34",
     name: "Disinfectants",
     column: 10,
-    required: ["tech_hm_31", "tech_hm_32"],
+    required: ["hm_31", "hm_32"],
     costs: {
       research_points: 86,
       coins: 6700000,
@@ -1024,10 +1024,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_35",
+    id: "hm_35",
     name: "Combination Locks",
     column: 10,
-    required: ["tech_hm_32"],
+    required: ["hm_32"],
     costs: {
       research_points: 90,
       coins: 5600000,
@@ -1055,10 +1055,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_36",
+    id: "hm_36",
     name: "Precautions",
     column: 11,
-    required: ["tech_hm_33"],
+    required: ["hm_33"],
     costs: {
       research_points: 86,
       coins: 7100000,
@@ -1081,10 +1081,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Small Home: Unlocks a Small Home upgrade"],
   },
   {
-    id: "tech_hm_37",
+    id: "hm_37",
     name: "Tertiary Workshop",
     column: 11,
-    required: ["tech_hm_33"],
+    required: ["hm_33"],
     costs: {
       research_points: 110,
       coins: 2700000,
@@ -1110,10 +1110,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_38",
+    id: "hm_38",
     name: "Flying Contraption",
     column: 11,
-    required: ["tech_hm_34"],
+    required: ["hm_34"],
     costs: {
       research_points: 115,
       coins: 3300000,
@@ -1140,10 +1140,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_39",
+    id: "hm_39",
     name: "Weight-Driven Clocks",
     column: 11,
-    required: ["tech_hm_35"],
+    required: ["hm_35"],
     costs: {
       research_points: 88,
       coins: 2800000,
@@ -1171,10 +1171,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_40",
+    id: "hm_40",
     name: "Universities",
     column: 12,
-    required: ["tech_hm_36", "tech_hm_37", "tech_hm_38"],
+    required: ["hm_36", "hm_37", "hm_38"],
     costs: {
       research_points: 105,
       coins: 4000000,
@@ -1197,10 +1197,10 @@ export const technos_HM: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_hm_41",
+    id: "hm_41",
     name: "Metabolism Theory",
     column: 12,
-    required: ["tech_hm_38", "tech_hm_39"],
+    required: ["hm_38", "hm_39"],
     costs: {
       research_points: 110,
       coins: 3400000,
@@ -1227,10 +1227,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_42",
+    id: "hm_42",
     name: "Shale Oil",
     column: 12,
-    required: ["tech_hm_39"],
+    required: ["hm_39"],
     costs: {
       research_points: 93,
       coins: 8500000,
@@ -1257,10 +1257,10 @@ export const technos_HM: TechnoData[] = [
     ],
   },
   {
-    id: "tech_hm_43",
+    id: "hm_43",
     name: "Early Gothic Decorations",
     column: 13,
-    required: ["tech_hm_40", "tech_hm_41", "tech_hm_42"],
+    required: ["hm_40", "hm_41", "hm_42"],
     costs: {
       research_points: 120,
       coins: 6100000,

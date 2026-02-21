@@ -4,7 +4,6 @@ import { toast } from "sonner";
 import { useAddElementStore } from "./add-element-store";
 import {
   getWikiDB,
-  techIdToDbId,
   areaIndexToId,
   tradePostIndexToId,
 } from "@/lib/db/schema";
@@ -46,7 +45,7 @@ export function useSubmitTechno() {
     const toAdd: Array<{ id: string; hidden: number }> = [];
 
     for (const technoData of technologies) {
-      const dbId = techIdToDbId(technoData.id);
+      const dbId = technoData.id;
       const existing = await db.technos.get(dbId);
       if (existing) {
         duplicates.push(technoData.name);

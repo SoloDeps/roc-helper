@@ -40,14 +40,13 @@ export async function exportPresetsJSON(): Promise<void> {
 }
 
 /**
- * Import — compat v1 (boolean hidden, boolean levels, "tech_eg_0", quantity)
+ * Import — compat v1 (boolean hidden, boolean levels, "eg_0", quantity)
  *       et v2 (0|1 hidden, 0|1 levels, "eg_0", qty)
  */
 export async function importPresetsJSON(jsonData: string): Promise<void> {
   try {
     const data = JSON.parse(jsonData);
     const db = getWikiDB();
-    const isV1 = !data.version || data.version < 2;
 
     if (Array.isArray(data.buildings)) {
       await db.buildings.bulkPut(
@@ -62,7 +61,7 @@ export async function importPresetsJSON(jsonData: string): Promise<void> {
     if (Array.isArray(data.technos)) {
       await db.technos.bulkPut(
         data.technos.map((t: TechnoEntity) => ({
-          id: isV1 ? t.id.replace(/^tech_/, "") : t.id,
+          id: t.id,
           hidden: t.hidden ? 1 : 0,
         })),
       );
@@ -173,7 +172,6 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
     if (!backup.data) throw new Error("Invalid backup format");
 
     const db = getWikiDB();
-    const isV1 = !backup.version || backup.version < 2;
 
     await clearAllData();
 
@@ -190,7 +188,7 @@ export async function restoreFromBackup(backupJson: string): Promise<void> {
     if (backup.data.technos) {
       await db.technos.bulkPut(
         backup.data.technos.map((t: TechnoEntity) => ({
-          id: isV1 ? t.id.replace(/^tech_/, "") : t.id,
+          id: t.id,
           hidden: t.hidden ? 1 : 0,
         })),
       );

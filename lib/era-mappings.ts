@@ -1,6 +1,6 @@
 /**
  * Mapping des ERA IDs (snake_case) vers leurs abréviations (2 lettres)
- * Utilisé pour générer les IDs de technos au format: tech_[abbr]_[index]
+ * Utilisé pour générer les IDs de technos au format: [abbr]_[index]
  */
 export const ERA_ID_TO_ABBR: Record<string, string> = {
   stone_age: "sa",

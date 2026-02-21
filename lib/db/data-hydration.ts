@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  getWikiDB,
-  dbIdToTechId,
-  areaIndexToId,
-  idToAreaIndex,
-  tradePostIndexToId,
-  idToTradePostIndex,
-} from "./schema";
+import { getWikiDB, areaIndexToId } from "./schema";
 import {
   getTechnologiesByEra,
   TECHNOLOGY_REGISTRY,
@@ -101,8 +94,7 @@ export async function getHydratedTechnos(
   const stateMap = new Map(userStates.map((s) => [s.id, s]));
 
   return staticData.map((techno) => {
-    const dbId = techno.id.replace(/^tech_/, "");
-    const state = stateMap.get(dbId);
+    const state = stateMap.get(techno.id);
     return { ...techno, era: eraId, hidden: state ? !!state.hidden : false };
   });
 }
@@ -114,12 +106,11 @@ export async function getAllHydratedTechnos(): Promise<HydratedTechno[]> {
 
   for (const state of userStates) {
     if (!state.id.match(/^([a-z]{2})_(\d+)$/)) continue;
-    const fullId = dbIdToTechId(state.id);
     let techno: TechnoData | undefined;
     let foundEraId: string | undefined;
 
     for (const eraId of Object.keys(TECHNOLOGY_REGISTRY)) {
-      techno = getTechnologiesByEra(eraId).find((t) => t.id === fullId);
+      techno = getTechnologiesByEra(eraId).find((t) => t.id === state.id);
       if (techno) {
         foundEraId = eraId;
         break;

@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_CG: TechnoData[] = [
   {
-    id: "tech_cg_0",
+    id: "cg_0",
     name: "Agora",
     column: 0,
     required: [],
@@ -33,10 +33,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_1",
+    id: "cg_1",
     name: "Carpentry",
     column: 1,
-    required: ["tech_cg_0"],
+    required: ["cg_0"],
     costs: {
       research_points: 16,
       coins: 178000,
@@ -62,10 +62,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_2",
+    id: "cg_2",
     name: "Cultural Exchange",
     column: 1,
-    required: ["tech_cg_0"],
+    required: ["cg_0"],
     costs: {
       research_points: 13,
       coins: 148000,
@@ -93,10 +93,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_3",
+    id: "cg_3",
     name: "Domestic Pigs",
     column: 2,
-    required: ["tech_cg_1"],
+    required: ["cg_1"],
     costs: {
       research_points: 14,
       coins: 163000,
@@ -124,10 +124,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_4",
+    id: "cg_4",
     name: "Primary Workshop",
     column: 2,
-    required: ["tech_cg_1"],
+    required: ["cg_1"],
     costs: {
       research_points: 17,
       coins: 192000,
@@ -152,10 +152,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_5",
+    id: "cg_5",
     name: "Alloys",
     column: 2,
-    required: ["tech_cg_2"],
+    required: ["cg_2"],
     costs: {
       research_points: 17,
       coins: 192000,
@@ -183,10 +183,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_6",
+    id: "cg_6",
     name: "Storage",
     column: 2,
-    required: ["tech_cg_2"],
+    required: ["cg_2"],
     costs: {
       research_points: 13,
       coins: 148000,
@@ -210,10 +210,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_7",
+    id: "cg_7",
     name: "Education",
     column: 3,
-    required: ["tech_cg_3"],
+    required: ["cg_3"],
     costs: {
       research_points: 13,
       coins: 148000,
@@ -240,10 +240,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_8",
+    id: "cg_8",
     name: "Psiloi",
     column: 3,
-    required: ["tech_cg_4"],
+    required: ["cg_4"],
     costs: {
       research_points: 17,
       coins: 192000,
@@ -266,10 +266,10 @@ export const technos_CG: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_cg_9",
+    id: "cg_9",
     name: "Golden Mask",
     column: 3,
-    required: ["tech_cg_5"],
+    required: ["cg_5"],
     costs: {
       research_points: 20,
       coins: 229000,
@@ -297,10 +297,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_10",
+    id: "cg_10",
     name: "Ceremonial Dress",
     column: 3,
-    required: ["tech_cg_6"],
+    required: ["cg_6"],
     costs: {
       research_points: 18,
       coins: 207000,
@@ -328,10 +328,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_11",
+    id: "cg_11",
     name: "Philosophy",
     column: 4,
-    required: ["tech_cg_7", "tech_cg_8"],
+    required: ["cg_7", "cg_8"],
     costs: {
       research_points: 18,
       coins: 207000,
@@ -354,10 +354,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_12",
+    id: "cg_12",
     name: "Channel",
     column: 4,
-    required: ["tech_cg_9", "tech_cg_10"],
+    required: ["cg_9", "cg_10"],
     costs: {
       research_points: 20,
       coins: 229000,
@@ -381,10 +381,10 @@ export const technos_CG: TechnoData[] = [
     rewards: ["Channel: Unlocks the Channel", "Fountain: Unlocks the Fountain"],
   },
   {
-    id: "tech_cg_13",
+    id: "cg_13",
     name: "Crop Rotation",
     column: 5,
-    required: ["tech_cg_11", "tech_cg_12"],
+    required: ["cg_11", "cg_12"],
     costs: {
       research_points: 18,
       coins: 207000,
@@ -411,10 +411,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_14",
+    id: "cg_14",
     name: "Toxotai",
     column: 5,
-    required: ["tech_cg_11", "tech_cg_12"],
+    required: ["cg_11", "cg_12"],
     costs: {
       research_points: 26,
       coins: 296000,
@@ -437,10 +437,10 @@ export const technos_CG: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_cg_15",
+    id: "cg_15",
     name: "Astrology",
     column: 5,
-    required: ["tech_cg_11", "tech_cg_12"],
+    required: ["cg_11", "cg_12"],
     costs: {
       research_points: 21,
       coins: 237000,
@@ -467,10 +467,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_16",
+    id: "cg_16",
     name: "Astronomy",
     column: 5,
-    required: ["tech_cg_11", "tech_cg_12"],
+    required: ["cg_11", "cg_12"],
     costs: {
       research_points: 18,
       coins: 207000,
@@ -497,10 +497,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_17",
+    id: "cg_17",
     name: "Hoplites",
     column: 6,
-    required: ["tech_cg_13", "tech_cg_14"],
+    required: ["cg_13", "cg_14"],
     costs: {
       research_points: 21,
       coins: 237000,
@@ -522,10 +522,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_18",
+    id: "cg_18",
     name: "Temples",
     column: 6,
-    required: ["tech_cg_14"],
+    required: ["cg_14"],
     costs: {
       research_points: 20,
       coins: 229000,
@@ -548,10 +548,10 @@ export const technos_CG: TechnoData[] = [
     rewards: ["Large Culture Site: Unlocks the Large Culture Site"],
   },
   {
-    id: "tech_cg_19",
+    id: "cg_19",
     name: "Library",
     column: 6,
-    required: ["tech_cg_15"],
+    required: ["cg_15"],
     costs: {
       research_points: 20,
       coins: 222000,
@@ -580,10 +580,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_20",
+    id: "cg_20",
     name: "Mummification",
     column: 6,
-    required: ["tech_cg_16"],
+    required: ["cg_16"],
     costs: {
       research_points: 26,
       coins: 296000,
@@ -610,10 +610,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_21",
+    id: "cg_21",
     name: "Cataphract",
     column: 7,
-    required: ["tech_cg_17"],
+    required: ["cg_17"],
     costs: {
       research_points: 42,
       coins: 481000,
@@ -639,10 +639,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_22",
+    id: "cg_22",
     name: "Concrete",
     column: 7,
-    required: ["tech_cg_18"],
+    required: ["cg_18"],
     costs: {
       research_points: 25,
       coins: 281000,
@@ -669,10 +669,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_23",
+    id: "cg_23",
     name: "Water Pump",
     column: 7,
-    required: ["tech_cg_18", "tech_cg_19", "tech_cg_20"],
+    required: ["cg_18", "cg_19", "cg_20"],
     costs: {
       research_points: 20,
       coins: 222000,
@@ -696,10 +696,10 @@ export const technos_CG: TechnoData[] = [
     rewards: ["Water Pump: Unlocks the Water Pump"],
   },
   {
-    id: "tech_cg_24",
+    id: "cg_24",
     name: "Math",
     column: 8,
-    required: ["tech_cg_21", "tech_cg_22"],
+    required: ["cg_21", "cg_22"],
     costs: {
       research_points: 29,
       coins: 326000,
@@ -725,10 +725,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_25",
+    id: "cg_25",
     name: "Secondary Workshop",
     column: 8,
-    required: ["tech_cg_22"],
+    required: ["cg_22"],
     costs: {
       research_points: 26,
       coins: 296000,
@@ -754,10 +754,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_26",
+    id: "cg_26",
     name: "Make Up",
     column: 8,
-    required: ["tech_cg_23"],
+    required: ["cg_23"],
     costs: {
       research_points: 24,
       coins: 274000,
@@ -785,10 +785,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_27",
+    id: "cg_27",
     name: "Tertiary Workshop",
     column: 9,
-    required: ["tech_cg_24", "tech_cg_25"],
+    required: ["cg_24", "cg_25"],
     costs: {
       research_points: 27,
       coins: 311000,
@@ -814,10 +814,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_28",
+    id: "cg_28",
     name: "Scaffolding",
     column: 9,
-    required: ["tech_cg_26"],
+    required: ["cg_26"],
     costs: {
       research_points: 52,
       coins: 592000,
@@ -844,10 +844,10 @@ export const technos_CG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_cg_29",
+    id: "cg_29",
     name: "Egyptian Consensus",
     column: 10,
-    required: ["tech_cg_27", "tech_cg_28"],
+    required: ["cg_27", "cg_28"],
     costs: {
       research_points: 27,
       coins: 303000,

@@ -7,7 +7,7 @@ import { TechPathDrawer } from "./tech-path-drawer";
 import { TechTreeDesktop } from "./tech-tree-desktop";
 import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
-import { getWikiDB, techIdToDbId, dbIdToTechId } from "@/lib/db/schema";
+import { getWikiDB } from "@/lib/db/schema";
 import { GitFork, X, Target, ArrowRight, List, GitBranch } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -49,7 +49,7 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
     const db = getWikiDB();
     return await db.technos
       .where("id")
-      .anyOf(technologies.map((t) => techIdToDbId(t.id)))
+      .anyOf(technologies.map((t) => t.id))
       .toArray();
   }, [technologies]);
 
@@ -95,7 +95,7 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
-      if (t.hidden) ids.add(dbIdToTechId(t.id));
+      if (t.hidden) ids.add(t.id);
     });
     return ids;
   }, [technosInDB]);
@@ -155,12 +155,12 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       if (!isCurrentlyCompleted) {
         const idsToComplete = [techId, ...collectAncestorIds(techId)];
         await db.technos.bulkPut(
-          idsToComplete.map((id) => ({ id: techIdToDbId(id), hidden: 1 })),
+          idsToComplete.map((id) => ({ id: id, hidden: 1 })),
         );
       } else {
         const idsToUncheck = [techId, ...collectDescendantIds(techId)];
         await db.technos.bulkPut(
-          idsToUncheck.map((id) => ({ id: techIdToDbId(id), hidden: 0 })),
+          idsToUncheck.map((id) => ({ id: id, hidden: 0 })),
         );
       }
     },

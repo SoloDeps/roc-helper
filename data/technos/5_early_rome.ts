@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_ER: TechnoData[] = [
   {
-    id: "tech_er_0",
+    id: "er_0",
     name: "Municipium",
     column: 0,
     required: [],
@@ -34,10 +34,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_1",
+    id: "er_1",
     name: "Hastati",
     column: 1,
-    required: ["tech_er_0"],
+    required: ["er_0"],
     costs: {
       research_points: 22,
       coins: 298000,
@@ -65,10 +65,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_2",
+    id: "er_2",
     name: "Rise of China",
     column: 1,
-    required: ["tech_er_0"],
+    required: ["er_0"],
     costs: {
       research_points: 37,
       coins: 498000,
@@ -92,10 +92,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_3",
+    id: "er_3",
     name: "Rear Livestock",
     column: 2,
-    required: ["tech_er_1", "tech_er_2"],
+    required: ["er_1", "er_2"],
     costs: {
       research_points: 42,
       coins: 562000,
@@ -118,10 +118,10 @@ export const technos_ER: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_er_4",
+    id: "er_4",
     name: "Insulae",
     column: 2,
-    required: ["tech_er_1", "tech_er_2"],
+    required: ["er_1", "er_2"],
     costs: {
       research_points: 41,
       coins: 548000,
@@ -148,10 +148,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_5",
+    id: "er_5",
     name: "Primary Workshop",
     column: 2,
-    required: ["tech_er_1", "tech_er_2"],
+    required: ["er_1", "er_2"],
     costs: {
       research_points: 30,
       coins: 402000,
@@ -174,10 +174,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_6",
+    id: "er_6",
     name: "Ink and Brush",
     column: 2,
-    required: ["tech_er_2"],
+    required: ["er_2"],
     costs: {
       research_points: 25,
       coins: 337000,
@@ -205,10 +205,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_7",
+    id: "er_7",
     name: "Marketplaces",
     column: 3,
-    required: ["tech_er_3", "tech_er_4", "tech_er_5"],
+    required: ["er_3", "er_4", "er_5"],
     costs: {
       research_points: 31,
       coins: 408000,
@@ -236,10 +236,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_8",
+    id: "er_8",
     name: "Sericulture",
     column: 3,
-    required: ["tech_er_6"],
+    required: ["er_6"],
     costs: {
       research_points: 24,
       coins: 321000,
@@ -267,10 +267,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_9",
+    id: "er_9",
     name: "Marks of History",
     column: 4,
-    required: ["tech_er_7"],
+    required: ["er_7"],
     costs: {
       research_points: 38,
       coins: 501000,
@@ -293,10 +293,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_10",
+    id: "er_10",
     name: "Velites",
     column: 4,
-    required: ["tech_er_7"],
+    required: ["er_7"],
     costs: {
       research_points: 26,
       coins: 352000,
@@ -322,10 +322,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_11",
+    id: "er_11",
     name: "Silk Manufacture",
     column: 4,
-    required: ["tech_er_8"],
+    required: ["er_8"],
     costs: {
       research_points: 45,
       coins: 602000,
@@ -355,10 +355,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_12",
+    id: "er_12",
     name: "Tributum Capitis",
     column: 5,
-    required: ["tech_er_9", "tech_er_10"],
+    required: ["er_9", "er_10"],
     costs: {
       research_points: 46,
       coins: 610000,
@@ -381,10 +381,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_13",
+    id: "er_13",
     name: "Paddy Fields",
     column: 5,
-    required: ["tech_er_11"],
+    required: ["er_11"],
     costs: {
       research_points: 41,
       coins: 546000,
@@ -411,10 +411,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_14",
+    id: "er_14",
     name: "Rammed Earth Houses",
     column: 5,
-    required: ["tech_er_11"],
+    required: ["er_11"],
     costs: {
       research_points: 45,
       coins: 599000,
@@ -441,10 +441,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_15",
+    id: "er_15",
     name: "Auxilia Riders",
     column: 6,
-    required: ["tech_er_12", "tech_er_13"],
+    required: ["er_12", "er_13"],
     costs: {
       research_points: 30,
       coins: 405000,
@@ -467,10 +467,10 @@ export const technos_ER: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
   },
   {
-    id: "tech_er_16",
+    id: "er_16",
     name: "Calligraphy",
     column: 6,
-    required: ["tech_er_13", "tech_er_14"],
+    required: ["er_13", "er_14"],
     costs: {
       research_points: 34,
       coins: 447000,
@@ -497,10 +497,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_17",
+    id: "er_17",
     name: "Roman Providence",
     column: 7,
-    required: ["tech_er_15"],
+    required: ["er_15"],
     costs: {
       research_points: 42,
       coins: 562000,
@@ -527,10 +527,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_18",
+    id: "er_18",
     name: "Baked Bricks",
     column: 7,
-    required: ["tech_er_16"],
+    required: ["er_16"],
     costs: {
       research_points: 30,
       coins: 396000,
@@ -557,10 +557,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_19",
+    id: "er_19",
     name: "Enhanced Paddy Fields",
     column: 7,
-    required: ["tech_er_16"],
+    required: ["er_16"],
     costs: {
       research_points: 48,
       coins: 636000,
@@ -587,10 +587,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_20",
+    id: "er_20",
     name: "Refined Silk",
     column: 7,
-    required: ["tech_er_16"],
+    required: ["er_16"],
     costs: {
       research_points: 35,
       coins: 470000,
@@ -617,10 +617,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_21",
+    id: "er_21",
     name: "Domus",
     column: 8,
-    required: ["tech_er_17"],
+    required: ["er_17"],
     costs: {
       research_points: 48,
       coins: 636000,
@@ -646,10 +646,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_22",
+    id: "er_22",
     name: "Triarii",
     column: 8,
-    required: ["tech_er_17"],
+    required: ["er_17"],
     costs: {
       research_points: 37,
       coins: 486000,
@@ -674,10 +674,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_23",
+    id: "er_23",
     name: "Dynastic Law",
     column: 8,
-    required: ["tech_er_18", "tech_er_19", "tech_er_20"],
+    required: ["er_18", "er_19", "er_20"],
     costs: {
       research_points: 47,
       coins: 633000,
@@ -704,10 +704,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_24",
+    id: "er_24",
     name: "Watchtowers",
     column: 9,
-    required: ["tech_er_21"],
+    required: ["er_21"],
     costs: {
       research_points: 58,
       coins: 773000,
@@ -726,10 +726,10 @@ export const technos_ER: TechnoData[] = [
     rewards: ["Large Culture Site: Unlocks a Large Culture Site upgrade"],
   },
   {
-    id: "tech_er_25",
+    id: "er_25",
     name: "Secondary Workshop",
     column: 9,
-    required: ["tech_er_22"],
+    required: ["er_22"],
     costs: {
       research_points: 42,
       coins: 562000,
@@ -755,10 +755,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_26",
+    id: "er_26",
     name: "Silk Mastery",
     column: 9,
-    required: ["tech_er_23"],
+    required: ["er_23"],
     costs: {
       research_points: 44,
       coins: 591000,
@@ -786,10 +786,10 @@ export const technos_ER: TechnoData[] = [
     ],
   },
   {
-    id: "tech_er_27",
+    id: "er_27",
     name: "Tertiary Workshop",
     column: 10,
-    required: ["tech_er_24", "tech_er_25", "tech_er_26"],
+    required: ["er_24", "er_25", "er_26"],
     costs: {
       research_points: 40,
       coins: 534000,

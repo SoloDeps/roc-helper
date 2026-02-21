@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_LG: TechnoData[] = [
   {
-    id: "tech_lg_0",
+    id: "lg_0",
     name: "Flamboyant Gothic",
     column: 0,
     required: [],
@@ -30,10 +30,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_1",
+    id: "lg_1",
     name: "Brigandine Armor",
     column: 1,
-    required: ["tech_lg_0"],
+    required: ["lg_0"],
     costs: {
       research_points: 130,
       coins: 6600000,
@@ -56,10 +56,10 @@ export const technos_LG: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_lg_2",
+    id: "lg_2",
     name: "Fulling Mills",
     column: 1,
-    required: ["tech_lg_0"],
+    required: ["lg_0"],
     costs: {
       research_points: 32,
       coins: 6600000,
@@ -82,10 +82,10 @@ export const technos_LG: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_lg_3",
+    id: "lg_3",
     name: "Sternpost Rudder",
     column: 1,
-    required: ["tech_lg_0"],
+    required: ["lg_0"],
     costs: {
       research_points: 165,
       coins: 11000000,
@@ -108,10 +108,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_4",
+    id: "lg_4",
     name: "Rose Windows",
     column: 2,
-    required: ["tech_lg_1", "tech_lg_2"],
+    required: ["lg_1", "lg_2"],
     costs: {
       research_points: 81,
       coins: 3600000,
@@ -137,10 +137,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_5",
+    id: "lg_5",
     name: "Primary Workshop",
     column: 2,
-    required: ["tech_lg_2"],
+    required: ["lg_2"],
     costs: {
       research_points: 180,
       coins: 3800000,
@@ -166,10 +166,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_6",
+    id: "lg_6",
     name: "Capstan and Windlass",
     column: 2,
-    required: ["tech_lg_3"],
+    required: ["lg_3"],
     costs: {
       research_points: 100,
       coins: 7000000,
@@ -196,10 +196,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_7",
+    id: "lg_7",
     name: "Lighthouse Design",
     column: 2,
-    required: ["tech_lg_3"],
+    required: ["lg_3"],
     costs: {
       research_points: 155,
       coins: 7800000,
@@ -227,10 +227,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_8",
+    id: "lg_8",
     name: "Cranequin Crossbows",
     column: 3,
-    required: ["tech_lg_4", "tech_lg_5"],
+    required: ["lg_4", "lg_5"],
     costs: {
       research_points: 220,
       coins: 2700000,
@@ -253,10 +253,10 @@ export const technos_LG: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_lg_9",
+    id: "lg_9",
     name: "Ottoman Postal System",
     column: 3,
-    required: ["tech_lg_5", "tech_lg_6", "tech_lg_7"],
+    required: ["lg_5", "lg_6", "lg_7"],
     costs: {
       research_points: 180,
       coins: 3400000,
@@ -284,10 +284,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_10",
+    id: "lg_10",
     name: "Counterweight Cranes",
     column: 3,
-    required: ["tech_lg_6", "tech_lg_7"],
+    required: ["lg_6", "lg_7"],
     costs: {
       research_points: 135,
       coins: 6200000,
@@ -314,10 +314,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_11",
+    id: "lg_11",
     name: "Water-Powered Hammers",
     column: 4,
-    required: ["tech_lg_8"],
+    required: ["lg_8"],
     costs: {
       research_points: 130,
       coins: 8100000,
@@ -343,10 +343,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_12",
+    id: "lg_12",
     name: "Stained Glass Mastery",
     column: 4,
-    required: ["tech_lg_8"],
+    required: ["lg_8"],
     costs: {
       research_points: 180,
       coins: 9900000,
@@ -373,10 +373,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_13",
+    id: "lg_13",
     name: "Pilotage and Sea Lanes",
     column: 4,
-    required: ["tech_lg_8", "tech_lg_9", "tech_lg_10"],
+    required: ["lg_8", "lg_9", "lg_10"],
     costs: {
       research_points: 145,
       coins: 8000000,
@@ -399,10 +399,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_14",
+    id: "lg_14",
     name: "Carvel Planking",
     column: 4,
-    required: ["tech_lg_10"],
+    required: ["lg_10"],
     costs: {
       research_points: 150,
       coins: 3400000,
@@ -429,10 +429,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_15",
+    id: "lg_15",
     name: "Lance-Rest Harness",
     column: 5,
-    required: ["tech_lg_11", "tech_lg_12", "tech_lg_13"],
+    required: ["lg_11", "lg_12", "lg_13"],
     costs: {
       research_points: 105,
       coins: 2700000,
@@ -455,10 +455,10 @@ export const technos_LG: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
   },
   {
-    id: "tech_lg_16",
+    id: "lg_16",
     name: "Sounding Lead Practices",
     column: 5,
-    required: ["tech_lg_13"],
+    required: ["lg_13"],
     costs: {
       research_points: 110,
       coins: 8500000,
@@ -485,10 +485,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_17",
+    id: "lg_17",
     name: "Ottoman Tax Register",
     column: 5,
-    required: ["tech_lg_14"],
+    required: ["lg_14"],
     costs: {
       research_points: 130,
       coins: 10000000,
@@ -515,10 +515,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_18",
+    id: "lg_18",
     name: "Port Dues Administration",
     column: 5,
-    required: ["tech_lg_14"],
+    required: ["lg_14"],
     costs: {
       research_points: 125,
       coins: 4100000,
@@ -546,10 +546,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_19",
+    id: "lg_19",
     name: "Perpendicular Tracery",
     column: 6,
-    required: ["tech_lg_15"],
+    required: ["lg_15"],
     costs: {
       research_points: 130,
       coins: 8500000,
@@ -572,10 +572,10 @@ export const technos_LG: TechnoData[] = [
     rewards: ["Moderate Culture Site: Unlocks a Moderate Culture Site upgrade"],
   },
   {
-    id: "tech_lg_20",
+    id: "lg_20",
     name: "Enclosed Fields",
     column: 6,
-    required: ["tech_lg_15"],
+    required: ["lg_15"],
     costs: {
       research_points: 220,
       coins: 9400000,
@@ -602,10 +602,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_21",
+    id: "lg_21",
     name: "Portolan Charts",
     column: 6,
-    required: ["tech_lg_16", "tech_lg_17"],
+    required: ["lg_16", "lg_17"],
     costs: {
       research_points: 140,
       coins: 5800000,
@@ -632,10 +632,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_22",
+    id: "lg_22",
     name: "Customs Houses",
     column: 6,
-    required: ["tech_lg_17", "tech_lg_18"],
+    required: ["lg_17", "lg_18"],
     costs: {
       research_points: 135,
       coins: 8400000,
@@ -663,10 +663,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_23",
+    id: "lg_23",
     name: "Secondary Workshop",
     column: 7,
-    required: ["tech_lg_19", "tech_lg_20"],
+    required: ["lg_19", "lg_20"],
     costs: {
       research_points: 210,
       coins: 3700000,
@@ -692,10 +692,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_24",
+    id: "lg_24",
     name: "Bills of Exchange",
     column: 7,
-    required: ["tech_lg_20", "tech_lg_21"],
+    required: ["lg_20", "lg_21"],
     costs: {
       research_points: 165,
       coins: 9100000,
@@ -722,10 +722,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_25",
+    id: "lg_25",
     name: "Double Entry Bookkeeping",
     column: 7,
-    required: ["tech_lg_21", "tech_lg_22"],
+    required: ["lg_21", "lg_22"],
     costs: {
       research_points: 170,
       coins: 6000000,
@@ -752,10 +752,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_26",
+    id: "lg_26",
     name: "Coat of Plates",
     column: 8,
-    required: ["tech_lg_23"],
+    required: ["lg_23"],
     costs: {
       research_points: 215,
       coins: 10000000,
@@ -780,10 +780,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_27",
+    id: "lg_27",
     name: "Lierne and Fan Vaults",
     column: 8,
-    required: ["tech_lg_23"],
+    required: ["lg_23"],
     costs: {
       research_points: 165,
       coins: 8800000,
@@ -810,10 +810,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_28",
+    id: "lg_28",
     name: "Admiralty Courts",
     column: 8,
-    required: ["tech_lg_23", "tech_lg_24"],
+    required: ["lg_23", "lg_24"],
     costs: {
       research_points: 145,
       coins: 3300000,
@@ -841,10 +841,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_29",
+    id: "lg_29",
     name: "Quarantine",
     column: 8,
-    required: ["tech_lg_24", "tech_lg_25"],
+    required: ["lg_24", "lg_25"],
     costs: {
       research_points: 120,
       coins: 5200000,
@@ -872,10 +872,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_30",
+    id: "lg_30",
     name: "Gelatin Sizing",
     column: 9,
-    required: ["tech_lg_26", "tech_lg_27"],
+    required: ["lg_26", "lg_27"],
     costs: {
       research_points: 170,
       coins: 9500000,
@@ -902,10 +902,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_31",
+    id: "lg_31",
     name: "Covered Sewers",
     column: 9,
-    required: ["tech_lg_27", "tech_lg_28"],
+    required: ["lg_27", "lg_28"],
     costs: {
       research_points: 150,
       coins: 4200000,
@@ -931,10 +931,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_32",
+    id: "lg_32",
     name: "Log Line and Sandglass",
     column: 9,
-    required: ["tech_lg_28", "tech_lg_29"],
+    required: ["lg_28", "lg_29"],
     costs: {
       research_points: 130,
       coins: 2600000,
@@ -962,10 +962,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_33",
+    id: "lg_33",
     name: "City Watch",
     column: 10,
-    required: ["tech_lg_30"],
+    required: ["lg_30"],
     costs: {
       research_points: 225,
       coins: 4300000,
@@ -991,10 +991,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_34",
+    id: "lg_34",
     name: "Field Artillery",
     column: 10,
-    required: ["tech_lg_30", "tech_lg_31"],
+    required: ["lg_30", "lg_31"],
     costs: {
       research_points: 125,
       coins: 8500000,
@@ -1017,10 +1017,10 @@ export const technos_LG: TechnoData[] = [
     rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
   },
   {
-    id: "tech_lg_35",
+    id: "lg_35",
     name: "Windmill Automation",
     column: 10,
-    required: ["tech_lg_30", "tech_lg_31"],
+    required: ["lg_30", "lg_31"],
     costs: {
       research_points: 130,
       coins: 7200000,
@@ -1047,10 +1047,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_36",
+    id: "lg_36",
     name: "Guild Halls",
     column: 10,
-    required: ["tech_lg_31", "tech_lg_32"],
+    required: ["lg_31", "lg_32"],
     costs: {
       research_points: 125,
       coins: 9100000,
@@ -1078,10 +1078,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_37",
+    id: "lg_37",
     name: "Came Glasswork",
     column: 11,
-    required: ["tech_lg_33", "tech_lg_34"],
+    required: ["lg_33", "lg_34"],
     costs: {
       research_points: 155,
       coins: 3500000,
@@ -1103,10 +1103,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_38",
+    id: "lg_38",
     name: "Hops Cultivation",
     column: 11,
-    required: ["tech_lg_35", "tech_lg_36"],
+    required: ["lg_35", "lg_36"],
     costs: {
       research_points: 165,
       coins: 4200000,
@@ -1132,10 +1132,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_39",
+    id: "lg_39",
     name: "Letters of Credit",
     column: 11,
-    required: ["tech_lg_36"],
+    required: ["lg_36"],
     costs: {
       research_points: 125,
       coins: 3500000,
@@ -1162,10 +1162,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_40",
+    id: "lg_40",
     name: "Monte Di Pieta",
     column: 11,
-    required: ["tech_lg_36"],
+    required: ["lg_36"],
     costs: {
       research_points: 150,
       coins: 5000000,
@@ -1192,10 +1192,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_41",
+    id: "lg_41",
     name: "Tertiary Workshop",
     column: 12,
-    required: ["tech_lg_37", "tech_lg_38", "tech_lg_39"],
+    required: ["lg_37", "lg_38", "lg_39"],
     costs: {
       research_points: 160,
       coins: 4300000,
@@ -1221,10 +1221,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_42",
+    id: "lg_42",
     name: "Treadle Looms",
     column: 12,
-    required: ["tech_lg_39", "tech_lg_40"],
+    required: ["lg_39", "lg_40"],
     costs: {
       research_points: 135,
       coins: 11000000,
@@ -1251,10 +1251,10 @@ export const technos_LG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_lg_43",
+    id: "lg_43",
     name: "Ottoman Empire Consensus",
     column: 13,
-    required: ["tech_lg_41", "tech_lg_42"],
+    required: ["lg_41", "lg_42"],
     costs: {
       research_points: 175,
       coins: 7800000,

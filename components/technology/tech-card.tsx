@@ -16,8 +16,7 @@ interface TechCardProps {
 
 export const TechCard = memo<TechCardProps>(
   ({ tech, eraId, isCompleted, onToggleComplete, onShowDetails }) => {
-    const rawId = tech.id.replace(/^tech_/, "");
-    const imgSrc = `/images/technos/${eraId}/${rawId}.webp`;
+    const imgSrc = `/images/technos/${eraId}/${tech.id}.webp`;
 
     return (
       /* mt-3 laisse de la place pour l'image qui déborde vers le haut */

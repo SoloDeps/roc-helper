@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_BA: TechnoData[] = [
   {
-    id: "tech_ba_0",
+    id: "ba_0",
     name: "Village",
     column: 0,
     required: [],
@@ -18,10 +18,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_1",
+    id: "ba_1",
     name: "Alliances",
     column: 1,
-    required: ["tech_ba_0"],
+    required: ["ba_0"],
     costs: {
       research_points: 1,
       coins: 7500,
@@ -33,10 +33,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_2",
+    id: "ba_2",
     name: "Chariot",
     column: 2,
-    required: ["tech_ba_1"],
+    required: ["ba_1"],
     costs: {
       research_points: 4,
       coins: 28950,
@@ -48,10 +48,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_3",
+    id: "ba_3",
     name: "Swordplay",
     column: 2,
-    required: ["tech_ba_1"],
+    required: ["ba_1"],
     costs: {
       research_points: 5,
       coins: 38600,
@@ -60,10 +60,10 @@ export const technos_BA: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_ba_4",
+    id: "ba_4",
     name: "Feed Trough",
     column: 3,
-    required: ["tech_ba_2"],
+    required: ["ba_2"],
     costs: {
       research_points: 6,
       coins: 67550,
@@ -75,10 +75,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_5",
+    id: "ba_5",
     name: "Sacred Groves",
     column: 3,
-    required: ["tech_ba_2"],
+    required: ["ba_2"],
     costs: {
       research_points: 6,
       coins: 59800,
@@ -90,10 +90,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_6",
+    id: "ba_6",
     name: "Archery",
     column: 3,
-    required: ["tech_ba_3"],
+    required: ["ba_3"],
     costs: {
       research_points: 3,
       coins: 44400,
@@ -102,10 +102,10 @@ export const technos_BA: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_ba_7",
+    id: "ba_7",
     name: "Primary Workshop",
     column: 4,
-    required: ["tech_ba_4", "tech_ba_5", "tech_ba_6"],
+    required: ["ba_4", "ba_5", "ba_6"],
     costs: {
       research_points: 5,
       coins: 51250,
@@ -117,10 +117,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_8",
+    id: "ba_8",
     name: "Wonders",
     column: 5,
-    required: ["tech_ba_7"],
+    required: ["ba_7"],
     costs: {
       research_points: 4,
       coins: 38600,
@@ -129,10 +129,10 @@ export const technos_BA: TechnoData[] = [
     rewards: ["Wonders Unlocked: New Feature"],
   },
   {
-    id: "tech_ba_9",
+    id: "ba_9",
     name: "Social Change",
     column: 6,
-    required: ["tech_ba_8"],
+    required: ["ba_8"],
     costs: {
       research_points: 6,
       coins: 59800,
@@ -150,10 +150,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_10",
+    id: "ba_10",
     name: "Sacred Stones",
     column: 6,
-    required: ["tech_ba_8"],
+    required: ["ba_8"],
     costs: {
       research_points: 6,
       coins: 64900,
@@ -171,10 +171,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_11",
+    id: "ba_11",
     name: "Barn",
     column: 6,
-    required: ["tech_ba_8"],
+    required: ["ba_8"],
     costs: {
       research_points: 8,
       coins: 77200,
@@ -192,10 +192,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_12",
+    id: "ba_12",
     name: "Farm Utensils",
     column: 6,
-    required: ["tech_ba_8"],
+    required: ["ba_8"],
     costs: {
       research_points: 11,
       coins: 102500,
@@ -210,10 +210,10 @@ export const technos_BA: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_ba_13",
+    id: "ba_13",
     name: "Treasure Hunting",
     column: 7,
-    required: ["tech_ba_9"],
+    required: ["ba_9"],
     costs: {
       research_points: 11,
       coins: 77200,
@@ -231,10 +231,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_14",
+    id: "ba_14",
     name: "Building Knowledge",
     column: 7,
-    required: ["tech_ba_10", "tech_ba_11"],
+    required: ["ba_10", "ba_11"],
     costs: {
       research_points: 9,
       coins: 42700,
@@ -252,10 +252,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_15",
+    id: "ba_15",
     name: "Cavalry",
     column: 7,
-    required: ["tech_ba_12"],
+    required: ["ba_12"],
     costs: {
       research_points: 11,
       coins: 88800,
@@ -270,10 +270,10 @@ export const technos_BA: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks the Cavalry Barracks"],
   },
   {
-    id: "tech_ba_16",
+    id: "ba_16",
     name: "Stakes",
     column: 8,
-    required: ["tech_ba_13", "tech_ba_14"],
+    required: ["ba_13", "ba_14"],
     costs: {
       research_points: 11,
       coins: 116000,
@@ -288,10 +288,10 @@ export const technos_BA: TechnoData[] = [
     rewards: ["Small Home: Unlocks a Small Home upgrade"],
   },
   {
-    id: "tech_ba_17",
+    id: "ba_17",
     name: "Secondary Workshop",
     column: 8,
-    required: ["tech_ba_13"],
+    required: ["ba_13"],
     costs: {
       research_points: 11,
       coins: 90500,
@@ -309,10 +309,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_18",
+    id: "ba_18",
     name: "Plough",
     column: 8,
-    required: ["tech_ba_13", "tech_ba_14", "tech_ba_15"],
+    required: ["ba_13", "ba_14", "ba_15"],
     costs: {
       research_points: 10,
       coins: 96500,
@@ -330,10 +330,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_19",
+    id: "ba_19",
     name: "Bronze Effigy",
     column: 8,
-    required: ["tech_ba_15"],
+    required: ["ba_15"],
     costs: {
       research_points: 10,
       coins: 82000,
@@ -350,10 +350,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_20",
+    id: "ba_20",
     name: "Stronger Frames",
     column: 9,
-    required: ["tech_ba_16", "tech_ba_17"],
+    required: ["ba_16", "ba_17"],
     costs: {
       research_points: 13,
       coins: 145000,
@@ -372,10 +372,10 @@ export const technos_BA: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_ba_21",
+    id: "ba_21",
     name: "Tertiary Workshop",
     column: 9,
-    required: ["tech_ba_17"],
+    required: ["ba_17"],
     costs: {
       research_points: 13,
       coins: 135000,
@@ -397,10 +397,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_22",
+    id: "ba_22",
     name: "Small Holding",
     column: 9,
-    required: ["tech_ba_18", "tech_ba_19"],
+    required: ["ba_18", "ba_19"],
     costs: {
       research_points: 10,
       coins: 154500,
@@ -418,10 +418,10 @@ export const technos_BA: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ba_23",
+    id: "ba_23",
     name: "Prosperity",
     column: 10,
-    required: ["tech_ba_20", "tech_ba_21", "tech_ba_22"],
+    required: ["ba_20", "ba_21", "ba_22"],
     costs: {
       research_points: 17,
       coins: 245000,

@@ -250,8 +250,7 @@ export default function ResearchTreePage() {
   const technosWithStatus = useMemo(() => {
     if (!technosInDB || !selectedEraTechnologies.length) return [];
     return selectedEraTechnologies.map((tech) => {
-      const dbId = tech.id.replace(/^tech_/, "");
-      const dbTech = technosInDB.find((t) => t.id === dbId);
+      const dbTech = technosInDB.find((t) => t.id === tech.id);
       return { ...tech, hidden: dbTech ? !!dbTech.hidden : false };
     });
   }, [selectedEraTechnologies, technosInDB]);

@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_EG: TechnoData[] = [
   {
-    id: "tech_eg_0",
+    id: "eg_0",
     name: "Flying Buttresses",
     column: 0,
     required: [],
@@ -31,10 +31,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_1",
+    id: "eg_1",
     name: "Carrucas",
     column: 1,
-    required: ["tech_eg_0"],
+    required: ["eg_0"],
     costs: {
       research_points: 110,
       coins: 5900000,
@@ -60,10 +60,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_2",
+    id: "eg_2",
     name: "Deep Sea Ports",
     column: 1,
-    required: ["tech_eg_0"],
+    required: ["eg_0"],
     costs: {
       research_points: 28,
       coins: 5900000,
@@ -90,10 +90,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_3",
+    id: "eg_3",
     name: "Primary Workshop",
     column: 2,
-    required: ["tech_eg_1"],
+    required: ["eg_1"],
     costs: {
       research_points: 140,
       coins: 9900000,
@@ -115,10 +115,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_4",
+    id: "eg_4",
     name: "Routiers",
     column: 2,
-    required: ["tech_eg_1"],
+    required: ["eg_1"],
     costs: {
       research_points: 69,
       coins: 3200000,
@@ -141,10 +141,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_eg_5",
+    id: "eg_5",
     name: "Knot Refinement",
     column: 2,
-    required: ["tech_eg_2"],
+    required: ["eg_2"],
     costs: {
       research_points: 150,
       coins: 3400000,
@@ -170,10 +170,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_6",
+    id: "eg_6",
     name: "Shipwright Guilds",
     column: 2,
-    required: ["tech_eg_2"],
+    required: ["eg_2"],
     costs: {
       research_points: 85,
       coins: 6300000,
@@ -200,10 +200,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_7",
+    id: "eg_7",
     name: "Gothic Bridge Building",
     column: 3,
-    required: ["tech_eg_3", "tech_eg_4"],
+    required: ["eg_3", "eg_4"],
     costs: {
       research_points: 130,
       coins: 7000000,
@@ -229,10 +229,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_8",
+    id: "eg_8",
     name: "Navigational Charts",
     column: 3,
-    required: ["tech_eg_4", "tech_eg_5", "tech_eg_6"],
+    required: ["eg_4", "eg_5", "eg_6"],
     costs: {
       research_points: 185,
       coins: 2400000,
@@ -260,10 +260,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_9",
+    id: "eg_9",
     name: "Dry Dock Construction",
     column: 3,
-    required: ["tech_eg_5", "tech_eg_6"],
+    required: ["eg_5", "eg_6"],
     costs: {
       research_points: 150,
       coins: 3100000,
@@ -290,10 +290,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_10",
+    id: "eg_10",
     name: "Wharf Construction",
     column: 3,
-    required: ["tech_eg_6"],
+    required: ["eg_6"],
     costs: {
       research_points: 115,
       coins: 5500000,
@@ -320,10 +320,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_11",
+    id: "eg_11",
     name: "Masonry Techniques",
     column: 4,
-    required: ["tech_eg_7"],
+    required: ["eg_7"],
     costs: {
       research_points: 110,
       coins: 7300000,
@@ -349,10 +349,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_12",
+    id: "eg_12",
     name: "Crossbow Engineering",
     column: 4,
-    required: ["tech_eg_7", "tech_eg_8"],
+    required: ["eg_7", "eg_8"],
     costs: {
       research_points: 150,
       coins: 8800000,
@@ -375,10 +375,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_eg_13",
+    id: "eg_13",
     name: "Lateen Sails",
     column: 4,
-    required: ["tech_eg_8", "tech_eg_9"],
+    required: ["eg_8", "eg_9"],
     costs: {
       research_points: 120,
       coins: 7200000,
@@ -405,10 +405,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_14",
+    id: "eg_14",
     name: "Port Warehouse Innovations",
     column: 4,
-    required: ["tech_eg_9", "tech_eg_10"],
+    required: ["eg_9", "eg_10"],
     costs: {
       research_points: 125,
       coins: 3100000,
@@ -435,10 +435,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_15",
+    id: "eg_15",
     name: "Civic Self-Government",
     column: 5,
-    required: ["tech_eg_11"],
+    required: ["eg_11"],
     costs: {
       research_points: 90,
       coins: 2500000,
@@ -464,10 +464,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_16",
+    id: "eg_16",
     name: "Horse Collar Improvements",
     column: 5,
-    required: ["tech_eg_11", "tech_eg_12", "tech_eg_13"],
+    required: ["eg_11", "eg_12", "eg_13"],
     costs: {
       research_points: 92,
       coins: 7600000,
@@ -493,10 +493,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_17",
+    id: "eg_17",
     name: "Cartography Innovations",
     column: 5,
-    required: ["tech_eg_12", "tech_eg_13"],
+    required: ["eg_12", "eg_13"],
     costs: {
       research_points: 110,
       coins: 9400000,
@@ -523,10 +523,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_18",
+    id: "eg_18",
     name: "Hull Clinker Construction",
     column: 5,
-    required: ["tech_eg_14"],
+    required: ["eg_14"],
     costs: {
       research_points: 105,
       coins: 3700000,
@@ -553,10 +553,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_19",
+    id: "eg_19",
     name: "Three-Field Crop Rotation",
     column: 6,
-    required: ["tech_eg_15"],
+    required: ["eg_15"],
     costs: {
       research_points: 110,
       coins: 7600000,
@@ -579,10 +579,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_eg_20",
+    id: "eg_20",
     name: "Secondary Workshop",
     column: 6,
-    required: ["tech_eg_15", "tech_eg_16"],
+    required: ["eg_15", "eg_16"],
     costs: {
       research_points: 185,
       coins: 8400000,
@@ -608,10 +608,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_21",
+    id: "eg_21",
     name: "Mercantile Code",
     column: 6,
-    required: ["tech_eg_17", "tech_eg_18"],
+    required: ["eg_17", "eg_18"],
     costs: {
       research_points: 120,
       coins: 5200000,
@@ -638,10 +638,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_22",
+    id: "eg_22",
     name: "Cavalrymen",
     column: 7,
-    required: ["tech_eg_19", "tech_eg_20"],
+    required: ["eg_19", "eg_20"],
     costs: {
       research_points: 115,
       coins: 7500000,
@@ -664,10 +664,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
   },
   {
-    id: "tech_eg_23",
+    id: "eg_23",
     name: "Maritime Schools",
     column: 7,
-    required: ["tech_eg_20", "tech_eg_21"],
+    required: ["eg_20", "eg_21"],
     costs: {
       research_points: 180,
       coins: 3300000,
@@ -695,10 +695,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_24",
+    id: "eg_24",
     name: "Caravel Design",
     column: 7,
-    required: ["tech_eg_21"],
+    required: ["eg_21"],
     costs: {
       research_points: 140,
       coins: 8100000,
@@ -725,10 +725,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_25",
+    id: "eg_25",
     name: "Veterinary Science",
     column: 8,
-    required: ["tech_eg_22"],
+    required: ["eg_22"],
     costs: {
       research_points: 140,
       coins: 5400000,
@@ -754,10 +754,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_26",
+    id: "eg_26",
     name: "Windmill Expansions",
     column: 8,
-    required: ["tech_eg_22"],
+    required: ["eg_22"],
     costs: {
       research_points: 180,
       coins: 9000000,
@@ -780,10 +780,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_eg_27",
+    id: "eg_27",
     name: "Trade Guild Formations",
     column: 8,
-    required: ["tech_eg_23"],
+    required: ["eg_23"],
     costs: {
       research_points: 140,
       coins: 7900000,
@@ -810,10 +810,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_28",
+    id: "eg_28",
     name: "Stowage Planning",
     column: 8,
-    required: ["tech_eg_23", "tech_eg_24"],
+    required: ["eg_23", "eg_24"],
     costs: {
       research_points: 120,
       coins: 3000000,
@@ -840,10 +840,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_29",
+    id: "eg_29",
     name: "Gargoyle Drainage Systems",
     column: 9,
-    required: ["tech_eg_25"],
+    required: ["eg_25"],
     costs: {
       research_points: 100,
       coins: 4600000,
@@ -869,10 +869,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_30",
+    id: "eg_30",
     name: "Noble Knights",
     column: 9,
-    required: ["tech_eg_26", "tech_eg_27"],
+    required: ["eg_26", "eg_27"],
     costs: {
       research_points: 145,
       coins: 8500000,
@@ -897,10 +897,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_31",
+    id: "eg_31",
     name: "Pintle-And-Gudgeon Rudder",
     column: 9,
-    required: ["tech_eg_27"],
+    required: ["eg_27"],
     costs: {
       research_points: 125,
       coins: 3800000,
@@ -927,10 +927,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_32",
+    id: "eg_32",
     name: "Tidal Calculation Tables",
     column: 9,
-    required: ["tech_eg_28"],
+    required: ["eg_28"],
     costs: {
       research_points: 110,
       coins: 2300000,
@@ -958,10 +958,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_33",
+    id: "eg_33",
     name: "Paper Milling Processes",
     column: 10,
-    required: ["tech_eg_29"],
+    required: ["eg_29"],
     costs: {
       research_points: 190,
       coins: 3800000,
@@ -986,10 +986,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_34",
+    id: "eg_34",
     name: "Heraldry",
     column: 10,
-    required: ["tech_eg_29", "tech_eg_30"],
+    required: ["eg_29", "eg_30"],
     costs: {
       research_points: 105,
       coins: 7600000,
@@ -1012,10 +1012,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Small Home: Unlocks a Small Home upgrade"],
   },
   {
-    id: "tech_eg_35",
+    id: "eg_35",
     name: "Harbor Crane Systems",
     column: 10,
-    required: ["tech_eg_31", "tech_eg_32"],
+    required: ["eg_31", "eg_32"],
     costs: {
       research_points: 110,
       coins: 6400000,
@@ -1043,10 +1043,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_36",
+    id: "eg_36",
     name: "Wheeled Towers",
     column: 11,
-    required: ["tech_eg_33", "tech_eg_34", "tech_eg_35"],
+    required: ["eg_33", "eg_34", "eg_35"],
     costs: {
       research_points: 105,
       coins: 8100000,
@@ -1069,10 +1069,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
   },
   {
-    id: "tech_eg_37",
+    id: "eg_37",
     name: "Foreign Trade Links",
     column: 11,
-    required: ["tech_eg_34", "tech_eg_35"],
+    required: ["eg_34", "eg_35"],
     costs: {
       research_points: 135,
       coins: 3100000,
@@ -1096,10 +1096,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_38",
+    id: "eg_38",
     name: "Anchorage Techniques",
     column: 11,
-    required: ["tech_eg_35"],
+    required: ["eg_35"],
     costs: {
       research_points: 140,
       coins: 3800000,
@@ -1127,10 +1127,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_39",
+    id: "eg_39",
     name: "Baronial Hall Design",
     column: 12,
-    required: ["tech_eg_36"],
+    required: ["eg_36"],
     costs: {
       research_points: 105,
       coins: 3100000,
@@ -1153,10 +1153,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_eg_40",
+    id: "eg_40",
     name: "Tertiary Workshop",
     column: 12,
-    required: ["tech_eg_36", "tech_eg_37"],
+    required: ["eg_36", "eg_37"],
     costs: {
       research_points: 125,
       coins: 4500000,
@@ -1182,10 +1182,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_41",
+    id: "eg_41",
     name: "Port Authority Systems",
     column: 12,
-    required: ["tech_eg_37", "tech_eg_38"],
+    required: ["eg_37", "eg_38"],
     costs: {
       research_points: 135,
       coins: 3900000,
@@ -1213,10 +1213,10 @@ export const technos_EG: TechnoData[] = [
     ],
   },
   {
-    id: "tech_eg_42",
+    id: "eg_42",
     name: "Mechanical Clock",
     column: 13,
-    required: ["tech_eg_39", "tech_eg_40"],
+    required: ["eg_39", "eg_40"],
     costs: {
       research_points: 115,
       coins: 9700000,
@@ -1239,10 +1239,10 @@ export const technos_EG: TechnoData[] = [
     rewards: ["Large Culture Site: Unlocks a Large Culture Site upgrade"],
   },
   {
-    id: "tech_eg_43",
+    id: "eg_43",
     name: "Ottoman Naval Power",
     column: 13,
-    required: ["tech_eg_40", "tech_eg_41"],
+    required: ["eg_40", "eg_41"],
     costs: {
       research_points: 150,
       coins: 7000000,

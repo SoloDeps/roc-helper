@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_IE: TechnoData[] = [
   {
-    id: "tech_ie_0",
+    id: "ie_0",
     name: "Castillos",
     column: 0,
     required: [],
@@ -30,10 +30,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_1",
+    id: "ie_1",
     name: "Primary Workshop",
     column: 1,
-    required: ["tech_ie_0"],
+    required: ["ie_0"],
     costs: {
       research_points: 100,
       coins: 6800000,
@@ -57,10 +57,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_2",
+    id: "ie_2",
     name: "Almogavars",
     column: 1,
-    required: ["tech_ie_0"],
+    required: ["ie_0"],
     costs: {
       research_points: 115,
       coins: 5600000,
@@ -83,10 +83,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_ie_3",
+    id: "ie_3",
     name: "Glacier Mastery",
     column: 1,
-    required: ["tech_ie_0"],
+    required: ["ie_0"],
     costs: {
       research_points: 71,
       coins: 1900000,
@@ -117,10 +117,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_4",
+    id: "ie_4",
     name: "Masia",
     column: 2,
-    required: ["tech_ie_1", "tech_ie_2"],
+    required: ["ie_1", "ie_2"],
     costs: {
       research_points: 57,
       coins: 5400000,
@@ -146,10 +146,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_5",
+    id: "ie_5",
     name: "Drift Nets",
     column: 2,
-    required: ["tech_ie_3"],
+    required: ["ie_3"],
     costs: {
       research_points: 77,
       coins: 2100000,
@@ -179,10 +179,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_6",
+    id: "ie_6",
     name: "Mead Halls",
     column: 2,
-    required: ["tech_ie_3"],
+    required: ["ie_3"],
     costs: {
       research_points: 105,
       coins: 7200000,
@@ -211,10 +211,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_7",
+    id: "ie_7",
     name: "Domesticated Donkeys",
     column: 3,
-    required: ["tech_ie_4"],
+    required: ["ie_4"],
     costs: {
       research_points: 90,
       coins: 2400000,
@@ -237,10 +237,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_ie_8",
+    id: "ie_8",
     name: "Patios",
     column: 3,
-    required: ["tech_ie_4"],
+    required: ["ie_4"],
     costs: {
       research_points: 88,
       coins: 3200000,
@@ -263,10 +263,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Large Culture Site: Unlocks a Large Culture Site upgrade"],
   },
   {
-    id: "tech_ie_9",
+    id: "ie_9",
     name: "Dragon Boats",
     column: 3,
-    required: ["tech_ie_5", "tech_ie_6"],
+    required: ["ie_5", "ie_6"],
     costs: {
       research_points: 135,
       coins: 3300000,
@@ -295,10 +295,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_10",
+    id: "ie_10",
     name: "Crossbowmen",
     column: 4,
-    required: ["tech_ie_7", "tech_ie_8"],
+    required: ["ie_7", "ie_8"],
     costs: {
       research_points: 120,
       coins: 3800000,
@@ -321,10 +321,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_ie_11",
+    id: "ie_11",
     name: "Tattoos",
     column: 4,
-    required: ["tech_ie_9"],
+    required: ["ie_9"],
     costs: {
       research_points: 88,
       coins: 2200000,
@@ -352,10 +352,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_12",
+    id: "ie_12",
     name: "Superior Beekeeping",
     column: 4,
-    required: ["tech_ie_9"],
+    required: ["ie_9"],
     costs: {
       research_points: 67,
       coins: 5300000,
@@ -383,10 +383,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_13",
+    id: "ie_13",
     name: "Orange Plantation",
     column: 5,
-    required: ["tech_ie_10"],
+    required: ["ie_10"],
     costs: {
       research_points: 89,
       coins: 6800000,
@@ -413,10 +413,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_14",
+    id: "ie_14",
     name: "Eyeglasses",
     column: 5,
-    required: ["tech_ie_10"],
+    required: ["ie_10"],
     costs: {
       research_points: 63,
       coins: 3500000,
@@ -442,10 +442,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_15",
+    id: "ie_15",
     name: "Tavern Brawls",
     column: 5,
-    required: ["tech_ie_11", "tech_ie_12"],
+    required: ["ie_11", "ie_12"],
     costs: {
       research_points: 92,
       coins: 5700000,
@@ -473,10 +473,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_16",
+    id: "ie_16",
     name: "Improved Fishing",
     column: 5,
-    required: ["tech_ie_11", "tech_ie_12"],
+    required: ["ie_11", "ie_12"],
     costs: {
       research_points: 82,
       coins: 4200000,
@@ -503,10 +503,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_17",
+    id: "ie_17",
     name: "Jinete",
     column: 6,
-    required: ["tech_ie_13", "tech_ie_14"],
+    required: ["ie_13", "ie_14"],
     costs: {
       research_points: 125,
       coins: 4700000,
@@ -529,10 +529,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
   },
   {
-    id: "tech_ie_18",
+    id: "ie_18",
     name: "Sun Compass",
     column: 6,
-    required: ["tech_ie_15", "tech_ie_16"],
+    required: ["ie_15", "ie_16"],
     costs: {
       research_points: 80,
       coins: 5100000,
@@ -558,10 +558,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_19",
+    id: "ie_19",
     name: "Long-Distance Seafaring",
     column: 6,
-    required: ["tech_ie_15", "tech_ie_16"],
+    required: ["ie_15", "ie_16"],
     costs: {
       research_points: 110,
       coins: 1900000,
@@ -588,10 +588,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_20",
+    id: "ie_20",
     name: "Horseshoe Arches",
     column: 7,
-    required: ["tech_ie_17"],
+    required: ["ie_17"],
     costs: {
       research_points: 92,
       coins: 4200000,
@@ -614,10 +614,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_ie_21",
+    id: "ie_21",
     name: "Félag Partnerships",
     column: 7,
-    required: ["tech_ie_18", "tech_ie_19"],
+    required: ["ie_18", "ie_19"],
     costs: {
       research_points: 78,
       coins: 3200000,
@@ -644,10 +644,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_22",
+    id: "ie_22",
     name: "Donkey Herds",
     column: 8,
-    required: ["tech_ie_20", "tech_ie_21"],
+    required: ["ie_20", "ie_21"],
     costs: {
       research_points: 92,
       coins: 5600000,
@@ -670,10 +670,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_ie_23",
+    id: "ie_23",
     name: "Toledo Steel",
     column: 8,
-    required: ["tech_ie_20"],
+    required: ["ie_20"],
     costs: {
       research_points: 75,
       coins: 2500000,
@@ -696,10 +696,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Small Home: Unlocks a Small Home upgrade"],
   },
   {
-    id: "tech_ie_24",
+    id: "ie_24",
     name: "Norse Hamlets",
     column: 8,
-    required: ["tech_ie_20", "tech_ie_21"],
+    required: ["ie_20", "ie_21"],
     costs: {
       research_points: 92,
       coins: 4400000,
@@ -726,10 +726,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_25",
+    id: "ie_25",
     name: "Beekeeping Mastery",
     column: 8,
-    required: ["tech_ie_21"],
+    required: ["ie_21"],
     costs: {
       research_points: 57,
       coins: 2300000,
@@ -756,10 +756,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_26",
+    id: "ie_26",
     name: "Advanced Trebuchet",
     column: 9,
-    required: ["tech_ie_22", "tech_ie_23"],
+    required: ["ie_22", "ie_23"],
     costs: {
       research_points: 130,
       coins: 2800000,
@@ -782,10 +782,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
   },
   {
-    id: "tech_ie_27",
+    id: "ie_27",
     name: "Mead Mastery",
     column: 9,
-    required: ["tech_ie_24", "tech_ie_25"],
+    required: ["ie_24", "ie_25"],
     costs: {
       research_points: 99,
       coins: 5800000,
@@ -811,10 +811,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_28",
+    id: "ie_28",
     name: "Viking Homesteads",
     column: 9,
-    required: ["tech_ie_24", "tech_ie_25"],
+    required: ["ie_24", "ie_25"],
     costs: {
       research_points: 77,
       coins: 1700000,
@@ -841,10 +841,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_29",
+    id: "ie_29",
     name: "Distillation",
     column: 10,
-    required: ["tech_ie_26"],
+    required: ["ie_26"],
     costs: {
       research_points: 84,
       coins: 4800000,
@@ -867,10 +867,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_ie_30",
+    id: "ie_30",
     name: "Botany",
     column: 10,
-    required: ["tech_ie_26"],
+    required: ["ie_26"],
     costs: {
       research_points: 69,
       coins: 5800000,
@@ -896,10 +896,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_31",
+    id: "ie_31",
     name: "Magnetic Compass",
     column: 10,
-    required: ["tech_ie_27"],
+    required: ["ie_27"],
     costs: {
       research_points: 105,
       coins: 2900000,
@@ -925,10 +925,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_32",
+    id: "ie_32",
     name: "Fishing Mastery",
     column: 10,
-    required: ["tech_ie_28"],
+    required: ["ie_28"],
     costs: {
       research_points: 94,
       coins: 1700000,
@@ -955,10 +955,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_33",
+    id: "ie_33",
     name: "Order of Calatrava",
     column: 11,
-    required: ["tech_ie_29", "tech_ie_30", "tech_ie_31"],
+    required: ["ie_29", "ie_30", "ie_31"],
     costs: {
       research_points: 135,
       coins: 3000000,
@@ -983,10 +983,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_34",
+    id: "ie_34",
     name: "Glima Fighting",
     column: 11,
-    required: ["tech_ie_31", "tech_ie_32"],
+    required: ["ie_31", "ie_32"],
     costs: {
       research_points: 67,
       coins: 2200000,
@@ -1013,10 +1013,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_35",
+    id: "ie_35",
     name: "Perfected Honey",
     column: 11,
-    required: ["tech_ie_31", "tech_ie_32"],
+    required: ["ie_31", "ie_32"],
     costs: {
       research_points: 91,
       coins: 6000000,
@@ -1042,10 +1042,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_36",
+    id: "ie_36",
     name: "Secondary Workshop",
     column: 12,
-    required: ["tech_ie_33"],
+    required: ["ie_33"],
     costs: {
       research_points: 100,
       coins: 4600000,
@@ -1071,10 +1071,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_37",
+    id: "ie_37",
     name: "Donkey Farms",
     column: 12,
-    required: ["tech_ie_33"],
+    required: ["ie_33"],
     costs: {
       research_points: 105,
       coins: 6100000,
@@ -1097,10 +1097,10 @@ export const technos_IE: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_ie_38",
+    id: "ie_38",
     name: "Fjord Dominion",
     column: 12,
-    required: ["tech_ie_34", "tech_ie_35"],
+    required: ["ie_34", "ie_35"],
     costs: {
       research_points: 77,
       coins: 3900000,
@@ -1127,10 +1127,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_39",
+    id: "ie_39",
     name: "Harbor Economics",
     column: 12,
-    required: ["tech_ie_34", "tech_ie_35"],
+    required: ["ie_34", "ie_35"],
     costs: {
       research_points: 90,
       coins: 4200000,
@@ -1156,10 +1156,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_40",
+    id: "ie_40",
     name: "Tertiary Workshop",
     column: 13,
-    required: ["tech_ie_36", "tech_ie_37", "tech_ie_38", "tech_ie_39"],
+    required: ["ie_36", "ie_37", "ie_38", "ie_39"],
     costs: {
       research_points: 82,
       coins: 6200000,
@@ -1185,10 +1185,10 @@ export const technos_IE: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ie_41",
+    id: "ie_41",
     name: "Viking Consensus",
     column: 14,
-    required: ["tech_ie_40"],
+    required: ["ie_40"],
     costs: {
       research_points: 100,
       coins: 4900000,

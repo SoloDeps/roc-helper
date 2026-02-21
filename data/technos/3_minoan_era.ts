@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_ME: TechnoData[] = [
   {
-    id: "tech_me_0",
+    id: "me_0",
     name: "Township",
     column: 0,
     required: [],
@@ -32,10 +32,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_1",
+    id: "me_1",
     name: "Primary Workshop",
     column: 1,
-    required: ["tech_me_0"],
+    required: ["me_0"],
     costs: {
       research_points: 7,
       coins: 84000,
@@ -58,10 +58,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_2",
+    id: "me_2",
     name: "Trading",
     column: 2,
-    required: ["tech_me_1"],
+    required: ["me_1"],
     costs: {
       research_points: 6,
       coins: 63400,
@@ -83,10 +83,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_3",
+    id: "me_3",
     name: "Arenas",
     column: 2,
-    required: ["tech_me_1"],
+    required: ["me_1"],
     costs: {
       research_points: 9,
       coins: 101000,
@@ -108,10 +108,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_4",
+    id: "me_4",
     name: "Oat Production",
     column: 3,
-    required: ["tech_me_2"],
+    required: ["me_2"],
     costs: {
       research_points: 6,
       coins: 66900,
@@ -139,10 +139,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_5",
+    id: "me_5",
     name: "Shepherding",
     column: 3,
-    required: ["tech_me_2"],
+    required: ["me_2"],
     costs: {
       research_points: 7,
       coins: 84500,
@@ -165,10 +165,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_6",
+    id: "me_6",
     name: "Masonry",
     column: 3,
-    required: ["tech_me_3"],
+    required: ["me_3"],
     costs: {
       research_points: 10,
       coins: 110000,
@@ -190,10 +190,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_7",
+    id: "me_7",
     name: "Basket Weaving",
     column: 4,
-    required: ["tech_me_4"],
+    required: ["me_4"],
     costs: {
       research_points: 10,
       coins: 110000,
@@ -220,10 +220,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_8",
+    id: "me_8",
     name: "Composite Bow",
     column: 4,
-    required: ["tech_me_5", "tech_me_6"],
+    required: ["me_5", "me_6"],
     costs: {
       research_points: 9,
       coins: 102000,
@@ -246,10 +246,10 @@ export const technos_ME: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_me_9",
+    id: "me_9",
     name: "Rise of Egypt",
     column: 5,
-    required: ["tech_me_7", "tech_me_8"],
+    required: ["me_7", "me_8"],
     costs: {
       research_points: 15,
     },
@@ -261,10 +261,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_10",
+    id: "me_10",
     name: "Egyptian Diplomacy",
     column: 6,
-    required: ["tech_me_9"],
+    required: ["me_9"],
     costs: {
       research_points: 5,
       goods: [
@@ -283,10 +283,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_11",
+    id: "me_11",
     name: "Ankh",
     column: 7,
-    required: ["tech_me_10"],
+    required: ["me_10"],
     costs: {
       research_points: 6,
       coins: 66000,
@@ -309,10 +309,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_12",
+    id: "me_12",
     name: "Papyrus Scroll",
     column: 7,
-    required: ["tech_me_10"],
+    required: ["me_10"],
     costs: {
       research_points: 5,
       coins: 110000,
@@ -335,10 +335,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_13",
+    id: "me_13",
     name: "Screws",
     column: 8,
-    required: ["tech_me_11", "tech_me_12"],
+    required: ["me_11", "me_12"],
     costs: {
       research_points: 4,
       coins: 88000,
@@ -360,10 +360,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_14",
+    id: "me_14",
     name: "Hieroglyphs",
     column: 8,
-    required: ["tech_me_11", "tech_me_12"],
+    required: ["me_11", "me_12"],
     costs: {
       research_points: 8,
       coins: 110000,
@@ -387,10 +387,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_15",
+    id: "me_15",
     name: "Animal Husbandry",
     column: 9,
-    required: ["tech_me_13"],
+    required: ["me_13"],
     costs: {
       research_points: 14,
       coins: 134000,
@@ -412,10 +412,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_16",
+    id: "me_16",
     name: "Millstone",
     column: 9,
-    required: ["tech_me_13"],
+    required: ["me_13"],
     costs: {
       research_points: 15,
       coins: 147000,
@@ -441,10 +441,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_17",
+    id: "me_17",
     name: "Joists",
     column: 9,
-    required: ["tech_me_14"],
+    required: ["me_14"],
     costs: {
       research_points: 17,
       coins: 176000,
@@ -472,10 +472,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_18",
+    id: "me_18",
     name: "Geometry",
     column: 9,
-    required: ["tech_me_14"],
+    required: ["me_14"],
     costs: {
       research_points: 11,
       coins: 110000,
@@ -502,10 +502,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_19",
+    id: "me_19",
     name: "Stables",
     column: 10,
-    required: ["tech_me_15"],
+    required: ["me_15"],
     costs: {
       research_points: 12,
       coins: 132000,
@@ -527,10 +527,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_20",
+    id: "me_20",
     name: "Preservation",
     column: 10,
-    required: ["tech_me_15", "tech_me_16", "tech_me_17"],
+    required: ["me_15", "me_16", "me_17"],
     costs: {
       research_points: 20,
       coins: 207000,
@@ -557,10 +557,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_21",
+    id: "me_21",
     name: "Fine Papyrus",
     column: 10,
-    required: ["tech_me_17"],
+    required: ["me_17"],
     costs: {
       research_points: 16,
       coins: 176000,
@@ -588,10 +588,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_22",
+    id: "me_22",
     name: "Water Wheel",
     column: 10,
-    required: ["tech_me_18"],
+    required: ["me_18"],
     costs: {
       research_points: 14,
       coins: 186000,
@@ -615,10 +615,10 @@ export const technos_ME: TechnoData[] = [
     rewards: ["Irrigation Station: Unlocks the Irrigation Station"],
   },
   {
-    id: "tech_me_23",
+    id: "me_23",
     name: "Columns",
     column: 11,
-    required: ["tech_me_19"],
+    required: ["me_19"],
     costs: {
       research_points: 15,
       coins: 167000,
@@ -644,10 +644,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_24",
+    id: "me_24",
     name: "Winch",
     column: 11,
-    required: ["tech_me_20", "tech_me_21"],
+    required: ["me_20", "me_21"],
     costs: {
       research_points: 16,
       coins: 185000,
@@ -673,10 +673,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_25",
+    id: "me_25",
     name: "Extraction Methods",
     column: 11,
-    required: ["tech_me_22"],
+    required: ["me_22"],
     costs: {
       research_points: 27,
       coins: 308000,
@@ -705,10 +705,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_26",
+    id: "me_26",
     name: "Secondary Workshop",
     column: 12,
-    required: ["tech_me_23"],
+    required: ["me_23"],
     costs: {
       research_points: 23,
       coins: 264000,
@@ -734,10 +734,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_27",
+    id: "me_27",
     name: "Administration",
     column: 12,
-    required: ["tech_me_23", "tech_me_24"],
+    required: ["me_23", "me_24"],
     costs: {
       research_points: 25,
       coins: 282000,
@@ -763,10 +763,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_28",
+    id: "me_28",
     name: "Burial Rites",
     column: 12,
-    required: ["tech_me_24", "tech_me_25"],
+    required: ["me_24", "me_25"],
     costs: {
       research_points: 16,
       coins: 264000,
@@ -794,10 +794,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_29",
+    id: "me_29",
     name: "Geography",
     column: 12,
-    required: ["tech_me_24", "tech_me_25"],
+    required: ["me_24", "me_25"],
     costs: {
       research_points: 21,
       coins: 220000,
@@ -824,10 +824,10 @@ export const technos_ME: TechnoData[] = [
     ],
   },
   {
-    id: "tech_me_30",
+    id: "me_30",
     name: "Tertiary Workshop",
     column: 13,
-    required: ["tech_me_26", "tech_me_27", "tech_me_28", "tech_me_29"],
+    required: ["me_26", "me_27", "me_28", "me_29"],
     costs: {
       research_points: 18,
       coins: 277000,

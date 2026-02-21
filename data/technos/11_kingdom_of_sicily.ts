@@ -2,7 +2,7 @@ import { TechnoData } from "@/types/shared";
 
 export const technos_KS: TechnoData[] = [
   {
-    id: "tech_ks_0",
+    id: "ks_0",
     name: "Sicilian Villetta",
     column: 0,
     required: [],
@@ -30,10 +30,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_1",
+    id: "ks_1",
     name: "Vegetable Gardens",
     column: 1,
-    required: ["tech_ks_0"],
+    required: ["ks_0"],
     costs: {
       research_points: 82,
       coins: 4400000,
@@ -56,10 +56,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_ks_2",
+    id: "ks_2",
     name: "Primary Workshop",
     column: 1,
-    required: ["tech_ks_0"],
+    required: ["ks_0"],
     costs: {
       research_points: 77,
       coins: 4400000,
@@ -86,10 +86,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_3",
+    id: "ks_3",
     name: "Rise of Arabia",
     column: 1,
-    required: ["tech_ks_0"],
+    required: ["ks_0"],
     costs: {
       research_points: 105,
       coins: 7500000,
@@ -113,10 +113,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_4",
+    id: "ks_4",
     name: "Orchards",
     column: 2,
-    required: ["tech_ks_1"],
+    required: ["ks_1"],
     costs: {
       research_points: 89,
       coins: 2400000,
@@ -135,10 +135,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Moderate Culture Site: Unlocks a Moderate Culture Site upgrade"],
   },
   {
-    id: "tech_ks_5",
+    id: "ks_5",
     name: "Pedites",
     column: 2,
-    required: ["tech_ks_2"],
+    required: ["ks_2"],
     costs: {
       research_points: 115,
       coins: 2500000,
@@ -161,10 +161,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
   },
   {
-    id: "tech_ks_6",
+    id: "ks_6",
     name: "Bazaar",
     column: 2,
-    required: ["tech_ks_3"],
+    required: ["ks_3"],
     costs: {
       research_points: 31,
       coins: 4700000,
@@ -193,10 +193,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_7",
+    id: "ks_7",
     name: "Camel Husbandry",
     column: 2,
-    required: ["tech_ks_3"],
+    required: ["ks_3"],
     costs: {
       research_points: 21,
       coins: 5300000,
@@ -223,10 +223,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_8",
+    id: "ks_8",
     name: "Improved Roof Tiles",
     column: 3,
-    required: ["tech_ks_4", "tech_ks_5"],
+    required: ["ks_4", "ks_5"],
     costs: {
       research_points: 95,
       coins: 1800000,
@@ -249,10 +249,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_ks_9",
+    id: "ks_9",
     name: "Coffee",
     column: 3,
-    required: ["tech_ks_6"],
+    required: ["ks_6"],
     costs: {
       research_points: 73,
       coins: 2300000,
@@ -280,10 +280,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_10",
+    id: "ks_10",
     name: "Incense",
     column: 3,
-    required: ["tech_ks_6"],
+    required: ["ks_6"],
     costs: {
       research_points: 98,
       coins: 4100000,
@@ -312,10 +312,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_11",
+    id: "ks_11",
     name: "Basic Irrigation Network",
     column: 3,
-    required: ["tech_ks_7"],
+    required: ["ks_7"],
     costs: {
       research_points: 96,
       coins: 5500000,
@@ -343,10 +343,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_12",
+    id: "ks_12",
     name: "Windmill",
     column: 4,
-    required: ["tech_ks_8"],
+    required: ["ks_8"],
     costs: {
       research_points: 77,
       coins: 6700000,
@@ -372,10 +372,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_13",
+    id: "ks_13",
     name: "Armored Crossbowmen",
     column: 4,
-    required: ["tech_ks_8"],
+    required: ["ks_8"],
     costs: {
       research_points: 125,
       coins: 5400000,
@@ -398,10 +398,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
   },
   {
-    id: "tech_ks_14",
+    id: "ks_14",
     name: "Refined Tools",
     column: 4,
-    required: ["tech_ks_8"],
+    required: ["ks_8"],
     costs: {
       research_points: 96,
       coins: 2300000,
@@ -424,10 +424,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_ks_15",
+    id: "ks_15",
     name: "Channels",
     column: 4,
-    required: ["tech_ks_8", "tech_ks_9", "tech_ks_10", "tech_ks_11"],
+    required: ["ks_8", "ks_9", "ks_10", "ks_11"],
     costs: {
       research_points: 110,
       coins: 1800000,
@@ -456,10 +456,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_16",
+    id: "ks_16",
     name: "Domed Sanctuary",
     column: 5,
-    required: ["tech_ks_12", "tech_ks_13", "tech_ks_15"],
+    required: ["ks_12", "ks_13", "ks_15"],
     costs: {
       research_points: 105,
       coins: 5800000,
@@ -485,10 +485,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_17",
+    id: "ks_17",
     name: "Polychrome Inlays",
     column: 5,
-    required: ["tech_ks_14", "tech_ks_15"],
+    required: ["ks_14", "ks_15"],
     costs: {
       research_points: 84,
       coins: 7100000,
@@ -511,10 +511,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Little Culture Site: Unlocks a Little Culture Site upgrade"],
   },
   {
-    id: "tech_ks_18",
+    id: "ks_18",
     name: "Maskan House",
     column: 5,
-    required: ["tech_ks_15"],
+    required: ["ks_15"],
     costs: {
       research_points: 81,
       coins: 2700000,
@@ -541,10 +541,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_19",
+    id: "ks_19",
     name: "Improved Market Stands",
     column: 5,
-    required: ["tech_ks_15"],
+    required: ["ks_15"],
     costs: {
       research_points: 84,
       coins: 5700000,
@@ -573,10 +573,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_20",
+    id: "ks_20",
     name: "Pavilions",
     column: 6,
-    required: ["tech_ks_16", "tech_ks_17"],
+    required: ["ks_16", "ks_17"],
     costs: {
       research_points: 80,
       coins: 6300000,
@@ -599,10 +599,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Average Home: Unlocks a Average Home upgrade"],
   },
   {
-    id: "tech_ks_21",
+    id: "ks_21",
     name: "Fountain Pen",
     column: 6,
-    required: ["tech_ks_18"],
+    required: ["ks_18"],
     costs: {
       research_points: 97,
       coins: 3900000,
@@ -632,10 +632,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_22",
+    id: "ks_22",
     name: "Hard Soap",
     column: 6,
-    required: ["tech_ks_19"],
+    required: ["ks_19"],
     costs: {
       research_points: 86,
       coins: 5700000,
@@ -662,10 +662,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_23",
+    id: "ks_23",
     name: "Melites",
     column: 7,
-    required: ["tech_ks_20"],
+    required: ["ks_20"],
     costs: {
       research_points: 135,
       coins: 2400000,
@@ -688,10 +688,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
   },
   {
-    id: "tech_ks_24",
+    id: "ks_24",
     name: "Law of Cotangents",
     column: 7,
-    required: ["tech_ks_21", "tech_ks_22"],
+    required: ["ks_21", "ks_22"],
     costs: {
       research_points: 105,
       coins: 6100000,
@@ -719,10 +719,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_25",
+    id: "ks_25",
     name: "Automatic Controls",
     column: 7,
-    required: ["tech_ks_21", "tech_ks_22"],
+    required: ["ks_21", "ks_22"],
     costs: {
       research_points: 105,
       coins: 4100000,
@@ -750,10 +750,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_26",
+    id: "ks_26",
     name: "Improved Sails",
     column: 8,
-    required: ["tech_ks_23"],
+    required: ["ks_23"],
     costs: {
       research_points: 89,
       coins: 6800000,
@@ -776,10 +776,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
   },
   {
-    id: "tech_ks_27",
+    id: "ks_27",
     name: "Conservation",
     column: 8,
-    required: ["tech_ks_23"],
+    required: ["ks_23"],
     costs: {
       research_points: 105,
       coins: 5900000,
@@ -802,10 +802,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
   },
   {
-    id: "tech_ks_28",
+    id: "ks_28",
     name: "Windpump",
     column: 8,
-    required: ["tech_ks_24"],
+    required: ["ks_24"],
     costs: {
       research_points: 92,
       coins: 2200000,
@@ -832,10 +832,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_29",
+    id: "ks_29",
     name: "Building Extensions",
     column: 8,
-    required: ["tech_ks_25"],
+    required: ["ks_25"],
     costs: {
       research_points: 76,
       coins: 3500000,
@@ -862,10 +862,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_30",
+    id: "ks_30",
     name: "Familia Regis",
     column: 9,
-    required: ["tech_ks_26", "tech_ks_27", "tech_ks_28"],
+    required: ["ks_26", "ks_27", "ks_28"],
     costs: {
       research_points: 140,
       coins: 6400000,
@@ -890,10 +890,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_31",
+    id: "ks_31",
     name: "Paper Packaging",
     column: 9,
-    required: ["tech_ks_28"],
+    required: ["ks_28"],
     costs: {
       research_points: 95,
       coins: 2800000,
@@ -921,10 +921,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_32",
+    id: "ks_32",
     name: "Market Economics",
     column: 9,
-    required: ["tech_ks_29"],
+    required: ["ks_29"],
     costs: {
       research_points: 84,
       coins: 1700000,
@@ -953,10 +953,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_33",
+    id: "ks_33",
     name: "Monasteries",
     column: 10,
-    required: ["tech_ks_30"],
+    required: ["ks_30"],
     costs: {
       research_points: 95,
       coins: 2900000,
@@ -982,10 +982,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_34",
+    id: "ks_34",
     name: "Marble Decorations",
     column: 10,
-    required: ["tech_ks_30"],
+    required: ["ks_30"],
     costs: {
       research_points: 110,
       coins: 5800000,
@@ -1012,10 +1012,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_35",
+    id: "ks_35",
     name: "Sine Quadrant",
     column: 10,
-    required: ["tech_ks_31", "tech_ks_32"],
+    required: ["ks_31", "ks_32"],
     costs: {
       research_points: 125,
       coins: 4800000,
@@ -1042,10 +1042,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_36",
+    id: "ks_36",
     name: "Secondary Workshop",
     column: 11,
-    required: ["tech_ks_33", "tech_ks_35"],
+    required: ["ks_33", "ks_35"],
     costs: {
       research_points: 80,
       coins: 6100000,
@@ -1071,10 +1071,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_37",
+    id: "ks_37",
     name: "Piazza",
     column: 11,
-    required: ["tech_ks_34", "tech_ks_35"],
+    required: ["ks_34", "ks_35"],
     costs: {
       research_points: 100,
       coins: 2300000,
@@ -1097,10 +1097,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Large Culture Site: Unlocks a Large Culture Site upgrade"],
   },
   {
-    id: "tech_ks_38",
+    id: "ks_38",
     name: "Lusterware",
     column: 11,
-    required: ["tech_ks_35"],
+    required: ["ks_35"],
     costs: {
       research_points: 105,
       coins: 2800000,
@@ -1127,10 +1127,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_39",
+    id: "ks_39",
     name: "Water Clock",
     column: 11,
-    required: ["tech_ks_35"],
+    required: ["ks_35"],
     costs: {
       research_points: 81,
       coins: 2300000,
@@ -1157,10 +1157,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_40",
+    id: "ks_40",
     name: "Siege Tower",
     column: 12,
-    required: ["tech_ks_36", "tech_ks_37"],
+    required: ["ks_36", "ks_37"],
     costs: {
       research_points: 145,
       coins: 3400000,
@@ -1179,10 +1179,10 @@ export const technos_KS: TechnoData[] = [
     rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
   },
   {
-    id: "tech_ks_41",
+    id: "ks_41",
     name: "Magnifying Glass",
     column: 12,
-    required: ["tech_ks_38"],
+    required: ["ks_38"],
     costs: {
       research_points: 105,
       coins: 2900000,
@@ -1209,10 +1209,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_42",
+    id: "ks_42",
     name: "Astronomical Instruments",
     column: 12,
-    required: ["tech_ks_39"],
+    required: ["ks_39"],
     costs: {
       research_points: 83,
       coins: 7300000,
@@ -1238,10 +1238,10 @@ export const technos_KS: TechnoData[] = [
     ],
   },
   {
-    id: "tech_ks_43",
+    id: "ks_43",
     name: "Tertiary Workshop",
     column: 13,
-    required: ["tech_ks_40", "tech_ks_41", "tech_ks_42"],
+    required: ["ks_40", "ks_41", "ks_42"],
     costs: {
       research_points: 115,
       coins: 5200000,

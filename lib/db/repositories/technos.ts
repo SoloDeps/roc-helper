@@ -1,6 +1,6 @@
 "use client";
 
-import { getWikiDB, techIdToDbId, dbIdToTechId } from "../schema";
+import { getWikiDB } from "../schema";
 import type { TechnoEntity } from "../schema";
 
 /**
@@ -12,11 +12,11 @@ export async function getTechnos(): Promise<TechnoEntity[]> {
 }
 
 /**
- * Récupère une technologie par son ID complet (ex: "tech_eg_0")
+ * Récupère une technologie par son ID complet (ex: "eg_0")
  */
 export async function getTechno(id: string): Promise<TechnoEntity | undefined> {
   const db = getWikiDB();
-  return await db.technos.get(techIdToDbId(id));
+  return await db.technos.get(id);
 }
 
 /**
@@ -25,17 +25,17 @@ export async function getTechno(id: string): Promise<TechnoEntity | undefined> {
 export async function saveTechno(techno: TechnoEntity): Promise<void> {
   const db = getWikiDB();
   await db.technos.put({
-    id: techIdToDbId(techno.id),
+    id: techno.id,
     hidden: techno.hidden ? 1 : 0,
   });
 }
 
 /**
- * Supprime une technologie par son ID complet (ex: "tech_eg_0")
+ * Supprime une technologie par son ID complet (ex: "eg_0")
  */
 export async function removeTechno(id: string): Promise<void> {
   const db = getWikiDB();
-  await db.technos.delete(techIdToDbId(id));
+  await db.technos.delete(id);
 }
 
 /**

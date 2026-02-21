@@ -7,7 +7,7 @@ import Dexie, { type Table } from "dexie";
 // ============================================================================
 
 export interface TechnoEntity {
-  id: string; // "eg_0" (sans préfixe "tech_")
+  id: string; // "eg_0"
   hidden: number; // 0 | 1
 }
 
@@ -97,14 +97,4 @@ export function tradePostIndexToId(index: number): string {
 }
 export function idToTradePostIndex(id: string): number {
   return parseInt(id.replace("otp_", ""));
-}
-
-/** "tech_eg_0" → "eg_0" (pour stocker en DB) */
-export function techIdToDbId(fullId: string): string {
-  return fullId.replace(/^tech_/, "");
-}
-
-/** "eg_0" → "tech_eg_0" (pour reconstruire depuis la DB) */
-export function dbIdToTechId(dbId: string): string {
-  return `tech_${dbId}`;
 }

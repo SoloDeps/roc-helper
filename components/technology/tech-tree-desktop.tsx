@@ -21,7 +21,7 @@ import { TechDetailsPanel } from "./tech-details-panel";
 import { TechPathPanel } from "./tech-path-panel";
 import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
-import { getWikiDB, techIdToDbId, dbIdToTechId } from "@/lib/db/schema";
+import { getWikiDB } from "@/lib/db/schema";
 import { Handle, Position } from "@xyflow/react";
 import { cn, getCityCrestIconLocal } from "@/lib/utils";
 import { GitFork, X, Target, Check } from "lucide-react";
@@ -152,8 +152,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
     mode === "path-pick-to" ||
     mode === "ancestors-pick";
 
-  const rawId = id.replace(/^tech_/, "");
-  const imgSrc = eraId ? `/images/technos/${eraId}/${rawId}.webp` : null;
+  const imgSrc = eraId ? `/images/technos/${eraId}/${id}.webp` : null;
 
   // mt-3 on wrapper to allow image overflow upward (handled by ReactFlow node wrapper via style)
   return (
@@ -306,14 +305,14 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
     const db = getWikiDB();
     return await db.technos
       .where("id")
-      .anyOf(technologies.map((t) => techIdToDbId(t.id)))
+      .anyOf(technologies.map((t) => t.id))
       .toArray();
   }, [technologies]);
 
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
-      if (t.hidden) ids.add(dbIdToTechId(t.id));
+      if (t.hidden) ids.add(t.id);
     });
     return ids;
   }, [technosInDB]);
@@ -328,7 +327,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           ...collectAncestorIds(techId, technologies),
         ];
         await db.technos.bulkPut(
-          idsToComplete.map((id) => ({ id: techIdToDbId(id), hidden: 1 })),
+          idsToComplete.map((id) => ({ id: id, hidden: 1 })),
         );
       } else {
         const idsToUncheck = [
@@ -336,7 +335,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           ...collectDescendantIds(techId, technologies),
         ];
         await db.technos.bulkPut(
-          idsToUncheck.map((id) => ({ id: techIdToDbId(id), hidden: 0 })),
+          idsToUncheck.map((id) => ({ id: id, hidden: 0 })),
         );
       }
     },
@@ -346,9 +345,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
   const { baseNodes, baseEdges } = useMemo(() => {
     const enriched = technologies.map((tech) => ({
       ...tech,
-      completed:
-        technosInDB?.find((t) => t.id === techIdToDbId(tech.id))?.hidden ??
-        false,
+      completed: technosInDB?.find((t) => t.id === tech.id)?.hidden ?? false,
     }));
     const { nodes, edges } = buildGraphData(enriched as any);
     return {
