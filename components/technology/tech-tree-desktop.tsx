@@ -128,7 +128,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
     onToggleComplete,
     eraId,
   } = useContext(SelectionContext);
-  const { name, allied } = data;
+  const { name, allied, costs } = data;
 
   const isCompleted = completedIds.has(id);
   const isSelectMode = mode === "select";
@@ -156,7 +156,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
 
   // mt-3 on wrapper to allow image overflow upward (handled by ReactFlow node wrapper via style)
   return (
-    <div className="relative mt-3">
+    <div className="relative">
       {/* Image absolute — déborde au-dessus du node */}
       {imgSrc && (
         <div className="absolute -top-1 left-2.5 size-11 z-10 pointer-events-none">
@@ -176,7 +176,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
       <div
         className={cn(
           "relative border rounded-md overflow-visible",
-          "w-[200px] h-12",
+          "w-[200px] h-13",
           "flex items-center",
           "transition-all duration-200 cursor-pointer",
           isCompleted
@@ -207,23 +207,26 @@ function TechNodeWithContext({ id, data, selected }: any) {
         <Handle
           type="target"
           position={Position.Left}
-          className="!bg-primary !border !border-background"
+          className="!opacity-0 !pointer-events-none"
         />
 
         {/* Spacer pour laisser place à l'image absolute */}
         <div className="shrink-0 w-16" />
 
-        {/* Nom */}
-        <div className="flex-1 min-w-0 w-full py-2 pr-2">
+        {/* Nom & RP */}
+        <div className="flex flex-col justify-center gap-0.5 size-full min-w-0 w-full py-1 pr-2">
           <span
             className={cn(
-              "font-semibold text-[11px] leading-tight line-clamp-2 block",
+              "font-semibold text-[11px] leading-tight line-clamp-2 block max-sm:font-pro!",
               isCompleted && "text-green-700 dark:text-green-400",
               isPathFrom && "text-orange-600 dark:text-orange-300",
               isPathTo && "text-orange-600 dark:text-orange-300",
             )}
           >
             {name}
+          </span>
+          <span className="font-semibold text-[9px] text-muted-foreground">
+            {costs.research_points} RP
           </span>
         </div>
 
@@ -251,9 +254,9 @@ function TechNodeWithContext({ id, data, selected }: any) {
             <Image
               src={getCityCrestIconLocal(allied)}
               alt={allied}
-              width={18}
-              height={18}
-              className="rounded-sm shadow-md ring-1 ring-background"
+              width={100}
+              height={100}
+              className="object-contain size-6 select-none"
             />
           </div>
         )}
@@ -273,7 +276,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
         <Handle
           type="source"
           position={Position.Right}
-          className="!bg-primary !border-2 !border-background"
+          className="!opacity-0 !pointer-events-none"
         />
       </div>
     </div>
@@ -296,10 +299,10 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
   const [mode, setMode] = useState<Mode>("select");
   const [pathFromId, setPathFromId] = useState<string | null>(null);
   const [pathToId, setPathToId] = useState<string | null>(null);
-  const [pathNodeIds, setPathNodeIds] = useState(new Set<string>());
-  const [pathEdgeIds, setPathEdgeIds] = useState(new Set<string>());
+  const [pathRawNodeIds, setPathRawNodeIds] = useState(new Set<string>());
+  const [pathRawEdgeIds, setPathRawEdgeIds] = useState(new Set<string>());
   const [pathFound, setPathFound] = useState(true);
-  const [pathTechs, setPathTechs] = useState<TechnoData[]>([]);
+  const [excludeCompleted, setExcludeCompleted] = useState(true);
 
   const technosInDB = useLiveQuery(async () => {
     const db = getWikiDB();
@@ -316,6 +319,36 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
     });
     return ids;
   }, [technosInDB]);
+
+  // Derived live from raw + excludeCompleted toggle
+  const pathNodeIds = useMemo(() => {
+    if (!excludeCompleted || !pathToId) return pathRawNodeIds;
+    return new Set(
+      [...pathRawNodeIds].filter(
+        (id) => id === pathToId || !completedIds.has(id),
+      ),
+    );
+  }, [pathRawNodeIds, pathToId, excludeCompleted, completedIds]);
+
+  const pathEdgeIds = useMemo(() => {
+    if (!excludeCompleted || !pathToId) return pathRawEdgeIds;
+    return new Set(
+      [...pathRawEdgeIds].filter((id) => {
+        const [src, tgt] = id.split("-");
+        return (
+          !completedIds.has(src) ||
+          src === pathToId ||
+          !completedIds.has(tgt) ||
+          tgt === pathToId
+        );
+      }),
+    );
+  }, [pathRawEdgeIds, pathToId, excludeCompleted, completedIds]);
+
+  const pathTechs = useMemo(
+    () => getOrderedTechs(pathNodeIds, technologies),
+    [pathNodeIds, technologies],
+  );
 
   const onToggleComplete = useCallback(
     async (techId: string) => {
@@ -432,8 +465,8 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
         };
       return {
         ...edge,
-        style: { stroke: "#6b7280", strokeWidth: 1.5 },
-        markerEnd: { type: "arrowclosed" as const, color: "#6b7280" },
+        style: { stroke: "var(--edge-color)", strokeWidth: 1.5 },
+        markerEnd: { type: "arrowclosed" as const, color: "var(--edge-color)" },
         animated: false,
       };
     });
@@ -452,10 +485,9 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
     setMode("select");
     setPathFromId(null);
     setPathToId(null);
-    setPathNodeIds(new Set());
-    setPathEdgeIds(new Set());
+    setPathRawNodeIds(new Set());
+    setPathRawEdgeIds(new Set());
     setPathFound(true);
-    setPathTechs([]);
   }, []);
 
   const applyResult = useCallback(
@@ -466,14 +498,13 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
       toId: string,
       fromId?: string,
     ) => {
-      setPathNodeIds(nodeIds);
-      setPathEdgeIds(edgeIds);
+      setPathRawNodeIds(nodeIds);
+      setPathRawEdgeIds(edgeIds);
       setPathFound(found);
-      setPathTechs(found ? getOrderedTechs(nodeIds, technologies) : []);
       setPathToId(toId);
       if (fromId) setPathFromId(fromId);
     },
-    [technologies],
+    [],
   );
 
   const onInit = useCallback((instance: any) => {
@@ -594,13 +625,38 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
                 </button>
               </>
             ) : (
-              <button
-                onClick={reset}
-                className="flex items-center gap-1.5 text-xs bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
-              >
-                <X className="size-3.5" />
-                Cancel
-              </button>
+              <div className="flex flex-row gap-1.5">
+                <button
+                  onClick={reset}
+                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
+                >
+                  <X className="size-3.5" />
+                  Cancel
+                </button>
+                <button
+                  onClick={() => setExcludeCompleted((v) => !v)}
+                  className={cn(
+                    "flex items-center gap-1.5 text-xs bg-background/90 border rounded-lg px-3 py-1.5 shadow transition-colors",
+                    excludeCompleted
+                      ? "border-emerald-600 text-emerald-700 dark:border-emerald-500/60 dark:text-emerald-400 hover:bg-emerald-500/10"
+                      : "border-border text-muted-foreground hover:border-primary/50",
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "size-3.5 rounded border-2 flex items-center justify-center shrink-0",
+                      excludeCompleted
+                        ? "bg-emerald-600 border-emerald-600 dark:bg-emerald-500 dark:border-emerald-500"
+                        : "border-muted-foreground/50",
+                    )}
+                  >
+                    {excludeCompleted && (
+                      <Check className="size-2.5 text-white stroke-[3]" />
+                    )}
+                  </div>
+                  Skip done
+                </button>
+              </div>
             )}
           </Panel>
 
@@ -657,7 +713,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           {selectedTech && mode === "select" && (
             <Panel
               position="top-right"
-              className="m-2 w-[360px] rounded-lg! overflow-hidden!"
+              className="m-2 w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
             >
               <TechDetailsPanel
                 tech={selectedTech}
@@ -671,7 +727,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           {isPathMode && pathFound && pathToTech && (
             <Panel
               position="top-right"
-              className="m-2 w-[360px] rounded-lg! overflow-hidden!"
+              className="m-2 hidden w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
             >
               <TechPathPanel
                 fromTech={mode === "ancestors-result" ? null : pathFromTech}

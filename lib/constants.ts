@@ -173,7 +173,7 @@ export const buildingsAbbr = [
     abbreviations: ["BE", "AF", "FA", "IE", "KS", "HM"],
   },
   {
-    title: "Early Gothic",
+    title: "Early Gothic Era ~ Late Gothic Era",
     buildings: ["Jeweler", "Alchemist", "Glassblower"],
     abbreviations: ["EG", "LG"],
   },

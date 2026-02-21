@@ -8,6 +8,12 @@ import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = localFont({
   src: "../public/fonts/font-sans.woff2",
+  variable: "--font-sans",
+});
+
+const fontPro = localFont({
+  src: "../public/fonts/font-pro.woff2",
+  variable: "--font-pro",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.className} antialiased`}
+        className={`${fontPro.className} ${fontSans.className} antialiased`}
         suppressHydrationWarning
       >
         <Providers>

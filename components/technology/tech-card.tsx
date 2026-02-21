@@ -20,7 +20,7 @@ export const TechCard = memo<TechCardProps>(
 
     return (
       /* mt-3 laisse de la place pour l'image qui déborde vers le haut */
-      <div className="mt-2 h-15 relative">
+      <div className="mt-1.5 h-16 relative">
         {/* Image absolue qui déborde au-dessus de la card */}
         <div className="absolute -top-1.5 left-2 size-14 z-10 pointer-events-none">
           <Image
@@ -55,8 +55,7 @@ export const TechCard = memo<TechCardProps>(
             <span
               className={cn(
                 "font-semibold text-sm leading-tight truncate",
-                isCompleted &&
-                  "text-green-700 dark:text-green-400 line-through",
+                isCompleted && "text-green-700 dark:text-green-400",
               )}
             >
               {tech.name}
@@ -64,9 +63,8 @@ export const TechCard = memo<TechCardProps>(
 
             <div className="flex items-center gap-2 mt-0.5">
               {tech.costs.research_points && (
-                <span className="text-[11px] font-bold text-purple-500 dark:text-purple-400">
-                  {tech.costs.research_points}{" "}
-                  <span className="opacity-70 font-normal">RP</span>
+                <span className="text-[13px] font-semibold text-muted-foreground">
+                  {tech.costs.research_points} RP
                 </span>
               )}
               {tech.allied && (
@@ -88,7 +86,7 @@ export const TechCard = memo<TechCardProps>(
 
           {/* Checkbox */}
           <div className="">
-            <button
+            <div
               onClick={(e) => {
                 e.stopPropagation();
                 onToggleComplete(tech.id);
@@ -106,7 +104,7 @@ export const TechCard = memo<TechCardProps>(
               {isCompleted && (
                 <Check className="size-[18px] text-white stroke-4" />
               )}
-            </button>
+            </div>
           </div>
         </button>
       </div>

@@ -8,7 +8,7 @@ import { TechTreeDesktop } from "./tech-tree-desktop";
 import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB } from "@/lib/db/schema";
-import { GitFork, X, Target, ArrowRight, List, GitBranch } from "lucide-react";
+import { GitFork, X, Target, List, GitBranch, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   getAllAncestors,
@@ -39,11 +39,11 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
   const [mode, setMode] = useState<Mode>("select");
   const [pathFromId, setPathFromId] = useState<string | null>(null);
   const [pathToId, setPathToId] = useState<string | null>(null);
-  const [pathNodeIds, setPathNodeIds] = useState(new Set<string>());
-  const [pathEdgeIds, setPathEdgeIds] = useState(new Set<string>());
+  const [pathRawNodeIds, setPathRawNodeIds] = useState(new Set<string>());
+  const [pathRawEdgeIds, setPathRawEdgeIds] = useState(new Set<string>());
   const [pathFound, setPathFound] = useState(true);
-  const [pathTechs, setPathTechs] = useState<TechnoData[]>([]);
   const [isPathDrawerOpen, setIsPathDrawerOpen] = useState(false);
+  const [excludeCompleted, setExcludeCompleted] = useState(true);
 
   const technosInDB = useLiveQuery(async () => {
     const db = getWikiDB();
@@ -62,14 +62,51 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
     return Array.from(groups.entries()).sort(([a], [b]) => a - b);
   }, [technologies]);
 
+  const completedIds = useMemo(() => {
+    const ids = new Set<string>();
+    technosInDB?.forEach((t) => {
+      if (t.hidden) ids.add(t.id);
+    });
+    return ids;
+  }, [technosInDB]);
+
+  // Derived live from raw + excludeCompleted toggle
+  const pathNodeIds = useMemo(() => {
+    if (!excludeCompleted || !pathToId) return pathRawNodeIds;
+    return new Set(
+      [...pathRawNodeIds].filter(
+        (id) => id === pathToId || !completedIds.has(id),
+      ),
+    );
+  }, [pathRawNodeIds, pathToId, excludeCompleted, completedIds]);
+
+  const pathEdgeIds = useMemo(() => {
+    if (!excludeCompleted || !pathToId) return pathRawEdgeIds;
+    return new Set(
+      [...pathRawEdgeIds].filter((id) => {
+        const [src, tgt] = id.split("-");
+        return (
+          !completedIds.has(src) ||
+          src === pathToId ||
+          !completedIds.has(tgt) ||
+          tgt === pathToId
+        );
+      }),
+    );
+  }, [pathRawEdgeIds, pathToId, excludeCompleted, completedIds]);
+
+  const pathTechs = useMemo(
+    () => getOrderedTechs(pathNodeIds, technologies),
+    [pathNodeIds, technologies],
+  );
+
   const reset = useCallback(() => {
     setMode("select");
     setPathFromId(null);
     setPathToId(null);
-    setPathNodeIds(new Set());
-    setPathEdgeIds(new Set());
+    setPathRawNodeIds(new Set());
+    setPathRawEdgeIds(new Set());
     setPathFound(true);
-    setPathTechs([]);
     setIsPathDrawerOpen(false);
   }, []);
 
@@ -81,24 +118,15 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       toId: string,
       fromId?: string,
     ) => {
-      setPathNodeIds(nodeIds);
-      setPathEdgeIds(edgeIds);
+      setPathRawNodeIds(nodeIds);
+      setPathRawEdgeIds(edgeIds);
       setPathFound(found);
-      setPathTechs(found ? getOrderedTechs(nodeIds, technologies) : []);
       setPathToId(toId);
       if (fromId) setPathFromId(fromId);
-      if (found) setIsPathDrawerOpen(true);
+      // Don't auto-open drawer — user can browse the list first
     },
-    [technologies],
+    [],
   );
-
-  const completedIds = useMemo(() => {
-    const ids = new Set<string>();
-    technosInDB?.forEach((t) => {
-      if (t.hidden) ids.add(t.id);
-    });
-    return ids;
-  }, [technosInDB]);
 
   const getCompletionStatus = useCallback(
     (techId: string) => completedIds.has(techId),
@@ -213,17 +241,17 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
 
   return (
     <>
-      {/* ── Tabs : sticky au scroll ── */}
-      <div className="sticky top-0 z-30 bg-background pt-1 pb-2">
-        {/* Tab switcher */}
-        <div className="flex rounded-lg border border-border overflow-hidden mb-2">
+      {/* ── Sticky header ── */}
+      <div className="sticky top-0 z-30 bg-background border-y border-border">
+        {/* Tabs — underline style */}
+        <div className="flex">
           <button
             onClick={() => setActiveTab("list")}
             className={cn(
-              "flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-medium transition-colors",
+              "flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium transition-colors border-b-2 -mb-px",
               activeTab === "list"
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-muted/50",
+                ? "border-primary text-foreground"
+                : "border-transparent text-muted-foreground hover:text-foreground",
             )}
           >
             <List className="size-3.5" />
@@ -232,10 +260,10 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
           <button
             onClick={() => setActiveTab("graph")}
             className={cn(
-              "flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-medium transition-colors",
+              "flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium transition-colors border-b-2 -mb-px",
               activeTab === "graph"
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-muted/50",
+                ? "border-primary text-foreground"
+                : "border-transparent text-muted-foreground hover:text-foreground",
             )}
           >
             <GitBranch className="size-3.5" />
@@ -243,103 +271,113 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
           </button>
         </div>
 
-        {/* Toolbar path/prerequisites — uniquement visible sur l'onglet list */}
+        {/* Toolbar — only on list tab */}
         {activeTab === "list" && (
-          <>
+          <div className="px-3 py-2 border-t border-border">
             {mode === "select" ? (
+              /* Normal mode: 2 full-width buttons side by side */
               <div className="flex gap-2">
                 <button
                   onClick={() => setMode("ancestors-pick")}
-                  className="flex items-center gap-1.5 text-xs border border-border rounded-lg px-3 py-1.5 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-border rounded-lg py-2 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
-                  <Target className="size-3.5" />
+                  <Target className="size-3.5 shrink-0" />
                   Prerequisites
                 </button>
                 <button
                   onClick={() => setMode("path-pick-from")}
-                  className="flex items-center gap-1.5 text-xs border border-border rounded-lg px-3 py-1.5 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-border rounded-lg py-2 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
-                  <GitFork className="size-3.5" />
+                  <GitFork className="size-3.5 shrink-0" />
                   Path A → B
                 </button>
               </div>
             ) : (
-              <div className="flex items-center justify-between gap-2">
-                <div className="text-xs flex-1 min-w-0">
+              /* Active mode: instruction + skip + cancel */
+              <div className="flex items-center gap-2">
+                {/* Instruction pill */}
+                <div className="flex-1 min-w-0">
                   {mode === "ancestors-pick" && (
-                    <span className="text-orange-400 font-medium">
-                      Tap the target techno
+                    <span className="text-xs text-orange-400 font-semibold">
+                      Select target tech
                     </span>
                   )}
                   {mode === "path-pick-from" && (
-                    <span className="text-orange-400 font-medium">
-                      Select start techno (A)
+                    <span className="text-xs text-orange-400 font-semibold">
+                      Select A
                     </span>
                   )}
                   {mode === "path-pick-to" && (
-                    <span className="text-orange-400 font-medium truncate block">
+                    <span className="text-xs text-orange-400 font-semibold truncate block">
                       <span className="text-muted-foreground font-normal">
-                        From{" "}
+                        A:{" "}
                       </span>
                       {pathFromTech?.name}
                       <span className="text-muted-foreground font-normal">
                         {" "}
-                        → destination (B)
+                        → Select B
                       </span>
                     </span>
                   )}
                   {isResultMode && pathFound && (
-                    <button
-                      onClick={() => setIsPathDrawerOpen(true)}
-                      className="flex items-center gap-1.5 text-orange-400 font-medium hover:underline underline-offset-2 truncate"
-                    >
-                      {mode === "ancestors-result" ? (
-                        <span>
-                          Prerequisites for{" "}
-                          <span className="font-bold">{pathToTech?.name}</span>
-                        </span>
-                      ) : (
-                        <>
-                          <span className="truncate max-w-[80px]">
-                            {pathFromTech?.name}
-                          </span>
-                          <ArrowRight className="size-3 shrink-0" />
-                          <span className="truncate max-w-[80px]">
-                            {pathToTech?.name}
-                          </span>
-                        </>
-                      )}
-                      <span className="text-muted-foreground font-normal shrink-0">
-                        · {pathTechs.filter((t) => t.id !== pathToId).length}{" "}
-                        unlocks
-                      </span>
-                    </button>
+                    <span className="text-xs text-orange-400 font-semibold truncate block">
+                      {mode === "ancestors-result"
+                        ? `Prerequisites · ${pathToTech?.name}`
+                        : `${pathFromTech?.name} → ${pathToTech?.name}`}
+                    </span>
                   )}
                   {isResultMode && !pathFound && (
-                    <span className="text-red-400 font-medium">
+                    <span className="text-xs text-red-400 font-semibold">
                       No path found
                     </span>
                   )}
                 </div>
+
+                {/* Skip done toggle */}
+                <button
+                  onClick={() => setExcludeCompleted((v) => !v)}
+                  className={cn(
+                    "flex items-center gap-1.5 text-xs border rounded-lg px-2.5 py-1.5 shrink-0 transition-colors",
+                    excludeCompleted
+                      ? "border-emerald-600 text-emerald-700 dark:border-emerald-500/60 dark:text-emerald-400 hover:bg-emerald-500/10"
+                      : "border-border text-muted-foreground hover:border-primary/50",
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "size-3.5 rounded border-2 flex items-center justify-center shrink-0",
+                      excludeCompleted
+                        ? "bg-emerald-600 border-emerald-600 dark:bg-emerald-500 dark:border-emerald-500"
+                        : "border-muted-foreground/50",
+                    )}
+                  >
+                    {excludeCompleted && (
+                      <Check className="size-2.5 text-white stroke-[3]" />
+                    )}
+                  </div>
+                  Skip done
+                </button>
+
+                {/* Cancel */}
                 <button
                   onClick={reset}
-                  className="flex items-center gap-1 text-xs border border-orange-400/50 text-orange-400 rounded-lg px-2.5 py-1.5 hover:bg-orange-500/10 transition-colors shrink-0"
+                  className="flex items-center gap-1 text-xs border border-orange-400/50 text-orange-400 rounded-lg px-2.5 py-1.5 shrink-0 hover:bg-orange-500/10 transition-colors"
                 >
                   <X className="size-3.5" />
                   Cancel
                 </button>
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
 
       {/* ── Techno List tab ── */}
       {activeTab === "list" && (
-        <div className="space-y-8 pb-4">
+        <div className="space-y-7 pt-5 pb-10">
           {groupedByColumn.map(([columnIndex, techs]) => (
-            <div key={columnIndex} className="space-y-1">
-              <div className="text-xs font-semibold text-muted-foreground/70 px-0.5">
+            <div key={columnIndex} className="space-y-1.5">
+              <div className="text-xs font-semibold text-muted-foreground/60 px-0.5">
                 Column {columnIndex + 1}
               </div>
               <div className="space-y-1">
@@ -414,14 +452,26 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
 
       <TechPathDrawer
         open={isPathDrawerOpen}
-        onOpenChange={(open) => {
-          setIsPathDrawerOpen(open);
-          if (!open) reset();
-        }}
+        onOpenChange={setIsPathDrawerOpen}
         fromTech={mode === "ancestors-result" ? null : pathFromTech}
         toTech={pathToTech}
         pathTechs={pathTechs}
       />
+
+      {/* FAB — visible only in result mode on list tab */}
+      {activeTab === "list" && isResultMode && pathFound && pathToTech && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
+          <button
+            onClick={() => setIsPathDrawerOpen(true)}
+            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white text-sm font-semibold rounded-full px-5 py-3 shadow-lg shadow-orange-500/20 transition-all"
+          >
+            <span className="size-5 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold shrink-0">
+              {pathTechs.length}
+            </span>
+            View total cost
+          </button>
+        </div>
+      )}
     </>
   );
 }

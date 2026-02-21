@@ -46,6 +46,7 @@ import {
 } from "@/lib/utils";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
 import type { TechnoData } from "@/types/shared";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 // ─── Stats helpers ────────────────────────────────────────────────────────────
 
@@ -211,10 +212,10 @@ function TechTreeSkeleton({ onAdd }: { onAdd: () => void }) {
 
 export default function ResearchTreePage() {
   const selectedEraId = useSelectedEraId();
-  console.log(selectedEraId)
   const selectEra = useSelectEra();
   const { openModal, selectCategory, setDirectTechnologyMode } =
     useAddElementStore();
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const technosInDB = useLiveQuery(async () => {
     const db = getWikiDB();
@@ -268,15 +269,15 @@ export default function ResearchTreePage() {
   const isEmpty = !technosInDB || technosInDB.length === 0;
 
   return (
-    <div className="size-full container-wrapper">
+    <div className="flex flex-col min-h-0 flex-1 container-wrapper">
       {isEmpty ? (
         <>
           {/* Header identique pour cohérence visuelle avec/sans contenu */}
-          <div className="flex gap-1.5 items-end w-full">
+          <div className="pt-4 flex gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
               <div className="w-full sm:w-60">
                 <ResponsiveSelect
-                  label="Saved Eras"
+                  label={isMobile ? "" : "Saved Eras"}
                   value=""
                   onValueChange={() => {}}
                   options={[]}
@@ -305,11 +306,11 @@ export default function ResearchTreePage() {
       ) : (
         <>
           {/* ── Row : Era select + Add New Era + [spacer] + Era Stats ── */}
-          <div className="flex gap-1.5 items-end w-full">
+          <div className="pt-4 flex gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
               <div className="w-full sm:w-60">
                 <ResponsiveSelect
-                  label="Saved Eras"
+                  label={isMobile ? "" : "Saved Eras"}
                   value={selectedEraId || ""}
                   onValueChange={(newEraId) => selectEra(newEraId)}
                   options={eraOptions}
@@ -335,7 +336,7 @@ export default function ResearchTreePage() {
 
           {selectedEraId && technosWithStatus.length > 0 && (
             <>
-              <div className="hidden md:block">
+              <div className="hidden md:block mt-2">
                 <TechTreeDesktop technologies={technosWithStatus} />
               </div>
               <div className="md:hidden">
@@ -344,9 +345,9 @@ export default function ResearchTreePage() {
             </>
           )}
 
-          {selectedEraId && technosWithStatus.length === 0 && (
+          {/* {selectedEraId && technosWithStatus.length === 0 && (
             <TechTreeSkeleton onAdd={handleAddNewEra} />
-          )}
+          )} */}
         </>
       )}
 
