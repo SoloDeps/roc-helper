@@ -4,16 +4,18 @@ import React, { useMemo, useState, useCallback } from "react";
 import { TechCard } from "./tech-card";
 import { TechDetailsModal } from "./tech-details-modal";
 import { TechPathDrawer } from "./tech-path-drawer";
+import { TechTreeDesktop } from "./tech-tree-desktop";
 import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB, techIdToDbId, dbIdToTechId } from "@/lib/db/schema";
-import { GitFork, X, Target, ArrowRight } from "lucide-react";
+import { GitFork, X, Target, ArrowRight, List, GitBranch } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   getAllAncestors,
   getSubgraphBetween,
   getOrderedTechs,
 } from "@/lib/path-utils";
+import { useSelectedEraId } from "@/lib/stores/technology-page-store";
 
 type Mode =
   | "select"
@@ -28,6 +30,9 @@ interface TechTreeMobileProps {
 }
 
 export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
+  const selectedEraId = useSelectedEraId();
+  const [activeTab, setActiveTab] = useState<"list" | "graph">("list");
+
   const [selectedTech, setSelectedTech] = useState<TechnoData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -87,7 +92,6 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
     [technologies],
   );
 
-  // Completed IDs set
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
@@ -148,7 +152,6 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       if (mode !== "select") return;
       const db = getWikiDB();
       const isCurrentlyCompleted = completedIds.has(techId);
-      const now = Date.now();
       if (!isCurrentlyCompleted) {
         const idsToComplete = [techId, ...collectAncestorIds(techId)];
         await db.technos.bulkPut(
@@ -210,152 +213,198 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
 
   return (
     <>
-      {/* ── Toolbar ── */}
-      <div className="sticky top-0 z-20 bg-background pb-2 pt-1 space-y-1.5">
-        {mode === "select" ? (
-          <div className="flex gap-2">
-            <button
-              onClick={() => setMode("ancestors-pick")}
-              className="flex items-center gap-1.5 text-xs border border-border rounded-lg px-3 py-1.5 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
-            >
-              <Target className="size-3.5" />
-              Prérequis
-            </button>
-            <button
-              onClick={() => setMode("path-pick-from")}
-              className="flex items-center gap-1.5 text-xs border border-border rounded-lg px-3 py-1.5 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
-            >
-              <GitFork className="size-3.5" />
-              Chemin A → B
-            </button>
-          </div>
-        ) : (
-          <div className="flex items-center justify-between gap-2">
-            <div className="text-xs flex-1 min-w-0">
-              {mode === "ancestors-pick" && (
-                <span className="text-orange-400 font-medium">
-                  Cliquez sur la techno cible
-                </span>
-              )}
-              {mode === "path-pick-from" && (
-                <span className="text-orange-400 font-medium">
-                  Sélectionnez le départ (A)
-                </span>
-              )}
-              {mode === "path-pick-to" && (
-                <span className="text-orange-400 font-medium truncate block">
-                  <span className="text-muted-foreground font-normal">De </span>
-                  {pathFromTech?.name}
-                  <span className="text-muted-foreground font-normal">
-                    {" "}
-                    → arrivée (B)
-                  </span>
-                </span>
-              )}
-              {isResultMode && pathFound && (
+      {/* ── Tabs : sticky au scroll ── */}
+      <div className="sticky top-0 z-30 bg-background pt-1 pb-2">
+        {/* Tab switcher */}
+        <div className="flex rounded-lg border border-border overflow-hidden mb-2">
+          <button
+            onClick={() => setActiveTab("list")}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-medium transition-colors",
+              activeTab === "list"
+                ? "bg-primary text-primary-foreground"
+                : "bg-background text-muted-foreground hover:bg-muted/50",
+            )}
+          >
+            <List className="size-3.5" />
+            Techno List
+          </button>
+          <button
+            onClick={() => setActiveTab("graph")}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-medium transition-colors",
+              activeTab === "graph"
+                ? "bg-primary text-primary-foreground"
+                : "bg-background text-muted-foreground hover:bg-muted/50",
+            )}
+          >
+            <GitBranch className="size-3.5" />
+            Research Tree
+          </button>
+        </div>
+
+        {/* Toolbar path/prerequisites — uniquement visible sur l'onglet list */}
+        {activeTab === "list" && (
+          <>
+            {mode === "select" ? (
+              <div className="flex gap-2">
                 <button
-                  onClick={() => setIsPathDrawerOpen(true)}
-                  className="flex items-center gap-1.5 text-orange-400 font-medium hover:underline underline-offset-2 truncate"
+                  onClick={() => setMode("ancestors-pick")}
+                  className="flex items-center gap-1.5 text-xs border border-border rounded-lg px-3 py-1.5 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
-                  {mode === "ancestors-result" ? (
-                    <span>
-                      Prérequis de{" "}
-                      <span className="font-bold">{pathToTech?.name}</span>
-                    </span>
-                  ) : (
-                    <>
-                      <span className="truncate max-w-[80px]">
-                        {pathFromTech?.name}
-                      </span>
-                      <ArrowRight className="size-3 shrink-0" />
-                      <span className="truncate max-w-[80px]">
-                        {pathToTech?.name}
-                      </span>
-                    </>
-                  )}
-                  <span className="text-muted-foreground font-normal shrink-0">
-                    · {pathTechs.filter((t) => t.id !== pathToId).length} étapes
-                  </span>
+                  <Target className="size-3.5" />
+                  Prerequisites
                 </button>
-              )}
-              {isResultMode && !pathFound && (
-                <span className="text-red-400 font-medium">
-                  Aucun chemin trouvé
-                </span>
-              )}
-            </div>
-            <button
-              onClick={reset}
-              className="flex items-center gap-1 text-xs border border-orange-400/50 text-orange-400 rounded-lg px-2.5 py-1.5 hover:bg-orange-500/10 transition-colors shrink-0"
-            >
-              <X className="size-3.5" />
-              Annuler
-            </button>
-          </div>
+                <button
+                  onClick={() => setMode("path-pick-from")}
+                  className="flex items-center gap-1.5 text-xs border border-border rounded-lg px-3 py-1.5 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                >
+                  <GitFork className="size-3.5" />
+                  Path A → B
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between gap-2">
+                <div className="text-xs flex-1 min-w-0">
+                  {mode === "ancestors-pick" && (
+                    <span className="text-orange-400 font-medium">
+                      Tap the target techno
+                    </span>
+                  )}
+                  {mode === "path-pick-from" && (
+                    <span className="text-orange-400 font-medium">
+                      Select start techno (A)
+                    </span>
+                  )}
+                  {mode === "path-pick-to" && (
+                    <span className="text-orange-400 font-medium truncate block">
+                      <span className="text-muted-foreground font-normal">
+                        From{" "}
+                      </span>
+                      {pathFromTech?.name}
+                      <span className="text-muted-foreground font-normal">
+                        {" "}
+                        → destination (B)
+                      </span>
+                    </span>
+                  )}
+                  {isResultMode && pathFound && (
+                    <button
+                      onClick={() => setIsPathDrawerOpen(true)}
+                      className="flex items-center gap-1.5 text-orange-400 font-medium hover:underline underline-offset-2 truncate"
+                    >
+                      {mode === "ancestors-result" ? (
+                        <span>
+                          Prerequisites for{" "}
+                          <span className="font-bold">{pathToTech?.name}</span>
+                        </span>
+                      ) : (
+                        <>
+                          <span className="truncate max-w-[80px]">
+                            {pathFromTech?.name}
+                          </span>
+                          <ArrowRight className="size-3 shrink-0" />
+                          <span className="truncate max-w-[80px]">
+                            {pathToTech?.name}
+                          </span>
+                        </>
+                      )}
+                      <span className="text-muted-foreground font-normal shrink-0">
+                        · {pathTechs.filter((t) => t.id !== pathToId).length}{" "}
+                        unlocks
+                      </span>
+                    </button>
+                  )}
+                  {isResultMode && !pathFound && (
+                    <span className="text-red-400 font-medium">
+                      No path found
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={reset}
+                  className="flex items-center gap-1 text-xs border border-orange-400/50 text-orange-400 rounded-lg px-2.5 py-1.5 hover:bg-orange-500/10 transition-colors shrink-0"
+                >
+                  <X className="size-3.5" />
+                  Cancel
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
-      {/* ── Tech list ── */}
-      <div className="space-y-6 pb-4">
-        {groupedByColumn.map(([columnIndex, techs]) => (
-          <div key={columnIndex} className="space-y-2">
-            <div className="text-sm font-semibold text-muted-foreground px-0.5">
-              Colonne {columnIndex + 1}
-            </div>
-            <div className="space-y-2">
-              {techs.map((tech) => {
-                const isPathFrom = tech.id === pathFromId;
-                const isPathTo = tech.id === pathToId;
-                const isOnPath =
-                  isResultMode &&
-                  pathNodeIds.has(tech.id) &&
-                  !isPathFrom &&
-                  !isPathTo;
-                const isPathDimmed =
-                  (mode === "path-pick-to" || isResultMode) &&
-                  !pathNodeIds.has(tech.id) &&
-                  !isPathFrom;
+      {/* ── Techno List tab ── */}
+      {activeTab === "list" && (
+        <div className="space-y-8 pb-4">
+          {groupedByColumn.map(([columnIndex, techs]) => (
+            <div key={columnIndex} className="space-y-1">
+              <div className="text-xs font-semibold text-muted-foreground/70 px-0.5">
+                Column {columnIndex + 1}
+              </div>
+              <div className="space-y-1">
+                {techs.map((tech) => {
+                  const isPathFrom = tech.id === pathFromId;
+                  const isPathTo = tech.id === pathToId;
+                  const isOnPath =
+                    isResultMode &&
+                    pathNodeIds.has(tech.id) &&
+                    !isPathFrom &&
+                    !isPathTo;
+                  const isPathDimmed =
+                    (mode === "path-pick-to" || isResultMode) &&
+                    !pathNodeIds.has(tech.id) &&
+                    !isPathFrom;
 
-                return (
-                  <div
-                    key={tech.id}
-                    onClick={() => {
-                      if (mode !== "select") handleCardClick(tech);
-                    }}
-                    className={cn(
-                      "transition-all duration-150",
-                      mode !== "select" && "cursor-pointer",
-                      (isPathFrom || isPathTo) &&
-                        "ring-2 ring-orange-400/60 rounded-lg",
-                      isOnPath && "ring-1 ring-orange-300/40 rounded-lg",
-                      isPathDimmed && "opacity-30",
-                    )}
-                  >
-                    {(isPathFrom || isPathTo) && (
-                      <div className="flex items-center gap-1.5 px-1 mb-0.5">
-                        <span className="size-4 rounded-full bg-orange-500 text-white text-[10px] flex items-center justify-center font-bold">
-                          {isPathFrom ? "A" : "B"}
-                        </span>
-                        <span className="text-[10px] text-orange-400 font-medium">
-                          {isPathFrom ? "Départ" : "Arrivée"}
-                        </span>
-                      </div>
-                    )}
-                    <TechCard
-                      tech={tech}
-                      isCompleted={getCompletionStatus(tech.id)}
-                      onToggleComplete={handleToggleComplete}
-                      onShowDetails={
-                        mode === "select" ? handleShowDetails : () => {}
-                      }
-                    />
-                  </div>
-                );
-              })}
+                  return (
+                    <div
+                      key={tech.id}
+                      onClick={() => {
+                        if (mode !== "select") handleCardClick(tech);
+                      }}
+                      className={cn(
+                        "transition-all duration-150",
+                        mode !== "select" && "cursor-pointer",
+                        (isPathFrom || isPathTo) &&
+                          "ring-2 ring-orange-400/60 rounded-lg",
+                        isOnPath && "ring-1 ring-orange-300/40 rounded-lg",
+                        isPathDimmed && "opacity-30",
+                      )}
+                    >
+                      {(isPathFrom || isPathTo) && (
+                        <div className="flex items-center gap-1.5 px-1 mb-0.5">
+                          <span className="size-4 rounded-full bg-orange-500 text-white text-[10px] flex items-center justify-center font-bold">
+                            {isPathFrom ? "A" : "B"}
+                          </span>
+                          <span className="text-[10px] text-orange-400 font-medium">
+                            {isPathFrom ? "Start" : "Destination"}
+                          </span>
+                        </div>
+                      )}
+                      <TechCard
+                        tech={tech}
+                        eraId={selectedEraId ?? ""}
+                        isCompleted={getCompletionStatus(tech.id)}
+                        onToggleComplete={handleToggleComplete}
+                        onShowDetails={
+                          mode === "select" ? handleShowDetails : () => {}
+                        }
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+
+      {/* ── Research Tree tab ── */}
+      {activeTab === "graph" && (
+        <div className="h-[calc(100vh-200px)] min-h-[400px]">
+          <TechTreeDesktop technologies={technologies} />
+        </div>
+      )}
 
       <TechDetailsModal
         tech={selectedTech}

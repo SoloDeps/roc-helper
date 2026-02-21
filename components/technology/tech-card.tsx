@@ -1,78 +1,115 @@
 "use client";
 
-import { useState, memo } from "react";
+import { memo } from "react";
 import { Check } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn, getCityCrestIconLocal } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
+import Image from "next/image";
 
 interface TechCardProps {
   tech: TechnoData;
+  eraId: string;
   isCompleted: boolean;
   onToggleComplete: (techId: string) => void;
   onShowDetails: (tech: TechnoData) => void;
 }
 
 export const TechCard = memo<TechCardProps>(
-  ({ tech, isCompleted, onToggleComplete, onShowDetails }) => {
-    return (
-      <div
-        className={cn(
-          "flex items-center gap-3 p-3 rounded-lg border bg-card transition-all",
-          isCompleted && "opacity-60",
-          "hover:border-primary/50",
-        )}
-      >
-        {/* Left: Checkbox */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleComplete(tech.id);
-          }}
-          className={cn(
-            "shrink-0 size-5 rounded border-2 flex items-center justify-center transition-all",
-            isCompleted
-              ? "bg-primary border-primary"
-              : "border-muted-foreground/30 hover:border-primary/50",
-          )}
-          aria-label={isCompleted ? "Mark as incomplete" : "Mark as completed"}
-        >
-          {isCompleted && (
-            <Check className="size-3 text-primary-foreground stroke-2" />
-          )}
-        </button>
+  ({ tech, eraId, isCompleted, onToggleComplete, onShowDetails }) => {
+    const rawId = tech.id.replace(/^tech_/, "");
+    const imgSrc = `/images/technos/${eraId}/${rawId}.webp`;
 
-        {/* Center: Title + RP (clickable) */}
+    return (
+      /* mt-3 laisse de la place pour l'image qui déborde vers le haut */
+      <div className="mt-2 h-15 relative">
+        {/* Image absolue qui déborde au-dessus de la card */}
+        <div className="absolute -top-1.5 left-2 size-14 z-10 pointer-events-none">
+          <Image
+            src={imgSrc}
+            alt={tech.name}
+            fill
+            className={cn(
+              "object-contain drop-shadow-lg",
+              // isCompleted && "opacity-60 saturate-50",
+            )}
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+        </div>
+
+        {/* Card */}
         <button
           onClick={() => onShowDetails(tech)}
-          className="flex-1 text-left flex items-center justify-between gap-3 min-w-0"
-        >
-          <span
-            className={cn(
-              "font-medium text-sm truncate",
-              isCompleted && "line-through",
-            )}
-          >
-            {tech.name}
-          </span>
-
-          {/* Research Points badge */}
-          {tech.costs.research_points && (
-            <div className="shrink-0 flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400">
-              <span className="text-xs font-semibold">
-                {tech.costs.research_points}
-              </span>
-              <span className="text-[10px] opacity-70">RP</span>
-            </div>
+          className={cn(
+            "size-full flex items-center rounded-lg border bg-card transition-all text-left",
+            isCompleted
+              ? "border-green-600/50 bg-green-600/10 dark:border-green-500/40 dark:bg-green-500/5"
+              : "border-border hover:border-primary/50",
           )}
-        </button>
+        >
+          {/* Spacer pour laisser la place à l'image absolute */}
+          <div className="shrink-0 w-15" />
 
-        {/* Allied badge (optional) */}
-        {tech.allied && (
-          <div className="shrink-0 text-xs bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-md">
-            {tech.allied}
+          {/* Nom + meta */}
+          <div className="flex-1 min-w-0 flex flex-col justify-center ps-4 py-2 pr-2">
+            <span
+              className={cn(
+                "font-semibold text-sm leading-tight truncate",
+                isCompleted &&
+                  "text-green-700 dark:text-green-400 line-through",
+              )}
+            >
+              {tech.name}
+            </span>
+
+            <div className="flex items-center gap-2 mt-0.5">
+              {tech.costs.research_points && (
+                <span className="text-[11px] font-bold text-purple-500 dark:text-purple-400">
+                  {tech.costs.research_points}{" "}
+                  <span className="opacity-70 font-normal">RP</span>
+                </span>
+              )}
+              {tech.allied && (
+                <div className="flex items-center gap-1">
+                  <Image
+                    src={getCityCrestIconLocal(tech.allied)}
+                    alt={tech.allied}
+                    width={14}
+                    height={14}
+                    className="rounded-sm"
+                  />
+                  <span className="text-[10px] text-blue-400 font-medium">
+                    {tech.allied}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
-        )}
+
+          {/* Checkbox */}
+          <div className="">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleComplete(tech.id);
+              }}
+              className={cn(
+                "shrink-0 mr-2.5 size-6 rounded border-2 flex items-center justify-center transition-all",
+                isCompleted
+                  ? "bg-green-500 border-green-500"
+                  : "border-muted-foreground/30 hover:border-green-600/70 dark:hover:border-green-400/70",
+              )}
+              aria-label={
+                isCompleted ? "Mark as incomplete" : "Mark as completed"
+              }
+            >
+              {isCompleted && (
+                <Check className="size-[18px] text-white stroke-4" />
+              )}
+            </button>
+          </div>
+        </button>
       </div>
     );
   },

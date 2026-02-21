@@ -26,7 +26,7 @@ interface ContentItem {
 const content: Record<"male" | "female" | "male2", ContentItem> = {
   female: {
     imgClass: "h-64 left-[72px]",
-    image: "/characters/female_lge.png",
+    image: "/images/characters/female_lge.png",
     textClass: "ps-40",
     text: "Glad to see you, Sire!",
     description:
@@ -34,7 +34,7 @@ const content: Record<"male" | "female" | "male2", ContentItem> = {
   },
   male: {
     imgClass: "h-64 left-14 hidden md:block",
-    image: "/characters/male_lge.png",
+    image: "/images/characters/male_lge.png",
     textClass: "ps-6 md:ps-40",
     text: "I hope you're doing well, Chief!",
     description:
@@ -42,7 +42,7 @@ const content: Record<"male" | "female" | "male2", ContentItem> = {
   },
   male2: {
     imgClass: "h-56 left-28 hidden md:block",
-    image: "/characters/male2_lge.png",
+    image: "/images/characters/male2_lge.png",
     textClass: "ps-12 md:ps-52",
     text: "What are you up to, Chief?",
     description:

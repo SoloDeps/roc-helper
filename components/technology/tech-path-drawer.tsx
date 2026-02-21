@@ -114,8 +114,8 @@ export function TechPathDrawer({
           {/* Total costs */}
           <div>
             <p className="text-xs text-muted-foreground mb-2 font-medium uppercase tracking-wide">
-              Coût total · {stepsCount} techno{stepsCount > 1 ? "s" : ""} à
-              débloquer
+              Total cost · {stepsCount} tech{stepsCount > 1 ? "s" : ""} to
+              unlock
             </p>
             {stepsCount === 0 ? (
               <p className="text-xs text-muted-foreground italic">
@@ -140,7 +140,7 @@ export function TechPathDrawer({
           {stepsCount > 0 && (
             <div className="border-t border-alpha-300 pt-4">
               <p className="text-xs text-muted-foreground mb-3 font-medium uppercase tracking-wide">
-                Ordre de déblocage
+                Unlock order
               </p>
               <div className="space-y-2">
                 {techsToDisplay.map((tech, index) => (

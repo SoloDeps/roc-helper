@@ -58,8 +58,8 @@ export function layoutGraph(
 ): Node[] {
   const NODE_WIDTH = 180;
   const NODE_HEIGHT = 50;
-  const NODESEP = 30; // vertical gap between nodes in same column
-  const RANKSEP = 100; // horizontal gap between columns
+  const NODESEP = 10; // vertical gap between nodes in same column
+  const RANKSEP = 80; // horizontal gap between columns
 
   // Build column map from techno data if available
   const columnMap = new Map<string, number>();

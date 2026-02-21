@@ -34,6 +34,7 @@ interface ResponsiveSelectProps {
   placeholder?: string;
   label?: string;
   className?: string;
+  drawerBtnClassName?: string;
   disabled?: boolean;
   readOnly?: boolean; // If true, shows normal appearance but prevents opening
   hideChevron?: boolean; // If true, hides the chevron icon
@@ -117,6 +118,7 @@ export function ResponsiveSelect({
   placeholder = "Select an option",
   label,
   className,
+  drawerBtnClassName,
   disabled = false,
   readOnly = false,
   hideChevron = false,
@@ -213,6 +215,7 @@ export function ResponsiveSelect({
             className={cn(
               "w-full justify-between h-12",
               readOnly && "cursor-default",
+              drawerBtnClassName
             )}
             onClick={readOnly ? (e) => e.preventDefault() : undefined}
           >

@@ -23,13 +23,15 @@ import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB, techIdToDbId, dbIdToTechId } from "@/lib/db/schema";
 import { Handle, Position } from "@xyflow/react";
-import { cn } from "@/lib/utils";
+import { cn, getCityCrestIconLocal } from "@/lib/utils";
 import { GitFork, X, Target, Check } from "lucide-react";
 import {
   getAllAncestors,
   getSubgraphBetween,
   getOrderedTechs,
 } from "@/lib/path-utils";
+import Image from "next/image";
+import { useSelectedEraId } from "@/lib/stores/technology-page-store";
 
 // ============================================================
 // Helper: collect all ancestor IDs (for cascade completion)
@@ -56,7 +58,6 @@ function collectDescendantIds(
   targetId: string,
   technologies: TechnoData[],
 ): string[] {
-  // Build children map: id -> list of techs that require it
   const children = new Map<string, string[]>();
   technologies.forEach((t) => {
     (t.required ?? []).forEach((reqId) => {
@@ -97,6 +98,7 @@ interface SelectionCtx {
   pathNodeIds: Set<string>;
   completedIds: Set<string>;
   onToggleComplete: (id: string) => void;
+  eraId: string;
 }
 
 const SelectionContext = createContext<SelectionCtx>({
@@ -108,10 +110,11 @@ const SelectionContext = createContext<SelectionCtx>({
   pathNodeIds: new Set(),
   completedIds: new Set(),
   onToggleComplete: () => {},
+  eraId: "",
 });
 
 // ============================================================
-// TechNode — fixed width, checkbox, green when completed
+// TechNode — image-based game-style node
 // ============================================================
 function TechNodeWithContext({ id, data, selected }: any) {
   const {
@@ -123,6 +126,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
     pathNodeIds,
     completedIds,
     onToggleComplete,
+    eraId,
   } = useContext(SelectionContext);
   const { name, allied } = data;
 
@@ -148,90 +152,131 @@ function TechNodeWithContext({ id, data, selected }: any) {
     mode === "path-pick-to" ||
     mode === "ancestors-pick";
 
+  const rawId = id.replace(/^tech_/, "");
+  const imgSrc = eraId ? `/images/technos/${eraId}/${rawId}.webp` : null;
+
+  // mt-3 on wrapper to allow image overflow upward (handled by ReactFlow node wrapper via style)
   return (
-    <div
-      className={cn(
-        // ✅ Fixed width
-        "relative border rounded-sm px-2 py-2 w-[180px]",
-        "flex items-center gap-2",
-        "transition-all duration-200 cursor-pointer",
-        // Completed = green
-        isCompleted
-          ? "bg-green-500/15 border-green-500/50"
-          : "bg-card border-border",
-        isSelected &&
-          "border-primary shadow-xl scale-105 ring-2 ring-primary/40",
-        isConnected &&
-          "border-blue-400/70 ring-1 ring-blue-400/30 bg-blue-500/5",
-        isDimmed && "opacity-25",
-        !isCompleted &&
-          !isSelected &&
-          !isConnected &&
-          !isDimmed &&
-          isSelectMode &&
-          "hover:border-primary/50",
-        isPathFrom &&
-          "border-orange-400 ring-2 ring-orange-400/50 bg-orange-500/10 scale-105",
-        isPathTo &&
-          "border-orange-400 ring-2 ring-orange-400/50 bg-orange-500/10 scale-105",
-        isOnPath && "border-orange-300/70 bg-orange-500/5",
-        isPathDimmed && "opacity-20",
-        isPicking && "hover:border-orange-400/70 hover:bg-orange-500/5",
+    <div className="relative mt-3">
+      {/* Image absolute — déborde au-dessus du node */}
+      {imgSrc && (
+        <div className="absolute -top-1 left-2.5 size-11 z-10 pointer-events-none">
+          <Image
+            src={imgSrc}
+            alt={name}
+            fill
+            className={cn("object-contain drop-shadow-lg")}
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+        </div>
       )}
-    >
-      <Handle
-        type="target"
-        position={Position.Left}
-        className="!bg-primary !border !border-background"
-      />
 
-      {/* ✅ Checkbox */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onToggleComplete(id);
-        }}
-        className={cn(
-          "shrink-0 size-4 rounded border-2 flex items-center justify-center transition-all",
-          isCompleted
-            ? "bg-green-500 border-green-500"
-            : "border-muted-foreground/40 hover:border-green-400",
-        )}
-      >
-        {isCompleted && <Check className="size-2.5 text-white stroke-[3]" />}
-      </button>
-
-      {/* Name */}
+      {/* Node card */}
       <div
         className={cn(
-          "font-semibold text-xs text-left leading-tight flex-1 truncate",
-          isCompleted && "text-green-400",
+          "relative border rounded-md overflow-visible",
+          "w-[200px] h-12",
+          "flex items-center",
+          "transition-all duration-200 cursor-pointer",
+          isCompleted
+            ? "bg-green-600/15 border-green-600/50 dark:bg-green-950/60 dark:border-green-500/50"
+            : "bg-card border-border",
+          isSelected &&
+            "border-primary shadow-xl scale-105 ring-2 ring-primary/40",
+          isConnected &&
+            "border-blue-500/70 ring-1 ring-blue-500/30 bg-blue-500/10 dark:border-blue-400/70 dark:ring-blue-400/30 dark:bg-blue-950/30",
+          isDimmed && "opacity-20",
+          !isCompleted &&
+            !isSelected &&
+            !isConnected &&
+            !isDimmed &&
+            isSelectMode &&
+            "hover:border-primary/50",
+          isPathFrom &&
+            "border-orange-500 ring-2 ring-orange-500/50 bg-orange-500/15 dark:bg-orange-950/30 scale-105",
+          isPathTo &&
+            "border-orange-500 ring-2 ring-orange-500/50 bg-orange-500/15 dark:bg-orange-950/30 scale-105",
+          isOnPath &&
+            "border-orange-400/60 bg-orange-500/10 dark:bg-orange-950/20",
+          isPathDimmed && "opacity-15",
+          isPicking &&
+            "hover:border-orange-500/70 hover:bg-orange-500/10 dark:hover:border-orange-400/70 dark:hover:bg-orange-950/20",
         )}
       >
-        {name}
+        <Handle
+          type="target"
+          position={Position.Left}
+          className="!bg-primary !border !border-background"
+        />
+
+        {/* Spacer pour laisser place à l'image absolute */}
+        <div className="shrink-0 w-16" />
+
+        {/* Nom */}
+        <div className="flex-1 min-w-0 w-full py-2 pr-2">
+          <span
+            className={cn(
+              "font-semibold text-[11px] leading-tight line-clamp-2 block",
+              isCompleted && "text-green-700 dark:text-green-400",
+              isPathFrom && "text-orange-600 dark:text-orange-300",
+              isPathTo && "text-orange-600 dark:text-orange-300",
+            )}
+          >
+            {name}
+          </span>
+        </div>
+
+        {/* Checkbox — div, pas button imbriqué dans un div cliquable ReactFlow */}
+        <div
+          role="checkbox"
+          aria-checked={isCompleted}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleComplete(id);
+          }}
+          className={cn(
+            "shrink-0 mr-2 size-5 rounded border-2 flex items-center justify-center transition-all cursor-pointer",
+            isCompleted
+              ? "bg-green-500 border-green-500"
+              : "border-muted-foreground/40 hover:border-green-600 dark:hover:border-green-400",
+          )}
+        >
+          {isCompleted && <Check className="size-2.5 text-white stroke-[3]" />}
+        </div>
+
+        {/* Allied crest */}
+        {allied && (
+          <div className="absolute -top-2 -right-2 z-20 pointer-events-none">
+            <Image
+              src={getCityCrestIconLocal(allied)}
+              alt={allied}
+              width={18}
+              height={18}
+              className="rounded-sm shadow-md ring-1 ring-background"
+            />
+          </div>
+        )}
+
+        {/* Path A/B badge */}
+        {isPathFrom && (
+          <div className="absolute -top-2 -left-2 z-20 bg-orange-500 text-white text-[10px] size-5 flex items-center justify-center rounded-full font-bold shadow">
+            A
+          </div>
+        )}
+        {isPathTo && (
+          <div className="absolute -top-2 -left-2 z-20 bg-orange-500 text-white text-[10px] size-5 flex items-center justify-center rounded-full font-bold shadow">
+            B
+          </div>
+        )}
+
+        <Handle
+          type="source"
+          position={Position.Right}
+          className="!bg-primary !border-2 !border-background"
+        />
       </div>
-
-      {allied && (
-        <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-medium shadow-md">
-          {allied}
-        </div>
-      )}
-      {isPathFrom && (
-        <div className="absolute -top-2 -left-2 bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow">
-          A
-        </div>
-      )}
-      {isPathTo && (
-        <div className="absolute -top-2 -left-2 bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow">
-          B
-        </div>
-      )}
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        className="!bg-primary !border-2 !border-background"
-      />
     </div>
   );
 }
@@ -246,6 +291,7 @@ interface TechTreeDesktopProps {
 }
 
 export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
+  const selectedEraId = useSelectedEraId();
   const [selectedTech, setSelectedTech] = useState<TechnoData | null>(null);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [mode, setMode] = useState<Mode>("select");
@@ -264,7 +310,6 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
       .toArray();
   }, [technologies]);
 
-  // ✅ Completed IDs set
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
@@ -273,13 +318,10 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
     return ids;
   }, [technosInDB]);
 
-  // ✅ Toggle completion with ancestor cascade
   const onToggleComplete = useCallback(
     async (techId: string) => {
       const db = getWikiDB();
       const isCurrentlyCompleted = completedIds.has(techId);
-
-      const now = Date.now();
       if (!isCurrentlyCompleted) {
         const idsToComplete = [
           techId,
@@ -362,7 +404,6 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
             animated: true,
             zIndex: 10,
           };
-        // Still show green for completed edges even when dimmed
         const bothCompleted =
           completedIds.has(edge.source) && completedIds.has(edge.target);
         if (bothCompleted)
@@ -382,7 +423,6 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
         };
       });
     }
-    // Default: green if both nodes completed, grey otherwise
     return baseEdges.map((edge) => {
       const bothCompleted =
         completedIds.has(edge.source) && completedIds.has(edge.target);
@@ -496,6 +536,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
       pathNodeIds,
       completedIds,
       onToggleComplete,
+      eraId: selectedEraId ?? "",
     }),
     [
       selectedNodeId,
@@ -506,6 +547,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
       pathNodeIds,
       completedIds,
       onToggleComplete,
+      selectedEraId,
     ],
   );
 
@@ -513,7 +555,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
 
   return (
     <SelectionContext.Provider value={ctx}>
-      <div className="w-full h-[600px] border border-border rounded-lg overflow-hidden bg-background-300/20">
+      <div className="w-full h-[calc(100vh-200px)] min-h-[500px] border border-border rounded-lg overflow-hidden bg-background-300/20">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -524,7 +566,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           onPaneClick={onPaneClick}
           nodeTypes={nodeTypes}
           fitView
-          minZoom={0.5}
+          minZoom={0.3}
           maxZoom={1.5}
           nodesDraggable={false}
           nodesConnectable={false}
@@ -541,17 +583,17 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
               <>
                 <button
                   onClick={() => setMode("ancestors-pick")}
-                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-border rounded-lg px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
                   <Target className="size-3.5" />
-                  Prérequis d'une techno
+                  Prerequisites
                 </button>
                 <button
                   onClick={() => setMode("path-pick-from")}
-                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-border rounded-lg px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
                   <GitFork className="size-3.5" />
-                  Chemin A → B
+                  Path A → B
                 </button>
               </>
             ) : (
@@ -560,7 +602,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
                 className="flex items-center gap-1.5 text-xs bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
               >
                 <X className="size-3.5" />
-                Annuler
+                Cancel
               </button>
             )}
           </Panel>
@@ -570,26 +612,25 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
               <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-xs shadow text-center">
                 {mode === "ancestors-pick" && (
                   <p className="text-orange-400 font-medium">
-                    Cliquez sur la techno{" "}
-                    <span className="font-bold">cible</span>
+                    Click the <span className="font-bold">target</span> tech
                   </p>
                 )}
                 {mode === "path-pick-from" && (
                   <p className="text-orange-400 font-medium">
-                    Cliquez sur le <span className="font-bold">départ</span> (A)
+                    Click the <span className="font-bold">start</span> (A)
                   </p>
                 )}
                 {mode === "path-pick-to" && (
                   <p className="text-orange-400 font-medium">
                     <span className="text-muted-foreground font-normal">
-                      De{" "}
+                      From{" "}
                     </span>
                     {pathFromTech?.name}
                     <span className="text-muted-foreground font-normal">
                       {" "}
                       →{" "}
                     </span>
-                    <span className="font-bold">arrivée</span> (B)
+                    <span className="font-bold">destination</span> (B)
                   </p>
                 )}
               </div>
@@ -598,7 +639,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           {isPathMode && !pathFound && (
             <Panel position="bottom-center" className="mb-2">
               <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-xs shadow">
-                <p className="text-red-400 font-medium">Aucun chemin trouvé</p>
+                <p className="text-red-400 font-medium">No path found</p>
               </div>
             </Panel>
           )}
@@ -607,11 +648,11 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
               <div className="flex items-center gap-4 bg-background/90 border border-border rounded-lg px-3 py-1.5 text-xs shadow">
                 <div className="flex items-center gap-1.5">
                   <div className="w-6 h-0.5 bg-blue-500" />
-                  <span className="text-muted-foreground">Prérequis</span>
+                  <span className="text-muted-foreground">Prerequisites</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <div className="w-6 h-0.5 bg-green-500" />
-                  <span className="text-muted-foreground">Débloque</span>
+                  <span className="text-muted-foreground">Unlocks</span>
                 </div>
               </div>
             </Panel>
