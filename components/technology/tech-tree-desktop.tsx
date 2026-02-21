@@ -31,7 +31,9 @@ import {
   getOrderedTechs,
 } from "@/lib/path-utils";
 import Image from "next/image";
-import { useSelectedEraId } from "@/lib/stores/technology-page-store";
+import { ABBR_TO_ERA_ID } from "@/lib/era-mappings";
+import { useBuildingSelections } from "@/hooks/use-building-selections";
+import { getGoodNameFromPriorityEra, getItemIconLocal } from "@/lib/utils";
 
 // ============================================================
 // Helper: collect all ancestor IDs (for cascade completion)
@@ -96,9 +98,9 @@ interface SelectionCtx {
   pathFromId: string | null;
   pathToId: string | null;
   pathNodeIds: Set<string>;
+  ancestorsOfFrom: Set<string>;
   completedIds: Set<string>;
   onToggleComplete: (id: string) => void;
-  eraId: string;
 }
 
 const SelectionContext = createContext<SelectionCtx>({
@@ -108,9 +110,9 @@ const SelectionContext = createContext<SelectionCtx>({
   pathFromId: null,
   pathToId: null,
   pathNodeIds: new Set(),
+  ancestorsOfFrom: new Set(),
   completedIds: new Set(),
   onToggleComplete: () => {},
-  eraId: "",
 });
 
 // ============================================================
@@ -124,10 +126,11 @@ function TechNodeWithContext({ id, data, selected }: any) {
     pathFromId,
     pathToId,
     pathNodeIds,
+    ancestorsOfFrom,
     completedIds,
     onToggleComplete,
-    eraId,
   } = useContext(SelectionContext);
+  const userSelections = useBuildingSelections();
   const { name, allied, costs } = data;
 
   const isCompleted = completedIds.has(id);
@@ -145,14 +148,46 @@ function TechNodeWithContext({ id, data, selected }: any) {
     !isPathFrom &&
     !isPathTo;
   const isPathDimmed =
-    (mode === "path-result" || mode === "ancestors-result") &&
-    !pathNodeIds.has(id);
+    ((mode === "path-result" || mode === "ancestors-result") &&
+      !pathNodeIds.has(id)) ||
+    (mode === "path-pick-to" && ancestorsOfFrom.has(id));
   const isPicking =
     mode === "path-pick-from" ||
     mode === "path-pick-to" ||
     mode === "ancestors-pick";
 
-  const imgSrc = eraId ? `/images/technos/${eraId}/${id}.webp` : null;
+  // Derive era folder from tech id: "ba_1" -> "ba" -> "bronze_age"
+  const abbr = id.split("_")[0];
+  const eraFolder = ABBR_TO_ERA_ID[abbr] ?? abbr;
+
+  // Resolve Primary/Secondary/Tertiary Workshop → actual good name (e.g. "gold_laurel")
+  const workshopMatch = name.match(
+    /^(Primary|Secondary|Tertiary)\s+Workshop$/i,
+  );
+  const resolvedGoodName = workshopMatch
+    ? getGoodNameFromPriorityEra(
+        workshopMatch[1],
+        abbr.toUpperCase(),
+        userSelections,
+      )
+    : null;
+
+  // "gold_laurel" → "Gold Laurel"
+  const formatGoodName = (raw: string) =>
+    raw.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const displayName = resolvedGoodName
+    ? formatGoodName(resolvedGoodName)
+    : name;
+  // Large goods images will live in /images/goods-large/ once ready — falls back to badge icon for now
+  const imgSrc = resolvedGoodName
+    ? `/images/goods-large/${resolvedGoodName}.webp`
+    : eraFolder
+      ? `/images/technos/${eraFolder}/${id}.webp`
+      : null;
+  const imgFallback = resolvedGoodName
+    ? getItemIconLocal(resolvedGoodName)
+    : null;
 
   // mt-3 on wrapper to allow image overflow upward (handled by ReactFlow node wrapper via style)
   return (
@@ -162,11 +197,16 @@ function TechNodeWithContext({ id, data, selected }: any) {
         <div className="absolute -top-1 left-2.5 size-11 z-10 pointer-events-none">
           <Image
             src={imgSrc}
-            alt={name}
+            alt={displayName}
             fill
             className={cn("object-contain drop-shadow-lg")}
             onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
+              const target = e.target as HTMLImageElement;
+              if (imgFallback && target.src !== imgFallback) {
+                target.src = imgFallback;
+              } else {
+                target.style.display = "none";
+              }
             }}
           />
         </div>
@@ -223,7 +263,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
               isPathTo && "text-orange-600 dark:text-orange-300",
             )}
           >
-            {name}
+            {displayName}
           </span>
           <span className="font-semibold text-[9px] text-muted-foreground">
             {costs.research_points} RP
@@ -286,23 +326,100 @@ function TechNodeWithContext({ id, data, selected }: any) {
 const nodeTypes = { custom: TechNodeWithContext };
 
 // ============================================================
+// External control interface — used by TechTreeMobile to share state
+// ============================================================
+export interface TechTreeExternalControl {
+  mode: Mode;
+  setMode: (m: Mode) => void;
+  pathFromId: string | null;
+  setPathFromId: (id: string | null) => void;
+  pathToId: string | null;
+  setPathToId: (id: string | null) => void;
+  pathRawNodeIds: Set<string>;
+  setPathRawNodeIds: (s: Set<string>) => void;
+  pathRawEdgeIds: Set<string>;
+  setPathRawEdgeIds: (s: Set<string>) => void;
+  pathFound: boolean;
+  setPathFound: (f: boolean) => void;
+  excludeCompleted: boolean;
+  setExcludeCompleted: (v: boolean | ((prev: boolean) => boolean)) => void;
+  selectedTech: TechnoData | null;
+  setSelectedTech: (t: TechnoData | null) => void;
+  selectedNodeId: string | null;
+  setSelectedNodeId: (id: string | null) => void;
+  onOpenPathDrawer: () => void;
+}
+
+// ============================================================
 // Main
 // ============================================================
 interface TechTreeDesktopProps {
   technologies: TechnoData[];
+  externalControl?: TechTreeExternalControl;
+  hideControls?: boolean;
 }
 
-export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
-  const selectedEraId = useSelectedEraId();
-  const [selectedTech, setSelectedTech] = useState<TechnoData | null>(null);
-  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
-  const [mode, setMode] = useState<Mode>("select");
-  const [pathFromId, setPathFromId] = useState<string | null>(null);
-  const [pathToId, setPathToId] = useState<string | null>(null);
-  const [pathRawNodeIds, setPathRawNodeIds] = useState(new Set<string>());
-  const [pathRawEdgeIds, setPathRawEdgeIds] = useState(new Set<string>());
-  const [pathFound, setPathFound] = useState(true);
-  const [excludeCompleted, setExcludeCompleted] = useState(true);
+export function TechTreeDesktop({
+  technologies,
+  externalControl,
+  hideControls = false,
+}: TechTreeDesktopProps) {
+  const isExternal = !!externalControl;
+
+  // Internal state — only used in standalone desktop mode
+  const [_selectedTech, _setSelectedTech] = useState<TechnoData | null>(null);
+  const [_selectedNodeId, _setSelectedNodeId] = useState<string | null>(null);
+  const [_mode, _setMode] = useState<Mode>("select");
+  const [_pathFromId, _setPathFromId] = useState<string | null>(null);
+  const [_pathToId, _setPathToId] = useState<string | null>(null);
+  const [_pathRawNodeIds, _setPathRawNodeIds] = useState(new Set<string>());
+  const [_pathRawEdgeIds, _setPathRawEdgeIds] = useState(new Set<string>());
+  const [_pathFound, _setPathFound] = useState(true);
+  const [_excludeCompleted, _setExcludeCompleted] = useState(true);
+
+  // Route to external or internal state
+  const selectedTech = isExternal
+    ? externalControl.selectedTech
+    : _selectedTech;
+  const setSelectedTech = isExternal
+    ? externalControl.setSelectedTech
+    : _setSelectedTech;
+  const selectedNodeId = isExternal
+    ? externalControl.selectedNodeId
+    : _selectedNodeId;
+  const setSelectedNodeId = isExternal
+    ? externalControl.setSelectedNodeId
+    : _setSelectedNodeId;
+  const mode = isExternal ? externalControl.mode : _mode;
+  const setMode = isExternal ? externalControl.setMode : _setMode;
+  const pathFromId = isExternal ? externalControl.pathFromId : _pathFromId;
+  const setPathFromId = isExternal
+    ? externalControl.setPathFromId
+    : _setPathFromId;
+  const pathToId = isExternal ? externalControl.pathToId : _pathToId;
+  const setPathToId = isExternal ? externalControl.setPathToId : _setPathToId;
+  const pathRawNodeIds = isExternal
+    ? externalControl.pathRawNodeIds
+    : _pathRawNodeIds;
+  const setPathRawNodeIds = isExternal
+    ? externalControl.setPathRawNodeIds
+    : _setPathRawNodeIds;
+  const pathRawEdgeIds = isExternal
+    ? externalControl.pathRawEdgeIds
+    : _pathRawEdgeIds;
+  const setPathRawEdgeIds = isExternal
+    ? externalControl.setPathRawEdgeIds
+    : _setPathRawEdgeIds;
+  const pathFound = isExternal ? externalControl.pathFound : _pathFound;
+  const setPathFound = isExternal
+    ? externalControl.setPathFound
+    : _setPathFound;
+  const excludeCompleted = isExternal
+    ? externalControl.excludeCompleted
+    : _excludeCompleted;
+  const setExcludeCompleted = isExternal
+    ? externalControl.setExcludeCompleted
+    : _setExcludeCompleted;
 
   const technosInDB = useLiveQuery(async () => {
     const db = getWikiDB();
@@ -554,6 +671,12 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
   const pathFromTech = technologies.find((t) => t.id === pathFromId) ?? null;
   const pathToTech = technologies.find((t) => t.id === pathToId) ?? null;
 
+  // Ancestors of A — dimmed during pick-to so user sees only forward candidates
+  const ancestorsOfFrom = useMemo(() => {
+    if (!pathFromId || mode !== "path-pick-to") return new Set<string>();
+    return new Set(collectAncestorIds(pathFromId, technologies));
+  }, [pathFromId, mode, technologies]);
+
   const ctx = useMemo(
     () => ({
       selectedNodeId: mode === "select" ? selectedNodeId : null,
@@ -562,9 +685,9 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
       pathFromId,
       pathToId,
       pathNodeIds,
+      ancestorsOfFrom,
       completedIds,
       onToggleComplete,
-      eraId: selectedEraId ?? "",
     }),
     [
       selectedNodeId,
@@ -573,9 +696,9 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
       pathFromId,
       pathToId,
       pathNodeIds,
+      ancestorsOfFrom,
       completedIds,
       onToggleComplete,
-      selectedEraId,
     ],
   );
 
@@ -583,7 +706,7 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
 
   return (
     <SelectionContext.Provider value={ctx}>
-      <div className="w-full h-[calc(100vh-200px)] min-h-[500px] border border-border rounded-lg overflow-hidden bg-background-300/20">
+      <div className="w-full h-[calc(100vh-200px)] min-h-[500px] border border-border md:rounded-lg overflow-hidden bg-background-300/20">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -601,10 +724,12 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
           elementsSelectable={true}
           proOptions={{ hideAttribution: true }}
         >
-          <Controls
-            showInteractive={false}
-            className="[&>button]:bg-background! dark:[&>button]:bg-background-200! dark:[&>button]:text-white! [&>button]:text-black! [&>button]:border-gray-400!"
-          />
+          {!hideControls && (
+            <Controls
+              showInteractive={false}
+              className="[&>button]:bg-background! dark:[&>button]:bg-background-200! dark:[&>button]:text-white! [&>button]:text-black! [&>button]:border-gray-400!"
+            />
+          )}
 
           <Panel position="top-left" className="m-2 flex flex-col gap-1.5">
             {mode === "select" ? (
@@ -710,7 +835,8 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
               </div>
             </Panel>
           )}
-          {selectedTech && mode === "select" && (
+          {/* Side panels — hidden in mobile/external mode (FAB drawer is used instead) */}
+          {!isExternal && selectedTech && mode === "select" && (
             <Panel
               position="top-right"
               className="m-2 w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
@@ -724,10 +850,10 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
               />
             </Panel>
           )}
-          {isPathMode && pathFound && pathToTech && (
+          {!isExternal && isPathMode && pathFound && pathToTech && (
             <Panel
               position="top-right"
-              className="m-2 hidden w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
+              className="m-2 w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
             >
               <TechPathPanel
                 fromTech={mode === "ancestors-result" ? null : pathFromTech}
@@ -735,6 +861,17 @@ export function TechTreeDesktop({ technologies }: TechTreeDesktopProps) {
                 pathTechs={pathTechs}
                 onClose={reset}
               />
+            </Panel>
+          )}
+          {/* In mobile/external mode: FAB trigger on result */}
+          {isExternal && isPathMode && pathFound && pathToTech && (
+            <Panel position="bottom-center" className="mb-16">
+              <button
+                onClick={() => externalControl.onOpenPathDrawer()}
+                className="flex items-center gap-2 text-xs bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
+              >
+                View total cost
+              </button>
             </Panel>
           )}
         </ReactFlow>

@@ -4,7 +4,10 @@ import React, { useMemo, useState, useCallback } from "react";
 import { TechCard } from "./tech-card";
 import { TechDetailsModal } from "./tech-details-modal";
 import { TechPathDrawer } from "./tech-path-drawer";
-import { TechTreeDesktop } from "./tech-tree-desktop";
+import {
+  TechTreeDesktop,
+  type TechTreeExternalControl,
+} from "./tech-tree-desktop";
 import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB } from "@/lib/db/schema";
@@ -15,7 +18,6 @@ import {
   getSubgraphBetween,
   getOrderedTechs,
 } from "@/lib/path-utils";
-import { useSelectedEraId } from "@/lib/stores/technology-page-store";
 
 type Mode =
   | "select"
@@ -30,12 +32,14 @@ interface TechTreeMobileProps {
 }
 
 export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
-  const selectedEraId = useSelectedEraId();
   const [activeTab, setActiveTab] = useState<"list" | "graph">("list");
 
+  // ── Shared selection state (persists across tab changes) ──────────────────
   const [selectedTech, setSelectedTech] = useState<TechnoData | null>(null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // ── Shared path/prereq state ──────────────────────────────────────────────
   const [mode, setMode] = useState<Mode>("select");
   const [pathFromId, setPathFromId] = useState<string | null>(null);
   const [pathToId, setPathToId] = useState<string | null>(null);
@@ -108,6 +112,8 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
     setPathRawEdgeIds(new Set());
     setPathFound(true);
     setIsPathDrawerOpen(false);
+    setSelectedTech(null);
+    setSelectedNodeId(null);
   }, []);
 
   const applyResult = useCallback(
@@ -239,10 +245,56 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
   const pathToTech = technologies.find((t) => t.id === pathToId) ?? null;
   const isResultMode = mode === "path-result" || mode === "ancestors-result";
 
+  // Ancestors of A — dimmed during pick-to so user sees only forward candidates
+  const ancestorsOfFrom = useMemo(() => {
+    if (!pathFromId || mode !== "path-pick-to") return new Set<string>();
+    return new Set(collectAncestorIds(pathFromId));
+  }, [pathFromId, mode, collectAncestorIds]);
+
+  // ── External control object passed to TechTreeDesktop in graph tab ─────────
+  // This wires the shared state into the desktop component when used in mobile
+  const externalControl: TechTreeExternalControl = useMemo(
+    () => ({
+      mode: mode as any,
+      setMode: setMode as any,
+      pathFromId,
+      setPathFromId,
+      pathToId,
+      setPathToId,
+      pathRawNodeIds,
+      setPathRawNodeIds,
+      pathRawEdgeIds,
+      setPathRawEdgeIds,
+      pathFound,
+      setPathFound,
+      excludeCompleted,
+      setExcludeCompleted,
+      selectedTech,
+      setSelectedTech,
+      selectedNodeId,
+      setSelectedNodeId,
+      onOpenPathDrawer: () => setIsPathDrawerOpen(true),
+    }),
+    [
+      mode,
+      pathFromId,
+      pathToId,
+      pathRawNodeIds,
+      pathRawEdgeIds,
+      pathFound,
+      excludeCompleted,
+      selectedTech,
+      selectedNodeId,
+    ],
+  );
+
+  // FAB visible on both tabs when prereq/path is active
+  const showFAB = isResultMode && pathFound && pathToTech;
+
   return (
     <>
       {/* ── Sticky header ── */}
-      <div className="sticky top-0 z-30 bg-background border-y border-border">
+      <div className="sticky top-0 z-30 bg-background border-y border-border -mx-2 sm:-mx-4">
         {/* Tabs — underline style */}
         <div className="flex">
           <button
@@ -271,22 +323,22 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
           </button>
         </div>
 
-        {/* Toolbar — only on list tab */}
+        {/* Toolbar — visible on list tab only (graph tab has its own Panel buttons) */}
         {activeTab === "list" && (
-          <div className="px-3 py-2 border-t border-border">
+          <div className="p-2 border-t border-border">
             {mode === "select" ? (
               /* Normal mode: 2 full-width buttons side by side */
               <div className="flex gap-2">
                 <button
                   onClick={() => setMode("ancestors-pick")}
-                  className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-border rounded-lg py-2 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-border rounded-md py-2 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
                   <Target className="size-3.5 shrink-0" />
                   Prerequisites
                 </button>
                 <button
                   onClick={() => setMode("path-pick-from")}
-                  className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-border rounded-lg py-2 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-xs border border-border rounded-md py-2 hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
                   <GitFork className="size-3.5 shrink-0" />
                   Path A → B
@@ -374,7 +426,7 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
 
       {/* ── Techno List tab ── */}
       {activeTab === "list" && (
-        <div className="space-y-7 pt-5 pb-10">
+        <div className="space-y-7 pt-5 pb-24">
           {groupedByColumn.map(([columnIndex, techs]) => (
             <div key={columnIndex} className="space-y-1.5">
               <div className="text-xs font-semibold text-muted-foreground/60 px-0.5">
@@ -389,10 +441,11 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
                     pathNodeIds.has(tech.id) &&
                     !isPathFrom &&
                     !isPathTo;
+                  // During pick-to: only dim ancestors of A (they're unreachable forward)
+                  // During result: dim everything not on the path
                   const isPathDimmed =
-                    (mode === "path-pick-to" || isResultMode) &&
-                    !pathNodeIds.has(tech.id) &&
-                    !isPathFrom;
+                    (mode === "path-pick-to" && ancestorsOfFrom.has(tech.id)) ||
+                    (isResultMode && !pathNodeIds.has(tech.id) && !isPathFrom);
 
                   return (
                     <div
@@ -421,7 +474,6 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
                       )}
                       <TechCard
                         tech={tech}
-                        eraId={selectedEraId ?? ""}
                         isCompleted={getCompletionStatus(tech.id)}
                         onToggleComplete={handleToggleComplete}
                         onShowDetails={
@@ -440,10 +492,15 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       {/* ── Research Tree tab ── */}
       {activeTab === "graph" && (
         <div className="h-[calc(100vh-200px)] min-h-[400px]">
-          <TechTreeDesktop technologies={technologies} />
+          <TechTreeDesktop
+            technologies={technologies}
+            externalControl={externalControl}
+            hideControls
+          />
         </div>
       )}
 
+      {/* ── Modals ── */}
       <TechDetailsModal
         tech={selectedTech}
         open={isModalOpen}
@@ -458,8 +515,8 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
         pathTechs={pathTechs}
       />
 
-      {/* FAB — visible only in result mode on list tab */}
-      {activeTab === "list" && isResultMode && pathFound && pathToTech && (
+      {/* ── FAB — visible on BOTH tabs when prereq/path result is active ── */}
+      {showFAB && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
           <button
             onClick={() => setIsPathDrawerOpen(true)}

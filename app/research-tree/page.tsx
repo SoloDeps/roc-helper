@@ -273,7 +273,7 @@ export default function ResearchTreePage() {
       {isEmpty ? (
         <>
           {/* Header identique pour cohérence visuelle avec/sans contenu */}
-          <div className="pt-4 flex gap-1.5 items-end w-full">
+          <div className="py-2 md:pt-4 flex gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
               <div className="w-full sm:w-60">
                 <ResponsiveSelect
@@ -306,7 +306,7 @@ export default function ResearchTreePage() {
       ) : (
         <>
           {/* ── Row : Era select + Add New Era + [spacer] + Era Stats ── */}
-          <div className="pt-4 flex gap-1.5 items-end w-full">
+          <div className="py-2 md:pt-4 flex gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
               <div className="w-full sm:w-60">
                 <ResponsiveSelect

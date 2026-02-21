@@ -2,21 +2,58 @@
 
 import { memo } from "react";
 import { Check } from "lucide-react";
-import { cn, getCityCrestIconLocal } from "@/lib/utils";
+import {
+  cn,
+  getCityCrestIconLocal,
+  getGoodNameFromPriorityEra,
+  getItemIconLocal,
+} from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import Image from "next/image";
+import { ABBR_TO_ERA_ID } from "@/lib/era-mappings";
+import { useBuildingSelections } from "@/hooks/use-building-selections";
 
 interface TechCardProps {
   tech: TechnoData;
-  eraId: string;
   isCompleted: boolean;
   onToggleComplete: (techId: string) => void;
   onShowDetails: (tech: TechnoData) => void;
 }
 
 export const TechCard = memo<TechCardProps>(
-  ({ tech, eraId, isCompleted, onToggleComplete, onShowDetails }) => {
-    const imgSrc = `/images/technos/${eraId}/${tech.id}.webp`;
+  ({ tech, isCompleted, onToggleComplete, onShowDetails }) => {
+    const userSelections = useBuildingSelections();
+
+    // Derive era folder from tech id: "ba_1" -> "ba" -> "bronze_age"
+    const abbr = tech.id.split("_")[0];
+    const eraFolder = ABBR_TO_ERA_ID[abbr] ?? abbr;
+
+    // Resolve Primary/Secondary/Tertiary Workshop → actual good name (e.g. "gold_laurel")
+    const workshopMatch = tech.name.match(
+      /^(Primary|Secondary|Tertiary)\s+Workshop$/i,
+    );
+    const resolvedGoodName = workshopMatch
+      ? getGoodNameFromPriorityEra(
+          workshopMatch[1],
+          abbr.toUpperCase(),
+          userSelections,
+        )
+      : null;
+
+    // "gold_laurel" → "Gold Laurel"
+    const formatGoodName = (raw: string) =>
+      raw.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+    const displayName = resolvedGoodName
+      ? formatGoodName(resolvedGoodName)
+      : tech.name;
+    // Large goods images will live in /images/goods-large/ once ready — falls back to badge icon for now
+    const imgSrc = resolvedGoodName
+      ? `/images/goods-large/${resolvedGoodName}.webp`
+      : `/images/technos/${eraFolder}/${tech.id}.webp`;
+    const imgFallback = resolvedGoodName
+      ? getItemIconLocal(resolvedGoodName)
+      : null;
 
     return (
       /* mt-3 laisse de la place pour l'image qui déborde vers le haut */
@@ -25,14 +62,16 @@ export const TechCard = memo<TechCardProps>(
         <div className="absolute -top-1.5 left-2 size-14 z-10 pointer-events-none">
           <Image
             src={imgSrc}
-            alt={tech.name}
+            alt={displayName}
             fill
-            className={cn(
-              "object-contain drop-shadow-lg",
-              // isCompleted && "opacity-60 saturate-50",
-            )}
+            className={cn("object-contain drop-shadow-lg")}
             onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
+              const target = e.target as HTMLImageElement;
+              if (imgFallback && target.src !== imgFallback) {
+                target.src = imgFallback;
+              } else {
+                target.style.display = "none";
+              }
             }}
           />
         </div>
@@ -58,7 +97,7 @@ export const TechCard = memo<TechCardProps>(
                 isCompleted && "text-green-700 dark:text-green-400",
               )}
             >
-              {tech.name}
+              {displayName}
             </span>
 
             <div className="flex items-center gap-2 mt-0.5">
