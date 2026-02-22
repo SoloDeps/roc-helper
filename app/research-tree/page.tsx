@@ -197,7 +197,7 @@ function EraStatsButton({
           <DrawerTrigger asChild>
             <Button variant="outline" className="gap-1.5">
               <BarChart2 className="size-4" />
-              Calculate
+              <span className="max-[420px]:hidden">Calculate</span>
             </Button>
           </DrawerTrigger>
           <DrawerContent className="p-0 gap-0 flex flex-col overflow-hidden h-[500px]">
@@ -490,7 +490,7 @@ export default function ResearchTreePage() {
               <div className="md:hidden">
                 <Button variant="outline" className="gap-1.5" disabled>
                   <BarChart2 className="size-4" />
-                  Calculate
+                  <span className="max-[410px]:hidden">Calculate</span>
                 </Button>
               </div>
               <div className="hidden md:flex">
