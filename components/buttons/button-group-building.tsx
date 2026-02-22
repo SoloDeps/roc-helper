@@ -39,7 +39,7 @@ import {
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useUIStore } from "@/lib/stores/ui-store";
-import { getWikiDB } from "@/lib/db/schema";
+import { resetWikiDB } from "@/lib/db/schema";
 import { hideAllEntities, showAllEntities } from "@/lib/db/hide-show-utils";
 import { ButtonGroup } from "../ui/button-group";
 
@@ -85,22 +85,13 @@ export function ButtonGroupBuilding() {
 
   const handleDeleteAll = async () => {
     try {
-      const db = getWikiDB();
-
-      await Promise.all([
-        db.buildings.clear(),
-        db.technos.clear(),
-        db.ottomanAreas.clear(),
-        db.ottomanTradePosts.clear(),
-      ]);
-
+      await resetWikiDB();
       invalidateAll();
       toast.success("All data deleted successfully");
     } catch (error) {
       console.error("Failed to delete all data:", error);
       toast.error("Failed to delete all data");
     } finally {
-      // ✅ Fermer les deux drawers
       setDeleteDialogOpen(false);
       setDrawerOpen(false);
     }

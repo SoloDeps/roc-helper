@@ -30,18 +30,6 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        {pathname !== "/research-tree" && (
-          <Button
-            variant="outline"
-            size="sm"
-            className="hidden md:flex"
-            asChild
-          >
-            <Link href="/research-tree">
-              <span>Research Tree</span>
-            </Link>
-          </Button>
-        )}
         {pathname !== "/calculator" && (
           <Button
             variant="outline"
@@ -51,6 +39,18 @@ export function SiteHeader() {
           >
             <Link href="/calculator">
               <span>Calculator</span>
+            </Link>
+          </Button>
+        )}
+        {pathname !== "/research-tree" && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden md:flex"
+            asChild
+          >
+            <Link href="/research-tree">
+              <span>Research Tree</span>
             </Link>
           </Button>
         )}

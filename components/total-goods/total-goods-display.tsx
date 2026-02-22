@@ -497,7 +497,7 @@ export function TotalGoodsDisplay({
   // (les entités hidden sont exclues du calcul, donc totals = vide aussi)
   if (allDataHidden) {
     return (
-      <div className="p-8 size-full m-auto flex items-center justify-center bg-background-200">
+      <div className="p-3 size-full m-auto flex items-center justify-center bg-background-200">
         <div className="-mt-12">
           <EmptyOutline perso="male2" type="all-hidden" />
         </div>
@@ -508,7 +508,7 @@ export function TotalGoodsDisplay({
   // ✅ AMÉLIORATION: EmptyCard apparaît seulement après le chargement
   if (!hasAnyResources) {
     return (
-      <div className="p-8 size-full m-auto flex items-center justify-center bg-background-200">
+      <div className="p-3 size-full m-auto flex items-center justify-center bg-background-200">
         <div className="-mt-12">
           <EmptyOutline perso="female" type="total" />
         </div>

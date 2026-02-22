@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 interface WorkshopModalProps {
   variant?: "default" | "outline" | "ghost";
+  btnClass?: string;
 }
 
 // ============================================================================
@@ -273,7 +274,7 @@ const WorkshopContent = memo(() => {
   return (
     <div className="flex flex-col h-full max-h-full">
       {/* Header */}
-      <div className="flex-shrink-0 sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background px-4 py-1.5 md:py-3">
+      <div className="shrink-0 sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background px-4 py-1.5 md:py-3">
         <h2 className="text-base font-semibold">Manage Workshops</h2>
         <p className="text-sm text-muted-foreground md:mt-1">
           Update your workshop selections.
@@ -303,11 +304,11 @@ WorkshopContent.displayName = "WorkshopContent";
 // MAIN COMPONENT
 // ============================================================================
 
-export function WorkshopModal({ variant = "outline" }: WorkshopModalProps) {
+export function WorkshopModal({ variant = "outline", btnClass }: WorkshopModalProps) {
   const [open, setOpen] = useState(false);
 
   const trigger = (
-    <Button size="sm" variant={variant}>
+    <Button size="sm" variant={variant} className={btnClass}>
       <Store className="size-4 mr-1" />
       Workshops
     </Button>

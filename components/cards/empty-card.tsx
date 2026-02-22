@@ -26,7 +26,7 @@ const content: Record<"male" | "female" | "male2", ContentItem> = {
   female: {
     imgClass: "h-64 left-[72px] hidden md:block",
     image: "/images/characters/female_lge.png",
-    textClass: "ps-40",
+    textClass: "ps-6 md:ps-40",
     text: "Glad to see you, Sire!",
     description:
       "Here, you can view and adjust the resources you need.\nFelix could use your help on the other side!",

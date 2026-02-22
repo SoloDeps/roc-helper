@@ -14,18 +14,18 @@ interface CardData {
 
 const cards: CardData[] = [
   {
-    title: "Research Tree",
-    description: "Explore technologies and plan your research path",
-    icon: "/game_icons/icon_flat_research_points.webp",
-    illustration: "/images/technos/kingdom_of_sicily/ks_41.webp",
-    href: "/research-tree",
-  },
-  {
     title: "Calculator",
     description: "Plan buildings and track the resources you'll need",
     icon: "/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/high_middle_ages/hm_13.webp",
     href: "/calculator",
+  },
+  {
+    title: "Research Tree",
+    description: "Explore technologies and plan your research path",
+    icon: "/game_icons/icon_flat_research_points.webp",
+    illustration: "/images/technos/kingdom_of_sicily/ks_41.webp",
+    href: "/research-tree",
   },
   {
     title: "Help",
@@ -74,15 +74,6 @@ function HomeCard({ data }: { data: CardData }) {
       <div className="absolute inset-y-0 left-0 z-20 p-3.5 flex flex-col justify-center md:justify-start gap-1.5 max-w-[62%]">
         {/* Icon circle + title */}
         <div className="flex items-center gap-2 md:mt-2">
-          {/* <div className="size-10 rounded-full bg-muted border border-border flex items-center justify-center shrink-0 overflow-hidden">
-            <Image
-              src={data.icon}
-              alt=""
-              width={15}
-              height={15}
-              className="object-contain size-6"
-            />
-          </div> */}
           <h3 className="text-[17px] md:text-lg font-bold leading-tight text-foreground truncate">
             {data.title}
           </h3>
@@ -105,7 +96,7 @@ function HomeCard({ data }: { data: CardData }) {
 
 export function HomeCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full pb-5">
       {cards.map((card) => (
         <HomeCard key={card.title} data={card} />
       ))}

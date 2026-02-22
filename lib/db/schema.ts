@@ -77,7 +77,16 @@ export function getWikiDB(): RocWikiDB {
   return wikiDbInstance;
 }
 
-export const db = typeof window !== "undefined" ? getWikiDB() : null;
+// export const db = typeof window !== "undefined" ? getWikiDB() : null;
+
+export async function resetWikiDB(): Promise<void> {
+  if (wikiDbInstance) {
+    wikiDbInstance.close();
+    await wikiDbInstance.delete();
+    wikiDbInstance = null;
+  }
+  getWikiDB();
+}
 
 // ============================================================================
 // HELPERS — Conversion id techno

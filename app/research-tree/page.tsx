@@ -59,6 +59,7 @@ import {
 import { useBuildingSelections } from "@/hooks/use-building-selections";
 import type { TechnoData } from "@/types/shared";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { WorkshopModal } from "@/components/modals/workshop-modal";
 
 // ─── Stats helpers ────────────────────────────────────────────────────────────
 
@@ -271,7 +272,9 @@ function DeleteEraButton({
         >
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Delete &quot;{selectedEraName}&quot;?</AlertDialogTitle>
+              <AlertDialogTitle>
+                Delete &quot;{selectedEraName}&quot;?
+              </AlertDialogTitle>
               <AlertDialogDescription>
                 This will permanently delete all technologies saved for this
                 era. This action cannot be undone.
@@ -434,7 +437,7 @@ export default function ResearchTreePage() {
       {isEmpty ? (
         <>
           {/* Header — same layout as non-empty for visual consistency */}
-          <div className="py-2 md:pt-4 flex gap-1.5 items-end w-full">
+          <div className="py-2 md:pt-4 flex justify-between gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
               <div className="w-full sm:w-60">
                 <ResponsiveSelect
@@ -456,17 +459,23 @@ export default function ResearchTreePage() {
                 <span className="hidden md:inline-block">New Era</span>
               </Button>
             </div>
-            <Button variant="outline" className="gap-1.5" disabled>
-              <BarChart2 className="size-4" />
-              Era Stats
-            </Button>
+
+            <div className="flex gap-1.5">
+              <Button variant="outline" className="gap-1.5" disabled>
+                <BarChart2 className="size-4" />
+                Era Stats
+              </Button>
+              <div className="hidden md:flex">
+                <WorkshopModal />
+              </div>
+            </div>
           </div>
           <TechTreeSkeleton onAdd={handleAddNewEra} />
         </>
       ) : (
         <>
           {/* ── Row: [Select Era ▼] [+ Add] [🗑️] ··· [📊 Stats] ── */}
-          <div className="py-2 md:pt-4 flex gap-1.5 items-end w-full">
+          <div className="py-2 md:pt-4 flex justify-between gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
               {/* Era selector */}
               <div className="w-36 sm:w-60">
@@ -502,11 +511,17 @@ export default function ResearchTreePage() {
             </div>
 
             {/* Era stats — pushed to the right */}
-            {technosWithStatus.length > 0 && (
-              <div className="ml-auto w-full max-w-24 sm:w-auto">
-                <EraStatsButton technologies={technosWithStatus} />
+
+            <div className="flex gap-1.5">
+              {technosWithStatus.length > 0 && (
+                <div className="w-full sm:w-auto">
+                  <EraStatsButton technologies={technosWithStatus} />
+                </div>
+              )}
+              <div className="hidden md:flex">
+                <WorkshopModal btnClass="h-9" />
               </div>
-            )}
+            </div>
           </div>
 
           {selectedEraId && technosWithStatus.length > 0 && (

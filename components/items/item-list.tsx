@@ -55,7 +55,8 @@ export function ItemList() {
   const { accordionsState, setAccordionsState, addToAccordionsState } =
     useUIStore();
 
-  const { location, hideHidden, hideTechnos } = useFiltersStore();
+  // const { location, hideHidden, hideTechnos } = useFiltersStore();
+  const { tableType, location, hideHidden, hideTechnos } = useFiltersStore();
 
   // État pour gérer les drawers mobiles
   const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
@@ -95,11 +96,11 @@ export function ItemList() {
   // FILTER BUILDINGS
   const filteredBuildings = useMemo(() => {
     let filtered = [...buildings];
-    // ✅ Removed tableType filter - property 'resource' no longer exists on HydratedBuilding
+    if (tableType) filtered = filtered.filter((b) => b.type === tableType);
     if (location) filtered = filtered.filter((b) => b.category === location);
     if (hideHidden) filtered = filtered.filter((b) => !b.hidden);
     return filtered;
-  }, [buildings, location, hideHidden]);
+  }, [buildings, tableType, location, hideHidden]);
 
   // FILTER TECHNOS
   const filteredTechnos = useMemo(() => {

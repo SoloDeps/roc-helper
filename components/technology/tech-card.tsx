@@ -90,7 +90,7 @@ export const TechCard = memo<TechCardProps>(
           <div className="shrink-0 w-15" />
 
           {/* Nom + meta */}
-          <div className="flex-1 min-w-0 flex flex-col justify-center ps-4 py-2 pr-2">
+          <div className="flex-1 min-w-0 flex flex-col justify-center ps-4 py-2 pr-2 max-md:font-pro">
             <span
               className={cn(
                 "font-semibold text-sm leading-tight truncate",
