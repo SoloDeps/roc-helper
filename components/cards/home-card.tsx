@@ -36,7 +36,7 @@ const cards: CardData[] = [
   },
   {
     title: "Coming Soon",
-    description: "Something powerful is taking shape in the mists of time...",
+    description: "Something is taking shape in the shadows...",
     icon: "/game_icons/icon_flat_scout.webp",
     illustration: "/images/technos/minoan_era/me_6.webp",
     locked: true,

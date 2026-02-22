@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   Circle,
   Trash2,
+  LoaderCircle,
 } from "lucide-react";
 import { useAddElementStore } from "@/lib/stores/add-element-store";
 import { AddElementModal } from "@/components/modals/add-element/add-element-modal";
@@ -346,18 +347,30 @@ function DeleteEraButton({
 
 // ─── Empty state skeleton ─────────────────────────────────────────────────────
 
-function TechTreeSkeleton({ onAdd }: { onAdd: () => void }) {
+function TechTreeSkeleton({
+  onAdd,
+  loading = false,
+}: {
+  onAdd: () => void;
+  loading?: boolean;
+}) {
   return (
-    <div className="relative w-full h-[calc(100vh-200px)] min-h-[500px] border border-dashed border-border rounded-lg overflow-hidden bg-muted/5 mt-2">
+    <div className="relative w-full h-[calc(100vh-200px)] min-h-[500px] border border-dashed border-border rounded-lg overflow-hidden bg-muted/5">
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/60 backdrop-blur-[1px]">
-        <AlertCircle className="size-10 text-muted-foreground" />
-        <p className="text-sm text-muted-foreground">
-          Your research tree will appear here
-        </p>
-        <Button onClick={onAdd}>
-          <Plus className="size-4 mr-2" />
-          Add your first era
-        </Button>
+        {loading ? (
+          <LoaderCircle className="size-7 animate-spin text-muted-foreground" />
+        ) : (
+          <>
+            <AlertCircle className="size-10 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">
+              Your research tree will appear here
+            </p>
+            <Button onClick={onAdd}>
+              <Plus className="size-4 mr-2" />
+              Add your first era
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );
@@ -430,11 +443,12 @@ export default function ResearchTreePage() {
   const selectedEraName =
     availableEras.find((e) => e.id === selectedEraId)?.name ?? "";
 
-  const isEmpty = !technosInDB || technosInDB.length === 0;
+  const isLoading = technosInDB === undefined;
+  const isEmpty = !isLoading && technosInDB.length === 0;
 
   return (
     <div className="flex flex-col min-h-0 flex-1 container-wrapper">
-      {isEmpty ? (
+      {isLoading || isEmpty ? (
         <>
           {/* Header — same layout as non-empty for visual consistency */}
           <div className="py-2 md:pt-4 flex justify-between gap-1.5 items-end w-full">
@@ -466,11 +480,11 @@ export default function ResearchTreePage() {
                 Era Stats
               </Button>
               <div className="hidden md:flex">
-                <WorkshopModal />
+                <WorkshopModal btnClass="h-9" />
               </div>
             </div>
           </div>
-          <TechTreeSkeleton onAdd={handleAddNewEra} />
+          <TechTreeSkeleton onAdd={handleAddNewEra} loading={isLoading} />
         </>
       ) : (
         <>
@@ -526,7 +540,7 @@ export default function ResearchTreePage() {
 
           {selectedEraId && technosWithStatus.length > 0 && (
             <>
-              <div className="hidden md:block mt-2">
+              <div className="hidden md:block">
                 <TechTreeDesktop technologies={technosWithStatus} />
               </div>
               <div className="md:hidden">

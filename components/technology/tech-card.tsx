@@ -28,9 +28,9 @@ export const TechCard = memo<TechCardProps>(
     const abbr = tech.id.split("_")[0];
     const eraFolder = ABBR_TO_ERA_ID[abbr] ?? abbr;
 
-    // Resolve Primary/Secondary/Tertiary Workshop → actual good name (e.g. "gold_laurel")
+    // Resolve Primary/Secondary/Tertiary Good → actual good name (e.g. "gold_laurel")
     const workshopMatch = tech.name.match(
-      /^(Primary|Secondary|Tertiary)\s+Workshop$/i,
+      /^(Primary|Secondary|Tertiary)\s+Good$/i,
     );
     const resolvedGoodName = workshopMatch
       ? getGoodNameFromPriorityEra(

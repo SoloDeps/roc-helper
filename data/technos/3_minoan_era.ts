@@ -33,7 +33,7 @@ export const technos_ME: TechnoData[] = [
   },
   {
     id: "me_1",
-    name: "Primary Workshop",
+    name: "Primary Good",
     column: 1,
     required: ["me_0"],
     costs: {
@@ -52,9 +52,9 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Workshop: Unlocks a Primary Workshop upgrade",
+      "Primary Good: Unlocks a Primary Good upgrade",
       "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
-      "Primary Workshop: Allows constructing 1 more Primary Workshop building in your city",
+      "Primary Good: Allows constructing 1 more Primary Good building in your city",
     ],
   },
   {
@@ -706,7 +706,7 @@ export const technos_ME: TechnoData[] = [
   },
   {
     id: "me_26",
-    name: "Secondary Workshop",
+    name: "Secondary Good",
     column: 12,
     required: ["me_23"],
     costs: {
@@ -729,7 +729,7 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Workshop: Unlocks a Secondary Workshop upgrade",
+      "Secondary Good: Unlocks a Secondary Good upgrade",
       "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -825,7 +825,7 @@ export const technos_ME: TechnoData[] = [
   },
   {
     id: "me_30",
-    name: "Tertiary Workshop",
+    name: "Tertiary Good",
     column: 13,
     required: ["me_26", "me_27", "me_28", "me_29"],
     costs: {
@@ -848,7 +848,7 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Workshop: Unlocks a Tertiary Workshop upgrade",
+      "Tertiary Good: Unlocks a Tertiary Good upgrade",
       "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
     ],
   },

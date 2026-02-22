@@ -160,10 +160,8 @@ function TechNodeWithContext({ id, data, selected }: any) {
   const abbr = id.split("_")[0];
   const eraFolder = ABBR_TO_ERA_ID[abbr] ?? abbr;
 
-  // Resolve Primary/Secondary/Tertiary Workshop → actual good name (e.g. "gold_laurel")
-  const workshopMatch = name.match(
-    /^(Primary|Secondary|Tertiary)\s+Workshop$/i,
-  );
+  // Resolve Primary/Secondary/Tertiary Good → actual good name (e.g. "gold_laurel")
+  const workshopMatch = name.match(/^(Primary|Secondary|Tertiary)\s+Good$/i);
   const resolvedGoodName = workshopMatch
     ? getGoodNameFromPriorityEra(
         workshopMatch[1],
@@ -191,7 +189,13 @@ function TechNodeWithContext({ id, data, selected }: any) {
 
   // mt-3 on wrapper to allow image overflow upward (handled by ReactFlow node wrapper via style)
   return (
-    <div className="relative">
+    <div
+      className={cn(
+        "relative",
+        isDimmed && "opacity-20",
+        isPathDimmed && "opacity-15",
+      )}
+    >
       {/* Image absolute — déborde au-dessus du node */}
       {imgSrc && (
         <div className="absolute -top-1 left-2.5 size-11 z-10 pointer-events-none">
@@ -226,7 +230,6 @@ function TechNodeWithContext({ id, data, selected }: any) {
             "border-primary shadow-xl scale-105 ring-2 ring-primary/40",
           isConnected &&
             "border-blue-500/70 ring-1 ring-blue-500/30 bg-blue-500/10 dark:border-blue-400/70 dark:ring-blue-400/30 dark:bg-blue-950/30",
-          isDimmed && "opacity-20",
           !isCompleted &&
             !isSelected &&
             !isConnected &&
@@ -239,7 +242,6 @@ function TechNodeWithContext({ id, data, selected }: any) {
             "border-orange-500 ring-2 ring-orange-500/50 bg-orange-500/15 dark:bg-orange-950/30 scale-105",
           isOnPath &&
             "border-orange-400/60 bg-orange-500/10 dark:bg-orange-950/20",
-          isPathDimmed && "opacity-15",
           isPicking &&
             "hover:border-orange-500/70 hover:bg-orange-500/10 dark:hover:border-orange-400/70 dark:hover:bg-orange-950/20",
         )}
@@ -579,12 +581,14 @@ export function TechTreeDesktop({
           style: { stroke: "#22c55e", strokeWidth: 1.5 },
           markerEnd: { type: "arrowclosed" as const, color: "#22c55e" },
           animated: false,
+          zIndex: 5,
         };
       return {
         ...edge,
         style: { stroke: "var(--edge-color)", strokeWidth: 1.5 },
         markerEnd: { type: "arrowclosed" as const, color: "var(--edge-color)" },
         animated: false,
+        zIndex: 0,
       };
     });
   }, [mode, pathEdgeIds, selectedNodeId, baseEdges, completedIds]);
@@ -605,7 +609,7 @@ export function TechTreeDesktop({
     setPathRawNodeIds(new Set());
     setPathRawEdgeIds(new Set());
     setPathFound(true);
-  }, []);
+  }, [setMode, setPathFromId, setPathToId, setPathRawNodeIds, setPathRawEdgeIds, setPathFound]);
 
   const applyResult = useCallback(
     (
@@ -621,7 +625,7 @@ export function TechTreeDesktop({
       setPathToId(toId);
       if (fromId) setPathFromId(fromId);
     },
-    [],
+    [setPathRawNodeIds, setPathRawEdgeIds, setPathFound, setPathToId, setPathFromId],
   );
 
   const onInit = useCallback((instance: any) => {
@@ -658,7 +662,7 @@ export function TechTreeDesktop({
         setSelectedNodeId(node.id);
       }
     },
-    [mode, pathFromId, technologies, applyResult],
+    [mode, pathFromId, technologies, applyResult, setMode, setPathFromId, setSelectedNodeId, setSelectedTech],
   );
 
   const onPaneClick = useCallback(() => {
@@ -666,7 +670,7 @@ export function TechTreeDesktop({
       setSelectedTech(null);
       setSelectedNodeId(null);
     }
-  }, [mode]);
+  }, [mode, setSelectedTech, setSelectedNodeId]);
 
   const pathFromTech = technologies.find((t) => t.id === pathFromId) ?? null;
   const pathToTech = technologies.find((t) => t.id === pathToId) ?? null;

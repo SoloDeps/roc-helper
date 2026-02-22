@@ -103,7 +103,7 @@ export const technos_BA: TechnoData[] = [
   },
   {
     id: "ba_7",
-    name: "Primary Workshop",
+    name: "Primary Good",
     column: 4,
     required: ["ba_4", "ba_5", "ba_6"],
     costs: {
@@ -112,7 +112,7 @@ export const technos_BA: TechnoData[] = [
       food: 30550,
     },
     rewards: [
-      "Primary Workshop: Unlocks the Primary Workshop",
+      "Primary Good: Unlocks the Primary Good",
       "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -289,7 +289,7 @@ export const technos_BA: TechnoData[] = [
   },
   {
     id: "ba_17",
-    name: "Secondary Workshop",
+    name: "Secondary Good",
     column: 8,
     required: ["ba_13"],
     costs: {
@@ -304,7 +304,7 @@ export const technos_BA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Workshop: Unlocks the Secondary Workshop",
+      "Secondary Good: Unlocks the Secondary Good",
       "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -373,7 +373,7 @@ export const technos_BA: TechnoData[] = [
   },
   {
     id: "ba_21",
-    name: "Tertiary Workshop",
+    name: "Tertiary Good",
     column: 9,
     required: ["ba_17"],
     costs: {
@@ -392,7 +392,7 @@ export const technos_BA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Workshop: Unlocks the Tertiary Workshop",
+      "Tertiary Good: Unlocks the Tertiary Good",
       "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
     ],
   },

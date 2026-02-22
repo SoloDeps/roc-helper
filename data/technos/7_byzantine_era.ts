@@ -95,7 +95,7 @@ export const technos_BE: TechnoData[] = [
   },
   {
     id: "be_3",
-    name: "Primary Workshop",
+    name: "Primary Good",
     column: 2,
     required: ["be_1"],
     costs: {
@@ -118,7 +118,7 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Workshop: Unlocks the Primary Workshop",
+      "Primary Good: Unlocks the Primary Good",
       "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
       "+20000: Increased Trade Token Limit",
     ],
@@ -326,7 +326,7 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Workshop: Allows constructing 1 more Primary Workshop building in your city",
+      "Primary Good: Allows constructing 1 more Primary Good building in your city",
     ],
   },
   {
@@ -475,7 +475,7 @@ export const technos_BE: TechnoData[] = [
     rewards: [
       "Rural Farm: Unlocks a Rural Farm upgrade",
       "Compact Culture Site: Allows constructing 1 more Compact Culture Site building in your city",
-      "Primary Workshop: Allows constructing 1 more Primary Workshop building in your city",
+      "Primary Good: Allows constructing 1 more Primary Good building in your city",
     ],
   },
   {
@@ -1074,7 +1074,7 @@ export const technos_BE: TechnoData[] = [
   },
   {
     id: "be_37",
-    name: "Secondary Workshop",
+    name: "Secondary Good",
     column: 13,
     required: ["be_34"],
     costs: {
@@ -1097,7 +1097,7 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Workshop: Unlocks the Secondary Workshop",
+      "Secondary Good: Unlocks the Secondary Good",
       "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -1187,7 +1187,7 @@ export const technos_BE: TechnoData[] = [
   },
   {
     id: "be_41",
-    name: "Tertiary Workshop",
+    name: "Tertiary Good",
     column: 14,
     required: ["be_37", "be_38", "be_39", "be_40"],
     costs: {
@@ -1206,7 +1206,7 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Workshop: Unlocks the Tertiary Workshop",
+      "Tertiary Good: Unlocks the Tertiary Good",
       "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
     ],
   },

@@ -57,7 +57,7 @@ export const technos_KS: TechnoData[] = [
   },
   {
     id: "ks_2",
-    name: "Primary Workshop",
+    name: "Primary Good",
     column: 1,
     required: ["ks_0"],
     costs: {
@@ -80,7 +80,7 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Workshop: Unlocks a Primary Workshop upgrade",
+      "Primary Good: Unlocks a Primary Good upgrade",
       "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
       "+10000: Increased Trade Token Limit",
     ],
@@ -1043,7 +1043,7 @@ export const technos_KS: TechnoData[] = [
   },
   {
     id: "ks_36",
-    name: "Secondary Workshop",
+    name: "Secondary Good",
     column: 11,
     required: ["ks_33", "ks_35"],
     costs: {
@@ -1066,7 +1066,7 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Workshop: Unlocks a Secondary Workshop upgrade",
+      "Secondary Good: Unlocks a Secondary Good upgrade",
       "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -1239,7 +1239,7 @@ export const technos_KS: TechnoData[] = [
   },
   {
     id: "ks_43",
-    name: "Tertiary Workshop",
+    name: "Tertiary Good",
     column: 13,
     required: ["ks_40", "ks_41", "ks_42"],
     costs: {
@@ -1258,7 +1258,7 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Workshop: Unlocks a Tertiary Workshop upgrade",
+      "Tertiary Good: Unlocks a Tertiary Good upgrade",
       "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
     ],
   },

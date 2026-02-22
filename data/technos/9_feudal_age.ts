@@ -122,7 +122,7 @@ export const technos_FA: TechnoData[] = [
   },
   {
     id: "fa_4",
-    name: "Primary Workshop",
+    name: "Primary Good",
     column: 2,
     required: ["fa_1"],
     costs: {
@@ -145,7 +145,7 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Workshop: Unlocks a Primary Workshop upgrade",
+      "Primary Good: Unlocks a Primary Good upgrade",
       "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
       "+10000: Increase Trade Token Limit",
     ],
@@ -968,7 +968,7 @@ export const technos_FA: TechnoData[] = [
   },
   {
     id: "fa_33",
-    name: "Secondary Workshop",
+    name: "Secondary Good",
     column: 12,
     required: ["fa_30"],
     costs: {
@@ -991,13 +991,13 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Workshop: Unlocks a Secondary Workshop upgrade",
+      "Secondary Good: Unlocks a Secondary Good upgrade",
       "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
     ],
   },
   {
     id: "fa_34",
-    name: "Tertiary Workshop",
+    name: "Tertiary Good",
     column: 12,
     required: ["fa_30"],
     costs: {
@@ -1020,7 +1020,7 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Workshop: Unlocks a Tertiary Workshop upgrade",
+      "Tertiary Good: Unlocks a Tertiary Good upgrade",
       "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
     ],
   },

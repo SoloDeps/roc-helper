@@ -18,6 +18,7 @@ import {
   getSubgraphBetween,
   getOrderedTechs,
 } from "@/lib/path-utils";
+import { Button } from "../ui/button";
 
 type Mode =
   | "select"
@@ -518,15 +519,16 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       {/* ── FAB — visible on BOTH tabs when prereq/path result is active ── */}
       {showFAB && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
-          <button
+          <Button
+            variant="default"
             onClick={() => setIsPathDrawerOpen(true)}
-            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white text-sm font-semibold rounded-full px-5 py-3 shadow-lg shadow-orange-500/20 transition-all"
+            className="bg-orange-400 shadow-xs shadow-orange-500/20"
           >
-            <span className="size-5 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold shrink-0">
+            <span className="size-5 rounded-full bg-white/50 flex items-center justify-center text-xs font-bold shrink-0">
               {pathTechs.length}
             </span>
             View total cost
-          </button>
+          </Button>
         </div>
       )}
     </>

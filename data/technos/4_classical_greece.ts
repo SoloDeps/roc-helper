@@ -125,7 +125,7 @@ export const technos_CG: TechnoData[] = [
   },
   {
     id: "cg_4",
-    name: "Primary Workshop",
+    name: "Primary Good",
     column: 2,
     required: ["cg_1"],
     costs: {
@@ -144,9 +144,9 @@ export const technos_CG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Workshop: Unlocks a Primary Workshop upgrade",
+      "Primary Good: Unlocks a Primary Good upgrade",
       "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
-      "Primary Workshop: Allows constructing 1 more Primary Workshop building in your city",
+      "Primary Good: Allows constructing 1 more Primary Good building in your city",
       "Dock Workers: Increases dock worker amount",
       "Harbor: +1 Trading Slot",
     ],
@@ -726,7 +726,7 @@ export const technos_CG: TechnoData[] = [
   },
   {
     id: "cg_25",
-    name: "Secondary Workshop",
+    name: "Secondary Good",
     column: 8,
     required: ["cg_22"],
     costs: {
@@ -749,7 +749,7 @@ export const technos_CG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Workshop: Unlocks a Secondary Workshop upgrade",
+      "Secondary Good: Unlocks a Secondary Good upgrade",
       "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -786,7 +786,7 @@ export const technos_CG: TechnoData[] = [
   },
   {
     id: "cg_27",
-    name: "Tertiary Workshop",
+    name: "Tertiary Good",
     column: 9,
     required: ["cg_24", "cg_25"],
     costs: {
@@ -809,7 +809,7 @@ export const technos_CG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Workshop: Unlocks a Tertiary Workshop upgrade",
+      "Tertiary Good: Unlocks a Tertiary Good upgrade",
       "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
     ],
   },

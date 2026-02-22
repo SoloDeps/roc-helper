@@ -138,7 +138,7 @@ export const technos_LG: TechnoData[] = [
   },
   {
     id: "lg_5",
-    name: "Primary Workshop",
+    name: "Primary Good",
     column: 2,
     required: ["lg_2"],
     costs: {
@@ -161,7 +161,7 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Workshop: Unlocks a Primary Workshop upgrade",
+      "Primary Good: Unlocks a Primary Good upgrade",
       "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -664,7 +664,7 @@ export const technos_LG: TechnoData[] = [
   },
   {
     id: "lg_23",
-    name: "Secondary Workshop",
+    name: "Secondary Good",
     column: 7,
     required: ["lg_19", "lg_20"],
     costs: {
@@ -687,7 +687,7 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Workshop: Unlocks a Secondary Workshop upgrade",
+      "Secondary Good: Unlocks a Secondary Good upgrade",
       "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
     ],
   },
@@ -1099,7 +1099,7 @@ export const technos_LG: TechnoData[] = [
     },
     rewards: [
       "Large Culture Site: Unlocks a Large Culture Site upgrade",
-      "Primary Workshop: Allows constructing 1 more Primary Workshop building in Capital City",
+      "Primary Good: Allows constructing 1 more Primary Good building in Capital City",
     ],
   },
   {
@@ -1193,7 +1193,7 @@ export const technos_LG: TechnoData[] = [
   },
   {
     id: "lg_41",
-    name: "Tertiary Workshop",
+    name: "Tertiary Good",
     column: 12,
     required: ["lg_37", "lg_38", "lg_39"],
     costs: {
@@ -1216,7 +1216,7 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Workshop: Unlocks a Tertiary Workshop upgrade",
+      "Tertiary Good: Unlocks a Tertiary Good upgrade",
       "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
     ],
   },

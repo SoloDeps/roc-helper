@@ -21,6 +21,7 @@ interface WorkshopModalProps {
 type BuildingSelections = string[][];
 
 const STORAGE_KEY = "local:buildingSelections";
+const WORKSHOP_SEEN_KEY = "local:workshopSeen";
 const DEFAULT_SELECTIONS = buildingsAbbr.map(() => ["", "", ""]);
 
 // ============================================================================
@@ -162,7 +163,6 @@ const WorkshopRow = memo(
         return () => clearTimeout(timeoutId);
       }
     }, [currentSelection]);
-    // }, [currentSelection[0], currentSelection[1], currentSelection[2]]);
 
     const primaryOptions = buildings.map((name) => ({
       value: name,
@@ -304,13 +304,35 @@ WorkshopContent.displayName = "WorkshopContent";
 // MAIN COMPONENT
 // ============================================================================
 
-export function WorkshopModal({ variant = "outline", btnClass }: WorkshopModalProps) {
+export function WorkshopModal({
+  variant = "outline",
+  btnClass,
+}: WorkshopModalProps) {
   const [open, setOpen] = useState(false);
+  // ✅ Lu une seule fois au mount via initializer lazy — pas de lecture localStorage à chaque render
+  const [showPulse, setShowPulse] = useState(
+    () =>
+      typeof window !== "undefined" && !localStorage.getItem(WORKSHOP_SEEN_KEY),
+  );
+
+  const handleOpenChange = (val: boolean) => {
+    if (val && showPulse) {
+      localStorage.setItem(WORKSHOP_SEEN_KEY, "1");
+      setShowPulse(false);
+    }
+    setOpen(val);
+  };
 
   const trigger = (
-    <Button size="sm" variant={variant} className={btnClass}>
+    <Button size="sm" variant={variant} className={cn(btnClass, "relative")}>
       <Store className="size-4 mr-1" />
       Workshops
+      {showPulse && (
+        <span className="absolute -top-0.5 -right-0.5 flex size-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-300 opacity-80" />
+          <span className="relative inline-flex size-2.5 rounded-full bg-orange-400" />
+        </span>
+      )}
     </Button>
   );
 
@@ -318,7 +340,7 @@ export function WorkshopModal({ variant = "outline", btnClass }: WorkshopModalPr
     <ResponsiveModal
       trigger={trigger}
       open={open}
-      onOpenChange={setOpen}
+      onOpenChange={handleOpenChange}
       className={cn(
         "p-0 gap-0 flex flex-col overflow-hidden",
         "md:h-[min(600px,50vh)] md:w-full md:max-w-[600px]",
