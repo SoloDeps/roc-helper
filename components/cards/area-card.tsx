@@ -101,8 +101,8 @@ export function AreaCard({
       <div className="hidden md:flex size-28 shrink-0 overflow-hidden relative">
         <div className="size-full flex items-center justify-center bg-background-400/50">
           <Image
-            src="/svg/icon_flat_scout.png"
-            alt="Map"
+            src="/game_icons/icon_flat_scout.webp"
+            alt="scout"
             draggable={false}
             className="size-20 object-contain opacity-30 select-none invert-100 dark:invert-10"
             width={80}
@@ -143,7 +143,7 @@ export function AreaCard({
               >
                 <Button
                   size="sm"
-                  variant={hidden || isMobile ? "outline" : "ghost"}
+                  variant={hidden ? "outline" : "ghost"}
                   className={cn(
                     "rounded-sm h-6 w-20",
                     isMobile &&

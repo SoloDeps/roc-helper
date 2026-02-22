@@ -144,7 +144,7 @@ function StatsContent({ technologies }: { technologies: TechnoData[] }) {
       <TabsList className="w-full">
         <TabsTrigger value="completed" className="flex-1 gap-1.5">
           <CheckCircle2 className="size-3.5 text-green-500" />
-          Unlocked ({completed.length})
+          Selected ({completed.length})
         </TabsTrigger>
         <TabsTrigger value="remaining" className="flex-1 gap-1.5">
           <Circle className="size-3.5 text-muted-foreground" />
@@ -197,7 +197,7 @@ function EraStatsButton({
           <DrawerTrigger asChild>
             <Button variant="outline" className="gap-1.5">
               <BarChart2 className="size-4" />
-              Stats
+              Calculate
             </Button>
           </DrawerTrigger>
           <DrawerContent className="p-0 gap-0 flex flex-col overflow-hidden h-[500px]">
@@ -490,7 +490,7 @@ export default function ResearchTreePage() {
               <div className="md:hidden">
                 <Button variant="outline" className="gap-1.5" disabled>
                   <BarChart2 className="size-4" />
-                  Stats
+                  Calculate
                 </Button>
               </div>
               <div className="hidden md:flex">

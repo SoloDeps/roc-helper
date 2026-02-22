@@ -14,7 +14,6 @@ import {
   getGoodNameFromPriorityEra,
 } from "@/lib/utils";
 import { useBuilding } from "@/hooks/use-database";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import type { HydratedBuilding } from "@/lib/db/data-hydration";
 
 interface BuildingCardProps {
@@ -34,7 +33,6 @@ export function BuildingCard({
   onUpdateQuantity,
   onToggleHidden,
 }: BuildingCardProps) {
-  const isMobile = useMediaQuery("(max-width: 767px)");
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -129,7 +127,7 @@ export function BuildingCard({
         {imageError ? (
           <div className="size-full flex items-center justify-center bg-background-400/50">
             <Image
-              src="/svg/icon_flat_home.png"
+              src="/game_icons/icon_flat_home.webp"
               alt={name}
               draggable={false}
               className="size-20 object-contain opacity-30 select-none invert-100 dark:invert-10"
