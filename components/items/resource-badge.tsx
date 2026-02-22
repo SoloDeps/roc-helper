@@ -1,4 +1,4 @@
-import { slugify } from "@/lib/utils";
+import { slugify, withBase } from "@/lib/utils";
 import Image from "next/image";
 import { memo, useState, useEffect } from "react";
 
@@ -20,7 +20,7 @@ export const ResourceBadge = memo(function ResourceBadge({
   return (
     <div className="flex items-center justify-between px-2 rounded-md bg-background-100 border border-alpha-200 h-9 shrink-0">
       <Image
-        src={src}
+        src={withBase(src)}
         alt={`${alt} - ${slugify(value)}`}
         className="size-[25px] select-none"
         draggable={false}

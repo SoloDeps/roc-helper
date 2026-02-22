@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ResourceBadge } from "@/components/items/resource-badge";
 import BuildingCounter from "@/components/items/building-counter";
-import { cn, getWikiImageUrl } from "@/lib/utils";
+import { cn, getWikiImageUrl, withBase } from "@/lib/utils";
 import {
   getItemIconLocal,
   formatNumber,
@@ -129,7 +129,7 @@ export function BuildingCard({
         {imageError ? (
           <div className="size-full flex items-center justify-center bg-background-400/50">
             <Image
-              src="/svg/icon_flat_home.png"
+              src={withBase("/svg/icon_flat_home.png")}
               alt={name}
               draggable={false}
               className="size-20 object-contain opacity-30 select-none invert-100 dark:invert-10"

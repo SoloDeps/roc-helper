@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { withBase } from "@/lib/utils";
 import { formatNumber } from "@/lib/utils";
 
 interface ResourceItemProps {
@@ -25,11 +27,13 @@ export function ResourceItem({
   return (
     <div className="flex items-center h-[60px] gap-2 px-1 md:px-2 py-1.5">
       {icon && (
-        <img
-          src={icon}
+        <Image
+          src={withBase(icon)}
           alt={name || ""}
           className="h-auto w-7 md:w-8 select-none"
           draggable={false}
+          width={28}
+          height={28}
         />
       )}
       <div className="flex flex-col min-w-0">

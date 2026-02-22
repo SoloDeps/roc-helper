@@ -8,6 +8,7 @@ import { showAllEntities } from "@/lib/db/hide-show-utils";
 import { Button } from "@/components/ui/button";
 import { WorkshopModal } from "@/components/modals/workshop-modal";
 import { AddElementModal } from "../modals/add-element/add-element-modal";
+import { withBase } from "@/lib/utils";
 
 interface EmptyType {
   perso: "male" | "female" | "male2";
@@ -92,7 +93,7 @@ export function EmptyOutline({ perso, type }: EmptyType) {
         )}
       </div>
       <Image
-        src={content[perso].image}
+        src={withBase(content[perso].image)}
         alt="img"
         className={`absolute ${content[perso].imgClass || "left-28"} bottom-0 -translate-x-1/2 w-auto pointer-events-none z-10`}
         width={280}

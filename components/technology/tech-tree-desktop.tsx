@@ -23,7 +23,7 @@ import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB } from "@/lib/db/schema";
 import { Handle, Position } from "@xyflow/react";
-import { cn, getCityCrestIconLocal } from "@/lib/utils";
+import { cn, getCityCrestIconLocal, withBase } from "@/lib/utils";
 import { GitFork, X, Target, Check } from "lucide-react";
 import {
   getAllAncestors,
@@ -200,7 +200,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
       {imgSrc && (
         <div className="absolute -top-1 left-2.5 size-11 z-10 pointer-events-none">
           <Image
-            src={imgSrc}
+            src={withBase(imgSrc)}
             alt={displayName}
             fill
             className={cn("object-contain drop-shadow-lg")}
@@ -294,7 +294,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
         {allied && (
           <div className="absolute -top-2 -right-2 z-20 pointer-events-none">
             <Image
-              src={getCityCrestIconLocal(allied)}
+              src={withBase(getCityCrestIconLocal(allied))}
               alt={allied}
               width={100}
               height={100}

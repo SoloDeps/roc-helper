@@ -9,6 +9,7 @@ import {
   getGoodNameFromPriorityEra,
   getItemIconLocal,
   getCityCrestIconLocal,
+  withBase,
 } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
@@ -72,7 +73,7 @@ export function TechDetailsPanel({ tech, onClose }: TechDetailsPanelProps) {
             {/* Allied badge (left) */}
             {tech.allied && (
               <Image
-                src={getCityCrestIconLocal(tech.allied)}
+                src={withBase(getCityCrestIconLocal(tech.allied))}
                 className="h-6 w-auto shrink-0"
                 width={24}
                 height={24}

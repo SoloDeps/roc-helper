@@ -8,6 +8,7 @@ import {
   FALLBACK_IMAGE,
   type NavigableItem,
 } from "@/lib/catalog";
+import { withBase } from "@/lib/utils";
 
 /**
  * Horizontal card component (ElementCard)
@@ -36,7 +37,7 @@ export const ElementCard = memo<ElementCardProps>(
         className="size-full text-left flex items-center gap-2 h-16 px-3"
       >
         <Image
-          src={imageUrl}
+          src={withBase(imageUrl)}
           alt={item.name}
           width={48}
           height={48}
