@@ -1,7 +1,7 @@
 "use client";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Help() {
   return (
@@ -152,8 +152,8 @@ export default function Help() {
                       find a bug?
                     </summary>
                     <p className="mt-3 mb-0 pl-6 text-sm leading-relaxed">
-                      Since the app is in beta, please report it on Discord.
-                      Any feedback helps improve RoC Helper for everyone.
+                      Since the app is in beta, please report it on Discord. Any
+                      feedback helps improve RoC Helper for everyone.
                     </p>
                   </details>
                 </div>

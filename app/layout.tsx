@@ -18,7 +18,7 @@ const fontPro = localFont({
 
 export const metadata: Metadata = {
   title: "RoC Helper",
-  description: "Resource calculator and building planner for Rise of Cultures",
+  description: "Resource calculator and research tree planner for Rise of Cultures",
 };
 
 export default function RootLayout({
