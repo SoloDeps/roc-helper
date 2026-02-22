@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, withBase } from "@/lib/utils";
 
 interface CardData {
   title: string;
@@ -62,7 +62,7 @@ function HomeCard({ data }: { data: CardData }) {
       {/* Illustration — right side, overflows bottom */}
       <div className="absolute bottom-0 right-2 z-20 size-24 pointer-events-none">
         <Image
-          src={data.illustration}
+          src={withBase(data.illustration)}
           alt=""
           fill
           className="object-cover select-none"

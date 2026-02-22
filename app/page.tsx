@@ -1,5 +1,6 @@
-import { HomeCards } from "@/components/cards/home-card";
 import Image from "next/image";
+import { HomeCards } from "@/components/cards/home-card";
+import { withBase } from "@/lib/utils";
 
 export default function Home() {
   return (
@@ -8,7 +9,7 @@ export default function Home() {
         <div className="flex flex-col gap-4 size-full max-w-4xl">
           <div className="relative shrink-0 h-36 md:h-44 overflow-hidden rounded-xl border shadow-xs">
             <Image
-              src="/images/banners/banner1.png"
+              src={withBase("/images/banners/banner1.png")}
               alt=""
               width={1200}
               height={400}
