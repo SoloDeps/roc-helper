@@ -151,38 +151,47 @@ function StatsContent({ technologies }: { technologies: TechnoData[] }) {
           Remaining ({remaining.length})
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="completed" className="mt-4">
-        <CostGrid techs={completed} emptyLabel="No technos unlocked yet." />
-      </TabsContent>
-      <TabsContent value="remaining" className="mt-4">
-        <CostGrid
-          techs={remaining}
-          emptyLabel="All technos already unlocked!"
-        />
-      </TabsContent>
+      {/* min-h fixe pour éviter le saut de hauteur quand un onglet est vide */}
+      <div className="min-h-[200px]">
+        <TabsContent value="completed" className="mt-4">
+          <CostGrid techs={completed} emptyLabel="No technos unlocked yet." />
+        </TabsContent>
+        <TabsContent value="remaining" className="mt-4">
+          <CostGrid
+            techs={remaining}
+            emptyLabel="All technos already unlocked!"
+          />
+        </TabsContent>
+      </div>
     </Tabs>
   );
 }
 
-function EraStatsButton({ technologies }: { technologies: TechnoData[] }) {
+function EraStatsButton({
+  technologies,
+  desktopOpen,
+  onDesktopOpenChange,
+}: {
+  technologies: TechnoData[];
+  desktopOpen?: boolean;
+  onDesktopOpenChange?: (open: boolean) => void;
+}) {
   return (
     <>
+      {/* Desktop: Dialog driven by external state (button lives inside ReactFlow Panel) */}
       <div className="hidden md:block">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline" className="gap-1.5">
-              <BarChart2 className="size-4" />
-              Era Stats
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
+        <Dialog open={desktopOpen} onOpenChange={onDesktopOpenChange}>
+          <DialogContent className="p-0 gap-0 flex flex-col overflow-hidden h-[500px] w-[500px] min-w-[500px] min-h-[500px]">
+            <DialogHeader className="shrink-0 px-4 pt-4 pb-3 border-b border-border">
               <DialogTitle>Era Research Overview</DialogTitle>
             </DialogHeader>
-            <StatsContent technologies={technologies} />
+            <div className="flex-1 overflow-y-auto p-4 size-full">
+              <StatsContent technologies={technologies} />
+            </div>
           </DialogContent>
         </Dialog>
       </div>
+      {/* Mobile: self-contained button + Drawer */}
       <div className="md:hidden">
         <Drawer>
           <DrawerTrigger asChild>
@@ -191,11 +200,13 @@ function EraStatsButton({ technologies }: { technologies: TechnoData[] }) {
               Stats
             </Button>
           </DrawerTrigger>
-          <DrawerContent className="p-4 pb-8 space-y-4">
-            <DrawerHeader className="p-0">
+          <DrawerContent className="p-0 gap-0 flex flex-col overflow-hidden h-[500px]">
+            <DrawerHeader className="shrink-0 px-4 pt-4 pb-3 border-b border-border">
               <DrawerTitle>Era Research Overview</DrawerTitle>
             </DrawerHeader>
-            <StatsContent technologies={technologies} />
+            <div className="flex-1 overflow-y-auto p-4">
+              <StatsContent technologies={technologies} />
+            </div>
           </DrawerContent>
         </Drawer>
       </div>
@@ -384,6 +395,7 @@ export default function ResearchTreePage() {
   const { openModal, selectCategory, setDirectTechnologyMode } =
     useAddElementStore();
   const isMobile = useMediaQuery("(max-width: 767px)");
+  const [statsOpen, setStatsOpen] = useState(false);
 
   const technosInDB = useLiveQuery(async () => {
     const db = getWikiDB();
@@ -475,10 +487,12 @@ export default function ResearchTreePage() {
             </div>
 
             <div className="flex gap-1.5">
-              <Button variant="outline" className="gap-1.5" disabled>
-                <BarChart2 className="size-4" />
-                Era Stats
-              </Button>
+              <div className="md:hidden">
+                <Button variant="outline" className="gap-1.5" disabled>
+                  <BarChart2 className="size-4" />
+                  Stats
+                </Button>
+              </div>
               <div className="hidden md:flex">
                 <WorkshopModal btnClass="h-9" />
               </div>
@@ -529,7 +543,11 @@ export default function ResearchTreePage() {
             <div className="flex gap-1.5">
               {technosWithStatus.length > 0 && (
                 <div className="w-full sm:w-auto">
-                  <EraStatsButton technologies={technosWithStatus} />
+                  <EraStatsButton
+                    technologies={technosWithStatus}
+                    desktopOpen={statsOpen}
+                    onDesktopOpenChange={setStatsOpen}
+                  />
                 </div>
               )}
               <div className="hidden md:flex">
@@ -541,7 +559,10 @@ export default function ResearchTreePage() {
           {selectedEraId && technosWithStatus.length > 0 && (
             <>
               <div className="hidden md:block">
-                <TechTreeDesktop technologies={technosWithStatus} />
+                <TechTreeDesktop
+                  technologies={technosWithStatus}
+                  onOpenStats={() => setStatsOpen(true)}
+                />
               </div>
               <div className="md:hidden">
                 <TechTreeMobile technologies={technosWithStatus} />

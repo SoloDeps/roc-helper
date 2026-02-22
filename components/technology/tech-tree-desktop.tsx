@@ -24,7 +24,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB } from "@/lib/db/schema";
 import { Handle, Position } from "@xyflow/react";
 import { cn, getCityCrestIconLocal, withBase } from "@/lib/utils";
-import { GitFork, X, Target, Check } from "lucide-react";
+import { GitFork, X, Target, Check, BarChart2 } from "lucide-react";
 import {
   getAllAncestors,
   getSubgraphBetween,
@@ -359,12 +359,14 @@ interface TechTreeDesktopProps {
   technologies: TechnoData[];
   externalControl?: TechTreeExternalControl;
   hideControls?: boolean;
+  onOpenStats?: () => void;
 }
 
 export function TechTreeDesktop({
   technologies,
   externalControl,
   hideControls = false,
+  onOpenStats,
 }: TechTreeDesktopProps) {
   const isExternal = !!externalControl;
 
@@ -609,7 +611,14 @@ export function TechTreeDesktop({
     setPathRawNodeIds(new Set());
     setPathRawEdgeIds(new Set());
     setPathFound(true);
-  }, [setMode, setPathFromId, setPathToId, setPathRawNodeIds, setPathRawEdgeIds, setPathFound]);
+  }, [
+    setMode,
+    setPathFromId,
+    setPathToId,
+    setPathRawNodeIds,
+    setPathRawEdgeIds,
+    setPathFound,
+  ]);
 
   const applyResult = useCallback(
     (
@@ -625,7 +634,13 @@ export function TechTreeDesktop({
       setPathToId(toId);
       if (fromId) setPathFromId(fromId);
     },
-    [setPathRawNodeIds, setPathRawEdgeIds, setPathFound, setPathToId, setPathFromId],
+    [
+      setPathRawNodeIds,
+      setPathRawEdgeIds,
+      setPathFound,
+      setPathToId,
+      setPathFromId,
+    ],
   );
 
   const onInit = useCallback((instance: any) => {
@@ -662,7 +677,16 @@ export function TechTreeDesktop({
         setSelectedNodeId(node.id);
       }
     },
-    [mode, pathFromId, technologies, applyResult, setMode, setPathFromId, setSelectedNodeId, setSelectedTech],
+    [
+      mode,
+      pathFromId,
+      technologies,
+      applyResult,
+      setMode,
+      setPathFromId,
+      setSelectedNodeId,
+      setSelectedTech,
+    ],
   );
 
   const onPaneClick = useCallback(() => {
@@ -735,19 +759,32 @@ export function TechTreeDesktop({
             />
           )}
 
+          {/* Calculate button — top center, always visible in select mode */}
+          {onOpenStats && mode === "select" && (
+            <Panel position="top-center" className="m-2">
+              <button
+                onClick={onOpenStats}
+                className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-primary/70 hover:text-primary transition-colors"
+              >
+                <BarChart2 className="size-3.5" />
+                Calculate
+              </button>
+            </Panel>
+          )}
+
           <Panel position="top-left" className="m-2 flex flex-col gap-1.5">
             {mode === "select" ? (
               <>
                 <button
                   onClick={() => setMode("ancestors-pick")}
-                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
                   <Target className="size-3.5" />
                   Prerequisites
                 </button>
                 <button
                   onClick={() => setMode("path-pick-from")}
-                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
                 >
                   <GitFork className="size-3.5" />
                   Path A → B
@@ -757,7 +794,7 @@ export function TechTreeDesktop({
               <div className="flex flex-row gap-1.5">
                 <button
                   onClick={reset}
-                  className="flex items-center gap-1.5 text-xs bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
+                  className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-2.5 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
                 >
                   <X className="size-3.5" />
                   Cancel
@@ -765,7 +802,7 @@ export function TechTreeDesktop({
                 <button
                   onClick={() => setExcludeCompleted((v) => !v)}
                   className={cn(
-                    "flex items-center gap-1.5 text-xs bg-background/90 border rounded-lg px-3 py-1.5 shadow transition-colors",
+                    "flex items-center gap-1.5 text-[13px] bg-background/90 border rounded-lg px-3 py-1.5 shadow transition-colors",
                     excludeCompleted
                       ? "border-emerald-600 text-emerald-700 dark:border-emerald-500/60 dark:text-emerald-400 hover:bg-emerald-500/10"
                       : "border-border text-muted-foreground hover:border-primary/50",
@@ -791,7 +828,7 @@ export function TechTreeDesktop({
 
           {mode !== "select" && !isPathMode && (
             <Panel position="bottom-center" className="mb-2">
-              <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-xs shadow text-center">
+              <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-[13px] shadow text-center">
                 {mode === "ancestors-pick" && (
                   <p className="text-orange-400 font-medium">
                     Click the <span className="font-bold">target</span> tech
@@ -820,14 +857,14 @@ export function TechTreeDesktop({
           )}
           {isPathMode && !pathFound && (
             <Panel position="bottom-center" className="mb-2">
-              <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-xs shadow">
+              <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-[13px] shadow">
                 <p className="text-red-400 font-medium">No path found</p>
               </div>
             </Panel>
           )}
           {mode === "select" && selectedNodeId && (
             <Panel position="bottom-center" className="mb-2">
-              <div className="flex items-center gap-4 bg-background/90 border border-border rounded-lg px-3 py-1.5 text-xs shadow">
+              <div className="flex items-center gap-4 bg-background/90 border border-border rounded-lg px-3 py-1.5 text-[13px] shadow">
                 <div className="flex items-center gap-1.5">
                   <div className="w-6 h-0.5 bg-blue-500" />
                   <span className="text-muted-foreground">Prerequisites</span>
@@ -872,7 +909,7 @@ export function TechTreeDesktop({
             <Panel position="bottom-center" className="mb-16">
               <button
                 onClick={() => externalControl.onOpenPathDrawer()}
-                className="flex items-center gap-2 text-xs bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
+                className="flex items-center gap-2 text-[13px] bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
               >
                 View total cost
               </button>

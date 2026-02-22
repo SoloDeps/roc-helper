@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useCallback, useEffect, memo, useRef } from "react";
-import { Store, RotateCw } from "lucide-react";
+import { Store, RotateCw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ResponsiveModal } from "./responsive-modal";
 import { ResponsiveSelect } from "./responsive-select";
 import { buildingsAbbr } from "@/lib/constants";
 import { getGoodsImg } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface WorkshopModalProps {
   variant?: "default" | "outline" | "ghost";
@@ -245,7 +246,11 @@ WorkshopRow.displayName = "WorkshopRow";
 // MODAL CONTENT
 // ============================================================================
 
-const WorkshopContent = memo(() => {
+interface WorkshopContentProps {
+  onClose?: () => void;
+}
+
+const WorkshopContent = memo(({ onClose }: WorkshopContentProps) => {
   const [selections, setSelections] =
     useState<BuildingSelections>(loadSelections);
 
@@ -275,10 +280,31 @@ const WorkshopContent = memo(() => {
     <div className="flex flex-col h-full max-h-full">
       {/* Header */}
       <div className="shrink-0 sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background px-4 py-1.5 md:py-3">
-        <h2 className="text-base font-semibold">Manage Workshops</h2>
-        <p className="text-sm text-muted-foreground md:mt-1">
-          Update your workshop selections.
-        </p>
+        <div className="flex justify-between items-start">
+          <div>
+            <h2 className="text-base font-semibold">Manage Workshops</h2>
+            <p className="text-sm text-muted-foreground md:mt-1">
+              Update your workshop selections.{" "}
+              <Link
+                href="/help#workshops-system"
+                className="underline font-medium text-blue-500 dark:text-cyan-400"
+              >
+                Need help?
+              </Link>
+            </p>
+          </div>
+          {onClose && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="rounded-full h-8 w-8 shrink-0 mt-0.5"
+            >
+              <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Content */}
@@ -347,7 +373,7 @@ export function WorkshopModal({
         "h-[80vh]",
       )}
     >
-      <WorkshopContent />
+      <WorkshopContent onClose={() => setOpen(false)} />
     </ResponsiveModal>
   );
 }
