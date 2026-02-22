@@ -14,6 +14,7 @@ import {
 import type { HydratedOttomanArea } from "@/lib/db/data-hydration";
 import Image from "next/image";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { trade_post_table } from "@/data/allieds/ottoman";
 
 interface AreaCardProps {
   area: HydratedOttomanArea;
@@ -113,25 +114,28 @@ export function AreaCard({
 
       <div className="flex p-3 size-full relative self-start">
         <div className="flex-1 h-full">
-          <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center gap-2">
-              <h3
-                className={cn(
-                  "text-sm lg:text-[15px] font-medium truncate capitalize pl-1",
-                  hidden && "opacity-50",
-                )}
-              >
-                Area {areaIndex}
-              </h3>
+          <div className="flex justify-between items-start mb-3">
+            <div className="flex items-start gap-2">
+              <div className={cn("flex flex-col space-y-1", hidden && "opacity-50")}>
+                <h3 className="text-sm lg:text-[15px] font-medium truncate capitalize leading-tight">
+                  Area {areaIndex}
+                </h3>
+                <span className="text-[13px] font-medium text-muted-foreground leading-tight">
+                  {trade_post_table
+                    .filter((tp) => tp.area === areaIndex)
+                    .map((tp) => tp.name.replace(/ (Village|City)$/, ""))
+                    .join(", ")}
+                </span>
+              </div>
 
-              <div className={hidden ? "opacity-50" : ""}>
+              {/* <div className={hidden ? "opacity-50" : ""}>
                 <Badge
                   variant="outline"
                   className="bg-green-200 dark:bg-green-300 text-green-950 border-alpha-100 border rounded-sm"
                 >
                   Area
                 </Badge>
-              </div>
+              </div> */}
 
               <div
                 className={cn(

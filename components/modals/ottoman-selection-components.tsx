@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import {
   useAddElementStore,
   useOttomanSelection,
-  useNavigationPath,
 } from "@/lib/stores/add-element-store";
 import {
   useSubmitOttomanAreas,
@@ -19,6 +18,7 @@ import {
   getAllTradePosts,
   hasAreaData,
 } from "@/lib/ottoman-data-loader";
+import { trade_post_table } from "@/data/allieds/ottoman";
 import { useOttomanAreas, useOttomanTradePosts } from "@/hooks/use-database";
 
 // ============================================================================
@@ -55,6 +55,22 @@ export const OttomanAreasSelection = memo<OttomanAreasSelectionProps>(
       onSubmit?.();
     }, [submit, onSubmit]);
 
+    const allSelected =
+      availableAreas.length > 0 &&
+      availableAreas.every((idx) => selectedAreas.has(idx));
+
+    const handleSelectAll = useCallback(() => {
+      if (allSelected) {
+        availableAreas.forEach((idx) => {
+          if (selectedAreas.has(idx)) toggleOttomanArea(idx);
+        });
+      } else {
+        availableAreas.forEach((idx) => {
+          if (!selectedAreas.has(idx)) toggleOttomanArea(idx);
+        });
+      }
+    }, [allSelected, availableAreas, selectedAreas, toggleOttomanArea]);
+
     const hasSelection = selectedAreas.size > 0;
 
     if (availableAreas.length === 0) {
@@ -75,13 +91,27 @@ export const OttomanAreasSelection = memo<OttomanAreasSelectionProps>(
       <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto pb-24 md:pb-4">
           <div className="space-y-2 pb-4">
-            <p className="text-sm text-muted-foreground mb-4">
-              Select the areas you want to add ({selectedAreas.size} selected)
-            </p>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-sm text-muted-foreground">
+                {selectedAreas.size} / {availableAreas.length} selected
+              </p>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={handleSelectAll}
+                className="h-7 text-sm"
+              >
+                {allSelected ? "Deselect all" : "Select all"}
+              </Button>
+            </div>
 
             <div className="grid grid-cols-1 gap-2">
               {availableAreas.map((areaIndex) => {
                 const isSelected = selectedAreas.has(areaIndex);
+                const areaNames = trade_post_table
+                  .filter((tp) => tp.area === areaIndex)
+                  .map((tp) => tp.name.replace(/ (Village|City)$/, ""))
+                  .join(", ");
 
                 return (
                   <div
@@ -103,9 +133,16 @@ export const OttomanAreasSelection = memo<OttomanAreasSelectionProps>(
                       )}
                     />
                     <MapPin className="size-4 text-muted-foreground shrink-0" />
-                    <span className="text-sm font-medium">
-                      Area {areaIndex}
-                    </span>
+                    <div className="flex flex-col leading-tight">
+                      <span className="text-sm font-medium">
+                        Area {areaIndex}
+                      </span>
+                      {areaNames && (
+                        <span className="text-[13px] font-medium text-muted-foreground">
+                          {areaNames}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 );
               })}
@@ -183,6 +220,27 @@ export const OttomanTradePostsSelection = memo<OttomanTradePostsSelectionProps>(
       onSubmit?.();
     }, [submit, onSubmit]);
 
+    const allSelected =
+      availableTradePosts.length > 0 &&
+      availableTradePosts.every((tp) => selectedTradePosts.has(tp.name));
+
+    const handleSelectAll = useCallback(() => {
+      if (allSelected) {
+        availableTradePosts.forEach((tp) => {
+          if (selectedTradePosts.has(tp.name)) toggleOttomanTradePost(tp.name);
+        });
+      } else {
+        availableTradePosts.forEach((tp) => {
+          if (!selectedTradePosts.has(tp.name)) toggleOttomanTradePost(tp.name);
+        });
+      }
+    }, [
+      allSelected,
+      availableTradePosts,
+      selectedTradePosts,
+      toggleOttomanTradePost,
+    ]);
+
     const hasSelection = selectedTradePosts.size > 0;
 
     if (availableTradePosts.length === 0) {
@@ -204,10 +262,20 @@ export const OttomanTradePostsSelection = memo<OttomanTradePostsSelectionProps>(
       <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto pb-24 md:pb-4">
           <div className="space-y-4 pb-4">
-            <p className="text-sm text-muted-foreground mb-4">
-              Select the trade posts you want to add ({selectedTradePosts.size}{" "}
-              selected)
-            </p>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-sm text-muted-foreground">
+                {selectedTradePosts.size} / {availableTradePosts.length}{" "}
+                selected
+              </p>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={handleSelectAll}
+                className="h-7 text-sm"
+              >
+                {allSelected ? "Deselect all" : "Select all"}
+              </Button>
+            </div>
 
             {tradePostsByArea.map(([areaIndex, tradePosts]) => (
               <div key={areaIndex} className="space-y-2">
@@ -246,7 +314,7 @@ export const OttomanTradePostsSelection = memo<OttomanTradePostsSelectionProps>(
                           <span className="text-sm font-medium">
                             {tradePost.name}
                           </span>
-                          <span className="text-xs text-muted-foreground ml-2">
+                          <span className="text-[13px] font-medium text-muted-foreground ml-2">
                             ({tradePost.resource})
                           </span>
                         </div>
