@@ -4,8 +4,6 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: isProd ? "/roc-helper" : "",
-  assetPrefix: isProd ? "/roc-helper" : "", 
   reactCompiler: true,
   compiler: {
     removeConsole: isProd,

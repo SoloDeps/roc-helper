@@ -5,7 +5,7 @@ import { X, EyeOff, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ResourceBadge } from "@/components/items/resource-badge";
-import { cn, withBase } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   formatNumber,
   getGoodNameFromPriorityEra,
@@ -101,7 +101,7 @@ export function AreaCard({
       <div className="hidden md:flex size-28 shrink-0 overflow-hidden relative">
         <div className="size-full flex items-center justify-center bg-background-400/50">
           <Image
-            src={withBase("/svg/icon_flat_scout.png")}
+            src="/svg/icon_flat_scout.png"
             alt="Map"
             draggable={false}
             className="size-20 object-contain opacity-30 select-none invert-100 dark:invert-10"

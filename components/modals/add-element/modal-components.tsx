@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo } from "react";
+import { memo } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +8,6 @@ import {
   FALLBACK_IMAGE,
   type NavigableItem,
 } from "@/lib/catalog";
-import { withBase } from "@/lib/utils";
 
 /**
  * Horizontal card component (ElementCard)
@@ -37,7 +36,7 @@ export const ElementCard = memo<ElementCardProps>(
         className="size-full text-left flex items-center gap-2 h-16 px-3"
       >
         <Image
-          src={withBase(imageUrl)}
+          src={imageUrl}
           alt={item.name}
           width={48}
           height={48}

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Check, ChevronRight } from "lucide-react";
-import { cn, withBase } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -86,7 +86,7 @@ const DrawerSelectContent = React.memo<{
               <div className="flex items-center gap-3">
                 {option.imageUrl ? (
                   <Image
-                    src={withBase(option.imageUrl)}
+                    src={option.imageUrl}
                     alt={option.value}
                     className="size-7 brightness-110"
                     width={28}
@@ -163,7 +163,7 @@ export function ResponsiveSelect({
               <div className="flex items-center gap-2">
                 {selectedOption.imageUrl && (
                   <Image
-                    src={withBase(selectedOption.imageUrl)}
+                    src={selectedOption.imageUrl}
                     alt={selectedOption.value}
                     className="size-5 brightness-110"
                     width={20}
@@ -184,7 +184,7 @@ export function ResponsiveSelect({
                   <div className="flex items-center gap-2">
                     {option.imageUrl && (
                       <Image
-                        src={withBase(option.imageUrl)}
+                        src={option.imageUrl}
                         alt={option.value}
                         className="size-5 brightness-110"
                         width={20}
@@ -222,7 +222,7 @@ export function ResponsiveSelect({
             <div className="flex items-center gap-3 min-w-0">
               {selectedOption?.imageUrl ? (
                 <Image
-                  src={withBase(selectedOption.imageUrl)}
+                  src={selectedOption.imageUrl}
                   alt={selectedOption.value}
                   className="size-7 shrink-0 brightness-110"
                   width={28}

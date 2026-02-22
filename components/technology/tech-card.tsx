@@ -7,7 +7,6 @@ import {
   getCityCrestIconLocal,
   getGoodNameFromPriorityEra,
   getItemIconLocal,
-  withBase,
 } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import Image from "next/image";
@@ -62,7 +61,7 @@ export const TechCard = memo<TechCardProps>(
         {/* Image absolue qui déborde au-dessus de la card */}
         <div className="absolute -top-1.5 left-2 size-14 z-10 pointer-events-none">
           <Image
-            src={withBase(imgSrc)}
+            src={imgSrc}
             alt={displayName}
             fill
             className={cn("object-contain drop-shadow-lg")}
@@ -114,7 +113,7 @@ export const TechCard = memo<TechCardProps>(
           <div className="flex items-center gap-2.5">
             {tech.allied && (
               <Image
-                src={withBase(getCityCrestIconLocal(tech.allied))}
+                src={getCityCrestIconLocal(tech.allied)}
                 alt={tech.allied}
                 width={40}
                 height={40}

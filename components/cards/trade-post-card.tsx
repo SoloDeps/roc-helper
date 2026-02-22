@@ -14,7 +14,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { cn, withBase } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   formatNumber,
   getGoodNameFromPriorityEra,
@@ -147,7 +147,7 @@ export function TradePostCard({
           <div className="flex justify-between items-center mb-3">
             <div className="flex items-center gap-2">
               <Image
-                src={withBase(resourceIcon)}
+                src={resourceIcon}
                 alt={resource}
                 className="size-6 select-none"
                 draggable={false}

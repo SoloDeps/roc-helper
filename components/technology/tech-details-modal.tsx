@@ -10,7 +10,6 @@ import {
   getGoodNameFromPriorityEra,
   getItemIconLocal,
   getCityCrestIconLocal,
-  withBase,
 } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
@@ -81,7 +80,7 @@ export function TechDetailsModal({
               {/* Allied badge (left) */}
               {tech.allied && (
                 <Image
-                  src={withBase(getCityCrestIconLocal(tech.allied))}
+                  src={getCityCrestIconLocal(tech.allied)}
                   className="h-8 w-auto"
                   width={32}
                   height={32}

@@ -4,7 +4,7 @@ import { memo, useMemo } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Plus, Check } from "lucide-react";
-import { cn, withBase } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { ERAS } from "@/lib/catalog";
 import { useSubmitTechno } from "@/lib/stores/add-element-submission-hooks";
 import { useTechnos } from "@/hooks/use-database";
@@ -63,7 +63,7 @@ export const TechnologySelection = memo(() => {
             {/* Left: Icon + Era Name */}
             <div className="flex items-center gap-3 flex-1 min-w-0">
               <Image
-                src={withBase("/game_icons/icon_flat_research_points.webp")}
+                src="/game_icons/icon_flat_research_points.webp"
                 alt={era.name}
                 width={40}
                 height={40}

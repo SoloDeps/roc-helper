@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ResourceBadge } from "@/components/items/resource-badge";
@@ -9,7 +8,6 @@ import {
   getGoodNameFromPriorityEra,
   getItemIconLocal,
   getCityCrestIconLocal,
-  withBase,
 } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
@@ -73,7 +71,7 @@ export function TechDetailsPanel({ tech, onClose }: TechDetailsPanelProps) {
             {/* Allied badge (left) */}
             {tech.allied && (
               <Image
-                src={withBase(getCityCrestIconLocal(tech.allied))}
+                src={getCityCrestIconLocal(tech.allied)}
                 className="h-6 w-auto shrink-0"
                 width={24}
                 height={24}

@@ -200,7 +200,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
       {imgSrc && (
         <div className="absolute -top-1 left-2.5 size-11 z-10 pointer-events-none">
           <Image
-            src={withBase(imgSrc)}
+            src={imgSrc}
             alt={displayName}
             fill
             className={cn("object-contain drop-shadow-lg")}
@@ -294,7 +294,7 @@ function TechNodeWithContext({ id, data, selected }: any) {
         {allied && (
           <div className="absolute -top-2 -right-2 z-20 pointer-events-none">
             <Image
-              src={withBase(getCityCrestIconLocal(allied))}
+              src={getCityCrestIconLocal(allied)}
               alt={allied}
               width={100}
               height={100}

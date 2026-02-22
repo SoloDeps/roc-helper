@@ -4,13 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "./mode-toggle";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Info } from "lucide-react";
 import { WorkshopModal } from "../modals/workshop-modal";
 import { MobileNav } from "./mobile-nav";
 import { siteConfig } from "@/lib/config";
-import { withBase } from "@/lib/utils";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -20,7 +18,7 @@ export function SiteHeader() {
         <MobileNav items={siteConfig.navItems} />
         <Link href="/" className="hidden md:flex items-center gap-2 ">
           <Image
-            src={withBase("/icon/48.png")}
+            src="/icon/48.png"
             width={24}
             height={24}
             alt="logo"
