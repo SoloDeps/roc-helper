@@ -266,7 +266,7 @@ function calculateTradePostCosts(
   tradePostData: {
     levels: { [key: number]: Array<{ resource: string; amount: number }> };
   },
-  // ✅ checkedLevels en boolean (déjà converti depuis 0|1 avant appel)
+  //  checkedLevels en boolean (déjà converti depuis 0|1 avant appel)
   checkedLevels: HydratedOttomanTradePost["levels"],
 ): HydratedOttomanTradePost["costs"] {
   const costs: HydratedOttomanTradePost["costs"] = { resources: {}, goods: [] };
@@ -339,7 +339,7 @@ export async function getHydratedOttomanTradePost(
   const tradePostData = getTradePostByIndex(tradePostIndex);
   if (!tradePostData) return null;
 
-  // ✅ Convertir levels 0|1 → boolean pour les composants
+  //  Convertir levels 0|1 → boolean pour les composants
   const rawLevels = userState?.levels ?? {
     unlock: 0,
     lvl2: 0,

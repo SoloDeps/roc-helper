@@ -625,9 +625,7 @@ export const CATALOG: Category[] = [
         id: "vikings_beehives",
         name: "Beehives",
         imgType: "beehive",
-        buildings: [
-          { id: "beehive", name: "Beehive", imgType: "beehive" },
-        ],
+        buildings: [{ id: "beehive", name: "Beehive", imgType: "beehive" }],
       },
       {
         id: "vikings_fishing_piers",
@@ -820,7 +818,7 @@ export function getCategory(id: string): Category | undefined {
 }
 
 /**
- * ✅ retourne des items navigables (Subcategory OU Era)
+ *  retourne des items navigables (Subcategory OU Era)
  */
 export function getSubcategories(categoryId: string): NavigableItem[] {
   const category = getCategory(categoryId);

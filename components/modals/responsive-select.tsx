@@ -130,7 +130,7 @@ export function ResponsiveSelect({
 
   const selectedOption = options.find((opt) => opt.value === value);
 
-  // ✅ Prevent opening if readOnly
+  //  Prevent opening if readOnly
   const handleOpenChange = React.useCallback(
     (newOpen: boolean) => {
       if (!readOnly) {

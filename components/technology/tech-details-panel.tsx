@@ -27,7 +27,7 @@ export function TechDetailsPanel({ tech, onClose }: TechDetailsPanelProps) {
   const mainResources = Object.entries(tech.costs || {})
     .filter(([type]) => type !== "goods")
     .map(([type, value]) => ({
-      resource: type, // ✅ Changed from 'type' to 'resource' for consistency
+      resource: type, //  Changed from 'type' to 'resource' for consistency
       value,
       icon: getItemIconLocal(type),
     }));

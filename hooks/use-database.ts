@@ -2,11 +2,7 @@
 
 import { useLiveQuery } from "dexie-react-hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  getWikiDB,
-  areaIndexToId,
-  tradePostIndexToId,
-} from "@/lib/db/schema";
+import { getWikiDB, areaIndexToId, tradePostIndexToId } from "@/lib/db/schema";
 import { getEraAbbr } from "@/lib/era-mappings";
 import {
   getAllHydratedBuildings,
@@ -22,7 +18,7 @@ import type { OttomanTradePostEntity } from "@/lib/db/schema";
 // ============================================================================
 
 export function useBuildings() {
-  // ✅ useLiveQuery : se met à jour automatiquement dès que Dexie change,
+  //  useLiveQuery : se met à jour automatiquement dès que Dexie change,
   //    quelle que soit la source de l'écriture (research tree, calculator, etc.)
   return useLiveQuery(() => getAllHydratedBuildings());
 }
@@ -88,7 +84,7 @@ export function useToggleBuildingHidden() {
 // ============================================================================
 
 export function useTechnos() {
-  // ✅ FIX : était useQuery (cache React Query non invalidé par les bulkPut
+  //  FIX : était useQuery (cache React Query non invalidé par les bulkPut
   //    directs du research tree). useLiveQuery réagit à tout write Dexie.
   return useLiveQuery(() => getAllHydratedTechnos());
 }
@@ -146,7 +142,7 @@ export function useToggleTechnosByEra() {
 // ============================================================================
 
 export function useOttomanAreas() {
-  // ✅ useLiveQuery : réactif à tout write Dexie
+  //  useLiveQuery : réactif à tout write Dexie
   return useLiveQuery(() => getAllHydratedOttomanAreas());
 }
 
@@ -193,7 +189,7 @@ export function useToggleOttomanAreaHidden() {
 // ============================================================================
 
 export function useOttomanTradePosts() {
-  // ✅ useLiveQuery : réactif à tout write Dexie
+  //  useLiveQuery : réactif à tout write Dexie
   return useLiveQuery(() => getAllHydratedOttomanTradePosts());
 }
 

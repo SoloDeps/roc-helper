@@ -33,7 +33,7 @@ interface UIStore {
   resetFilters: () => void;
 
   // Actions - Accordions
-  // ✅ Support des callbacks ET des valeurs directes
+  //  Support des callbacks ET des valeurs directes
   setAccordionsState: (
     idsOrUpdater: string[] | ((prev: string[]) => string[]),
   ) => void;
@@ -92,7 +92,7 @@ export const useUIStore = create<UIStore>()(
         resetFilters: () => set({ filters: DEFAULT_FILTERS }),
 
         // Accordion actions
-        // ✅ Accepte soit un tableau, soit une fonction callback
+        //  Accepte soit un tableau, soit une fonction callback
         setAccordionsState: (idsOrUpdater) => {
           if (typeof idsOrUpdater === "function") {
             set((state) => ({
@@ -103,7 +103,7 @@ export const useUIStore = create<UIStore>()(
           }
         },
 
-        // ✅ Helper pour ajouter des IDs sans écraser
+        //  Helper pour ajouter des IDs sans écraser
         addToAccordionsState: (ids) =>
           set((state) => ({
             accordionsState: Array.from(
@@ -111,7 +111,7 @@ export const useUIStore = create<UIStore>()(
             ),
           })),
 
-        // ✅ Helper pour retirer des IDs
+        //  Helper pour retirer des IDs
         removeFromAccordionsState: (ids) =>
           set((state) => ({
             accordionsState: state.accordionsState.filter(

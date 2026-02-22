@@ -16,8 +16,8 @@
 //   allied?: string;
 //   hidden?: boolean;
 //   completed?: boolean;
-//   highlighted?: boolean; // ✅ Connected to selected node
-//   dimmed?: boolean; // ✅ Not connected to selected node
+//   highlighted?: boolean; //  Connected to selected node
+//   dimmed?: boolean; //  Not connected to selected node
 // }
 
 // interface TechNodeProps {

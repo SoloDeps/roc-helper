@@ -189,7 +189,7 @@ const ElementStep = memo(() => {
     return parentId ? getChildren(parentId) : [];
   }, [path.categoryId, path.subcategoryId, isTech]);
 
-  // ✅ For technology path, show technologies with direct add button
+  //  For technology path, show technologies with direct add button
   if (isTech && path.categoryId === "technology") {
     return (
       <div className="space-y-4 pb-20 md:pb-0">
@@ -218,7 +218,7 @@ const ConfigurationStep = memo(() => {
 
   const { submit, isLoading } = useSubmitElement();
 
-  // ✅ Don't use try-catch here - let submit handle errors silently
+  //  Don't use try-catch here - let submit handle errors silently
   const handleSubmit = useCallback(async () => {
     await submit();
   }, [submit]);

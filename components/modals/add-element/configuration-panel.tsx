@@ -207,11 +207,14 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
     isLoading = false,
     nested = true,
   }) => {
-    // ✅ Get last used era for smart defaults
+    //  Get last used era for smart defaults
     const lastUsedEra = useLastUsedEra();
 
     const elementData = useMemo(
-      () => (path.elementId ? getBuildingData(path.categoryId + "_" + path.elementId) : null),
+      () =>
+        path.elementId
+          ? getBuildingData(path.categoryId + "_" + path.elementId)
+          : null,
       [path.elementId, path.categoryId],
     );
 
@@ -220,7 +223,7 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
       [elementData],
     );
 
-    // ✅ Initialize era with intelligent fallback
+    //  Initialize era with intelligent fallback
     useEffect(() => {
       if (availableEras.length > 0 && !config.selectedEra) {
         // Check if lastUsedEra is available for this element
@@ -232,7 +235,7 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
       }
     }, [availableEras, config.selectedEra, lastUsedEra, onEraChange]);
 
-    // ✅ If current era is not available in this building, switch to a valid one
+    //  If current era is not available in this building, switch to a valid one
     useEffect(() => {
       if (
         config.selectedEra &&

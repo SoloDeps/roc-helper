@@ -67,7 +67,7 @@ export function ItemList() {
   const areasData = useOttomanAreas();
   const tradePostsData = useOttomanTradePosts();
 
-  // ✅ Détection du chargement initial
+  //  Détection du chargement initial
   const isInitialLoading =
     buildingsData === undefined ||
     technosData === undefined ||
@@ -79,7 +79,7 @@ export function ItemList() {
   const areas = useMemo(() => areasData ?? [], [areasData]);
   const tradePosts = useMemo(() => tradePostsData ?? [], [tradePostsData]);
 
-  // ✅ Track previous counts to detect new items
+  //  Track previous counts to detect new items
   const previousCountsRef = useRef<Map<string, number>>(new Map());
 
   const removeBuilding = useRemoveBuilding();
@@ -183,14 +183,14 @@ export function ItemList() {
     filteredTradePosts,
   ]);
 
-  // ✅ Handle expand all trigger
+  //  Handle expand all trigger
   useEffect(() => {
     if (accordionsState.includes("__expand_all__")) {
       setAccordionsState(allAccordionIds);
     }
   }, [accordionsState, allAccordionIds, setAccordionsState]);
 
-  // ✅ AUTO-EXPAND: Detect new items and expand their accordions
+  //  AUTO-EXPAND: Detect new items and expand their accordions
   useEffect(() => {
     const currentCounts = new Map<string, number>();
 
@@ -225,7 +225,7 @@ export function ItemList() {
       }
     });
 
-    // ✅ Expand accordions with new items using the helper
+    //  Expand accordions with new items using the helper
     if (accordionsToExpand.length > 0) {
       addToAccordionsState(accordionsToExpand);
     }
@@ -244,7 +244,7 @@ export function ItemList() {
     addToAccordionsState,
   ]);
 
-  // ✅ Vérifier s'il y a des données à afficher
+  //  Vérifier s'il y a des données à afficher
   const hasAnyData = useMemo(() => {
     return (
       buildings.length > 0 ||
@@ -379,7 +379,7 @@ export function ItemList() {
 
     return data;
   }, [
-    queryClient, // ✅ Add queryClient to dependencies
+    queryClient, //  Add queryClient to dependencies
     technosByEra,
     hideTechnos,
     technos,

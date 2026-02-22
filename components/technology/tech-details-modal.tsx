@@ -33,7 +33,7 @@ export function TechDetailsModal({
   const mainResources = Object.entries(tech.costs || {})
     .filter(([type]) => type !== "goods")
     .map(([type, value]) => ({
-      resource: type, // ✅ Changed from 'type' to 'resource' for consistency
+      resource: type, //  Changed from 'type' to 'resource' for consistency
       value,
       icon: getItemIconLocal(type),
     }));
@@ -55,7 +55,7 @@ export function TechDetailsModal({
           era,
           userSelections,
         );
-        // ✅ Use resolved name if found, otherwise fallback to "default"
+        //  Use resolved name if found, otherwise fallback to "default"
         goodName = resolvedName || "default";
       }
 

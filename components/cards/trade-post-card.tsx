@@ -47,7 +47,7 @@ export function TradePostCard({
   const { id, name, area, resource, levels, costs, hidden, sourceData } =
     tradePost;
 
-  // ✅ Use new structure: costs.resources
+  //  Use new structure: costs.resources
   const mainResources = Object.entries(costs.resources || {}).map(
     ([resource, value]) => ({
       resource,
@@ -56,7 +56,7 @@ export function TradePostCard({
     }),
   );
 
-  // ✅ Use new structure: costs.goods
+  //  Use new structure: costs.goods
   const goodsBadges = (() => {
     const goods = costs.goods;
     if (!goods?.length) return [];

@@ -32,7 +32,7 @@ export function AreaCard({
   const [isHovered, setIsHovered] = useState(false);
   const { id, areaIndex, costs, hidden } = area;
 
-  // ✅ Use new structure: costs.resources
+  //  Use new structure: costs.resources
   const mainResources = Object.entries(costs.resources || {}).map(
     ([resource, value]) => ({
       resource,
@@ -41,7 +41,7 @@ export function AreaCard({
     }),
   );
 
-  // ✅ Use new structure: costs.goods
+  //  Use new structure: costs.goods
   const goodsBadges = (() => {
     const goods = costs.goods;
     if (!goods?.length) return null;
@@ -59,7 +59,7 @@ export function AreaCard({
           era,
           userSelections,
         );
-        // ✅ Use resolved name if found, otherwise fallback to "default"
+        //  Use resolved name if found, otherwise fallback to "default"
         goodName = resolvedName || "default";
       }
 

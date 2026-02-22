@@ -34,14 +34,14 @@ export function TechnoCard({
   const selectEra = useSelectEra();
   const [isHovered, setIsHovered] = useState(false);
 
-  // ✅ Aggregate costs - ALWAYS aggregate ALL technos in the era (visible AND hidden)
+  //  Aggregate costs - ALWAYS aggregate ALL technos in the era (visible AND hidden)
   const aggregatedData = useMemo(() => {
     if (technos.length === 0) {
       return {
         totalResearch: 0,
         totalCoins: 0,
         totalFood: 0,
-        goods: [] as Array<{ resource: string; amount: number }>, // ✅ Changed type to resource
+        goods: [] as Array<{ resource: string; amount: number }>, //  Changed type to resource
         technoCount: 0,
       };
     }
@@ -50,7 +50,7 @@ export function TechnoCard({
     const goodsMap = new Map<string, number>();
 
     technos.forEach((techno) => {
-      // ✅ Handle flat costs structure from registry
+      //  Handle flat costs structure from registry
       Object.entries(techno.costs).forEach(([key, value]) => {
         if (key === "goods" && Array.isArray(value)) {
           // Aggregate goods
@@ -79,10 +79,10 @@ export function TechnoCard({
 
   const allHidden = technos.length > 0 && technos.every((t) => t.hidden);
 
-  // ✅ Extract eraId from era prop (era prop is already the eraId in snake_case)
+  //  Extract eraId from era prop (era prop is already the eraId in snake_case)
   const eraId = era;
 
-  // ✅ Handle customize click - Navigate to research tree with this era
+  //  Handle customize click - Navigate to research tree with this era
   const handleCustomize = () => {
     if (eraId) {
       // Set this era as selected in the research tree store

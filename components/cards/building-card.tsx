@@ -38,7 +38,7 @@ export function BuildingCard({
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // ✅ Use provided building OR fetch from Dexie
+  //  Use provided building OR fetch from Dexie
   const fetchedBuilding = useBuilding(buildingProp ? undefined : buildingId);
   const building = buildingProp || fetchedBuilding;
 
@@ -57,7 +57,7 @@ export function BuildingCard({
     hidden,
   } = building;
 
-  // ✅ CALCULATE qty × costs HERE IN THE CARD (with new structure)
+  //  CALCULATE qty × costs HERE IN THE CARD (with new structure)
   const mainResources = Object.entries(costs.resources || {}).map(
     ([resourceType, unitValue]) => ({
       resource: resourceType,

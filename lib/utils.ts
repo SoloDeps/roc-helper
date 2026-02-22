@@ -161,3 +161,6 @@ export function getEraBuildingLevel(level: number): 1 | 2 | 3 {
   const pos = ((level - 1) % 3) + 1;
   return pos as 1 | 2 | 3;
 }
+
+export const withBase = (path: string) =>
+  process.env.NODE_ENV === "production" ? `/roc-helper${path}` : path;

@@ -68,10 +68,10 @@ function accumulateCosts(
     }
   }
 
-  // ✅ Traiter costs.goods avec format { resource: "...", amount: ... }
+  //  Traiter costs.goods avec format { resource: "...", amount: ... }
   if (costs.goods && Array.isArray(costs.goods)) {
     for (const good of costs.goods) {
-      // ✅ Protection: vérifier que resource existe
+      //  Protection: vérifier que resource existe
       if (!good.resource || typeof good.resource !== "string") {
         console.warn("⚠️ Invalid good detected in costs:", good);
         continue;
@@ -111,7 +111,7 @@ export function groupGoodsByEra(
   const byEra = new Map<string, Map<string, number>>();
 
   goods.forEach((amount, resource) => {
-    // ✅ Protection: vérifier que resource est valide
+    //  Protection: vérifier que resource est valide
     if (!resource || typeof resource !== "string") {
       console.warn("⚠️ Invalid good resource in grouping:", resource);
       return;
@@ -151,7 +151,7 @@ export function groupGoodsByCity(
   ];
 
   goods.forEach((amount, resource) => {
-    // ✅ Protection: vérifier que resource est valide
+    //  Protection: vérifier que resource est valide
     if (!resource || typeof resource !== "string") {
       console.warn("⚠️ Invalid good resource in city grouping:", resource);
       return;

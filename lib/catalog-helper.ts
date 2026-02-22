@@ -32,7 +32,7 @@ export function getChildren(parentId: string): NavigableItem[] {
   const category = categories.find((cat) => cat.id === parentId);
 
   if (category) {
-    // ✅ Cas spécial : Technology retourne les eras
+    //  Cas spécial : Technology retourne les eras
     // if (category.items === "@eras") {
     //   return ERAS.map((era) => ({
     //     id: era.id,
@@ -49,7 +49,7 @@ export function getChildren(parentId: string): NavigableItem[] {
   for (const cat of categories) {
     const subcategory = cat.subcategories?.find((sub) => sub.id === parentId);
     if (subcategory) {
-      // ✅ Pour Ottoman, les subcategories n'ont pas de buildings à afficher
+      //  Pour Ottoman, les subcategories n'ont pas de buildings à afficher
       // (areas et tradeposts sont gérés différemment via ottoman_selection step)
       if (cat.id === "ottoman") {
         return [];

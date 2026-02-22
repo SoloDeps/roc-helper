@@ -28,16 +28,16 @@ function loadFromStorage(): BuildingSelections {
 }
 
 /**
- * ✅ Hook that syncs with localStorage and listens for changes
+ *  Hook that syncs with localStorage and listens for changes
  */
 export function useBuildingSelections() {
   const [selections, setSelections] =
     useState<BuildingSelections>(loadFromStorage);
 
   useEffect(() => {
-    // ✅ Listen for storage events (sync across tabs/components)
+    //  Listen for storage events (sync across tabs/components)
     const handleStorageChange = () => {
-      // ✅ Use queueMicrotask to defer setState and avoid render conflicts
+      //  Use queueMicrotask to defer setState and avoid render conflicts
       queueMicrotask(() => {
         setSelections(loadFromStorage());
       });

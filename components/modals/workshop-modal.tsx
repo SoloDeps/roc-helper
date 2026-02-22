@@ -48,7 +48,7 @@ function saveSelections(selections: BuildingSelections) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
 
-    // ✅ Defer storage event to avoid setState during render
+    //  Defer storage event to avoid setState during render
     queueMicrotask(() => {
       window.dispatchEvent(new Event("storage"));
     });
@@ -76,16 +76,16 @@ interface WorkshopRowProps {
 
 const WorkshopRow = memo(
   ({ title, buildings, index, selections, onUpdate }: WorkshopRowProps) => {
-    // ✅ Use selections directly as source of truth for initialization
+    //  Use selections directly as source of truth for initialization
     const currentSelection = selections[index] || ["", "", ""];
     const [primary, setPrimary] = useState(currentSelection[0]);
     const [secondary, setSecondary] = useState(currentSelection[1]);
     const [tertiary, setTertiary] = useState(currentSelection[2]);
 
-    // ✅ Track the last values we sent via onUpdate to avoid syncing our own changes
+    //  Track the last values we sent via onUpdate to avoid syncing our own changes
     const lastUpdateRef = useRef({ primary, secondary, tertiary });
 
-    // ✅ Derive options from current state
+    //  Derive options from current state
     const secondaryOptions = primary
       ? buildings.filter((b) => b !== primary)
       : [];
@@ -109,7 +109,7 @@ const WorkshopRow = memo(
       (value: string) => {
         setSecondary(value);
 
-        // ✅ Calculate tertiary synchronously based on new secondary
+        //  Calculate tertiary synchronously based on new secondary
         const newTertiaryOptions = value
           ? buildings.filter((b) => b !== primary && b !== value)
           : [];
@@ -135,7 +135,7 @@ const WorkshopRow = memo(
       onUpdate(index, "", "", "");
     }, [index, onUpdate]);
 
-    // ✅ Sync with external changes only (from storage events in other tabs/components)
+    //  Sync with external changes only (from storage events in other tabs/components)
     useEffect(() => {
       const externalPrimary = currentSelection[0];
       const externalSecondary = currentSelection[1];
@@ -249,7 +249,7 @@ const WorkshopContent = memo(() => {
   const [selections, setSelections] =
     useState<BuildingSelections>(loadSelections);
 
-  // ✅ Listen for storage changes (sync across tabs/components)
+  //  Listen for storage changes (sync across tabs/components)
   useEffect(() => {
     const handleStorageChange = () => {
       setSelections(loadSelections());
@@ -309,7 +309,7 @@ export function WorkshopModal({
   btnClass,
 }: WorkshopModalProps) {
   const [open, setOpen] = useState(false);
-  // ✅ Lu une seule fois au mount via initializer lazy — pas de lecture localStorage à chaque render
+  //  Lu une seule fois au mount via initializer lazy — pas de lecture localStorage à chaque render
   const [showPulse, setShowPulse] = useState(
     () =>
       typeof window !== "undefined" && !localStorage.getItem(WORKSHOP_SEEN_KEY),

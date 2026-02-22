@@ -20,14 +20,14 @@ export const TechnologySelection = memo(() => {
   // Get already added technos from DB
   const existingTechnos = useTechnos();
 
-  // ✅ Extract era IDs (full IDs, not abbreviations)
+  //  Extract era IDs (full IDs, not abbreviations)
   // existingTechnos contain { era: "early_gothic_era", ... }
   const existingEraIds = useMemo(
     () => new Set((existingTechnos || []).map((t) => t.era)),
     [existingTechnos],
   );
 
-  // ✅ Filter out already added eras using full IDs
+  //  Filter out already added eras using full IDs
   const availableEras = useMemo(() => {
     return ERAS.filter((era) => !existingEraIds.has(era.id));
   }, [existingEraIds]);
@@ -47,7 +47,7 @@ export const TechnologySelection = memo(() => {
   return (
     <div className="space-y-2 pb-20 md:pb-0">
       {availableEras.map((era) => {
-        const isAdded = existingEraIds.has(era.id); // ✅ Use era.id instead of era.abbr
+        const isAdded = existingEraIds.has(era.id); //  Use era.id instead of era.abbr
 
         return (
           <Button

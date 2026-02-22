@@ -66,7 +66,7 @@ function useAllEntities() {
   const areasData = useOttomanAreas();
   const tradePostsData = useOttomanTradePosts();
 
-  // ✅ AMÉLIORATION: Détection plus précise du loading
+  //  AMÉLIORATION: Détection plus précise du loading
   const isLoading =
     buildingsData === undefined ||
     technosData === undefined ||
@@ -294,14 +294,14 @@ function useOtherGoodsByCiv(
 ) {
   return useMemo(() => {
     const grouped: Record<string, ResourceItem[]> = {};
-    const processedTypes = new Set<string>(); // ✅ Track déjà traités pour éviter doublons
+    const processedTypes = new Set<string>(); //  Track déjà traités pour éviter doublons
 
     // Initialiser les groupes
     Object.keys(goodsByCivilization).forEach((civ) => (grouped[civ] = []));
 
     const itemsList = getExcludedItems();
 
-    // ✅ 1. Traiter les ITEMS depuis mainResources
+    //  1. Traiter les ITEMS depuis mainResources
     Object.entries(mainResources).forEach(([type, amount]) => {
       if (itemsList.includes(type)) {
         const item = {
@@ -313,13 +313,13 @@ function useOtherGoodsByCiv(
 
         if (!grouped.ITEMS) grouped.ITEMS = [];
         grouped.ITEMS.push(item);
-        processedTypes.add(type); // ✅ Marquer comme traité
+        processedTypes.add(type); //  Marquer comme traité
       }
     });
 
-    // ✅ 2. NOUVEAU : Traiter les ALLIED CITY RESOURCES depuis mainResources
+    //  2. NOUVEAU : Traiter les ALLIED CITY RESOURCES depuis mainResources
     Object.entries(mainResources).forEach(([type, amount]) => {
-      // ✅ Skip si déjà traité dans ITEMS
+      //  Skip si déjà traité dans ITEMS
       if (processedTypes.has(type)) return;
 
       // Vérifier si c'est une ressource alliée (deben, aspers, wu_zhu, etc.)
@@ -334,15 +334,15 @@ function useOtherGoodsByCiv(
 
           if (!grouped[civKey]) grouped[civKey] = [];
           grouped[civKey].push(item);
-          processedTypes.add(type); // ✅ Marquer comme traité
+          processedTypes.add(type); //  Marquer comme traité
           break; // Sortir dès qu'on a trouvé la civilisation
         }
       }
     });
 
-    // ✅ 3. Traiter tous les autres goods (goods map)
+    //  3. Traiter tous les autres goods (goods map)
     otherGoods.forEach((amount, type) => {
-      // ✅ Skip si déjà traité
+      //  Skip si déjà traité
       if (processedTypes.has(type)) return;
 
       const displayName = type.replace(/_/g, " ");
@@ -369,7 +369,7 @@ function useOtherGoodsByCiv(
         if (!grouped.OTHERS) grouped.OTHERS = [];
         grouped.OTHERS.push(item);
       }
-      processedTypes.add(type); // ✅ Marquer comme traité
+      processedTypes.add(type); //  Marquer comme traité
     });
 
     // Retourner uniquement les groupes non vides
@@ -484,7 +484,7 @@ export function TotalGoodsDisplay({
   // RENDER
   // ========================================
 
-  // ✅ AMÉLIORATION: Afficher le skeleton pendant le chargement
+  //  AMÉLIORATION: Afficher le skeleton pendant le chargement
   if (isLoading) {
     return (
       <div className="size-full overflow-y-auto bg-background-200">
@@ -505,7 +505,7 @@ export function TotalGoodsDisplay({
     );
   }
 
-  // ✅ AMÉLIORATION: EmptyCard apparaît seulement après le chargement
+  //  AMÉLIORATION: EmptyCard apparaît seulement après le chargement
   if (!hasAnyResources) {
     return (
       <div className="p-3 size-full m-auto flex items-center justify-center bg-background-200">
