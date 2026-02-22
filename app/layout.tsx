@@ -6,9 +6,9 @@ import { SiteHeader } from "@/components/header/site-header";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 
-const fontSans = localFont({
-  src: "../public/fonts/font-sans.woff2",
-  variable: "--font-sans",
+const fontCanv = localFont({
+  src: "../public/fonts/font-canv.woff2",
+  variable: "--font-canv",
 });
 
 const fontPro = localFont({
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontPro.className} ${fontSans.className} antialiased`}
+        className={`${fontPro.variable} ${fontCanv.variable} antialiased`}
         suppressHydrationWarning
       >
         <Providers>

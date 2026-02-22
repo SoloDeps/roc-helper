@@ -7,7 +7,6 @@ import { showAllEntities } from "@/lib/db/hide-show-utils";
 
 import { Button } from "@/components/ui/button";
 import { WorkshopModal } from "@/components/modals/workshop-modal";
-import { PresetListModal } from "@/components/modals/preset-list-modal";
 import { AddElementModal } from "../modals/add-element/add-element-modal";
 
 interface EmptyType {
@@ -25,7 +24,7 @@ interface ContentItem {
 
 const content: Record<"male" | "female" | "male2", ContentItem> = {
   female: {
-    imgClass: "h-64 left-[72px]",
+    imgClass: "h-64 left-[72px] hidden md:block",
     image: "/images/characters/female_lge.png",
     textClass: "ps-40",
     text: "Glad to see you, Sire!",
@@ -81,7 +80,6 @@ export function EmptyOutline({ perso, type }: EmptyType) {
             {type === "building" && (
               <div className="flex justify-center items-center gap-2">
                 <AddElementModal variant="default" long />
-                {/* <PresetListModal variant="default" /> */}
               </div>
             )}
             {type === "total" && <WorkshopModal variant="default" />}

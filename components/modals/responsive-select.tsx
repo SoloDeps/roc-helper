@@ -213,25 +213,27 @@ export function ResponsiveSelect({
             variant="outline"
             disabled={disabled}
             className={cn(
-              "w-full justify-between h-12",
+              "w-full justify-between h-12 min-w-0",
               readOnly && "cursor-default",
-              drawerBtnClassName
+              drawerBtnClassName,
             )}
             onClick={readOnly ? (e) => e.preventDefault() : undefined}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0">
               {selectedOption?.imageUrl ? (
                 <Image
                   src={selectedOption.imageUrl}
                   alt={selectedOption.value}
-                  className="size-7 brightness-110"
+                  className="size-7 shrink-0 brightness-110"
                   width={28}
                   height={28}
                 />
               ) : null}
-              <span>{selectedOption?.label || placeholder}</span>
+              <span className="truncate">
+                {selectedOption?.label || placeholder}
+              </span>
             </div>
-            <div>
+            <div className="shrink-0">
               {!hideChevron && (
                 <ChevronRight className="size-5 text-muted-foreground" />
               )}

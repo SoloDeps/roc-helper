@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
+import { toast } from "sonner";
 import { getWikiDB } from "@/lib/db/schema";
 import { ABBR_TO_ERA_ID } from "@/lib/era-mappings";
 import { ERAS } from "@/lib/catalog";
@@ -20,6 +21,7 @@ import {
   BarChart2,
   CheckCircle2,
   Circle,
+  Trash2,
 } from "lucide-react";
 import { useAddElementStore } from "@/lib/stores/add-element-store";
 import { AddElementModal } from "@/components/modals/add-element/add-element-modal";
@@ -37,6 +39,16 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ResourceBadge } from "@/components/items/resource-badge";
 import {
@@ -174,7 +186,7 @@ function EraStatsButton({ technologies }: { technologies: TechnoData[] }) {
           <DrawerTrigger asChild>
             <Button variant="outline" className="gap-1.5">
               <BarChart2 className="size-4" />
-              Era Stats
+              Stats
             </Button>
           </DrawerTrigger>
           <DrawerContent className="p-4 pb-8 space-y-4">
@@ -189,7 +201,147 @@ function EraStatsButton({ technologies }: { technologies: TechnoData[] }) {
   );
 }
 
-// ─── Empty state skeleton (même hauteur que le ReactFlow) ────────────────────
+// ─── Delete Era Button ────────────────────────────────────────────────────────
+
+interface DeleteEraButtonProps {
+  selectedEraId: string;
+  selectedEraName: string;
+  availableEras: { id: string; name: string }[];
+  onDeleted: (nextEraId: string | null) => void;
+}
+
+function DeleteEraButton({
+  selectedEraId,
+  selectedEraName,
+  availableEras,
+  onDeleted,
+}: DeleteEraButtonProps) {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [desktopDialogOpen, setDesktopDialogOpen] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+
+  const handleConfirmDelete = async () => {
+    try {
+      const db = getWikiDB();
+
+      // Resolve era abbreviation from eraId — e.g. "bronze_age" → "ba"
+      const abbr = Object.entries(ABBR_TO_ERA_ID).find(
+        ([, id]) => id === selectedEraId,
+      )?.[0];
+
+      if (!abbr) {
+        toast.error("Could not identify era prefix");
+        return;
+      }
+
+      // Delete all technos belonging to this era
+      await db.technos.filter((t) => t.id.startsWith(`${abbr}_`)).delete();
+
+      // Pick next era to auto-select (first remaining)
+      const remaining = availableEras.filter((e) => e.id !== selectedEraId);
+      onDeleted(remaining[0]?.id ?? null);
+
+      toast.success(`"${selectedEraName}" deleted`);
+    } catch (err) {
+      console.error("Failed to delete era:", err);
+      toast.error("Failed to delete era");
+    } finally {
+      setDesktopDialogOpen(false);
+      setMobileDrawerOpen(false);
+    }
+  };
+
+  // ── Desktop : AlertDialog ─────────────────────────────────────────────────
+  if (isDesktop) {
+    return (
+      <>
+        <Button
+          variant="outline"
+          size="icon"
+          className="shrink-0 text-destructive hover:text-destructive hover:bg-destructive/10 border-destructive/30"
+          onClick={() => setDesktopDialogOpen(true)}
+          title={`Delete era "${selectedEraName}"`}
+        >
+          <Trash2 className="size-4" />
+        </Button>
+
+        <AlertDialog
+          open={desktopDialogOpen}
+          onOpenChange={setDesktopDialogOpen}
+        >
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete &quot;{selectedEraName}&quot;?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will permanently delete all technologies saved for this
+                era. This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                variant="destructive"
+                onClick={handleConfirmDelete}
+              >
+                Delete Era
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </>
+    );
+  }
+
+  // ── Mobile : nested Drawer (same pattern as button-group-building) ────────
+  return (
+    <>
+      <Button
+        variant="outline"
+        size="icon"
+        className="shrink-0 text-destructive hover:text-destructive hover:bg-destructive/10 border-destructive/30"
+        onClick={() => setMobileDrawerOpen(true)}
+        title={`Delete era "${selectedEraName}"`}
+      >
+        <Trash2 className="size-4" />
+      </Button>
+
+      <Drawer open={mobileDrawerOpen} onOpenChange={setMobileDrawerOpen} nested>
+        <DrawerContent className="max-h-[40vh]">
+          <DrawerHeader className="border-b py-3 px-4">
+            <DrawerTitle className="text-base text-destructive">
+              Delete &quot;{selectedEraName}&quot;?
+            </DrawerTitle>
+          </DrawerHeader>
+          <div className="p-4 space-y-4">
+            <p className="text-sm text-muted-foreground">
+              This will permanently delete{" "}
+              <b>all technologies saved for this era</b>. This action cannot be{" "}
+              <b>undone</b>.
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                className="flex-1"
+                onClick={() => setMobileDrawerOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                className="flex-1"
+                onClick={handleConfirmDelete}
+              >
+                Delete Era
+              </Button>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+
+// ─── Empty state skeleton ─────────────────────────────────────────────────────
 
 function TechTreeSkeleton({ onAdd }: { onAdd: () => void }) {
   return (
@@ -262,17 +414,26 @@ export default function ResearchTreePage() {
     openModal();
   };
 
+  // After deletion, jump to the next available era (or null → empty state)
+  const handleEraDeleted = (nextEraId: string | null) => {
+    selectEra(nextEraId ?? "");
+  };
+
   const eraOptions = availableEras.map((era) => ({
     value: era.id,
     label: era.name,
   }));
+
+  const selectedEraName =
+    availableEras.find((e) => e.id === selectedEraId)?.name ?? "";
+
   const isEmpty = !technosInDB || technosInDB.length === 0;
 
   return (
     <div className="flex flex-col min-h-0 flex-1 container-wrapper">
       {isEmpty ? (
         <>
-          {/* Header identique pour cohérence visuelle avec/sans contenu */}
+          {/* Header — same layout as non-empty for visual consistency */}
           <div className="py-2 md:pt-4 flex gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
               <div className="w-full sm:w-60">
@@ -295,7 +456,6 @@ export default function ResearchTreePage() {
                 <span className="hidden md:inline-block">New Era</span>
               </Button>
             </div>
-
             <Button variant="outline" className="gap-1.5" disabled>
               <BarChart2 className="size-4" />
               Era Stats
@@ -305,10 +465,11 @@ export default function ResearchTreePage() {
         </>
       ) : (
         <>
-          {/* ── Row : Era select + Add New Era + [spacer] + Era Stats ── */}
+          {/* ── Row: [Select Era ▼] [+ Add] [🗑️] ··· [📊 Stats] ── */}
           <div className="py-2 md:pt-4 flex gap-1.5 items-end w-full">
             <div className="flex gap-1.5 items-end w-full">
-              <div className="w-full sm:w-60">
+              {/* Era selector */}
+              <div className="w-36 sm:w-60">
                 <ResponsiveSelect
                   label={isMobile ? "" : "Saved Eras"}
                   value={selectedEraId || ""}
@@ -318,6 +479,8 @@ export default function ResearchTreePage() {
                   placeholder="Select an era"
                 />
               </div>
+
+              {/* Add new era */}
               <Button
                 variant="outline"
                 onClick={handleAddNewEra}
@@ -326,9 +489,21 @@ export default function ResearchTreePage() {
                 <Plus className="size-4" /> Add
                 <span className="hidden md:inline-block">New Era</span>
               </Button>
+
+              {/* Delete current era — only visible when an era is selected */}
+              {selectedEraId && (
+                <DeleteEraButton
+                  selectedEraId={selectedEraId}
+                  selectedEraName={selectedEraName}
+                  availableEras={availableEras}
+                  onDeleted={handleEraDeleted}
+                />
+              )}
             </div>
+
+            {/* Era stats — pushed to the right */}
             {technosWithStatus.length > 0 && (
-              <div className="ml-auto">
+              <div className="ml-auto w-full max-w-24 sm:w-auto">
                 <EraStatsButton technologies={technosWithStatus} />
               </div>
             )}
@@ -344,14 +519,10 @@ export default function ResearchTreePage() {
               </div>
             </>
           )}
-
-          {/* {selectedEraId && technosWithStatus.length === 0 && (
-            <TechTreeSkeleton onAdd={handleAddNewEra} />
-          )} */}
         </>
       )}
 
-      {/* Modal partagée — trigger caché, piloté uniquement via le store */}
+      {/* Shared modal — trigger-less, driven by store */}
       <AddElementModal hideTrigger />
     </div>
   );

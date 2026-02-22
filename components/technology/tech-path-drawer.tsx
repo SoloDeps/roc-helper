@@ -110,7 +110,7 @@ export function TechPathDrawer({
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 space-y-5">
+        <div className="flex-1 overflow-y-auto p-4 space-y-5 bg-background-200">
           {/* Total costs */}
           <div>
             <p className="text-xs text-muted-foreground mb-2 font-medium uppercase tracking-wide">

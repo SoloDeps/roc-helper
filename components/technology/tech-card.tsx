@@ -106,25 +106,20 @@ export const TechCard = memo<TechCardProps>(
                   {tech.costs.research_points} RP
                 </span>
               )}
-              {tech.allied && (
-                <div className="flex items-center gap-1">
-                  <Image
-                    src={getCityCrestIconLocal(tech.allied)}
-                    alt={tech.allied}
-                    width={14}
-                    height={14}
-                    className="rounded-sm"
-                  />
-                  <span className="text-[10px] text-blue-400 font-medium">
-                    {tech.allied}
-                  </span>
-                </div>
-              )}
             </div>
           </div>
 
           {/* Checkbox */}
-          <div className="">
+          <div className="flex items-center gap-2.5">
+            {tech.allied && (
+              <Image
+                src={getCityCrestIconLocal(tech.allied)}
+                alt={tech.allied}
+                width={40}
+                height={40}
+                className="object-contain h-7 w-auto"
+              />
+            )}
             <div
               onClick={(e) => {
                 e.stopPropagation();

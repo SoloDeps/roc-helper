@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-canv: var(--font-canv);
   --font-pro: var(--font-pro);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -202,12 +202,12 @@
   }
 
   body {
-    font-family: var(--font-sans) !important;
+    font-family: var(--font-canv)!important;
     @apply bg-background text-foreground;
   }
 
   .font-pro {  /* classe utilitaire à utiliser au cas par cas */
-    font-family: var(--font-pro);
+    font-family: var(--font-pro)!important;
   }
 
   *,
