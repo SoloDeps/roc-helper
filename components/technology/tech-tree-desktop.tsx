@@ -177,9 +177,9 @@ function TechNodeWithContext({ id, data, selected }: any) {
   const displayName = resolvedGoodName
     ? formatGoodName(resolvedGoodName)
     : name;
-  // Large goods images will live in /images/images/goods-large/ once ready — falls back to badge icon for now
+  // Large goods images will live in /images/goods-large/ once ready — falls back to badge icon for now
   const imgSrc = resolvedGoodName
-    ? `/images/images/goods-large/${resolvedGoodName}.webp`
+    ? `/images/goods-large/${resolvedGoodName}.webp`
     : eraFolder
       ? `/images/technos/${eraFolder}/${id}.webp`
       : null;
