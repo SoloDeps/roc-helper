@@ -23,7 +23,7 @@ import type { TechnoData } from "@/types/shared";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getWikiDB } from "@/lib/db/schema";
 import { Handle, Position } from "@xyflow/react";
-import { cn, getCityCrestIconLocal, withBase } from "@/lib/utils";
+import { cn, getCityCrestIconLocal } from "@/lib/utils";
 import { GitFork, X, Target, Check, BarChart2 } from "lucide-react";
 import {
   getAllAncestors,
