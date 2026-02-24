@@ -177,9 +177,9 @@ function TechNodeWithContext({ id, data, selected }: any) {
   const displayName = resolvedGoodName
     ? formatGoodName(resolvedGoodName)
     : name;
-  // Large goods images will live in /images/goods-large/ once ready — falls back to badge icon for now
+  // Large goods images will live in /images/images/goods-large/ once ready — falls back to badge icon for now
   const imgSrc = resolvedGoodName
-    ? `/images/goods-large/${resolvedGoodName}.webp`
+    ? `/images/images/goods-large/${resolvedGoodName}.webp`
     : eraFolder
       ? `/images/technos/${eraFolder}/${id}.webp`
       : null;
@@ -745,8 +745,8 @@ export function TechTreeDesktop({
           onPaneClick={onPaneClick}
           nodeTypes={nodeTypes}
           fitView
-          minZoom={0.3}
-          maxZoom={1.5}
+          minZoom={0.4}
+          maxZoom={2}
           nodesDraggable={false}
           nodesConnectable={false}
           elementsSelectable={true}
@@ -755,7 +755,7 @@ export function TechTreeDesktop({
           {!hideControls && (
             <Controls
               showInteractive={false}
-              className="[&>button]:bg-background! dark:[&>button]:bg-background-200! dark:[&>button]:text-white! [&>button]:text-black! [&>button]:border-gray-400!"
+              className="shadow! border! border-border! rounded-md! overflow-hidden! [&>button]:bg-background/90! [&>button]:text-foreground! [&>button]:border-0! [&>button]:border-b! [&>button]:border-border! [&>button:last-child]:border-b-0! [&>button:hover]:bg-accent!"
             />
           )}
 

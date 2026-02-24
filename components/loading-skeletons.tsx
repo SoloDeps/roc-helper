@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { LoaderCircle } from "lucide-react";
 
 /**
  * Skeleton pour un accordion item (building, techno, area, etc.)
@@ -32,13 +33,8 @@ export function AccordionItemSkeleton() {
  */
 export function ItemListSkeleton() {
   return (
-    <div className="space-y-4 py-3 px-2 pb-28 md:p-3">
-      <div className="space-y-2">
-        {/* Simulate 4-6 accordion items */}
-        {Array.from({ length: 5 }).map((_, i) => (
-          <AccordionItemSkeleton key={i} />
-        ))}
-      </div>
+    <div className="p-6 size-full bg-background-200 flex items-start justify-center">
+      <LoaderCircle className="size-5 animate-spin text-muted-foreground" />
     </div>
   );
 }
@@ -46,7 +42,11 @@ export function ItemListSkeleton() {
 /**
  * Skeleton pour un resource block
  */
-export function ResourceBlockSkeleton({ itemCount = 3 }: { itemCount?: number }) {
+export function ResourceBlockSkeleton({
+  itemCount = 3,
+}: {
+  itemCount?: number;
+}) {
   return (
     <section className="rounded-sm overflow-hidden border">
       {/* Header */}
@@ -57,7 +57,10 @@ export function ResourceBlockSkeleton({ itemCount = 3 }: { itemCount?: number })
       {/* Items grid */}
       <div className={`grid grid-cols-${itemCount} bg-background-300`}>
         {Array.from({ length: itemCount }).map((_, i) => (
-          <div key={i} className="flex items-center h-[60px] gap-2 px-1 md:px-2 py-1.5">
+          <div
+            key={i}
+            className="flex items-center h-[60px] gap-2 px-1 md:px-2 py-1.5"
+          >
             <Skeleton className="h-7 md:h-8 w-7 md:w-8 shrink-0" />
             <div className="flex flex-col gap-1 min-w-0 flex-1">
               <Skeleton className="h-3 w-16" />
@@ -75,30 +78,39 @@ export function ResourceBlockSkeleton({ itemCount = 3 }: { itemCount?: number })
  */
 export function TotalResourcesSkeleton() {
   return (
-    <div className="px-2 py-4 md:p-4 mb-4 md:mb-16 max-w-[870px] mx-auto space-y-3">
-      {/* Main resources block */}
-      <div className="grid grid-cols-1 md:grid-cols-6 xl:grid-cols-1 2xl:grid-cols-6 gap-3">
-        <div className="col-span-4 md:col-start-2 xl:col-start-1 2xl:col-start-2">
-          <ResourceBlockSkeleton itemCount={3} />
-        </div>
-      </div>
+    // <div className="px-2 py-4 md:p-4 mb-4 md:mb-16 max-w-[870px] mx-auto space-y-3">
+    //   {/* Main resources block */}
+    //   <div className="grid grid-cols-1 md:grid-cols-6 xl:grid-cols-1 2xl:grid-cols-6 gap-3">
+    //     <div className="col-span-4 md:col-start-2 xl:col-start-1 2xl:col-start-2">
+    //       <ResourceBlockSkeleton itemCount={3} />
+    //     </div>
+    //   </div>
 
-      {/* Era blocks + Other goods */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2 gap-3">
-        {/* Left column: Era blocks */}
-        <div className="space-y-3">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <ResourceBlockSkeleton key={`era-${i}`} itemCount={3} />
-          ))}
-        </div>
+    //   {/* Era blocks + Other goods */}
+    //   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2 gap-3">
+    //     {/* Left column: Era blocks */}
+    //     <div className="space-y-3">
+    //       {Array.from({ length: 4 }).map((_, i) => (
+    //         <ResourceBlockSkeleton key={`era-${i}`} itemCount={3} />
+    //       ))}
+    //     </div>
 
-        {/* Right column: Other goods */}
-        <div className="space-y-3">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <ResourceBlockSkeleton key={`other-${i}`} itemCount={3} />
-          ))}
-        </div>
-      </div>
+    //     {/* Right column: Other goods */}
+    //     <div className="space-y-3">
+    //       {Array.from({ length: 4 }).map((_, i) => (
+    //         <ResourceBlockSkeleton key={`other-${i}`} itemCount={3} />
+    //       ))}
+    //     </div>
+    //   </div>
+    // </div>
+    // {/* Simulate 4-6 accordion items */}
+    // {/* {Array.from({ length: 5 }).map((_, i) => (
+    //   <AccordionItemSkeleton key={i} />
+    //   ))} */}
+    // {/* <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/60 backdrop-blur-[1px]"> */}
+
+    <div className="p-6 size-full bg-background-200 flex items-start justify-center">
+      <LoaderCircle className="size-5 animate-spin text-muted-foreground" />
     </div>
   );
 }

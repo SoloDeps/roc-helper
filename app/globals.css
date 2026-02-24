@@ -81,7 +81,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(70.7% 0.165 254.624);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -142,7 +142,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
+  --primary: oklch(98.511% 0.00011 271.152);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -265,10 +265,10 @@
   }
 
   .construction-badge {
-    @apply !bg-green-300 dark:!bg-green-400 !text-green-950;
+    @apply !bg-green-300 dark:!bg-green-400 !text-green-950 !border-green-400/70 dark:!border-green-400;
   }
   .upgrade-badge {
-    @apply !bg-blue-200 dark:!bg-blue-300 !text-blue-950;
+    @apply !bg-blue-200 dark:!bg-blue-300 !text-blue-950 !border-blue-400/60 dark:!border-blue-300;
   }
 }
 

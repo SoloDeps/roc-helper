@@ -253,24 +253,24 @@ function useEraBlocks(
         resources: [
           {
             icon: primaryMeta?.name
-              ? `/goods/${slugify(primaryMeta.name)}.webp`
-              : "/goods/default.webp",
+              ? `/images/goods/${slugify(primaryMeta.name)}.webp`
+              : "/images/goods/default.webp",
             name: primaryMeta?.name ?? "Primary",
             amount: amounts.primary,
             difference: amounts.primary,
           },
           {
             icon: secondaryMeta?.name
-              ? `/goods/${slugify(secondaryMeta.name)}.webp`
-              : "/goods/default.webp",
+              ? `/images/goods/${slugify(secondaryMeta.name)}.webp`
+              : "/images/goods/default.webp",
             name: secondaryMeta?.name ?? "Secondary",
             amount: amounts.secondary,
             difference: amounts.secondary,
           },
           {
             icon: tertiaryMeta?.name
-              ? `/goods/${slugify(tertiaryMeta.name)}.webp`
-              : "/goods/default.webp",
+              ? `/images/goods/${slugify(tertiaryMeta.name)}.webp`
+              : "/images/goods/default.webp",
             name: tertiaryMeta?.name ?? "Tertiary",
             amount: amounts.tertiary,
             difference: amounts.tertiary,
@@ -357,7 +357,7 @@ function useOtherGoodsByCiv(
       }
 
       const item = {
-        icon: `/goods/${normalized}.webp`,
+        icon: `/images/goods/${normalized}.webp`,
         name: displayName,
         amount,
         difference: amount,
@@ -497,7 +497,7 @@ export function TotalGoodsDisplay({
   // (les entités hidden sont exclues du calcul, donc totals = vide aussi)
   if (allDataHidden) {
     return (
-      <div className="p-3 size-full m-auto flex items-center justify-center bg-background-200">
+      <div className="p-2 size-full m-auto flex items-center justify-center bg-background-200">
         <div className="-mt-12">
           <EmptyOutline perso="male2" type="all-hidden" />
         </div>
@@ -508,7 +508,7 @@ export function TotalGoodsDisplay({
   //  AMÉLIORATION: EmptyCard apparaît seulement après le chargement
   if (!hasAnyResources) {
     return (
-      <div className="p-3 size-full m-auto flex items-center justify-center bg-background-200">
+      <div className="p-2 size-full m-auto flex items-center justify-center bg-background-200">
         <div className="-mt-12">
           <EmptyOutline perso="female" type="total" />
         </div>

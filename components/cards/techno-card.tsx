@@ -276,7 +276,7 @@ export function TechnoCard({
             >
               {!mainResources.length && !goodsBadges?.length ? (
                 <ResourceBadge
-                  icon="/goods/default.webp"
+                  icon="/images/goods/default.webp"
                   value="0"
                   alt="No resources"
                 />

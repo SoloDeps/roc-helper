@@ -152,7 +152,7 @@ export function TradePostCard({
                 className="size-6 select-none"
                 draggable={false}
                 onError={(e) => {
-                  e.currentTarget.src = "/goods/default.webp";
+                  e.currentTarget.src = "/images/goods/default.webp";
                 }}
                 width={24}
                 height={24}
@@ -224,7 +224,7 @@ export function TradePostCard({
           >
             {!mainResources.length && !goodsBadges.length ? (
               <ResourceBadge
-                icon="/goods/default.webp"
+                icon="/images/goods/default.webp"
                 value="0"
                 alt="No goods"
               />

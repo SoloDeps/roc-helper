@@ -16,28 +16,28 @@ const cards: CardData[] = [
   {
     title: "Calculator",
     description: "Plan buildings and track the resources you'll need",
-    icon: "/game_icons/icon_flat_research_points.webp",
+    icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/high_middle_ages/hm_13.webp",
     href: "/calculator",
   },
   {
     title: "Research Tree",
     description: "Explore technologies and plan your research path",
-    icon: "/game_icons/icon_flat_research_points.webp",
+    icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/kingdom_of_sicily/ks_41.webp",
     href: "/research-tree",
   },
   {
     title: "Help",
     description: "Learn how to use RoC Helper and explore its features",
-    icon: "/game_icons/icon_flat_research_points.webp",
+    icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/high_middle_ages/hm_16.webp",
     href: "/help",
   },
   {
     title: "Coming Soon",
     description: "Something is taking shape in the shadows...",
-    icon: "/game_icons/icon_flat_scout.webp",
+    icon: "/images/game_icons/icon_flat_scout.webp",
     illustration: "/images/technos/minoan_era/me_6.webp",
     locked: true,
     badge: "Coming Soon",
@@ -64,8 +64,9 @@ function HomeCard({ data }: { data: CardData }) {
         <Image
           src={data.illustration}
           alt=""
-          fill
-          className="object-cover select-none"
+          width={96}
+          height={96}
+          className="object-contains size-full select-none"
           draggable={false}
         />
       </div>
@@ -74,9 +75,9 @@ function HomeCard({ data }: { data: CardData }) {
       <div className="absolute inset-y-0 left-0 z-20 p-3.5 flex flex-col justify-center md:justify-start gap-1.5 max-w-[62%]">
         {/* Icon circle + title */}
         <div className="flex items-center gap-2 md:mt-2">
-          <h3 className="text-[17px] md:text-lg font-bold leading-tight text-foreground truncate">
+          <h2 className="text-[17px] md:text-lg font-bold leading-tight text-foreground truncate">
             {data.title}
-          </h3>
+          </h2>
         </div>
 
         {/* Description */}

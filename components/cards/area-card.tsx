@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { X, EyeOff, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ResourceBadge } from "@/components/items/resource-badge";
 import { cn } from "@/lib/utils";
 import {
@@ -102,7 +101,7 @@ export function AreaCard({
       <div className="hidden md:flex size-28 shrink-0 overflow-hidden relative">
         <div className="size-full flex items-center justify-center bg-background-400/50">
           <Image
-            src="/game_icons/icon_flat_scout.webp"
+            src="/images/game_icons/icon_flat_scout.webp"
             alt="scout"
             draggable={false}
             className="size-20 object-contain opacity-30 select-none invert-100 dark:invert-10"
@@ -116,7 +115,12 @@ export function AreaCard({
         <div className="flex-1 h-full">
           <div className="flex justify-between items-start mb-3">
             <div className="flex items-start gap-2">
-              <div className={cn("flex flex-col space-y-1", hidden && "opacity-50")}>
+              <div
+                className={cn(
+                  "flex flex-col space-y-1",
+                  hidden && "opacity-50",
+                )}
+              >
                 <h3 className="text-sm lg:text-[15px] font-medium truncate capitalize leading-tight">
                   Area {areaIndex}
                 </h3>

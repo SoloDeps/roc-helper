@@ -18,7 +18,7 @@ export function SiteHeader() {
         <MobileNav items={siteConfig.navItems} />
         <Link href="/" className="hidden md:flex items-center gap-2 ">
           <Image
-            src="/icon/48.png"
+            src="/images/logo.webp"
             width={24}
             height={24}
             alt="logo"

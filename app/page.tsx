@@ -8,10 +8,10 @@ export default function Home() {
         <div className="flex flex-col gap-4 size-full max-w-4xl">
           <div className="relative shrink-0 h-36 md:h-44 overflow-hidden rounded-xl border shadow-xs">
             <Image
-              src="/images/banners/banner1.png"
+              src="/images/banners/banner1.webp"
               alt=""
-              width={1200}
-              height={400}
+              width={900}
+              height={200}
               className="object-cover size-full select-none"
               draggable={false}
             />

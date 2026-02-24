@@ -154,7 +154,7 @@ const LevelCheckboxes = memo<LevelCheckboxesProps>(
                 className={cn(
                   "flex items-center gap-3 rounded-sm border px-3 py-2.5",
                   isSelected
-                    ? "border-2 border-primary bg-primary/10 shadow-md"
+                    ? "border-2 border-primary! bg-primary/10! shadow-md"
                     : "border-alpha-300 bg-background-100 hover:border-alpha-400",
                 )}
               >

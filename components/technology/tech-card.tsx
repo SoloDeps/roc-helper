@@ -47,9 +47,9 @@ export const TechCard = memo<TechCardProps>(
     const displayName = resolvedGoodName
       ? formatGoodName(resolvedGoodName)
       : tech.name;
-    // Large goods images will live in /images/goods-large/ once ready — falls back to badge icon for now
+    // Large goods images will live in /images/images/goods-large/ once ready — falls back to badge icon for now
     const imgSrc = resolvedGoodName
-      ? `/images/goods-large/${resolvedGoodName}.webp`
+      ? `/images/images/goods-large/${resolvedGoodName}.webp`
       : `/images/technos/${eraFolder}/${tech.id}.webp`;
     const imgFallback = resolvedGoodName
       ? getItemIconLocal(resolvedGoodName)

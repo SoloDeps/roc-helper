@@ -329,7 +329,10 @@ export function FiltersDrawer() {
           <Filter className="size-4" />
           Filters
           {activeFiltersCount > 0 && (
-            <Badge variant="default" className="size-5 px-1 text-[13px]">
+            <Badge
+              variant="default"
+              className="size-5 text-[13px] bg-[#171717] text-white dark:bg-primary dark:text-primary-foreground font-medium"
+            >
               {activeFiltersCount}
             </Badge>
           )}

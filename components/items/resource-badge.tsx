@@ -24,7 +24,7 @@ export const ResourceBadge = memo(function ResourceBadge({
         alt={`${alt} - ${slugify(value)}`}
         className="size-[25px] select-none"
         draggable={false}
-        onError={() => setSrc("/goods/default.webp")}
+        onError={() => setSrc("/images/goods/default.webp")}
         width={25}
         height={25}
       />

@@ -266,7 +266,7 @@ export const ReusableAccordion = memo(function ReusableAccordion({
 
       {/* 🎯 OPTIMISATION : Wrapper div pour éviter layout shift */}
       <AccordionContent className="pb-0">
-        <div className="px-2 md:px-4 pb-4 pt-3 space-y-2 2xl:ps-10">
+        <div className="px-2 md:px-4 pb-4 pt-1 md:pt-2 space-y-2 2xl:ps-10">
           {children}
         </div>
       </AccordionContent>

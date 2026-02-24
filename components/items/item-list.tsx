@@ -580,15 +580,17 @@ export function ItemList() {
               inlineSubtitle
               onOpenMobileActions={() => setActiveDrawer("ottoman-areas")}
             >
-              {filteredAreas.map((area) => (
-                <AreaCard
-                  key={area.id}
-                  area={area}
-                  userSelections={userSelections}
-                  onRemove={(id) => removeArea.mutate(id)}
-                  onToggleHidden={(id) => toggleAreaHidden.mutate(id)}
-                />
-              ))}
+              {[...filteredAreas]
+                .sort((a, b) => a.areaIndex - b.areaIndex)
+                .map((area) => (
+                  <AreaCard
+                    key={area.id}
+                    area={area}
+                    userSelections={userSelections}
+                    onRemove={(id) => removeArea.mutate(id)}
+                    onToggleHidden={(id) => toggleAreaHidden.mutate(id)}
+                  />
+                ))}
             </ReusableAccordion>
           )}
 
@@ -626,18 +628,20 @@ export function ItemList() {
               inlineSubtitle
               onOpenMobileActions={() => setActiveDrawer("ottoman-tradeposts")}
             >
-              {filteredTradePosts.map((tp) => (
-                <TradePostCard
-                  key={tp.id}
-                  tradePost={tp}
-                  userSelections={userSelections}
-                  onRemove={(id) => removeTradePost.mutate(id)}
-                  onToggleHidden={(id) => toggleTradePostHidden.mutate(id)}
-                  onToggleLevel={(id, level) =>
-                    toggleTradePostLevel.mutate({ id, level })
-                  }
-                />
-              ))}
+              {[...filteredTradePosts]
+                .sort((a, b) => a.area - b.area)
+                .map((tp) => (
+                  <TradePostCard
+                    key={tp.id}
+                    tradePost={tp}
+                    userSelections={userSelections}
+                    onRemove={(id) => removeTradePost.mutate(id)}
+                    onToggleHidden={(id) => toggleTradePostHidden.mutate(id)}
+                    onToggleLevel={(id, level) =>
+                      toggleTradePostLevel.mutate({ id, level })
+                    }
+                  />
+                ))}
             </ReusableAccordion>
           )}
         </Accordion>

@@ -4,16 +4,16 @@ import { buildingsAbbr, EraAbbr, goodsUrlByEra } from "./constants";
 import { imagesUrl } from "./catalog";
 
 export const selectorGoods: Record<string, string> = {
-  default: "/goods/default.webp",
-  tailor: "/goods/wool.webp",
-  stone_mason: "/goods/alabaster_idol.webp",
-  artisan: "/goods/bronze_bracelet.webp",
-  scribe: "/goods/parchment.webp",
-  carpenter: "/goods/planks.webp",
-  spice_merchant: "/goods/pepper.webp",
-  jeweler: "/goods/fine_jewelry.webp",
-  alchemist: "/goods/ointment.webp",
-  glassblower: "/goods/lead_glass.webp",
+  default: "/images/goods/default.webp",
+  tailor: "/images/goods/wool.webp",
+  stone_mason: "/images/goods/alabaster_idol.webp",
+  artisan: "/images/goods/bronze_bracelet.webp",
+  scribe: "/images/goods/parchment.webp",
+  carpenter: "/images/goods/planks.webp",
+  spice_merchant: "/images/goods/pepper.webp",
+  jeweler: "/images/goods/fine_jewelry.webp",
+  alchemist: "/images/goods/ointment.webp",
+  glassblower: "/images/goods/lead_glass.webp",
 };
 
 export function cn(...inputs: ClassValue[]) {
@@ -134,9 +134,9 @@ export function getGoodNameFromPriorityEra(
 export function getItemIconLocal(type: string): string {
   const normalized = slugify(type);
   if (normalized && normalized !== "default") {
-    return `/goods/${normalized}.webp`;
+    return `/images/goods/${normalized}.webp`;
   }
-  return `/goods/default.webp`;
+  return `/images/goods/default.webp`;
 }
 
 export function getCityCrestIconLocal(type: string): string {
@@ -144,7 +144,7 @@ export function getCityCrestIconLocal(type: string): string {
   if (normalized && normalized !== "default") {
     return imagesUrl[normalized as keyof typeof imagesUrl];
   }
-  return `/goods/default.webp`;
+  return `/images/goods/default.webp`;
 }
 
 export function getWikiImageUrl(

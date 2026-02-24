@@ -44,18 +44,18 @@ export default function Help() {
 
         <div className="size-full bg-background-200">
           <ScrollArea className="h-full">
-            <div className="h-64 overflow-hidden">
+            <div className="h-36 md:h-64 overflow-hidden">
               <Image
-                src="/images/banners/banner3.webp"
+                src="/images/banners/banner_help.webp"
                 alt="ROC Helper Banner"
-                className="w-full h-80 object-center object-cover -mt-16 select-none"
+                className="size-full object-bottom object-cover select-none"
                 draggable={false}
-                width={1200}
-                height={400}
+                width={900}
+                height={380}
               />
             </div>
 
-            <div className="prose prose-sm dark:prose-invert prose-p:text-[15px] prose-p:mb-3 max-w-none px-2 md:px-6 pt-5 pb-20 size-full flex flex-col gap-y-6">
+            <div className="prose dark:prose-invert prose-p:text-[15px] prose-p:mb-3 max-w-none px-2 md:px-6 pt-5 pb-20 size-full flex flex-col gap-y-6">
               {/* ========================= */}
               {/* BETA WARNING */}
               {/* ========================= */}
@@ -285,7 +285,7 @@ export default function Help() {
                 <ul className="space-y-2 ps-3">
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/wool.webp"
+                      src="/images/goods/wool.webp"
                       alt="Wool"
                       width={20}
                       height={20}
@@ -297,7 +297,7 @@ export default function Help() {
 
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/bronze_bracelet.webp"
+                      src="/images/goods/bronze_bracelet.webp"
                       alt="Bronze Bracelet"
                       width={20}
                       height={20}
@@ -309,7 +309,7 @@ export default function Help() {
 
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/alabaster_idol.webp"
+                      src="/images/goods/alabaster_idol.webp"
                       alt="Alabaster Idol"
                       width={20}
                       height={20}
@@ -339,7 +339,7 @@ export default function Help() {
                 <ul className="space-y-2 ps-3">
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/parchment.webp"
+                      src="/images/goods/parchment.webp"
                       alt="Parchment"
                       width={20}
                       height={20}
@@ -351,7 +351,7 @@ export default function Help() {
 
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/planks.webp"
+                      src="/images/goods/planks.webp"
                       alt="Planks"
                       width={20}
                       height={20}
@@ -363,7 +363,7 @@ export default function Help() {
 
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/chili.webp"
+                      src="/images/goods/chili.webp"
                       alt="Chili"
                       width={20}
                       height={20}
@@ -379,7 +379,7 @@ export default function Help() {
                 <ul className="space-y-2 ps-3">
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/lead_glass.webp"
+                      src="/images/goods/lead_glass.webp"
                       alt="Lead Glass"
                       width={20}
                       height={20}
@@ -391,7 +391,7 @@ export default function Help() {
 
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/ointment.webp"
+                      src="/images/goods/ointment.webp"
                       alt="Ointment"
                       width={20}
                       height={20}
@@ -403,7 +403,7 @@ export default function Help() {
 
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/goods/fine_jewelry.webp"
+                      src="/images/goods/fine_jewelry.webp"
                       alt="Fine Jewelry"
                       width={20}
                       height={20}

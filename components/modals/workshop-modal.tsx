@@ -288,6 +288,7 @@ const WorkshopContent = memo(({ onClose }: WorkshopContentProps) => {
               <Link
                 href="/help#workshops-system"
                 className="underline font-medium text-blue-500 dark:text-cyan-400"
+                onClick={() => onClose?.()}
               >
                 Need help?
               </Link>
@@ -298,7 +299,7 @@ const WorkshopContent = memo(({ onClose }: WorkshopContentProps) => {
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="rounded-full h-8 w-8 shrink-0 mt-0.5"
+              className="rounded-full h-8 w-8 shrink-0 max-sm:-mt-1.5"
             >
               <X className="h-4 w-4" />
               <span className="sr-only">Close</span>

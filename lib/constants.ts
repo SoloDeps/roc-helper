@@ -180,7 +180,7 @@ export const buildingsAbbr = [
 ];
 
 // export const itemsUrl = {
-//   default: "/images/thumb/3/36/Goods.png/32px-Goods.png",
+//   default: "/images/thumb/3/36/images/goods.png/32px-Goods.png",
 //   coins: "/images/thumb/Coin.png/32px-Coin.png",
 //   food: "/images/thumb/Food.png/32px-Food.png",
 //   research_points: "/images/thumb/Research.png/32px-Research.png",
@@ -435,7 +435,7 @@ export const goodsByCivilization: Record<
       "ceremonial_dress",
       "deben",
       "papyrus",
-      "gold_ore"
+      "gold_ore",
     ],
   },
   CHINA: {
@@ -461,7 +461,7 @@ export const goodsByCivilization: Record<
       "cocoa",
       "jade",
       "obsidian",
-      "feathers"
+      "feathers",
     ],
   },
   "VIKING KINGDOM": {
@@ -491,7 +491,7 @@ export const goodsByCivilization: Record<
       "myrrh",
       "brass",
       "gold_dinar",
-      "coffee_beans"
+      "coffee_beans",
     ],
   },
   "OTTOMAN EMPIRE": {

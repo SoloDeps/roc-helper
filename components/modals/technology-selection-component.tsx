@@ -63,7 +63,7 @@ export const TechnologySelection = memo(() => {
             {/* Left: Icon + Era Name */}
             <div className="flex items-center gap-3 flex-1 min-w-0">
               <Image
-                src="/game_icons/icon_flat_research_points.webp"
+                src="/images/game_icons/icon_flat_research_points.webp"
                 alt={era.name}
                 width={40}
                 height={40}

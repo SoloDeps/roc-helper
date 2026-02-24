@@ -102,7 +102,9 @@ function MobileQuantityDrawer({
           {/* Display current value - shows local value for instant feedback */}
           <div className="text-center">
             <div className="text-4xl font-bold tabular-nums">{localValue}</div>
-            <div className="text-[15px] font-medium text-muted-foreground mt-1">Max: {max}</div>
+            <div className="text-[15px] font-medium text-muted-foreground mt-1">
+              Max: {max}
+            </div>
           </div>
 
           {/* Slider with debounced updates */}
@@ -121,7 +123,7 @@ function MobileQuantityDrawer({
 }
 
 /**
- * Desktop Counter with instant button feedback
+ * Desktop Counter with debounced updates
  */
 function DesktopCounter({
   value,
@@ -130,11 +132,27 @@ function DesktopCounter({
   max = 999,
   disabled = false,
 }: BuildingCounterProps) {
-  // For buttons, we want instant feedback, no debounce
+  const [localValue, setLocalValue] = useState(value);
+
+  // Sync local value when prop changes (e.g., from external updates)
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  const debouncedOnChange = useDebouncedCallback(onChange, 300);
+
+  const handleChange = useCallback(
+    (newValue: number) => {
+      setLocalValue(newValue);
+      debouncedOnChange(newValue);
+    },
+    [debouncedOnChange],
+  );
+
   return (
     <NumberField
-      value={value}
-      onChange={onChange}
+      value={localValue}
+      onChange={handleChange}
       minValue={min}
       maxValue={max}
       isDisabled={disabled}
@@ -149,7 +167,7 @@ function DesktopCounter({
         </Button>
 
         <div className="flex items-center justify-center size-9 px-2 bg-background-100 text-center font-medium tabular-nums select-none">
-          {value}
+          {localValue}
         </div>
 
         <Button

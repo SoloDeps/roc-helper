@@ -8,6 +8,7 @@ import { showAllEntities } from "@/lib/db/hide-show-utils";
 import { Button } from "@/components/ui/button";
 import { WorkshopModal } from "@/components/modals/workshop-modal";
 import { AddElementModal } from "../modals/add-element/add-element-modal";
+import { Eye } from "lucide-react";
 
 interface EmptyType {
   perso: "male" | "female" | "male2";
@@ -26,7 +27,7 @@ const content: Record<"male" | "female" | "male2", ContentItem> = {
   female: {
     imgClass: "h-64 left-[72px] hidden md:block",
     image: "/images/characters/female_lge.png",
-    textClass: "ps-6 md:ps-40",
+    textClass: "ps-5 md:ps-40",
     text: "Glad to see you, Sire!",
     description:
       "Here, you can view and adjust the resources you need.\nFelix could use your help on the other side!",
@@ -34,7 +35,7 @@ const content: Record<"male" | "female" | "male2", ContentItem> = {
   male: {
     imgClass: "h-64 left-14 hidden md:block",
     image: "/images/characters/male_lge.png",
-    textClass: "ps-6 md:ps-40",
+    textClass: "ps-5 md:ps-40",
     text: "I hope you're doing well, Chief!",
     description:
       "We should start adding new buildings to the list to better track the resources we'll need for them.",
@@ -42,7 +43,7 @@ const content: Record<"male" | "female" | "male2", ContentItem> = {
   male2: {
     imgClass: "h-56 left-28 hidden md:block",
     image: "/images/characters/male2_lge.png",
-    textClass: "ps-12 md:ps-52",
+    textClass: "ps-5 md:ps-52",
     text: "What are you up to, Chief?",
     description:
       "Everything's hidden here...\nUnhide some items to see your resources!",
@@ -85,6 +86,7 @@ export function EmptyOutline({ perso, type }: EmptyType) {
             {type === "total" && <WorkshopModal variant="default" />}
             {type === "all-hidden" && (
               <Button variant="default" size="sm" onClick={handleShowAll}>
+                <Eye className="h-4 w-4" />
                 Show all
               </Button>
             )}

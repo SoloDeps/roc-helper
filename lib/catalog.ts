@@ -51,7 +51,7 @@ export interface NavigableItem {
 // CONSTANTS
 // ============================================================================
 
-export const FALLBACK_IMAGE = "/game_icons/icon_flat_home.webp";
+export const FALLBACK_IMAGE = "/images/game_icons/icon_flat_home.webp";
 
 export const ERAS: Era[] = [
   {
@@ -141,39 +141,39 @@ export const ERAS: Era[] = [
 ];
 
 export const imagesUrl = {
-  home: "/game_icons/icon_flat_home.webp",
-  farm: "/game_icons/icon_flat_farm.webp",
-  museum: "/game_icons/icon_flat_museum.webp",
-  research: "/game_icons/icon_flat_research_points.webp",
-  barracks: "/game_icons/icon_flat_barracks.webp",
-  cultureSite: "/game_icons/icon_flat_cultureSite.webp",
-  info: "/game_icons/icon_flat_info.webp",
-  workshop: "/game_icons/icon_flat_workshop.webp",
-  shipyard: "/game_icons/icon_flat_shipyard.webp",
-  warehouse: "/game_icons/icon_flat_warehouse.webp",
-  scout: "/game_icons/icon_flat_scout.webp",
-  sailorHome: "/game_icons/icon_flat_sailorHome.webp",
-  goldMine: "/game_icons/icon_flat_goldMine.webp",
-  papyrusField: "/game_icons/icon_flat_papyrusField.webp",
-  riceFarm: "/game_icons/icon_flat_riceFarm.webp",
-  aviary: "/game_icons/icon_flat_aviary.webp",
-  quarry: "/game_icons/icon_flat_quarry.webp",
-  ritualSite: "/game_icons/icon_flat_ritualSite.webp",
-  beehive: "/game_icons/icon_flat_beehive.webp",
-  fishingPier: "/game_icons/icon_flat_fishingPier.webp",
-  expeditionPier: "/game_icons/icon_flat_expeditionPier.webp",
-  runestone: "/game_icons/icon_flat_runestone.webp",
-  tavern: "/game_icons/icon_flat_tavern.webp",
-  camelFarm: "/game_icons/icon_flat_camelFarm.webp",
-  irrigation: "/game_icons/icon_flat_irrigation.webp",
-  merchant: "/game_icons/icon_flat_merchant.webp",
+  home: "/images/game_icons/icon_flat_home.webp",
+  farm: "/images/game_icons/icon_flat_farm.webp",
+  museum: "/images/game_icons/icon_flat_museum.webp",
+  research: "/images/game_icons/icon_flat_research_points.webp",
+  barracks: "/images/game_icons/icon_flat_barracks.webp",
+  cultureSite: "/images/game_icons/icon_flat_cultureSite.webp",
+  info: "/images/game_icons/icon_flat_info.webp",
+  workshop: "/images/game_icons/icon_flat_workshop.webp",
+  shipyard: "/images/game_icons/icon_flat_shipyard.webp",
+  warehouse: "/images/game_icons/icon_flat_warehouse.webp",
+  scout: "/images/game_icons/icon_flat_scout.webp",
+  sailorHome: "/images/game_icons/icon_flat_sailorHome.webp",
+  goldMine: "/images/game_icons/icon_flat_goldMine.webp",
+  papyrusField: "/images/game_icons/icon_flat_papyrusField.webp",
+  riceFarm: "/images/game_icons/icon_flat_riceFarm.webp",
+  aviary: "/images/game_icons/icon_flat_aviary.webp",
+  quarry: "/images/game_icons/icon_flat_quarry.webp",
+  ritualSite: "/images/game_icons/icon_flat_ritualSite.webp",
+  beehive: "/images/game_icons/icon_flat_beehive.webp",
+  fishingPier: "/images/game_icons/icon_flat_fishingPier.webp",
+  expeditionPier: "/images/game_icons/icon_flat_expeditionPier.webp",
+  runestone: "/images/game_icons/icon_flat_runestone.webp",
+  tavern: "/images/game_icons/icon_flat_tavern.webp",
+  camelFarm: "/images/game_icons/icon_flat_camelFarm.webp",
+  irrigation: "/images/game_icons/icon_flat_irrigation.webp",
+  merchant: "/images/game_icons/icon_flat_merchant.webp",
   // crests
-  china: "/city_crest/icon_city_crest_china.webp",
-  arabia: "/city_crest/icon_city_crest_arabia.webp",
-  egypt: "/city_crest/icon_city_crest_egypt.webp",
-  maya: "/city_crest/icon_city_crest_maya.webp",
-  ottoman: "/city_crest/icon_city_crest_ottoman.webp",
-  vikings: "/city_crest/icon_city_crest_vikings.webp",
+  china: "/images/city_crest/icon_city_crest_china.webp",
+  arabia: "/images/city_crest/icon_city_crest_arabia.webp",
+  egypt: "/images/city_crest/icon_city_crest_egypt.webp",
+  maya: "/images/city_crest/icon_city_crest_maya.webp",
+  ottoman: "/images/city_crest/icon_city_crest_ottoman.webp",
+  vikings: "/images/city_crest/icon_city_crest_vikings.webp",
 } as const;
 
 // ============================================================================
