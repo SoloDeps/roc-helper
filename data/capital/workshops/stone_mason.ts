@@ -6,6 +6,8 @@ export const stoneMasonWorkshop: BuildingData = {
   category: "capital",
   subcategory: "workshops",
   imageName: "Capital_Stone_Mason_Lv",
+  width: 4,
+  height: 3,
   levels: [
     {
       level: 1,

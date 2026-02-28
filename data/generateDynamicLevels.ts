@@ -1,5 +1,7 @@
 import {
   BuildingLevel,
+  BuildingProduction,
+  BuildingHappiness,
   Costs,
   EraCode,
   EraGoodsMap,
@@ -57,6 +59,18 @@ export interface StandardLevelConfig {
     extraGoods: { amount: number; resource: string }[];
   };
   eraGoodsMap?: EraGoodsMap;
+  // Formules de production + bonheur pour les niveaux dynamiques (40+)
+  productionFormula?: {
+    coins?: (level: number) => number;
+    workers?: number | ((level: number) => number);
+    food?: (level: number) => number;
+    goods?: (level: number) => number;
+  };
+  happinessFormula?: {
+    h1: (level: number) => number;
+    h2: (level: number) => number;
+    h3: (level: number) => number;
+  };
 }
 
 export function generateStandardLevels(
@@ -125,10 +139,38 @@ export function generateStandardLevels(
       };
     }
 
+    // ── Production ───────────────────────────────────────────────────────────
+    let production: BuildingProduction | undefined;
+    if (config.productionFormula) {
+      const pf = config.productionFormula;
+      production = {
+        ...(pf.coins !== undefined && { coins: pf.coins(level) }),
+        ...(pf.workers !== undefined && {
+          workers:
+            typeof pf.workers === "function" ? pf.workers(level) : pf.workers,
+        }),
+        ...(pf.food !== undefined && { food: pf.food(level) }),
+        ...(pf.goods !== undefined && { goods: pf.goods(level) }),
+      };
+    }
+
+    // ── Happiness ─────────────────────────────────────────────────────────────
+    let happiness: BuildingHappiness | undefined;
+    if (config.happinessFormula) {
+      const hf = config.happinessFormula;
+      happiness = {
+        h1: hf.h1(level),
+        h2: hf.h2(level),
+        h3: hf.h3(level),
+      };
+    }
+
     levels.push({
       level,
       era: currentEra,
       ...(max_qty !== undefined && { max_qty }),
+      ...(production !== undefined && { production }),
+      ...(happiness !== undefined && { happiness }),
       upgrade,
       ...(construction !== undefined && { construction }),
     });
@@ -196,6 +238,8 @@ export interface CultureLevelConfig {
     food?: (level: number) => number;
     gems?: number;
   };
+  culture_range?: number; // fixe pour tous les niveaux
+  culture_bonus?: (level: number) => number; // formule par niveau
 }
 
 export function generateCultureLevels(
@@ -241,6 +285,12 @@ export function generateCultureLevels(
       level,
       era: currentEra,
       max_qty,
+      ...(config.culture_range !== undefined && {
+        culture_range: config.culture_range,
+      }),
+      ...(config.culture_bonus !== undefined && {
+        culture_bonus: config.culture_bonus(level),
+      }),
       construction,
       upgrade,
     });

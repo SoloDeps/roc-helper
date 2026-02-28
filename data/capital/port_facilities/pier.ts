@@ -6,6 +6,8 @@ export const pier: BuildingData = {
   category: "capital",
   subcategory: "port_facilities",
   imageName: "Pier_Lv",
+  width: 3,
+  height: 1,
   levels: [
     {
       level: 1,

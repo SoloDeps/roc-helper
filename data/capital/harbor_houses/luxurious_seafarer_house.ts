@@ -6,6 +6,8 @@ export const luxuriousSeafarerHouse: BuildingData = {
   category: "capital",
   subcategory: "homes",
   imageName: "Luxurious_Seafarer_House_Lv",
+  width: 2,
+  height: 2,
   levels: [
     {
       level: 1,

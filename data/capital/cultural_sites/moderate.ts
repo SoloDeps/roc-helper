@@ -12,6 +12,8 @@ export const moderateCultureSiteDynamic = generateCultureLevels({
     coins: (l) => l * 310000 - 1420000,
     food: (l) => l * 180000 - 860000,
   },
+  culture_range: 2,
+  culture_bonus: (l) => l * 140 - 520,
 });
 
 export const moderateCultureSite: BuildingData = {
@@ -20,11 +22,15 @@ export const moderateCultureSite: BuildingData = {
   category: "capital",
   subcategory: "cultural_sites",
   imageName: "Capital_Moderate_Culture_Site_Lv",
+  width: 2,
+  height: 2,
   levels: [
     {
       level: 1,
       era: "SA",
       max_qty: 2,
+      culture_range: 2,
+      culture_bonus: 160,
       construction: {
         coins: 20,
         food: 10,
@@ -34,6 +40,8 @@ export const moderateCultureSite: BuildingData = {
       level: 2,
       era: "BA",
       max_qty: 2,
+      culture_range: 2,
+      culture_bonus: 200,
       construction: {
         coins: 6400,
         food: 4000,
@@ -47,6 +55,8 @@ export const moderateCultureSite: BuildingData = {
       level: 3,
       era: "ME",
       max_qty: 3,
+      culture_range: 2,
+      culture_bonus: 240,
       construction: {
         coins: 38000,
         food: 24000,
@@ -60,6 +70,8 @@ export const moderateCultureSite: BuildingData = {
       level: 4,
       era: "CG",
       max_qty: 3,
+      culture_range: 2,
+      culture_bonus: 280,
       construction: {
         coins: 130000,
         food: 80000,
@@ -73,6 +85,8 @@ export const moderateCultureSite: BuildingData = {
       level: 5,
       era: "ER",
       max_qty: 3,
+      culture_range: 2,
+      culture_bonus: 320,
       construction: {
         coins: 360000,
         food: 220000,
@@ -86,6 +100,8 @@ export const moderateCultureSite: BuildingData = {
       level: 6,
       era: "RE",
       max_qty: 4,
+      culture_range: 2,
+      culture_bonus: 400,
       construction: {
         coins: 750000,
         food: 460000,
@@ -99,6 +115,8 @@ export const moderateCultureSite: BuildingData = {
       level: 7,
       era: "BE",
       max_qty: 4,
+      culture_range: 2,
+      culture_bonus: 480,
       construction: {
         coins: 1300000,
         food: 830000,
@@ -112,6 +130,8 @@ export const moderateCultureSite: BuildingData = {
       level: 8,
       era: "AF",
       max_qty: 4,
+      culture_range: 2,
+      culture_bonus: 560,
       construction: {
         coins: 2100000,
         food: 1400000,
@@ -125,6 +145,8 @@ export const moderateCultureSite: BuildingData = {
       level: 9,
       era: "FA",
       max_qty: 4,
+      culture_range: 2,
+      culture_bonus: 680,
       construction: {
         coins: 3300000,
         food: 2100000,
@@ -138,6 +160,8 @@ export const moderateCultureSite: BuildingData = {
       level: 10,
       era: "IE",
       max_qty: 4,
+      culture_range: 2,
+      culture_bonus: 800,
       construction: {
         coins: 4900000,
         food: 3100000,
@@ -151,6 +175,8 @@ export const moderateCultureSite: BuildingData = {
       level: 11,
       era: "KS",
       max_qty: 5,
+      culture_range: 2,
+      culture_bonus: 960,
       construction: {
         coins: 6900000,
         food: 4200000,
@@ -164,6 +190,8 @@ export const moderateCultureSite: BuildingData = {
       level: 12,
       era: "HM",
       max_qty: 5,
+      culture_range: 2,
+      culture_bonus: 1160,
       construction: {
         coins: 9300000,
         food: 5600000,
@@ -177,6 +205,8 @@ export const moderateCultureSite: BuildingData = {
       level: 13,
       era: "EG",
       max_qty: 6,
+      culture_range: 2,
+      culture_bonus: 1300,
       construction: {
         coins: 11800000,
         food: 7000000,

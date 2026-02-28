@@ -21,6 +21,16 @@ export const smallHomeDynamic = generateStandardLevels({
     food: 640000,
     extraGoods: [{ amount: 3000, resource: "confection" }],
   },
+  // Production + happiness formulas for levels 40+
+  productionFormula: {
+    coins: (l) => l * 1500 - 23500,
+    workers: 1,
+  },
+  happinessFormula: {
+    h1: (l) => Math.ceil(l / 3) * 170 - 1180,
+    h2: (l) => Math.ceil(l / 3) * 350 - 2480,
+    h3: (l) => Math.ceil(l / 3) * 690 - 4840,
+  },
 });
 
 export const smallHome: BuildingData = {
@@ -29,9 +39,21 @@ export const smallHome: BuildingData = {
   category: "capital",
   subcategory: "homes",
   imageName: "Capital_Small_Home_Lv",
+  width: 2,
+  height: 2,
+  duration: 6,
   levels: [
     {
       level: 1,
+      production: {
+        coins: 1800,
+        workers: 1,
+      },
+      happiness: {
+        h1: 70,
+        h2: 150,
+        h3: 300,
+      },
       era: "SA",
       max_qty: 7,
       construction: {
@@ -40,6 +62,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 2,
+      production: {
+        coins: 3500,
+        workers: 1,
+      },
+      happiness: {
+        h1: 70,
+        h2: 150,
+        h3: 300,
+      },
       era: "SA",
       max_qty: 7,
       upgrade: {
@@ -49,6 +80,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 3,
+      production: {
+        coins: 5300,
+        workers: 1,
+      },
+      happiness: {
+        h1: 70,
+        h2: 150,
+        h3: 300,
+      },
       era: "SA",
       max_qty: 7,
       upgrade: {
@@ -58,6 +98,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 4,
+      production: {
+        coins: 6100,
+        workers: 1,
+      },
+      happiness: {
+        h1: 110,
+        h2: 220,
+        h3: 440,
+      },
       era: "BA",
       max_qty: 12,
       construction: {
@@ -71,6 +120,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 5,
+      production: {
+        coins: 6700,
+        workers: 1,
+      },
+      happiness: {
+        h1: 110,
+        h2: 220,
+        h3: 440,
+      },
       era: "BA",
       max_qty: 12,
       upgrade: {
@@ -86,6 +144,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 6,
+      production: {
+        coins: 7040,
+        workers: 1,
+      },
+      happiness: {
+        h1: 110,
+        h2: 220,
+        h3: 440,
+      },
       era: "BA",
       max_qty: 12,
       upgrade: {
@@ -101,6 +168,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 7,
+      production: {
+        coins: 7740,
+        workers: 1,
+      },
+      happiness: {
+        h1: 150,
+        h2: 300,
+        h3: 590,
+      },
       era: "ME",
       max_qty: 14,
       construction: {
@@ -142,6 +218,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 8,
+      production: {
+        coins: 8130,
+        workers: 1,
+      },
+      happiness: {
+        h1: 150,
+        h2: 300,
+        h3: 590,
+      },
       era: "ME",
       max_qty: 14,
       upgrade: {
@@ -161,6 +246,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 9,
+      production: {
+        coins: 8540,
+        workers: 1,
+      },
+      happiness: {
+        h1: 150,
+        h2: 300,
+        h3: 590,
+      },
       era: "ME",
       max_qty: 14,
       upgrade: {
@@ -188,6 +282,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 10,
+      production: {
+        coins: 9390,
+        workers: 1,
+      },
+      happiness: {
+        h1: 200,
+        h2: 390,
+        h3: 790,
+      },
       era: "CG",
       max_qty: 18,
       construction: {
@@ -229,6 +332,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 11,
+      production: {
+        coins: 9860,
+        workers: 1,
+      },
+      happiness: {
+        h1: 200,
+        h2: 390,
+        h3: 790,
+      },
       era: "CG",
       max_qty: 18,
       upgrade: {
@@ -256,6 +368,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 12,
+      production: {
+        coins: 10400,
+        workers: 1,
+      },
+      happiness: {
+        h1: 200,
+        h2: 390,
+        h3: 790,
+      },
       era: "CG",
       max_qty: 18,
       upgrade: {
@@ -283,6 +404,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 13,
+      production: {
+        coins: 11200,
+        workers: 1,
+      },
+      happiness: {
+        h1: 250,
+        h2: 490,
+        h3: 980,
+      },
       era: "ER",
       max_qty: 20,
       construction: {
@@ -324,6 +454,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 14,
+      production: {
+        coins: 11600,
+        workers: 1,
+      },
+      happiness: {
+        h1: 250,
+        h2: 490,
+        h3: 980,
+      },
       era: "ER",
       max_qty: 20,
       upgrade: {
@@ -347,6 +486,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 15,
+      production: {
+        coins: 12100,
+        workers: 1,
+      },
+      happiness: {
+        h1: 250,
+        h2: 490,
+        h3: 980,
+      },
       era: "ER",
       max_qty: 20,
       upgrade: {
@@ -370,6 +518,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 16,
+      production: {
+        coins: 13100,
+        workers: 1,
+      },
+      happiness: {
+        h1: 300,
+        h2: 590,
+        h3: 1180,
+      },
       era: "RE",
       max_qty: 22,
       construction: {
@@ -411,6 +568,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 17,
+      production: {
+        coins: 13600,
+        workers: 1,
+      },
+      happiness: {
+        h1: 300,
+        h2: 590,
+        h3: 1180,
+      },
       era: "RE",
       max_qty: 22,
       upgrade: {
@@ -438,6 +604,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 18,
+      production: {
+        coins: 14100,
+        workers: 1,
+      },
+      happiness: {
+        h1: 300,
+        h2: 590,
+        h3: 1180,
+      },
       era: "RE",
       max_qty: 22,
       upgrade: {
@@ -465,6 +640,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 19,
+      production: {
+        coins: 15200,
+        workers: 1,
+      },
+      happiness: {
+        h1: 340,
+        h2: 690,
+        h3: 1380,
+      },
       era: "BE",
       max_qty: 24,
       construction: {
@@ -506,6 +690,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 20,
+      production: {
+        coins: 15800,
+        workers: 1,
+      },
+      happiness: {
+        h1: 340,
+        h2: 690,
+        h3: 1380,
+      },
       era: "BE",
       max_qty: 24,
       upgrade: {
@@ -533,6 +726,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 21,
+      production: {
+        coins: 16400,
+        workers: 1,
+      },
+      happiness: {
+        h1: 340,
+        h2: 690,
+        h3: 1380,
+      },
       era: "BE",
       max_qty: 24,
       upgrade: {
@@ -560,6 +762,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 22,
+      production: {
+        coins: 17500,
+        workers: 1,
+      },
+      happiness: {
+        h1: 420,
+        h2: 840,
+        h3: 1670,
+      },
       era: "AF",
       max_qty: 25,
       construction: {
@@ -601,6 +812,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 23,
+      production: {
+        coins: 18000,
+        workers: 1,
+      },
+      happiness: {
+        h1: 420,
+        h2: 840,
+        h3: 1670,
+      },
       era: "AF",
       max_qty: 25,
       upgrade: {
@@ -628,6 +848,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 24,
+      production: {
+        coins: 18500,
+        workers: 1,
+      },
+      happiness: {
+        h1: 420,
+        h2: 840,
+        h3: 1670,
+      },
       era: "AF",
       max_qty: 25,
       upgrade: {
@@ -655,6 +884,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 25,
+      production: {
+        coins: 19800,
+        workers: 1,
+      },
+      happiness: {
+        h1: 490,
+        h2: 980,
+        h3: 1970,
+      },
       era: "FA",
       max_qty: 26,
       construction: {
@@ -696,6 +934,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 26,
+      production: {
+        coins: 20400,
+        workers: 1,
+      },
+      happiness: {
+        h1: 490,
+        h2: 980,
+        h3: 1970,
+      },
       era: "FA",
       max_qty: 26,
       upgrade: {
@@ -723,6 +970,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 27,
+      production: {
+        coins: 21000,
+        workers: 1,
+      },
+      happiness: {
+        h1: 490,
+        h2: 980,
+        h3: 1970,
+      },
       era: "FA",
       max_qty: 26,
       upgrade: {
@@ -750,6 +1006,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 28,
+      production: {
+        coins: 22500,
+        workers: 1,
+      },
+      happiness: {
+        h1: 590,
+        h2: 1180,
+        h3: 2360,
+      },
       era: "IE",
       max_qty: 27,
       construction: {
@@ -791,6 +1056,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 29,
+      production: {
+        coins: 23200,
+        workers: 1,
+      },
+      happiness: {
+        h1: 590,
+        h2: 1180,
+        h3: 2360,
+      },
       era: "IE",
       max_qty: 27,
       upgrade: {
@@ -818,6 +1092,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 30,
+      production: {
+        coins: 23900,
+        workers: 1,
+      },
+      happiness: {
+        h1: 590,
+        h2: 1180,
+        h3: 2360,
+      },
       era: "IE",
       max_qty: 27,
       upgrade: {
@@ -845,6 +1128,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 31,
+      production: {
+        coins: 25600,
+        workers: 1,
+      },
+      happiness: {
+        h1: 710,
+        h2: 1430,
+        h3: 2850,
+      },
       era: "KS",
       max_qty: 28,
       construction: {
@@ -886,6 +1178,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 32,
+      production: {
+        coins: 26400,
+        workers: 1,
+      },
+      happiness: {
+        h1: 710,
+        h2: 1430,
+        h3: 2850,
+      },
       era: "KS",
       max_qty: 28,
       upgrade: {
@@ -913,6 +1214,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 33,
+      production: {
+        coins: 27200,
+        workers: 1,
+      },
+      happiness: {
+        h1: 710,
+        h2: 1430,
+        h3: 2850,
+      },
       era: "KS",
       max_qty: 28,
       upgrade: {
@@ -940,6 +1250,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 34,
+      production: {
+        coins: 29100,
+        workers: 1,
+      },
+      happiness: {
+        h1: 860,
+        h2: 1720,
+        h3: 3440,
+      },
       era: "HM",
       max_qty: 29,
       construction: {
@@ -981,6 +1300,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 35,
+      production: {
+        coins: 30000,
+        workers: 1,
+      },
+      happiness: {
+        h1: 860,
+        h2: 1720,
+        h3: 3440,
+      },
       era: "HM",
       max_qty: 29,
       upgrade: {
@@ -1008,6 +1336,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 36,
+      production: {
+        coins: 30900,
+        workers: 1,
+      },
+      happiness: {
+        h1: 860,
+        h2: 1720,
+        h3: 3440,
+      },
       era: "HM",
       max_qty: 29,
       upgrade: {
@@ -1035,6 +1372,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 37,
+      production: {
+        coins: 32000,
+        workers: 1,
+      },
+      happiness: {
+        h1: 1030,
+        h2: 2070,
+        h3: 4130,
+      },
       era: "EG",
       max_qty: 30,
       construction: {
@@ -1076,6 +1422,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 38,
+      production: {
+        coins: 33500,
+        workers: 1,
+      },
+      happiness: {
+        h1: 1030,
+        h2: 2070,
+        h3: 4130,
+      },
       era: "EG",
       max_qty: 30,
       upgrade: {
@@ -1103,6 +1458,15 @@ export const smallHome: BuildingData = {
     },
     {
       level: 39,
+      production: {
+        coins: 35000,
+        workers: 1,
+      },
+      happiness: {
+        h1: 1030,
+        h2: 2070,
+        h3: 4130,
+      },
       era: "EG",
       max_qty: 30,
       upgrade: {

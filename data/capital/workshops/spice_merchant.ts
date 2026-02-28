@@ -6,6 +6,8 @@ export const spiceMerchantWorkshop: BuildingData = {
   category: "capital",
   subcategory: "workshops",
   imageName: "Capital_Spice_Merchant_Lv",
+  width: 4,
+  height: 3,
   levels: [
     {
       level: 1,

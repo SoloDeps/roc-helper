@@ -6,6 +6,8 @@ export const largeWarehouse: BuildingData = {
   category: "capital",
   subcategory: "warehouses",
   imageName: "Large_Warehouse_Lv",
+  width: 3,
+  height: 2,
   levels: [
     {
       level: 1,

@@ -29,6 +29,8 @@ export const ruralFarm: BuildingData = {
   category: "capital",
   subcategory: "farms",
   imageName: "Capital_Rural_Farm_Lv",
+  width: 4,
+  height: 3,
   levels: [
     {
       level: 1,

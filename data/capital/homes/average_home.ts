@@ -28,6 +28,9 @@ export const averageHome: BuildingData = {
   name: "Average Home",
   category: "capital",
   subcategory: "homes",
+  width: 3,
+  height: 3,
+  duration: 12,
   imageName: "Capital_Average_Home_Lv",
   levels: [
     {

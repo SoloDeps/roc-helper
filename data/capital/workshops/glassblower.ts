@@ -6,6 +6,8 @@ export const glassblowerWorkshop: BuildingData = {
   category: "capital",
   subcategory: "workshops",
   imageName: "Capital_Glassblower_Lv",
+  width: 4,
+  height: 3,
   levels: [
     {
       level: 1,

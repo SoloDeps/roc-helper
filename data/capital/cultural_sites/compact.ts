@@ -20,6 +20,8 @@ export const compactCultureSite: BuildingData = {
   category: "capital",
   subcategory: "cultural_sites",
   imageName: "Capital_Compact_Culture_Site_Lv",
+  width: 2,
+  height: 1,
   levels: [
     {
       level: 1,

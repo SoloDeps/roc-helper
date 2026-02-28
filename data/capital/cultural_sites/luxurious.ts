@@ -18,6 +18,8 @@ export const luxuriousCultureSite: BuildingData = {
   category: "capital",
   subcategory: "cultural_sites",
   imageName: "Capital_Luxurious_Culture_Site_Lv",
+  width: 3,
+  height: 2,
   levels: [
     {
       level: 1,

@@ -6,6 +6,8 @@ export const shipyards: BuildingData = {
   category: "capital",
   subcategory: "ships",
   imageName: "Shipyard_Lv",
+  width: 5,
+  height: 3,
   levels: [
     {
       level: 1,

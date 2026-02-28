@@ -6,6 +6,8 @@ export const rangedBarracks: BuildingData = {
   category: "capital",
   subcategory: "barracks",
   imageName: "Capital_Ranged_Barracks_Lv",
+  width: 3,
+  height: 5,
   levels: [
     {
       level: 1,

@@ -6,6 +6,8 @@ export const lighthouse: BuildingData = {
   category: "capital",
   subcategory: "port_facilities",
   imageName: "Lighthouse_Lv",
+  width: 2,
+  height: 1,
   levels: [
     {
       level: 1,

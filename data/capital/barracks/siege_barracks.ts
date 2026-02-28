@@ -6,6 +6,8 @@ export const siegeBarracks: BuildingData = {
   category: "capital",
   subcategory: "barracks",
   imageName: "Capital_Siege_Barracks_Lv",
+  width: 5,
+  height: 6,
   levels: [
     {
       level: 6,

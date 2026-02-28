@@ -6,6 +6,8 @@ export const jewelerWorkshop: BuildingData = {
   category: "capital",
   subcategory: "workshops",
   imageName: "Capital_Jeweler_Lv",
+  width: 4,
+  height: 3,
   levels: [
     {
       level: 1,

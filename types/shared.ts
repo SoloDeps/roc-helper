@@ -49,12 +49,38 @@ export interface Costs {
 }
 
 // BUILDINGS
+
+export interface BuildingProduction {
+  coins?: number; // total produit sur `duration` heures
+  workers?: number;
+  food?: number; // fermes
+  goods?: number; // certains bâtiments produisent des goods
+  // allied cities
+  aspers?: number;
+  deben?: number;
+  wu_zhu?: number;
+  rice?: number;
+  cocoa?: number;
+  dirham?: number;
+}
+
+export interface BuildingHappiness {
+  h1: number; // seuil à atteindre pour +25% de production
+  h2: number; // seuil à atteindre pour +50% de production
+  h3: number; // seuil à atteindre pour +100% de production
+}
+
 export interface BuildingLevel {
   level: number;
   era: EraCode;
   max_qty?: number;
+  production?: BuildingProduction;
+  happiness?: BuildingHappiness;
   upgrade?: Costs;
   construction?: Costs;
+  // cultural sites
+  culture_range?: number;  // rayon en cases
+  culture_bonus?: number;  // points de bonheur émis
 }
 
 export interface BuildingData {
@@ -63,6 +89,9 @@ export interface BuildingData {
   category: string;
   subcategory: string;
   imageName: string;
+  width: number; // largeur en cellules (ne change jamais)
+  height: number; // hauteur en cellules (ne change jamais)
+  duration?: number; // durée de collecte en heures (ex: 6 = 6h)
   levels: BuildingLevel[]; // TOUS les niveaux, même 40+
 }
 

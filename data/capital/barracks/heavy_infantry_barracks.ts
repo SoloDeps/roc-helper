@@ -6,6 +6,8 @@ export const heavyInfantryBarracks: BuildingData = {
   category: "capital",
   subcategory: "barracks",
   imageName: "Capital_Heavy_Infantry_Barracks_Lv",
+  width: 5,
+  height: 5,
   levels: [
     {
       level: 4,
