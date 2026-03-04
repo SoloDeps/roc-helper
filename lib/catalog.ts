@@ -142,6 +142,7 @@ export const ERAS: Era[] = [
 
 export const imagesUrl = {
   home: "/images/game_icons/icon_flat_home.webp",
+  barn: "/images/game_icons/icon_flat_barn.webp",
   farm: "/images/game_icons/icon_flat_farm.webp",
   museum: "/images/game_icons/icon_flat_museum.webp",
   research: "/images/game_icons/icon_flat_research_points.webp",

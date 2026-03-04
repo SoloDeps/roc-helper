@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState, useCallback } from "react";
 import { TechCard } from "./tech-card";
-import { TechDetailsModal } from "./tech-details-modal";
+import { TechDetailsDrawer } from "./tech-details-drawer";
 import { TechPathDrawer } from "./tech-path-drawer";
 import {
   TechTreeDesktop,
@@ -502,7 +502,7 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       )}
 
       {/* ── Modals ── */}
-      <TechDetailsModal
+      <TechDetailsDrawer
         tech={selectedTech}
         open={isModalOpen}
         onOpenChange={setIsModalOpen}

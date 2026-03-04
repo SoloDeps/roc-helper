@@ -1,3 +1,5 @@
+import type { ImageType } from "@/lib/catalog";
+
 export type PreLGEra =
   | "SA"
   | "BA"
@@ -66,16 +68,41 @@ export interface BuildingData {
   levels: BuildingLevel[]; // TOUS les niveaux, même 40+
 }
 
+// ============================================================================
+// REWARDS
+// ============================================================================
+
+/**
+ * Source d'image pour un reward — discriminated union sur `kind`
+ *
+ * - techno   : image locale du techno tree  → /images/technos/{era}/{techId}.webp
+ * - wiki     : image du wiki RoC            → getWikiImageUrl(imageName, level != null, level ?? 1)
+ * - catalog  : icône plate dans imagesUrl   → imagesUrl[imgType]  (invert optionnel)
+ * - local    : chemin absolu direct         → path  (invert optionnel)
+ * - good     : good sélectionné par le user → getGoodNameFromPriorityEra(priority, era_du_tech, selections)
+ */
+export type RewardImgSource =
+  | { kind: "techno"; techId: string }
+  | { kind: "wiki"; imageName: string; level?: number }
+  | { kind: "catalog"; imgType: ImageType; invert?: boolean }
+  | { kind: "local"; path: string; invert?: boolean }
+  | { kind: "good"; priority: "primary" | "secondary" | "tertiary" };
+
+export interface Reward {
+  title: string; // ex: "Small Home"
+  desc: string; // ex: "Unlocks a Small Home upgrade"
+  img: RewardImgSource;
+}
+
 // TECHNOS
 export interface TechnoData {
   id: string;
   name: string;
   column: number;
   allied?: PreAlliedCity;
-  // image: string; // utilisation de icon_[id].webp a la place
   costs: Costs;
   required?: string[]; // IDs des technos nécessaires
-  rewards?: string[]; // Textes des récompenses
+  rewards?: Reward[]; // Structured rewards (nouveau format)
 }
 
 // OTTOMAN - AREAS

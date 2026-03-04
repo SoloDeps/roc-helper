@@ -12,9 +12,21 @@ export const technos_BA: TechnoData[] = [
       food: 14400,
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "City Hall: Unlocks a Great Hall upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 4 },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 4 },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a Great Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
     ],
   },
   {
@@ -28,8 +40,16 @@ export const technos_BA: TechnoData[] = [
       food: 5000,
     },
     rewards: [
-      "Alliance Unlocked: New Feature",
-      "Alliance City Unlocked: New Feature",
+      {
+        title: "Alliance Unlocked",
+        desc: "New Feature",
+        img: { kind: "techno", techId: "ba_1" },
+      },
+      {
+        title: "Alliance City Unlocked",
+        desc: "New Feature",
+        img: { kind: "local", path: "/images/technos/features/icon_alliancecity.webp" },
+      },
     ],
   },
   {
@@ -43,8 +63,16 @@ export const technos_BA: TechnoData[] = [
       food: 17250,
     },
     rewards: [
-      "Small Home: Allows constructing 1 more Small Home building in your city",
-      "Rural Farm: Allows constructing 1 more Rural Farm building in your city",
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Allows constructing 1 more Rural Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -57,7 +85,13 @@ export const technos_BA: TechnoData[] = [
       coins: 38600,
       food: 23000,
     },
-    rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks a Infantry Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Infantry_Barracks_Lv", level: 2 },
+      },
+    ],
   },
   {
     id: "ba_4",
@@ -70,8 +104,16 @@ export const technos_BA: TechnoData[] = [
       food: 40250,
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 4 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -85,8 +127,16 @@ export const technos_BA: TechnoData[] = [
       food: 35600,
     },
     rewards: [
-      "Little Culture Site: Unlocks the Little Culture Site",
-      "Luxurious Culture Site: Unlocks a Luxurious Culture Site upgrade",
+      {
+        title: "Little Culture Site",
+        desc: "Unlocks the Little Culture Site",
+        img: { kind: "wiki", imageName: "Capital_Little_Culture_Site_Lv", level: 2 },
+      },
+      {
+        title: "Luxurious Culture Site",
+        desc: "Unlocks a Luxurious Culture Site upgrade",
+        img: { kind: "wiki", imageName: "Capital_Luxurious_Culture_Site_Lv", level: 2 },
+      },
     ],
   },
   {
@@ -99,7 +149,13 @@ export const technos_BA: TechnoData[] = [
       coins: 44400,
       food: 26450,
     },
-    rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
+    rewards: [
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks a Ranged Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Ranged_Barracks_Lv", level: 2 },
+      },
+    ],
   },
   {
     id: "ba_7",
@@ -112,8 +168,16 @@ export const technos_BA: TechnoData[] = [
       food: 30550,
     },
     rewards: [
-      "Primary Good: Unlocks the Primary Good",
-      "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
+      {
+        title: "Primary Good",
+        desc: "Unlocks the Primary Good",
+        img: { kind: "good", priority: "primary" },
+      },
+      {
+        title: "Primary Workshop",
+        desc: "Unlocks the good Primary Goods for you, so that you can produce it in your city",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -126,7 +190,13 @@ export const technos_BA: TechnoData[] = [
       coins: 38600,
       food: 23000,
     },
-    rewards: ["Wonders Unlocked: New Feature"],
+    rewards: [
+      {
+        title: "Wonders Unlocked",
+        desc: "New Feature",
+        img: { kind: "techno", techId: "ba_8" },
+      },
+    ],
   },
   {
     id: "ba_9",
@@ -137,16 +207,24 @@ export const technos_BA: TechnoData[] = [
       research_points: 6,
       coins: 59800,
       food: 35600,
-      goods: [
-        {
-          amount: 5,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 5, resource: "primary_ba" }],
     },
     rewards: [
-      "Average Home: Unlocks the Average Home",
-      "Moderate Culture Site: Unlocks a Moderate Culture Site upgrade",
+      {
+        title: "Museum Unlocked",
+        desc: "New Feature",
+        img: { kind: "local", path: "/images/technos/features/icon_museum.webp" },
+      },
+      {
+        title: "Average Home",
+        desc: "Unlocks the Average Home",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 4 },
+      },
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks a Moderate Culture Site upgrade",
+        img: { kind: "wiki", imageName: "Capital_Moderate_Culture_Site_Lv", level: 2 },
+      },
     ],
   },
   {
@@ -158,16 +236,19 @@ export const technos_BA: TechnoData[] = [
       research_points: 6,
       coins: 64900,
       food: 38650,
-      goods: [
-        {
-          amount: 10,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 10, resource: "primary_ba" }],
     },
     rewards: [
-      "Compact Culture Site: Unlocks a Compact Culture Site upgrade",
-      "Compact Culture Site: Allows constructing 1 more Compact Culture Site building in your city",
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks a Compact Culture Site upgrade",
+        img: { kind: "wiki", imageName: "Capital_Compact_Culture_Site_Lv", level: 2 },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Allows constructing 1 more Compact Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -179,16 +260,19 @@ export const technos_BA: TechnoData[] = [
       research_points: 8,
       coins: 77200,
       food: 46000,
-      goods: [
-        {
-          amount: 15,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 15, resource: "primary_ba" }],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 5 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -200,14 +284,15 @@ export const technos_BA: TechnoData[] = [
       research_points: 11,
       coins: 102500,
       food: 61050,
-      goods: [
-        {
-          amount: 20,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 20, resource: "primary_ba" }],
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 5 },
+      },
+    ],
   },
   {
     id: "ba_13",
@@ -218,16 +303,19 @@ export const technos_BA: TechnoData[] = [
       research_points: 11,
       coins: 77200,
       food: 46000,
-      goods: [
-        {
-          amount: 20,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 20, resource: "primary_ba" }],
     },
     rewards: [
-      "Treasure Hunt Unlocked: New Feature",
-      "Average Home: Unlocks a Average Home upgrade",
+      {
+        title: "Treasure Hunt Unlocked",
+        desc: "New Feature",
+        img: { kind: "techno", techId: "ba_13" },
+      },
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 5 },
+      },
     ],
   },
   {
@@ -239,16 +327,19 @@ export const technos_BA: TechnoData[] = [
       research_points: 9,
       coins: 42700,
       food: 25450,
-      goods: [
-        {
-          amount: 25,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 25, resource: "primary_ba" }],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 5 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -260,14 +351,15 @@ export const technos_BA: TechnoData[] = [
       research_points: 11,
       coins: 88800,
       food: 52900,
-      goods: [
-        {
-          amount: 30,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 30, resource: "primary_ba" }],
     },
-    rewards: ["Cavalry Barracks: Unlocks the Cavalry Barracks"],
+    rewards: [
+      {
+        title: "Cavalry Barracks",
+        desc: "Unlocks the Cavalry Barracks",
+        img: { kind: "wiki", imageName: "Capital_Cavalry_Barracks_Lv", level: 2 },
+      },
+    ],
   },
   {
     id: "ba_16",
@@ -278,14 +370,15 @@ export const technos_BA: TechnoData[] = [
       research_points: 11,
       coins: 116000,
       food: 69000,
-      goods: [
-        {
-          amount: 35,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 35, resource: "primary_ba" }],
     },
-    rewards: ["Small Home: Unlocks a Small Home upgrade"],
+    rewards: [
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 6 },
+      },
+    ],
   },
   {
     id: "ba_17",
@@ -296,16 +389,19 @@ export const technos_BA: TechnoData[] = [
       research_points: 11,
       coins: 90500,
       food: 53950,
-      goods: [
-        {
-          amount: 40,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 40, resource: "primary_ba" }],
     },
     rewards: [
-      "Secondary Good: Unlocks the Secondary Good",
-      "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+      {
+        title: "Secondary Good",
+        desc: "Unlocks the Secondary Good",
+        img: { kind: "good", priority: "secondary" },
+      },
+      {
+        title: "Secondary Workshop",
+        desc: "Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+        img: { kind: "catalog", imgType: "workshop" },
+      },
     ],
   },
   {
@@ -317,16 +413,19 @@ export const technos_BA: TechnoData[] = [
       research_points: 10,
       coins: 96500,
       food: 57500,
-      goods: [
-        {
-          amount: 45,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 45, resource: "primary_ba" }],
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 6 },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -338,15 +437,14 @@ export const technos_BA: TechnoData[] = [
       research_points: 10,
       coins: 82000,
       food: 48850,
-      goods: [
-        {
-          amount: 50,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 50, resource: "primary_ba" }],
     },
     rewards: [
-      "Little Culture Site: Allows constructing 1 more Little Culture Site building in your city",
+      {
+        title: "Little Culture Site",
+        desc: "Allows constructing 1 more Little Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -359,17 +457,17 @@ export const technos_BA: TechnoData[] = [
       coins: 145000,
       food: 86500,
       goods: [
-        {
-          amount: 55,
-          resource: "primary_ba",
-        },
-        {
-          amount: 10,
-          resource: "secondary_ba",
-        },
+        { amount: 55, resource: "primary_ba" },
+        { amount: 10, resource: "secondary_ba" },
       ],
     },
-    rewards: ["Average Home: Unlocks a Average Home upgrade"],
+    rewards: [
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 6 },
+      },
+    ],
   },
   {
     id: "ba_21",
@@ -381,19 +479,21 @@ export const technos_BA: TechnoData[] = [
       coins: 135000,
       food: 80500,
       goods: [
-        {
-          amount: 55,
-          resource: "primary_ba",
-        },
-        {
-          amount: 15,
-          resource: "secondary_ba",
-        },
+        { amount: 55, resource: "primary_ba" },
+        { amount: 15, resource: "secondary_ba" },
       ],
     },
     rewards: [
-      "Tertiary Good: Unlocks the Tertiary Good",
-      "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+      {
+        title: "Tertiary Good",
+        desc: "Unlocks the Tertiary Good",
+        img: { kind: "good", priority: "tertiary" },
+      },
+      {
+        title: "Tertiary Workshop",
+        desc: "Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+        img: { kind: "catalog", imgType: "workshop" },
+      },
     ],
   },
   {
@@ -405,16 +505,19 @@ export const technos_BA: TechnoData[] = [
       research_points: 10,
       coins: 154500,
       food: 92000,
-      goods: [
-        {
-          amount: 70,
-          resource: "primary_ba",
-        },
-      ],
+      goods: [{ amount: 70, resource: "primary_ba" }],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 6 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -427,23 +530,22 @@ export const technos_BA: TechnoData[] = [
       coins: 245000,
       food: 146000,
       goods: [
-        {
-          amount: 80,
-          resource: "primary_ba",
-        },
-        {
-          amount: 10,
-          resource: "secondary_ba",
-        },
-        {
-          amount: 5,
-          resource: "tertiary_ba",
-        },
+        { amount: 80, resource: "primary_ba" },
+        { amount: 10, resource: "secondary_ba" },
+        { amount: 5, resource: "tertiary_ba" },
       ],
     },
     rewards: [
-      "Season Pass Unlocked: New Feature",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Season Pass Unlocked",
+        desc: "New Feature",
+        img: { kind: "local", path: "/images/technos/features/icon_seasonpass.webp" },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
 ];
