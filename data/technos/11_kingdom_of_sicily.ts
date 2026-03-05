@@ -22,11 +22,35 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Compact Culture Site: Unlocks a Compact Culture Site upgrade",
-      "Luxurious Home: Allows constructing 1 more Luxurious Home building in your city",
-      "City Hall: Unlocks a Great Hall upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 31 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 31 },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks a Compact Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Compact_Culture_Site_Lv",
+          level: 11,
+        },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Allows constructing 1 more Luxurious Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a Great Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
     ],
   },
   {
@@ -53,7 +77,13 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 31 },
+      },
+    ],
   },
   {
     id: "ks_2",
@@ -80,9 +110,24 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Good: Unlocks a Primary Good upgrade",
-      "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
-      "+10000: Increased Trade Token Limit",
+      {
+        title: "Primary Workshop",
+        desc: "Unlocks a Primary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Primary Goods",
+        desc: "Unlocks the good Primary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "primary" },
+      },
+      {
+        title: "+10000",
+        desc: "Increased Trade Token Limit",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_limittradingtokens.webp",
+        },
+      },
     ],
   },
   {
@@ -107,9 +152,21 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Unlock City: Unlocks Allied Culture Arabia!",
-      "Medium Home: Unlocks the Medium Home",
-      "Luxurious Home: Unlocks the Luxurious Home",
+      {
+        title: "Unlock City",
+        desc: "Unlocks Allied Culture Arabia!",
+        img: { kind: "catalog", imgType: "arabia" },
+      },
+      {
+        title: "Medium Home",
+        desc: "Unlocks the Medium Home",
+        img: { kind: "wiki", imageName: "Arabia_Medium_Home_Lv", level: 1 },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Unlocks the Luxurious Home",
+        img: { kind: "wiki", imageName: "Arabia_Luxurious_Home_Lv", level: 3 },
+      },
     ],
   },
   {
@@ -132,7 +189,17 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Moderate Culture Site: Unlocks a Moderate Culture Site upgrade"],
+    rewards: [
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks a Moderate Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Moderate_Culture_Site_Lv",
+          level: 11,
+        },
+      },
+    ],
   },
   {
     id: "ks_5",
@@ -158,7 +225,17 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks a Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Infantry_Barracks_Lv",
+          level: 11,
+        },
+      },
+    ],
   },
   {
     id: "ks_6",
@@ -186,10 +263,33 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Bazaar Unlocked: New Feature",
-      "Merchant: Unlocks the Merchant",
-      "Luxurious Merchant: Unlocks the Luxurious Merchant",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
+      {
+        title: "Bazaar Unlocked",
+        desc: "New Feature",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_bazaar.webp",
+        },
+      },
+      {
+        title: "Merchant",
+        desc: "Unlocks the Merchant",
+        img: { kind: "wiki", imageName: "Arabia_Merchant_Lv", level: 1 },
+      },
+      {
+        title: "Luxurious Merchant",
+        desc: "Unlocks the Luxurious Merchant",
+        img: {
+          kind: "wiki",
+          imageName: "Arabia_Luxurious_Merchant_Lv",
+          level: 3,
+        },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -218,8 +318,16 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Camel Farm: Unlocks the Camel Farm",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
+      {
+        title: "Camel Farm",
+        desc: "Unlocks the Camel Farm",
+        img: { kind: "wiki", imageName: "Arabia_Camel_Farm" },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -246,7 +354,13 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Average Home: Unlocks a Average Home upgrade"],
+    rewards: [
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 31 },
+      },
+    ],
   },
   {
     id: "ks_9",
@@ -274,9 +388,21 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Coffee Brewer: Unlocks the Coffee Brewer",
-      "Coffee: Unlocks the good Coffee for you, so that you can produce it in your city",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
+      {
+        title: "Coffee Brewer",
+        desc: "Unlocks the Coffee Brewer",
+        img: { kind: "wiki", imageName: "Arabia_Coffee_Brewer" },
+      },
+      {
+        title: "Coffee",
+        desc: "Unlocks the good Coffee for you, so that you can produce it in Arabia",
+        img: { kind: "local", path: "/images/goods-large/coffee.webp" },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -305,10 +431,26 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Incense Maker: Unlocks the Incense Maker",
-      "Incense: Unlocks the good Incense for you, so that you can produce it in your city",
-      "Merchant: Allows constructing 1 more Merchant building in your city",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
+      {
+        title: "Incense Maker",
+        desc: "Unlocks the Incense Maker",
+        img: { kind: "wiki", imageName: "Arabia_Incense_Maker" },
+      },
+      {
+        title: "Incense",
+        desc: "Unlocks the good Incense for you, so that you can produce it in Arabia",
+        img: { kind: "local", path: "/images/goods-large/incense.webp" },
+      },
+      {
+        title: "Merchant",
+        desc: "Allows constructing 1 more Merchant building in Arabia",
+        img: { kind: "catalog", imgType: "merchant", invert: true },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -337,9 +479,21 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Small Well: Unlocks the Small Well",
-      "Luxurious Home: Allows constructing 1 more Luxurious Home building in your city",
-      "Luxurious Noria: Unlocks the Luxurious Noria",
+      {
+        title: "Small Well",
+        desc: "Unlocks the Small Well",
+        img: { kind: "wiki", imageName: "Arabia_Small_Well" },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Allows constructing 1 more Luxurious Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Luxurious Noria",
+        desc: "Unlocks the Luxurious Noria",
+        img: { kind: "wiki", imageName: "Arabia_Luxurious_Noria" },
+      },
     ],
   },
   {
@@ -367,8 +521,16 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 32 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -395,7 +557,17 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
+    rewards: [
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks a Ranged Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Ranged_Barracks_Lv",
+          level: 11,
+        },
+      },
+    ],
   },
   {
     id: "ks_14",
@@ -421,7 +593,13 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 32 },
+      },
+    ],
   },
   {
     id: "ks_15",
@@ -449,10 +627,33 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Channel: Unlocks the Channel",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
-      "Luxurious Workshop: Unlocks the Luxurious Workshop",
-      "Bazaar Offer Slot Extension: Unlocks 2 more Bazaar Offer Slots",
+      {
+        title: "Channel",
+        desc: "Unlocks the Channel",
+        img: { kind: "wiki", imageName: "Arabia_Channel" },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Luxurious Workshop",
+        desc: "Unlocks the Luxurious Workshop",
+        img: {
+          kind: "wiki",
+          imageName: "Arabia_Luxurious_Workshop_Lv",
+          level: 1,
+        },
+      },
+      {
+        title: "Bazaar Offer Slot Extension",
+        desc: "Unlocks 2 more Bazaar Offer Slots",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_IncreaseBazaarOfferSlotsReward.webp",
+        },
+      },
     ],
   },
   {
@@ -480,8 +681,16 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 32 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -508,7 +717,17 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Little Culture Site: Unlocks a Little Culture Site upgrade"],
+    rewards: [
+      {
+        title: "Little Culture Site",
+        desc: "Unlocks a Little Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Little_Culture_Site_Lv",
+          level: 11,
+        },
+      },
+    ],
   },
   {
     id: "ks_18",
@@ -536,8 +755,16 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Medium Home: Unlocks a Medium Home upgrade",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
+      {
+        title: "Medium Home",
+        desc: "Unlocks a Medium Home upgrade",
+        img: { kind: "wiki", imageName: "Arabia_Medium_Home_Lv", level: 2 },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -566,10 +793,26 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Merchant: Unlocks a Merchant upgrade",
-      "Merchant: Allows constructing 1 more Merchant building in your city",
-      "Small Well: Allows constructing 1 more Small Well building in your city",
-      "Bazaar Upgrade: Increase the offered amount of Resources for all Bazaar Offers",
+      {
+        title: "Merchant",
+        desc: "Unlocks a Merchant upgrade",
+        img: { kind: "wiki", imageName: "Arabia_Merchant_Lv", level: 2 },
+      },
+      {
+        title: "Merchant",
+        desc: "Allows constructing 1 more Merchant building in Arabia",
+        img: { kind: "catalog", imgType: "merchant", invert: true },
+      },
+      {
+        title: "Small Well",
+        desc: "Allows constructing 1 more Small Well building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Bazaar Upgrade",
+        desc: "Increase the offered amount of Resources for all Bazaar Offers",
+        img: { kind: "local", path: "/images/technos/features/icon_IncreaseBazaarLevelReward.webp" },
+      },
     ],
   },
   {
@@ -596,7 +839,13 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Average Home: Unlocks a Average Home upgrade"],
+    rewards: [
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 32 },
+      },
+    ],
   },
   {
     id: "ks_21",
@@ -624,11 +873,34 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Merchant: Allows constructing 1 more Merchant building in your city",
-      "Camel Farm: Allows constructing 1 more Camel Farm building in your city",
-      "Luxurious Home: Allows constructing 2 more Luxurious Home buildings in your city",
-      "Luxurious Merchant: Allows constructing 2 more Luxurious Merchant buildings in your city",
-      "Bazaar Offer Slot Extension: Unlock 2 more Bazaar Offer Slots",
+      {
+        title: "Merchant",
+        desc: "Allows constructing 1 more Merchant building in Arabia",
+        img: { kind: "catalog", imgType: "merchant", invert: true },
+      },
+      {
+        title: "Camel Farm",
+        desc: "Allows constructing 1 more Camel Farm building in Arabia",
+        img: { kind: "catalog", imgType: "camelFarm", invert: true },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Allows constructing 2 more Luxurious Home buildings in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Luxurious Merchant",
+        desc: "Allows constructing 2 more Luxurious Merchant buildings in Arabia",
+        img: { kind: "catalog", imgType: "merchant", invert: true },
+      },
+      {
+        title: "Bazaar Offer Slot Extension",
+        desc: "Unlock 2 more Bazaar Offer Slots",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_IncreaseBazaarOfferSlotsReward.webp",
+        },
+      },
     ],
   },
   {
@@ -657,8 +929,16 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
-      "Small Well: Allows constructing 1 more Small Well building in your city",
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Small Well",
+        desc: "Allows constructing 1 more Small Well building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -685,7 +965,17 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Cavalry Barracks",
+        desc: "Unlocks a Cavalry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Cavalry_Barracks_Lv",
+          level: 11,
+        },
+      },
+    ],
   },
   {
     id: "ks_24",
@@ -713,9 +1003,21 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Incense Maker: Allows constructing 1 more Incense Maker building in your city",
-      "Small Well: Allows constructing 1 more Small Well building in your city",
-      "Luxurious Workshop: Allows constructing 1 more Luxurious Workshop building in your city",
+      {
+        title: "Incense Maker",
+        desc: "Allows constructing 1 more Incense Maker building in Arabia",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Small Well",
+        desc: "Allows constructing 1 more Small Well building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Luxurious Workshop",
+        desc: "Allows constructing 1 more Luxurious Workshop building in Arabia",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -744,9 +1046,21 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Coffee Brewer: Allows constructing 1 more Coffee Brewer building in your city",
-      "Channel: Allows constructing 1 more Channel building in your city",
-      "Bazaar Offer Slot Extension: Unlocks 2 more Bazaar Offer Slots",
+      {
+        title: "Coffee Brewer",
+        desc: "Allows constructing 1 more Coffee Brewer building in Arabia",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Channel",
+        desc: "Allows constructing 1 more Channel building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Bazaar Offer Slot Extension",
+        desc: "Unlocks 2 more Bazaar Offer Slots",
+        img: { kind: "local", path: "/images/technos/features/icon_IncreaseBazaarOfferSlotsReward.webp" },
+      },
     ],
   },
   {
@@ -773,7 +1087,13 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
+    rewards: [
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 33 },
+      },
+    ],
   },
   {
     id: "ks_27",
@@ -799,7 +1119,13 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 33 },
+      },
+    ],
   },
   {
     id: "ks_28",
@@ -827,8 +1153,16 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Small Well: Allows constructing 1 more Small Well building in your city",
-      "Channel: Allows constructing 1 more Channel building in your city",
+      {
+        title: "Small Well",
+        desc: "Allows constructing 1 more Small Well building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Channel",
+        desc: "Allows constructing 1 more Channel building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -857,8 +1191,16 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Medium Home: Unlocks a Medium Home upgrade",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
+      {
+        title: "Medium Home",
+        desc: "Unlocks a Medium Home upgrade",
+        img: { kind: "wiki", imageName: "Arabia_Medium_Home_Lv", level: 3 },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -886,7 +1228,15 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Heavy Infantry Barracks: Unlocks a Heavy Infantry Barracks upgrade",
+      {
+        title: "Heavy Infantry Barracks",
+        desc: "Unlocks a Heavy Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Heavy_Infantry_Barracks_Lv",
+          level: 11,
+        },
+      },
     ],
   },
   {
@@ -915,9 +1265,24 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Merchant: Unlocks a Merchant upgrade",
-      "Merchant: Allows constructing 1 more Merchant building in your city",
-      "Bazaar Offer Slot Extension: Unlock 1 more Bazaar Offer Slot",
+      {
+        title: "Merchant",
+        desc: "Unlocks a Merchant upgrade",
+        img: { kind: "wiki", imageName: "Arabia_Merchant_Lv", level: 3 },
+      },
+      {
+        title: "Merchant",
+        desc: "Allows constructing 1 more Merchant building in Arabia",
+        img: { kind: "catalog", imgType: "merchant", invert: true },
+      },
+      {
+        title: "Bazaar Offer Slot Extension",
+        desc: "Unlock 1 more Bazaar Offer Slot",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_IncreaseBazaarOfferSlotsReward.webp",
+        },
+      },
     ],
   },
   {
@@ -946,10 +1311,26 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Camel Farm: Allows constructing 1 more Camel Farm building in your city",
-      "Medium Farm: Allows constructing 1 more Medium Farm building in your city",
-      "Merchant: Allows constructing 1 more Merchant building in your city",
-      "Bazaar Upgrade: Increases the offered amount of Resources for all Bazaar Offers",
+      {
+        title: "Camel Farm",
+        desc: "Allows constructing 1 more Camel Farm building in Arabia",
+        img: { kind: "catalog", imgType: "camelFarm", invert: true },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Merchant",
+        desc: "Allows constructing 1 more Merchant building in Arabia",
+        img: { kind: "catalog", imgType: "merchant", invert: true },
+      },
+      {
+        title: "Bazaar Upgrade",
+        desc: "Increases the offered amount of Resources for all Bazaar Offers",
+        img: { kind: "local", path: "/images/technos/features/icon_IncreaseBazaarLevelReward.webp" },
+      },
     ],
   },
   {
@@ -977,8 +1358,16 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 33 },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -1006,9 +1395,21 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Moderate Culture Site: Allows constructing 1 more Moderate Culture Site building in your city",
-      "Luxurious Culture Site: Allows constructing 1 more Luxurious Culture Site building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 33 },
+      },
+      {
+        title: "Moderate Culture Site",
+        desc: "Allows constructing 1 more Moderate Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Luxurious Culture Site",
+        desc: "Allows constructing 1 more Luxurious Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -1037,8 +1438,16 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Small Well: Allows constructing 1 more Small Well building in your city",
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
+      {
+        title: "Small Well",
+        desc: "Allows constructing 1 more Small Well building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -1066,8 +1475,16 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Good: Unlocks a Secondary Good upgrade",
-      "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+      {
+        title: "Secondary Workshop",
+        desc: "Unlocks a Secondary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Secondary Goods",
+        desc: "Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "secondary" },
+      },
     ],
   },
   {
@@ -1094,7 +1511,17 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Large Culture Site: Unlocks a Large Culture Site upgrade"],
+    rewards: [
+      {
+        title: "Large Culture Site",
+        desc: "Unlocks a Large Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Large_Culture_Site_Lv",
+          level: 11,
+        },
+      },
+    ],
   },
   {
     id: "ks_38",
@@ -1122,8 +1549,16 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Channel: Allows constructing 1 more Channel building in your city",
-      "Camel Farm: Allows constructing 1 more Camel Farm building in your city",
+      {
+        title: "Channel",
+        desc: "Allows constructing 1 more Channel building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Camel Farm",
+        desc: "Allows constructing 1 more Camel Farm building in Arabia",
+        img: { kind: "catalog", imgType: "camelFarm", invert: true },
+      },
     ],
   },
   {
@@ -1152,8 +1587,19 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Medium Home: Allows constructing 1 more Medium Home building in your city",
-      "Bazaar Offer Slot Extension: Unlock 1 more Bazaar Offer Slot",
+      {
+        title: "Medium Home",
+        desc: "Allows constructing 1 more Medium Home building in Arabia",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Bazaar Offer Slot Extension",
+        desc: "Unlock 1 more Bazaar Offer Slot",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_IncreaseBazaarOfferSlotsReward.webp",
+        },
+      },
     ],
   },
   {
@@ -1176,7 +1622,17 @@ export const technos_KS: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
+    rewards: [
+      {
+        title: "Siege Barracks",
+        desc: "Unlocks a Siege Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Siege_Barracks_Lv",
+          level: 11,
+        },
+      },
+    ],
   },
   {
     id: "ks_41",
@@ -1204,8 +1660,19 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Small Well: Allows constructing 1 more Small Well building in your city",
-      "Bazaar Offer Slot Extension: Unlock 1 more Bazaar Offer Slot",
+      {
+        title: "Small Well",
+        desc: "Allows constructing 1 more Small Well building in Arabia",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Bazaar Offer Slot Extension",
+        desc: "Unlock 1 more Bazaar Offer Slot",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_IncreaseBazaarOfferSlotsReward.webp",
+        },
+      },
     ],
   },
   {
@@ -1234,7 +1701,11 @@ export const technos_KS: TechnoData[] = [
     },
     allied: "arabia",
     rewards: [
-      "Merchant: Allows constructing 1 more Merchant building in your city",
+      {
+        title: "Merchant",
+        desc: "Allows constructing 1 more Merchant building in Arabia",
+        img: { kind: "catalog", imgType: "merchant", invert: true },
+      },
     ],
   },
   {
@@ -1258,8 +1729,16 @@ export const technos_KS: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Good: Unlocks a Tertiary Good upgrade",
-      "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+      {
+        title: "Tertiary Workshop",
+        desc: "Unlocks a Tertiary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Tertiary Goods",
+        desc: "Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "tertiary" },
+      },
     ],
   },
 ];
