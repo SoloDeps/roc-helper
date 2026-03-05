@@ -436,7 +436,7 @@ export function TechTreeDesktop({
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
-      if (t.hidden) ids.add(t.id);
+      if (t.cp) ids.add(t.id); // cp = progression research tree (hidden = calculator uniquement)
     });
     return ids;
   }, [technosInDB]);
@@ -480,16 +480,27 @@ export function TechTreeDesktop({
           techId,
           ...collectAncestorIds(techId, technologies),
         ];
+        // Récupérer les entrées existantes pour préserver hidden (calculator)
+        const existing = await db.technos.bulkGet(idsToComplete);
         await db.technos.bulkPut(
-          idsToComplete.map((id) => ({ id: id, hidden: 1 })),
+          idsToComplete.map((id, i) => ({
+            ...(existing[i] ?? { id, hidden: 0 }),
+            id,
+            cp: 1,
+          })),
         );
       } else {
         const idsToUncheck = [
           techId,
           ...collectDescendantIds(techId, technologies),
         ];
+        const existing = await db.technos.bulkGet(idsToUncheck);
         await db.technos.bulkPut(
-          idsToUncheck.map((id) => ({ id: id, hidden: 0 })),
+          idsToUncheck.map((id, i) => ({
+            ...(existing[i] ?? { id, hidden: 0 }),
+            id,
+            cp: 0,
+          })),
         );
       }
     },

@@ -34,32 +34,34 @@ export function TechnoCard({
   const selectEra = useSelectEra();
   const [isHovered, setIsHovered] = useState(false);
 
-  //  Aggregate costs - ALWAYS aggregate ALL technos in the era (visible AND hidden)
+  // Agrège uniquement les technos cp=false (non complétées)
   const aggregatedData = useMemo(() => {
-    if (technos.length === 0) {
+    const remaining = technos.filter((t) => !t.cp);
+
+    if (remaining.length === 0) {
       return {
         totalResearch: 0,
         totalCoins: 0,
         totalFood: 0,
-        goods: [] as Array<{ resource: string; amount: number }>, //  Changed type to resource
-        technoCount: 0,
+        goods: [] as Array<{ resource: string; amount: number }>,
+        technoCount: technos.length,
+        remainingCount: 0,
       };
     }
 
     const resources: Record<string, number> = {};
     const goodsMap = new Map<string, number>();
 
-    technos.forEach((techno) => {
-      //  Handle flat costs structure from registry
+    remaining.forEach((techno) => {
       Object.entries(techno.costs).forEach(([key, value]) => {
         if (key === "goods" && Array.isArray(value)) {
-          // Aggregate goods
           value.forEach((good) => {
-            const existing = goodsMap.get(good.resource);
-            goodsMap.set(good.resource, (existing || 0) + good.amount);
+            goodsMap.set(
+              good.resource,
+              (goodsMap.get(good.resource) || 0) + good.amount,
+            );
           });
         } else if (typeof value === "number") {
-          // Aggregate numeric resources (research_points, coins, food, etc.)
           resources[key] = (resources[key] || 0) + value;
         }
       });
@@ -74,6 +76,7 @@ export function TechnoCard({
         amount,
       })),
       technoCount: technos.length,
+      remainingCount: remaining.length,
     };
   }, [technos]);
 
@@ -196,13 +199,11 @@ export function TechnoCard({
                   className="bg-blue-200 dark:bg-blue-300 text-blue-950 border-alpha-100 border rounded-sm"
                 >
                   {(() => {
-                    const visibleCount = technos.filter(
-                      (t) => !t.hidden,
-                    ).length;
-                    const totalCount = technos.length;
-                    const hasHidden = visibleCount < totalCount;
-                    return hasHidden
-                      ? `${visibleCount}/${totalCount} technos`
+                    const remainingCount = aggregatedData.remainingCount;
+                    const totalCount = aggregatedData.technoCount;
+                    const hasCompleted = remainingCount < totalCount;
+                    return hasCompleted
+                      ? `${remainingCount}/${totalCount} technos`
                       : `${totalCount} techno${totalCount > 1 ? "s" : ""}`;
                   })()}
                 </Badge>

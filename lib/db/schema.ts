@@ -2,41 +2,34 @@
 
 import Dexie, { type Table } from "dexie";
 
-// ============================================================================
-// OPTIMIZED ENTITIES — hidden: 0|1 partout, levels: 0|1, qty pour buildings
-// ============================================================================
-
 export interface TechnoEntity {
   id: string; // "eg_0"
-  hidden: number; // 0 | 1
+  hidden: number; // 0 | 1 — calculator uniquement (exclure du total)
+  cp: number; // 0 | 1 — research tree uniquement (techno complétée)
 }
 
 export interface BuildingEntity {
   id: string;
-  qty: number; // ex-quantity
+  qty: number;
   hidden: number; // 0 | 1
 }
 
 export interface OttomanAreaEntity {
-  id: string; // "oa_{index}" ex: "oa_1"
+  id: string;
   hidden: number; // 0 | 1
 }
 
 export interface OttomanTradePostEntity {
-  id: string; // "otp_{index}" ex: "otp_5"
+  id: string;
   levels: {
-    unlock: number; // 0 | 1
-    lvl2: number; // 0 | 1
-    lvl3: number; // 0 | 1
-    lvl4: number; // 0 | 1
-    lvl5: number; // 0 | 1
+    unlock: number;
+    lvl2: number;
+    lvl3: number;
+    lvl4: number;
+    lvl5: number;
   };
   hidden: number; // 0 | 1
 }
-
-// ============================================================================
-// DATABASE SCHEMA
-// ============================================================================
 
 export class RocWikiDB extends Dexie {
   buildings!: Table<BuildingEntity, string>;
@@ -53,12 +46,17 @@ export class RocWikiDB extends Dexie {
       ottomanAreas: "id,hidden",
       ottomanTradePosts: "id,hidden",
     });
+
+    // Ajout du champ cp (completed) pour séparer la progression du research tree
+    // du hidden du calculator. Pas de migration : cp démarre à 0 pour tous.
+    this.version(2).stores({
+      buildings: "id,hidden",
+      technos: "id,hidden,cp",
+      ottomanAreas: "id,hidden",
+      ottomanTradePosts: "id,hidden",
+    });
   }
 }
-
-// ============================================================================
-// SINGLETON INSTANCE
-// ============================================================================
 
 let wikiDbInstance: RocWikiDB | null = null;
 
@@ -66,18 +64,14 @@ export function getWikiDB(): RocWikiDB {
   if (typeof window === "undefined") {
     throw new Error("Database can only be accessed on client side");
   }
-
   if (!wikiDbInstance) {
     wikiDbInstance = new RocWikiDB();
     wikiDbInstance.open().catch((err) => {
       console.error("Failed to open roc_wiki_db:", err);
     });
   }
-
   return wikiDbInstance;
 }
-
-// export const db = typeof window !== "undefined" ? getWikiDB() : null;
 
 export async function resetWikiDB(): Promise<void> {
   if (wikiDbInstance) {
@@ -88,11 +82,6 @@ export async function resetWikiDB(): Promise<void> {
   getWikiDB();
 }
 
-// ============================================================================
-// HELPERS — Conversion id techno
-// ============================================================================
-
-/** "oa_1" helpers */
 export function areaIndexToId(index: number): string {
   return `oa_${index}`;
 }
@@ -100,7 +89,6 @@ export function idToAreaIndex(id: string): number {
   return parseInt(id.replace("oa_", ""));
 }
 
-/** "otp_5" helpers */
 export function tradePostIndexToId(index: number): string {
   return `otp_${index}`;
 }

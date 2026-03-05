@@ -2,11 +2,7 @@
 
 import { toast } from "sonner";
 import { useAddElementStore } from "./add-element-store";
-import {
-  getWikiDB,
-  areaIndexToId,
-  tradePostIndexToId,
-} from "@/lib/db/schema";
+import { getWikiDB, areaIndexToId, tradePostIndexToId } from "@/lib/db/schema";
 import { ERAS } from "@/lib/catalog";
 import { getTechnologiesByEra } from "@/data/technos-registry";
 import { getAllTradePosts } from "@/lib/ottoman-data-loader";
@@ -42,7 +38,7 @@ export function useSubmitTechno() {
 
     const db = getWikiDB();
     const duplicates: string[] = [];
-    const toAdd: Array<{ id: string; hidden: number }> = [];
+    const toAdd: Array<{ id: string; hidden: number; cp: number }> = [];
 
     for (const technoData of technologies) {
       const dbId = technoData.id;
@@ -50,7 +46,7 @@ export function useSubmitTechno() {
       if (existing) {
         duplicates.push(technoData.name);
       } else {
-        toAdd.push({ id: dbId, hidden: 0 });
+        toAdd.push({ id: dbId, hidden: 0, cp: 0 });
       }
     }
 
