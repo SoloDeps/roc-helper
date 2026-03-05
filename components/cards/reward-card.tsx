@@ -41,7 +41,7 @@ function resolveRewardImage(
     }
     case "catalog": {
       return {
-        src: imagesUrl[img.imgType] ?? "/images/goods/default.webp",
+        src: imagesUrl[img.imgType] ?? "/images/goods-large/default.webp",
         invert: img.invert ?? false,
       };
     }
