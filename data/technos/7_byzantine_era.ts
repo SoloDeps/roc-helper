@@ -1,4 +1,5 @@
 import { TechnoData } from "@/types/shared";
+import path from "path";
 
 export const technos_BE: TechnoData[] = [
   {
@@ -26,10 +27,30 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Moderate Culture Site: Unlocks a Moderate Culture Site upgrade",
-      "City Hall: Unlocks a Great Hall upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 19 },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 19 },
+      },
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks a Moderate Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Moderate_Culture_Site_Lv",
+          level: 7,
+        },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a Great Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
     ],
   },
   {
@@ -57,8 +78,24 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Infantry Barracks: Unlocks a Infantry Barracks upgrade",
-      "Compact Culture Site: Unlocks a Compact Culture Site upgrade",
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks a Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Infantry_Barracks_Lv",
+          level: 7,
+        },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks a Compact Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Compact_Culture_Site_Lv",
+          level: 7,
+        },
+      },
     ],
   },
   {
@@ -87,10 +124,30 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Unlock City: Unlocks Allied Culture Maya Empire!",
-      "Worker Home: Unlocks the Worker Home",
-      "Jade Quarry: Unlocks the Jade Quarry",
-      "Obsidian Quarry: Unlocks the Obsidian Quarry",
+      {
+        title: "Unlock City",
+        desc: "Unlocks Allied Culture Maya Empire!",
+        img: { kind: "catalog", imgType: "maya" },
+      },
+      {
+        title: "Worker Home",
+        desc: "Unlocks the Worker Home",
+        img: { kind: "wiki", imageName: "Maya_Worker_Home_Lv", level: 1 },
+      },
+      {
+        title: "Jade Quarry",
+        desc: "Unlocks the Jade Quarry",
+        img: { kind: "wiki", imageName: "Maya_Jade_Quarry_Lv", level: 1 },
+      },
+      {
+        title: "Obsidian Quarry",
+        desc: "Unlocks the Obsidian Quarry",
+        img: {
+          kind: "wiki",
+          imageName: "Maya_Obsidian_Quarry_Lv",
+          level: 1,
+        },
+      },
     ],
   },
   {
@@ -118,9 +175,24 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Good: Unlocks the Primary Good",
-      "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
-      "+20000: Increased Trade Token Limit",
+      {
+        title: "Primary Workshop",
+        desc: "Unlocks the Primary Workshop",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Primary Goods",
+        desc: "Unlocks the good Primary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "primary" },
+      },
+      {
+        title: "+20000",
+        desc: "Increased Trade Token Limit",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_limittradingtokens.webp",
+        },
+      },
     ],
   },
   {
@@ -149,10 +221,32 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Small Ritual Site: Unlocks the Small Ritual Site",
-      "Priest Home: Unlocks the Priest Home",
-      "Luxurious Ritual Site: Unlocks the Luxurious Ritual Site",
-      "Worker Home: Allows constructing 3 more Worker Home buildings in your city",
+      {
+        title: "Small Ritual Site",
+        desc: "Unlocks the Small Ritual Site",
+        img: {
+          kind: "wiki",
+          imageName: "Maya_Small_Ritual_Site",
+        },
+      },
+      {
+        title: "Priest Home",
+        desc: "Unlocks the Priest Home",
+        img: { kind: "wiki", imageName: "Maya_Priest_Home_Lv", level: 1 },
+      },
+      {
+        title: "Luxurious Ritual Site",
+        desc: "Unlocks the Luxurious Ritual Site",
+        img: {
+          kind: "wiki",
+          imageName: "Maya_Luxurious_Ritual_Site",
+        },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 3 more Worker Home buildings in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -181,10 +275,26 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Mask Sculptor: Unlocks the Mask Sculptor",
-      "Ancestor Mask: Unlocks the good Ancestor Mask for you, so that you can produce it in your city",
-      "Chronicler: Unlocks the Chronicler",
-      "Calendar Stone: Unlocks the good Calendar Stone for you, so that you can produce it in your city",
+      {
+        title: "Mask Sculptor",
+        desc: "Unlocks the Mask Sculptor",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Ancestor Mask",
+        desc: "Unlocks the good Ancestor Mask for you, so that you can produce it in Maya Empire",
+        img: { kind: "local", path: "/images/goods-large/ancestor_mask.webp" },
+      },
+      {
+        title: "Chronicler",
+        desc: "Unlocks the Chronicler",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Calendar Stone",
+        desc: "Unlocks the good Calendar Stone for you, so that you can produce it in Maya Empire",
+        img: { kind: "local", path: "/images/goods-large/calendar_stone.webp" },
+      },
     ],
   },
   {
@@ -212,8 +322,20 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Little Culture Site: Unlocks a Little Culture Site upgrade",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 19 },
+      },
+      {
+        title: "Little Culture Site",
+        desc: "Unlocks a Little Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Little_Culture_Site_Lv",
+          level: 7,
+        },
+      },
     ],
   },
   {
@@ -241,8 +363,20 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Large Culture Site: Unlocks a Large Culture Site upgrade",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 19 },
+      },
+      {
+        title: "Large Culture Site",
+        desc: "Unlocks a Large Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Large_Culture_Site_Lv",
+          level: 7,
+        },
+      },
     ],
   },
   {
@@ -271,8 +405,19 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Average Ritual Site: Unlocks the Average Ritual Site",
-      "Priest Home: Allows constructing 2 more Priest Home buildings in your city",
+      {
+        title: "Average Ritual Site",
+        desc: "Unlocks the Average Ritual Site",
+        img: {
+          kind: "wiki",
+          imageName: "Maya_Average_Ritual_Site",
+        },
+      },
+      {
+        title: "Priest Home",
+        desc: "Allows constructing 2 more Priest Home buildings in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -299,7 +444,17 @@ export const technos_BE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
+    rewards: [
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks a Ranged Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Ranged_Barracks_Lv",
+          level: 7,
+        },
+      },
+    ],
   },
   {
     id: "be_10",
@@ -326,7 +481,11 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Good: Allows constructing 1 more Primary Good building in your city",
+      {
+        title: "Primary Workshop",
+        desc: "Allows constructing 1 more Primary Workshop building in your city",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -355,8 +514,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Priest Home: Unlocks a Priest Home upgrade",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Priest Home",
+        desc: "Unlocks a Priest Home upgrade",
+        img: { kind: "wiki", imageName: "Maya_Priest_Home_Lv", level: 2 },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -385,8 +552,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Jade Quarry: Allows constructing 1 more Jade Quarry building in your city",
-      "Obsidian Quarry: Allows constructing 1 more Obsidian Quarry building in your city",
+      {
+        title: "Jade Quarry",
+        desc: "Allows constructing 1 more Jade Quarry building in Maya Empire",
+        img: { kind: "catalog", imgType: "quarry", invert: true },
+      },
+      {
+        title: "Obsidian Quarry",
+        desc: "Allows constructing 1 more Obsidian Quarry building in Maya Empire",
+        img: { kind: "catalog", imgType: "quarry", invert: true },
+      },
     ],
   },
   {
@@ -414,8 +589,16 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 20 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -444,8 +627,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Worker Home: Unlocks a Worker Home upgrade",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Worker Home",
+        desc: "Unlocks a Worker Home upgrade",
+        img: { kind: "wiki", imageName: "Maya_Worker_Home_Lv", level: 2 },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -473,9 +664,21 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Compact Culture Site: Allows constructing 1 more Compact Culture Site building in your city",
-      "Primary Good: Allows constructing 1 more Primary Good building in your city",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 20 },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Allows constructing 1 more Compact Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Primary Workshop",
+        desc: "Allows constructing 1 more Primary Workshop building in your city",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -503,8 +706,16 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 20 },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -532,7 +743,17 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     allied: "maya",
-    rewards: ["Obsidian Quarry: Unlocks a Obsidian Quarry upgrade"],
+    rewards: [
+      {
+        title: "Obsidian Quarry",
+        desc: "Unlocks a Obsidian Quarry upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Maya_Obsidian_Quarry_Lv",
+          level: 2,
+        },
+      },
+    ],
   },
   {
     id: "be_18",
@@ -559,7 +780,13 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     allied: "maya",
-    rewards: ["Jade Quarry: Unlocks a Jade Quarry upgrade"],
+    rewards: [
+      {
+        title: "Jade Quarry",
+        desc: "Unlocks a Jade Quarry upgrade",
+        img: { kind: "wiki", imageName: "Maya_Jade_Quarry_Lv", level: 2 },
+      },
+    ],
   },
   {
     id: "be_19",
@@ -585,7 +812,13 @@ export const technos_BE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
+    rewards: [
+      {
+        title: "Siege Barracks",
+        desc: "Unlocks a Siege Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Siege_Barracks_Lv", level: 7 },
+      },
+    ],
   },
   {
     id: "be_20",
@@ -613,8 +846,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Small Ritual Site: Allows constructing 1 more Small Ritual Site building in your city",
-      "Priest Home: Allows constructing 1 more Priest Home building in your city",
+      {
+        title: "Small Ritual Site",
+        desc: "Allows constructing 1 more Small Ritual Site building in Maya Empire",
+        img: { kind: "catalog", imgType: "ritualSite", invert: true },
+      },
+      {
+        title: "Priest Home",
+        desc: "Allows constructing 1 more Priest Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -642,8 +883,16 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 20 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -672,8 +921,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Mask Sculptor: Allows constructing 1 more Mask Sculptor building in your city",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Mask Sculptor",
+        desc: "Allows constructing 1 more Mask Sculptor building in Maya Empire",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -702,8 +959,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Chronicler: Allows constructing 1 more Chronicler building in your city",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Chronicler",
+        desc: "Allows constructing 1 more Chronicler building in Maya Empire",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -731,8 +996,16 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 21 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -761,8 +1034,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Average Ritual Site: Allows constructing 1 more Average Ritual Site building in your city",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Average Ritual Site",
+        desc: "Allows constructing 1 more Average Ritual Site building in Maya Empire",
+        img: { kind: "catalog", imgType: "ritualSite", invert: true },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -791,8 +1072,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Worker Home: Unlocks a Worker Home upgrade",
-      "Worker Home: Allows constructing 2 more Worker Home buildings in your city",
+      {
+        title: "Worker Home",
+        desc: "Unlocks a Worker Home upgrade",
+        img: { kind: "wiki", imageName: "Maya_Worker_Home_Lv", level: 3 },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 2 more Worker Home buildings in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -820,7 +1109,11 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Little Culture Site: Allows constructing 1 more Little Culture Site building in your city",
+      {
+        title: "Little Culture Site",
+        desc: "Allows constructing 1 more Little Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -847,7 +1140,17 @@ export const technos_BE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Cavalry Barracks",
+        desc: "Unlocks a Cavalry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Cavalry_Barracks_Lv",
+          level: 7,
+        },
+      },
+    ],
   },
   {
     id: "be_29",
@@ -875,8 +1178,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Priest Home: Unlocks a Priest Home upgrade",
-      "Priest Home: Allows constructing 1 more Priest Home building in your city",
+      {
+        title: "Priest Home",
+        desc: "Unlocks a Priest Home upgrade",
+        img: { kind: "wiki", imageName: "Maya_Priest_Home_Lv", level: 3 },
+      },
+      {
+        title: "Priest Home",
+        desc: "Allows constructing 1 more Priest Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -903,7 +1214,13 @@ export const technos_BE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Average Home: Unlocks a Average Home upgrade"],
+    rewards: [
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 21 },
+      },
+    ],
   },
   {
     id: "be_31",
@@ -929,7 +1246,13 @@ export const technos_BE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 21 },
+      },
+    ],
   },
   {
     id: "be_32",
@@ -957,7 +1280,11 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Jade Quarry: Allows constructing 1 more Jade Quarry building in your city",
+      {
+        title: "Jade Quarry",
+        desc: "Allows constructing 1 more Jade Quarry building in Maya Empire",
+        img: { kind: "catalog", imgType: "quarry", invert: true },
+      },
     ],
   },
   {
@@ -986,8 +1313,16 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Obsidian Quarry: Allows constructing 1 more Obsidian Quarry building in your city",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Obsidian Quarry",
+        desc: "Allows constructing 1 more Obsidian Quarry building in Maya Empire",
+        img: { kind: "catalog", imgType: "quarry", invert: true },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -1015,7 +1350,15 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Heavy Infantry Barracks: Unlocks a Heavy Infantry Barracks upgrade",
+      {
+        title: "Heavy Infantry Barracks",
+        desc: "Unlocks a Heavy Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Heavy_Infantry_Barracks_Lv",
+          level: 7,
+        },
+      },
     ],
   },
   {
@@ -1043,7 +1386,13 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     allied: "maya",
-    rewards: ["Jade Quarry: Unlocks a Jade Quarry upgrade"],
+    rewards: [
+      {
+        title: "Jade Quarry",
+        desc: "Unlocks a Jade Quarry upgrade",
+        img: { kind: "wiki", imageName: "Maya_Jade_Quarry_Lv", level: 3 },
+      },
+    ],
   },
   {
     id: "be_36",
@@ -1070,7 +1419,17 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     allied: "maya",
-    rewards: ["Obsidian Quarry: Unlocks a Obsidian Quarry upgrade"],
+    rewards: [
+      {
+        title: "Obsidian Quarry",
+        desc: "Unlocks a Obsidian Quarry upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Maya_Obsidian_Quarry_Lv",
+          level: 3,
+        },
+      },
+    ],
   },
   {
     id: "be_37",
@@ -1097,8 +1456,16 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Good: Unlocks the Secondary Good",
-      "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+      {
+        title: "Secondary Workshop",
+        desc: "Unlocks the Secondary Workshop",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Secondary Goods",
+        desc: "Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "secondary" },
+      },
     ],
   },
   {
@@ -1125,7 +1492,13 @@ export const technos_BE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
+    rewards: [
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 21 },
+      },
+    ],
   },
   {
     id: "be_39",
@@ -1153,7 +1526,11 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Maya Empire",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -1182,7 +1559,11 @@ export const technos_BE: TechnoData[] = [
     },
     allied: "maya",
     rewards: [
-      "Average Ritual Site: Allows constructing 1 more Average Ritual Site building in your city",
+      {
+        title: "Average Ritual Site",
+        desc: "Allows constructing 1 more Average Ritual Site building in Maya Empire",
+        img: { kind: "catalog", imgType: "ritualSite", invert: true },
+      },
     ],
   },
   {
@@ -1206,8 +1587,16 @@ export const technos_BE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Good: Unlocks the Tertiary Good",
-      "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+      {
+        title: "Tertiary Workshop",
+        desc: "Unlocks the Tertiary Workshop",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Tertiary Goods",
+        desc: "Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "tertiary" },
+      },
     ],
   },
 ];

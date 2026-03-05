@@ -26,9 +26,21 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "City Hall: Unlocks a Great Hall upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 25 },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 25 },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a Great Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
     ],
   },
   {
@@ -56,8 +68,24 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Infantry Barracks: Unlocks a Infantry Barracks upgrade",
-      "Moderate Culture Site: Unlocks a Moderate Culture Site upgrade",
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks a Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Infantry_Barracks_Lv",
+          level: 9,
+        },
+      },
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks a Moderate Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Moderate_Culture_Site_Lv",
+          level: 9,
+        },
+      },
     ],
   },
   {
@@ -86,9 +114,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Unlock City: Unlocks Allied Culture Viking Kingdom!",
-      "Worker Home: Unlocks the Worker Home",
-      "Beehive: Unlocks the Beehive",
+      {
+        title: "Unlock City",
+        desc: "Unlocks Allied Culture Viking Kingdom!",
+        img: { kind: "catalog", imgType: "vikings" },
+      },
+      {
+        title: "Worker Home",
+        desc: "Unlocks the Worker Home",
+        img: { kind: "wiki", imageName: "Viking_Worker_Home_Lv", level: 1 },
+      },
+      {
+        title: "Beehive",
+        desc: "Unlocks the Beehive",
+        img: { kind: "wiki", imageName: "Viking_Beehive_Lv", level: 1 },
+      },
     ],
   },
   {
@@ -116,8 +156,20 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Compact Culture Site: Unlocks a Compact Culture Site upgrade",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 25 },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks a Compact Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Compact_Culture_Site_Lv",
+          level: 9,
+        },
+      },
     ],
   },
   {
@@ -145,9 +197,24 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Good: Unlocks a Primary Good upgrade",
-      "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
-      "+10000: Increase Trade Token Limit",
+      {
+        title: "Primary Workshop",
+        desc: "Unlocks a Primary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Primary Goods",
+        desc: "Unlocks the good Primary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "primary" },
+      },
+      {
+        title: "+10000",
+        desc: "Increase Trade Token Limit",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_limittradingtokens.webp",
+        },
+      },
     ],
   },
   {
@@ -176,10 +243,30 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Sailor's Home: Unlocks the Sailor's Home",
-      "Fishing Pier: Unlocks the Fishing Pier",
-      "Luxurious Home: Unlocks the Premium Home",
-      "Luxurious Fishing Pier: Unlocks the Luxurious Fishing Pier",
+      {
+        title: "Sailor's Home",
+        desc: "Unlocks the Sailor's Home",
+        img: { kind: "wiki", imageName: "Viking_Sailor_Home_Lv", level: 1 },
+      },
+      {
+        title: "Fishing Pier",
+        desc: "Unlocks the Fishing Pier",
+        img: { kind: "wiki", imageName: "Viking_Fishing_Pier_Lv", level: 1 },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Unlocks the Premium Home",
+        img: { kind: "wiki", imageName: "Viking_Luxurious_Home_Lv", level: 3 },
+      },
+      {
+        title: "Luxurious Fishing Pier",
+        desc: "Unlocks the Luxurious Fishing Pier",
+        img: {
+          kind: "wiki",
+          imageName: "Viking_Luxurious_Fishing_Pier_Lv",
+          level: 3,
+        },
+      },
     ],
   },
   {
@@ -207,8 +294,20 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Little Culture Site: Unlocks a Little Culture Site upgrade",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 25 },
+      },
+      {
+        title: "Little Culture Site",
+        desc: "Unlocks a Little Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Little_Culture_Site_Lv",
+          level: 9,
+        },
+      },
     ],
   },
   {
@@ -236,8 +335,20 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Large Culture Site: Unlocks a Large Culture Site upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 26 },
+      },
+      {
+        title: "Large Culture Site",
+        desc: "Unlocks a Large Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Large_Culture_Site_Lv",
+          level: 9,
+        },
+      },
     ],
   },
   {
@@ -266,11 +377,31 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Tavern: Unlocks the Tavern",
-      "Mead: Unlocks the good Mead for you, so that you can produce it in your city",
-      "Tavern Runestone: Unlocks the Tavern Runestone",
-      "Worker Home: Allows constructing 2 more Worker Home buildings in your city",
-      "Sailor's Home: Allows constructing 1 more Sailor's Home building in your city",
+      {
+        title: "Tavern",
+        desc: "Unlocks the Tavern",
+        img: { kind: "wiki", imageName: "Viking_Tavern_Lv", level: 1 },
+      },
+      {
+        title: "Mead",
+        desc: "Unlocks the good Mead for you, so that you can produce it in Viking Kingdom",
+        img: { kind: "local", path: "/images/goods-large/mead.webp" },
+      },
+      {
+        title: "Tavern Runestone",
+        desc: "Unlocks the Tavern Runestone",
+        img: { kind: "wiki", imageName: "Viking_Tavern_Runestone" },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 2 more Worker Home buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Sailor's Home",
+        desc: "Allows constructing 1 more Sailor's Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -297,7 +428,17 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
+    rewards: [
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks a Ranged Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Ranged_Barracks_Lv",
+          level: 9,
+        },
+      },
+    ],
   },
   {
     id: "fa_10",
@@ -325,11 +466,38 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Expedition Pier: Unlocks the Expedition Pier",
-      "Ceramic Treasure: Unlocks the good Ceramic Treasure for you, so that you can produce it in your city",
-      "Gold Treasure: Unlocks the good Gold Treasure for you, so that you can produce it in your city",
-      "Luxurious Sailing Port: Unlocks the Luxurious Sailing Port",
-      "Sailor's Home: Allows constructing 2 more Sailor's Home buildings in your city",
+      {
+        title: "Expedition Pier",
+        desc: "Unlocks the Expedition Pier",
+        img: { kind: "wiki", imageName: "Viking_Expedition_Pier" },
+      },
+      {
+        title: "Ceramic Treasure",
+        desc: "Unlocks the good Ceramic Treasure for you, so that you can produce it in Viking Kingdom",
+        img: {
+          kind: "local",
+          path: "/images/goods-large/ceramic_treasure.webp",
+        },
+      },
+      {
+        title: "Gold Treasure",
+        desc: "Unlocks the good Gold Treasure for you, so that you can produce it in Viking Kingdom",
+        img: { kind: "local", path: "/images/goods-large/gold_treasure.webp" },
+      },
+      {
+        title: "Luxurious Sailing Port",
+        desc: "Unlocks the Luxurious Sailing Port",
+        img: {
+          kind: "wiki",
+          imageName: "Viking_Luxurious_Sailor_Port_Lv",
+          level: 1,
+        },
+      },
+      {
+        title: "Sailor's Home",
+        desc: "Allows constructing 2 more Sailor's Home buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -358,9 +526,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Worker Home: Allows constructing 2 more Worker Home buildings in your city",
-      "Fishing Pier: Allows constructing 1 more Fishing Pier building in your city",
-      "Beehive: Allows constructing 1 more Beehive building in your city",
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 2 more Worker Home buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Fishing Pier",
+        desc: "Allows constructing 1 more Fishing Pier building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "fishingPier", invert: true },
+      },
+      {
+        title: "Beehive",
+        desc: "Allows constructing 1 more Beehive building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "beehive", invert: true },
+      },
     ],
   },
   {
@@ -387,7 +567,13 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 26 },
+      },
+    ],
   },
   {
     id: "fa_13",
@@ -413,7 +599,13 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Average Home: Unlocks a Average Home upgrade"],
+    rewards: [
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 26 },
+      },
+    ],
   },
   {
     id: "fa_14",
@@ -441,9 +633,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Worker Home: Unlocks a Worker Home upgrade",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
-      "Beehive: Allows constructing 2 more Beehive buildings in your city",
+      {
+        title: "Worker Home",
+        desc: "Unlocks a Worker Home upgrade",
+        img: { kind: "wiki", imageName: "Viking_Worker_Home_Lv", level: 2 },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Beehive",
+        desc: "Allows constructing 2 more Beehive buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "beehive", invert: true },
+      },
     ],
   },
   {
@@ -472,9 +676,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Sailor's Home: Unlocks a Sailor's Home upgrade",
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
-      "Tavern: Allows constructing 1 more Tavern building in your city",
+      {
+        title: "Sailor's Home",
+        desc: "Unlocks a Sailor's Home upgrade",
+        img: { kind: "wiki", imageName: "Viking_Sailor_Home_Lv", level: 2 },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Tavern",
+        desc: "Allows constructing 1 more Tavern building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -501,7 +717,17 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Cavalry Barracks",
+        desc: "Unlocks a Cavalry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Cavalry_Barracks_Lv",
+          level: 9,
+        },
+      },
+    ],
   },
   {
     id: "fa_17",
@@ -528,7 +754,13 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     allied: "vikings",
-    rewards: ["Beehive: Unlocks a Beehive upgrade"],
+    rewards: [
+      {
+        title: "Beehive",
+        desc: "Unlocks a Beehive upgrade",
+        img: { kind: "wiki", imageName: "Viking_Beehive_Lv", level: 2 },
+      },
+    ],
   },
   {
     id: "fa_18",
@@ -556,8 +788,16 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Sailor's Home: Allows constructing 1 more Sailor's Home building in your city",
-      "Fishing Pier: Allows constructing 1 more Fishing Pier building in your city",
+      {
+        title: "Sailor's Home",
+        desc: "Allows constructing 1 more Sailor's Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Fishing Pier",
+        desc: "Allows constructing 1 more Fishing Pier building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "fishingPier", invert: true },
+      },
     ],
   },
   {
@@ -585,8 +825,16 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in your city",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -615,9 +863,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Fishing Pier: Unlocks a Fishing Pier upgrade",
-      "Expedition Pier: Allows constructing 1 more Expedition Pier building in your city",
-      "Tavern: Allows constructing 1 more Tavern building in your city",
+      {
+        title: "Fishing Pier",
+        desc: "Unlocks a Fishing Pier upgrade",
+        img: { kind: "wiki", imageName: "Viking_Fishing_Pier_Lv", level: 2 },
+      },
+      {
+        title: "Expedition Pier",
+        desc: "Allows constructing 1 more Expedition Pier building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Tavern",
+        desc: "Allows constructing 1 more Tavern building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -644,7 +904,13 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
+    rewards: [
+      {
+        title: "Siege Barracks",
+        desc: "Unlocks a Siege Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Siege_Barracks_Lv", level: 9 },
+      },
+    ],
   },
   {
     id: "fa_22",
@@ -672,9 +938,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Sailor's Home: Allows constructing 2 more Sailor's Home buildings in your city",
-      "Worker Home: Allows constructing 2 more Worker Home buildings in your city",
-      "Beehive: Allows constructing 1 more Beehive building in your city",
+      {
+        title: "Sailor's Home",
+        desc: "Allows constructing 2 more Sailor's Home buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 2 more Worker Home buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Beehive",
+        desc: "Allows constructing 1 more Beehive building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "beehive", invert: true },
+      },
     ],
   },
   {
@@ -701,7 +979,13 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Small Home: Unlocks a Small Home upgrade"],
+    rewards: [
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 27 },
+      },
+    ],
   },
   {
     id: "fa_24",
@@ -727,7 +1011,13 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
+    rewards: [
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 26 },
+      },
+    ],
   },
   {
     id: "fa_25",
@@ -755,9 +1045,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Worker Home: Unlocks a Worker Home upgrade",
-      "Worker Home: Allows constructing 2 more Worker Home buildings in your city",
-      "Beehive: Allows constructing 1 more Beehive building in your city",
+      {
+        title: "Worker Home",
+        desc: "Unlocks a Worker Home upgrade",
+        img: { kind: "wiki", imageName: "Viking_Worker_Home_Lv", level: 3 },
+      },
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 2 more Worker Home buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Beehive",
+        desc: "Allows constructing 1 more Beehive building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "beehive", invert: true },
+      },
     ],
   },
   {
@@ -786,10 +1088,26 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Sailor's Home: Unlocks a Sailor's Home upgrade",
-      "Sailor's Home: Allows constructing 1 more Sailor's Home building in your city",
-      "Expedition Pier: Allows constructing 1 more Expedition Pier building in your city",
-      "Tavern: Allows constructing 1 more Tavern building in your city",
+      {
+        title: "Sailor's Home",
+        desc: "Unlocks a Sailor's Home upgrade",
+        img: { kind: "wiki", imageName: "Viking_Sailor_Home_Lv", level: 3 },
+      },
+      {
+        title: "Sailor's Home",
+        desc: "Allows constructing 1 more Sailor's Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Expedition Pier",
+        desc: "Allows constructing 1 more Expedition Pier building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Tavern",
+        desc: "Allows constructing 1 more Tavern building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -816,7 +1134,13 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 27 },
+      },
+    ],
   },
   {
     id: "fa_28",
@@ -843,8 +1167,16 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 27 },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -873,8 +1205,16 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Fishing Pier: Allows constructing 1 more Fishing Pier building in your city",
-      "Beehive: Allows constructing 1 more Beehive building in your city",
+      {
+        title: "Fishing Pier",
+        desc: "Allows constructing 1 more Fishing Pier building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "fishingPier", invert: true },
+      },
+      {
+        title: "Beehive",
+        desc: "Allows constructing 1 more Beehive building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "beehive", invert: true },
+      },
     ],
   },
   {
@@ -902,7 +1242,15 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Heavy Infantry Barracks: Unlocks a Heavy Infantry Barracks upgrade",
+      {
+        title: "Heavy Infantry Barracks",
+        desc: "Unlocks a Heavy Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Heavy_Infantry_Barracks_Lv",
+          level: 9,
+        },
+      },
     ],
   },
   {
@@ -931,8 +1279,16 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Beehive: Unlocks a Beehive upgrade",
-      "Beehive: Allows constructing 2 more Beehive buildings in your city",
+      {
+        title: "Beehive",
+        desc: "Unlocks a Beehive upgrade",
+        img: { kind: "wiki", imageName: "Viking_Beehive_Lv", level: 3 },
+      },
+      {
+        title: "Beehive",
+        desc: "Allows constructing 2 more Beehive buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "beehive", invert: true },
+      },
     ],
   },
   {
@@ -961,9 +1317,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Fishing Pier: Unlocks a Fishing Pier upgrade",
-      "Sailor's Home: Allows constructing 1 more Sailor's Home building in your city",
-      "Fishing Pier: Allows constructing 1 more Fishing Pier building in your city",
+      {
+        title: "Fishing Pier",
+        desc: "Unlocks a Fishing Pier upgrade",
+        img: { kind: "wiki", imageName: "Viking_Fishing_Pier_Lv", level: 3 },
+      },
+      {
+        title: "Sailor's Home",
+        desc: "Allows constructing 1 more Sailor's Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Fishing Pier",
+        desc: "Allows constructing 1 more Fishing Pier building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "fishingPier", invert: true },
+      },
     ],
   },
   {
@@ -991,8 +1359,16 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Good: Unlocks a Secondary Good upgrade",
-      "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+      {
+        title: "Secondary Workshop",
+        desc: "Unlocks a Secondary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Secondary Goods",
+        desc: "Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "secondary" },
+      },
     ],
   },
   {
@@ -1020,8 +1396,16 @@ export const technos_FA: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Good: Unlocks a Tertiary Good upgrade",
-      "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+      {
+        title: "Tertiary Workshop",
+        desc: "Unlocks a Tertiary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Tertiary Goods",
+        desc: "Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "tertiary" },
+      },
     ],
   },
   {
@@ -1050,9 +1434,21 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Worker Home: Allows constructing 2 more Worker Home buildings in your city",
-      "Tavern: Allows constructing 1 more Tavern building in your city",
-      "Beehive: Allows constructing 1 more Beehive building in your city",
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 2 more Worker Home buildings in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Tavern",
+        desc: "Allows constructing 1 more Tavern building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Beehive",
+        desc: "Allows constructing 1 more Beehive building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "beehive", invert: true },
+      },
     ],
   },
   {
@@ -1081,8 +1477,16 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Sailor's Home: Allows constructing 1 more Sailor's Home building in your city",
-      "Fishing Pier: Allows constructing 1 more Fishing Pier building in your city",
+      {
+        title: "Sailor's Home",
+        desc: "Allows constructing 1 more Sailor's Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Fishing Pier",
+        desc: "Allows constructing 1 more Fishing Pier building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "fishingPier", invert: true },
+      },
     ],
   },
   {
@@ -1109,7 +1513,13 @@ export const technos_FA: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
+    rewards: [
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 27 },
+      },
+    ],
   },
   {
     id: "fa_38",
@@ -1137,7 +1547,11 @@ export const technos_FA: TechnoData[] = [
     },
     allied: "vikings",
     rewards: [
-      "Worker Home: Allows constructing 1 more Worker Home building in your city",
+      {
+        title: "Worker Home",
+        desc: "Allows constructing 1 more Worker Home building in Viking Kingdom",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
 ];

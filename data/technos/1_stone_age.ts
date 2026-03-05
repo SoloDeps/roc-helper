@@ -10,8 +10,16 @@ export const technos_SA: TechnoData[] = [
       research_points: 1,
     },
     rewards: [
-      "Small Home: Unlocks the Small Home",
-      "City Hall: Unlocks a Great Hall upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks the Small Home",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 1 },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a Great Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
     ],
   },
   {
@@ -23,7 +31,13 @@ export const technos_SA: TechnoData[] = [
       research_points: 1,
       coins: 1,
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 1 },
+      },
+    ],
   },
   {
     id: "sa_2",
@@ -35,7 +49,13 @@ export const technos_SA: TechnoData[] = [
       coins: 15,
       food: 10,
     },
-    rewards: ["Infantry Barracks: Unlocks the Infantry Barracks"],
+    rewards: [
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks the Infantry Barracks",
+        img: { kind: "wiki", imageName: "Capital_Infantry_Barracks_Lv", level: 1 },
+      },
+    ],
   },
   {
     id: "sa_3",
@@ -48,8 +68,16 @@ export const technos_SA: TechnoData[] = [
       food: 40,
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 2 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -63,8 +91,16 @@ export const technos_SA: TechnoData[] = [
       food: 60,
     },
     rewards: [
-      "Moderate Culture Site: Unlocks the Moderate Culture Site",
-      "Luxurious Culture Site: Unlocks the Luxurious Culture Site",
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks the Moderate Culture Site",
+        img: { kind: "wiki", imageName: "Capital_Moderate_Culture_Site_Lv", level: 1 },
+      },
+      {
+        title: "Luxurious Culture Site",
+        desc: "Unlocks the Luxurious Culture Site",
+        img: { kind: "wiki", imageName: "Capital_Luxurious_Culture_Site_Lv", level: 1 },
+      },
     ],
   },
   {
@@ -77,7 +113,13 @@ export const technos_SA: TechnoData[] = [
       coins: 300,
       food: 100,
     },
-    rewards: ["Domestic Farm: Unlocks the Domestic Farm"],
+    rewards: [
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks the Domestic Farm",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 1 },
+      },
+    ],
   },
   {
     id: "sa_6",
@@ -90,8 +132,16 @@ export const technos_SA: TechnoData[] = [
       food: 375,
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Rural Farm: Allows constructing 1 more Rural Farm building in your city",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 2 },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Allows constructing 1 more Rural Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -104,7 +154,13 @@ export const technos_SA: TechnoData[] = [
       coins: 900,
       food: 650,
     },
-    rewards: ["Ranged Barracks: Unlocks the Ranged Barracks"],
+    rewards: [
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks the Ranged Barracks",
+        img: { kind: "wiki", imageName: "Capital_Ranged_Barracks_Lv", level: 1 },
+      },
+    ],
   },
   {
     id: "sa_8",
@@ -117,9 +173,21 @@ export const technos_SA: TechnoData[] = [
       food: 1300,
     },
     rewards: [
-      "Events Unlocked: New Feature",
-      "Compact Culture Site: Unlocks the Compact Culture Site",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Events Unlocked",
+        desc: "New Feature",
+        img: { kind: "local", path: "/images/technos/features/icon_events.webp" },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks the Compact Culture Site",
+        img: { kind: "wiki", imageName: "Capital_Compact_Culture_Site_Lv", level: 1 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -133,8 +201,16 @@ export const technos_SA: TechnoData[] = [
       food: 2275,
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 2 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -148,7 +224,11 @@ export const technos_SA: TechnoData[] = [
       food: 3575,
     },
     rewards: [
-      "Infantry Barracks: Allows constructing 1 more Infantry Barracks building in your city",
+      {
+        title: "Infantry Barracks",
+        desc: "Allows constructing 1 more Infantry Barracks building in your city",
+        img: { kind: "catalog", imgType: "barracks", invert: true },
+      },
     ],
   },
   {
@@ -162,8 +242,16 @@ export const technos_SA: TechnoData[] = [
       food: 5460,
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 3 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -176,7 +264,13 @@ export const technos_SA: TechnoData[] = [
       coins: 12600,
       food: 9100,
     },
-    rewards: ["Rural Farm: Unlocks a Rural Farm upgrade"],
+    rewards: [
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 3 },
+      },
+    ],
   },
   {
     id: "sa_13",
@@ -189,8 +283,16 @@ export const technos_SA: TechnoData[] = [
       food: 11050,
     },
     rewards: [
-      "Daily Bonus Unlocked: New Feature",
-      "Compact Culture Site: Allows constructing 2 more Compact Culture Site buildings in your city",
+      {
+        title: "Daily Bonus Unlocked",
+        desc: "New Feature",
+        img: { kind: "local", path: "/images/technos/features/icon_dailybonus.webp" },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Allows constructing 2 more Compact Culture Site buildings in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -204,7 +306,11 @@ export const technos_SA: TechnoData[] = [
       food: 13000,
     },
     rewards: [
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -217,6 +323,12 @@ export const technos_SA: TechnoData[] = [
       coins: 25200,
       food: 18200,
     },
-    rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
+    rewards: [
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 3 },
+      },
+    ],
   },
 ];

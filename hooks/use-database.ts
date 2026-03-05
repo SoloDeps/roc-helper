@@ -18,8 +18,6 @@ import type { OttomanTradePostEntity } from "@/lib/db/schema";
 // ============================================================================
 
 export function useBuildings() {
-  //  useLiveQuery : se met à jour automatiquement dès que Dexie change,
-  //    quelle que soit la source de l'écriture (research tree, calculator, etc.)
   return useLiveQuery(() => getAllHydratedBuildings());
 }
 
@@ -84,8 +82,6 @@ export function useToggleBuildingHidden() {
 // ============================================================================
 
 export function useTechnos() {
-  //  FIX : était useQuery (cache React Query non invalidé par les bulkPut
-  //    directs du research tree). useLiveQuery réagit à tout write Dexie.
   return useLiveQuery(() => getAllHydratedTechnos());
 }
 
@@ -94,7 +90,7 @@ export function useAddTechno() {
   return useMutation({
     mutationFn: async ({ technoId }: { technoId: string }) => {
       const db = getWikiDB();
-      await db.technos.put({ id: technoId, hidden: 0 });
+      await db.technos.put({ id: technoId, hidden: 0, cp: 0 });
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["technos"] }),
   });
@@ -117,6 +113,7 @@ export function useRemoveTechnosByEra() {
   });
 }
 
+/** Calculator — toggle hidden uniquement, ne touche pas cp */
 export function useToggleTechnosByEra() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -142,7 +139,6 @@ export function useToggleTechnosByEra() {
 // ============================================================================
 
 export function useOttomanAreas() {
-  //  useLiveQuery : réactif à tout write Dexie
   return useLiveQuery(() => getAllHydratedOttomanAreas());
 }
 
@@ -189,7 +185,6 @@ export function useToggleOttomanAreaHidden() {
 // ============================================================================
 
 export function useOttomanTradePosts() {
-  //  useLiveQuery : réactif à tout write Dexie
   return useLiveQuery(() => getAllHydratedOttomanTradePosts());
 }
 

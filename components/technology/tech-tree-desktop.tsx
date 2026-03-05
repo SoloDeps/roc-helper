@@ -249,17 +249,17 @@ function TechNodeWithContext({ id, data, selected }: any) {
         <Handle
           type="target"
           position={Position.Left}
-          className="!opacity-0 !pointer-events-none"
+          className="opacity-0! pointer-events-none!"
         />
 
         {/* Spacer pour laisser place à l'image absolute */}
         <div className="shrink-0 w-16" />
 
         {/* Nom & RP */}
-        <div className="flex flex-col justify-center gap-0.5 size-full min-w-0 w-full py-1 pr-2">
+        <div className="flex flex-col justify-center gap-0.5 size-full min-w-0 w-full py-1 pr-2 max-md:font-sans!">
           <span
             className={cn(
-              "font-semibold text-[11px] leading-tight line-clamp-2 block max-sm:font-pro!",
+              "font-semibold text-[11px] leading-tight line-clamp-2 block",
               isCompleted && "text-green-700 dark:text-green-400",
               isPathFrom && "text-orange-600 dark:text-orange-300",
               isPathTo && "text-orange-600 dark:text-orange-300",
@@ -436,7 +436,7 @@ export function TechTreeDesktop({
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
-      if (t.hidden) ids.add(t.id);
+      if (t.cp) ids.add(t.id); // cp = progression research tree (hidden = calculator uniquement)
     });
     return ids;
   }, [technosInDB]);
@@ -480,16 +480,27 @@ export function TechTreeDesktop({
           techId,
           ...collectAncestorIds(techId, technologies),
         ];
+        // Récupérer les entrées existantes pour préserver hidden (calculator)
+        const existing = await db.technos.bulkGet(idsToComplete);
         await db.technos.bulkPut(
-          idsToComplete.map((id) => ({ id: id, hidden: 1 })),
+          idsToComplete.map((id, i) => ({
+            ...(existing[i] ?? { id, hidden: 0 }),
+            id,
+            cp: 1,
+          })),
         );
       } else {
         const idsToUncheck = [
           techId,
           ...collectDescendantIds(techId, technologies),
         ];
+        const existing = await db.technos.bulkGet(idsToUncheck);
         await db.technos.bulkPut(
-          idsToUncheck.map((id) => ({ id: id, hidden: 0 })),
+          idsToUncheck.map((id, i) => ({
+            ...(existing[i] ?? { id, hidden: 0 }),
+            id,
+            cp: 0,
+          })),
         );
       }
     },

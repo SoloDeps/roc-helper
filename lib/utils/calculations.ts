@@ -33,9 +33,9 @@ export function calculateTotalCosts(
     accumulateCosts(totals, building.costs, building.quantity);
   }
 
-  // Technos
+  // Technos — exclure si hidden (masquée calculator) OU cp=true (déjà complétée)
   for (const techno of technos) {
-    if (techno.hidden) continue;
+    if (techno.hidden || techno.cp) continue;
     accumulateCosts(totals, techno.costs, 1);
   }
 

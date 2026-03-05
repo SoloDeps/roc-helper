@@ -22,11 +22,39 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Luxurious Home: Unlocks a Luxurious Home upgrade",
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Luxurious Farm: Unlocks a Luxurious Farm upgrade",
-      "City Hall: Unlocks a Great Hall upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 16 },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Unlocks a Luxurious Home upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Luxurious_Home_Lv",
+          level: 18,
+        },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 16 },
+      },
+      {
+        title: "Luxurious Farm",
+        desc: "Unlocks a Luxurious Farm upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Luxurious_Farm_Lv",
+          level: 18,
+        },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a Great Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
     ],
   },
   {
@@ -54,8 +82,24 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Moderate Culture Site: Unlocks a Moderate Culture Site upgrade",
-      "Luxurious Culture Site: Unlocks a Luxurious Culture Site upgrade",
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks a Moderate Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Moderate_Culture_Site_Lv",
+          level: 6,
+        },
+      },
+      {
+        title: "Luxurious Culture Site",
+        desc: "Unlocks a Luxurious Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Luxurious_Culture_Site_Lv",
+          level: 6,
+        },
+      },
     ],
   },
   {
@@ -82,7 +126,17 @@ export const technos_RE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks a Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Infantry_Barracks_Lv",
+          level: 6,
+        },
+      },
+    ],
   },
   {
     id: "re_3",
@@ -110,10 +164,26 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Average Home: Unlocks a Average Home upgrade",
-      "Small Home: Allows constructing 3 more Small Home buildings in your city",
-      "Luxurious Home: Unlocks a Luxurious Home upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "China_Small_Home_Lv", level: 4 },
+      },
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "China_Average_Home_Lv", level: 4 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 3 more Small Home buildings in China",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Unlocks a Luxurious Home upgrade",
+        img: { kind: "wiki", imageName: "China_Luxurious_Home_Lv", level: 6 },
+      },
     ],
   },
   {
@@ -141,9 +211,21 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 16 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 16 },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -171,8 +253,16 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Good: Unlocks a Primary Good upgrade",
-      "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
+      {
+        title: "Primary Workshop",
+        desc: "Unlocks a Primary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Primary Goods",
+        desc: "Unlocks the good Primary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "primary" },
+      },
     ],
   },
   {
@@ -197,9 +287,21 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Clay Processor: Unlocks the Clay Processor",
-      "Clay: Unlocks the good Clay for you, so that you can produce it in your city",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Clay Processor",
+        desc: "Unlocks the Clay Processor",
+        img: { kind: "wiki", imageName: "China_Clay_Processor" },
+      },
+      {
+        title: "Clay",
+        desc: "Unlocks the good Clay for you, so that you can produce it in China",
+        img: { kind: "local", path: "/images/goods-large/clay.webp" },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in China",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -228,9 +330,25 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Rice Farm: Unlocks a Rice Farm upgrade",
-      "Luxurious Rice Farm: Unlocks a Luxurious Rice Farm upgrade",
-      "Rice Farm: Allows constructing 2 more Rice Farm buildings in your city",
+      {
+        title: "Rice Farm",
+        desc: "Unlocks a Rice Farm upgrade",
+        img: { kind: "wiki", imageName: "China_Rice_Farm_Lv", level: 4 },
+      },
+      {
+        title: "Luxurious Rice Farm",
+        desc: "Unlocks a Luxurious Rice Farm upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "China_Luxurious_Rice_Farm_Lv",
+          level: 6,
+        },
+      },
+      {
+        title: "Rice Farm",
+        desc: "Allows constructing 2 more Rice Farm buildings in China",
+        img: { kind: "catalog", imgType: "riceFarm", invert: true },
+      },
     ],
   },
   {
@@ -258,8 +376,20 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Compact Culture Site: Unlocks a Compact Culture Site upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 17 },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks a Compact Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Compact_Culture_Site_Lv",
+          level: 6,
+        },
+      },
     ],
   },
   {
@@ -283,9 +413,25 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Little Culture Site: Unlocks a Little Culture Site upgrade",
-      "Rural Farm: Allows constructing 1 more Rural Farm building in your city",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 17 },
+      },
+      {
+        title: "Little Culture Site",
+        desc: "Unlocks a Little Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Little_Culture_Site_Lv",
+          level: 6,
+        },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Allows constructing 1 more Rural Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -313,8 +459,20 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Ranged Barracks: Unlocks a Ranged Barracks upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks a Ranged Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Ranged_Barracks_Lv",
+          level: 6,
+        },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -343,9 +501,21 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Porcelain Workshop: Unlocks the Porcelain Workshop",
-      "Porcelain: Unlocks the good Porcelain for you, so that you can produce it in your city",
-      "Clay Processor: Allows constructing 1 more Clay Processor building in your city",
+      {
+        title: "Porcelain Workshop",
+        desc: "Unlocks the Porcelain Workshop",
+        img: { kind: "wiki", imageName: "China_Porcelain_Workshop" },
+      },
+      {
+        title: "Porcelain",
+        desc: "Unlocks the good Porcelain for you, so that you can produce it in China",
+        img: { kind: "local", path: "/images/goods-large/porcelain.webp" },
+      },
+      {
+        title: "Clay Processor",
+        desc: "Allows constructing 1 more Clay Processor building in China",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -372,7 +542,13 @@ export const technos_RE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Siege Barracks: Unlocks the Siege Barracks"],
+    rewards: [
+      {
+        title: "Siege Barracks",
+        desc: "Unlocks the Siege Barracks",
+        img: { kind: "wiki", imageName: "Capital_Siege_Barracks_Lv", level: 6 },
+      },
+    ],
   },
   {
     id: "re_13",
@@ -400,9 +576,21 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Average Home: Unlocks a Average Home upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "China_Small_Home_Lv", level: 5 },
+      },
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "China_Average_Home_Lv", level: 5 },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in China",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -431,7 +619,11 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Small Home: Allows constructing 3 more Small Home buildings in your city",
+      {
+        title: "Small Home",
+        desc: "Allows constructing 3 more Small Home buildings in China",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -459,8 +651,16 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 17 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 17 },
+      },
     ],
   },
   {
@@ -489,8 +689,16 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Rice Farm: Unlocks a Rice Farm upgrade",
-      "Rice Farm: Allows constructing 2 more Rice Farm buildings in your city",
+      {
+        title: "Rice Farm",
+        desc: "Unlocks a Rice Farm upgrade",
+        img: { kind: "wiki", imageName: "China_Rice_Farm_Lv", level: 5 },
+      },
+      {
+        title: "Rice Farm",
+        desc: "Allows constructing 2 more Rice Farm buildings in China",
+        img: { kind: "catalog", imgType: "riceFarm", invert: true },
+      },
     ],
   },
   {
@@ -519,7 +727,11 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in China",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -547,8 +759,16 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Little Culture Site: Allows constructing 1 more Little Culture Site building in your city",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 18 },
+      },
+      {
+        title: "Little Culture Site",
+        desc: "Allows constructing 1 more Little Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -572,9 +792,21 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
-      "Moderate Culture Site: Allows constructing 1 more Moderate Culture Site building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 18 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Moderate Culture Site",
+        desc: "Allows constructing 1 more Moderate Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -601,7 +833,17 @@ export const technos_RE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Cavalry Barracks",
+        desc: "Unlocks a Cavalry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Cavalry_Barracks_Lv",
+          level: 6,
+        },
+      },
+    ],
   },
   {
     id: "re_21",
@@ -629,8 +871,16 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Clay Processor: Allows constructing 1 more Clay Processor building in your city",
-      "Porcelain Workshop: Allows constructing 1 more Porcelain Workshop building in your city",
+      {
+        title: "Clay Processor",
+        desc: "Allows constructing 1 more Clay Processor building in China",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Porcelain Workshop",
+        desc: "Allows constructing 1 more Porcelain Workshop building in China",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -658,9 +908,21 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 18 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 18 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -687,7 +949,17 @@ export const technos_RE: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Large Culture Site: Unlocks a Large Culture Site upgrade"],
+    rewards: [
+      {
+        title: "Large Culture Site",
+        desc: "Unlocks a Large Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Large_Culture_Site_Lv",
+          level: 6,
+        },
+      },
+    ],
   },
   {
     id: "re_24",
@@ -711,9 +983,21 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Average Home: Unlocks a Average Home upgrade",
-      "Small Home: Allows constructing 2 more Small Home buildings in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "China_Small_Home_Lv", level: 6 },
+      },
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "China_Average_Home_Lv", level: 6 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 2 more Small Home buildings in China",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -742,8 +1026,16 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Rice Farm: Unlocks a Rice Farm upgrade",
-      "Rice Farm: Allows constructing 2 more Rice Farm buildings in your city",
+      {
+        title: "Rice Farm",
+        desc: "Unlocks a Rice Farm upgrade",
+        img: { kind: "wiki", imageName: "China_Rice_Farm_Lv", level: 6 },
+      },
+      {
+        title: "Rice Farm",
+        desc: "Allows constructing 2 more Rice Farm buildings in China",
+        img: { kind: "catalog", imgType: "riceFarm", invert: true },
+      },
     ],
   },
   {
@@ -771,8 +1063,16 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Good: Unlocks a Secondary Good upgrade",
-      "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+      {
+        title: "Secondary Workshop",
+        desc: "Unlocks a Secondary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Secondary Goods",
+        desc: "Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "secondary" },
+      },
     ],
   },
   {
@@ -800,7 +1100,15 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Heavy Infantry Barracks: Unlocks a Heavy Infantry Barracks upgrade",
+      {
+        title: "Heavy Infantry Barracks",
+        desc: "Unlocks a Heavy Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Heavy_Infantry_Barracks_Lv",
+          level: 6,
+        },
+      },
     ],
   },
   {
@@ -829,8 +1137,16 @@ export const technos_RE: TechnoData[] = [
     },
     allied: "china",
     rewards: [
-      "Clay Processor: Allows constructing 1 more Clay Processor building in your city",
-      "Small Home: Allows constructing 2 more Small Home buildings in your city",
+      {
+        title: "Clay Processor",
+        desc: "Allows constructing 1 more Clay Processor building in China",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 2 more Small Home buildings in China",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -858,8 +1174,16 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Good: Unlocks a Tertiary Good upgrade",
-      "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+      {
+        title: "Tertiary Workshop",
+        desc: "Unlocks a Tertiary Workshop upgrade",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Tertiary Goods",
+        desc: "Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+        img: { kind: "good", priority: "tertiary" },
+      },
     ],
   },
   {
@@ -887,6 +1211,12 @@ export const technos_RE: TechnoData[] = [
       ],
     },
     allied: "china",
-    rewards: ["20: Gives you 20 Gems"],
+    rewards: [
+      {
+        title: "20 Gems",
+        desc: "Gives you 20 Gems",
+        img: { kind: "local", path: "/images/goods-large/gem.webp" },
+      },
+    ],
   },
 ];

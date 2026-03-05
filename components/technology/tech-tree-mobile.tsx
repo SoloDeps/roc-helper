@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState, useCallback } from "react";
 import { TechCard } from "./tech-card";
-import { TechDetailsModal } from "./tech-details-modal";
+import { TechDetailsDrawer } from "./tech-details-drawer";
 import { TechPathDrawer } from "./tech-path-drawer";
 import {
   TechTreeDesktop,
@@ -70,7 +70,7 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
   const completedIds = useMemo(() => {
     const ids = new Set<string>();
     technosInDB?.forEach((t) => {
-      if (t.hidden) ids.add(t.id);
+      if (t.cp) ids.add(t.id); // cp = progression research tree
     });
     return ids;
   }, [technosInDB]);
@@ -189,13 +189,23 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       const isCurrentlyCompleted = completedIds.has(techId);
       if (!isCurrentlyCompleted) {
         const idsToComplete = [techId, ...collectAncestorIds(techId)];
+        const existing = await db.technos.bulkGet(idsToComplete);
         await db.technos.bulkPut(
-          idsToComplete.map((id) => ({ id: id, hidden: 1 })),
+          idsToComplete.map((id, i) => ({
+            ...(existing[i] ?? { id, hidden: 0 }),
+            id,
+            cp: 1,
+          })),
         );
       } else {
         const idsToUncheck = [techId, ...collectDescendantIds(techId)];
+        const existing = await db.technos.bulkGet(idsToUncheck);
         await db.technos.bulkPut(
-          idsToUncheck.map((id) => ({ id: id, hidden: 0 })),
+          idsToUncheck.map((id, i) => ({
+            ...(existing[i] ?? { id, hidden: 0 }),
+            id,
+            cp: 0,
+          })),
         );
       }
     },
@@ -502,7 +512,7 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
       )}
 
       {/* ── Modals ── */}
-      <TechDetailsModal
+      <TechDetailsDrawer
         tech={selectedTech}
         open={isModalOpen}
         onOpenChange={setIsModalOpen}

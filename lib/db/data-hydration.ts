@@ -21,7 +21,8 @@ import type { TechnoData } from "@/types/shared";
 
 export interface HydratedTechno extends TechnoData {
   era: string;
-  hidden: boolean;
+  hidden: boolean; // calculator — exclure du total
+  cp: boolean; // research tree — techno complétée
 }
 
 export interface HydratedBuilding {
@@ -59,7 +60,6 @@ export interface HydratedOttomanTradePost {
   name: string;
   area: number;
   resource: string;
-  // levels exposés en boolean aux composants (converti depuis 0|1)
   levels: {
     unlock: boolean;
     lvl2: boolean;
@@ -95,7 +95,12 @@ export async function getHydratedTechnos(
 
   return staticData.map((techno) => {
     const state = stateMap.get(techno.id);
-    return { ...techno, era: eraId, hidden: state ? !!state.hidden : false };
+    return {
+      ...techno,
+      era: eraId,
+      hidden: state ? !!state.hidden : false,
+      cp: state ? !!state.cp : false,
+    };
   });
 }
 
@@ -118,7 +123,12 @@ export async function getAllHydratedTechnos(): Promise<HydratedTechno[]> {
     }
 
     if (techno && foundEraId) {
-      result.push({ ...techno, era: foundEraId, hidden: !!state.hidden });
+      result.push({
+        ...techno,
+        era: foundEraId,
+        hidden: !!state.hidden,
+        cp: !!state.cp,
+      });
     }
   }
 
@@ -266,7 +276,6 @@ function calculateTradePostCosts(
   tradePostData: {
     levels: { [key: number]: Array<{ resource: string; amount: number }> };
   },
-  //  checkedLevels en boolean (déjà converti depuis 0|1 avant appel)
   checkedLevels: HydratedOttomanTradePost["levels"],
 ): HydratedOttomanTradePost["costs"] {
   const costs: HydratedOttomanTradePost["costs"] = { resources: {}, goods: [] };
@@ -291,7 +300,7 @@ function calculateTradePostCosts(
     };
 
   Object.entries(checkedLevels).forEach(([levelKey, isChecked]) => {
-    if (isChecked) return; // niveau déjà complété → exclure du calcul
+    if (isChecked) return;
     const levelNum =
       levelMapping[levelKey as keyof HydratedOttomanTradePost["levels"]];
     const levelData = tradePostData.levels?.[levelNum];
@@ -334,12 +343,10 @@ export async function getHydratedOttomanTradePost(
   const match = id.match(/^otp_(\d+)$/);
   if (!match) return null;
 
-  const allTradePosts = getAllTradePosts();
   const tradePostIndex = parseInt(match[1]);
   const tradePostData = getTradePostByIndex(tradePostIndex);
   if (!tradePostData) return null;
 
-  //  Convertir levels 0|1 → boolean pour les composants
   const rawLevels = userState?.levels ?? {
     unlock: 0,
     lvl2: 0,
@@ -379,11 +386,9 @@ export async function getAllHydratedOttomanTradePosts(): Promise<
   const db = getWikiDB();
   const userStates = await db.ottomanTradePosts.toArray();
   const result: HydratedOttomanTradePost[] = [];
-
   for (const state of userStates) {
     const hydrated = await getHydratedOttomanTradePost(state.id);
     if (hydrated) result.push(hydrated);
   }
-
   return result;
 }

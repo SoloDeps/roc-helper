@@ -26,9 +26,21 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Luxurious Home: Unlocks a Luxurious Home upgrade",
-      "City Hall: Unlocks a Great Hall upgrade",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 7 },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Unlocks a Luxurious Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Luxurious_Home_Lv", level: 9 },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a Great Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
     ],
   },
   {
@@ -52,9 +64,21 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Good: Unlocks a Primary Good upgrade",
-      "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
-      "Primary Good: Allows constructing 1 more Primary Good building in your city",
+      {
+        title: "Primary Good",
+        desc: "Unlocks a Primary Good upgrade",
+        img: { kind: "good", priority: "primary" },
+      },
+      {
+        title: "Primary Workshop",
+        desc: "Unlocks the good Primary Goods for you, so that you can produce it in your city",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "+1 Primary Workshop",
+        desc: "Allows constructing 1 more Primary Good building in your city",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -78,8 +102,19 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Trading Unlocked: New Feature",
-      "Dock Workers: Increases dock worker amount",
+      {
+        title: "Trading Unlocked",
+        desc: "New Feature",
+        img: { kind: "techno", techId: "me_2" },
+      },
+      {
+        title: "Dock Workers",
+        desc: "Increases dock worker amount",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_workers_trading.webp",
+        },
+      },
     ],
   },
   {
@@ -103,8 +138,23 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Player Encounters Unlocked: New Feature",
-      "Infantry Barracks: Unlocks a Infantry Barracks upgrade",
+      {
+        title: "Player Encounters Unlocked",
+        desc: "New Feature",
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_playerencounters.webp",
+        },
+      },
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks a Infantry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Infantry_Barracks_Lv",
+          level: 3,
+        },
+      },
     ],
   },
   {
@@ -132,10 +182,30 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Luxurious Farm: Unlocks a Luxurious Farm upgrade",
-      "Luxurious Culture Site: Unlocks a Luxurious Culture Site upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 7 },
+      },
+      {
+        title: "Luxurious Farm",
+        desc: "Unlocks a Luxurious Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Luxurious_Farm_Lv", level: 9 },
+      },
+      {
+        title: "Luxurious Culture Site",
+        desc: "Unlocks a Luxurious Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Luxurious_Culture_Site_Lv",
+          level: 3,
+        },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -159,9 +229,25 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Little Culture Site: Unlocks a Little Culture Site upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 7 },
+      },
+      {
+        title: "Little Culture Site",
+        desc: "Unlocks a Little Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Little_Culture_Site_Lv",
+          level: 3,
+        },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -185,8 +271,20 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Moderate Culture Site: Unlocks a Moderate Culture Site upgrade",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 7 },
+      },
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks a Moderate Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Moderate_Culture_Site_Lv",
+          level: 3,
+        },
+      },
     ],
   },
   {
@@ -214,9 +312,25 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Compact Culture Site: Unlocks a Compact Culture Site upgrade",
-      "Compact Culture Site: Allows constructing 1 more Compact Culture Site building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 8 },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks a Compact Culture Site upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Compact_Culture_Site_Lv",
+          level: 3,
+        },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Allows constructing 1 more Compact Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -243,7 +357,17 @@ export const technos_ME: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
+    rewards: [
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks a Ranged Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Ranged_Barracks_Lv",
+          level: 3,
+        },
+      },
+    ],
   },
   {
     id: "me_9",
@@ -255,9 +379,21 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Unlock City: Unlocks Allied Culture Egypt",
-      "Small Home: Unlocks the Small Home",
-      "Luxurious Home: Unlocks the Luxurious Home",
+      {
+        title: "Unlock City",
+        desc: "Unlocks Allied Culture Egypt",
+        img: { kind: "catalog", imgType: "egypt" },
+      },
+      {
+        title: "Small Home",
+        desc: "Unlocks the Small Home",
+        img: { kind: "wiki", imageName: "Egypt_Small_Home_Lv", level: 1 },
+      },
+      {
+        title: "Luxurious Home",
+        desc: "Unlocks the Luxurious Home",
+        img: { kind: "wiki", imageName: "Egypt_Luxurious_Home_Lv", level: 3 },
+      },
     ],
   },
   {
@@ -276,10 +412,26 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Gold Mine: Unlocks the Gold Mine",
-      "Papyrus Field: Unlocks the Papyrus Field",
-      "Luxurious Gold Mine: Unlocks the Luxurious Gold Mine",
-      "Luxurious Papyrus Field: Unlocks the Luxurious Papyrus Field",
+      {
+        title: "Gold Mine",
+        desc: "Unlocks the Gold Mine",
+        img: { kind: "wiki", imageName: "Egypt_Gold_Mine_Lv", level: 1 },
+      },
+      {
+        title: "Papyrus Field",
+        desc: "Unlocks the Papyrus Field",
+        img: { kind: "wiki", imageName: "Egypt_Papyrus_Field_Lv", level: 1 },
+      },
+      {
+        title: "Luxurious Gold Mine",
+        desc: "Unlocks the Luxurious Gold Mine",
+        img: { kind: "wiki", imageName: "Egypt_Luxurious_Gold_Mine_Lv", level: 3 },
+      },
+      {
+        title: "Luxurious Papyrus Field",
+        desc: "Unlocks the Luxurious Papyrus Field",
+        img: { kind: "wiki", imageName: "Egypt_Luxurious_Papyrus_Field_Lv", level: 3 },
+      },
     ],
   },
   {
@@ -304,8 +456,16 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Goldsmith: Unlocks the Goldsmith",
-      "Ankh: Unlocks the good Ankh for you, so that you can produce it in your city",
+      {
+        title: "Ankh",
+        desc: "Unlocks the good Ankh for you, so that you can produce it in your city",
+        img: { kind: "techno", techId: "me_11" },
+      },
+      {
+        title: "Goldsmith",
+        desc: "Unlocks the Goldsmith",
+        img: { kind: "wiki", imageName: "Egypt_Goldsmith_Lv", level: 1 },
+      },
     ],
   },
   {
@@ -330,8 +490,16 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Papyrus Press: Unlocks the Papyrus Press",
-      "Papyrus Scroll: Unlocks the good Papyrus Scroll for you, so that you can produce it in your city",
+      {
+        title: "Papyrus Scroll",
+        desc: "Unlocks the good Papyrus Scroll for you, so that you can produce it in your city",
+        img: { kind: "techno", techId: "me_12" },
+      },
+      {
+        title: "Papyrus Press",
+        desc: "Unlocks the Papyrus Press",
+        img: { kind: "wiki", imageName: "Egypt_Papyrus_Press_Lv", level: 1 },
+      },
     ],
   },
   {
@@ -355,8 +523,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Moderate Culture Site: Allows constructing 1 more Moderate Culture Site building in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 8 },
+      },
+      {
+        title: "Moderate Culture Site",
+        desc: "Allows constructing 1 more Moderate Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -381,9 +557,21 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Average Home: Unlocks the Average Home",
-      "Small Well: Unlocks the Small Well",
-      "Oasis: Unlocks the Oasis",
+      {
+        title: "Average Home",
+        desc: "Unlocks the Average Home",
+        img: { kind: "wiki", imageName: "Egypt_Average_Home_Lv", level: 1 },
+      },
+      {
+        title: "Small Well",
+        desc: "Unlocks the Small Well",
+        img: { kind: "wiki", imageName: "Egypt_Small_Well" },
+      },
+      {
+        title: "Oasis",
+        desc: "Unlocks the Oasis",
+        img: { kind: "wiki", imageName: "Egypt_Oasis"},
+      },
     ],
   },
   {
@@ -407,8 +595,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in your city",
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 8 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -436,8 +632,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Rural Farm: Allows constructing 1 more Rural Farm building in your city",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 8 },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Allows constructing 1 more Rural Farm building in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -466,9 +670,21 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Gold Mine: Unlocks a Gold Mine upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Small_Home_Lv", level: 2 },
+      },
+      {
+        title: "Gold Mine",
+        desc: "Unlocks a Gold Mine upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Gold_Mine_Lv", level: 2 },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in Egypt",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -497,8 +713,16 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Papyrus Field: Unlocks a Papyrus Field upgrade",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Average_Home_Lv", level: 2 },
+      },
+      {
+        title: "Papyrus Field",
+        desc: "Unlocks a Papyrus Field upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Papyrus_Field_Lv", level: 2 },
+      },
     ],
   },
   {
@@ -522,8 +746,20 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Cavalry Barracks: Unlocks a Cavalry Barracks upgrade",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
+      {
+        title: "Cavalry Barracks",
+        desc: "Unlocks a Cavalry Barracks upgrade",
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Cavalry_Barracks_Lv",
+          level: 3,
+        },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -552,8 +788,16 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Average Home: Allows constructing 1 more Average Home building in your city",
-      "Small Well: Allows constructing 2 more Small Well buildings in your city",
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in Egypt",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Small Well",
+        desc: "Allows constructing 2 more Small Well buildings in Egypt",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -582,9 +826,21 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Papyrus Field: Allows constructing 1 more Papyrus Field building in your city",
-      "Papyrus Press: Allows constructing 1 more Papyrus Press building in your city",
-      "Small Home: Allows constructing 2 more Small Home buildings in your city",
+      {
+        title: "Papyrus Field",
+        desc: "Allows constructing 1 more Papyrus Field building in Egypt",
+        img: { kind: "catalog", imgType: "papyrusField", invert: true },
+      },
+      {
+        title: "Papyrus Press",
+        desc: "Allows constructing 1 more Papyrus Press building in Egypt",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 2 more Small Home buildings in Egypt",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -612,7 +868,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     allied: "egypt",
-    rewards: ["Irrigation Station: Unlocks the Irrigation Station"],
+    rewards: [
+      {
+        title: "Irrigation Station",
+        desc: "Unlocks the Irrigation Station",
+        img: {
+          kind: "wiki",
+          imageName: "Egypt_Irrigation_Station",
+        },
+      },
+    ],
   },
   {
     id: "me_23",
@@ -639,8 +904,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Little Culture Site: Allows constructing 1 more Little Culture Site building in your city",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 9 },
+      },
+      {
+        title: "Little Culture Site",
+        desc: "Allows constructing 1 more Little Culture Site building in your city",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
     ],
   },
   {
@@ -668,8 +941,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 9 },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 9 },
+      },
     ],
   },
   {
@@ -698,10 +979,26 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Gold Mine: Allows constructing 1 more Gold Mine building in your city",
-      "Goldsmith: Allows constructing 1 more Goldsmith building in your city",
-      "Small Home: Allows constructing 1 more Small Home building in your city",
-      "Average Home: Allows constructing 2 more Average Home buildings in your city",
+      {
+        title: "Gold Mine",
+        desc: "Allows constructing 1 more Gold Mine building in Egypt",
+        img: { kind: "catalog", imgType: "goldMine", invert: true },
+      },
+      {
+        title: "Goldsmith",
+        desc: "Allows constructing 1 more Goldsmith building in Egypt",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in Egypt",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 2 more Average Home buildings in Egypt",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -729,8 +1026,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Good: Unlocks a Secondary Good upgrade",
-      "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+      {
+        title: "Secondary Good",
+        desc: "Unlocks a Secondary Good upgrade",
+        img: { kind: "good", priority: "secondary" },
+      },
+      {
+        title: "Secondary Workshop",
+        desc: "Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
   {
@@ -758,8 +1063,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Average Home: Allows constructing 1 more Average Home building in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 9 },
+      },
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in your city",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
     ],
   },
   {
@@ -788,9 +1101,21 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Small Home: Unlocks a Small Home upgrade",
-      "Irrigation Station: Allows constructing 2 more Irrigation Station buildings in your city",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Average_Home_Lv", level: 3 },
+      },
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Small_Home_Lv", level: 3 },
+      },
+      {
+        title: "Irrigation Station",
+        desc: "Allows constructing 2 more Irrigation Station buildings in your city",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
     ],
   },
   {
@@ -819,8 +1144,16 @@ export const technos_ME: TechnoData[] = [
     },
     allied: "egypt",
     rewards: [
-      "Gold Mine: Unlocks a Gold Mine upgrade",
-      "Papyrus Field: Unlocks a Papyrus Field upgrade",
+      {
+        title: "Gold Mine",
+        desc: "Unlocks a Gold Mine upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Gold_Mine_Lv", level: 3 },
+      },
+      {
+        title: "Papyrus Field",
+        desc: "Unlocks a Papyrus Field upgrade",
+        img: { kind: "wiki", imageName: "Egypt_Papyrus_Field_Lv", level: 3 },
+      },
     ],
   },
   {
@@ -848,8 +1181,16 @@ export const technos_ME: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Good: Unlocks a Tertiary Good upgrade",
-      "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+      {
+        title: "Tertiary Good",
+        desc: "Unlocks a Tertiary Good upgrade",
+        img: { kind: "good", priority: "tertiary" },
+      },
+      {
+        title: "Tertiary Workshop",
+        desc: "Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      },
     ],
   },
 ];

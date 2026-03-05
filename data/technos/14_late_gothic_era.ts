@@ -22,11 +22,31 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Small Home: Unlocks a Small Home upgrade",
-      "Rural Farm: Unlocks a Rural Farm upgrade",
-      "Common Warehouse: Unlocks a Common Warehouse upgrade",
-      "City Hall: Unlocks a City Hall upgrade",
-      "Unlock: New Ottoman Empire Sea Map Region",
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 40 },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 40 },
+      },
+      {
+        title: "Common Warehouse",
+        desc: "Unlocks a Common Warehouse upgrade",
+        img: { kind: "wiki", imageName: "Common_Warehouse_Lv", level: 2 },
+      },
+      {
+        title: "City Hall",
+        desc: "Unlocks a City Hall upgrade",
+        img: { kind: "catalog", imgType: "museum", invert: true },
+      },
+      {
+        title: "Unlock",
+        desc: "New Ottoman Empire Sea Map Region",
+        img: { kind: "catalog", imgType: "ottoman" },
+      }
     ],
   },
   {
@@ -53,7 +73,13 @@ export const technos_LG: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Infantry Barracks: Unlocks a Infantry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Infantry Barracks",
+        desc: "Unlocks a Infantry Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Infantry_Barracks_Lv", level: 14 },
+      }
+    ],
   },
   {
     id: "lg_2",
@@ -79,7 +105,13 @@ export const technos_LG: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Domestic Farm: Unlocks a Domestic Farm upgrade"],
+    rewards: [
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 40 },
+      }
+    ],
   },
   {
     id: "lg_3",
@@ -103,8 +135,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Ottoman Empire Ship: Unlocks a Ottoman Empire Ship upgrade",
-      "Shipyard: Allows constructing 1 more Shipyard building in Capital City",
+      {
+        title: "Ottoman Empire Ship",
+        desc: "Unlocks a Ottoman Empire Ship upgrade",
+        img: { kind: "wiki", imageName: "Ottoman_Empire_Ship_Lv", level: 3 },
+      },
+      {
+        title: "Shipyard",
+        desc: "Allows constructing 1 more Shipyard building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -132,8 +172,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Average Home: Unlocks a Average Home upgrade",
-      "Compact Culture Site: Unlocks a Compact Culture Site upgrade",
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 40 },
+      },
+      {
+        title: "Compact Culture Site",
+        desc: "Unlocks a Compact Culture Site upgrade",
+        img: { kind: "wiki", imageName: "Capital_Compact_Culture_Site_Lv", level: 14 },
+      }
     ],
   },
   {
@@ -161,8 +209,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Primary Good: Unlocks a Primary Good upgrade",
-      "Primary Goods: Unlocks the good Primary Goods for you, so that you can produce it in your city",
+      {
+        title: "Primary Good",
+        desc: "Unlocks a Primary Good upgrade",
+        img: { kind: "good", priority: "primary" },
+      },
+      {
+        title: "Primary Workshop",
+        desc: "Unlocks the Primary workshop building",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      }
     ],
   },
   {
@@ -191,8 +247,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Seafarer House: Unlocks a Seafarer House upgrade",
-      "4 Trade Village Silver Upgrade Keys: Gives you 4 Trade Village Silver Upgrade Keys",
+      {
+        title: "Seafarer House",
+        desc: "Unlocks a Seafarer House upgrade",
+        img: { kind: "wiki", imageName: "Seafarer_House_Lv", level: 3 },
+      },
+      {
+        title: "4 Trade Village Silver Upgrade Keys",
+        desc: "Gives you 4 Trade Village Silver Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_silver_upkey.webp" },
+      }
     ],
   },
   {
@@ -221,9 +285,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Lighthouse: Unlocks the Lighthouse",
-      "4 Trade Village Silver Upgrade Keys: Gives you 4 Trade Village Silver Upgrade Keys",
-      "Lighthouse: Allows constructing 1 more Lighthouse building in Capital City",
+      {
+        title: "Lighthouse",
+        desc: "Unlocks the Lighthouse",
+        img: { kind: "wiki", imageName: "Lighthouse_Lv", level: 1 },
+      },
+      {
+        title: "4 Trade Village Silver Upgrade Keys",
+        desc: "Gives you 4 Trade Village Silver Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_silver_upkey.webp" },
+      },
+      {
+        title: "Lighthouse",
+        desc: "Allows constructing 1 more Lighthouse building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -250,7 +326,13 @@ export const technos_LG: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Ranged Barracks: Unlocks a Ranged Barracks upgrade"],
+    rewards: [
+      {
+        title: "Ranged Barracks",
+        desc: "Unlocks a Ranged Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Ranged_Barracks_Lv", level: 14 },
+      }
+    ],
   },
   {
     id: "lg_9",
@@ -278,9 +360,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Seafarer House: Allows constructing 1 more Seafarer House building in Capital City",
-      "4 Trade Village Gold Upgrade Keys: Gives you 4 Trade Village Gold Upgrade Keys",
-      "Lighthouse: Allows constructing 1 more Lighthouse building in Capital City",
+      {
+        title: "Seafarer House",
+        desc: "Allows constructing 1 more Seafarer House building in Capital City",
+        img: { kind: "catalog", imgType: "sailorHome", invert: true },
+      },
+      {
+        title: "4 Trade Village Gold Upgrade Keys",
+        desc: "Gives you 4 Trade Village Gold Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_gold_upkey.webp" },
+      },
+      {
+        title: "Lighthouse",
+        desc: "Allows constructing 1 more Lighthouse building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -309,8 +403,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Common Warehouse: Allows constructing 1 more Common Warehouse building in Capital City",
-      "2 Trade City Silver Upgrade Keys: Gives you 2 Trade City Silver Upgrade Keys",
+      {
+        title: "Common Warehouse",
+        desc: "Allows constructing 1 more Common Warehouse building in Capital City",
+        img: { kind: "catalog", imgType: "warehouse", invert: true },
+      },
+      {
+        title: "2 Trade City Silver Upgrade Keys",
+        desc: "Gives you 2 Trade City Silver Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_silver_upkey.webp" },
+      }
     ],
   },
   {
@@ -338,8 +440,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Food: Gives you 10,000 Food",
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
+      {
+        title: "15,000 Aspers",
+        desc: "Gives you 15,000 Aspers",
+        img: { kind: "local", path: "/images/goods-large/asper.webp" },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 41 },
+      }
     ],
   },
   {
@@ -367,9 +477,21 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Coins: Gives you 10,000 Coins",
-      "Small Home: Allows constructing 1 more Small Home building in Capital City",
-      "Small Home: Unlocks a Small Home upgrade",
+      {
+        title: "15,000 Aspers",
+        desc: "Gives you 15,000 Aspers",
+        img: { kind: "local", path: "/images/goods-large/asper.webp" },
+      },
+      {
+        title: "Small Home",
+        desc: "Allows constructing 1 more Small Home building in Capital City",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 41 },
+      }
     ],
   },
   {
@@ -394,8 +516,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Shipyard: Allows constructing 1 more Shipyard building in Capital City",
-      "4 Trade Village Gold Upgrade Keys: Gives you 4 Trade Village Gold Upgrade Keys",
+      {
+        title: "Shipyard",
+        desc: "Allows constructing 1 more Shipyard building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      },
+      {
+        title: "4 Trade Village Gold Upgrade Keys",
+        desc: "Gives you 4 Trade Village Gold Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_gold_upkey.webp" },
+      }
     ],
   },
   {
@@ -424,8 +554,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Shipyard: Unlocks a Shipyard upgrade",
-      "2 Trade City Silver Upgrade Keys: Gives you 2 Trade City Silver Upgrade Keys",
+      {
+        title: "Shipyard",
+        desc: "Unlocks a Shipyard upgrade",
+        img: { kind: "wiki", imageName: "Shipyard_Lv", level: 2 },
+      },
+      {
+        title: "2 Trade City Silver Upgrade Keys",
+        desc: "Gives you 2 Trade City Silver Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_silver_upkey.webp" },
+      }
     ],
   },
   {
@@ -452,7 +590,13 @@ export const technos_LG: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Cavalry Barracks: Unlocks a Cavalry Barracks upgrade"],
+    rewards: [
+      {
+        title: "Cavalry Barracks",
+        desc: "Unlocks a Cavalry Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Cavalry_Barracks_Lv", level: 14 },
+      }
+    ],
   },
   {
     id: "lg_16",
@@ -480,8 +624,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Lighthouse: Allows constructing 1 more Lighthouse building in Capital City",
-      "4 Trade Village Platinum Upgrade Keys: Gives you 4 Trade Village Platinum Upgrade Keys",
+      {
+        title: "Lighthouse",
+        desc: "Allows constructing 1 more Lighthouse building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      },
+      {
+        title: "4 Trade Village Platinum Upgrade Keys",
+        desc: "Gives you 4 Trade Village Platinum Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_platinum_upkey.webp" },
+      }
     ],
   },
   {
@@ -510,8 +662,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Seafarer House: Allows constructing 1 more Seafarer House building in Capital City",
-      "2 Trade City Gold Upgrade Keys: Gives you 2 Trade City Gold Upgrade Keys",
+      {
+        title: "Seafarer House",
+        desc: "Allows constructing 1 more Seafarer House building in Capital City",
+        img: { kind: "catalog", imgType: "sailorHome", invert: true },
+      },
+      {
+        title: "2 Trade City Gold Upgrade Keys",
+        desc: "Gives you 2 Trade City Gold Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_gold_upkey.webp" },
+      }
     ],
   },
   {
@@ -540,9 +700,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Pier: Unlocks the Pier",
-      "2 Trade City Gold Upgrade Keys: Gives you 2 Trade City Gold Upgrade Keys",
-      "Pier: Allows constructing 1 more Pier building in Capital City",
+      {
+        title: "Pier",
+        desc: "Unlocks the Pier",
+        img: { kind: "wiki", imageName: "Pier_Lv", level: 1 },
+      },
+      {
+        title: "2 Trade City Gold Upgrade Keys",
+        desc: "Gives you 2 Trade City Gold Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_gold_upkey.webp" },
+      },
+      {
+        title: "Pier",
+        desc: "Allows constructing 1 more Pier building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -569,7 +741,13 @@ export const technos_LG: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Moderate Culture Site: Unlocks a Moderate Culture Site upgrade"],
+    rewards: [
+      {
+        title: "Moderate Culture Site",
+        desc: "Unlocks a Moderate Culture Site upgrade",
+        img: { kind: "wiki", imageName: "Capital_Moderate_Culture_Site_Lv", level: 14 },
+      }
+    ],
   },
   {
     id: "lg_20",
@@ -596,9 +774,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Food: Gives you 10,000 Food",
-      "Rural Farm: Allows constructing 1 more Rural Farm building in Capital City",
-      "Rural Farm: Unlocks a Rural Farm upgrade",
+      {
+        title: "Rural Farm",
+        desc: "Allows constructing 1 more Rural Farm building in Capital City",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 41 },
+      }
     ],
   },
   {
@@ -627,8 +812,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Lighthouse: Allows constructing 1 more Lighthouse building in Capital City",
-      "4 Trade Village Platinum Upgrade Keys: Gives you 4 Trade Village Platinum Upgrade Keys",
+      {
+        title: "Lighthouse",
+        desc: "Allows constructing 1 more Lighthouse building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      },
+      {
+        title: "4 Trade Village Platinum Upgrade Keys",
+        desc: "Gives you 4 Trade Village Platinum Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_platinum_upkey.webp" },
+      }
     ],
   },
   {
@@ -657,9 +850,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Common Warehouse: Allows constructing 1 more Common Warehouse building in Capital City",
-      "2 Trade City Platinum Upgrade Keys: Gives you 2 Trade City Platinum Upgrade Keys",
-      "Pier: Allows constructing 1 more Pier building in Capital City",
+      {
+        title: "Common Warehouse",
+        desc: "Allows constructing 1 more Common Warehouse building in Capital City",
+        img: { kind: "catalog", imgType: "warehouse", invert: true },
+      },
+      {
+        title: "2 Trade City Platinum Upgrade Keys",
+        desc: "Gives you 2 Trade City Platinum Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_platinum_upkey.webp" },
+      },
+      {
+        title: "Pier",
+        desc: "Allows constructing 1 more Pier building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -687,8 +892,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Secondary Good: Unlocks a Secondary Good upgrade",
-      "Secondary Goods: Unlocks the good Secondary Goods for you, so that you can produce it in your city",
+      {
+        title: "Secondary Good",
+        desc: "Unlocks a Secondary Good upgrade",
+        img: { kind: "good", priority: "secondary" },
+      },
+      {
+        title: "Secondary Workshop",
+        desc: "Unlocks the Secondary workshop building",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      }
     ],
   },
   {
@@ -717,8 +930,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Seafarer House: Unlocks a Seafarer House upgrade",
-      "4 Trade Village Diamond Upgrade Keys: Gives you 4 Trade Village Diamond Upgrade Keys",
+      {
+        title: "Seafarer House",
+        desc: "Unlocks a Seafarer House upgrade",
+        img: { kind: "wiki", imageName: "Seafarer_House_Lv", level: 4 },
+      },
+      {
+        title: "4 Trade Village Diamond Upgrade Keys",
+        desc: "Gives you 4 Trade Village Diamond Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_diamond_upkey.webp" },
+      }
     ],
   },
   {
@@ -747,8 +968,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Common Warehouse: Unlocks a Common Warehouse upgrade",
-      "2 Trade City Platinum Upgrade Keys: Gives you 2 Trade City Platinum Upgrade Keys",
+      {
+        title: "Common Warehouse",
+        desc: "Unlocks a Common Warehouse upgrade",
+        img: { kind: "wiki", imageName: "Common_Warehouse_Lv", level: 3 },
+      },
+      {
+        title: "2 Trade City Platinum Upgrade Keys",
+        desc: "Gives you 2 Trade City Platinum Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_platinum_upkey.webp" },
+      }
     ],
   },
   {
@@ -776,7 +1005,11 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Heavy Infantry Barracks: Unlocks a Heavy Infantry Barracks upgrade",
+      {
+        title: "Heavy Infantry Barracks",
+        desc: "Unlocks a Heavy Infantry Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Heavy_Infantry_Barracks_Lv", level: 14 },
+      }
     ],
   },
   {
@@ -804,9 +1037,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Coins: Gives you 10,000 Coins",
-      "Average Home: Allows constructing 1 more Average Home building in Capital City",
-      "Average Home: Unlocks a Average Home upgrade",
+      {
+        title: "Average Home",
+        desc: "Allows constructing 1 more Average Home building in Capital City",
+        img: { kind: "catalog", imgType: "home", invert: true },
+      },
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 41 },
+      }
     ],
   },
   {
@@ -835,9 +1075,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Common Warehouse: Allows constructing 1 more Common Warehouse building in Capital City",
-      "4 Trade Village Advanced Upgrade Keys: Gives you 4 Trade Village Advanced Upgrade Keys",
-      "Shipyard: Allows constructing 1 more Shipyard building in Capital City",
+      {
+        title: "Common Warehouse",
+        desc: "Allows constructing 1 more Common Warehouse building in Capital City",
+        img: { kind: "catalog", imgType: "warehouse", invert: true },
+      },
+      {
+        title: "4 Trade Village Advanced Upgrade Keys",
+        desc: "Gives you 4 Trade Village Advanced Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_advanced_upkey.webp" },
+      },
+      {
+        title: "Shipyard",
+        desc: "Allows constructing 1 more Shipyard building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -866,9 +1118,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Seafarer House: Allows constructing 1 more Seafarer House building in Capital City",
-      "4 Trade Village Diamond Upgrade Keys: Gives you 4 Trade Village Diamond Upgrade Keys",
-      "Pier: Allows constructing 1 more Pier building in Capital City",
+      {
+        title: "Seafarer House",
+        desc: "Allows constructing 1 more Seafarer House building in Capital City",
+        img: { kind: "catalog", imgType: "sailorHome", invert: true },
+      },
+      {
+        title: "4 Trade Village Diamond Upgrade Keys",
+        desc: "Gives you 4 Trade Village Diamond Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_diamond_upkey.webp" },
+      },
+      {
+        title: "Pier",
+        desc: "Allows constructing 1 more Pier building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -896,9 +1160,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Food: Gives you 10,000 Food",
-      "Domestic Farm: Allows constructing 1 more Domestic Farm building in Capital City",
-      "Domestic Farm: Unlocks a Domestic Farm upgrade",
+      {
+        title: "Domestic Farm",
+        desc: "Allows constructing 1 more Domestic Farm building in Capital City",
+        img: { kind: "catalog", imgType: "barn", invert: true },
+      },
+      {
+        title: "Domestic Farm",
+        desc: "Unlocks a Domestic Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 42 },
+      }
     ],
   },
   {
@@ -926,8 +1197,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Little Culture Site: Unlocks a Little Culture Site upgrade",
-      "Little Culture Site: Allows constructing 1 more Little Culture Site building in Capital City",
+      {
+        title: "Little Culture Site",
+        desc: "Unlocks a Little Culture Site upgrade",
+        img: { kind: "wiki", imageName: "Capital_Little_Culture_Site_Lv", level: 14 },
+      },
+      {
+        title: "Little Culture Site",
+        desc: "Allows constructing 1 more Little Culture Site building in Capital City",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      }
     ],
   },
   {
@@ -956,9 +1235,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Ottoman Emipre Ship: Unlocks a Ottoman Emipre Ship upgrade",
-      "2 Trade City Diamond Upgrade Keys: Gives you 2 Trade City Diamond Upgrade Keys",
-      "Shipyard: Allows constructing 1 more Shipyard building in Capital City",
+      {
+        title: "Ottoman Empire Ship",
+        desc: "Unlocks a Ottoman Empire Ship upgrade",
+        img: { kind: "wiki", imageName: "Ottoman_Empire_Ship_Lv", level: 4 },
+      },
+      {
+        title: "2 Trade City Diamond Upgrade Keys",
+        desc: "Gives you 2 Trade City Diamond Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_diamond_upkey.webp" },
+      },
+      {
+        title: "Shipyard",
+        desc: "Allows constructing 1 more Shipyard building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      }
     ],
   },
   {
@@ -986,8 +1277,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Coins: Gives you 10,000 Coins",
-      "Average Home: Unlocks a Average Home upgrade",
+      {
+        title: "25,000 Aspers",
+        desc: "Gives you 25,000 Aspers",
+        img: { kind: "local", path: "/images/goods-large/asper.webp" },
+      },
+      {
+        title: "Average Home",
+        desc: "Unlocks a Average Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 42 },
+      }
     ],
   },
   {
@@ -1014,7 +1313,13 @@ export const technos_LG: TechnoData[] = [
         },
       ],
     },
-    rewards: ["Siege Barracks: Unlocks a Siege Barracks upgrade"],
+    rewards: [
+      {
+        title: "Siege Barracks",
+        desc: "Unlocks a Siege Barracks upgrade",
+        img: { kind: "wiki", imageName: "Capital_Siege_Barracks_Lv", level: 14 },
+      }
+    ],
   },
   {
     id: "lg_35",
@@ -1041,9 +1346,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Food: Gives you 10,000 Food",
-      "Moderate Culture Site: Allows constructing 1 more Moderate Culture Site building in Capital City",
-      "Rural Farm: Unlocks a Rural Farm upgrade",
+      {
+        title: "Moderate Culture Site",
+        desc: "Allows constructing 1 more Moderate Culture Site building in Capital City",
+        img: { kind: "catalog", imgType: "cultureSite", invert: true },
+      },
+      {
+        title: "Rural Farm",
+        desc: "Unlocks a Rural Farm upgrade",
+        img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 42 },
+      }
     ],
   },
   {
@@ -1072,9 +1384,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Lighthouse: Allows constructing 1 more Lighthouse building in Capital City",
-      "4 Trade Village Advanced Upgrade Keys: Gives you 4 Trade Village Advanced Upgrade Keys",
-      "Seafarer House: Allows constructing 1 more Seafarer House building in Capital City",
+      {
+        title: "Lighthouse",
+        desc: "Allows constructing 1 more Lighthouse building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      },
+      {
+        title: "4 Trade Village Advanced Upgrade Keys",
+        desc: "Gives you 4 Trade Village Advanced Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_advanced_upkey.webp" },
+      },
+      {
+        title: "Seafarer House",
+        desc: "Allows constructing 1 more Seafarer House building in Capital City",
+        img: { kind: "catalog", imgType: "sailorHome", invert: true },
+      }
     ],
   },
   {
@@ -1098,8 +1422,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Large Culture Site: Unlocks a Large Culture Site upgrade",
-      "Primary Good: Allows constructing 1 more Primary Good building in Capital City",
+      {
+        title: "Large Culture Site",
+        desc: "Unlocks a Large Culture Site upgrade",
+        img: { kind: "wiki", imageName: "Capital_Large_Culture_Site_Lv", level: 14 },
+      },
+      {
+        title: "Primary Workshop",
+        desc: "Allows constructing 1 more Primary Workshop buildings in Capital City",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      }
     ],
   },
   {
@@ -1127,8 +1459,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "10,000 Coins: Gives you 10,000 Coins",
-      "Small Home: Unlocks a Small Home upgrade",
+      {
+        title: "25,000 Aspers",
+        desc: "Gives you 25,000 Aspers",
+        img: { kind: "local", path: "/images/goods-large/asper.webp" },
+      },
+      {
+        title: "Small Home",
+        desc: "Unlocks a Small Home upgrade",
+        img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 42 },
+      }
     ],
   },
   {
@@ -1157,8 +1497,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Common Warehouse: Allows constructing 1 more Common Warehouse building in Capital City",
-      "2 Trade City Advanced Upgrade Keys: Gives you 2 Trade City Advanced Upgrade Keys",
+      {
+        title: "Common Warehouse",
+        desc: "Allows constructing 1 more Common Warehouse building in Capital City",
+        img: { kind: "catalog", imgType: "warehouse", invert: true },
+      },
+      {
+        title: "4 Trade City Advanced Upgrade Keys",
+        desc: "Gives you 4 Trade City Advanced Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_advanced_upkey.webp" },
+      },
+      {
+        title: "4 Trade Village Advanced Upgrade Keys",
+        desc: "Gives you 4 Trade City Advanced Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_advanced_upkey.webp" },
+      }
     ],
   },
   {
@@ -1187,8 +1540,21 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Pier: Allows constructing 1 more Pier building in Capital City",
-      "2 Trade City Diamond Upgrade Keys: Gives you 2 Trade City Diamond Upgrade Keys",
+      {
+        title: "Pier",
+        desc: "Allows constructing 1 more Pier building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      },
+      {
+        title: "2 Trade City Diamond Upgrade Keys",
+        desc: "Gives you 2 Trade City Diamond Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_diamond_upkey.webp" },
+      },
+      {
+        title: "4 Trade Village Advanced Upgrade Keys",
+        desc: "Gives you 4 Trade Village Advanced Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_village_advanced_upkey.webp" },
+      }
     ],
   },
   {
@@ -1216,8 +1582,16 @@ export const technos_LG: TechnoData[] = [
       ],
     },
     rewards: [
-      "Tertiary Good: Unlocks a Tertiary Good upgrade",
-      "Tertiary Goods: Unlocks the good Tertiary Goods for you, so that you can produce it in your city",
+      {
+        title: "Tertiary Good",
+        desc: "Unlocks a Tertiary Good upgrade",
+        img: { kind: "good", priority: "tertiary" },
+      },
+      {
+        title: "Tertiary Workshop",
+        desc: "Unlocks the Tertiary workshop building",
+        img: { kind: "catalog", imgType: "workshop", invert: true },
+      }
     ],
   },
   {
@@ -1246,8 +1620,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "Pier: Allows constructing 1 more Pier building in Capital City",
-      "2 Trade City Advanced Upgrade Keys: Gives you 2 Trade City Advanced Upgrade Keys",
+      {
+        title: "Pier",
+        desc: "Allows constructing 1 more Pier building in Capital City",
+        img: { kind: "catalog", imgType: "shipyard", invert: true },
+      },
+      {
+        title: "2 Trade City Advanced Upgrade Keys",
+        desc: "Gives you 2 Trade City Advanced Upgrade Keys",
+        img: { kind: "local", path: "/images/goods/trade_city_advanced_upkey.webp" },
+      }
     ],
   },
   {
@@ -1276,8 +1658,16 @@ export const technos_LG: TechnoData[] = [
     },
     allied: "ottoman",
     rewards: [
-      "1 Wonder Orb: Gives you 1 Wonder Orb",
-      "100,000 Aspers: Gives you 100,000 Aspers",
+      {
+        title: "1 Wonder Orb",
+        desc: "Gives you 1 Wonder Orb",
+        img: { kind: "local", path: "/images/technos/features/icon_wonder_orb.webp" },
+      },
+      {
+        title: "100,000 Aspers",
+        desc: "Gives you 100,000 Aspers",
+        img: { kind: "local", path: "/images/goods-large/asper.webp" },
+      }
     ],
   },
 ];

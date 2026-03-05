@@ -4,7 +4,7 @@ import { getWikiDB } from "@/lib/db/schema";
 import { getEraAbbr } from "@/lib/era-mappings";
 
 // ============================================================================
-// BUILDINGS — hidden: 0|1
+// BUILDINGS
 // ============================================================================
 
 export async function hideAllBuildings(buildingIds: string[]): Promise<void> {
@@ -36,7 +36,7 @@ export async function toggleHideAllBuildings(
 }
 
 // ============================================================================
-// TECHNOS — hidden: 0|1
+// TECHNOS — hidden uniquement (cp = progression research tree, jamais touché ici)
 // ============================================================================
 
 export async function hideAllTechnosByEra(eraId: string): Promise<void> {
@@ -76,7 +76,7 @@ export async function toggleHideAllTechnosByEra(eraId: string): Promise<void> {
 }
 
 // ============================================================================
-// OTTOMAN AREAS — hidden: 0|1
+// OTTOMAN AREAS
 // ============================================================================
 
 export async function hideAllOttomanAreas(): Promise<void> {
@@ -104,7 +104,7 @@ export async function toggleHideAllOttomanAreas(): Promise<void> {
 }
 
 // ============================================================================
-// OTTOMAN TRADE POSTS — hidden: 0|1
+// OTTOMAN TRADE POSTS
 // ============================================================================
 
 export async function hideAllOttomanTradePosts(): Promise<void> {
@@ -143,7 +143,6 @@ export async function hideAllEntities(): Promise<void> {
     db.ottomanAreas.toArray(),
     db.ottomanTradePosts.toArray(),
   ]);
-
   await Promise.all(
     [
       buildings.filter((b) => !b.hidden).length > 0 &&
@@ -153,6 +152,7 @@ export async function hideAllEntities(): Promise<void> {
             .map((b) => ({ ...b, hidden: 1 as number })),
         ),
       technos.filter((t) => !t.hidden).length > 0 &&
+        // Ne touche QUE hidden, pas cp
         db.technos.bulkPut(
           technos
             .filter((t) => !t.hidden)
@@ -182,9 +182,9 @@ export async function showAllEntities(): Promise<void> {
     db.ottomanAreas.toArray(),
     db.ottomanTradePosts.toArray(),
   ]);
-
   await Promise.all([
     db.buildings.bulkPut(buildings.map((b) => ({ ...b, hidden: 0 as number }))),
+    // Ne touche QUE hidden, pas cp
     db.technos.bulkPut(technos.map((t) => ({ ...t, hidden: 0 as number }))),
     db.ottomanAreas.bulkPut(areas.map((a) => ({ ...a, hidden: 0 as number }))),
     db.ottomanTradePosts.bulkPut(
