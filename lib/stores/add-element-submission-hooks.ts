@@ -174,6 +174,7 @@ export function useSubmitOttomanTradePosts() {
         lvl3: number;
         lvl4: number;
         lvl5: number;
+        lvl6: number;
       };
       hidden: number;
     }> = [];
@@ -190,7 +191,7 @@ export function useSubmitOttomanTradePosts() {
       } else {
         toAdd.push({
           id: tradePostId,
-          levels: { unlock: 0, lvl2: 0, lvl3: 0, lvl4: 0, lvl5: 0 },
+          levels: { unlock: 0, lvl2: 0, lvl3: 0, lvl4: 0, lvl5: 0, lvl6: 0 },
           hidden: 0,
         });
       }
@@ -283,6 +284,7 @@ export function useSubmitPreset() {
             lvl3: number;
             lvl4: number;
             lvl5: number;
+            lvl6: number;
           };
           hidden: number;
         }> = [];
@@ -308,7 +310,14 @@ export function useSubmitPreset() {
               if (!existing) {
                 tradePostsToAdd.push({
                   id: e.tradePostId,
-                  levels: { unlock: 0, lvl2: 0, lvl3: 0, lvl4: 0, lvl5: 0 },
+                  levels: {
+                    unlock: 0,
+                    lvl2: 0,
+                    lvl3: 0,
+                    lvl4: 0,
+                    lvl5: 0,
+                    lvl6: 0,
+                  },
                   hidden: 0,
                 });
               } else {

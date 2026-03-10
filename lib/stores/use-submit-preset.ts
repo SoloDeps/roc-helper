@@ -78,6 +78,13 @@ export function useSubmitPreset() {
           const entries = getEntriesForEra(section, era);
 
           for (const entry of entries) {
+            // Skip ottoman entries — only buildings here
+            if (
+              entry.kind === "ottoman_area" ||
+              entry.kind === "ottoman_tradepost"
+            )
+              continue;
+
             // Format ID : `{category}_{buildingId}_{type}_{era}_{level}`
             const buildingId = `${section.category}_${entry.buildingId}_${entry.type}_${entry.era}_${entry.level}`;
             const existing = await db.buildings.get(buildingId);
