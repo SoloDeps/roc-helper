@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { toast } from "sonner";
 import { useAddElementStore } from "./add-element-store";
 import { getWikiDB, areaIndexToId, tradePostIndexToId } from "@/lib/db/schema";
@@ -8,6 +9,13 @@ import { getTechnologiesByEra } from "@/data/technos-registry";
 import { getAllTradePosts } from "@/lib/ottoman-data-loader";
 import { useSelectEra } from "./technology-page-store";
 import { useQueryClient } from "@tanstack/react-query";
+import { PRESET_SECTIONS, getEntriesForEra } from "@/data/presets";
+import type {
+  BuildingEntry,
+  OttomanAreaEntry,
+  OttomanTradePostEntry,
+} from "@/data/presets";
+import type { EraAbbr } from "@/lib/constants";
 
 // ============================================================================
 // TECHNO SUBMISSION
@@ -214,4 +222,181 @@ export function useSubmitOttomanTradePosts() {
   };
 
   return { submit, isLoading: false };
+}
+
+// ============================================================================
+// PRESET SUBMISSION
+// ============================================================================
+
+export function useSubmitPreset() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { presetSelection, closeModal } = useAddElementStore();
+  const queryClient = useQueryClient();
+  const selectEra = useSelectEra();
+
+  const submit = async () => {
+    setIsLoading(true);
+    const db = getWikiDB();
+    const era = presetSelection.era as EraAbbr;
+    const eraObj = ERAS.find((e) => e.abbr === era);
+    const eraId = eraObj?.id;
+
+    let technosAdded = 0;
+    let buildingsAdded = 0;
+    let ottomanAreasAdded = 0;
+    let ottomanTradePostsAdded = 0;
+    let duplicatesSkipped = 0;
+
+    try {
+      // ── 1. TECHNOS ──────────────────────────────────────────────────────
+      if (presetSelection.technos && eraId) {
+        const technologies = getTechnologiesByEra(eraId);
+        const toAdd: Array<{ id: string; hidden: number; cp: number }> = [];
+
+        for (const techno of technologies) {
+          const existing = await db.technos.get(techno.id);
+          if (!existing) toAdd.push({ id: techno.id, hidden: 0, cp: 0 });
+          else duplicatesSkipped++;
+        }
+
+        if (toAdd.length > 0) {
+          await db.technos.bulkPut(toAdd);
+          technosAdded = toAdd.length;
+          queryClient.invalidateQueries({ queryKey: ["technos"] });
+          selectEra(eraId);
+        }
+      }
+
+      // ── 2. BUILDINGS / OTTOMAN AREAS / OTTOMAN TRADE POSTS ──────────────
+      if (presetSelection.selectedSections.size > 0) {
+        const buildingsToAdd: Array<{
+          id: string;
+          qty: number;
+          hidden: number;
+        }> = [];
+        const areasToAdd: Array<{ id: string; hidden: number }> = [];
+        const tradePostsToAdd: Array<{
+          id: string;
+          levels: {
+            unlock: number;
+            lvl2: number;
+            lvl3: number;
+            lvl4: number;
+            lvl5: number;
+          };
+          hidden: number;
+        }> = [];
+
+        for (const sectionId of presetSelection.selectedSections) {
+          const section = PRESET_SECTIONS.find((s) => s.id === sectionId);
+          if (!section) continue;
+
+          const entries = getEntriesForEra(section, era);
+
+          for (const entry of entries) {
+            // ── Ottoman Area ─────────────────────────────────────────────
+            if (entry.kind === "ottoman_area") {
+              const e = entry as OttomanAreaEntry;
+              const existing = await db.ottomanAreas.get(e.areaId);
+              if (!existing) areasToAdd.push({ id: e.areaId, hidden: 0 });
+              else duplicatesSkipped++;
+
+              // ── Ottoman Trade Post ────────────────────────────────────────
+            } else if (entry.kind === "ottoman_tradepost") {
+              const e = entry as OttomanTradePostEntry;
+              const existing = await db.ottomanTradePosts.get(e.tradePostId);
+              if (!existing) {
+                tradePostsToAdd.push({
+                  id: e.tradePostId,
+                  levels: { unlock: 0, lvl2: 0, lvl3: 0, lvl4: 0, lvl5: 0 },
+                  hidden: 0,
+                });
+              } else {
+                duplicatesSkipped++;
+              }
+
+              // ── Building (default) ────────────────────────────────────────
+            } else {
+              const e = entry as BuildingEntry;
+              // Format: {category}_{buildingId}_{type}_{era}_{level}
+              const buildingId = `${section.category}_${e.buildingId}_${e.type}_${e.era}_${e.level}`;
+              const existing = await db.buildings.get(buildingId);
+              if (!existing) {
+                buildingsToAdd.push({ id: buildingId, qty: e.qty, hidden: 0 });
+              } else {
+                duplicatesSkipped++;
+              }
+            }
+          }
+        }
+
+        if (buildingsToAdd.length > 0) {
+          await db.buildings.bulkPut(buildingsToAdd);
+          buildingsAdded = buildingsToAdd.length;
+          queryClient.invalidateQueries({ queryKey: ["buildings"] });
+        }
+
+        if (areasToAdd.length > 0) {
+          await db.ottomanAreas.bulkPut(areasToAdd);
+          ottomanAreasAdded = areasToAdd.length;
+          queryClient.invalidateQueries({ queryKey: ["ottoman-areas"] });
+        }
+
+        if (tradePostsToAdd.length > 0) {
+          await db.ottomanTradePosts.bulkPut(tradePostsToAdd);
+          ottomanTradePostsAdded = tradePostsToAdd.length;
+          queryClient.invalidateQueries({ queryKey: ["ottoman-tradeposts"] });
+        }
+      }
+
+      // ── 3. FEEDBACK ─────────────────────────────────────────────────────
+      const totalAdded =
+        technosAdded +
+        buildingsAdded +
+        ottomanAreasAdded +
+        ottomanTradePostsAdded;
+      if (totalAdded > 0) {
+        const parts: string[] = [];
+        if (technosAdded > 0) parts.push(`${technosAdded} technologies`);
+        if (buildingsAdded > 0) parts.push(`${buildingsAdded} buildings`);
+        if (ottomanAreasAdded > 0) parts.push(`${ottomanAreasAdded} areas`);
+        if (ottomanTradePostsAdded > 0)
+          parts.push(`${ottomanTradePostsAdded} trade posts`);
+
+        toast.success(`${parts.join(" and ")} added`, {
+          description:
+            duplicatesSkipped > 0
+              ? `${duplicatesSkipped} duplicates skipped`
+              : undefined,
+        });
+
+        // Reset la sélection preset
+        useAddElementStore.setState((state) => ({
+          presetSelection: {
+            ...state.presetSelection,
+            technos: false,
+            selectedSections: new Set(),
+          },
+        }));
+
+        closeModal();
+      } else if (duplicatesSkipped > 0) {
+        toast.info("Everything already in the list", {
+          description: `${duplicatesSkipped} items were already added`,
+        });
+      } else {
+        toast.warning("Nothing to add", {
+          description:
+            "No data found for this era. Check preset-data.ts entries.",
+        });
+      }
+    } catch (error) {
+      console.error("❌ Failed to submit preset:", error);
+      toast.error("Failed to add preset");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { submit, isLoading };
 }

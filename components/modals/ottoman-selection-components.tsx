@@ -89,22 +89,21 @@ export const OttomanAreasSelection = memo<OttomanAreasSelectionProps>(
 
     return (
       <div className="flex flex-col h-full">
-        <div className="flex-1 overflow-y-auto pb-24 md:pb-4">
+        <div className="flex items-center justify-between bg-background z-10 py-2 border-b border-alpha-300 -mx-4 -mt-4 px-4">
+          <p className="text-sm text-muted-foreground">
+            {selectedAreas.size} / {availableAreas.length} selected
+          </p>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleSelectAll}
+            className="h-7 text-sm"
+          >
+            {allSelected ? "Deselect all" : "Select all"}
+          </Button>
+        </div>
+        <div className="flex-1 overflow-y-auto pb-24 md:pb-4 pt-3">
           <div className="space-y-2 pb-4">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-sm text-muted-foreground">
-                {selectedAreas.size} / {availableAreas.length} selected
-              </p>
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={handleSelectAll}
-                className="h-7 text-sm"
-              >
-                {allSelected ? "Deselect all" : "Select all"}
-              </Button>
-            </div>
-
             <div className="grid grid-cols-1 gap-2">
               {availableAreas.map((areaIndex) => {
                 const isSelected = selectedAreas.has(areaIndex);
@@ -260,23 +259,21 @@ export const OttomanTradePostsSelection = memo<OttomanTradePostsSelectionProps>(
 
     return (
       <div className="flex flex-col h-full">
-        <div className="flex-1 overflow-y-auto pb-24 md:pb-4">
+        <div className="flex items-center justify-between bg-background z-10 py-2 border-b border-alpha-300 -mx-4 -mt-4 px-4">
+          <p className="text-sm text-muted-foreground">
+            {selectedTradePosts.size} / {availableTradePosts.length} selected
+          </p>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleSelectAll}
+            className="h-7 text-sm"
+          >
+            {allSelected ? "Deselect all" : "Select all"}
+          </Button>
+        </div>
+        <div className="flex-1 overflow-y-auto pb-24 md:pb-4 pt-3">
           <div className="space-y-4 pb-4">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-sm text-muted-foreground">
-                {selectedTradePosts.size} / {availableTradePosts.length}{" "}
-                selected
-              </p>
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={handleSelectAll}
-                className="h-7 text-sm"
-              >
-                {allSelected ? "Deselect all" : "Select all"}
-              </Button>
-            </div>
-
             {tradePostsByArea.map(([areaIndex, tradePosts]) => (
               <div key={areaIndex} className="space-y-2">
                 <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2">

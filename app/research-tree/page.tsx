@@ -137,8 +137,8 @@ function CostGrid({
 }
 
 function StatsContent({ technologies }: { technologies: TechnoData[] }) {
-  const completed = technologies.filter((t) => (t as any).hidden);
-  const remaining = technologies.filter((t) => !(t as any).hidden);
+  const completed = technologies.filter((t) => (t as any).cp);
+  const remaining = technologies.filter((t) => !(t as any).cp);
   return (
     <Tabs defaultValue="remaining">
       <TabsList className="w-full">
@@ -432,7 +432,11 @@ export default function ResearchTreePage() {
     if (!technosInDB || !selectedEraTechnologies.length) return [];
     return selectedEraTechnologies.map((tech) => {
       const dbTech = technosInDB.find((t) => t.id === tech.id);
-      return { ...tech, hidden: dbTech ? !!dbTech.hidden : false };
+      return {
+        ...tech,
+        hidden: dbTech ? !!dbTech.hidden : false,
+        cp: dbTech ? !!dbTech.cp : false,
+      };
     });
   }, [selectedEraTechnologies, technosInDB]);
 

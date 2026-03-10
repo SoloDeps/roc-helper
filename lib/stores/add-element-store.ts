@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { getCatalogItem } from "@/lib/catalog";
+import { getCatalogItem, ERAS } from "@/lib/catalog";
 import { getBuildingData } from "@/lib/element-data-loader";
 import { getWikiDB } from "@/lib/db/schema";
 import { useAddBuilding } from "@/hooks/use-database";
@@ -18,7 +18,9 @@ export type FlowStep =
   | "subcategory"
   | "element"
   | "configuration"
-  | "ottoman_selection";
+  | "ottoman_selection"
+  | "preset_era"
+  | "preset_selection";
 
 export interface NavigationPath {
   categoryId?: string;
@@ -29,6 +31,12 @@ export interface NavigationPath {
 export interface OttomanSelection {
   selectedAreas: Set<number>;
   selectedTradePosts: Set<string>;
+}
+
+export interface PresetSelection {
+  era: string; // abbr uppercase ex: "LG"
+  technos: boolean;
+  selectedSections: Set<string>; // IDs des sections ex: "capital_homes"
 }
 
 export interface LevelConfig {
@@ -56,6 +64,7 @@ interface AddElementState {
   path: NavigationPath;
   config: ElementConfig;
   ottomanSelection: OttomanSelection;
+  presetSelection: PresetSelection;
   breadcrumbTrail: Array<{ id: string; name: string; step: FlowStep }>;
   lastAddedElementId: string | null;
   lastUsedEra: string;
@@ -80,6 +89,12 @@ interface AddElementState {
   toggleOttomanTradePost: (tradePostName: string) => void;
   clearOttomanSelection: () => void;
 
+  // Preset actions
+  setPresetEra: (eraAbbr: string) => void;
+  togglePresetTechnos: () => void;
+  togglePresetSection: (sectionId: string) => void;
+  clearPresetSelection: () => void;
+
   isTechnologyPath: () => boolean;
   isOttomanPath: () => boolean;
   updateBreadcrumbTrail: () => void;
@@ -92,14 +107,16 @@ const DEFAULT_CONFIG: ElementConfig = {
   buildingType: "upgrade",
 };
 
+const DEFAULT_PRESET: PresetSelection = {
+  era: "LG",
+  technos: false,
+  selectedSections: new Set(),
+};
+
 // ============================================================================
 // HELPERS
 // ============================================================================
 
-/**
- * Génère un ID unique pour une entité building
- * Format: {category}_{elementId}_{type}_{era}_{level}
- */
 function generateBuildingId(
   category: string,
   elementId: string,
@@ -110,9 +127,6 @@ function generateBuildingId(
   return `${category}_${elementId}_${type}_${era}_${level}`;
 }
 
-/**
- * Parse les coûts depuis le format data vers le format entity
- */
 function parseBuildingCosts(rawCosts: any): {
   resources: Record<string, number>;
   goods: Array<{ type: string; amount: number }>;
@@ -153,6 +167,7 @@ export const useAddElementStore = create<AddElementState>()(
           selectedAreas: new Set(),
           selectedTradePosts: new Set(),
         },
+        presetSelection: DEFAULT_PRESET,
         breadcrumbTrail: [],
         lastAddedElementId: null,
         lastUsedEra: "LG",
@@ -174,6 +189,7 @@ export const useAddElementStore = create<AddElementState>()(
               selectedAreas: new Set(),
               selectedTradePosts: new Set(),
             },
+            presetSelection: DEFAULT_PRESET,
             breadcrumbTrail: [],
           });
         },
@@ -280,10 +296,54 @@ export const useAddElementStore = create<AddElementState>()(
           });
         },
 
+        // ── Preset actions ──────────────────────────────────────────────────
+
+        setPresetEra: (eraAbbr) =>
+          set((state) => ({
+            presetSelection: {
+              ...state.presetSelection,
+              era: eraAbbr,
+              technos: false,
+              selectedSections: new Set(),
+            },
+          })),
+
+        togglePresetTechnos: () =>
+          set((state) => ({
+            presetSelection: {
+              ...state.presetSelection,
+              technos: !state.presetSelection.technos,
+            },
+          })),
+
+        togglePresetSection: (sectionId) =>
+          set((state) => {
+            const next = new Set(state.presetSelection.selectedSections);
+            if (next.has(sectionId)) next.delete(sectionId);
+            else next.add(sectionId);
+            return {
+              presetSelection: {
+                ...state.presetSelection,
+                selectedSections: next,
+              },
+            };
+          }),
+
+        clearPresetSelection: () => set({ presetSelection: DEFAULT_PRESET }),
+
+        // ── Navigation ──────────────────────────────────────────────────────
+
         goBack: () => {
           set((state) => {
             const isTech = state.path.categoryId === "technology";
-            const isOttoman = state.path.categoryId === "ottoman";
+
+            if (state.currentStep === "preset_selection") {
+              return { currentStep: "preset_era" };
+            }
+
+            if (state.currentStep === "preset_era") {
+              return { currentStep: "category", path: {} };
+            }
 
             if (state.currentStep === "configuration") {
               return {
@@ -486,7 +546,6 @@ export function useSubmitElement() {
       throw new Error("No levels selected");
     }
 
-    // Check for duplicates
     const db = getWikiDB();
     const duplicateItems: string[] = [];
 
@@ -544,7 +603,6 @@ export function useSubmitElement() {
           return;
         }
 
-        // Generate building ID
         const buildingId = generateBuildingId(
           path.categoryId!,
           path.elementId!,
@@ -557,7 +615,6 @@ export function useSubmitElement() {
           firstElementId = `${path.categoryId}_${path.elementId}`;
         }
 
-        // Add to database with minimal data
         await addBuilding.mutateAsync({
           buildingId,
           quantity: config.quantity,
@@ -609,6 +666,9 @@ export const useIsOttomanPath = () =>
 
 export const useOttomanSelection = () =>
   useAddElementStore((state) => state.ottomanSelection);
+
+export const usePresetSelection = () =>
+  useAddElementStore((state) => state.presetSelection);
 
 export const useBreadcrumbTrail = () =>
   useAddElementStore((state) => state.breadcrumbTrail);

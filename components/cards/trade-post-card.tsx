@@ -97,15 +97,17 @@ export function TradePostCard({
       { key: "lvl3" as const, label: "Lvl 3", number: 3 },
       { key: "lvl4" as const, label: "Lvl 4", number: 4 },
       { key: "lvl5" as const, label: "Lvl 5", number: 5 },
+      { key: "lvl6" as const, label: "Lvl 6", number: 6 },
     ];
 
     const hasUnlockData = (sourceData?.levels?.[1]?.length ?? 0) > 0;
+    const hasLvl6Data = (sourceData?.levels?.[6]?.length ?? 0) > 0;
 
-    if (!hasUnlockData) {
-      return buttons.slice(1);
-    }
-
-    return buttons;
+    return buttons.filter(({ key, number }) => {
+      if (number === 1) return hasUnlockData;
+      if (number === 6) return hasLvl6Data;
+      return true;
+    });
   }, [sourceData]);
 
   // Calculate selected levels for mobile button display

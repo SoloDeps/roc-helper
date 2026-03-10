@@ -515,10 +515,12 @@ export const goodsByCivilization: Record<
       "trade_city_platinum_upkey",
       "trade_city_gold_upkey",
       "trade_city_silver_upkey",
+      "trade_city_advanced_upkey",
       "trade_village_diamond_upkey",
       "trade_village_platinum_upkey",
       "trade_village_gold_upkey",
       "trade_village_silver_upkey",
+      "trade_village_advanced_upkey",
     ],
   },
 };
