@@ -111,19 +111,21 @@ export interface OttomanAreaData {
 }
 
 // OTTOMAN - TRADE POSTS
-export interface TradePostLevels {
-  1: Good[];
+export type TradePostLevels = {
+  [level: number]: Good[];
+} & {
+  1: Good[]; // unlock cost (peut être vide)
   2: Good[];
   3: Good[];
   4: Good[];
   5: Good[];
-}
+};
 
 export interface TradePostData {
   area: number;
   name: string;
   resource: string; // "wheat", "pomegranate", etc.
-  levels: TradePostLevels; // 5 niveaux fixes
+  levels: TradePostLevels; // 5 niveaux min, 6 pour les non-premium
 }
 
 // ERA GOODS

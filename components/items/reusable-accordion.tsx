@@ -101,7 +101,7 @@ export const ReusableAccordion = memo(function ReusableAccordion({
         className,
       )}
     >
-      <AccordionTrigger className="hover:no-underline [&>svg]:-order-1 justify-start gap-3 p-2 md:px-4 text-sm h-14 md:h-12">
+      <AccordionTrigger className="hover:no-underline [&>svg]:-order-1 justify-start gap-3 p-2 md:px-4 text-sm h-11">
         <div className="flex justify-between items-center w-full gap-2">
           {/* LEFT SIDE: Title & Subtitle */}
           <div className="flex flex-col md:flex-row capitalize items-start md:items-center gap-1 md:gap-0">

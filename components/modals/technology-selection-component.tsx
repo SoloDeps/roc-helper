@@ -67,7 +67,7 @@ export const TechnologySelection = memo(() => {
                 alt={era.name}
                 width={40}
                 height={40}
-                className="size-10 object-contain opacity-70 invert-100 dark:invert-0 shrink-0"
+                className="size-10 object-contain opacity-60 invert-100 dark:invert-0 shrink-0"
                 unoptimized
               />
               <span className="text-sm font-medium truncate">{era.name}</span>
@@ -77,7 +77,7 @@ export const TechnologySelection = memo(() => {
             {isAdded ? (
               <Check className="size-5 text-green-500 shrink-0" />
             ) : (
-              <Plus className="size-5 shrink-0" />
+              <Plus className="size-5 shrink-0 text-muted-foreground" />
             )}
           </Button>
         );

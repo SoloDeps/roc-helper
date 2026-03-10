@@ -1,7 +1,7 @@
 "use client";
 
 import { memo, useCallback, useMemo } from "react";
-import { Plus, X, ChevronLeft } from "lucide-react";
+import { Plus, X, ChevronLeft, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ResponsiveModal } from "../responsive-modal";
@@ -19,6 +19,7 @@ import {
   getCategories,
   getCatalogItem,
 } from "@/lib/catalog-helper";
+import { ERAS } from "@/lib/catalog";
 import { ElementGrid } from "./modal-components";
 import { ConfigurationPanel } from "./configuration-panel";
 import { TechnologySelection } from "../technology-selection-component";
@@ -26,14 +27,18 @@ import {
   OttomanAreasSelection,
   OttomanTradePostsSelection,
 } from "../ottoman-selection-components";
+import { PresetEraSelection } from "./preset-era-selection";
+import { PresetBuilder } from "./preset-builder";
+import Image from "next/image";
 
 /**
- * Modal Header - Centré avec Back à gauche et Close à droite
+ * Modal Header
  */
 const ModalHeader = memo(() => {
   const currentStep = useCurrentStep();
   const path = useNavigationPath();
-  const { closeModal, goBack, directTechnologyMode } = useAddElementStore();
+  const { closeModal, goBack, directTechnologyMode, presetSelection } =
+    useAddElementStore();
 
   const isTechPath = path.categoryId === "technology";
   const showBack =
@@ -41,12 +46,14 @@ const ModalHeader = memo(() => {
     !(directTechnologyMode && isTechPath && currentStep === "element");
 
   const getHeaderTitle = useCallback(() => {
-    if (currentStep === "category") {
-      return "Add Element";
+    if (currentStep === "preset_era") return "Quick Preset";
+    if (currentStep === "preset_selection") {
+      const eraObj = ERAS.find((e) => e.abbr === presetSelection.era);
+      return eraObj?.name ?? "Quick Preset";
     }
+    if (currentStep === "category") return "Add Element";
 
     let currentItemId: string | null = null;
-
     if (currentStep === "subcategory" && path.categoryId) {
       currentItemId = path.categoryId;
     } else if (currentStep === "element" && path.subcategoryId) {
@@ -61,20 +68,17 @@ const ModalHeader = memo(() => {
 
     if (currentItemId) {
       const item = getCatalogItem(currentItemId);
-      if (item && "name" in item) {
-        return item.name;
-      }
+      if (item && "name" in item) return item.name;
     }
 
     return "Add Element";
-  }, [currentStep, path, directTechnologyMode, isTechPath]);
+  }, [currentStep, path, directTechnologyMode, isTechPath, presetSelection]);
 
   const title = useMemo(() => getHeaderTitle(), [getHeaderTitle]);
 
   return (
     <div className="sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background">
       <div className="flex items-center justify-between h-10 px-4">
-        {/* Left: Back button */}
         <div className="w-20 flex justify-start">
           {showBack && (
             <Button
@@ -89,14 +93,12 @@ const ModalHeader = memo(() => {
           )}
         </div>
 
-        {/* Center: Title */}
         <div className="flex-1 text-center px-2">
           <h2 className="text-sm md:text-base font-semibold truncate">
             {title}
           </h2>
         </div>
 
-        {/* Right: Close button */}
         <div className="w-20 flex justify-end">
           <Button
             variant="ghost"
@@ -112,7 +114,6 @@ const ModalHeader = memo(() => {
     </div>
   );
 });
-
 ModalHeader.displayName = "ModalHeader";
 
 /**
@@ -131,8 +132,46 @@ const CategoryStep = memo(() => {
     };
   }, [categories]);
 
+  const handleQuickPreset = useCallback(() => {
+    useAddElementStore.setState({ currentStep: "preset_era" });
+  }, []);
+
   return (
     <div className="space-y-2 pb-20 md:pb-0">
+      {/* Quick Preset button */}
+      <div className="pb-1">
+        <Button
+          variant="outline"
+          className="size-full text-left flex items-center gap-2 h-[70px] px-3 w-full justify-start"
+          onClick={handleQuickPreset}
+        >
+          <Image
+            src="/images/game_icons/icon_thunder.webp"
+            alt="Quick Preset"
+            width={48}
+            height={48}
+            sizes="48px"
+            unoptimized
+            className="object-contain size-10 md:w-11 select-none shrink-0"
+          />
+
+          <div className="text-left flex-1 min-w-0">
+            <p className="font-medium text-sm truncate">Quick Preset</p>
+            <p className="text-[13px] text-muted-foreground">
+              Add multiple categories at once
+            </p>
+          </div>
+        </Button>
+
+        <div className="relative flex items-center gap-2 mt-3">
+          <div className="flex-1 h-px bg-border" />
+          <span className="text-xs text-muted-foreground shrink-0 px-1">
+            OR
+          </span>
+          <div className="flex-1 h-px bg-border" />
+        </div>
+      </div>
+
       {primary.length > 0 && (
         <ElementGrid
           items={primary}
@@ -148,7 +187,6 @@ const CategoryStep = memo(() => {
     </div>
   );
 });
-
 CategoryStep.displayName = "CategoryStep";
 
 /**
@@ -173,7 +211,6 @@ const SubcategoryStep = memo(() => {
     </div>
   );
 });
-
 SubcategoryStep.displayName = "SubcategoryStep";
 
 /**
@@ -189,7 +226,6 @@ const ElementStep = memo(() => {
     return parentId ? getChildren(parentId) : [];
   }, [path.categoryId, path.subcategoryId, isTech]);
 
-  //  For technology path, show technologies with direct add button
   if (isTech && path.categoryId === "technology") {
     return (
       <div className="space-y-4 pb-20 md:pb-0">
@@ -204,7 +240,6 @@ const ElementStep = memo(() => {
     </div>
   );
 });
-
 ElementStep.displayName = "ElementStep";
 
 /**
@@ -218,7 +253,6 @@ const ConfigurationStep = memo(() => {
 
   const { submit, isLoading } = useSubmitElement();
 
-  //  Don't use try-catch here - let submit handle errors silently
   const handleSubmit = useCallback(async () => {
     await submit();
   }, [submit]);
@@ -238,16 +272,13 @@ const ConfigurationStep = memo(() => {
     </div>
   );
 });
-
 ConfigurationStep.displayName = "ConfigurationStep";
 
 /**
- * Ottoman Selection Step - Multi-select for areas/tradeposts
+ * Ottoman Selection Step
  */
 const OttomanSelectionStep = memo(() => {
   const path = useNavigationPath();
-
-  // Determine if we're selecting areas or trade posts
   const isAreas = path.subcategoryId === "ottoman_areas";
   const isTradePosts = path.subcategoryId === "ottoman_tradeposts";
 
@@ -269,7 +300,6 @@ const OttomanSelectionStep = memo(() => {
 
   return null;
 });
-
 OttomanSelectionStep.displayName = "OttomanSelectionStep";
 
 /**
@@ -288,11 +318,12 @@ const ModalContent = memo(() => {
         {currentStep === "element" && <ElementStep />}
         {currentStep === "ottoman_selection" && <OttomanSelectionStep />}
         {currentStep === "configuration" && <ConfigurationStep />}
+        {currentStep === "preset_era" && <PresetEraSelection />}
+        {currentStep === "preset_selection" && <PresetBuilder />}
       </div>
     </div>
   );
 });
-
 ModalContent.displayName = "ModalContent";
 
 /**
@@ -313,7 +344,6 @@ export function AddElementModal({
   const { openModal, closeModal } = useAddElementStore();
 
   const trigger = hideTrigger ? (
-    // Trigger invisible mais monté pour que ResponsiveModal fonctionne
     <span className="sr-only" aria-hidden />
   ) : (
     <Button size="sm" variant={variant}>

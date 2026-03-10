@@ -195,7 +195,7 @@ export function useAddOttomanTradePost() {
       const db = getWikiDB();
       await db.ottomanTradePosts.put({
         id: tradePostIndexToId(tradePostIndex),
-        levels: { unlock: 0, lvl2: 0, lvl3: 0, lvl4: 0, lvl5: 0 },
+        levels: { unlock: 0, lvl2: 0, lvl3: 0, lvl4: 0, lvl5: 0, lvl6: 0 },
         hidden: 0,
       });
     },

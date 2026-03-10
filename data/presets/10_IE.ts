@@ -1,0 +1,128 @@
+import type { PresetSection } from "./index";
+
+export const sections_IE: PresetSection[] = [
+  {
+    id: "capital_homes_IE",
+    label: "Homes",
+    category: "capital",
+    entries: [
+      { buildingId: "small_home",   type: "construction", era: "IE", level: 28, qty: 1  },
+      { buildingId: "small_home",   type: "upgrade",      era: "IE", level: 28, qty: 26 },
+      { buildingId: "small_home",   type: "upgrade",      era: "IE", level: 29, qty: 27 },
+      { buildingId: "small_home",   type: "upgrade",      era: "IE", level: 30, qty: 27 },
+      { buildingId: "average_home", type: "construction", era: "IE", level: 28, qty: 1  },
+      { buildingId: "average_home", type: "upgrade",      era: "IE", level: 28, qty: 10 },
+      { buildingId: "average_home", type: "upgrade",      era: "IE", level: 29, qty: 11 },
+      { buildingId: "average_home", type: "upgrade",      era: "IE", level: 30, qty: 11 },
+    ],
+  },
+  {
+    id: "capital_farms_IE",
+    label: "Farms",
+    category: "capital",
+    entries: [
+      { buildingId: "rural_farm",    type: "construction", era: "IE", level: 28, qty: 1  },
+      { buildingId: "rural_farm",    type: "upgrade",      era: "IE", level: 28, qty: 10 },
+      { buildingId: "rural_farm",    type: "upgrade",      era: "IE", level: 29, qty: 11 },
+      { buildingId: "rural_farm",    type: "upgrade",      era: "IE", level: 30, qty: 11 },
+      { buildingId: "domestic_farm", type: "upgrade",      era: "IE", level: 28, qty: 9  },
+      { buildingId: "domestic_farm", type: "upgrade",      era: "IE", level: 29, qty: 9  },
+      { buildingId: "domestic_farm", type: "upgrade",      era: "IE", level: 30, qty: 9  },
+    ],
+  },
+  {
+    id: "capital_culture_sites_IE",
+    label: "Cultural Sites",
+    category: "capital",
+    entries: [
+      { buildingId: "little_culture_site",   type: "upgrade", era: "IE", level: 10, qty: 7 },
+      { buildingId: "compact_culture_site",  type: "upgrade", era: "IE", level: 10, qty: 9 },
+      { buildingId: "moderate_culture_site", type: "upgrade", era: "IE", level: 10, qty: 4 },
+      { buildingId: "large_culture_site",    type: "upgrade", era: "IE", level: 10, qty: 1 },
+    ],
+  },
+  {
+    id: "capital_barracks_IE",
+    label: "Barracks",
+    category: "capital",
+    entries: [
+      { buildingId: "infantry_barracks",       type: "upgrade", era: "IE", level: 10, qty: 2 },
+      { buildingId: "ranged_barracks",         type: "upgrade", era: "IE", level: 10, qty: 1 },
+      { buildingId: "cavalry_barracks",        type: "upgrade", era: "IE", level: 10, qty: 1 },
+      { buildingId: "heavy_infantry_barracks", type: "upgrade", era: "IE", level: 10, qty: 1 },
+      { buildingId: "siege_barracks",          type: "upgrade", era: "IE", level: 10, qty: 1 },
+    ],
+  },
+  {
+    id: "capital_workshops_IE",
+    label: "Workshops",
+    category: "capital",
+    entries: [
+      { buildingId: "carpenter",      type: "upgrade", era: "IE", level: 4, qty: 1 },
+      { buildingId: "scribe",         type: "upgrade", era: "IE", level: 4, qty: 4 },
+      { buildingId: "spice_merchant", type: "upgrade", era: "IE", level: 4, qty: 1 },
+    ],
+  },
+  {
+    id: "vikings_homes_IE",
+    label: "Homes",
+    category: "vikings",
+    entries: [
+      { buildingId: "worker_home", type: "construction", era: "FA", level: 1,  qty: 15 },
+      { buildingId: "worker_home", type: "upgrade",      era: "FA", level: 2,  qty: 15 },
+      { buildingId: "worker_home", type: "upgrade",      era: "FA", level: 3,  qty: 15 },
+      { buildingId: "worker_home", type: "upgrade",      era: "IE", level: 4,  qty: 30 },
+      { buildingId: "worker_home", type: "upgrade",      era: "IE", level: 5,  qty: 30 },
+      { buildingId: "worker_home", type: "upgrade",      era: "IE", level: 6,  qty: 30 },
+      { buildingId: "sailor_home", type: "construction", era: "FA", level: 1,  qty: 10 },
+      { buildingId: "sailor_home", type: "upgrade",      era: "FA", level: 2,  qty: 10 },
+      { buildingId: "sailor_home", type: "upgrade",      era: "FA", level: 3,  qty: 10 },
+      { buildingId: "sailor_home", type: "upgrade",      era: "IE", level: 4,  qty: 20 },
+      { buildingId: "sailor_home", type: "upgrade",      era: "IE", level: 5,  qty: 20 },
+      { buildingId: "sailor_home", type: "upgrade",      era: "IE", level: 6,  qty: 20 },
+    ],
+  },
+  {
+    id: "vikings_beehive_IE",
+    label: "Beehives",
+    category: "vikings",
+    entries: [
+      { buildingId: "beehive",      type: "construction", era: "FA", level: 1, qty: 10 },
+      { buildingId: "beehive",      type: "upgrade",      era: "FA", level: 2, qty: 10 },
+      { buildingId: "beehive",      type: "upgrade",      era: "FA", level: 3, qty: 10 },
+      { buildingId: "beehive",      type: "upgrade",      era: "IE", level: 4, qty: 21 },
+      { buildingId: "beehive",      type: "upgrade",      era: "IE", level: 5, qty: 21 },
+      { buildingId: "beehive",      type: "upgrade",      era: "IE", level: 6, qty: 21 },
+    ],
+  },
+  {
+    id: "vikings_fishing_pier_IE",
+    label: "Fishing Piers",
+    category: "vikings",
+    entries: [
+      { buildingId: "fishing_pier", type: "construction", era: "FA", level: 1, qty: 5  },
+      { buildingId: "fishing_pier", type: "upgrade",      era: "FA", level: 2, qty: 5  },
+      { buildingId: "fishing_pier", type: "upgrade",      era: "FA", level: 3, qty: 5  },
+      { buildingId: "fishing_pier", type: "upgrade",      era: "IE", level: 4, qty: 11 },
+      { buildingId: "fishing_pier", type: "upgrade",      era: "IE", level: 5, qty: 11 },
+      { buildingId: "fishing_pier", type: "upgrade",      era: "IE", level: 6, qty: 11 },
+    ],
+  },
+  {
+    id: "vikings_tavern_IE",
+    label: "Taverns",
+    category: "vikings",
+    entries: [
+      { buildingId: "tavern",       type: "construction", era: "FA", level: 1, qty: 4 },
+      { buildingId: "tavern",       type: "upgrade",      era: "IE", level: 2, qty: 9 },
+    ],
+  },
+  {
+    id: "vikings_sailor_port_IE",
+    label: "Sailor Ports",
+    category: "vikings",
+    entries: [
+      { buildingId: "sailor_port",  type: "construction", era: "IE", level: 1, qty: 3 },
+    ],
+  },
+];

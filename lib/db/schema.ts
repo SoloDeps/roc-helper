@@ -27,6 +27,7 @@ export interface OttomanTradePostEntity {
     lvl3: number;
     lvl4: number;
     lvl5: number;
+    lvl6: number;
   };
   hidden: number; // 0 | 1
 }
@@ -50,6 +51,15 @@ export class RocWikiDB extends Dexie {
     // Ajout du champ cp (completed) pour séparer la progression du research tree
     // du hidden du calculator. Pas de migration : cp démarre à 0 pour tous.
     this.version(2).stores({
+      buildings: "id,hidden",
+      technos: "id,hidden,cp",
+      ottomanAreas: "id,hidden",
+      ottomanTradePosts: "id,hidden",
+    });
+
+    // Ajout du level 6 sur les trade posts (villages/cities EG et LG standard).
+    // Pas de migration de données : lvl6 démarre à 0 pour tous.
+    this.version(3).stores({
       buildings: "id,hidden",
       technos: "id,hidden,cp",
       ottomanAreas: "id,hidden",

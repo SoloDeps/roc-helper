@@ -44,7 +44,7 @@ export const ElementCard = memo<ElementCardProps>(
           priority={priority}
           unoptimized
           className={`object-contain size-10 md:size-11 select-none ${
-            inverted ? "opacity-70 invert-100 dark:invert-0" : ""
+            inverted ? "opacity-60 invert-100 dark:invert-0" : ""
           }`}
           onError={(e) => {
             const target = e.target as HTMLImageElement;

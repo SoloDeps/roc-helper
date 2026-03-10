@@ -44,8 +44,75 @@ import {
 import { ERA_ORDER } from "@/data/config";
 import { ERA_ID_TO_ABBR } from "@/lib/era-mappings";
 import { EraCode } from "@/types/shared";
+import { CATALOG } from "@/lib/catalog";
 // import type { TechnoEntity } from "@/lib/db/schema";
 import type { HydratedTechno } from "@/lib/db/data-hydration";
+
+// ============================================================================
+// CATALOG ORDER MAPS
+// Precompute sort keys from CATALOG for O(1) lookup
+// ============================================================================
+
+/**
+ * Maps `category` (e.g. "capital", "egypt") → its index in CATALOG
+ */
+const CATEGORY_ORDER = new Map<string, number>(
+  CATALOG.map((cat, i) => [cat.id, i]),
+);
+
+/**
+ * Maps `${categoryId}__${subcategoryId}` → subcategory index within its category
+ * Used to order buildings by their subcategory (homes before farms, etc.)
+ */
+const SUBCATEGORY_ORDER = new Map<string, number>();
+CATALOG.forEach((cat) => {
+  (cat.subcategories ?? []).forEach((sub, j) => {
+    SUBCATEGORY_ORDER.set(`${cat.id}__${sub.id}`, j);
+  });
+});
+
+/**
+ * Maps `elementId` → subcategory name (e.g. "capital_small_home" → "homes")
+ * Allows grouping accordions by their subcategory section header.
+ */
+const ELEMENT_TO_SUBCATEGORY = new Map<
+  string,
+  { catId: string; subName: string }
+>();
+CATALOG.forEach((cat) => {
+  (cat.subcategories ?? []).forEach((sub) => {
+    sub.buildings.forEach((b) => {
+      // elementId in DB is stored as `${catId}_${buildingId}`, e.g. "capital_small_home"
+      ELEMENT_TO_SUBCATEGORY.set(`${cat.id}_${b.id}`, {
+        catId: cat.id,
+        subName: sub.name,
+      });
+    });
+  });
+});
+
+// ============================================================================
+// SECTION HEADER COMPONENT
+// ============================================================================
+
+interface SectionHeaderProps {
+  label: string;
+}
+
+function SectionHeader({ label }: SectionHeaderProps) {
+  return (
+    <div className="flex items-center gap-2 pt-4.5 first:pt-0.5">
+      <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {label}
+      </span>
+      {/* <div className="flex-1 h-px bg-border" /> */}
+    </div>
+  );
+}
+
+// ============================================================================
+// ITEM LIST
+// ============================================================================
 
 export function ItemList() {
   const queryClient = useQueryClient();
@@ -154,6 +221,81 @@ export function ItemList() {
     return groups;
   }, [technos]);
 
+  // ============================================================================
+  // SORTED + GROUPED BUILDINGS
+  // Produces an ordered list of { sectionHeader?, accordionEntries[] } groups
+  // so we can render section labels between accordion clusters.
+  // ============================================================================
+
+  type AccordionEntry = {
+    groupKey: string;
+    buildingsInElement: typeof filteredBuildings;
+  };
+
+  type SectionGroup = {
+    /** e.g. "Capital — Homes", "Egypt — Workshops" */
+    header: string;
+    entries: AccordionEntry[];
+  };
+
+  const sectionGroups = useMemo<SectionGroup[]>(() => {
+    // Sort all entries by (categoryOrder, subcategoryOrder, buildingName)
+    const sorted = Array.from(buildingsByElement.entries()).sort(
+      ([, bA], [, bB]) => {
+        const a = bA[0];
+        const b = bB[0];
+
+        const catOrderA = CATEGORY_ORDER.get(a.category) ?? 999;
+        const catOrderB = CATEGORY_ORDER.get(b.category) ?? 999;
+        if (catOrderA !== catOrderB) return catOrderA - catOrderB;
+
+        // Within same category, sort by subcategory order from CATALOG
+        const subA = ELEMENT_TO_SUBCATEGORY.get(`${a.category}_${a.elementId}`);
+        const subB = ELEMENT_TO_SUBCATEGORY.get(`${b.category}_${b.elementId}`);
+        const subKeyA = subA
+          ? `${a.category}__${CATALOG.find((c) => c.id === a.category)?.subcategories?.find((s) => s.name === subA.subName)?.id ?? ""}`
+          : "";
+        const subKeyB = subB
+          ? `${b.category}__${CATALOG.find((c) => c.id === b.category)?.subcategories?.find((s) => s.name === subB.subName)?.id ?? ""}`
+          : "";
+        const subOrderA = SUBCATEGORY_ORDER.get(subKeyA) ?? 999;
+        const subOrderB = SUBCATEGORY_ORDER.get(subKeyB) ?? 999;
+        if (subOrderA !== subOrderB) return subOrderA - subOrderB;
+
+        return a.name.localeCompare(b.name);
+      },
+    );
+
+    // Bucket into sections
+    const sections: SectionGroup[] = [];
+    let lastHeader = "";
+
+    sorted.forEach(([groupKey, buildingsInElement]) => {
+      const first = buildingsInElement[0];
+      const subInfo = ELEMENT_TO_SUBCATEGORY.get(
+        `${first.category}_${first.elementId}`,
+      );
+
+      // Capitalise category label
+      const catLabel =
+        CATALOG.find((c) => c.id === first.category)?.name ?? first.category;
+      const subLabel = subInfo?.subName ?? "";
+      const header = subLabel ? `${catLabel} — ${subLabel}` : catLabel;
+
+      if (header !== lastHeader) {
+        sections.push({ header, entries: [] });
+        lastHeader = header;
+      }
+
+      sections[sections.length - 1].entries.push({
+        groupKey,
+        buildingsInElement,
+      });
+    });
+
+    return sections;
+  }, [buildingsByElement]);
+
   // Get all accordion IDs
   const allAccordionIds = useMemo(() => {
     const ids: string[] = [];
@@ -197,7 +339,6 @@ export function ItemList() {
     // Count technologies
     if (technosByEra.size > 0 && !hideTechnos) {
       currentCounts.set("all-technologies", technosByEra.size);
-      // currentCounts.set("all-technologies", technos.length);
     }
 
     // Count buildings by element
@@ -322,7 +463,7 @@ export function ItemList() {
     // Ottoman areas drawer
     if (filteredAreas.length > 0) {
       data["ottoman-areas"] = {
-        title: "Ottoman Empire — Areas",
+        title: "Areas",
         allHidden: areas.every((a) => a.hidden),
         onToggleAllHidden: async () => {
           await toggleHideAllOttomanAreas();
@@ -351,7 +492,7 @@ export function ItemList() {
     // Ottoman trade posts drawer
     if (filteredTradePosts.length > 0) {
       data["ottoman-tradeposts"] = {
-        title: "Ottoman Empire — Trade Posts",
+        title: "Trade Posts",
         allHidden: tradePosts.every((tp) => tp.hidden),
         onToggleAllHidden: async () => {
           await toggleHideAllOttomanTradePosts();
@@ -379,7 +520,7 @@ export function ItemList() {
 
     return data;
   }, [
-    queryClient, //  Add queryClient to dependencies
+    queryClient,
     technosByEra,
     hideTechnos,
     technos,
@@ -416,233 +557,243 @@ export function ItemList() {
         >
           {/* TECHNOLOGIES ACCORDION */}
           {technosByEra.size > 0 && !hideTechnos && (
-            <ReusableAccordion
-              id="all-technologies"
-              title="Technologies"
-              selectedCount={technosByEra.size}
-              hiddenCount={
-                Array.from(technosByEra.values()).filter((eraTechnos) =>
-                  eraTechnos.every((t) => t.hidden),
-                ).length
-              }
-              allHidden={technos.length > 0 && technos.every((t) => t.hidden)}
-              onToggleAllHidden={() => {
-                Array.from(technosByEra.keys()).forEach((era) => {
-                  toggleTechnosByEra.mutate(era);
-                });
-              }}
-              onDeleteAll={async () => {
-                await deleteAllTechnologies();
-                queryClient.invalidateQueries({
-                  queryKey: ["technos"],
-                  refetchType: "all",
-                });
-              }}
-              deleteConfirmMessage={
-                <>
-                  This action cannot be <b>undone</b>.
-                  <br />
-                  This will permanently delete <b>all technologies</b> from all
-                  eras.
-                </>
-              }
-              onOpenMobileActions={() => setActiveDrawer("all-technologies")}
-            >
-              <div className="space-y-3">
-                {Array.from(technosByEra.entries())
-                  .sort(([eraIdA], [eraIdB]) => {
-                    const abbrA = ERA_ID_TO_ABBR[
-                      eraIdA
-                    ]?.toUpperCase() as EraCode;
-                    const abbrB = ERA_ID_TO_ABBR[
-                      eraIdB
-                    ]?.toUpperCase() as EraCode;
+            <>
+              <SectionHeader label="Research Tree" />
+              <ReusableAccordion
+                id="all-technologies"
+                title="Technologies"
+                selectedCount={technosByEra.size}
+                hiddenCount={
+                  Array.from(technosByEra.values()).filter((eraTechnos) =>
+                    eraTechnos.every((t) => t.hidden),
+                  ).length
+                }
+                allHidden={technos.length > 0 && technos.every((t) => t.hidden)}
+                onToggleAllHidden={() => {
+                  Array.from(technosByEra.keys()).forEach((era) => {
+                    toggleTechnosByEra.mutate(era);
+                  });
+                }}
+                onDeleteAll={async () => {
+                  await deleteAllTechnologies();
+                  queryClient.invalidateQueries({
+                    queryKey: ["technos"],
+                    refetchType: "all",
+                  });
+                }}
+                deleteConfirmMessage={
+                  <>
+                    This action cannot be <b>undone</b>.
+                    <br />
+                    This will permanently delete <b>all technologies</b> from
+                    all eras.
+                  </>
+                }
+                onOpenMobileActions={() => setActiveDrawer("all-technologies")}
+              >
+                <div className="space-y-3">
+                  {Array.from(technosByEra.entries())
+                    .sort(([eraIdA], [eraIdB]) => {
+                      const abbrA = ERA_ID_TO_ABBR[
+                        eraIdA
+                      ]?.toUpperCase() as EraCode;
+                      const abbrB = ERA_ID_TO_ABBR[
+                        eraIdB
+                      ]?.toUpperCase() as EraCode;
 
-                    return ERA_ORDER.indexOf(abbrA) - ERA_ORDER.indexOf(abbrB);
-                  })
-                  .map(([era, eraTechnos]) => {
-                    return (
-                      <TechnoCard
-                        key={era}
-                        era={era}
-                        technos={eraTechnos}
-                        userSelections={userSelections}
-                        onRemoveAll={() => removeTechnosByEra.mutate(era)}
-                        onToggleHidden={() => toggleTechnosByEra.mutate(era)}
-                      />
-                    );
-                  })}
-              </div>
-            </ReusableAccordion>
+                      return (
+                        ERA_ORDER.indexOf(abbrA) - ERA_ORDER.indexOf(abbrB)
+                      );
+                    })
+                    .map(([era, eraTechnos]) => {
+                      return (
+                        <TechnoCard
+                          key={era}
+                          era={era}
+                          technos={eraTechnos}
+                          userSelections={userSelections}
+                          onRemoveAll={() => removeTechnosByEra.mutate(era)}
+                          onToggleHidden={() => toggleTechnosByEra.mutate(era)}
+                        />
+                      );
+                    })}
+                </div>
+              </ReusableAccordion>
+            </>
           )}
 
-          {/* BUILDINGS ACCORDION */}
-          {Array.from(buildingsByElement.entries())
-            .sort(([keyA, buildingsA], [keyB, buildingsB]) => {
-              const categoryCompare = buildingsA[0].category.localeCompare(
-                buildingsB[0].category,
-              );
-              if (categoryCompare !== 0) return categoryCompare;
-              return buildingsA[0].name.localeCompare(buildingsB[0].name);
-            })
-            .map(([groupKey, buildingsInElement]) => {
-              const firstBuilding = buildingsInElement[0];
-              const accordionId = `element-${groupKey}`;
-              const selectedCount = buildingsInElement.length;
-              const hiddenCount = buildingsInElement.filter(
-                (b) => b.hidden,
-              ).length;
-              const allHidden = buildingsInElement.every((b) => b.hidden);
-              const displayName = firstBuilding.name;
-              const subtitle = firstBuilding.category;
-              const buildingIds = buildingsInElement.map((b) => b.id);
+          {/* BUILDINGS ACCORDIONS — grouped by category > subcategory */}
+          {sectionGroups.map((section) => (
+            <React.Fragment key={section.header}>
+              <SectionHeader label={section.header} />
+              {section.entries.map(({ groupKey, buildingsInElement }) => {
+                const firstBuilding = buildingsInElement[0];
+                const accordionId = `element-${groupKey}`;
+                const selectedCount = buildingsInElement.length;
+                const hiddenCount = buildingsInElement.filter(
+                  (b) => b.hidden,
+                ).length;
+                const allHidden = buildingsInElement.every((b) => b.hidden);
+                const displayName = firstBuilding.name;
+                const buildingIds = buildingsInElement.map((b) => b.id);
 
-              return (
-                <ReusableAccordion
-                  key={accordionId}
-                  id={accordionId}
-                  title={displayName}
-                  subtitle={subtitle}
-                  selectedCount={selectedCount}
-                  hiddenCount={hiddenCount}
-                  allHidden={allHidden}
-                  onToggleAllHidden={async () => {
-                    await toggleHideAllBuildings(buildingIds);
-                    queryClient.invalidateQueries({
-                      queryKey: ["buildings"],
-                      refetchType: "all",
-                    });
-                  }}
-                  onDeleteAll={async () => {
-                    await deleteAllBuildings(buildingIds);
-                    queryClient.invalidateQueries({
-                      queryKey: ["buildings"],
-                      refetchType: "all",
-                    });
-                  }}
-                  deleteConfirmMessage={
-                    <>
-                      This action cannot be <b>undone</b>.
-                      <br />
-                      This will permanently delete <b>all {displayName}</b>{" "}
-                      buildings.
-                    </>
-                  }
-                  inlineSubtitle
-                  onOpenMobileActions={() => setActiveDrawer(accordionId)}
-                >
-                  {buildingsInElement.map((building) => (
-                    <BuildingCard
-                      key={building.id}
-                      building={building}
-                      userSelections={userSelections}
-                      onRemove={(id) => removeBuilding.mutate(id)}
-                      onUpdateQuantity={(id, qty) =>
-                        updateQuantity.mutate({ id, quantity: qty })
-                      }
-                      onToggleHidden={(id) => toggleHidden.mutate(id)}
-                    />
-                  ))}
-                </ReusableAccordion>
-              );
-            })}
+                return (
+                  <ReusableAccordion
+                    key={accordionId}
+                    id={accordionId}
+                    title={displayName}
+                    selectedCount={selectedCount}
+                    hiddenCount={hiddenCount}
+                    allHidden={allHidden}
+                    onToggleAllHidden={async () => {
+                      await toggleHideAllBuildings(buildingIds);
+                      queryClient.invalidateQueries({
+                        queryKey: ["buildings"],
+                        refetchType: "all",
+                      });
+                    }}
+                    onDeleteAll={async () => {
+                      await deleteAllBuildings(buildingIds);
+                      queryClient.invalidateQueries({
+                        queryKey: ["buildings"],
+                        refetchType: "all",
+                      });
+                    }}
+                    deleteConfirmMessage={
+                      <>
+                        This action cannot be <b>undone</b>.
+                        <br />
+                        This will permanently delete <b>
+                          all {displayName}
+                        </b>{" "}
+                        buildings.
+                      </>
+                    }
+                    onOpenMobileActions={() => setActiveDrawer(accordionId)}
+                  >
+                    {buildingsInElement.map((building) => (
+                      <BuildingCard
+                        key={building.id}
+                        building={building}
+                        userSelections={userSelections}
+                        onRemove={(id) => removeBuilding.mutate(id)}
+                        onUpdateQuantity={(id, qty) =>
+                          updateQuantity.mutate({ id, quantity: qty })
+                        }
+                        onToggleHidden={(id) => toggleHidden.mutate(id)}
+                      />
+                    ))}
+                  </ReusableAccordion>
+                );
+              })}
+            </React.Fragment>
+          ))}
+
+          {/* OTTOMAN SECTION — single header for both areas and trade posts */}
+          {(filteredAreas.length > 0 || filteredTradePosts.length > 0) && (
+            <SectionHeader label="Ottoman Empire" />
+          )}
 
           {/* OTTOMAN AREAS ACCORDION */}
           {filteredAreas.length > 0 && (
-            <ReusableAccordion
-              id="ottoman-areas"
-              title="Areas"
-              subtitle="Ottoman Empire"
-              selectedCount={filteredAreas.length}
-              hiddenCount={areas.filter((a) => a.hidden).length}
-              allHidden={areas.every((a) => a.hidden)}
-              onToggleAllHidden={async () => {
-                await toggleHideAllOttomanAreas();
-                queryClient.invalidateQueries({
-                  queryKey: ["ottoman-areas"],
-                  refetchType: "all",
-                });
-              }}
-              onDeleteAll={async () => {
-                await deleteAllOttomanAreas();
-                queryClient.invalidateQueries({
-                  queryKey: ["ottoman-areas"],
-                  refetchType: "all",
-                });
-              }}
-              deleteConfirmMessage={
-                <>
-                  This action cannot be <b>undone</b>.
-                  <br />
-                  This will permanently delete <b>all Ottoman areas</b>.
-                </>
-              }
-              inlineSubtitle
-              onOpenMobileActions={() => setActiveDrawer("ottoman-areas")}
-            >
-              {[...filteredAreas]
-                .sort((a, b) => a.areaIndex - b.areaIndex)
-                .map((area) => (
-                  <AreaCard
-                    key={area.id}
-                    area={area}
-                    userSelections={userSelections}
-                    onRemove={(id) => removeArea.mutate(id)}
-                    onToggleHidden={(id) => toggleAreaHidden.mutate(id)}
-                  />
-                ))}
-            </ReusableAccordion>
+            <>
+              <ReusableAccordion
+                id="ottoman-areas"
+                title="Areas"
+                selectedCount={filteredAreas.length}
+                hiddenCount={areas.filter((a) => a.hidden).length}
+                allHidden={areas.every((a) => a.hidden)}
+                onToggleAllHidden={async () => {
+                  await toggleHideAllOttomanAreas();
+                  queryClient.invalidateQueries({
+                    queryKey: ["ottoman-areas"],
+                    refetchType: "all",
+                  });
+                }}
+                onDeleteAll={async () => {
+                  await deleteAllOttomanAreas();
+                  queryClient.invalidateQueries({
+                    queryKey: ["ottoman-areas"],
+                    refetchType: "all",
+                  });
+                }}
+                deleteConfirmMessage={
+                  <>
+                    This action cannot be <b>undone</b>.
+                    <br />
+                    This will permanently delete <b>all Ottoman areas</b>.
+                  </>
+                }
+                inlineSubtitle
+                onOpenMobileActions={() => setActiveDrawer("ottoman-areas")}
+              >
+                {[...filteredAreas]
+                  .sort((a, b) => a.areaIndex - b.areaIndex)
+                  .map((area) => (
+                    <AreaCard
+                      key={area.id}
+                      area={area}
+                      userSelections={userSelections}
+                      onRemove={(id) => removeArea.mutate(id)}
+                      onToggleHidden={(id) => toggleAreaHidden.mutate(id)}
+                    />
+                  ))}
+              </ReusableAccordion>
+            </>
           )}
 
           {/* OTTOMAN TRADE POSTS ACCORDION */}
           {filteredTradePosts.length > 0 && (
-            <ReusableAccordion
-              id="ottoman-tradeposts"
-              title="Trade Posts"
-              subtitle="Ottoman Empire"
-              selectedCount={filteredTradePosts.length}
-              hiddenCount={tradePosts.filter((tp) => tp.hidden).length}
-              allHidden={tradePosts.every((tp) => tp.hidden)}
-              onToggleAllHidden={async () => {
-                await toggleHideAllOttomanTradePosts();
-                queryClient.invalidateQueries({
-                  queryKey: ["ottoman-tradeposts"],
-                  refetchType: "all",
-                });
-              }}
-              onDeleteAll={async () => {
-                await deleteAllOttomanTradePosts();
-                queryClient.invalidateQueries({
-                  queryKey: ["ottoman-tradeposts"],
-                  refetchType: "all",
-                });
-              }}
-              deleteConfirmMessage={
-                <>
-                  This action cannot be <b>undone</b>.
-                  <br />
-                  This will permanently delete <b>all Ottoman trade posts</b>.
-                </>
-              }
-              helpText="Check the level checkboxes on cards to mark as completed or hidden"
-              inlineSubtitle
-              onOpenMobileActions={() => setActiveDrawer("ottoman-tradeposts")}
-            >
-              {[...filteredTradePosts]
-                .sort((a, b) => a.area - b.area)
-                .map((tp) => (
-                  <TradePostCard
-                    key={tp.id}
-                    tradePost={tp}
-                    userSelections={userSelections}
-                    onRemove={(id) => removeTradePost.mutate(id)}
-                    onToggleHidden={(id) => toggleTradePostHidden.mutate(id)}
-                    onToggleLevel={(id, level) =>
-                      toggleTradePostLevel.mutate({ id, level })
-                    }
-                  />
-                ))}
-            </ReusableAccordion>
+            <>
+              <ReusableAccordion
+                id="ottoman-tradeposts"
+                title="Trade Posts"
+                selectedCount={filteredTradePosts.length}
+                hiddenCount={tradePosts.filter((tp) => tp.hidden).length}
+                allHidden={tradePosts.every((tp) => tp.hidden)}
+                onToggleAllHidden={async () => {
+                  await toggleHideAllOttomanTradePosts();
+                  queryClient.invalidateQueries({
+                    queryKey: ["ottoman-tradeposts"],
+                    refetchType: "all",
+                  });
+                }}
+                onDeleteAll={async () => {
+                  await deleteAllOttomanTradePosts();
+                  queryClient.invalidateQueries({
+                    queryKey: ["ottoman-tradeposts"],
+                    refetchType: "all",
+                  });
+                }}
+                deleteConfirmMessage={
+                  <>
+                    This action cannot be <b>undone</b>.
+                    <br />
+                    This will permanently delete <b>all Ottoman trade posts</b>.
+                  </>
+                }
+                helpText="Check the level checkboxes on cards to mark as completed or hidden"
+                inlineSubtitle
+                onOpenMobileActions={() =>
+                  setActiveDrawer("ottoman-tradeposts")
+                }
+              >
+                {[...filteredTradePosts]
+                  .sort((a, b) => a.area - b.area)
+                  .map((tp) => (
+                    <TradePostCard
+                      key={tp.id}
+                      tradePost={tp}
+                      userSelections={userSelections}
+                      onRemove={(id) => removeTradePost.mutate(id)}
+                      onToggleHidden={(id) => toggleTradePostHidden.mutate(id)}
+                      onToggleLevel={(id, level) =>
+                        toggleTradePostLevel.mutate({ id, level })
+                      }
+                    />
+                  ))}
+              </ReusableAccordion>
+            </>
           )}
         </Accordion>
       </div>

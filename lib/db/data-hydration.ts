@@ -66,6 +66,7 @@ export interface HydratedOttomanTradePost {
     lvl3: boolean;
     lvl4: boolean;
     lvl5: boolean;
+    lvl6: boolean;
   };
   costs: {
     resources: Record<string, number>;
@@ -297,6 +298,7 @@ function calculateTradePostCosts(
       lvl3: 3,
       lvl4: 4,
       lvl5: 5,
+      lvl6: 6,
     };
 
   Object.entries(checkedLevels).forEach(([levelKey, isChecked]) => {
@@ -353,6 +355,7 @@ export async function getHydratedOttomanTradePost(
     lvl3: 0,
     lvl4: 0,
     lvl5: 0,
+    lvl6: 0,
   };
   const levels: HydratedOttomanTradePost["levels"] = {
     unlock: !!rawLevels.unlock,
@@ -360,6 +363,7 @@ export async function getHydratedOttomanTradePost(
     lvl3: !!rawLevels.lvl3,
     lvl4: !!rawLevels.lvl4,
     lvl5: !!rawLevels.lvl5,
+    lvl6: !!rawLevels.lvl6,
   };
 
   const sourceData = {

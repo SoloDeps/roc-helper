@@ -1,0 +1,102 @@
+import type { PresetSection } from "./index";
+
+export const sections_HM: PresetSection[] = [
+  {
+    id: "capital_homes_HM",
+    label: "Homes",
+    category: "capital",
+    entries: [
+      { buildingId: "small_home",   type: "construction", era: "HM", level: 34, qty: 1  },
+      { buildingId: "small_home",   type: "upgrade",      era: "HM", level: 34, qty: 28 },
+      { buildingId: "small_home",   type: "upgrade",      era: "HM", level: 35, qty: 29 },
+      { buildingId: "small_home",   type: "upgrade",      era: "HM", level: 36, qty: 29 },
+      { buildingId: "average_home", type: "construction", era: "HM", level: 34, qty: 1  },
+      { buildingId: "average_home", type: "upgrade",      era: "HM", level: 34, qty: 12 },
+      { buildingId: "average_home", type: "upgrade",      era: "HM", level: 35, qty: 13 },
+      { buildingId: "average_home", type: "upgrade",      era: "HM", level: 36, qty: 13 },
+    ],
+  },
+  {
+    id: "capital_farms_HM",
+    label: "Farms",
+    category: "capital",
+    entries: [
+      { buildingId: "rural_farm",    type: "construction", era: "HM", level: 34, qty: 1  },
+      { buildingId: "rural_farm",    type: "upgrade",      era: "HM", level: 34, qty: 11 },
+      { buildingId: "rural_farm",    type: "upgrade",      era: "HM", level: 35, qty: 12 },
+      { buildingId: "rural_farm",    type: "upgrade",      era: "HM", level: 36, qty: 12 },
+      { buildingId: "domestic_farm", type: "upgrade",      era: "HM", level: 34, qty: 10 },
+      { buildingId: "domestic_farm", type: "upgrade",      era: "HM", level: 35, qty: 10 },
+      { buildingId: "domestic_farm", type: "upgrade",      era: "HM", level: 36, qty: 10 },
+    ],
+  },
+  {
+    id: "capital_culture_sites_HM",
+    label: "Cultural Sites",
+    category: "capital",
+    entries: [
+      { buildingId: "little_culture_site",   type: "upgrade", era: "HM", level: 12, qty: 8 },
+      { buildingId: "compact_culture_site",  type: "upgrade", era: "HM", level: 12, qty: 9 },
+      { buildingId: "moderate_culture_site", type: "upgrade", era: "HM", level: 12, qty: 5 },
+      { buildingId: "large_culture_site",    type: "upgrade", era: "HM", level: 12, qty: 1 },
+    ],
+  },
+  {
+    id: "capital_barracks_HM",
+    label: "Barracks",
+    category: "capital",
+    entries: [
+      { buildingId: "infantry_barracks",       type: "upgrade", era: "HM", level: 12, qty: 2 },
+      { buildingId: "ranged_barracks",         type: "upgrade", era: "HM", level: 12, qty: 1 },
+      { buildingId: "cavalry_barracks",        type: "upgrade", era: "HM", level: 12, qty: 1 },
+      { buildingId: "heavy_infantry_barracks", type: "upgrade", era: "HM", level: 12, qty: 1 },
+      { buildingId: "siege_barracks",          type: "upgrade", era: "HM", level: 12, qty: 1 },
+    ],
+  },
+  {
+    id: "capital_workshops_HM",
+    label: "Workshops",
+    category: "capital",
+    entries: [
+      { buildingId: "carpenter",      type: "upgrade", era: "HM", level: 6, qty: 1 },
+      { buildingId: "scribe",         type: "upgrade", era: "HM", level: 6, qty: 4 },
+      { buildingId: "spice_merchant", type: "upgrade", era: "HM", level: 6, qty: 1 },
+    ],
+  },
+  {
+    id: "arabia_homes_HM",
+    label: "Homes",
+    category: "arabia",
+    entries: [
+      { buildingId: "medium_home", type: "construction", era: "KS", level: 1, qty: 13 },
+      { buildingId: "medium_home", type: "upgrade",      era: "KS", level: 2, qty: 13 },
+      { buildingId: "medium_home", type: "upgrade",      era: "KS", level: 3, qty: 13 },
+      { buildingId: "medium_home", type: "upgrade",      era: "HM", level: 4, qty: 26 },
+      { buildingId: "medium_home", type: "upgrade",      era: "HM", level: 5, qty: 26 },
+      { buildingId: "medium_home", type: "upgrade",      era: "HM", level: 6, qty: 26 },
+    ],
+  },
+  {
+    id: "arabia_merchant_HM",
+    label: "Merchants",
+    category: "arabia",
+    entries: [
+      { buildingId: "camel_farm", type: "construction", era: "KS", level: 2, qty: 5  },
+      { buildingId: "merchant",   type: "construction", era: "KS", level: 1, qty: 8  },
+      { buildingId: "merchant",   type: "upgrade",      era: "KS", level: 2, qty: 8  },
+      { buildingId: "merchant",   type: "upgrade",      era: "KS", level: 3, qty: 8  },
+      { buildingId: "merchant",   type: "upgrade",      era: "HM", level: 4, qty: 16 },
+      { buildingId: "merchant",   type: "upgrade",      era: "HM", level: 5, qty: 16 },
+      { buildingId: "merchant",   type: "upgrade",      era: "HM", level: 6, qty: 16 },
+    ],
+  },
+  {
+    id: "arabia_workshops_HM",
+    label: "Workshops",
+    category: "arabia",
+    entries: [
+      { buildingId: "carpet_factory",   type: "construction", era: "HM", level: 2, qty: 2 },
+      { buildingId: "oil_lamp_crafter", type: "construction", era: "HM", level: 2, qty: 2 },
+    ],
+  },
+];
