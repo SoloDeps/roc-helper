@@ -51,11 +51,11 @@ export const sections_EG: PresetSection[] = [
     category: "capital",
     entries: [
       // Les barracks EG utilisent le niveau LG|14 (partagé entre EG et LG)
-      { buildingId: "infantry_barracks",       type: "upgrade", era: "LG", level: 14, qty: 2 },
-      { buildingId: "ranged_barracks",         type: "upgrade", era: "LG", level: 14, qty: 1 },
-      { buildingId: "cavalry_barracks",        type: "upgrade", era: "LG", level: 14, qty: 1 },
-      { buildingId: "heavy_infantry_barracks", type: "upgrade", era: "LG", level: 14, qty: 1 },
-      { buildingId: "siege_barracks",          type: "upgrade", era: "LG", level: 14, qty: 1 },
+      { buildingId: "infantry_barracks",       type: "upgrade", era: "EG", level: 13, qty: 2 },
+      { buildingId: "ranged_barracks",         type: "upgrade", era: "EG", level: 13, qty: 1 },
+      { buildingId: "cavalry_barracks",        type: "upgrade", era: "EG", level: 13, qty: 1 },
+      { buildingId: "heavy_infantry_barracks", type: "upgrade", era: "EG", level: 13, qty: 1 },
+      { buildingId: "siege_barracks",          type: "upgrade", era: "EG", level: 13, qty: 1 },
     ],
   },
   {
