@@ -15,7 +15,7 @@ export const smallHomeDynamic = generateStandardLevels({
     food: (l) => l * 220000,
   },
   level40Upgrade: {
-    goodsSource: "current",
+    goodsSource: "previous",
     goodsAmount: 1500,
     coins: 320000,
     food: 640000,
