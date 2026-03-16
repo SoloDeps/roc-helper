@@ -14,6 +14,10 @@ export const siteConfig = {
       label: "Calculator",
     },
     {
+      href: "/campaign",
+      label: "Campaign",
+    },
+    {
       href: "/research-tree",
       label: "Research Tree",
     },

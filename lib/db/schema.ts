@@ -32,11 +32,18 @@ export interface OttomanTradePostEntity {
   hidden: number; // 0 | 1
 }
 
+export interface CampaignEntity {
+  id: string;    // e.g. "sa_2"
+  hidden: number; // 0 | 1
+  cp: number;     // 0 | 1
+}
+
 export class RocWikiDB extends Dexie {
   buildings!: Table<BuildingEntity, string>;
   technos!: Table<TechnoEntity, string>;
   ottomanAreas!: Table<OttomanAreaEntity, string>;
   ottomanTradePosts!: Table<OttomanTradePostEntity, string>;
+  campaigns!: Table<CampaignEntity, string>;
 
   constructor() {
     super("roc_wiki_db");
@@ -64,6 +71,15 @@ export class RocWikiDB extends Dexie {
       technos: "id,hidden,cp",
       ottomanAreas: "id,hidden",
       ottomanTradePosts: "id,hidden",
+    });
+
+    // Ajout de la table campaigns pour tracker la progression des régions.
+    this.version(4).stores({
+      buildings: "id,hidden",
+      technos: "id,hidden,cp",
+      ottomanAreas: "id,hidden",
+      ottomanTradePosts: "id,hidden",
+      campaigns: "id,hidden,cp",
     });
   }
 }

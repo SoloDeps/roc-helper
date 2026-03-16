@@ -14,7 +14,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   return (
     <header className="relative z-20 flex w-full shrink-0 items-center justify-between h-[50px] container-wrapper">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <MobileNav items={siteConfig.navItems} />
         <Link href="/" className="hidden md:flex items-center gap-2 ">
           <Image
@@ -41,6 +41,20 @@ export function SiteHeader() {
             </Link>
           </Button>
         )}
+
+        {pathname !== "/campaign" && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden md:flex"
+            asChild
+          >
+            <Link href="/campaign">
+              <span>Campaign</span>
+            </Link>
+          </Button>
+        )}
+
         {pathname !== "/research-tree" && (
           <Button
             variant="outline"

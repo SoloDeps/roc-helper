@@ -67,7 +67,8 @@ export function FiltersDrawer() {
     tableType !== "all" ||
     location !== "all" ||
     filters.hideHidden ||
-    filters.hideTechnos;
+    filters.hideTechnos ||
+    filters.hideCampaigns;
 
   // Count active filters
   const activeFiltersCount = useMemo(() => {
@@ -76,8 +77,9 @@ export function FiltersDrawer() {
     if (location !== "all") count++;
     if (filters.hideHidden) count++;
     if (filters.hideTechnos) count++;
+    if (filters.hideCampaigns) count++;
     return count;
-  }, [tableType, location, filters.hideHidden, filters.hideTechnos]);
+  }, [tableType, location, filters.hideHidden, filters.hideTechnos, filters.hideCampaigns]);
 
   // Active filters component
   const ActiveFilters = ({ className = "" }: { className?: string }) => {
@@ -156,6 +158,22 @@ export function FiltersDrawer() {
               Hide Technos
               <button
                 onClick={() => filters.setHideTechnos(false)}
+                className="hover:bg-muted rounded-sm p-0.5"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </Badge>
+          )}
+          {filters.hideCampaigns && (
+            <Badge
+              variant="secondary"
+              className={`rounded-md flex items-center gap-1.5 shrink-0 snap-start ${
+                badgeSize === "sm" ? "h-6 px-2 text-xs" : "h-7 px-2"
+              }`}
+            >
+              Hide Campaigns
+              <button
+                onClick={() => filters.setHideCampaigns(false)}
                 className="hover:bg-muted rounded-sm p-0.5"
               >
                 <X className="h-3 w-3" />
@@ -303,6 +321,46 @@ export function FiltersDrawer() {
               >
                 <RadioGroupItem
                   id={`${hideTechnosId}-on`}
+                  value="true"
+                  className="sr-only after:absolute after:inset-0"
+                />
+                <span className="text-sm font-medium">On</span>
+              </label>
+            </RadioGroup>
+          </div>
+
+          {/* Hide "Campaigns" */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium">
+              Hide &quot;Campaigns&quot;
+            </h4>
+            <RadioGroup
+              value={filters.hideCampaigns.toString()}
+              onValueChange={(value) =>
+                filters.setHideCampaigns(value === "true")
+              }
+              className="flex gap-2"
+            >
+              <label
+                className={buttonVariants({
+                  variant: !filters.hideCampaigns ? "default" : "outline",
+                  size: buttonSize,
+                })}
+              >
+                <RadioGroupItem
+                  value="false"
+                  className="sr-only after:absolute after:inset-0"
+                />
+                <span className="text-sm font-medium">Off</span>
+              </label>
+
+              <label
+                className={buttonVariants({
+                  variant: filters.hideCampaigns ? "default" : "outline",
+                  size: buttonSize,
+                })}
+              >
+                <RadioGroupItem
                   value="true"
                   className="sr-only after:absolute after:inset-0"
                 />

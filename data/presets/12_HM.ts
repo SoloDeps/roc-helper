@@ -58,9 +58,9 @@ export const sections_HM: PresetSection[] = [
     label: "Workshops",
     category: "capital",
     entries: [
-      { buildingId: "carpenter",      type: "upgrade", era: "HM", level: 6, qty: 1 },
-      { buildingId: "scribe",         type: "upgrade", era: "HM", level: 6, qty: 4 },
-      { buildingId: "spice_merchant", type: "upgrade", era: "HM", level: 6, qty: 1 },
+      { buildingId: "secondary_workshop", type: "upgrade", era: "HM", level: 6, qty: 1 },
+      { buildingId: "primary_workshop",   type: "upgrade", era: "HM", level: 6, qty: 4 },
+      { buildingId: "tertiary_workshop",  type: "upgrade", era: "HM", level: 6, qty: 1 },
     ],
   },
   {

@@ -57,9 +57,9 @@ export const sections_LG: PresetSection[] = [
     label: "Workshops",
     category: "capital",
     entries: [
-      { buildingId: "alchemist",   type: "upgrade", era: "LG", level: 2, qty: 1 },
-      { buildingId: "glassblower", type: "upgrade", era: "LG", level: 2, qty: 1 },
-      { buildingId: "jeweler",     type: "upgrade", era: "LG", level: 2, qty: 3 },
+      { buildingId: "secondary_workshop", type: "upgrade", era: "LG", level: 2, qty: 1 },
+      { buildingId: "tertiary_workshop",  type: "upgrade", era: "LG", level: 2, qty: 1 },
+      { buildingId: "primary_workshop",   type: "upgrade", era: "LG", level: 2, qty: 4 },
     ],
   },
   {

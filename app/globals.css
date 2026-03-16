@@ -270,6 +270,9 @@
   .upgrade-badge {
     @apply !bg-blue-200 dark:!bg-blue-300 !text-blue-950 !border-blue-400/60 dark:!border-blue-300;
   }
+  .campaign-badge {
+    @apply !bg-amber-200 dark:!bg-amber-300 !text-amber-950 !border-amber-400/60 dark:!border-amber-300;
+  }
 }
 
 @layer utilities {

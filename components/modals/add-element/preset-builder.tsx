@@ -96,7 +96,7 @@ const CITY_LABEL: Record<string, string> = {
 // ============================================================================
 
 export const PresetBuilder = memo(() => {
-  const { presetSelection, togglePresetSection, togglePresetTechnos } =
+  const { presetSelection, togglePresetSection, togglePresetTechnos, togglePresetCampaign } =
     useAddElementStore();
 
   const { submit, isLoading } = useSubmitPreset();
@@ -125,7 +125,7 @@ export const PresetBuilder = memo(() => {
   );
 
   const totalAvailable = useMemo(() => {
-    let n = 1 + capitalSections.length + ottomanSections.length;
+    let n = 2 + capitalSections.length + ottomanSections.length; // +2 for technos + campaign
     for (const city of alliedCities) {
       n += alliedSectionsMap[city]?.length ?? 0;
     }
@@ -134,7 +134,9 @@ export const PresetBuilder = memo(() => {
 
   const selectedCount = useMemo(
     () =>
-      (presetSelection.technos ? 1 : 0) + presetSelection.selectedSections.size,
+      (presetSelection.technos ? 1 : 0) +
+      (presetSelection.campaign ? 1 : 0) +
+      presetSelection.selectedSections.size,
     [presetSelection],
   );
 
@@ -146,6 +148,7 @@ export const PresetBuilder = memo(() => {
         presetSelection: {
           ...state.presetSelection,
           technos: false,
+          campaign: false,
           selectedSections: new Set(),
         },
       }));
@@ -160,6 +163,7 @@ export const PresetBuilder = memo(() => {
         presetSelection: {
           ...state.presetSelection,
           technos: true,
+          campaign: true,
           selectedSections: allIds,
         },
       }));
@@ -189,7 +193,7 @@ export const PresetBuilder = memo(() => {
       </div>
       <div className="flex-1 overflow-y-auto pb-24 md:pb-4 pt-3">
         <div className="space-y-4 pb-4">
-          {/* Technologies */}
+          {/* Technologies & Campaign */}
           <div className="space-y-2">
             <h3 className="text-sm font-medium text-muted-foreground">
               Researchs
@@ -199,6 +203,11 @@ export const PresetBuilder = memo(() => {
                 label="Technologies"
                 checked={presetSelection.technos}
                 onToggle={togglePresetTechnos}
+              />
+              <CheckRow
+                label="Campaign"
+                checked={presetSelection.campaign}
+                onToggle={togglePresetCampaign}
               />
             </div>
           </div>

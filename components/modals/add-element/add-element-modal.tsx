@@ -14,6 +14,7 @@ import {
   useIsTechnologyPath,
   useSubmitElement,
 } from "@/lib/stores/add-element-store";
+import { useIsCampaignPath } from "@/lib/stores/add-element-store";
 import {
   getChildren,
   getCategories,
@@ -23,6 +24,7 @@ import { ERAS } from "@/lib/catalog";
 import { ElementGrid } from "./modal-components";
 import { ConfigurationPanel } from "./configuration-panel";
 import { TechnologySelection } from "../technology-selection-component";
+import { CampaignSelection } from "../campaign-selection-component";
 import {
   OttomanAreasSelection,
   OttomanTradePostsSelection,
@@ -30,6 +32,8 @@ import {
 import { PresetEraSelection } from "./preset-era-selection";
 import { PresetBuilder } from "./preset-builder";
 import Image from "next/image";
+import { useBuildingSelections } from "@/hooks/use-building-selections";
+import { buildingsAbbr } from "@/lib/constants";
 
 /**
  * Modal Header
@@ -41,9 +45,11 @@ const ModalHeader = memo(() => {
     useAddElementStore();
 
   const isTechPath = path.categoryId === "technology";
+  const isCampaignPath = path.categoryId === "campaign";
   const showBack =
     currentStep !== "category" &&
-    !(directTechnologyMode && isTechPath && currentStep === "element");
+    !(directTechnologyMode && isTechPath && currentStep === "element") &&
+    !(isCampaignPath && currentStep === "element");
 
   const getHeaderTitle = useCallback(() => {
     if (currentStep === "preset_era") return "Quick Preset";
@@ -64,6 +70,10 @@ const ModalHeader = memo(() => {
 
     if (directTechnologyMode && isTechPath && currentStep === "element") {
       return "Add New Era";
+    }
+
+    if (currentStep === "element" && path.categoryId === "campaign") {
+      return "Add Campaign Era";
     }
 
     if (currentItemId) {
@@ -124,11 +134,14 @@ const CategoryStep = memo(() => {
 
   const categories = useMemo(() => getCategories(), []);
 
-  const { primary, secondary } = useMemo(() => {
-    const primaryIds = new Set(["technology", "capital"]);
+  const { campaign, topRow, secondary } = useMemo(() => {
+    const topRowIds = new Set(["capital", "technology"]);
     return {
-      primary: categories.filter((cat) => primaryIds.has(cat.id)),
-      secondary: categories.filter((cat) => !primaryIds.has(cat.id)),
+      campaign: categories.filter((cat) => cat.id === "campaign"),
+      topRow: categories.filter((cat) => topRowIds.has(cat.id)),
+      secondary: categories.filter(
+        (cat) => cat.id !== "campaign" && !topRowIds.has(cat.id),
+      ),
     };
   }, [categories]);
 
@@ -172,15 +185,31 @@ const CategoryStep = memo(() => {
         </div>
       </div>
 
-      {primary.length > 0 && (
+      {/* Capital + Technology — col-2 on same row */}
+      {topRow.length > 0 && (
         <ElementGrid
-          items={primary}
+          items={topRow}
           onSelect={selectCategory}
           columns={2}
           priorityCount={2}
         />
       )}
 
+      {/* Technologies — centered, half width */}
+      {campaign.length > 0 && (
+        <div className="flex justify-center">
+          <div className="w-1/2">
+            <ElementGrid
+              items={campaign}
+              onSelect={selectCategory}
+              columns={1}
+              priorityCount={1}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Other secondary categories */}
       {secondary.length > 0 && (
         <ElementGrid items={secondary} onSelect={selectCategory} columns={2} />
       )}
@@ -216,15 +245,71 @@ SubcategoryStep.displayName = "SubcategoryStep";
 /**
  * Step 3: Element Selection
  */
+const WORKSHOP_POSITIONS = [
+  { id: "primary_workshop", name: "Primary Workshop", posIndex: 0 },
+  { id: "secondary_workshop", name: "Secondary Workshop", posIndex: 1 },
+  { id: "tertiary_workshop", name: "Tertiary Workshop", posIndex: 2 },
+] as const;
+
+const WorkshopPositionStep = memo(() => {
+  const { selectElement } = useAddElementStore();
+  const selections = useBuildingSelections();
+
+  return (
+    <div className="space-y-2 pb-20 md:pb-0">
+      {WORKSHOP_POSITIONS.map(({ id, name, posIndex }) => {
+        // Trouver le nom du workshop sélectionné par le joueur si dispo
+        // On ne connaît pas encore l'ère ici, donc on affiche juste le nom
+        // de la position avec une note si configuré
+        const anyGroupSelected = buildingsAbbr.some(
+          (group) => !!selections[buildingsAbbr.indexOf(group)]?.[posIndex],
+        );
+
+        return (
+          <Button
+            key={id}
+            variant="outline"
+            onClick={() => selectElement(id)}
+            className="w-full text-left flex items-center gap-3 h-16 px-3"
+          >
+            <Image
+              src="/images/game_icons/icon_flat_workshop.webp"
+              alt={name}
+              width={44}
+              height={44}
+              className="object-contain opacity-60 invert-100 dark:invert-0 select-none"
+            />
+            <div className="flex-1 min-w-0">
+              <h3 className="font-medium text-sm">{name}</h3>
+              {anyGroupSelected && (
+                <p className="text-xs text-muted-foreground truncate">
+                  Configured in Workshops settings
+                </p>
+              )}
+            </div>
+          </Button>
+        );
+      })}
+    </div>
+  );
+});
+WorkshopPositionStep.displayName = "WorkshopPositionStep";
+
 const ElementStep = memo(() => {
   const path = useNavigationPath();
   const isTech = useIsTechnologyPath();
+  const isCampaign = useIsCampaignPath();
   const { selectElement } = useAddElementStore();
 
+  // Intercepter capital > workshops → afficher Primary/Secondary/Tertiary
+  const isCapitalWorkshops =
+    path.categoryId === "capital" && path.subcategoryId === "workshops";
+
   const elements = useMemo(() => {
-    const parentId = isTech ? path.categoryId : path.subcategoryId;
+    const parentId =
+      isTech || isCampaign ? path.categoryId : path.subcategoryId;
     return parentId ? getChildren(parentId) : [];
-  }, [path.categoryId, path.subcategoryId, isTech]);
+  }, [path.categoryId, path.subcategoryId, isTech, isCampaign]);
 
   if (isTech && path.categoryId === "technology") {
     return (
@@ -232,6 +317,18 @@ const ElementStep = memo(() => {
         <TechnologySelection />
       </div>
     );
+  }
+
+  if (isCampaign && path.categoryId === "campaign") {
+    return (
+      <div className="space-y-4 pb-20 md:pb-0">
+        <CampaignSelection />
+      </div>
+    );
+  }
+
+  if (isCapitalWorkshops) {
+    return <WorkshopPositionStep />;
   }
 
   return (

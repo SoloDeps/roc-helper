@@ -11,6 +11,7 @@ import {
   getAllHydratedOttomanTradePosts,
   getHydratedBuilding,
 } from "@/lib/db/data-hydration";
+import { useBuildingSelections } from "@/hooks/use-building-selections";
 import type { OttomanTradePostEntity } from "@/lib/db/schema";
 
 // ============================================================================
@@ -18,11 +19,18 @@ import type { OttomanTradePostEntity } from "@/lib/db/schema";
 // ============================================================================
 
 export function useBuildings() {
-  return useLiveQuery(() => getAllHydratedBuildings());
+  // Re-run hydration when workshop selections change in localStorage
+  // so that position-based workshop IDs resolve to the updated name/image.
+  const selections = useBuildingSelections();
+  return useLiveQuery(() => getAllHydratedBuildings(), [selections]);
 }
 
 export function useBuilding(id?: string) {
-  return useLiveQuery(() => (id ? getHydratedBuilding(id) : undefined), [id]);
+  const selections = useBuildingSelections();
+  return useLiveQuery(
+    () => (id ? getHydratedBuilding(id) : undefined),
+    [id, selections],
+  );
 }
 
 export function useAddBuilding() {
@@ -249,5 +257,90 @@ export function useToggleOttomanTradePostLevel() {
     },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["ottoman-tradeposts"] }),
+  });
+}
+
+// ============================================================================
+// CAMPAIGNS
+// ============================================================================
+
+export function useCampaigns() {
+  return useLiveQuery(async () => {
+    const db = getWikiDB();
+    return db.campaigns.toArray();
+  });
+}
+
+export function useAddCampaignRegion() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ regionId }: { regionId: string }) => {
+      const db = getWikiDB();
+      await db.campaigns.put({ id: regionId, hidden: 0, cp: 0 });
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["campaigns"] }),
+  });
+}
+
+export function useRemoveCampaignRegionsByEra() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (era: string) => {
+      const db = getWikiDB();
+      const eraAbbr = getEraAbbr(era);
+      const regions = await db.campaigns
+        .where("id")
+        .startsWith(`${eraAbbr}_`)
+        .toArray();
+      if (regions.length > 0)
+        await db.campaigns.bulkDelete(regions.map((r) => r.id));
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["campaigns"] }),
+  });
+}
+
+export function useToggleCampaignRegionHidden() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const db = getWikiDB();
+      const region = await db.campaigns.get(id);
+      if (!region) return;
+      await db.campaigns.update(id, { hidden: region.hidden ? 0 : 1 });
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["campaigns"] }),
+  });
+}
+
+export function useToggleCampaignRegionsByEra() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (era: string) => {
+      const db = getWikiDB();
+      const eraAbbr = getEraAbbr(era);
+      const eraRegions = await db.campaigns
+        .where("id")
+        .startsWith(`${eraAbbr}_`)
+        .toArray();
+      if (eraRegions.length === 0) return;
+      const allHidden = eraRegions.every((r) => !!r.hidden);
+      await db.campaigns.bulkPut(
+        eraRegions.map((r) => ({ ...r, hidden: allHidden ? 0 : 1 })),
+      );
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["campaigns"] }),
+  });
+}
+
+export function useToggleCampaignRegionCp() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const db = getWikiDB();
+      const region = await db.campaigns.get(id);
+      if (!region) return;
+      await db.campaigns.update(id, { cp: region.cp ? 0 : 1 });
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["campaigns"] }),
   });
 }

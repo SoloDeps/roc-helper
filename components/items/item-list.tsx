@@ -4,6 +4,7 @@ import React, { useMemo, useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { BuildingCard } from "@/components/cards/building-card";
 import { TechnoCard } from "@/components/cards/techno-card";
+import { CampaignCard } from "@/components/cards/campaign-card";
 import { AreaCard } from "@/components/cards/area-card";
 import { TradePostCard } from "@/components/cards/trade-post-card";
 import { EmptyOutline } from "@/components/cards/empty-card";
@@ -28,6 +29,9 @@ import {
   useRemoveOttomanTradePost,
   useToggleOttomanTradePostHidden,
   useToggleOttomanTradePostLevel,
+  useCampaigns,
+  useRemoveCampaignRegionsByEra,
+  useToggleCampaignRegionsByEra,
 } from "@/hooks/use-database";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
 import {
@@ -40,11 +44,15 @@ import {
   deleteAllTechnologies,
   deleteAllOttomanAreas,
   deleteAllOttomanTradePosts,
+  deleteAllCampaigns,
 } from "@/lib/db/delete-utils";
 import { ERA_ORDER } from "@/data/config";
 import { ERA_ID_TO_ABBR } from "@/lib/era-mappings";
 import { EraCode } from "@/types/shared";
 import { CATALOG } from "@/lib/catalog";
+import { getCampaignsByEra } from "@/data/campaigns/campaigns-registry";
+import { ERAS } from "@/lib/catalog";
+import { WORKSHOP_ERAS, type EraAbbr } from "@/lib/constants";
 // import type { TechnoEntity } from "@/lib/db/schema";
 import type { HydratedTechno } from "@/lib/db/data-hydration";
 
@@ -123,7 +131,8 @@ export function ItemList() {
     useUIStore();
 
   // const { location, hideHidden, hideTechnos } = useFiltersStore();
-  const { tableType, location, hideHidden, hideTechnos } = useFiltersStore();
+  const { tableType, location, hideHidden, hideTechnos, hideCampaigns } =
+    useFiltersStore();
 
   // État pour gérer les drawers mobiles
   const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
@@ -133,18 +142,21 @@ export function ItemList() {
   const technosData = useTechnos();
   const areasData = useOttomanAreas();
   const tradePostsData = useOttomanTradePosts();
+  const campaignsData = useCampaigns();
 
   //  Détection du chargement initial
   const isInitialLoading =
     buildingsData === undefined ||
     technosData === undefined ||
     areasData === undefined ||
-    tradePostsData === undefined;
+    tradePostsData === undefined ||
+    campaignsData === undefined;
 
   const buildings = useMemo(() => buildingsData ?? [], [buildingsData]);
   const technos = useMemo(() => technosData ?? [], [technosData]);
   const areas = useMemo(() => areasData ?? [], [areasData]);
   const tradePosts = useMemo(() => tradePostsData ?? [], [tradePostsData]);
+  const campaignEntities = useMemo(() => campaignsData ?? [], [campaignsData]);
 
   //  Track previous counts to detect new items
   const previousCountsRef = useRef<Map<string, number>>(new Map());
@@ -159,6 +171,8 @@ export function ItemList() {
   const removeTradePost = useRemoveOttomanTradePost();
   const toggleTradePostHidden = useToggleOttomanTradePostHidden();
   const toggleTradePostLevel = useToggleOttomanTradePostLevel();
+  const removeCampaignsByEra = useRemoveCampaignRegionsByEra();
+  const toggleCampaignsByEra = useToggleCampaignRegionsByEra();
 
   // FILTER BUILDINGS
   const filteredBuildings = useMemo(() => {
@@ -175,6 +189,33 @@ export function ItemList() {
     if (hideHidden) return technos.filter((t) => !t.hidden);
     return technos;
   }, [technos, hideTechnos, hideHidden]);
+
+  // FILTER CAMPAIGNS - group by era
+  const campaignsByEra = useMemo(() => {
+    const groups = new Map<string, typeof campaignEntities>();
+    campaignEntities.forEach((c) => {
+      // e.g. "sa_2" → "sa"
+      const abbr = c.id.match(/^([a-z]+)_/)?.[1];
+      if (!abbr) return;
+      const era = ERAS.find((e) => e.abbr.toLowerCase() === abbr);
+      if (!era) return;
+      const eraId = era.id;
+      if (!groups.has(eraId)) groups.set(eraId, []);
+      groups.get(eraId)!.push(c);
+    });
+    return groups;
+  }, [campaignEntities]);
+
+  const filteredCampaignsByEra = useMemo(() => {
+    if (hideCampaigns) return new Map<string, typeof campaignEntities>();
+    if (!hideHidden) return campaignsByEra;
+    const filtered = new Map<string, typeof campaignEntities>();
+    campaignsByEra.forEach((regions, eraId) => {
+      const visible = regions.filter((r) => !r.hidden);
+      if (visible.length > 0) filtered.set(eraId, visible);
+    });
+    return filtered;
+  }, [campaignsByEra, hideCampaigns, hideHidden]);
 
   // FILTER OTTOMAN
   const filteredAreas = useMemo(() => {
@@ -199,12 +240,21 @@ export function ItemList() {
   const buildingsByElement = useMemo(() => {
     const groups = new Map<string, typeof filteredBuildings>();
     filteredBuildings.forEach((building) => {
-      const groupKey = `${building.category}_${building.elementId}`;
+      const isPositionWorkshop = building.accordionName !== building.name;
+      const groupKey = isPositionWorkshop
+        ? `${building.category}_${building.accordionName}`
+        : `${building.category}_${building.elementId}`;
       if (!groups.has(groupKey)) groups.set(groupKey, []);
       groups.get(groupKey)!.push(building);
     });
     groups.forEach((buildings) => {
-      buildings.sort((a, b) => a.level - b.level);
+      // Trier par ère selon WORKSHOP_ERAS puis par level
+      buildings.sort((a, b) => {
+        const eraA = WORKSHOP_ERAS.indexOf(a.era as EraAbbr);
+        const eraB = WORKSHOP_ERAS.indexOf(b.era as EraAbbr);
+        if (eraA !== eraB) return eraA - eraB;
+        return a.level - b.level;
+      });
     });
     return groups;
   }, [filteredBuildings]);
@@ -262,7 +312,18 @@ export function ItemList() {
         const subOrderB = SUBCATEGORY_ORDER.get(subKeyB) ?? 999;
         if (subOrderA !== subOrderB) return subOrderA - subOrderB;
 
-        return a.name.localeCompare(b.name);
+        // Trier par la plus petite ère du groupe selon WORKSHOP_ERAS
+        const minEra = (buildings: typeof filteredBuildings) =>
+          Math.min(
+            ...buildings
+              .map((b) => WORKSHOP_ERAS.indexOf(b.era as EraAbbr))
+              .filter((i) => i >= 0),
+          );
+        const eraA = minEra(bA);
+        const eraB = minEra(bB);
+        if (eraA !== eraB) return eraA - eraB;
+
+        return 0;
       },
     );
 
@@ -300,6 +361,10 @@ export function ItemList() {
   const allAccordionIds = useMemo(() => {
     const ids: string[] = [];
 
+    if (filteredCampaignsByEra.size > 0) {
+      ids.push("all-campaigns");
+    }
+
     if (technosByEra.size > 0 && !hideTechnos) {
       ids.push("all-technologies");
     }
@@ -318,6 +383,7 @@ export function ItemList() {
 
     return ids;
   }, [
+    filteredCampaignsByEra,
     technosByEra,
     hideTechnos,
     buildingsByElement,
@@ -335,6 +401,11 @@ export function ItemList() {
   //  AUTO-EXPAND: Detect new items and expand their accordions
   useEffect(() => {
     const currentCounts = new Map<string, number>();
+
+    // Count campaigns
+    if (filteredCampaignsByEra.size > 0) {
+      currentCounts.set("all-campaigns", campaignEntities.length);
+    }
 
     // Count technologies
     if (technosByEra.size > 0 && !hideTechnos) {
@@ -374,6 +445,8 @@ export function ItemList() {
     // Update ref for next comparison
     previousCountsRef.current = currentCounts;
   }, [
+    campaignEntities.length,
+    filteredCampaignsByEra,
     technos.length,
     technosByEra,
     hideTechnos,
@@ -391,13 +464,49 @@ export function ItemList() {
       buildings.length > 0 ||
       technos.length > 0 ||
       areas.length > 0 ||
-      tradePosts.length > 0
+      tradePosts.length > 0 ||
+      campaignEntities.length > 0
     );
-  }, [buildings.length, technos.length, areas.length, tradePosts.length]);
+  }, [
+    buildings.length,
+    technos.length,
+    areas.length,
+    tradePosts.length,
+    campaignEntities.length,
+  ]);
 
   // Drawer data memoization
   const drawerData = useMemo(() => {
     const data: Record<string, any> = {};
+
+    // Campaigns drawer
+    if (filteredCampaignsByEra.size > 0) {
+      data["all-campaigns"] = {
+        title: "Campaigns",
+        allHidden:
+          campaignEntities.length > 0 &&
+          campaignEntities.every((r) => r.hidden),
+        onToggleAllHidden: () => {
+          Array.from(filteredCampaignsByEra.keys()).forEach((era) => {
+            toggleCampaignsByEra.mutate(era);
+          });
+        },
+        onDeleteAll: async () => {
+          await deleteAllCampaigns();
+          queryClient.invalidateQueries({
+            queryKey: ["campaigns"],
+            refetchType: "all",
+          });
+        },
+        deleteConfirmMessage: (
+          <>
+            This action cannot be <b>undone</b>.
+            <br />
+            This will permanently delete <b>all campaigns</b> from all eras.
+          </>
+        ),
+      };
+    }
 
     // Technologies drawer
     if (technosByEra.size > 0 && !hideTechnos) {
@@ -433,7 +542,7 @@ export function ItemList() {
       const buildingIds = buildingsInElement.map((b) => b.id);
 
       data[accordionId] = {
-        title: `${firstBuilding.category} — ${firstBuilding.name}`,
+        title: `${firstBuilding.category} — ${firstBuilding.accordionName ?? firstBuilding.name}`,
         allHidden: buildingsInElement.every((b) => b.hidden),
         onToggleAllHidden: async () => {
           await toggleHideAllBuildings(buildingIds);
@@ -521,6 +630,9 @@ export function ItemList() {
     return data;
   }, [
     queryClient,
+    filteredCampaignsByEra,
+    campaignEntities,
+    toggleCampaignsByEra,
     technosByEra,
     hideTechnos,
     technos,
@@ -555,6 +667,78 @@ export function ItemList() {
           value={accordionsState}
           onValueChange={setAccordionsState}
         >
+          {/* CAMPAIGNS ACCORDION */}
+          {filteredCampaignsByEra.size > 0 && (
+            <>
+              <SectionHeader label="Campaign" />
+              <ReusableAccordion
+                id="all-campaigns"
+                title="Campaigns"
+                selectedCount={filteredCampaignsByEra.size}
+                hiddenCount={
+                  Array.from(filteredCampaignsByEra.values()).filter(
+                    (eraCampaigns) => eraCampaigns.every((r) => r.hidden),
+                  ).length
+                }
+                allHidden={
+                  campaignEntities.length > 0 &&
+                  campaignEntities.every((r) => r.hidden)
+                }
+                onToggleAllHidden={() => {
+                  Array.from(filteredCampaignsByEra.keys()).forEach((era) => {
+                    toggleCampaignsByEra.mutate(era);
+                  });
+                }}
+                onDeleteAll={async () => {
+                  await deleteAllCampaigns();
+                  queryClient.invalidateQueries({
+                    queryKey: ["campaigns"],
+                    refetchType: "all",
+                  });
+                }}
+                deleteConfirmMessage={
+                  <>
+                    This action cannot be <b>undone</b>.
+                    <br />
+                    This will permanently delete <b>all campaigns</b> from all
+                    eras.
+                  </>
+                }
+                onOpenMobileActions={() => setActiveDrawer("all-campaigns")}
+              >
+                <div className="space-y-3">
+                  {Array.from(filteredCampaignsByEra.entries())
+                    .sort(([eraIdA], [eraIdB]) => {
+                      const abbrA = ERA_ID_TO_ABBR[
+                        eraIdA
+                      ]?.toUpperCase() as EraCode;
+                      const abbrB = ERA_ID_TO_ABBR[
+                        eraIdB
+                      ]?.toUpperCase() as EraCode;
+                      return (
+                        ERA_ORDER.indexOf(abbrA) - ERA_ORDER.indexOf(abbrB)
+                      );
+                    })
+                    .map(([eraId, eraRegions]) => {
+                      const staticRegions = getCampaignsByEra(eraId);
+                      return (
+                        <CampaignCard
+                          key={eraId}
+                          era={eraId}
+                          regions={eraRegions}
+                          staticRegions={staticRegions}
+                          onRemoveAll={() => removeCampaignsByEra.mutate(eraId)}
+                          onToggleHidden={() =>
+                            toggleCampaignsByEra.mutate(eraId)
+                          }
+                        />
+                      );
+                    })}
+                </div>
+              </ReusableAccordion>
+            </>
+          )}
+
           {/* TECHNOLOGIES ACCORDION */}
           {technosByEra.size > 0 && !hideTechnos && (
             <>
@@ -634,7 +818,10 @@ export function ItemList() {
                   (b) => b.hidden,
                 ).length;
                 const allHidden = buildingsInElement.every((b) => b.hidden);
-                const displayName = firstBuilding.name;
+                const isPositionWorkshop =
+                  firstBuilding.accordionName !== firstBuilding.name;
+                const displayName =
+                  firstBuilding.accordionName ?? firstBuilding.name;
                 const buildingIds = buildingsInElement.map((b) => b.id);
 
                 return (

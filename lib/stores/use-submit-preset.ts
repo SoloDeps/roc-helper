@@ -6,6 +6,7 @@
 // Logique :
 //  1. Pour chaque section cochée → récupère les entries filtrées par era
 //  2. Génère l'ID : `${category}_${buildingId}_${type}_${era}_${level}`
+//     Pour les workshops : `${category}_${priority}_workshop_${type}_${era}_${level}`
 //  3. Skip les doublons (existe déjà en DB)
 //  4. bulkPut tout en une fois
 //  5. Si technos cochées → réutilise la logique de useSubmitTechno
@@ -19,8 +20,55 @@ import { getWikiDB } from "@/lib/db/schema";
 import { ERAS } from "@/lib/catalog";
 import { getTechnologiesByEra } from "@/data/technos-registry";
 import { PRESET_SECTIONS, getEntriesForEra } from "@/data/presets";
-import type { EraAbbr } from "@/lib/constants";
+import { buildingsAbbr, type EraAbbr } from "@/lib/constants";
 import { useSelectEra } from "./technology-page-store";
+
+// ============================================================================
+// WORKSHOP HELPERS
+// ============================================================================
+
+const PRIORITIES = ["primary", "secondary", "tertiary"] as const;
+type Priority = (typeof PRIORITIES)[number];
+
+/**
+ * Pour un era donné, retourne l'index du groupe de workshops correspondant.
+ * Ex: "BA" → 0 (groupe "Bronze Age ~ Roman Empire")
+ */
+function getWorkshopGroupIndex(era: EraAbbr): number {
+  return buildingsAbbr.findIndex((group) =>
+    group.abbreviations.some((abbr) => abbr === era),
+  );
+}
+
+/**
+ * Pour un buildingId hardcodé dans un preset (ex: "artisan", "scribe"),
+ * retourne sa position (primary/secondary/tertiary) dans son groupe.
+ * Ex: "artisan" dans groupe 0 → "primary" si l'ordre est [Tailor, Stone Mason, Artisan]
+ * On se base sur l'ordre dans buildingsAbbr.buildings.
+ */
+function getBuildingPositionInGroup(
+  buildingId: string,
+  groupIndex: number,
+): Priority | null {
+  if (groupIndex < 0 || groupIndex >= buildingsAbbr.length) return null;
+  const buildings = buildingsAbbr[groupIndex].buildings;
+  // Normalise : "stone_mason" → "Stone Mason", "spice_merchant" → "Spice Merchant"
+  const normalize = (s: string) =>
+    s.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const idx = buildings.findIndex(
+    (b) =>
+      b.toLowerCase() === normalize(buildingId).toLowerCase() ||
+      b.toLowerCase().replace(/\s+/g, "_") === buildingId.toLowerCase(),
+  );
+  return idx >= 0 ? PRIORITIES[idx] : null;
+}
+
+/**
+ * Vérifie si une section est une section workshops capitale.
+ */
+function isCapitalWorkshopSection(sectionId: string): boolean {
+  return sectionId.startsWith("capital_workshops_");
+}
 
 // Helper : eraAbbr → eraId (ex: "LG" → "late_gothic_era")
 function eraAbbrToId(abbr: string): string | undefined {
@@ -76,6 +124,7 @@ export function useSubmitPreset() {
           if (!section) continue;
 
           const entries = getEntriesForEra(section, era);
+          const isWorkshopSection = isCapitalWorkshopSection(sectionId);
 
           for (const entry of entries) {
             // Skip ottoman entries — only buildings here
@@ -85,8 +134,30 @@ export function useSubmitPreset() {
             )
               continue;
 
-            // Format ID : `{category}_{buildingId}_{type}_{era}_{level}`
-            const buildingId = `${section.category}_${entry.buildingId}_${entry.type}_${entry.era}_${entry.level}`;
+            let buildingId: string;
+
+            if (isWorkshopSection) {
+              // ── Workshops : ID basé sur la position (primary/secondary/tertiary)
+              // au lieu du nom hardcodé, pour rester stable quand le joueur
+              // change ses sélections dans le workshop modal.
+              const groupIndex = getWorkshopGroupIndex(entry.era);
+              const position = getBuildingPositionInGroup(
+                entry.buildingId,
+                groupIndex,
+              );
+
+              if (!position) {
+                // Fallback : buildingId concret si on ne trouve pas la position
+                buildingId = `${section.category}_${entry.buildingId}_${entry.type}_${entry.era}_${entry.level}`;
+              } else {
+                // ID stable basé sur la position
+                buildingId = `${section.category}_${position}_workshop_${entry.type}_${entry.era}_${entry.level}`;
+              }
+            } else {
+              // Format ID standard : `{category}_{buildingId}_{type}_{era}_{level}`
+              buildingId = `${section.category}_${entry.buildingId}_${entry.type}_${entry.era}_${entry.level}`;
+            }
+
             const existing = await db.buildings.get(buildingId);
             if (!existing) {
               toAdd.push({ id: buildingId, qty: entry.qty, hidden: 0 });

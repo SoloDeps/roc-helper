@@ -343,6 +343,13 @@ export const CATALOG: Category[] = [
       },
     ],
   },
+  // campaign
+  {
+    id: "campaign",
+    name: "Campaign",
+    imgType: "barracks",
+    items: "@eras",
+  },
   // technos
   {
     id: "technology",

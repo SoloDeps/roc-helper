@@ -61,6 +61,7 @@ import { useBuildingSelections } from "@/hooks/use-building-selections";
 import type { TechnoData } from "@/types/shared";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { WorkshopModal } from "@/components/modals/workshop-modal";
+import Image from "next/image";
 
 // ─── Stats helpers ────────────────────────────────────────────────────────────
 
@@ -372,8 +373,15 @@ function TechTreeSkeleton({
           <LoaderCircle className="size-7 animate-spin text-muted-foreground" />
         ) : (
           <>
-            <AlertCircle className="size-10 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">
+            <Image
+              src="/images/game_icons/icon_flat_research_points.webp"
+              alt="research points"
+              draggable={false}
+              className="size-20 object-contain opacity-40 select-none invert-100 dark:invert-10"
+              width={80}
+              height={80}
+            />
+            <p className="text-sm text-muted-foreground my-2">
               Your research tree will appear here
             </p>
             <Button onClick={onAdd}>
@@ -564,12 +572,16 @@ export default function ResearchTreePage() {
             <>
               <div className="hidden md:block">
                 <TechTreeDesktop
+                  key={selectedEraId}
                   technologies={technosWithStatus}
                   onOpenStats={() => setStatsOpen(true)}
                 />
               </div>
               <div className="md:hidden">
-                <TechTreeMobile technologies={technosWithStatus} />
+                <TechTreeMobile
+                  key={selectedEraId}
+                  technologies={technosWithStatus}
+                />
               </div>
             </>
           )}

@@ -47,6 +47,7 @@ export function BuildingCard({
     name,
     imageName,
     imgLvl,
+    isUnresolvedWorkshop,
     costs,
     quantity,
     maxQty,
@@ -124,10 +125,14 @@ export function BuildingCard({
 
       {/* Image */}
       <div className="hidden md:flex size-28 my-3 shrink-0 overflow-hidden relative">
-        {imageError ? (
+        {imageError || isUnresolvedWorkshop ? (
           <div className="size-full flex items-center justify-center bg-background-400/50">
             <Image
-              src="/images/game_icons/icon_flat_home.webp"
+              src={
+                isUnresolvedWorkshop
+                  ? "/images/game_icons/icon_flat_workshop.webp"
+                  : "/images/game_icons/icon_flat_home.webp"
+              }
               alt={name}
               draggable={false}
               className="size-20 object-contain opacity-30 select-none invert-100 dark:invert-10"
