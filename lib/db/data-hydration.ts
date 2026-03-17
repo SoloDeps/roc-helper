@@ -6,13 +6,10 @@ import {
   TECHNOLOGY_REGISTRY,
 } from "@/data/technos-registry";
 import { getBuildingData } from "@/lib/element-data-loader";
-import {
-  getAreaData,
-  getTradePostByIndex,
-} from "@/lib/ottoman-data-loader";
+import { getAreaData, getTradePostByIndex } from "@/lib/ottoman-data-loader";
 import { getEraAbbr } from "@/lib/era-mappings";
 import { slugify } from "@/lib/utils";
-import { buildingsAbbr } from "@/lib/constants";
+import { buildingsAbbr, WORKSHOP_MAX_QTY, type EraAbbr } from "@/lib/constants";
 import type { TechnoData } from "@/types/shared";
 
 // ============================================================================
@@ -248,6 +245,7 @@ export async function getHydratedBuilding(
   );
   let cardName = buildingData.name;
   let accordionName = buildingData.name;
+  let workshopMaxQty: number | undefined;
 
   if (isPositionWorkshop) {
     const priority = elementId.slice(
@@ -255,6 +253,8 @@ export async function getHydratedBuilding(
       -"_workshop".length,
     ) as (typeof WORKSHOP_PRIORITIES)[number];
     const priorityIndex = WORKSHOP_PRIORITIES.indexOf(priority);
+    workshopMaxQty =
+      WORKSHOP_MAX_QTY[era.toUpperCase() as EraAbbr]?.[priorityIndex];
     const groupIndex = buildingsAbbr.findIndex((group) =>
       group.abbreviations.some((abbr) => abbr === era.toUpperCase()),
     );
@@ -296,7 +296,7 @@ export async function getHydratedBuilding(
     type,
     era,
     level,
-    maxQty: levelData.max_qty || 40,
+    maxQty: workshopMaxQty ?? levelData.max_qty ?? 40,
     costs: { resources, goods },
     quantity: userState.qty ?? 1,
     hidden: !!userState.hidden,

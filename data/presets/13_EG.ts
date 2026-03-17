@@ -73,10 +73,10 @@ export const sections_EG: PresetSection[] = [
     label: "Harbor",
     category: "capital",
     entries: [
-      { buildingId: "seafarer_house",   type: "construction", era: "EG", level: 1, qty: 14 },
-      { buildingId: "seafarer_house",   type: "upgrade",      era: "EG", level: 2, qty: 14 },
-      { buildingId: "shipyard",         type: "construction", era: "EG", level: 1, qty: 9  },
-      { buildingId: "common_warehouse", type: "construction", era: "EG", level: 1, qty: 8  },
+      { buildingId: "seafarer_house",   type: "construction", era: "EG", level: 1, qty: 16 },
+      { buildingId: "seafarer_house",   type: "upgrade",      era: "EG", level: 2, qty: 16 },
+      { buildingId: "shipyard",         type: "construction", era: "EG", level: 1, qty: 10 },
+      { buildingId: "common_warehouse", type: "construction", era: "EG", level: 1, qty: 9 },
     ],
   },
   // ── Ottoman (areas 1–10, trade posts otp_0–otp_17) ───────────────────────

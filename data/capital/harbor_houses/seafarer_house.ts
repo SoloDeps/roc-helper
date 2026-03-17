@@ -10,7 +10,7 @@ export const seafarerHouse: BuildingData = {
     {
       level: 1,
       era: "EG",
-      max_qty: 14,
+      max_qty: 16,
       construction: {
         coins: 250000,
         food: 100000,
@@ -33,7 +33,7 @@ export const seafarerHouse: BuildingData = {
     {
       level: 2,
       era: "EG",
-      max_qty: 14,
+      max_qty: 16,
       upgrade: {
         food: 75000,
         goods: [
@@ -59,7 +59,7 @@ export const seafarerHouse: BuildingData = {
     {
       level: 3,
       era: "LG",
-      max_qty: 18,
+      max_qty: 20,
       construction: {
         coins: 250000,
         food: 100000,
@@ -103,7 +103,7 @@ export const seafarerHouse: BuildingData = {
     {
       level: 4,
       era: "LG",
-      max_qty: 18,
+      max_qty: 20,
       upgrade: {
         food: 150000,
         goods: [

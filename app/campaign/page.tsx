@@ -65,7 +65,7 @@ function CampaignInfoButton({
             <span className="max-[420px]:hidden">Info</span>
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="p-0 gap-0 flex flex-col overflow-hidden max-h-[75vh]">
+        <DrawerContent className="p-0 gap-0 flex flex-col overflow-hidden h-[70vh]">
           <DrawerHeader className="shrink-0 px-4 py-2 border-b border-border">
             <DrawerTitle>Campaign Info</DrawerTitle>
           </DrawerHeader>

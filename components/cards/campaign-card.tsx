@@ -194,7 +194,7 @@ export function CampaignCard({
                 className="rounded-sm h-[34px]"
                 onClick={handleCustomize}
               >
-                View
+                Customize
               </Button>
             </div>
           </div>

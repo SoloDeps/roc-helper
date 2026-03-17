@@ -129,6 +129,7 @@ export const alliedCityColors: Record<alliedCity, string> = {
 export const RESOURCE_COLORS = {
   MAIN: "90, 152, 189",
   ITEMS: "120, 83, 21", // Purple
+  OTHERS: "128, 128, 128",
   POSITIVE_DIFF: "34, 197, 94", // Green
   NEGATIVE_DIFF: "239, 68, 68", // Red
 } as const;

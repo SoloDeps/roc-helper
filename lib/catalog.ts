@@ -303,7 +303,7 @@ export const CATALOG: Category[] = [
       },
       {
         id: "ships",
-        name: "Ships",
+        name: "Shipyard",
         imgType: "shipyard",
         buildings: [{ id: "shipyard", name: "Shipyard", imgType: "shipyard" }],
       },

@@ -672,10 +672,13 @@ export function CampaignTreeDesktop({
       .filter((n) => !completedIds.has(n.id))
       .sort((a, b) => (b.position?.y ?? 0) - (a.position?.y ?? 0))[0];
     if (firstUncompleted) {
+      // Responsive zoom: smaller on mobile so more nodes are visible
+      const isMobile = window.innerWidth < 768;
+      const zoom = isMobile ? 0.8 : 1.35;
       rfInstanceRef.current.setCenter(
         0,
         firstUncompleted.position.y + NODE_H / 2,
-        { zoom: 1.2, duration: 0 },
+        { zoom, duration: 0 },
       );
     } else {
       rfInstanceRef.current.fitView({ padding: 0.2, duration: 0 });
@@ -707,6 +710,12 @@ export function CampaignTreeDesktop({
         setMode("path-result");
         return;
       }
+      // In external (mobile) mode, clicking a node in select mode only highlights
+      // connections — it does NOT open the details drawer (that's list-only on mobile)
+      if (isExternal) {
+        setSelectedNodeId((prev) => (prev === node.id ? null : node.id));
+        return;
+      }
       const region = regions.find((r) => r.id === node.id);
       if (region) {
         setSelectedRegion((prev) => (prev?.id === region.id ? null : region));
@@ -722,6 +731,7 @@ export function CampaignTreeDesktop({
       setPathFromId,
       setSelectedNodeId,
       setSelectedRegion,
+      isExternal,
     ],
   );
 
@@ -951,16 +961,8 @@ export function CampaignTreeDesktop({
               </Panel>
             )}
 
-            {isExternal && isPathMode && pathFound && pathToRegion && (
-              <Panel position="bottom-center" className="mb-16">
-                <button
-                  onClick={() => externalControl.onOpenPathDrawer()}
-                  className="flex items-center gap-2 text-[13px] bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
-                >
-                  View path details
-                </button>
-              </Panel>
-            )}
+            {/* NOTE: in external (mobile) mode the path drawer is triggered
+                by the FAB in campaign-tree-mobile — no inline button needed */}
           </ReactFlow>
         </ReactFlowProvider>
       </div>

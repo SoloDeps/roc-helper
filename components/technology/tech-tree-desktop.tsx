@@ -697,11 +697,13 @@ export function TechTreeDesktop({
       .sort((a, b) => (a.position?.x ?? 0) - (b.position?.x ?? 0))[0];
 
     if (firstUncompleted) {
-      // Positionner sans animation, puis révéler le graphe
+      // Responsive zoom: smaller on mobile so more nodes are visible
+      const isMobile = window.innerWidth < 768;
+      const zoom = isMobile ? 0.85 : 1.35;
       rfInstanceRef.current.setCenter(
         firstUncompleted.position.x + NODE_W / 2,
         0,
-        { zoom: 1.35, duration: 0 },
+        { zoom, duration: 0 },
       );
     } else {
       rfInstanceRef.current.fitView({ padding: 0.2, duration: 0 });
@@ -974,16 +976,8 @@ export function TechTreeDesktop({
               </Panel>
             )}
             {/* In mobile/external mode: FAB trigger on result */}
-            {isExternal && isPathMode && pathFound && pathToTech && (
-              <Panel position="bottom-center" className="mb-16">
-                <button
-                  onClick={() => externalControl.onOpenPathDrawer()}
-                  className="flex items-center gap-2 text-[13px] bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
-                >
-                  View total cost
-                </button>
-              </Panel>
-            )}
+            {/* In external (mobile) mode the FAB in tech-tree-mobile handles
+                path drawer opening — no inline button needed in the graph */}
           </ReactFlow>
         </ReactFlowProvider>
       </div>
