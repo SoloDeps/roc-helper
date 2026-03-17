@@ -95,22 +95,6 @@ export const eras = [
   },
 ] as const;
 
-// Mapping des noms d'ères (format wiki) vers les IDs standardisés
-export const eraWikiToId: Record<string, string> = eras.reduce(
-  (acc, era) => {
-    acc[era.name.toLowerCase().replace(/ /g, "_")] = era.id;
-    return acc;
-  },
-  {} as Record<string, string>,
-);
-
-// Fonction pour obtenir l'ID d'une ère à partir de son nom wiki
-export function getEraId(wikiEraName: string | null): string {
-  if (!wikiEraName) return "";
-  const normalized = wikiEraName.toLowerCase().replace(/ /g, "_");
-  return eraWikiToId[normalized] || normalized;
-}
-
 // ========================================
 // COULEURS - Centralisées
 // ========================================
@@ -145,6 +129,7 @@ export const alliedCityColors: Record<alliedCity, string> = {
 export const RESOURCE_COLORS = {
   MAIN: "90, 152, 189",
   ITEMS: "120, 83, 21", // Purple
+  OTHERS: "128, 128, 128",
   POSITIVE_DIFF: "34, 197, 94", // Green
   NEGATIVE_DIFF: "239, 68, 68", // Red
 } as const;
@@ -179,7 +164,54 @@ export const buildingsAbbr = [
   },
 ];
 
-// export const itemsUrl = {
+/**
+ * Max quantity par ère pour chaque position de workshop capital.
+ * Format : { era: [primary, secondary, tertiary] }
+ * Tous les workshops d'un même groupe ont les mêmes max_qty.
+ *
+ * Groupe 0 (BA→RE) : Tailor / Stone Mason / Artisan
+ * Groupe 1 (BE→HM) : Scribe / Carpenter / Spice Merchant
+ * Groupe 2 (EG→LG) : Jeweler / Alchemist / Glassblower
+ */
+export const WORKSHOP_MAX_QTY: Partial<
+  Record<EraAbbr, [number, number, number]>
+> = {
+  // Groupe 0 — max_qty identique pour les 3 workshops
+  BA: [1, 1, 1],
+  ME: [2, 1, 1],
+  CG: [3, 1, 1],
+  ER: [4, 1, 1],
+  RE: [4, 1, 1],
+  // Groupe 1
+  BE: [3, 1, 1],
+  AF: [4, 1, 1],
+  FA: [4, 1, 1],
+  IE: [4, 1, 1],
+  KS: [4, 1, 1],
+  HM: [4, 1, 1],
+  // Groupe 2
+  EG: [3, 1, 1],
+  LG: [4, 1, 1],
+} as const;
+
+/**
+ * Ères disponibles pour les workshops capital, dans l'ordre chronologique.
+ */
+export const WORKSHOP_ERAS: EraAbbr[] = [
+  "BA",
+  "ME",
+  "CG",
+  "ER",
+  "RE",
+  "BE",
+  "AF",
+  "FA",
+  "IE",
+  "KS",
+  "HM",
+  "EG",
+  "LG",
+] as const;
 //   default: "/images/thumb/3/36/images/goods.png/32px-Goods.png",
 //   coins: "/images/thumb/Coin.png/32px-Coin.png",
 //   food: "/images/thumb/Food.png/32px-Food.png",

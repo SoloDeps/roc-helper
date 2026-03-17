@@ -6,7 +6,7 @@ export const vikingBeehive: BuildingData = {
   name: "Beehive",
   category: "vikings",
   subcategory: "beehives",
-  imageName: "Vikings_Beehive_Lv",
+  imageName: "Viking_Beehive_Lv",
   levels: [
     {
       level: 1,

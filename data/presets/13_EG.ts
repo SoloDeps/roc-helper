@@ -63,9 +63,9 @@ export const sections_EG: PresetSection[] = [
     label: "Workshops",
     category: "capital",
     entries: [
-      { buildingId: "alchemist",   type: "construction", era: "EG", level: 1, qty: 1 },
-      { buildingId: "glassblower", type: "construction", era: "EG", level: 1, qty: 1 },
-      { buildingId: "jeweler",     type: "construction", era: "EG", level: 1, qty: 3 },
+      { buildingId: "secondary_workshop", type: "construction", era: "EG", level: 1, qty: 1 },
+      { buildingId: "tertiary_workshop",  type: "construction", era: "EG", level: 1, qty: 1 },
+      { buildingId: "primary_workshop",   type: "construction", era: "EG", level: 1, qty: 3 },
     ],
   },
   {
@@ -73,10 +73,10 @@ export const sections_EG: PresetSection[] = [
     label: "Harbor",
     category: "capital",
     entries: [
-      { buildingId: "seafarer_house",   type: "construction", era: "EG", level: 1, qty: 14 },
-      { buildingId: "seafarer_house",   type: "upgrade",      era: "EG", level: 2, qty: 14 },
-      { buildingId: "shipyard",         type: "construction", era: "EG", level: 1, qty: 9  },
-      { buildingId: "common_warehouse", type: "construction", era: "EG", level: 1, qty: 8  },
+      { buildingId: "seafarer_house",   type: "construction", era: "EG", level: 1, qty: 16 },
+      { buildingId: "seafarer_house",   type: "upgrade",      era: "EG", level: 2, qty: 16 },
+      { buildingId: "shipyard",         type: "construction", era: "EG", level: 1, qty: 10 },
+      { buildingId: "common_warehouse", type: "construction", era: "EG", level: 1, qty: 9 },
     ],
   },
   // ── Ottoman (areas 1–10, trade posts otp_0–otp_17) ───────────────────────

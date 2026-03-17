@@ -30,14 +30,10 @@ const getEraColor = (eraName: string): string => {
 
 const getCityColor = (cityName: string): string => {
   if (cityName === "ITEMS") return RESOURCE_COLORS.ITEMS;
+  if (cityName === "OTHERS") return RESOURCE_COLORS.OTHERS;
 
-  // Slugify the incoming city name and use it directly as the key
   const slugifiedCityName = slugify(cityName);
-
-  // Direct lookup in alliedCityColors
-  return (
-    alliedCityColors[slugifiedCityName as keyof typeof alliedCityColors] || ""
-  );
+  return alliedCityColors[slugifiedCityName as keyof typeof alliedCityColors] || RESOURCE_COLORS.OTHERS;
 };
 
 const getBlockStyles = (

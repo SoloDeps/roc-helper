@@ -60,9 +60,9 @@ export const sections_BE: PresetSection[] = [
     label: "Workshops",
     category: "capital",
     entries: [
-      { buildingId: "carpenter",       type: "construction", era: "BE", level: 1, qty: 1 },
-      { buildingId: "scribe",          type: "construction", era: "BE", level: 1, qty: 3 },
-      { buildingId: "spice_merchant",  type: "construction", era: "BE", level: 1, qty: 1 },
+      { buildingId: "secondary_workshop", type: "construction", era: "BE", level: 1, qty: 1 },
+      { buildingId: "primary_workshop",   type: "construction", era: "BE", level: 1, qty: 3 },
+      { buildingId: "tertiary_workshop",  type: "construction", era: "BE", level: 1, qty: 1 },
     ],
   },
   {

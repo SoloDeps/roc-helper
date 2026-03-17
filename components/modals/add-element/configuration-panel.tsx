@@ -21,6 +21,75 @@ import { Button } from "@/components/ui/button";
 import { ResponsiveSelect } from "@/components/modals/responsive-select";
 import { QtySlider } from "./quantity-slider";
 import { ERAS } from "@/lib/catalog";
+import {
+  buildingsAbbr,
+  WORKSHOP_MAX_QTY,
+  WORKSHOP_ERAS,
+  type EraAbbr,
+} from "@/lib/constants";
+import { useBuildingSelections } from "@/hooks/use-building-selections";
+import type { BuildingData } from "@/types/shared";
+
+const PRIORITIES = ["primary", "secondary", "tertiary"] as const;
+
+/**
+ * Vérifie si un elementId est un workshop à position (primary/secondary/tertiary_workshop)
+ */
+function isPositionWorkshop(elementId: string): boolean {
+  return PRIORITIES.some((p) => elementId === `${p}_workshop`);
+}
+
+/**
+ * Pour un workshop à position, retourne les données du workshop du groupe
+ * correspondant à l'ère donnée (ou le premier groupe si pas d'ère).
+ * Les max_qty sont overridés par WORKSHOP_MAX_QTY.
+ */
+function getPositionWorkshopData(
+  elementId: string,
+  era: string,
+  selections: string[][],
+  categoryId: string,
+): BuildingData | null {
+  const SUFFIX = "_workshop";
+  const priority = elementId.slice(
+    0,
+    -SUFFIX.length,
+  ) as (typeof PRIORITIES)[number];
+  const priorityIndex = PRIORITIES.indexOf(priority);
+
+  // Fusionner les données de tous les groupes pour avoir toutes les ères
+  const allLevels: BuildingData["levels"] = [];
+
+  for (let i = 0; i < buildingsAbbr.length; i++) {
+    const selected = selections[i]?.[priorityIndex];
+    const workshopId = selected
+      ? selected.toLowerCase().replace(/\s+/g, "_")
+      : buildingsAbbr[i].buildings[priorityIndex]
+          .toLowerCase()
+          .replace(/\s+/g, "_");
+    const data = getBuildingData(`${categoryId}_${workshopId}`);
+    if (!data) continue;
+
+    // Overrider le max_qty avec la valeur du tableau statique
+    const levelsWithCorrectQty = data.levels.map((lvl) => ({
+      ...lvl,
+      max_qty:
+        WORKSHOP_MAX_QTY[lvl.era as EraAbbr]?.[priorityIndex] ?? lvl.max_qty,
+    }));
+    allLevels.push(...levelsWithCorrectQty);
+  }
+
+  if (allLevels.length === 0) return null;
+
+  return {
+    id: `${categoryId}_${elementId}`,
+    name: `${priority.charAt(0).toUpperCase()}${priority.slice(1)} Workshop`,
+    category: categoryId,
+    subcategory: "workshops",
+    imageName: "",
+    levels: allLevels,
+  };
+}
 
 /**
  * Era selector - Now using ResponsiveSelect
@@ -209,14 +278,20 @@ export const ConfigurationPanel = memo<ConfigurationPanelProps>(
   }) => {
     //  Get last used era for smart defaults
     const lastUsedEra = useLastUsedEra();
+    const selections = useBuildingSelections();
 
-    const elementData = useMemo(
-      () =>
-        path.elementId
-          ? getBuildingData(path.categoryId + "_" + path.elementId)
-          : null,
-      [path.elementId, path.categoryId],
-    );
+    const elementData = useMemo((): BuildingData | null => {
+      if (!path.elementId) return null;
+      if (isPositionWorkshop(path.elementId)) {
+        return getPositionWorkshopData(
+          path.elementId,
+          "", // pas d'ère — on fusionne tous les groupes
+          selections,
+          path.categoryId ?? "capital",
+        );
+      }
+      return getBuildingData((path.categoryId ?? "") + "_" + path.elementId);
+    }, [path.elementId, path.categoryId, selections]);
 
     const availableEras = useMemo(
       () => (elementData ? getAvailableEras(elementData) : []),

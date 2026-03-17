@@ -10,7 +10,7 @@ export const commonWarehouse: BuildingData = {
     {
       level: 1,
       era: "EG",
-      max_qty: 8,
+      max_qty: 9,
       construction: {
         coins: 750000,
         food: 250000,
@@ -33,7 +33,7 @@ export const commonWarehouse: BuildingData = {
     {
       level: 2,
       era: "LG",
-      max_qty: 12,
+      max_qty: 13,
       construction: {
         coins: 750000,
         food: 250000,
@@ -73,7 +73,7 @@ export const commonWarehouse: BuildingData = {
     {
       level: 3,
       era: "LG",
-      max_qty: 12,
+      max_qty: 13,
       upgrade: {
         aspers: 60000,
         goods: [

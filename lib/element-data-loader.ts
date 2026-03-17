@@ -105,7 +105,13 @@ export function getMaxQuantity(data: BuildingData, era: string): number {
   const eraLevels = data.levels.filter((l) => l.era === era);
   if (eraLevels.length === 0) return 40;
 
-  return Math.max(...eraLevels.map((l) => l.max_qty || 40));
+  // Ne conserver que les max_qty explicitement définis pour ne pas
+  // polluer Math.max avec le fallback 40 sur les niveaux sans max_qty.
+  const defined = eraLevels
+    .map((l) => l.max_qty)
+    .filter((q): q is number => q !== undefined);
+
+  return defined.length > 0 ? Math.max(...defined) : 40;
 }
 
 // Check if a level has construction data

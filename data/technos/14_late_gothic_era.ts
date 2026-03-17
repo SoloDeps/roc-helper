@@ -488,10 +488,15 @@ export const technos_LG: TechnoData[] = [
         img: { kind: "catalog", imgType: "home", invert: true },
       },
       {
+        title: "+10000",
+        desc: "Increase Trade Token Limit",
+        img: { kind: "local", path: "/images/technos/features/icon_limittradingtokens.webp"},
+      },
+      {
         title: "Small Home",
         desc: "Unlocks a Small Home upgrade",
         img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 41 },
-      }
+      },
     ],
   },
   {

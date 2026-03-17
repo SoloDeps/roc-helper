@@ -61,9 +61,9 @@ export const sections_RE: PresetSection[] = [
     label: "Workshops",
     category: "capital",
     entries: [
-      { buildingId: "artisan",     type: "upgrade", era: "RE", level: 5, qty: 4 },
-      { buildingId: "stone_mason", type: "upgrade", era: "RE", level: 5, qty: 1 },
-      { buildingId: "tailor",      type: "upgrade", era: "RE", level: 5, qty: 1 },
+      { buildingId: "primary_workshop",   type: "upgrade", era: "RE", level: 5, qty: 4 },
+      { buildingId: "secondary_workshop", type: "upgrade", era: "RE", level: 5, qty: 1 },
+      { buildingId: "tertiary_workshop",  type: "upgrade", era: "RE", level: 5, qty: 1 },
     ],
   },
   {

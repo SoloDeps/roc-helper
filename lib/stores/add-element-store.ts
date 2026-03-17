@@ -7,6 +7,7 @@ import { getBuildingData } from "@/lib/element-data-loader";
 import { getWikiDB } from "@/lib/db/schema";
 import { useAddBuilding } from "@/hooks/use-database";
 import { slugify } from "@/lib/utils";
+import { buildingsAbbr } from "@/lib/constants";
 import { toast } from "sonner";
 
 // ============================================================================
@@ -36,6 +37,7 @@ export interface OttomanSelection {
 export interface PresetSelection {
   era: string; // abbr uppercase ex: "LG"
   technos: boolean;
+  campaign: boolean;
   selectedSections: Set<string>; // IDs des sections ex: "capital_homes"
 }
 
@@ -92,6 +94,7 @@ interface AddElementState {
   // Preset actions
   setPresetEra: (eraAbbr: string) => void;
   togglePresetTechnos: () => void;
+  togglePresetCampaign: () => void;
   togglePresetSection: (sectionId: string) => void;
   clearPresetSelection: () => void;
 
@@ -110,12 +113,15 @@ const DEFAULT_CONFIG: ElementConfig = {
 const DEFAULT_PRESET: PresetSelection = {
   era: "LG",
   technos: false,
+  campaign: false,
   selectedSections: new Set(),
 };
 
 // ============================================================================
 // HELPERS
 // ============================================================================
+
+const PRIORITIES = ["primary", "secondary", "tertiary"] as const;
 
 function generateBuildingId(
   category: string,
@@ -124,31 +130,46 @@ function generateBuildingId(
   level: number,
   type: "construction" | "upgrade",
 ): string {
+  // Si c'est un workshop capital, remplacer le nom concret par la position
+  if (category === "capital") {
+    const groupIndex = buildingsAbbr.findIndex((group) =>
+      group.abbreviations.some((abbr) => abbr === era.toUpperCase()),
+    );
+    if (groupIndex >= 0) {
+      const buildings = buildingsAbbr[groupIndex].buildings;
+      const posIndex = buildings.findIndex(
+        (b) => b.toLowerCase().replace(/\s+/g, "_") === elementId.toLowerCase(),
+      );
+      if (posIndex >= 0) {
+        return `${category}_${PRIORITIES[posIndex]}_workshop_${type}_${era}_${level}`;
+      }
+    }
+  }
   return `${category}_${elementId}_${type}_${era}_${level}`;
 }
 
-function parseBuildingCosts(rawCosts: any): {
-  resources: Record<string, number>;
-  goods: Array<{ type: string; amount: number }>;
-} {
-  const resources: Record<string, number> = {};
-  const goods: Array<{ type: string; amount: number }> = [];
+// function parseBuildingCosts(rawCosts: any): {
+//   resources: Record<string, number>;
+//   goods: Array<{ type: string; amount: number }>;
+// } {
+//   const resources: Record<string, number> = {};
+//   const goods: Array<{ type: string; amount: number }> = [];
 
-  Object.entries(rawCosts).forEach(([key, value]) => {
-    if (key === "goods" && Array.isArray(value)) {
-      value.forEach((item: any) => {
-        goods.push({
-          type: slugify(item.resource || item.resource),
-          amount: item.amount,
-        });
-      });
-    } else if (typeof value === "number") {
-      resources[key] = value;
-    }
-  });
+//   Object.entries(rawCosts).forEach(([key, value]) => {
+//     if (key === "goods" && Array.isArray(value)) {
+//       value.forEach((item: any) => {
+//         goods.push({
+//           type: slugify(item.resource || item.resource),
+//           amount: item.amount,
+//         });
+//       });
+//     } else if (typeof value === "number") {
+//       resources[key] = value;
+//     }
+//   });
 
-  return { resources, goods };
-}
+//   return { resources, goods };
+// }
 
 // ============================================================================
 // STORE IMPLEMENTATION
@@ -210,10 +231,11 @@ export const useAddElementStore = create<AddElementState>()(
 
         selectCategory: (categoryId) => {
           const isTech = categoryId === "technology";
+          const isCampaign = categoryId === "campaign";
 
           set({
             path: { categoryId },
-            currentStep: isTech ? "element" : "subcategory",
+            currentStep: isTech || isCampaign ? "element" : "subcategory",
           });
 
           get().updateBreadcrumbTrail();
@@ -304,6 +326,7 @@ export const useAddElementStore = create<AddElementState>()(
               ...state.presetSelection,
               era: eraAbbr,
               technos: false,
+              campaign: false,
               selectedSections: new Set(),
             },
           })),
@@ -313,6 +336,14 @@ export const useAddElementStore = create<AddElementState>()(
             presetSelection: {
               ...state.presetSelection,
               technos: !state.presetSelection.technos,
+            },
+          })),
+
+        togglePresetCampaign: () =>
+          set((state) => ({
+            presetSelection: {
+              ...state.presetSelection,
+              campaign: !state.presetSelection.campaign,
             },
           })),
 
@@ -360,7 +391,7 @@ export const useAddElementStore = create<AddElementState>()(
             }
 
             if (state.currentStep === "element") {
-              if (isTech) {
+              if (isTech || state.path.categoryId === "campaign") {
                 return {
                   currentStep: "category",
                   path: { categoryId: undefined },
@@ -530,13 +561,40 @@ export function useSubmitElement() {
       throw new Error("Invalid path: missing category or element");
     }
 
-    const id = `${path.categoryId}_${path.elementId}`;
+    // Résoudre primary/secondary/tertiary_workshop → vrai elementId
+    const resolvedElementId = (() => {
+      const SUFFIX = "_workshop";
+      if (!path.elementId.endsWith(SUFFIX)) return path.elementId;
+      const priority = path.elementId.slice(
+        0,
+        -SUFFIX.length,
+      ) as (typeof PRIORITIES)[number];
+      if (!PRIORITIES.includes(priority)) return path.elementId;
+      const priorityIndex = PRIORITIES.indexOf(priority);
+      const groupIndex = buildingsAbbr.findIndex((g) =>
+        g.abbreviations.some((a) => a === config.selectedEra.toUpperCase()),
+      );
+      if (groupIndex < 0) return path.elementId;
+      try {
+        const stored = localStorage.getItem("local:buildingSelections");
+        const selections = stored ? JSON.parse(stored) : [];
+        const selected = selections[groupIndex]?.[priorityIndex];
+        if (selected) return selected.toLowerCase().replace(/\s+/g, "_");
+      } catch {
+        /* ignore */
+      }
+      return buildingsAbbr[groupIndex].buildings[priorityIndex]
+        .toLowerCase()
+        .replace(/\s+/g, "_");
+    })();
+
+    const id = `${path.categoryId}_${resolvedElementId}`;
     const elementData = getBuildingData(id);
     if (!elementData) {
       throw new Error("Element data not found");
     }
 
-    const catalogItem = getCatalogItem(path.elementId);
+    const catalogItem = getCatalogItem(resolvedElementId);
     if (!catalogItem || !("name" in catalogItem)) {
       throw new Error("Catalog item not found");
     }
@@ -552,7 +610,7 @@ export function useSubmitElement() {
     for (const levelConfig of selectedLevels) {
       const buildingId = generateBuildingId(
         path.categoryId!,
-        path.elementId!,
+        resolvedElementId,
         config.selectedEra,
         levelConfig.level,
         config.buildingType,
@@ -605,14 +663,14 @@ export function useSubmitElement() {
 
         const buildingId = generateBuildingId(
           path.categoryId!,
-          path.elementId!,
+          resolvedElementId,
           config.selectedEra,
           levelConfig.level,
           config.buildingType,
         );
 
         if (!firstElementId) {
-          firstElementId = `${path.categoryId}_${path.elementId}`;
+          firstElementId = `${path.categoryId}_${resolvedElementId}`;
         }
 
         await addBuilding.mutateAsync({
@@ -675,3 +733,6 @@ export const useBreadcrumbTrail = () =>
 
 export const useLastUsedEra = () =>
   useAddElementStore((state) => state.lastUsedEra);
+
+export const useIsCampaignPath = () =>
+  useAddElementStore((state) => state.path.categoryId === "campaign");

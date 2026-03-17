@@ -65,10 +65,10 @@ export const sections_CG: PresetSection[] = [
     label: "Workshops",
     category: "capital",
     entries: [
-      { buildingId: "artisan",     type: "construction", era: "CG", level: 3, qty: 1 },
-      { buildingId: "artisan",     type: "upgrade",      era: "CG", level: 3, qty: 2 },
-      { buildingId: "stone_mason", type: "upgrade",      era: "CG", level: 3, qty: 1 },
-      { buildingId: "tailor",      type: "upgrade",      era: "CG", level: 3, qty: 1 },
+      { buildingId: "primary_workshop",   type: "construction", era: "CG", level: 3, qty: 1 },
+      { buildingId: "primary_workshop",   type: "upgrade",      era: "CG", level: 3, qty: 2 },
+      { buildingId: "secondary_workshop", type: "upgrade",      era: "CG", level: 3, qty: 1 },
+      { buildingId: "tertiary_workshop",  type: "upgrade",      era: "CG", level: 3, qty: 1 },
     ],
   },
   {

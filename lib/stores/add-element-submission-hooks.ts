@@ -6,6 +6,8 @@ import { useAddElementStore } from "./add-element-store";
 import { getWikiDB, areaIndexToId, tradePostIndexToId } from "@/lib/db/schema";
 import { ERAS } from "@/lib/catalog";
 import { getTechnologiesByEra } from "@/data/technos-registry";
+import { getCampaignsByEra } from "@/data/campaigns/campaigns-registry";
+import { useSelectCampaignEra } from "./campaign-page-store";
 import { getAllTradePosts } from "@/lib/ottoman-data-loader";
 import { useSelectEra } from "./technology-page-store";
 import { useQueryClient } from "@tanstack/react-query";
@@ -234,6 +236,7 @@ export function useSubmitPreset() {
   const { presetSelection, closeModal } = useAddElementStore();
   const queryClient = useQueryClient();
   const selectEra = useSelectEra();
+  const selectCampaignEra = useSelectCampaignEra();
 
   const submit = async () => {
     setIsLoading(true);
@@ -243,6 +246,7 @@ export function useSubmitPreset() {
     const eraId = eraObj?.id;
 
     let technosAdded = 0;
+    let campaignAdded = 0;
     let buildingsAdded = 0;
     let ottomanAreasAdded = 0;
     let ottomanTradePostsAdded = 0;
@@ -268,7 +272,26 @@ export function useSubmitPreset() {
         }
       }
 
-      // ── 2. BUILDINGS / OTTOMAN AREAS / OTTOMAN TRADE POSTS ──────────────
+      // ── 2. CAMPAIGN ─────────────────────────────────────────────────────
+      if (presetSelection.campaign && eraId) {
+        const regions = getCampaignsByEra(eraId);
+        const toAdd: Array<{ id: string; hidden: number; cp: number }> = [];
+
+        for (const region of regions) {
+          const existing = await db.campaigns.get(region.id);
+          if (!existing) toAdd.push({ id: region.id, hidden: 0, cp: 0 });
+          else duplicatesSkipped++;
+        }
+
+        if (toAdd.length > 0) {
+          await db.campaigns.bulkPut(toAdd);
+          campaignAdded = toAdd.length;
+          queryClient.invalidateQueries({ queryKey: ["campaigns"] });
+          selectCampaignEra(eraId);
+        }
+      }
+
+      // ── 3. BUILDINGS / OTTOMAN AREAS / OTTOMAN TRADE POSTS ──────────────
       if (presetSelection.selectedSections.size > 0) {
         const buildingsToAdd: Array<{
           id: string;
@@ -358,15 +381,17 @@ export function useSubmitPreset() {
         }
       }
 
-      // ── 3. FEEDBACK ─────────────────────────────────────────────────────
+      // ── 4. FEEDBACK ─────────────────────────────────────────────────────
       const totalAdded =
         technosAdded +
+        campaignAdded +
         buildingsAdded +
         ottomanAreasAdded +
         ottomanTradePostsAdded;
       if (totalAdded > 0) {
         const parts: string[] = [];
         if (technosAdded > 0) parts.push(`${technosAdded} technologies`);
+        if (campaignAdded > 0) parts.push(`${campaignAdded} campaign regions`);
         if (buildingsAdded > 0) parts.push(`${buildingsAdded} buildings`);
         if (ottomanAreasAdded > 0) parts.push(`${ottomanAreasAdded} areas`);
         if (ottomanTradePostsAdded > 0)
@@ -384,6 +409,7 @@ export function useSubmitPreset() {
           presetSelection: {
             ...state.presetSelection,
             technos: false,
+            campaign: false,
             selectedSections: new Set(),
           },
         }));

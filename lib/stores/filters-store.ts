@@ -7,11 +7,13 @@ interface FiltersState {
   location?: string;
   hideHidden: boolean;
   hideTechnos: boolean;
+  hideCampaigns: boolean;
 
   setTableType: (type?: "construction" | "upgrade") => void;
   setLocation: (location?: string) => void;
   setHideHidden: (hide: boolean) => void;
   setHideTechnos: (hide: boolean) => void;
+  setHideCampaigns: (hide: boolean) => void;
   setFilters: (
     filters: Partial<
       Omit<
@@ -20,6 +22,7 @@ interface FiltersState {
         | "setLocation"
         | "setHideHidden"
         | "setHideTechnos"
+        | "setHideCampaigns"
         | "setFilters"
         | "reset"
       >
@@ -33,11 +36,13 @@ export const useFiltersStore = create<FiltersState>((set) => ({
   location: undefined,
   hideHidden: false,
   hideTechnos: false,
+  hideCampaigns: false,
 
   setTableType: (tableType) => set({ tableType }),
   setLocation: (location) => set({ location }),
   setHideHidden: (hideHidden) => set({ hideHidden }),
   setHideTechnos: (hideTechnos) => set({ hideTechnos }),
+  setHideCampaigns: (hideCampaigns) => set({ hideCampaigns }),
   setFilters: (filters) => set(filters),
   reset: () =>
     set({
@@ -45,5 +50,6 @@ export const useFiltersStore = create<FiltersState>((set) => ({
       location: undefined,
       hideHidden: false,
       hideTechnos: false,
+      hideCampaigns: false,
     }),
 }));

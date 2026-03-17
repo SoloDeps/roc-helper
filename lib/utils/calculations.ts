@@ -6,6 +6,10 @@ import {
   HydratedOttomanTradePost,
   HydratedTechno,
 } from "@/lib/db/data-hydration";
+import type { CampaignEntity } from "@/lib/db/schema";
+import type { CampaignRegion } from "@/types/campaign-types";
+import { ERAS } from "@/lib/catalog";
+import { getCampaignsByEra } from "@/data/campaigns/campaigns-registry";
 
 export interface ResourceTotals {
   main: Record<string, number>;
@@ -19,6 +23,7 @@ export function calculateTotalCosts(
   technos: HydratedTechno[],
   areas: HydratedOttomanArea[],
   tradePosts: HydratedOttomanTradePost[],
+  campaignEntities?: CampaignEntity[],
 ): ResourceTotals {
   const totals: ResourceTotals = {
     main: {},
@@ -49,6 +54,40 @@ export function calculateTotalCosts(
   for (const tp of tradePosts) {
     if (tp.hidden) continue;
     accumulateCosts(totals, tp.costs, 1);
+  }
+
+  // Campaigns — aggregate scout coins for non-hidden, non-completed regions
+  if (campaignEntities && campaignEntities.length > 0) {
+    // Build map eraId → set of completed IDs
+    const completedIds = new Set(
+      campaignEntities.filter((r) => !!r.cp).map((r) => r.id),
+    );
+    const hiddenIds = new Set(
+      campaignEntities.filter((r) => !!r.hidden).map((r) => r.id),
+    );
+
+    // Get unique era IDs from campaign entities
+    const eraIds = new Set<string>();
+    campaignEntities.forEach((c) => {
+      const abbr = c.id.match(/^([a-z]+)_/)?.[1];
+      if (abbr) {
+        const era = ERAS.find((e) => e.abbr.toLowerCase() === abbr);
+        if (era) eraIds.add(era.id);
+      }
+    });
+
+    eraIds.forEach((eraId) => {
+      const staticRegions = getCampaignsByEra(eraId);
+      for (const region of staticRegions) {
+        if (completedIds.has(region.id)) continue;
+        if (hiddenIds.has(region.id)) continue;
+        // Only count if this region was added to DB
+        const isAdded = campaignEntities.some((c) => c.id === region.id);
+        if (!isAdded) continue;
+        // Accumulate scout cost
+        totals.main["coins"] = (totals.main["coins"] ?? 0) + region.scout.coins;
+      }
+    });
   }
 
   return totals;

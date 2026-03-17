@@ -130,3 +130,82 @@ export function layoutGraph(
     position: positions.get(node.id) ?? { x: 0, y: 0 },
   }));
 }
+
+// Vertical variant: column → Y axis (inverted: col 0 at bottom), nodes within a column spread on X axis
+export function layoutGraphVertical(
+  nodes: Node[],
+  edges: Edge[],
+  technos?: TechNode[],
+): Node[] {
+  const NODE_WIDTH = 200;
+  const NODE_HEIGHT = 52;
+  const NODESEP = 20; // horizontal gap between nodes in same row
+  const RANKSEP = 80; // vertical gap between rows (columns)
+
+  const columnMap = new Map<string, number>();
+  if (technos) {
+    technos.forEach((t) => columnMap.set(t.id, t.column));
+  }
+
+  // Group nodes by column (= row in vertical layout)
+  const columnGroups = new Map<number, string[]>();
+  nodes.forEach((node) => {
+    const col = columnMap.get(node.id) ?? 0;
+    if (!columnGroups.has(col)) columnGroups.set(col, []);
+    columnGroups.get(col)!.push(node.id);
+  });
+
+  const sortedColumns = Array.from(columnGroups.keys()).sort((a, b) => a - b);
+  const maxColIndex = sortedColumns.length - 1;
+
+  // Map column index → Y position (inverted: col 0 at bottom)
+  const columnToY = new Map<number, number>();
+  sortedColumns.forEach((col, i) => {
+    columnToY.set(col, (maxColIndex - i) * (NODE_HEIGHT + RANKSEP));
+  });
+
+  // Use dagre to get a clean horizontal ordering within each row
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+  dagreGraph.setGraph({
+    rankdir: "TB",
+    nodesep: NODESEP,
+    ranksep: RANKSEP,
+    edgesep: 10,
+  });
+  nodes.forEach((node) => {
+    dagreGraph.setNode(node.id, { width: NODE_WIDTH, height: NODE_HEIGHT });
+  });
+  edges.forEach((edge) => {
+    dagreGraph.setEdge(edge.source, edge.target);
+  });
+  dagre.layout(dagreGraph);
+
+  const positions = new Map<string, { x: number; y: number }>();
+
+  sortedColumns.forEach((col) => {
+    const ids = columnGroups.get(col)!;
+    const y = columnToY.get(col)!;
+
+    // Sort by dagre X to preserve clean left→right order within the row
+    const sorted = [...ids].sort((a, b) => {
+      return dagreGraph.node(a).x - dagreGraph.node(b).x;
+    });
+
+    const totalWidth =
+      sorted.length * NODE_WIDTH + (sorted.length - 1) * NODESEP;
+    const startX = -totalWidth / 2;
+
+    sorted.forEach((id, i) => {
+      positions.set(id, {
+        x: startX + i * (NODE_WIDTH + NODESEP),
+        y,
+      });
+    });
+  });
+
+  return nodes.map((node) => ({
+    ...node,
+    position: positions.get(node.id) ?? { x: 0, y: 0 },
+  }));
+}

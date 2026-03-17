@@ -6,6 +6,7 @@ import React, {
   createContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import {
@@ -14,6 +15,10 @@ import {
   useNodesState,
   useEdgesState,
   Panel,
+  ReactFlowInstance,
+  ReactFlowProvider,
+  Node,
+  Edge,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { buildGraphData, layoutGraph } from "@/lib/layout-graph";
@@ -607,12 +612,12 @@ export function TechTreeDesktop({
   }, [mode, pathEdgeIds, selectedNodeId, baseEdges, completedIds]);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(baseNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges as Edge[]);
   useEffect(() => {
     setNodes(baseNodes);
   }, [baseNodes, setNodes]);
   useEffect(() => {
-    setEdges(styledEdges);
+    setEdges(styledEdges as Edge[]);
   }, [styledEdges, setEdges]);
 
   const reset = useCallback(() => {
@@ -654,9 +659,59 @@ export function TechTreeDesktop({
     ],
   );
 
-  const onInit = useCallback((instance: any) => {
-    instance.fitView({ padding: 0.2 });
+  // ============================================================
+  // Auto-zoom sur la première node non complétée au chargement
+  // Dimensions du node : w-[200px] h-13 (= 52px)
+  // ============================================================
+  const NODE_W = 200;
+  const NODE_H = 52;
+
+  // Stocker l'instance React Flow pour pouvoir l'utiliser dans le useEffect
+  const rfInstanceRef = useRef<ReactFlowInstance<Node, Edge> | null>(null);
+
+  // Flag : le zoom initial a-t-il déjà été appliqué ?
+  // On le déclenche une seule fois par ère, dès que technosInDB est résolu (non undefined)
+  const initialZoomDone = useRef(false);
+
+  // Masquer le graphe jusqu'à ce que la position initiale soit appliquée
+  // évite le flicker : graphe en haut → animation vers la bonne node
+  const [isReady, setIsReady] = useState(false);
+
+  const onInit = useCallback((instance: ReactFlowInstance<Node, Edge>) => {
+    rfInstanceRef.current = instance;
+    // Pas de fitView ici — on attend Dexie avant de positionner
   }, []);
+
+  useEffect(() => {
+    // technosInDB === undefined = requête Dexie pas encore résolue, on attend
+    if (technosInDB === undefined) return;
+    // Ne zoomer qu'une seule fois au chargement initial
+    if (initialZoomDone.current) return;
+    // L'instance React Flow doit être prête
+    if (!rfInstanceRef.current) return;
+
+    initialZoomDone.current = true;
+
+    const firstUncompleted = [...baseNodes]
+      .filter((n) => !completedIds.has(n.id))
+      .sort((a, b) => (a.position?.x ?? 0) - (b.position?.x ?? 0))[0];
+
+    if (firstUncompleted) {
+      // Responsive zoom: smaller on mobile so more nodes are visible
+      const isMobile = window.innerWidth < 768;
+      const zoom = isMobile ? 0.85 : 1.35;
+      rfInstanceRef.current.setCenter(
+        firstUncompleted.position.x + NODE_W / 2,
+        0,
+        { zoom, duration: 0 },
+      );
+    } else {
+      rfInstanceRef.current.fitView({ padding: 0.2, duration: 0 });
+    }
+
+    // Laisser React Flow appliquer la position avant de révéler
+    requestAnimationFrame(() => setIsReady(true));
+  }, [technosInDB, baseNodes, completedIds]);
 
   const onNodeClick = useCallback(
     (_e: React.MouseEvent, node: any) => {
@@ -745,188 +800,186 @@ export function TechTreeDesktop({
 
   return (
     <SelectionContext.Provider value={ctx}>
-      <div className="w-full h-[calc(100vh-200px)] min-h-[500px] border border-border md:rounded-lg overflow-hidden bg-background-300/20">
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onInit={onInit}
-          onNodeClick={onNodeClick}
-          onPaneClick={onPaneClick}
-          nodeTypes={nodeTypes}
-          fitView
-          minZoom={0.4}
-          maxZoom={2}
-          nodesDraggable={false}
-          nodesConnectable={false}
-          elementsSelectable={true}
-          proOptions={{ hideAttribution: true }}
-        >
-          {!hideControls && (
-            <Controls
-              showInteractive={false}
-              className="shadow! border! border-border! rounded-md! overflow-hidden! [&>button]:bg-background/90! [&>button]:text-foreground! [&>button]:border-0! [&>button]:border-b! [&>button]:border-border! [&>button:last-child]:border-b-0! [&>button:hover]:bg-accent!"
-            />
-          )}
+      <div
+        className={cn(
+          "w-full h-[calc(100vh-200px)] min-h-[500px] border border-border md:rounded-lg overflow-hidden bg-background-300/20 transition-opacity duration-200",
+          isReady ? "opacity-100" : "opacity-0",
+        )}
+      >
+        <ReactFlowProvider>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onInit={onInit}
+            onNodeClick={onNodeClick}
+            onPaneClick={onPaneClick}
+            nodeTypes={nodeTypes}
+            minZoom={0.4}
+            maxZoom={2}
+            nodesDraggable={false}
+            nodesConnectable={false}
+            elementsSelectable={true}
+            proOptions={{ hideAttribution: true }}
+          >
+            {!hideControls && (
+              <Controls
+                showInteractive={false}
+                className="shadow! border! border-border! rounded-md! overflow-hidden! [&>button]:bg-background/90! [&>button]:text-foreground! [&>button]:border-0! [&>button]:border-b! [&>button]:border-border! [&>button:last-child]:border-b-0! [&>button:hover]:bg-accent!"
+              />
+            )}
 
-          {/* Calculate button — top center, always visible in select mode */}
-          {onOpenStats && mode === "select" && (
-            <Panel position="top-center" className="m-2">
-              <button
-                onClick={onOpenStats}
-                className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-primary/70 hover:text-primary transition-colors"
-              >
-                <BarChart2 className="size-3.5" />
-                Calculate
-              </button>
-            </Panel>
-          )}
+            {/* Calculate button — top center, always visible in select mode */}
+            {onOpenStats && mode === "select" && (
+              <Panel position="top-center" className="m-2">
+                <button
+                  onClick={onOpenStats}
+                  className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-primary/70 hover:text-primary transition-colors"
+                >
+                  <BarChart2 className="size-3.5" />
+                  Calculate
+                </button>
+              </Panel>
+            )}
 
-          <Panel position="top-left" className="m-2 flex flex-col gap-1.5">
-            {mode === "select" ? (
-              <>
-                <button
-                  onClick={() => setMode("ancestors-pick")}
-                  className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
-                >
-                  <Target className="size-3.5" />
-                  Prerequisites
-                </button>
-                <button
-                  onClick={() => setMode("path-pick-from")}
-                  className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
-                >
-                  <GitFork className="size-3.5" />
-                  Path A → B
-                </button>
-              </>
-            ) : (
-              <div className="flex flex-row gap-1.5">
-                <button
-                  onClick={reset}
-                  className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-2.5 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
-                >
-                  <X className="size-3.5" />
-                  Cancel
-                </button>
-                <button
-                  onClick={() => setExcludeCompleted((v) => !v)}
-                  className={cn(
-                    "flex items-center gap-1.5 text-[13px] bg-background/90 border rounded-lg px-3 py-1.5 shadow transition-colors",
-                    excludeCompleted
-                      ? "border-emerald-600 text-emerald-700 dark:border-emerald-500/60 dark:text-emerald-400 hover:bg-emerald-500/10"
-                      : "border-border text-muted-foreground hover:border-primary/50",
-                  )}
-                >
-                  <div
+            <Panel position="top-left" className="m-2 flex flex-col gap-1.5">
+              {mode === "select" ? (
+                <>
+                  <button
+                    onClick={() => setMode("ancestors-pick")}
+                    className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  >
+                    <Target className="size-3.5" />
+                    Prerequisites
+                  </button>
+                  <button
+                    onClick={() => setMode("path-pick-from")}
+                    className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-border rounded-md px-3 py-1.5 shadow hover:border-orange-400/70 hover:text-orange-400 transition-colors"
+                  >
+                    <GitFork className="size-3.5" />
+                    Path A → B
+                  </button>
+                </>
+              ) : (
+                <div className="flex flex-row gap-1.5">
+                  <button
+                    onClick={reset}
+                    className="flex items-center gap-1.5 text-[13px] bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-2.5 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
+                  >
+                    <X className="size-3.5" />
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => setExcludeCompleted((v) => !v)}
                     className={cn(
-                      "size-3.5 rounded border-2 flex items-center justify-center shrink-0",
+                      "flex items-center gap-1.5 text-[13px] bg-background/90 border rounded-lg px-3 py-1.5 shadow transition-colors",
                       excludeCompleted
-                        ? "bg-emerald-600 border-emerald-600 dark:bg-emerald-500 dark:border-emerald-500"
-                        : "border-muted-foreground/50",
+                        ? "border-emerald-600 text-emerald-700 dark:border-emerald-500/60 dark:text-emerald-400 hover:bg-emerald-500/10"
+                        : "border-border text-muted-foreground hover:border-primary/50",
                     )}
                   >
-                    {excludeCompleted && (
-                      <Check className="size-2.5 text-white stroke-[3]" />
-                    )}
-                  </div>
-                  Skip done
-                </button>
-              </div>
-            )}
-          </Panel>
+                    <div
+                      className={cn(
+                        "size-3.5 rounded border-2 flex items-center justify-center shrink-0",
+                        excludeCompleted
+                          ? "bg-emerald-600 border-emerald-600 dark:bg-emerald-500 dark:border-emerald-500"
+                          : "border-muted-foreground/50",
+                      )}
+                    >
+                      {excludeCompleted && (
+                        <Check className="size-2.5 text-white stroke-[3]" />
+                      )}
+                    </div>
+                    Skip done
+                  </button>
+                </div>
+              )}
+            </Panel>
 
-          {mode !== "select" && !isPathMode && (
-            <Panel position="bottom-center" className="mb-2">
-              <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-[13px] shadow text-center">
-                {mode === "ancestors-pick" && (
-                  <p className="text-orange-400 font-medium">
-                    Click the <span className="font-bold">target</span> tech
-                  </p>
-                )}
-                {mode === "path-pick-from" && (
-                  <p className="text-orange-400 font-medium">
-                    Click the <span className="font-bold">start</span> (A)
-                  </p>
-                )}
-                {mode === "path-pick-to" && (
-                  <p className="text-orange-400 font-medium">
-                    <span className="text-muted-foreground font-normal">
-                      From{" "}
-                    </span>
-                    {pathFromTech?.name}
-                    <span className="text-muted-foreground font-normal">
-                      {" "}
-                      →{" "}
-                    </span>
-                    <span className="font-bold">destination</span> (B)
-                  </p>
-                )}
-              </div>
-            </Panel>
-          )}
-          {isPathMode && !pathFound && (
-            <Panel position="bottom-center" className="mb-2">
-              <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-[13px] shadow">
-                <p className="text-red-400 font-medium">No path found</p>
-              </div>
-            </Panel>
-          )}
-          {mode === "select" && selectedNodeId && (
-            <Panel position="bottom-center" className="mb-2">
-              <div className="flex items-center gap-4 bg-background/90 border border-border rounded-lg px-3 py-1.5 text-[13px] shadow">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-6 h-0.5 bg-blue-500" />
-                  <span className="text-muted-foreground">Prerequisites</span>
+            {mode !== "select" && !isPathMode && (
+              <Panel position="bottom-center" className="mb-2">
+                <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-[13px] shadow text-center">
+                  {mode === "ancestors-pick" && (
+                    <p className="text-orange-400 font-medium">
+                      Click the <span className="font-bold">target</span> tech
+                    </p>
+                  )}
+                  {mode === "path-pick-from" && (
+                    <p className="text-orange-400 font-medium">
+                      Click the <span className="font-bold">start</span> (A)
+                    </p>
+                  )}
+                  {mode === "path-pick-to" && (
+                    <p className="text-orange-400 font-medium">
+                      <span className="text-muted-foreground font-normal">
+                        From{" "}
+                      </span>
+                      {pathFromTech?.name}
+                      <span className="text-muted-foreground font-normal">
+                        {" "}
+                        →{" "}
+                      </span>
+                      <span className="font-bold">destination</span> (B)
+                    </p>
+                  )}
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-6 h-0.5 bg-green-500" />
-                  <span className="text-muted-foreground">Unlocks</span>
+              </Panel>
+            )}
+            {isPathMode && !pathFound && (
+              <Panel position="bottom-center" className="mb-2">
+                <div className="bg-background/95 border border-border rounded-lg px-4 py-2 text-[13px] shadow">
+                  <p className="text-red-400 font-medium">No path found</p>
                 </div>
-              </div>
-            </Panel>
-          )}
-          {/* Side panels — hidden in mobile/external mode (FAB drawer is used instead) */}
-          {!isExternal && selectedTech && mode === "select" && (
-            <Panel
-              position="top-right"
-              className="m-2 w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
-            >
-              <TechDetailsPanel
-                tech={selectedTech}
-                onClose={() => {
-                  setSelectedTech(null);
-                  setSelectedNodeId(null);
-                }}
-              />
-            </Panel>
-          )}
-          {!isExternal && isPathMode && pathFound && pathToTech && (
-            <Panel
-              position="top-right"
-              className="m-2 w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
-            >
-              <TechPathPanel
-                fromTech={mode === "ancestors-result" ? null : pathFromTech}
-                toTech={pathToTech}
-                pathTechs={pathTechs}
-                onClose={reset}
-              />
-            </Panel>
-          )}
-          {/* In mobile/external mode: FAB trigger on result */}
-          {isExternal && isPathMode && pathFound && pathToTech && (
-            <Panel position="bottom-center" className="mb-16">
-              <button
-                onClick={() => externalControl.onOpenPathDrawer()}
-                className="flex items-center gap-2 text-[13px] bg-background/90 border border-orange-400/50 text-orange-400 rounded-lg px-3 py-1.5 shadow hover:bg-orange-500/10 transition-colors"
+              </Panel>
+            )}
+            {mode === "select" && selectedNodeId && (
+              <Panel position="bottom-center" className="mb-2">
+                <div className="flex items-center gap-4 bg-background/90 border border-border rounded-lg px-3 py-1.5 text-[13px] shadow">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-6 h-0.5 bg-blue-500" />
+                    <span className="text-muted-foreground">Prerequisites</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-6 h-0.5 bg-green-500" />
+                    <span className="text-muted-foreground">Unlocks</span>
+                  </div>
+                </div>
+              </Panel>
+            )}
+            {/* Side panels — hidden in mobile/external mode (FAB drawer is used instead) */}
+            {!isExternal && selectedTech && mode === "select" && (
+              <Panel
+                position="top-right"
+                className="m-2 w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
               >
-                View total cost
-              </button>
-            </Panel>
-          )}
-        </ReactFlow>
+                <TechDetailsPanel
+                  tech={selectedTech}
+                  onClose={() => {
+                    setSelectedTech(null);
+                    setSelectedNodeId(null);
+                  }}
+                />
+              </Panel>
+            )}
+            {!isExternal && isPathMode && pathFound && pathToTech && (
+              <Panel
+                position="top-right"
+                className="m-2 w-[330px] md:w-[360px] rounded-lg! overflow-hidden!"
+              >
+                <TechPathPanel
+                  fromTech={mode === "ancestors-result" ? null : pathFromTech}
+                  toTech={pathToTech}
+                  pathTechs={pathTechs}
+                  onClose={reset}
+                />
+              </Panel>
+            )}
+            {/* In mobile/external mode: FAB trigger on result */}
+            {/* In external (mobile) mode the FAB in tech-tree-mobile handles
+                path drawer opening — no inline button needed in the graph */}
+          </ReactFlow>
+        </ReactFlowProvider>
       </div>
     </SelectionContext.Provider>
   );

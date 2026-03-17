@@ -363,13 +363,13 @@ export default function Help() {
 
                   <li className="flex items-center gap-2">
                     <Image
-                      src="/images/goods/chili.webp"
-                      alt="Chili"
+                      src="/images/goods/pepper.webp"
+                      alt="Pepper"
                       width={20}
                       height={20}
                     />
                     <span>
-                      <strong>Chili</strong> → Spice Merchant
+                      <strong>Pepper</strong> → Spice Merchant
                     </span>
                   </li>
                 </ul>

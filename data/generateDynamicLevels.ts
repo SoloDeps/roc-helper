@@ -67,6 +67,10 @@ export function generateStandardLevels(
   const computedMax = maxLevel ?? ERA_ORDER.length * 3;
   const levels: BuildingLevel[] = [];
 
+  // Persiste le max_qty courant sur les 3 niveaux d'une même ère.
+  // Initialisé au defaultMaxQty pour couvrir un éventuel startLevel non aligné sur eraPos=1.
+  let currentMaxQty: number = config.defaultMaxQty;
+
   for (let level = startLevel; level <= computedMax; level++) {
     const eraPos = eraBuildingLevel(level);
     const currentEra = getEraForLevel(level);
@@ -105,13 +109,14 @@ export function generateStandardLevels(
       };
     }
 
-    // ── Construction + max_qty (eraPos === 1 uniquement) ─────────────────────
+    // ── Construction + max_qty ────────────────────────────────────────────────
+    // max_qty est recalculé à l'entrée d'une nouvelle ère (eraPos === 1)
+    // puis propagé sur les niveaux 2 et 3 de la même ère via currentMaxQty.
     let construction: Costs | undefined;
-    let max_qty: number | undefined;
 
     if (eraPos === 1) {
       const [g1, g2, g3] = getGoods(previousEra, config.eraGoodsMap);
-      max_qty =
+      currentMaxQty =
         getMaxQtyForBuilding(currentEra, config.buildingId) ??
         config.defaultMaxQty;
       construction = {
@@ -128,7 +133,7 @@ export function generateStandardLevels(
     levels.push({
       level,
       era: currentEra,
-      ...(max_qty !== undefined && { max_qty }),
+      max_qty: currentMaxQty,
       upgrade,
       ...(construction !== undefined && { construction }),
     });

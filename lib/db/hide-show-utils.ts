@@ -192,3 +192,19 @@ export async function showAllEntities(): Promise<void> {
     ),
   ]);
 }
+
+export async function toggleHideAllCampaignsByEra(eraId: string): Promise<void> {
+  const { getWikiDB } = await import("./schema");
+  const { getEraAbbr } = await import("@/lib/era-mappings");
+  const db = getWikiDB();
+  const eraAbbr = getEraAbbr(eraId);
+  const regions = await db.campaigns
+    .where("id")
+    .startsWith(`${eraAbbr}_`)
+    .toArray();
+  if (regions.length === 0) return;
+  const allHidden = regions.every((r) => !!r.hidden);
+  await db.campaigns.bulkPut(
+    regions.map((r) => ({ ...r, hidden: allHidden ? 0 : 1 })),
+  );
+}

@@ -10,7 +10,7 @@ export const shipyards: BuildingData = {
     {
       level: 1,
       era: "EG",
-      max_qty: 9,
+      max_qty: 10,
       construction: {
         coins: 1500000,
         food: 750000,
@@ -33,7 +33,7 @@ export const shipyards: BuildingData = {
     {
       level: 2,
       era: "LG",
-      max_qty: 13,
+      max_qty: 14,
       construction: {
         coins: 1500000,
         food: 750000,

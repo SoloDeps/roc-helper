@@ -6,13 +6,10 @@ import {
   TECHNOLOGY_REGISTRY,
 } from "@/data/technos-registry";
 import { getBuildingData } from "@/lib/element-data-loader";
-import {
-  getAreaData,
-  getAllTradePosts,
-  getTradePostByIndex,
-} from "@/lib/ottoman-data-loader";
+import { getAreaData, getTradePostByIndex } from "@/lib/ottoman-data-loader";
 import { getEraAbbr } from "@/lib/era-mappings";
 import { slugify } from "@/lib/utils";
+import { buildingsAbbr, WORKSHOP_MAX_QTY, type EraAbbr } from "@/lib/constants";
 import type { TechnoData } from "@/types/shared";
 
 // ============================================================================
@@ -28,6 +25,9 @@ export interface HydratedTechno extends TechnoData {
 export interface HydratedBuilding {
   id: string;
   name: string;
+  accordionName: string;
+  /** true si c'est un workshop à position sans sélection du joueur */
+  isUnresolvedWorkshop: boolean;
   imageName: string;
   imgLvl: boolean;
   category: string;
@@ -140,6 +140,64 @@ export async function getAllHydratedTechnos(): Promise<HydratedTechno[]> {
 // BUILDINGS
 // ============================================================================
 
+// ── Workshop position resolution ──────────────────────────────────────────
+// Les IDs de workshops basés sur la position ont la forme :
+// `capital_primary_workshop_construction_BA_1`
+// On doit les résoudre vers le workshop réel sélectionné par le joueur.
+
+const WORKSHOP_STORAGE_KEY = "local:buildingSelections";
+const WORKSHOP_PRIORITIES = ["primary", "secondary", "tertiary"] as const;
+
+function loadWorkshopSelectionsHydration(): string[][] {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = localStorage.getItem(WORKSHOP_STORAGE_KEY);
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Si l'elementId est `primary_workshop`, `secondary_workshop` ou `tertiary_workshop`,
+ * résout vers le vrai buildingId sélectionné par le joueur pour cette ère.
+ * Ex: "primary_workshop" + era "BA" → "tailor" (si le joueur a choisi Tailor en primary)
+ * Sinon retourne l'elementId tel quel.
+ */
+function resolveWorkshopElementId(elementId: string, era: string): string {
+  const WORKSHOP_SUFFIX = "_workshop";
+  if (!elementId.endsWith(WORKSHOP_SUFFIX)) return elementId;
+
+  const priority = elementId.slice(
+    0,
+    -WORKSHOP_SUFFIX.length,
+  ) as (typeof WORKSHOP_PRIORITIES)[number];
+  if (!WORKSHOP_PRIORITIES.includes(priority)) return elementId;
+
+  const priorityIndex = WORKSHOP_PRIORITIES.indexOf(priority);
+
+  // Trouver le groupe d'ères correspondant
+  const groupIndex = buildingsAbbr.findIndex((group) =>
+    group.abbreviations.some((abbr) => abbr === era.toUpperCase()),
+  );
+  if (groupIndex < 0) return elementId;
+
+  const selections = loadWorkshopSelectionsHydration();
+  const selectedBuilding = selections[groupIndex]?.[priorityIndex];
+
+  if (!selectedBuilding) {
+    // Pas de sélection → utilise le workshop par défaut pour les données
+    // mais affiche "Workshop {ERA}" comme nom
+    const defaultBuilding = buildingsAbbr[groupIndex]?.buildings[priorityIndex];
+    if (!defaultBuilding) return elementId;
+    return defaultBuilding.toLowerCase().replace(/\s+/g, "_");
+  }
+
+  return selectedBuilding.toLowerCase().replace(/\s+/g, "_");
+}
+
 export async function getHydratedBuilding(
   id: string,
 ): Promise<HydratedBuilding | null> {
@@ -154,7 +212,9 @@ export async function getHydratedBuilding(
   const category = parts[0];
   const elementId = parts.slice(1, -3).join("_");
 
-  const buildingData = getBuildingData(`${category}_${elementId}`);
+  // Résoudre vers le vrai workshop pour récupérer les données/coûts
+  const resolvedElementId = resolveWorkshopElementId(elementId, era);
+  const buildingData = getBuildingData(`${category}_${resolvedElementId}`);
   if (!buildingData) return null;
 
   const levelData = buildingData.levels.find(
@@ -179,18 +239,64 @@ export async function getHydratedBuilding(
     }
   });
 
+  // Noms pour les workshops à position
+  const isPositionWorkshop = WORKSHOP_PRIORITIES.some(
+    (p) => elementId === `${p}_workshop`,
+  );
+  let cardName = buildingData.name;
+  let accordionName = buildingData.name;
+  let workshopMaxQty: number | undefined;
+
+  if (isPositionWorkshop) {
+    const priority = elementId.slice(
+      0,
+      -"_workshop".length,
+    ) as (typeof WORKSHOP_PRIORITIES)[number];
+    const priorityIndex = WORKSHOP_PRIORITIES.indexOf(priority);
+    workshopMaxQty =
+      WORKSHOP_MAX_QTY[era.toUpperCase() as EraAbbr]?.[priorityIndex];
+    const groupIndex = buildingsAbbr.findIndex((group) =>
+      group.abbreviations.some((abbr) => abbr === era.toUpperCase()),
+    );
+    const selections = loadWorkshopSelectionsHydration();
+    const selectedBuilding = selections[groupIndex]?.[priorityIndex];
+
+    // Accordion : toujours "Primary Workshop" / "Secondary Workshop" / "Tertiary Workshop"
+    accordionName = `${priority.charAt(0).toUpperCase()}${priority.slice(1)} Workshop`;
+
+    // Card : nom du workshop sélectionné, ou "Workshop {ERA}" si pas de sélection
+    cardName = selectedBuilding ? selectedBuilding : `Workshop ${era}`;
+  }
+
+  const isUnresolvedWorkshop =
+    isPositionWorkshop &&
+    (() => {
+      const priority = elementId.slice(
+        0,
+        -"_workshop".length,
+      ) as (typeof WORKSHOP_PRIORITIES)[number];
+      const priorityIndex = WORKSHOP_PRIORITIES.indexOf(priority);
+      const groupIndex = buildingsAbbr.findIndex((group) =>
+        group.abbreviations.some((abbr) => abbr === era.toUpperCase()),
+      );
+      const selections = loadWorkshopSelectionsHydration();
+      return !selections[groupIndex]?.[priorityIndex];
+    })();
+
   return {
     id,
-    name: buildingData.name,
-    imageName: buildingData.imageName || elementId,
+    name: cardName,
+    accordionName,
+    isUnresolvedWorkshop,
+    imageName: buildingData.imageName || resolvedElementId,
     imgLvl: buildingData.imageName?.includes("_Lv") ?? false,
     category,
     subcategory: buildingData.subcategory || "unknown",
-    elementId,
+    elementId: resolvedElementId,
     type,
     era,
     level,
-    maxQty: levelData.max_qty || 40,
+    maxQty: workshopMaxQty ?? levelData.max_qty ?? 40,
     costs: { resources, goods },
     quantity: userState.qty ?? 1,
     hidden: !!userState.hidden,

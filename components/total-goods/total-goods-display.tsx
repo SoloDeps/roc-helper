@@ -8,6 +8,7 @@ import {
   useTechnos,
   useOttomanAreas,
   useOttomanTradePosts,
+  useCampaigns,
 } from "@/hooks/use-database";
 import {
   eras,
@@ -65,20 +66,23 @@ function useAllEntities() {
   const technosData = useTechnos();
   const areasData = useOttomanAreas();
   const tradePostsData = useOttomanTradePosts();
+  const campaignsData = useCampaigns();
 
   //  AMÉLIORATION: Détection plus précise du loading
   const isLoading =
     buildingsData === undefined ||
     technosData === undefined ||
     areasData === undefined ||
-    tradePostsData === undefined;
+    tradePostsData === undefined ||
+    campaignsData === undefined;
 
   const buildings = buildingsData ?? [];
   const technos = technosData ?? [];
   const areas = areasData ?? [];
   const tradePosts = tradePostsData ?? [];
+  const campaigns = campaignsData ?? [];
 
-  return { buildings, technos, areas, tradePosts, isLoading };
+  return { buildings, technos, areas, tradePosts, campaigns, isLoading };
 }
 
 /**
@@ -89,6 +93,7 @@ function useTotalCosts(
   technos: ReturnType<typeof useTechnos>,
   areas: ReturnType<typeof useOttomanAreas>,
   tradePosts: ReturnType<typeof useOttomanTradePosts>,
+  campaigns?: ReturnType<typeof useCampaigns>,
 ) {
   return useMemo(() => {
     if (!buildings || !technos || !areas || !tradePosts) {
@@ -100,8 +105,8 @@ function useTotalCosts(
       };
     }
 
-    return calculateTotalCosts(buildings, technos, areas, tradePosts);
-  }, [buildings, technos, areas, tradePosts]);
+    return calculateTotalCosts(buildings, technos, areas, tradePosts, campaigns ?? []);
+  }, [buildings, technos, areas, tradePosts, campaigns]);
 }
 
 /**
@@ -427,12 +432,12 @@ export function TotalGoodsDisplay({
   // DATA LOADING
   // ========================================
   const selections = useBuildingSelections();
-  const { buildings, technos, areas, tradePosts, isLoading } = useAllEntities();
+  const { buildings, technos, areas, tradePosts, campaigns, isLoading } = useAllEntities();
 
   // ========================================
   // CALCULATIONS
   // ========================================
-  const totals = useTotalCosts(buildings, technos, areas, tradePosts);
+  const totals = useTotalCosts(buildings, technos, areas, tradePosts, campaigns);
 
   // ========================================
   // DATA PROCESSING
