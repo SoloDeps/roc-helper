@@ -1,7 +1,8 @@
 "use client";
 
-import { areas_table, trade_post_table } from "@/data/allieds/ottoman";
-import type { OttomanAreaData, TradePostData } from "@/types/shared";
+import { areas_table } from "@/data/allieds/ottoman/areas";
+import { trade_post_table } from "@/data/allieds/ottoman/trade_posts";
+import type { TradePostData } from "@/types/shared";
 
 /**
  * Get all available Ottoman areas

@@ -79,6 +79,14 @@ export const sections_EG: PresetSection[] = [
       { buildingId: "common_warehouse", type: "construction", era: "EG", level: 1, qty: 9 },
     ],
   },
+  {
+    id: "ottoman_ships_EG",
+    label: "Ships",
+    category: "ottoman",
+    entries: [
+      { buildingId: "empire_ship",   type: "upgrade", era: "EG", level: 2, qty: 1 },
+    ],
+  },
   // ── Ottoman (areas 1–10, trade posts otp_0–otp_17) ───────────────────────
   {
     id: "ottoman_areas_EG",

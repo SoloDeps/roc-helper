@@ -49,9 +49,11 @@ export function getChildren(parentId: string): NavigableItem[] {
   for (const cat of categories) {
     const subcategory = cat.subcategories?.find((sub) => sub.id === parentId);
     if (subcategory) {
-      //  Pour Ottoman, les subcategories n'ont pas de buildings à afficher
-      // (areas et tradeposts sont gérés différemment via ottoman_selection step)
-      if (cat.id === "ottoman") {
+      //  Pour Ottoman, seules areas et tradeposts sont gérés via ottoman_selection step
+      if (
+        cat.id === "ottoman" &&
+        ["ottoman_areas", "ottoman_tradeposts"].includes(parentId)
+      ) {
         return [];
       }
 

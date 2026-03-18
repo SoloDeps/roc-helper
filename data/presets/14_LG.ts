@@ -79,6 +79,15 @@ export const sections_LG: PresetSection[] = [
       { buildingId: "pier",             type: "construction", era: "LG", level: 1, qty: 5 },
     ],
   },
+  {
+    id: "ottoman_ships_LG",
+    label: "Ships",
+    category: "ottoman",
+    entries: [
+      { buildingId: "empire_ship",   type: "upgrade", era: "LG", level: 3, qty: 1 },
+      { buildingId: "empire_ship",   type: "upgrade", era: "LG", level: 4, qty: 1 },
+    ],
+  },
   // ── Ottoman (areas 12–18, trade posts otp_18–otp_31) ─────────────────────
   {
     id: "ottoman_areas_LG",

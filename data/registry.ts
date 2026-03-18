@@ -168,6 +168,7 @@ import {
   arabiaOilLampCrafter,
 } from "@/data/allieds/arabia/workshops";
 // #endregion
+import { ottomanEmpireShip } from "@/data/allieds/ottoman/ship";
 
 /**
  * Element data registry
@@ -288,4 +289,6 @@ export const ELEMENT_DATA_REGISTRY: Record<string, BuildingData> = {
   arabia_incense_maker: arabiaIncenseMaker,
   arabia_luxurious_workshop: arabiaLuxuriousWorkshop,
   arabia_oil_lamp_crafter: arabiaOilLampCrafter,
+  // ottoman
+  ottoman_empire_ship: ottomanEmpireShip
 };

@@ -13,7 +13,7 @@ import {
 import type { HydratedOttomanArea } from "@/lib/db/data-hydration";
 import Image from "next/image";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { trade_post_table } from "@/data/allieds/ottoman";
+import { trade_post_table } from "@/data/allieds/ottoman/trade_posts";
 
 interface AreaCardProps {
   area: HydratedOttomanArea;

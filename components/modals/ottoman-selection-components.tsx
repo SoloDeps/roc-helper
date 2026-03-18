@@ -18,7 +18,7 @@ import {
   getAllTradePosts,
   hasAreaData,
 } from "@/lib/ottoman-data-loader";
-import { trade_post_table } from "@/data/allieds/ottoman";
+import { trade_post_table } from "@/data/allieds/ottoman/trade_posts";
 import { useOttomanAreas, useOttomanTradePosts } from "@/hooks/use-database";
 
 // ============================================================================

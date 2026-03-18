@@ -809,6 +809,14 @@ export const CATALOG: Category[] = [
         imgType: "shipyard",
         buildings: [],
       },
+      {
+        id: "ottoman_ship",
+        name: "Ships",
+        imgType: "shipyard",
+        buildings: [
+          { id: "empire_ship", name: "Ottoman Ship", imgType: "shipyard" },
+        ],
+      },
     ],
   },
 ];
