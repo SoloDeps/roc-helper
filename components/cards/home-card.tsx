@@ -28,6 +28,13 @@ const cards: CardData[] = [
     href: "/campaign",
   },
   {
+    title: "City Planner",
+    description: "Plan your city layout and track building placement",
+    icon: "/images/game_icons/icon_flat_research_points.webp",
+    illustration: "/images/technos/minoan_era/me_0.webp",
+    href: "/city-planner",
+  },
+  {
     title: "Research Tree",
     description: "Explore technologies and plan your research path",
     icon: "/images/game_icons/icon_flat_research_points.webp",
@@ -41,14 +48,14 @@ const cards: CardData[] = [
     illustration: "/images/technos/high_middle_ages/hm_16.webp",
     href: "/help",
   },
-  // {
-  //   title: "Coming Soon",
-  //   description: "Something is taking shape in the shadows...",
-  //   icon: "/images/game_icons/icon_flat_scout.webp",
-  //   illustration: "/images/technos/minoan_era/me_6.webp",
-  //   locked: true,
-  //   badge: "Coming Soon",
-  // },
+  {
+    title: "Coming Soon",
+    description: "Something is taking shape in the shadows...",
+    icon: "/images/game_icons/icon_flat_scout.webp",
+    illustration: "/images/technos/minoan_era/me_6.webp",
+    locked: true,
+    badge: "Coming Soon",
+  },
 ];
 
 function HomeCard({ data }: { data: CardData }) {
