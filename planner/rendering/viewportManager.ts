@@ -4,7 +4,7 @@
 // Zéro dépendance React/browser — testable Vitest Node.js
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { TILE_SIZE } from '../core/mapGrid';
+import { TILE_SIZE } from "../core/mapGrid";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Constantes
@@ -12,7 +12,7 @@ import { TILE_SIZE } from '../core/mapGrid';
 
 export const ZOOM_MIN = 0.3;
 export const ZOOM_MAX = 3.0;
-export const ZOOM_STEP_WHEEL = 0.1;  // sensibilité molette
+export const ZOOM_STEP_WHEEL = 0.1; // sensibilité molette
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -62,6 +62,25 @@ export function createInitialViewport(
       y: (canvasH - gridPixelH) / 2,
     },
   };
+}
+
+/**
+ * Calcule le zoom qui fait tenir toute la grille dans le canvas,
+ * avec un padding optionnel (défaut 32px de chaque côté).
+ * Résultat clampé entre ZOOM_MIN et ZOOM_MAX.
+ */
+export function calcFitZoom(
+  canvasW: number,
+  canvasH: number,
+  gridW: number,
+  gridH: number,
+  padding = 32,
+): number {
+  const availW = canvasW - padding * 2;
+  const availH = canvasH - padding * 2;
+  const zoomX = availW / (gridW * TILE_SIZE);
+  const zoomY = availH / (gridH * TILE_SIZE);
+  return Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, Math.min(zoomX, zoomY)));
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -162,8 +181,14 @@ export function getVisibleTiles(
 
   const minX = Math.max(0, Math.floor(-vp.offset.x / ts) - padding);
   const minY = Math.max(0, Math.floor(-vp.offset.y / ts) - padding);
-  const maxX = Math.min(gridW - 1, Math.ceil((canvasW - vp.offset.x) / ts) + padding);
-  const maxY = Math.min(gridH - 1, Math.ceil((canvasH - vp.offset.y) / ts) + padding);
+  const maxX = Math.min(
+    gridW - 1,
+    Math.ceil((canvasW - vp.offset.x) / ts) + padding,
+  );
+  const maxY = Math.min(
+    gridH - 1,
+    Math.ceil((canvasH - vp.offset.y) / ts) + padding,
+  );
 
   return { minX, minY, maxX, maxY };
 }
@@ -171,7 +196,11 @@ export function getVisibleTiles(
 /**
  * Vérifie si une tuile est dans la plage visible.
  */
-export function isTileVisible(tileX: number, tileY: number, visible: VisibleTiles): boolean {
+export function isTileVisible(
+  tileX: number,
+  tileY: number,
+  visible: VisibleTiles,
+): boolean {
   return (
     tileX >= visible.minX &&
     tileX <= visible.maxX &&

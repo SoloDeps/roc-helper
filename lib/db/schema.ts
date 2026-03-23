@@ -1,22 +1,23 @@
 "use client";
 
 import Dexie, { type Table } from "dexie";
+import type { CityLayout } from "@/planner/utils/layoutDB";
 
 export interface TechnoEntity {
-  id: string; // "eg_0"
-  hidden: number; // 0 | 1 — calculator uniquement (exclure du total)
-  cp: number; // 0 | 1 — research tree uniquement (techno complétée)
+  id: string;
+  hidden: number;
+  cp: number;
 }
 
 export interface BuildingEntity {
   id: string;
   qty: number;
-  hidden: number; // 0 | 1
+  hidden: number;
 }
 
 export interface OttomanAreaEntity {
   id: string;
-  hidden: number; // 0 | 1
+  hidden: number;
 }
 
 export interface OttomanTradePostEntity {
@@ -29,13 +30,13 @@ export interface OttomanTradePostEntity {
     lvl5: number;
     lvl6: number;
   };
-  hidden: number; // 0 | 1
+  hidden: number;
 }
 
 export interface CampaignEntity {
-  id: string;    // e.g. "sa_2"
-  hidden: number; // 0 | 1
-  cp: number;     // 0 | 1
+  id: string;
+  hidden: number;
+  cp: number;
 }
 
 export class RocWikiDB extends Dexie {
@@ -44,6 +45,8 @@ export class RocWikiDB extends Dexie {
   ottomanAreas!: Table<OttomanAreaEntity, string>;
   ottomanTradePosts!: Table<OttomanTradePostEntity, string>;
   campaigns!: Table<CampaignEntity, string>;
+  /** Phase 8 — city planner layouts */
+  cityLayouts!: Table<CityLayout, string>;
 
   constructor() {
     super("roc_wiki_db");
@@ -55,8 +58,6 @@ export class RocWikiDB extends Dexie {
       ottomanTradePosts: "id,hidden",
     });
 
-    // Ajout du champ cp (completed) pour séparer la progression du research tree
-    // du hidden du calculator. Pas de migration : cp démarre à 0 pour tous.
     this.version(2).stores({
       buildings: "id,hidden",
       technos: "id,hidden,cp",
@@ -64,8 +65,6 @@ export class RocWikiDB extends Dexie {
       ottomanTradePosts: "id,hidden",
     });
 
-    // Ajout du level 6 sur les trade posts (villages/cities EG et LG standard).
-    // Pas de migration de données : lvl6 démarre à 0 pour tous.
     this.version(3).stores({
       buildings: "id,hidden",
       technos: "id,hidden,cp",
@@ -73,13 +72,22 @@ export class RocWikiDB extends Dexie {
       ottomanTradePosts: "id,hidden",
     });
 
-    // Ajout de la table campaigns pour tracker la progression des régions.
     this.version(4).stores({
       buildings: "id,hidden",
       technos: "id,hidden,cp",
       ottomanAreas: "id,hidden",
       ottomanTradePosts: "id,hidden",
       campaigns: "id,hidden,cp",
+    });
+
+    // v5 — city planner layouts
+    this.version(5).stores({
+      buildings: "id,hidden",
+      technos: "id,hidden,cp",
+      ottomanAreas: "id,hidden",
+      ottomanTradePosts: "id,hidden",
+      campaigns: "id,hidden,cp",
+      cityLayouts: "id,cityId,updatedAt",
     });
   }
 }
