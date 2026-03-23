@@ -1,86 +1,73 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // buildingRenderer.ts
-// Dessin des entités placées et du ghost preview
-// Phase 3 : placeholders colorés (rectangles)
-// Phase 5+ : sprites depuis buildingDefinitions
+// Dessin des bâtiments placés, du ghost de placement et de la sélection,
+// ainsi que des bâtiments fixes prédéfinis (Moth Glade, Kaolin Quarry…)
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { TILE_SIZE } from '../core/mapGrid';
-import type { CityMapEntity } from '../core/cityMapEntity';
-import type { Viewport } from './viewportManager';
-import type { VisibleTiles } from './viewportManager';
-import { isRectVisible } from './viewportManager';
+import { TILE_SIZE } from "../core/mapGrid";
+import type { Viewport, VisibleTiles } from "./viewportManager";
+import type { FixedBuilding } from "../data/buildingDefinitions";
+import type { CityMapEntity } from "../core/cityMapEntity";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Palette de couleurs par type de bâtiment (Phase 3 — placeholders)
-// Phase 5+ : remplacé par les sprites
+// Palette bâtiments placés
 // ─────────────────────────────────────────────────────────────────────────────
 
-const BUILDING_COLORS: Record<string, string> = {
-  smallHome:         '#7C9E6E',
-  averageHome:       '#5E8B5A',
-  luxuriousHome:     '#3D6B3A',
-  ruralFarm:         '#C4A84F',
-  domesticFarm:      '#B09040',
-  luxuriousFarm:     '#8C7030',
-  littleCulture:     '#8B7CC8',
-  compactCulture:    '#7A6CB8',
-  moderateCulture:   '#6958A8',
-  largeCulture:      '#584898',
-  luxuriousCulture:  '#473888',
-  premiumCulture:    '#362888',
-  smallHome_allied:  '#6E9E8E',
-  // Fallback pour tout bâtiment non listé
-  _default:          '#5B8FB9',
-};
-
-function getBuildingColor(buildingDataId: string): string {
-  return BUILDING_COLORS[buildingDataId] ?? BUILDING_COLORS._default;
-}
+const ENTITY_FILL = "rgba(180, 160, 120, 0.85)";
+const ENTITY_STROKE = "rgba(100, 80, 50, 0.9)";
+const GHOST_VALID_FILL = "rgba(100, 180, 100, 0.45)";
+const GHOST_INVALID_FILL = "rgba(200, 60, 60, 0.45)";
+const GHOST_VALID_STROKE = "rgba(60, 140, 60, 0.8)";
+const GHOST_INVALID_STROKE = "rgba(180, 40, 40, 0.8)";
+const SELECTION_STROKE = "rgba(60, 140, 220, 0.95)";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Dessin des bâtiments placés
+// drawEntities — dessine toutes les entités placées sur la grille
 // ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Dessine toutes les entités placées visibles dans le viewport.
- * Culling intégré via isRectVisible().
- */
 export function drawEntities(
   ctx: CanvasRenderingContext2D,
   vp: Viewport,
   entities: ReadonlyMap<number, CityMapEntity>,
   visible: VisibleTiles,
 ): void {
-  const ts = TILE_SIZE * vp.zoom;
-
+  if (entities.size === 0) return;
   ctx.save();
+
+  const ts = TILE_SIZE * vp.zoom;
 
   for (const entity of entities.values()) {
     const b = entity.bounds;
-
-    // Culling — ignorer les entités hors viewport
-    if (!isRectVisible(b.x, b.y, b.w, b.h, visible)) continue;
+    // Culling : skip si le rect est entièrement hors de la zone visible
+    if (
+      b.x + b.w <= visible.minX ||
+      b.x > visible.maxX ||
+      b.y + b.h <= visible.minY ||
+      b.y > visible.maxY
+    )
+      continue;
 
     const sx = b.x * ts + vp.offset.x;
     const sy = b.y * ts + vp.offset.y;
     const sw = b.w * ts;
     const sh = b.h * ts;
 
-    const color = getBuildingColor(entity.buildingDataId);
-
-    // Fond du bâtiment
-    ctx.fillStyle = color;
+    ctx.fillStyle = ENTITY_FILL;
     ctx.fillRect(sx + 1, sy + 1, sw - 2, sh - 2);
 
-    // Bordure
-    ctx.strokeStyle = darken(color, 0.25);
-    ctx.lineWidth   = Math.max(1, vp.zoom);
+    ctx.strokeStyle = ENTITY_STROKE;
+    ctx.lineWidth = Math.max(1, vp.zoom * 1.2);
+    ctx.setLineDash([]);
     ctx.strokeRect(sx + 1, sy + 1, sw - 2, sh - 2);
 
-    // Label (visible seulement à partir d'un certain zoom)
-    if (vp.zoom >= 0.6 && sw > 24) {
-      drawEntityLabel(ctx, entity.buildingDataId, sx, sy, sw, sh, color);
+    if (vp.zoom >= 0.4 && sw > 20 && sh > 12) {
+      const label = entity.buildingDataId;
+      const fontSize = Math.max(8, Math.min(11, sw * 0.2));
+      ctx.font = `500 ${fontSize}px sans-serif`;
+      ctx.fillStyle = "rgba(0,0,0,0.7)";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(label, sx + sw / 2, sy + sh / 2, sw - 6);
     }
   }
 
@@ -88,39 +75,28 @@ export function drawEntities(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Dessin du ghost
+// drawGhost — dessine l'aperçu de placement (valide ou invalide)
 // ─────────────────────────────────────────────────────────────────────────────
 
-const GHOST_COLOR_VALID   = 'rgba(76, 175, 80, 0.5)';   // vert
-const GHOST_COLOR_INVALID = 'rgba(244, 67, 54, 0.5)';   // rouge
-const GHOST_BORDER_VALID  = 'rgba(56, 142, 60, 0.85)';
-const GHOST_BORDER_INVALID= 'rgba(211, 47, 47, 0.85)';
-
-/**
- * Dessine le ghost preview (bâtiment en cours de placement).
- * Vert si le placement est valide, rouge sinon.
- *
- * ⚠️ ghost.id === 0 — ne jamais passer au validator sans ignoreEntityId=0
- */
 export function drawGhost(
   ctx: CanvasRenderingContext2D,
   vp: Viewport,
   ghost: CityMapEntity,
   isValid: boolean,
 ): void {
-  const ts = TILE_SIZE * vp.zoom;
-  const b  = ghost.bounds;
+  ctx.save();
 
+  const ts = TILE_SIZE * vp.zoom;
+  const b = ghost.bounds;
   const sx = b.x * ts + vp.offset.x;
   const sy = b.y * ts + vp.offset.y;
   const sw = b.w * ts;
   const sh = b.h * ts;
 
-  ctx.save();
-
-  ctx.fillStyle   = isValid ? GHOST_COLOR_VALID : GHOST_COLOR_INVALID;
-  ctx.strokeStyle = isValid ? GHOST_BORDER_VALID : GHOST_BORDER_INVALID;
-  ctx.lineWidth   = Math.max(1.5, vp.zoom * 1.5);
+  ctx.fillStyle = isValid ? GHOST_VALID_FILL : GHOST_INVALID_FILL;
+  ctx.strokeStyle = isValid ? GHOST_VALID_STROKE : GHOST_INVALID_STROKE;
+  ctx.lineWidth = Math.max(1, vp.zoom * 1.5);
+  ctx.setLineDash([]);
 
   ctx.fillRect(sx + 1, sy + 1, sw - 2, sh - 2);
   ctx.strokeRect(sx + 1, sy + 1, sw - 2, sh - 2);
@@ -129,86 +105,136 @@ export function drawGhost(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Highlight de sélection (Phase 6)
+// drawSelectionOutline — contour bleu autour de l'entité sélectionnée
 // ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Dessine un contour de sélection autour d'une entité.
- */
 export function drawSelectionOutline(
   ctx: CanvasRenderingContext2D,
   vp: Viewport,
   entity: CityMapEntity,
 ): void {
-  const ts = TILE_SIZE * vp.zoom;
-  const b  = entity.bounds;
+  ctx.save();
 
+  const ts = TILE_SIZE * vp.zoom;
+  const b = entity.bounds;
   const sx = b.x * ts + vp.offset.x;
   const sy = b.y * ts + vp.offset.y;
   const sw = b.w * ts;
   const sh = b.h * ts;
 
-  ctx.save();
-  ctx.strokeStyle = '#FFD700';
-  ctx.lineWidth   = Math.max(2, vp.zoom * 2);
-  ctx.setLineDash([4, 2]);
-  ctx.strokeRect(sx, sy, sw, sh);
+  const gap = Math.max(2, vp.zoom * 2);
+  ctx.strokeStyle = SELECTION_STROKE;
+  ctx.lineWidth = Math.max(1.5, vp.zoom * 2);
+  ctx.setLineDash([5 * vp.zoom, 3 * vp.zoom]);
+  ctx.strokeRect(sx - gap, sy - gap, sw + gap * 2, sh + gap * 2);
   ctx.setLineDash([]);
+
   ctx.restore();
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Helpers internes
+// Palette — gris neutre pour les bâtiments fixes (non-constructibles)
+// Bridges = gris, extractionPoints = vert pâle, irrigation = bleu pâle, etc.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Dessine le label d'un bâtiment centré dans son rectangle.
- */
-function drawEntityLabel(
+const FIXED_BUILDING_COLORS: Record<string, string> = {
+  // China
+  mothGlade: "#A8C5A0",
+  kaolinQuarry: "#A8C5A0",
+  // Arabia
+  largeIrrigation: "#7BAEC8",
+  mediumIrrigation: "#7BAEC8",
+  smallIrrigation: "#7BAEC8",
+  // Egypt
+  irrigationStation: "#7BAEC8",
+  channel: "#7BAEC8",
+  smallWell: "#7BAEC8",
+  waterPump: "#7BAEC8",
+  averagePapyrusField: "#A8C5A0",
+  averageGoldMine: "#C8B86A",
+  // Mayas
+  jadeQuarry: "#A8C5A0",
+  obsidianQuarry: "#8A9BA8",
+  averageAviary: "#C8A87A",
+  // Vikings
+  averageBeehive: "#C8B86A",
+  averagePier: "#9AABB8",
+  // Fallback
+  _default: "#A8A8A8",
+};
+
+function getColor(group: string): string {
+  return FIXED_BUILDING_COLORS[group] ?? FIXED_BUILDING_COLORS._default;
+}
+
+function darken(hex: string, amount: number): string {
+  const n = parseInt(hex.replace("#", ""), 16);
+  const r = Math.max(0, (n >> 16) - Math.round(255 * amount));
+  const g = Math.max(0, ((n >> 8) & 0xff) - Math.round(255 * amount));
+  const b = Math.max(0, (n & 0xff) - Math.round(255 * amount));
+  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+}
+
+/** Humanise un group camelCase → "Moth Glade" */
+function humanizeName(group: string): string {
+  return (
+    group
+      .replace(/^average|^small|^medium|^large/, "")
+      .replace(/([A-Z])/g, " $1")
+      .trim() || group
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Rendu
+// ─────────────────────────────────────────────────────────────────────────────
+
+export function drawFixedBuildings(
   ctx: CanvasRenderingContext2D,
-  buildingDataId: string,
-  sx: number,
-  sy: number,
-  sw: number,
-  sh: number,
-  bgColor: string,
+  vp: Viewport,
+  buildings: FixedBuilding[],
+  canvasW: number,
+  canvasH: number,
 ): void {
-  // Nom court lisible (ex: 'smallHome' → 'Small Home')
-  const label = buildingDataId
-    .replace(/([A-Z])/g, ' $1')
-    .trim()
-    .split(' ')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
+  if (buildings.length === 0) return;
+  ctx.save();
 
-  const fontSize = Math.min(11, sw / label.length * 1.6);
-  if (fontSize < 7) return;
+  const ts = TILE_SIZE * vp.zoom;
 
-  ctx.font         = `${fontSize}px sans-serif`;
-  ctx.textAlign    = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillStyle    = lighten(bgColor, 0.8);
-  ctx.fillText(label, sx + sw / 2, sy + sh / 2, sw - 4);
-}
+  for (const b of buildings) {
+    const sx = b.x * ts + vp.offset.x;
+    const sy = b.y * ts + vp.offset.y;
+    const sw = b.w * ts;
+    const sh = b.h * ts;
 
-/**
- * Assombrit une couleur hex d'un facteur (0-1).
- */
-function darken(hex: string, factor: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const d = (v: number) => Math.max(0, Math.round(v * (1 - factor)));
-  return `rgb(${d(r)}, ${d(g)}, ${d(b)})`;
-}
+    // Culling
+    if (sx + sw < 0 || sy + sh < 0 || sx > canvasW || sy > canvasH) continue;
 
-/**
- * Éclaircit une couleur hex vers le blanc d'un facteur (0-1).
- */
-function lighten(hex: string, factor: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const l = (v: number) => Math.min(255, Math.round(v + (255 - v) * factor));
-  return `rgb(${l(r)}, ${l(g)}, ${l(b)})`;
+    const color = getColor(b.group);
+
+    // Fond
+    ctx.fillStyle = color;
+    ctx.fillRect(sx + 1, sy + 1, sw - 2, sh - 2);
+
+    // Bordure
+    ctx.strokeStyle = darken(color, 0.2);
+    ctx.lineWidth = Math.max(1, vp.zoom);
+    ctx.setLineDash([]);
+    ctx.strokeRect(sx + 1, sy + 1, sw - 2, sh - 2);
+
+    // Nom
+    if (vp.zoom >= 0.45 && sw > 20 && sh > 12) {
+      const name = humanizeName(b.group);
+      const fontSize = Math.max(8, Math.min(11, sw * 0.2));
+      ctx.font = `500 ${fontSize}px sans-serif`;
+      ctx.fillStyle = "rgba(0,0,0,0.65)";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      // Tronquer si trop long
+      ctx.fillText(name, sx + sw / 2, sy + sh / 2, sw - 6);
+    }
+  }
+
+  ctx.restore();
 }
