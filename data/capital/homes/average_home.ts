@@ -11,8 +11,8 @@ export const averageHomeDynamic = generateStandardLevels({
     food: (l) => l * 50000 - 450000,
   },
   construction: {
-    coins: (l) => l * 100000,
-    food: (l) => l * 220000,
+    coins: (l) => l * 300000,
+    food: (l) => l * 650000,
   },
   level40Upgrade: {
     goodsSource: "previous",

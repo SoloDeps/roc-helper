@@ -25,7 +25,10 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Harbor",
         desc: "New Feature",
-        img: { kind: "local", path: "/images/technos/features/icon_harbor.webp" },
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_harbor.webp",
+        },
       },
       {
         title: "Small Home",
@@ -51,7 +54,7 @@ export const technos_EG: TechnoData[] = [
         title: "City Hall",
         desc: "Unlocks a City Hall upgrade",
         img: { kind: "catalog", imgType: "museum", invert: true },
-      }
+      },
     ],
   },
   {
@@ -82,13 +85,17 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Compact Culture",
         desc: "Unlocks a Compact Culture upgrade",
-        img: { kind: "wiki", imageName: "Capital_Compact_Culture_Site_Lv", level: 13 },
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Compact_Culture_Site_Lv",
+          level: 13,
+        },
       },
       {
         title: "Rural Farm",
         desc: "Unlocks a Rural Farm upgrade",
         img: { kind: "wiki", imageName: "Capital_Rural_Farm_Lv", level: 37 },
-      }
+      },
     ],
   },
   {
@@ -126,7 +133,7 @@ export const technos_EG: TechnoData[] = [
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
   {
@@ -159,7 +166,7 @@ export const technos_EG: TechnoData[] = [
         title: "Primary Workshop",
         desc: "Unlocks the Primary Workshop",
         img: { kind: "catalog", imgType: "workshop", invert: true },
-      }
+      },
     ],
   },
   {
@@ -190,8 +197,12 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Infantry Barracks",
         desc: "Unlocks a Infantry Barracks upgrade",
-        img: { kind: "wiki", imageName: "Capital_Infantry_Barracks_Lv", level: 13 },
-      }
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Infantry_Barracks_Lv",
+          level: 13,
+        },
+      },
     ],
   },
   {
@@ -224,7 +235,7 @@ export const technos_EG: TechnoData[] = [
         title: "Common Warehouse",
         desc: "Allows constructing 1 more Common Warehouse building in Capital City",
         img: { kind: "catalog", imgType: "warehouse", invert: true },
-      }
+      },
     ],
   },
   {
@@ -262,7 +273,7 @@ export const technos_EG: TechnoData[] = [
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
   {
@@ -298,8 +309,12 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Moderate Culture Site",
         desc: "Unlocks a Moderate Culture Site upgrade",
-        img: { kind: "wiki", imageName: "Capital_Moderate_Culture_Site_Lv", level: 13 },
-      }
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Moderate_Culture_Site_Lv",
+          level: 13,
+        },
+      },
     ],
   },
   {
@@ -331,7 +346,10 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade Village Silver Upgrade Keys",
         desc: "Gives you 2 Trade Village Silver Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_silver_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_silver_upkey.webp",
+        },
       },
       {
         title: "Seafarer House",
@@ -341,8 +359,11 @@ export const technos_EG: TechnoData[] = [
       {
         title: "+10000",
         desc: "Increase Trade Token Limit",
-        img: { kind: "local", path: "/images/technos/features/icon_limittradingtokens.webp"},
-      }
+        img: {
+          kind: "local",
+          path: "/images/technos/features/icon_limittradingtokens.webp",
+        },
+      },
     ],
   },
   {
@@ -374,13 +395,16 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade Village Silver Upgrade Keys",
         desc: "Gives you 2 Trade Village Silver Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_silver_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_silver_upkey.webp",
+        },
       },
       {
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
   {
@@ -412,13 +436,16 @@ export const technos_EG: TechnoData[] = [
       {
         title: "3 Trade Village Silver Upgrade Keys",
         desc: "Gives you 3 Trade Village Silver Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_silver_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_silver_upkey.webp",
+        },
       },
       {
         title: "Common Warehouse",
         desc: "Allows constructing 1 more Common Warehouse building in Capital City",
         img: { kind: "catalog", imgType: "warehouse", invert: true },
-      }
+      },
     ],
   },
   {
@@ -455,7 +482,7 @@ export const technos_EG: TechnoData[] = [
         title: "Small Home",
         desc: "Allows constructing 1 more Small Home building in Capital City",
         img: { kind: "catalog", imgType: "home", invert: true },
-      }
+      },
     ],
   },
   {
@@ -486,8 +513,12 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Ranged Barracks",
         desc: "Unlocks a Ranged Barracks upgrade",
-        img: { kind: "wiki", imageName: "Capital_Ranged_Barracks_Lv", level: 13 },
-      }
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Ranged_Barracks_Lv",
+          level: 13,
+        },
+      },
     ],
   },
   {
@@ -525,7 +556,7 @@ export const technos_EG: TechnoData[] = [
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
   {
@@ -557,13 +588,16 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade Village Gold Upgrade Keys",
         desc: "Gives you 2 Trade Village Gold Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_gold_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_gold_upkey.webp",
+        },
       },
       {
         title: "Common Warehouse",
         desc: "Allows constructing 1 more Common Warehouse building in Capital City",
         img: { kind: "catalog", imgType: "warehouse", invert: true },
-      }
+      },
     ],
   },
   {
@@ -594,13 +628,17 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Little Culture Site",
         desc: "Unlocks a Little Culture Site upgrade",
-        img: { kind: "wiki", imageName: "Capital_Little_Culture_Site_Lv", level: 13 },
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Little_Culture_Site_Lv",
+          level: 13,
+        },
       },
       {
         title: "Little Culture Site",
         desc: "Allows constructing 1 more Little Culture Site building in Capital City",
         img: { kind: "catalog", imgType: "cultureSite", invert: true },
-      }
+      },
     ],
   },
   {
@@ -637,7 +675,7 @@ export const technos_EG: TechnoData[] = [
         title: "Rural Farm",
         desc: "Allows constructing 1 more Rural Farm building in Capital City",
         img: { kind: "catalog", imgType: "barn", invert: true },
-      }
+      },
     ],
   },
   {
@@ -669,13 +707,21 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade City Silver Upgrade Keys",
         desc: "Gives you 2 Trade City Silver Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_silver_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_silver_upkey.webp",
+        },
       },
       {
         title: "Seafarer House",
         desc: "Allows constructing 2 more Seafarer House building in Capital City",
         img: { kind: "catalog", imgType: "sailorHome", invert: true },
-      }
+      },
+      {
+        title: "Unlock",
+        desc: "Unlocks the Wheat Farm enhancement for your Trading Post hubs",
+        img: { kind: "catalog", imgType: "enhancement", invert: true },
+      },
     ],
   },
   {
@@ -707,13 +753,16 @@ export const technos_EG: TechnoData[] = [
       {
         title: "3 Trade Village Silver Upgrade Keys",
         desc: "Gives you 3 Trade Village Silver Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_silver_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_silver_upkey.webp",
+        },
       },
       {
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
   {
@@ -745,7 +794,7 @@ export const technos_EG: TechnoData[] = [
         title: "Domestic Farm",
         desc: "Unlocks a Domestic Farm upgrade",
         img: { kind: "wiki", imageName: "Capital_Domestic_Farm_Lv", level: 38 },
-      }
+      },
     ],
   },
   {
@@ -782,7 +831,7 @@ export const technos_EG: TechnoData[] = [
         title: "Secondary Workshop",
         desc: "Unlocks the Secondary Workshop building",
         img: { kind: "catalog", imgType: "workshop", invert: true },
-      }
+      },
     ],
   },
   {
@@ -814,13 +863,21 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade City Silver Upgrade Keys",
         desc: "Gives you 2 Trade City Silver Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_silver_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_silver_upkey.webp",
+        },
       },
       {
         title: "Ottoman Empire Ship",
         desc: "Unlocks a Ottoman Empire Ship upgrade",
         img: { kind: "wiki", imageName: "Ottoman_Empire_Ship_Lv", level: 2 },
-      }
+      },
+      {
+        title: "Unlock",
+        desc: "Unlocks the Pomegranate Orchard enhancement for your Trading Post hubs",
+        img: { kind: "catalog", imgType: "enhancement", invert: true },
+      },
     ],
   },
   {
@@ -851,8 +908,12 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Cavalry Barracks",
         desc: "Unlocks a Cavalry Barracks upgrade",
-        img: { kind: "wiki", imageName: "Capital_Cavalry_Barracks_Lv", level: 13 },
-      }
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Cavalry_Barracks_Lv",
+          level: 13,
+        },
+      },
     ],
   },
   {
@@ -884,7 +945,10 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade Village Gold Upgrade Keys",
         desc: "Gives you 2 Trade Village Gold Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_gold_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_gold_upkey.webp",
+        },
       },
       {
         title: "Seafarer House",
@@ -895,7 +959,7 @@ export const technos_EG: TechnoData[] = [
         title: "Common Warehouse",
         desc: "Allows constructing 1 more Common Warehouse building in Capital City",
         img: { kind: "catalog", imgType: "warehouse", invert: true },
-      }
+      },
     ],
   },
   {
@@ -927,13 +991,16 @@ export const technos_EG: TechnoData[] = [
       {
         title: "3 Trade Village Gold Upgrade Keys",
         desc: "Gives you 3 Trade Village Gold Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_gold_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_gold_upkey.webp",
+        },
       },
       {
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
   {
@@ -970,7 +1037,7 @@ export const technos_EG: TechnoData[] = [
         title: "Domestic Farm",
         desc: "Allows constructing 1 more Domestic Farm building in Capital City",
         img: { kind: "catalog", imgType: "barn", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1007,7 +1074,7 @@ export const technos_EG: TechnoData[] = [
         title: "Primary Workshop",
         desc: "Allows constructing 1 more Primary Workshop building in Capital City",
         img: { kind: "catalog", imgType: "workshop", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1039,13 +1106,21 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade City Gold Upgrade Keys",
         desc: "Gives you 2 Trade City Gold Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_gold_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_gold_upkey.webp",
+        },
       },
       {
         title: "Seafarer House",
         desc: "Allows constructing 2 more Seafarer House building in Capital City",
         img: { kind: "catalog", imgType: "sailorHome", invert: true },
-      }
+      },
+      {
+        title: "Unlock",
+        desc: "Unlocks the Ploughs enhancement for your Trading Post hubs",
+        img: { kind: "catalog", imgType: "enhancement", invert: true },
+      },
     ],
   },
   {
@@ -1077,13 +1152,21 @@ export const technos_EG: TechnoData[] = [
       {
         title: "3 Trade Village Platinum Upgrade Keys",
         desc: "Gives you 3 Trade Village Platinum Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_platinum_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_platinum_upkey.webp",
+        },
       },
       {
         title: "Common Warehouse",
         desc: "Allows constructing 1 more Common Warehouse building in Capital City",
         img: { kind: "catalog", imgType: "warehouse", invert: true },
-      }
+      },
+      {
+        title: "Unlock",
+        desc: "Unlocks the Pomegranate Irrigation enhancement for your Trading Post hubs",
+        img: { kind: "catalog", imgType: "enhancement", invert: true },
+      },
     ],
   },
   {
@@ -1120,7 +1203,7 @@ export const technos_EG: TechnoData[] = [
         title: "Average Home",
         desc: "Allows constructing 1 more Average Home building in Capital City",
         img: { kind: "catalog", imgType: "home", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1151,8 +1234,12 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Heavy Infantry Barracks",
         desc: "Unlocks a Heavy Infantry Barracks upgrade",
-        img: { kind: "wiki", imageName: "Capital_Heavy_Infantry_Barracks_Lv", level: 13 },
-      }
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Heavy_Infantry_Barracks_Lv",
+          level: 13,
+        },
+      },
     ],
   },
   {
@@ -1184,13 +1271,16 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade City Gold Upgrade Keys",
         desc: "Gives you 2 Trade City Gold Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_gold_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_gold_upkey.webp",
+        },
       },
       {
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1222,18 +1312,24 @@ export const technos_EG: TechnoData[] = [
       {
         title: "3 Trade Village Gold Upgrade Keys",
         desc: "Gives you 3 Trade Village Gold Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_gold_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_gold_upkey.webp",
+        },
       },
       {
         title: "2 Trade City Platinum Upgrade Keys",
         desc: "Gives you 2 Trade City Platinum Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_platinum_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_platinum_upkey.webp",
+        },
       },
       {
         title: "Seafarer House",
         desc: "Allows constructing 2 more Seafarer House building in Capital City",
         img: { kind: "catalog", imgType: "sailorHome", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1265,7 +1361,7 @@ export const technos_EG: TechnoData[] = [
         title: "Moderate Culture Site",
         desc: "Allows constructing 1 more Moderate Culture Site building in Capital City",
         img: { kind: "catalog", imgType: "cultureSite", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1297,7 +1393,7 @@ export const technos_EG: TechnoData[] = [
         title: "Small Home",
         desc: "Unlocks a Small Home upgrade",
         img: { kind: "wiki", imageName: "Capital_Small_Home_Lv", level: 39 },
-      }
+      },
     ],
   },
   {
@@ -1329,18 +1425,24 @@ export const technos_EG: TechnoData[] = [
       {
         title: "3 Trade Village Platinum Upgrade Keys",
         desc: "Gives you 3 Trade Village Platinum Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_platinum_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_platinum_upkey.webp",
+        },
       },
       {
         title: "2 Trade City Platinum Upgrade Keys",
         desc: "Gives you 2 Trade City Platinum Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_platinum_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_platinum_upkey.webp",
+        },
       },
       {
         title: "Common Warehouse",
         desc: "Allows constructing 1 more Common Warehouse building in Capital City",
         img: { kind: "catalog", imgType: "warehouse", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1371,8 +1473,12 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Siege Barracks",
         desc: "Unlocks a Siege Barracks upgrade",
-        img: { kind: "wiki", imageName: "Capital_Siege_Barracks_Lv", level: 13 },
-      }
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Siege_Barracks_Lv",
+          level: 13,
+        },
+      },
     ],
   },
   {
@@ -1400,7 +1506,10 @@ export const technos_EG: TechnoData[] = [
       {
         title: "3 Trade Village Diamond Upgrade Keys",
         desc: "Gives you 3 Trade Village Diamond Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_diamond_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_diamond_upkey.webp",
+        },
       },
       {
         title: "Common Warehouse",
@@ -1411,7 +1520,12 @@ export const technos_EG: TechnoData[] = [
         title: "Seafarer House",
         desc: "Allows constructing 2 more Seafarer House building in Capital City",
         img: { kind: "catalog", imgType: "sailorHome", invert: true },
-      }
+      },
+      {
+        title: "Unlock",
+        desc: "Unlocks the Bakery enhancement for your Trading Post hubs",
+        img: { kind: "catalog", imgType: "enhancement", invert: true },
+      },
     ],
   },
   {
@@ -1443,18 +1557,29 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade City Diamond Upgrade Keys",
         desc: "Gives you 2 Trade City Diamond Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_diamond_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_diamond_upkey.webp",
+        },
       },
       {
         title: "4 Trade Village Platinum Upgrade Keys",
         desc: "Gives you 4 Trade Village Platinum Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_platinum_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_platinum_upkey.webp",
+        },
       },
       {
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
+      {
+        title: "Unlock",
+        desc: "Unlocks the Syrup Press enhancement for your Trading Post hubs",
+        img: { kind: "catalog", imgType: "enhancement", invert: true },
+      },
     ],
   },
   {
@@ -1486,7 +1611,7 @@ export const technos_EG: TechnoData[] = [
         title: "Average Home",
         desc: "Unlocks a Average Home upgrade",
         img: { kind: "wiki", imageName: "Capital_Average_Home_Lv", level: 39 },
-      }
+      },
     ],
   },
   {
@@ -1523,7 +1648,7 @@ export const technos_EG: TechnoData[] = [
         title: "Tertiary Workshop",
         desc: "Unlocks the Tertiary Workshop building",
         img: { kind: "catalog", imgType: "workshop", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1555,7 +1680,10 @@ export const technos_EG: TechnoData[] = [
       {
         title: "4 Trade Village Diamond Upgrade Keys",
         desc: "Gives you 4 Trade Village Diamond Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_diamond_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_diamond_upkey.webp",
+        },
       },
       {
         title: "Common Warehouse",
@@ -1566,7 +1694,7 @@ export const technos_EG: TechnoData[] = [
         title: "Seafarer House",
         desc: "Allows constructing 2 more Seafarer House building in Capital City",
         img: { kind: "catalog", imgType: "sailorHome", invert: true },
-      }
+      },
     ],
   },
   {
@@ -1597,8 +1725,12 @@ export const technos_EG: TechnoData[] = [
       {
         title: "Large Culture Site",
         desc: "Unlocks a Large Culture Site upgrade",
-        img: { kind: "wiki", imageName: "Capital_Large_Culture_Site_Lv", level: 13 },
-      }
+        img: {
+          kind: "wiki",
+          imageName: "Capital_Large_Culture_Site_Lv",
+          level: 13,
+        },
+      },
     ],
   },
   {
@@ -1630,18 +1762,24 @@ export const technos_EG: TechnoData[] = [
       {
         title: "2 Trade City Diamond Upgrade Keys",
         desc: "Gives you 2 Trade City Diamond Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_city_diamond_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_city_diamond_upkey.webp",
+        },
       },
       {
         title: "3 Trade Village Diamond Upgrade Keys",
         desc: "Gives you 3 Trade Village Diamond Upgrade Keys",
-        img: { kind: "local", path: "/images/goods/trade_village_diamond_upkey.webp" },
+        img: {
+          kind: "local",
+          path: "/images/goods/trade_village_diamond_upkey.webp",
+        },
       },
       {
         title: "Shipyard",
         desc: "Allows constructing 1 more Shipyard building in Capital City",
         img: { kind: "catalog", imgType: "shipyard", invert: true },
-      }
+      },
     ],
   },
 ];

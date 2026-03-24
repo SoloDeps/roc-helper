@@ -134,14 +134,12 @@ const CategoryStep = memo(() => {
 
   const categories = useMemo(() => getCategories(), []);
 
-  const { campaign, topRow, secondary } = useMemo(() => {
-    const topRowIds = new Set(["capital", "technology"]);
+  const { topRow, secondary } = useMemo(() => {
+    const topRowIds = new Set(["capital", "harbor", "campaign", "technology"]);
     return {
-      campaign: categories.filter((cat) => cat.id === "campaign"),
+      // campaign: categories.filter((cat) => cat.id === "campaign"),
       topRow: categories.filter((cat) => topRowIds.has(cat.id)),
-      secondary: categories.filter(
-        (cat) => cat.id !== "campaign" && !topRowIds.has(cat.id),
-      ),
+      secondary: categories.filter((cat) => !topRowIds.has(cat.id)),
     };
   }, [categories]);
 
@@ -195,19 +193,13 @@ const CategoryStep = memo(() => {
         />
       )}
 
-      {/* Technologies — centered, half width */}
-      {campaign.length > 0 && (
-        <div className="flex justify-center">
-          <div className="w-1/2">
-            <ElementGrid
-              items={campaign}
-              onSelect={selectCategory}
-              columns={1}
-              priorityCount={1}
-            />
-          </div>
+      <div className="relative flex items-center gap-2 my-3">
+          <div className="flex-1 h-px bg-border" />
+          <span className="text-xs text-muted-foreground shrink-0 px-1">
+            ALLIED CITIES
+          </span>
+          <div className="flex-1 h-px bg-border" />
         </div>
-      )}
 
       {/* Other secondary categories */}
       {secondary.length > 0 && (

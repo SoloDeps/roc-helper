@@ -16,7 +16,6 @@ import { TechTreeMobile } from "@/components/technology/tech-tree-mobile";
 import { Button } from "@/components/ui/button";
 import { ResponsiveSelect } from "@/components/modals/responsive-select";
 import {
-  AlertCircle,
   Plus,
   BarChart2,
   CheckCircle2,
@@ -31,7 +30,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Drawer,
@@ -57,6 +55,7 @@ import {
   getItemIconLocal,
   getGoodNameFromPriorityEra,
 } from "@/lib/utils";
+import { eras, type EraAbbr } from "@/lib/constants";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
 import type { TechnoData } from "@/types/shared";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -82,6 +81,15 @@ function sumCosts(techs: TechnoData[]) {
   return { resources, goods };
 }
 
+// Ordered list of era abbreviations for chronological sort
+const ERA_ORDER = eras.map((e) => e.abbr);
+
+type GoodsByPriority = {
+  primary?: number;
+  secondary?: number;
+  tertiary?: number;
+};
+
 function CostGrid({
   techs,
   emptyLabel,
@@ -92,45 +100,131 @@ function CostGrid({
   const userSelections = useBuildingSelections();
   const { resources, goods } = useMemo(() => sumCosts(techs), [techs]);
   const hasContent = Object.keys(resources).length > 0 || goods.size > 0;
+
+  // ── Categorise goods ────────────────────────────────────────────────────────
+  const { eraGoodsMap, otherGoods } = useMemo(() => {
+    const eraMap = new Map<string, GoodsByPriority>();
+    const other: [string, number][] = [];
+
+    goods.forEach((amount, resource) => {
+      const match = resource.match(
+        /^(primary|secondary|tertiary)_([a-z]{2})$/i,
+      );
+      if (match) {
+        const priority = match[1].toLowerCase() as keyof GoodsByPriority;
+        const era = match[2].toUpperCase();
+        const current = eraMap.get(era) ?? {};
+        eraMap.set(era, { ...current, [priority]: amount });
+      } else {
+        other.push([resource, amount]);
+      }
+    });
+
+    return { eraGoodsMap: eraMap, otherGoods: other };
+  }, [goods]);
+
+  // Sort eras chronologically
+  const sortedEras = useMemo(
+    () =>
+      Array.from(eraGoodsMap.keys()).sort(
+        (a, b) =>
+          ERA_ORDER.indexOf(a as EraAbbr) - ERA_ORDER.indexOf(b as EraAbbr),
+      ),
+    [eraGoodsMap],
+  );
+
+  // Build a flat ordered list of badge props
+  const badges = useMemo(() => {
+    const result: { key: string; icon: string; value: string; alt: string }[] =
+      [];
+
+    // 1. research_points | coins | food (empty slot if absent)
+    const FIXED_KEYS = ["research_points", "coins", "food"] as const;
+    FIXED_KEYS.forEach((k) => {
+      if (resources[k] != null) {
+        result.push({
+          key: k,
+          icon: getItemIconLocal(k),
+          value: formatNumber(resources[k]),
+          alt: k,
+        });
+      }
+    });
+
+    // 2. Era goods: one row per era, always pri / sec / ter
+    sortedEras.forEach((eraAbbr) => {
+      const eraGoods = eraGoodsMap.get(eraAbbr)!;
+      (["primary", "secondary", "tertiary"] as const).forEach((priority) => {
+        const amount = eraGoods[priority];
+        if (amount != null) {
+          const goodName =
+            getGoodNameFromPriorityEra(priority, eraAbbr, userSelections) ??
+            "default";
+          result.push({
+            key: `${priority}_${eraAbbr}`,
+            icon: getItemIconLocal(goodName),
+            value: formatNumber(amount),
+            alt: `${priority}_${eraAbbr}`,
+          });
+        }
+      });
+    });
+
+    // 3. Other resources (not rp/coins/food)
+    const FIXED_SET = new Set(["research_points", "coins", "food"]);
+    Object.entries(resources)
+      .filter(([k]) => !FIXED_SET.has(k))
+      .forEach(([type, value]) => {
+        result.push({
+          key: type,
+          icon: getItemIconLocal(type),
+          value: formatNumber(value),
+          alt: type,
+        });
+      });
+
+    // 4. Unrecognised goods
+    otherGoods.forEach(([resource, amount], i) => {
+      const match = resource.match(
+        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
+      );
+      let goodName = resource;
+      if (match) {
+        goodName =
+          getGoodNameFromPriorityEra(match[1], match[2], userSelections) ??
+          "default";
+      }
+      result.push({
+        key: `${resource}-${i}`,
+        icon: getItemIconLocal(goodName),
+        value: formatNumber(amount),
+        alt: resource,
+      });
+    });
+
+    return result;
+  }, [resources, sortedEras, eraGoodsMap, otherGoods, userSelections]);
+
   return (
     <div className="space-y-2">
       <p className="text-xs text-muted-foreground">
         {techs.length} tech{techs.length !== 1 ? "s" : ""}
       </p>
+
       {!hasContent ? (
         <p className="text-xs text-muted-foreground italic py-2">
           {emptyLabel}
         </p>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
-          {Object.entries(resources).map(([type, value]) => (
+          {badges.map((b) => (
             <ResourceBadge
-              key={type}
-              icon={getItemIconLocal(type)}
-              value={formatNumber(value)}
-              alt={type}
+              key={b.key}
+              icon={b.icon}
+              value={b.value}
+              alt={b.alt}
             />
           ))}
-          {Array.from(goods.entries()).map(([resource, amount], i) => {
-            const match = resource.match(
-              /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-            );
-            let goodName = resource;
-            if (match) {
-              const [, priority, era] = match;
-              goodName =
-                getGoodNameFromPriorityEra(priority, era, userSelections) ||
-                "default";
-            }
-            return (
-              <ResourceBadge
-                key={`${resource}-${i}`}
-                icon={getItemIconLocal(goodName)}
-                value={formatNumber(amount)}
-                alt={resource}
-              />
-            );
-          })}
         </div>
       )}
     </div>

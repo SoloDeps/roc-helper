@@ -133,6 +133,36 @@ export function CampaignInfoPanel({
     "remaining",
   );
 
+  // ── Stable ordered key list (union of both tabs) ──────────────────────────
+  // Order: expansions → research_points → coins → food → others
+  const PRIORITY_RESOURCES = ["research_points", "coins", "food"];
+
+  const stableResourceKeys = useMemo(() => {
+    const allKeys = Array.from(
+      new Set([
+        ...aggregated.map((r) => r.resource),
+        ...obtainedAggregated.map((r) => r.resource),
+      ]),
+    );
+    const expansions = allKeys.filter((k) => k.startsWith("expansion_")).sort();
+    const priority = PRIORITY_RESOURCES.filter((k) => allKeys.includes(k));
+    const others = allKeys
+      .filter(
+        (k) => !k.startsWith("expansion_") && !PRIORITY_RESOURCES.includes(k),
+      )
+      .sort();
+    return [...expansions, ...priority, ...others];
+  }, [aggregated, obtainedAggregated]);
+
+  const stableCommanderKeys = useMemo(() => {
+    return Array.from(
+      new Set([
+        ...commanders.map((c) => c.resource),
+        ...obtainedCommanders.map((c) => c.resource),
+      ]),
+    );
+  }, [commanders, obtainedCommanders]);
+
   return (
     <div
       className={
@@ -183,15 +213,13 @@ export function CampaignInfoPanel({
           </div>
         </div>
 
-        {pct === 100 ? (
-          <div className="flex-1 flex items-center justify-center">
+        <>
+          {/* Scout cost OR all-scouted message */}
+          {pct === 100 ? (
             <p className="text-sm text-green-500 font-medium text-center py-2">
               All regions scouted! 🎉
             </p>
-          </div>
-        ) : (
-          <>
-            {/* Remaining scout cost */}
+          ) : (
             <div>
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
                 Scout cost remaining · {remaining.length} region
@@ -211,107 +239,146 @@ export function CampaignInfoPanel({
                 </div>
               </div>
             </div>
+          )}
 
-            {/* Rewards — tabbed when obtained rewards exist, plain otherwise */}
-            {(hasRewards || showRewardTabs) && (
-              <div>
-                {showRewardTabs ? (
-                  <div className="grid grid-cols-2 mb-2">
-                    <button
-                      onClick={() => setRewardTab("remaining")}
-                      className={`text-xs font-medium uppercase tracking-wider text-center pb-1 transition-colors ${
-                        rewardTab === "remaining"
-                          ? "text-foreground border-b-2 border-foreground/90"
-                          : "text-muted-foreground border-b-2 border-border hover:text-foreground"
-                      }`}
-                    >
-                      Remaining
-                    </button>
-                    <button
-                      onClick={() => setRewardTab("obtained")}
-                      className={`text-xs font-medium uppercase tracking-wider text-center pb-1 transition-colors ${
-                        rewardTab === "obtained"
-                          ? "text-foreground border-b-2 border-foreground/90"
-                          : "text-muted-foreground border-b-2 border-border hover:text-foreground"
-                      }`}
-                    >
-                      Obtained
-                    </button>
-                  </div>
-                ) : (
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
-                    Remaining rewards
-                  </p>
-                )}
+          {/* Rewards — tabbed when obtained rewards exist, plain otherwise */}
+          {(hasRewards ||
+            showRewardTabs ||
+            (pct === 100 && hasObtainedRewards)) && (
+            <div>
+              {pct === 100 ? (
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                  Obtained rewards
+                </p>
+              ) : showRewardTabs ? (
+                <div className="grid grid-cols-2 mb-2">
+                  <button
+                    onClick={() => setRewardTab("remaining")}
+                    className={`text-xs font-medium uppercase tracking-wider text-center pb-1 transition-colors ${
+                      rewardTab === "remaining"
+                        ? "text-foreground border-b-2 border-foreground/90"
+                        : "text-muted-foreground border-b-2 border-border hover:text-foreground"
+                    }`}
+                  >
+                    Remaining
+                  </button>
+                  <button
+                    onClick={() => setRewardTab("obtained")}
+                    className={`text-xs font-medium uppercase tracking-wider text-center pb-1 transition-colors ${
+                      rewardTab === "obtained"
+                        ? "text-foreground border-b-2 border-foreground/90"
+                        : "text-muted-foreground border-b-2 border-border hover:text-foreground"
+                    }`}
+                  >
+                    Obtained
+                  </button>
+                </div>
+              ) : (
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                  Remaining rewards
+                </p>
+              )}
 
-                {/* Remaining tab */}
-                {(!showRewardTabs || rewardTab === "remaining") && (
-                  <>
-                    {aggregated.length > 0 && (
+              {/* Remaining tab — hidden when all scouted */}
+              {pct < 100 && (!showRewardTabs || rewardTab === "remaining") && (
+                <>
+                  {(() => {
+                    const remainingMap = new Map(
+                      aggregated.map((r) => [r.resource, r.amount]),
+                    );
+                    const orderedItems = stableResourceKeys.filter((k) =>
+                      remainingMap.has(k),
+                    );
+                    return orderedItems.length > 0 ? (
                       <div className="grid grid-cols-2 gap-1.5">
-                        {aggregated.map((rw) => (
+                        {orderedItems.map((key) => (
                           <ResourceBadge
-                            key={rw.resource}
-                            icon={getItemIconLocal(rw.resource)}
-                            value={formatNumber(rw.amount)}
-                            alt={rw.resource}
+                            key={key}
+                            icon={getItemIconLocal(key)}
+                            value={formatNumber(remainingMap.get(key)!)}
+                            alt={key}
                           />
                         ))}
                       </div>
-                    )}
-                    {commanders.length > 0 && (
+                    ) : null;
+                  })()}
+                  {(() => {
+                    const remainingCmdMap = new Map(
+                      commanders.map((c) => [c.resource, c.name]),
+                    );
+                    const orderedCmds = stableCommanderKeys.filter((k) =>
+                      remainingCmdMap.has(k),
+                    );
+                    return orderedCmds.length > 0 ? (
                       <ul className="space-y-1.5 mt-1.5">
-                        {commanders.map((cmd) => (
+                        {orderedCmds.map((key) => (
                           <li
-                            key={cmd.resource}
+                            key={key}
                             className="flex items-center px-3 rounded-md bg-background-100 border border-alpha-200 h-9 shrink-0 text-sm font-medium"
                           >
-                            {cmd.name}
+                            {remainingCmdMap.get(key)}
                           </li>
                         ))}
                       </ul>
-                    )}
-                    {!hasRewards && (
-                      <p className="text-xs text-muted-foreground italic">
-                        No remaining rewards
-                      </p>
-                    )}
-                  </>
-                )}
+                    ) : null;
+                  })()}
+                  {!hasRewards && (
+                    <p className="text-xs text-muted-foreground italic">
+                      No remaining rewards
+                    </p>
+                  )}
+                </>
+              )}
 
-                {/* Obtained tab */}
-                {showRewardTabs && rewardTab === "obtained" && (
-                  <>
-                    {obtainedAggregated.length > 0 && (
+              {/* Obtained tab */}
+              {(pct === 100 ||
+                (showRewardTabs && rewardTab === "obtained")) && (
+                <>
+                  {(() => {
+                    const obtainedMap = new Map(
+                      obtainedAggregated.map((r) => [r.resource, r.amount]),
+                    );
+                    const orderedItems = stableResourceKeys.filter((k) =>
+                      obtainedMap.has(k),
+                    );
+                    return orderedItems.length > 0 ? (
                       <div className="grid grid-cols-2 gap-1.5">
-                        {obtainedAggregated.map((rw) => (
+                        {orderedItems.map((key) => (
                           <ResourceBadge
-                            key={rw.resource}
-                            icon={getItemIconLocal(rw.resource)}
-                            value={formatNumber(rw.amount)}
-                            alt={rw.resource}
+                            key={key}
+                            icon={getItemIconLocal(key)}
+                            value={formatNumber(obtainedMap.get(key)!)}
+                            alt={key}
                           />
                         ))}
                       </div>
-                    )}
-                    {obtainedCommanders.length > 0 && (
+                    ) : null;
+                  })()}
+                  {(() => {
+                    const obtainedCmdMap = new Map(
+                      obtainedCommanders.map((c) => [c.resource, c.name]),
+                    );
+                    const orderedCmds = stableCommanderKeys.filter((k) =>
+                      obtainedCmdMap.has(k),
+                    );
+                    return orderedCmds.length > 0 ? (
                       <ul className="space-y-1.5 mt-1.5">
-                        {obtainedCommanders.map((cmd) => (
+                        {orderedCmds.map((key) => (
                           <li
-                            key={cmd.resource}
+                            key={key}
                             className="flex items-center px-3 rounded-md bg-background-100 border border-alpha-200 h-9 shrink-0 text-sm font-medium"
                           >
-                            {cmd.name}
+                            {obtainedCmdMap.get(key)}
                           </li>
                         ))}
                       </ul>
-                    )}
-                  </>
-                )}
-              </div>
-            )}
-          </>
-        )}
+                    ) : null;
+                  })()}
+                </>
+              )}
+            </div>
+          )}
+        </>
       </div>
     </div>
   );

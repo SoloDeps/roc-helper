@@ -35,9 +35,9 @@ export const commonWarehouse: BuildingData = {
       era: "LG",
       max_qty: 13,
       construction: {
-        coins: 750000,
-        food: 250000,
+        coins: 1000000,
         goods: [
+          { amount: 30000, resource: 'aspers' },
           {
             amount: 1500,
             resource: "lead_glass",

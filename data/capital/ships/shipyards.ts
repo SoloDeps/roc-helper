@@ -35,9 +35,9 @@ export const shipyards: BuildingData = {
       era: "LG",
       max_qty: 14,
       construction: {
-        coins: 1500000,
-        food: 750000,
         goods: [
+          { amount: 3000, resource: "confection" },
+          { amount: 3000, resource: "syrup" },
           {
             amount: 3800,
             resource: "primary_eg",

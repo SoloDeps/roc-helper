@@ -205,17 +205,17 @@ export const ELEMENT_DATA_REGISTRY: Record<string, BuildingData> = {
   capital_alchemist: alchemistWorkshop,
   capital_jeweler: jewelerWorkshop,
   capital_glassblower: glassblowerWorkshop,
-  // capital - harbor houses
-  capital_seafarer_house: seafarerHouse,
-  capital_luxurious_seafarer_house: luxuriousSeafarerHouse,
-  // capital - port facilities
-  capital_pier: pier,
-  capital_lighthouse: lighthouse,
-  // capital - ships
-  capital_shipyard: shipyards,
-  // capital - warehouses
-  capital_common_warehouse: commonWarehouse,
-  capital_large_warehouse: largeWarehouse,
+  // harbor - seafarer houses
+  harbor_seafarer_house: seafarerHouse,
+  harbor_luxurious_seafarer_house: luxuriousSeafarerHouse,
+  // harbor - port facilities
+  harbor_pier: pier,
+  harbor_lighthouse: lighthouse,
+  // harbor - ships
+  harbor_shipyard: shipyards,
+  // harbor - warehouses
+  harbor_common_warehouse: commonWarehouse,
+  harbor_large_warehouse: largeWarehouse,
 
   // egypt
   egypt_small_home: egyptSmallHome,

@@ -61,9 +61,9 @@ export const seafarerHouse: BuildingData = {
       era: "LG",
       max_qty: 20,
       construction: {
-        coins: 250000,
-        food: 100000,
         goods: [
+          { amount: 2000, resource: "confection" },
+          { amount: 2000, resource: "syrup" },
           {
             amount: 3000,
             resource: "primary_eg",

@@ -168,6 +168,7 @@ export const imagesUrl = {
   camelFarm: "/images/game_icons/icon_flat_camelFarm.webp",
   irrigation: "/images/game_icons/icon_flat_irrigation.webp",
   merchant: "/images/game_icons/icon_flat_merchant.webp",
+  enhancement: "/images/game_icons/icon_flat_enhancements.webp",
   // crests
   china: "/images/city_crest/icon_city_crest_china.webp",
   arabia: "/images/city_crest/icon_city_crest_arabia.webp",
@@ -284,6 +285,14 @@ export const CATALOG: Category[] = [
           },
         ],
       },
+    ],
+  },
+  // harbor
+  {
+    id: "harbor",
+    name: "Harbor",
+    imgType: "shipyard",
+    subcategories: [
       {
         id: "harborHouses",
         name: "Harbor Houses",
