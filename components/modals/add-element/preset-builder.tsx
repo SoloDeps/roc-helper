@@ -102,10 +102,15 @@ export const PresetBuilder = memo(() => {
   const { submit, isLoading } = useSubmitPreset();
 
   const era = presetSelection.era as EraAbbr;
-  const eraName = ERAS.find((e) => e.abbr === era)?.name ?? era;
+  // const eraName = ERAS.find((e) => e.abbr === era)?.name ?? era;
 
   const capitalSections = useMemo(
     () => getSectionsForEraAndCategory(era, "capital"),
+    [era],
+  );
+
+  const harborSections = useMemo(
+    () => getSectionsForEraAndCategory(era, "harbor"),
     [era],
   );
 
@@ -155,6 +160,7 @@ export const PresetBuilder = memo(() => {
     } else {
       const allIds = new Set<string>();
       capitalSections.forEach((s) => allIds.add(s.id));
+      harborSections.forEach((s) => allIds.add(s.id));
       for (const city of alliedCities) {
         alliedSectionsMap[city]?.forEach((s) => allIds.add(s.id));
       }
@@ -171,6 +177,7 @@ export const PresetBuilder = memo(() => {
   }, [
     isAllSelected,
     capitalSections,
+    harborSections,
     alliedCities,
     alliedSectionsMap,
     ottomanSections,
@@ -216,6 +223,14 @@ export const PresetBuilder = memo(() => {
           <SectionGroup
             title="Capital"
             sections={capitalSections}
+            checkedIds={presetSelection.selectedSections}
+            onToggle={togglePresetSection}
+          />
+
+          {/* Harbor */}
+          <SectionGroup
+            title="Harbor"
+            sections={harborSections}
             checkedIds={presetSelection.selectedSections}
             onToggle={togglePresetSection}
           />

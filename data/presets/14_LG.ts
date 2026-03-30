@@ -62,23 +62,46 @@ export const sections_LG: PresetSection[] = [
       { buildingId: "primary_workshop",   type: "upgrade", era: "LG", level: 2, qty: 4 },
     ],
   },
+  // Harbor
   {
-    id: "capital_harbor_LG",
-    label: "Harbor",
-    category: "capital",
+    id: "harbor_seafarer_houses_LG",
+    label: "Seafarer Houses",
+    category: "harbor",
     entries: [
       { buildingId: "seafarer_house",   type: "construction", era: "LG", level: 3, qty: 4 },
-      { buildingId: "seafarer_house",   type: "upgrade",      era: "LG", level: 3, qty: 14 },
-      { buildingId: "seafarer_house",   type: "upgrade",      era: "LG", level: 4, qty: 14 },
+      { buildingId: "seafarer_house",   type: "upgrade",      era: "LG", level: 3, qty: 16 },
+      { buildingId: "seafarer_house",   type: "upgrade",      era: "LG", level: 4, qty: 20 },
+    ],
+  },
+  {
+    id: "harbor_shipyards_LG",
+    label: "Shipyards",
+    category: "harbor",
+    entries: [
       { buildingId: "shipyard",         type: "construction", era: "LG", level: 2, qty: 4 },
       { buildingId: "shipyard",         type: "upgrade",      era: "LG", level: 2, qty: 9 },
+    ],
+  },
+  {
+    id: "harbor_warehouses_LG",
+    label: "Warehouses",
+    category: "harbor",
+    entries: [
       { buildingId: "common_warehouse", type: "construction", era: "LG", level: 2, qty: 4 },
-      { buildingId: "common_warehouse", type: "upgrade",      era: "LG", level: 2, qty: 8 },
-      { buildingId: "common_warehouse", type: "upgrade",      era: "LG", level: 3, qty: 8 },
+      { buildingId: "common_warehouse", type: "upgrade",      era: "LG", level: 2, qty: 9 },
+      { buildingId: "common_warehouse", type: "upgrade",      era: "LG", level: 3, qty: 13 },
+    ],
+  },
+  {
+    id: "harbor_port_facilities_LG",
+    label: "Port Facilities",
+    category: "harbor",
+    entries: [
       { buildingId: "lighthouse",       type: "construction", era: "LG", level: 1, qty: 5 },
       { buildingId: "pier",             type: "construction", era: "LG", level: 1, qty: 5 },
     ],
   },
+  // Ottoman
   {
     id: "ottoman_ships_LG",
     label: "Ships",

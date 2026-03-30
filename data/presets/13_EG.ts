@@ -68,17 +68,33 @@ export const sections_EG: PresetSection[] = [
       { buildingId: "primary_workshop",   type: "construction", era: "EG", level: 1, qty: 3 },
     ],
   },
+  // Harbor
   {
-    id: "capital_harbor_EG",
-    label: "Harbor",
-    category: "capital",
+    id: "harbor_seafarer_EG",
+    label: "Seafarer Houses",
+    category: "harbor",
     entries: [
       { buildingId: "seafarer_house",   type: "construction", era: "EG", level: 1, qty: 16 },
       { buildingId: "seafarer_house",   type: "upgrade",      era: "EG", level: 2, qty: 16 },
-      { buildingId: "shipyard",         type: "construction", era: "EG", level: 1, qty: 10 },
+    ],
+  },
+  {
+    id: "harbor_warehouse_EG",
+    label: "Warehouses",
+    category: "harbor",
+    entries: [
       { buildingId: "common_warehouse", type: "construction", era: "EG", level: 1, qty: 9 },
     ],
   },
+  {
+    id: "harbor_shipyard_EG",
+    label: "Shipyards",
+    category: "harbor",
+    entries: [
+      { buildingId: "shipyard",         type: "construction", era: "EG", level: 1, qty: 10 },
+    ],
+  },
+  // Ottoman
   {
     id: "ottoman_ships_EG",
     label: "Ships",
