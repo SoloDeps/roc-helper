@@ -96,8 +96,12 @@ const CITY_LABEL: Record<string, string> = {
 // ============================================================================
 
 export const PresetBuilder = memo(() => {
-  const { presetSelection, togglePresetSection, togglePresetTechnos, togglePresetCampaign } =
-    useAddElementStore();
+  const {
+    presetSelection,
+    togglePresetSection,
+    togglePresetTechnos,
+    togglePresetCampaign,
+  } = useAddElementStore();
 
   const { submit, isLoading } = useSubmitPreset();
 
@@ -130,12 +134,22 @@ export const PresetBuilder = memo(() => {
   );
 
   const totalAvailable = useMemo(() => {
-    let n = 2 + capitalSections.length + ottomanSections.length; // +2 for technos + campaign
+    let n =
+      2 +
+      capitalSections.length +
+      harborSections.length +
+      ottomanSections.length; // +2 for technos + campaign
     for (const city of alliedCities) {
       n += alliedSectionsMap[city]?.length ?? 0;
     }
     return n;
-  }, [capitalSections, alliedCities, alliedSectionsMap, ottomanSections]);
+  }, [
+    capitalSections,
+    harborSections,
+    alliedCities,
+    alliedSectionsMap,
+    ottomanSections,
+  ]);
 
   const selectedCount = useMemo(
     () =>
