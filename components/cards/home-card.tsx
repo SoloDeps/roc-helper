@@ -67,7 +67,7 @@ function HomeCard({ data }: { data: CardData }) {
       <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-card/80 to-transparent z-10 pointer-events-none" />
 
       {/* Illustration — right side, overflows bottom */}
-      <div className="absolute bottom-0 right-2 z-20 size-24 pointer-events-none">
+      <div className="absolute bottom-0 right-2 z-20 h-auto w-24 pointer-events-none">
         <Image
           src={data.illustration}
           alt=""

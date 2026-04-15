@@ -567,6 +567,10 @@ export const technos_LG: TechnoData[] = [
         },
         {
           amount: 5000,
+          resource: "mohair",
+        },
+        {
+          amount: 12000,
           resource: "wheat",
         },
       ],
