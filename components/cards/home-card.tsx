@@ -41,6 +41,13 @@ const cards: CardData[] = [
     illustration: "/images/technos/high_middle_ages/hm_16.webp",
     href: "/help",
   },
+  {
+    title: "Wonders",
+    description: "Track your wonders progress and plan your presets",
+    icon: "/images/game_icons/icon_flat_research_points.webp",
+    illustration: "/images/technos/bronze_age/ba_8.webp",
+    href: "/wonders",
+  },
   // {
   //   title: "Coming Soon",
   //   description: "Something is taking shape in the shadows...",
@@ -67,7 +74,7 @@ function HomeCard({ data }: { data: CardData }) {
       <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-card/80 to-transparent z-10 pointer-events-none" />
 
       {/* Illustration — right side, overflows bottom */}
-      <div className="absolute bottom-0 right-2 z-20 size-24 pointer-events-none">
+      <div className="absolute bottom-0 right-2 z-20 w-24 h-auto pointer-events-none">
         <Image
           src={data.illustration}
           alt=""
