@@ -51,7 +51,8 @@ export function getLevelsForEraAndType(
       level: l.level,
       costs: l[type],
       maxQty: l.max_qty || 40,
-    }));
+    }))
+    .sort((a, b) => a.level - b.level);
 }
 
 // Calculate total costs for selected levels

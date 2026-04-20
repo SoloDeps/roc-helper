@@ -4,15 +4,15 @@ import { generateStandardLevels } from "@/data/generateDynamicLevels";
 export const ruralFarmDynamic = generateStandardLevels({
   buildingId: "rural_farm",
   defaultMaxQty: 13,
-  goodsAmounts: [1200, 1800, 2500],
+  goodsAmounts: [2500, 1200, 1800],
   constructionGoodsAmount: 6000,
   upgrade: {
-    coins: (l) => l * 150000 - 3550000,
-    food: (l) => l * 70000 - 1810000,
+    coins: (l) => (l - 1) * 150000 - 3550000,
+    food: (l) => (l - 1) * 70000 - 1810000,
   },
   construction: {
-    coins: (l) => l * 5000000 - 170000000,
-    food: (l) => l * 2000000 - 68000000,
+    coins: (l) => (l - 1) * 5000000 - 170000000,
+    food: (l) => (l - 1) * 2000000 - 68000000,
   },
   level40Upgrade: {
     goodsSource: "previous",

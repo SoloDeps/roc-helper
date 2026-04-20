@@ -5,12 +5,12 @@ export const moderateCultureSiteDynamic = generateCultureLevels({
   buildingId: "moderate_culture_site",
   defaultMaxQty: 6,
   construction: {
-    coins: (l) => l * 2500000 - 20700000,
-    food: (l) => l * 1400000 - 11200000,
+    coins: (l) => (l - 1) * 2500000 - 20700000,
+    food: (l) => (l - 1) * 1400000 - 11200000,
   },
   upgrade: {
-    coins: (l) => l * 310000 - 1420000,
-    food: (l) => l * 180000 - 860000,
+    coins: (l) => (l - 1) * 310000 - 1420000,
+    food: (l) => (l - 1) * 180000 - 860000,
   },
 });
 

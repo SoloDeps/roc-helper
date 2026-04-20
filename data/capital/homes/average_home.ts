@@ -4,15 +4,15 @@ import { generateStandardLevels } from "@/data/generateDynamicLevels";
 export const averageHomeDynamic = generateStandardLevels({
   buildingId: "average_home",
   defaultMaxQty: 15,
-  goodsAmounts: [1200, 1600, 2000],
+  goodsAmounts: [2000, 1200, 1600],
   constructionGoodsAmount: 5000,
   upgrade: {
-    coins: (l) => l * 40000 - 730000,
-    food: (l) => l * 50000 - 450000,
+    coins: (l) => (l - 1) * 40000 - 730000,
+    food: (l) => (l - 1) * 50000 - 450000,
   },
   construction: {
-    coins: (l) => l * 300000,
-    food: (l) => l * 650000,
+    coins: (l) => (l - 1) * 300000,
+    food: (l) => (l - 1) * 650000,
   },
   level40Upgrade: {
     goodsSource: "previous",

@@ -5,12 +5,12 @@ export const littleCultureSiteDynamic = generateCultureLevels({
   buildingId: "little_culture_site",
   defaultMaxQty: 10,
   construction: {
-    coins: (l) => l * 800000 - 7000000,
-    food: (l) => l * 500000 - 4600000,
+    coins: (l) => (l - 1) * 800000 - 7000000,
+    food: (l) => (l - 1) * 500000 - 4600000,
   },
   upgrade: {
-    coins: (l) => l * 100000 - 550000,
-    food: (l) => l * 44000 - 178000,
+    coins: (l) => (l - 1) * 100000 - 550000,
+    food: (l) => (l - 1) * 44000 - 178000,
   },
 });
 
