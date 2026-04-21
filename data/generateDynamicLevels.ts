@@ -75,7 +75,7 @@ export function generateStandardLevels(
     const eraPos = eraBuildingLevel(level);
     const currentEra = getEraForLevel(level);
     const previousEra = getPrevEra(currentEra);
-    const goodsEra = eraPos === 1 ? previousEra : currentEra;
+    const goodsEra = eraPos - 1 === 1 ? previousEra : currentEra;
     const goodsAmount = config.goodsAmounts[eraPos - 1];
 
     // ── Upgrade ──────────────────────────────────────────────────────────────
