@@ -48,14 +48,14 @@ const cards: CardData[] = [
     illustration: "/images/technos/bronze_age/ba_8.webp",
     href: "/wonders",
   },
-  // {
-  //   title: "Coming Soon",
-  //   description: "Something is taking shape in the shadows...",
-  //   icon: "/images/game_icons/icon_flat_scout.webp",
-  //   illustration: "/images/technos/minoan_era/me_6.webp",
-  //   locked: true,
-  //   badge: "Coming Soon",
-  // },
+  {
+    title: "Coming Soon",
+    description: "Something is taking shape in the shadows...",
+    icon: "/images/game_icons/icon_flat_scout.webp",
+    illustration: "/images/technos/minoan_era/me_6.webp",
+    locked: true,
+    badge: "Coming Soon",
+  },
 ];
 
 function HomeCard({ data }: { data: CardData }) {
@@ -74,14 +74,15 @@ function HomeCard({ data }: { data: CardData }) {
       <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-card/80 to-transparent z-10 pointer-events-none" />
 
       {/* Illustration — right side, overflows bottom */}
-      <div className="absolute bottom-0 right-2 z-20 h-auto w-24 pointer-events-none">
+      <div className="absolute bottom-3 right-3 z-20 h-auto w-22 pointer-events-none">
         <Image
           src={data.illustration}
           alt=""
-          width={96}
-          height={96}
+          width={88}
+          height={88}
           className="object-contains size-full select-none"
           draggable={false}
+          priority
         />
       </div>
 

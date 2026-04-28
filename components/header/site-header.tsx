@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink, Info } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 const leftNavLinks = [
   { href: "/calculator", label: "Calculator", external: false, icon: null },
@@ -20,6 +21,7 @@ const leftNavLinks = [
     external: false,
     icon: null,
   },
+  { href: "/wonders", label: "Wonders", external: false, icon: null },
 ];
 
 const rightNavLinks = [
@@ -82,13 +84,29 @@ function NavLink({
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isWonders = pathname === "/wonders";
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isWonders) return;
+
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      setScrolled(false); // reset au cleanup, pas dans le body
+    };
+  }, [isWonders]);
 
   return (
     <header
       className={cn(
-        "relative z-20 flex w-full shrink-0 items-center h-[50px] container-wrapper",
-        isHome && "sticky top-0 bg-background-200",
+        "relative z-50 flex w-full shrink-0 items-center h-[50px] container-wrapper",
+        "sticky top-0 bg-background-200",
+        "transition-[box-shadow,border-color] duration-200",
+        isWonders && scrolled && "border-b shadow-sm",
       )}
     >
       {/* Logo */}
