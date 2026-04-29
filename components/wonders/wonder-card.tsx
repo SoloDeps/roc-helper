@@ -239,10 +239,11 @@ export function WonderGameCard({ wonder, currentLevel }: WonderGameCardProps) {
                 src={imageSrc}
                 alt={wonder.meta.name}
                 onClick={() => setDetailOpen(true)}
+                draggable={false}
                 className={cn(
-                  "w-full h-auto transition-all duration-300 group-hover:brightness-110",
+                  "w-full h-auto transition-all duration-300 group-hover:brightness-110 select-none scale-100",
                   !isUnlocked && "grayscale brightness-[0.75]",
-                  "cursor-pointer hover:scale-[1.03] origin-center",
+                  "cursor-pointer hover:scale-[1.02] origin-center",
                 )}
                 style={{ transform: `translateY(${offsetPx}px)` }}
                 title="Voir les détails du Wonder"
@@ -287,7 +288,7 @@ export function WonderGameCard({ wonder, currentLevel }: WonderGameCardProps) {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full h-7 text-xs rounded-sm gap-1.5"
+                  className="w-full h-7 text-xs rounded-sm gap-1.5 select-none"
                   onClick={handleEditClick}
                 >
                   <Pencil className="size-3" />
@@ -297,7 +298,7 @@ export function WonderGameCard({ wonder, currentLevel }: WonderGameCardProps) {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full h-7 text-xs rounded-sm"
+                  className="w-full h-7 text-xs rounded-sm select-none"
                   onClick={handleUnlock}
                 >
                   Unlock

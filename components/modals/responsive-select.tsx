@@ -10,23 +10,16 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  // SelectValue,
 } from "@/components/ui/select";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import Image from "next/image";
 
-/**
- * Option type for the responsive select
- */
 interface SelectOption {
   value: string;
   label: string;
   imageUrl?: string;
 }
 
-/**
- * ResponsiveSelect Props
- */
 interface ResponsiveSelectProps {
   value: string;
   onValueChange: (value: string) => void;
@@ -34,17 +27,19 @@ interface ResponsiveSelectProps {
   placeholder?: string;
   label?: string;
   className?: string;
+  selectClassName?: string;
   drawerBtnClassName?: string;
   disabled?: boolean;
-  readOnly?: boolean; // If true, shows normal appearance but prevents opening
-  hideChevron?: boolean; // If true, hides the chevron icon
-  nested?: boolean; // Si true, s'ouvre en drawer nested (au-dessus d'un autre drawer)
+  readOnly?: boolean;
+  hideChevron?: boolean;
+  rotateChevron?: boolean;
+  nested?: boolean;
   drawerClassName?: string;
+  // ✅ CORRIGÉ : alignItemWithTrigger utilise toujours popper en interne
+  // car item-aligned casse dans les modales Radix (bug portal/focus-scope)
+  alignItemWithTrigger?: boolean;
 }
 
-/**
- * Mobile Drawer Content
- */
 const DrawerSelectContent = React.memo<{
   placeholder?: string;
   options: SelectOption[];
@@ -59,7 +54,6 @@ const DrawerSelectContent = React.memo<{
 
   return (
     <div className="flex flex-col max-h-full h-full">
-      {/* Header */}
       <div className="sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background shrink-0">
         <div className="flex items-center justify-center h-10 px-4">
           <h3 className="text-sm font-semibold">
@@ -68,11 +62,9 @@ const DrawerSelectContent = React.memo<{
         </div>
       </div>
 
-      {/* Options List */}
       <div className="flex-1 overflow-y-auto p-2 pb-6 min-h-0">
         {options.map((option) => {
           const isSelected = option.value === value;
-
           return (
             <Button
               key={option.value}
@@ -106,11 +98,6 @@ const DrawerSelectContent = React.memo<{
 
 DrawerSelectContent.displayName = "DrawerSelectContent";
 
-/**
- * Responsive Select Component
- * - Desktop: Normal Select dropdown
- * - Mobile: Button that opens a Drawer
- */
 export function ResponsiveSelect({
   value,
   onValueChange,
@@ -118,10 +105,13 @@ export function ResponsiveSelect({
   placeholder = "Select an option",
   label,
   className,
+  selectClassName,
   drawerBtnClassName,
   disabled = false,
   readOnly = false,
   hideChevron = false,
+  rotateChevron = false,
+  alignItemWithTrigger = false,
   nested = false,
   drawerClassName,
 }: ResponsiveSelectProps) {
@@ -130,7 +120,6 @@ export function ResponsiveSelect({
 
   const selectedOption = options.find((opt) => opt.value === value);
 
-  //  Prevent opening if readOnly
   const handleOpenChange = React.useCallback(
     (newOpen: boolean) => {
       if (!readOnly) {
@@ -140,7 +129,6 @@ export function ResponsiveSelect({
     [readOnly],
   );
 
-  // Desktop: Regular Select
   if (isDesktop) {
     return (
       <div className={cn("flex flex-col space-y-2", className)}>
@@ -156,6 +144,7 @@ export function ResponsiveSelect({
             className={cn(
               "w-full font-medium text-sm",
               readOnly && "cursor-default",
+              selectClassName,
             )}
             onClick={readOnly ? (e) => e.preventDefault() : undefined}
           >
@@ -178,7 +167,20 @@ export function ResponsiveSelect({
           </SelectTrigger>
 
           {!readOnly && (
-            <SelectContent position="popper">
+            <SelectContent
+              // ✅ FIX CRITIQUE : on force toujours "popper" pour éviter le bug
+              // Radix item-aligned + Dialog modal (portal bloqué par focus-scope).
+              // On simule l'alignement visuellement via sideOffset=0 + align="start".
+              position="popper"
+              sideOffset={alignItemWithTrigger ? 0 : 4}
+              align={alignItemWithTrigger ? "start" : "center"}
+              // ✅ Contraindre la largeur pour coller au trigger quand aligné
+              className={
+                alignItemWithTrigger
+                  ? "w-[var(--radix-select-trigger-width)] max-h-[min(var(--radix-select-content-available-height),300px)]"
+                  : undefined
+              }
+            >
               {options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   <div className="flex items-center gap-2">
@@ -202,7 +204,7 @@ export function ResponsiveSelect({
     );
   }
 
-  // Mobile: Drawer
+  // Mobile: Drawer (inchangé)
   return (
     <div className={cn("flex flex-col space-y-2", className)}>
       {label && <label className="text-sm font-medium">{label}</label>}
@@ -235,7 +237,12 @@ export function ResponsiveSelect({
             </div>
             <div className="shrink-0">
               {!hideChevron && (
-                <ChevronRight className="size-5 text-muted-foreground" />
+                <ChevronRight
+                  className={cn(
+                    "size-5 text-muted-foreground",
+                    rotateChevron ? "rotate-90 -mr-2" : "",
+                  )}
+                />
               )}
             </div>
           </Button>

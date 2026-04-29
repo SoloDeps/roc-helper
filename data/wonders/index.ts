@@ -103,31 +103,31 @@ function resolveSlotLabel(slot: WonderSlot): string {
  */
 const SYNERGY_BONUS_LABELS: Record<string, string> = {
   // Ancient World
-  SH: "+1 RP/day",
-  HG: "Food +8%",
-  SoZ: "Infantry Dmg +4%",
-  ToA: "Ranged Dmg +4%",
-  ToM: "+100 primary goods",
-  LoA: "Trade Goods +5%",
-  CoR: "Donations: Gears +5%",
-  CP: "+60 previous era goods",
-  GS: "Cavalry Dmg +4%",
-  AS: "+1 RP/day",
+  SH: "+1/day",
+  HG: "+8%", //food
+  SoZ: "+4%", //Infantry Dmg 
+  ToA: "+4%", //Ranged Dmg
+  ToM: "+100", //primary goods
+  LoA: "+5%", //Trade Goods
+  CoR: "+5%", //Donations: Gears
+  CP: "+60", //previous era goods
+  GS: "+4%", //Cavalry Dmg
+  AS: "+1", //RP/day
   // Great Empires
-  C: "Heavy Inf Dmg +4%", // Colosseum
-  PoA: "Infantry HP +2%",
-  SF: "Ranged HP +2%",
-  TA: "Heavy Inf HP +2%",
-  FC: "+60 current era goods",
-  GW: "+1 RP/day",
-  SP: "Bastion HP +2%",
-  Tikal: "Capital Goods +5%",
-  CI: "Ranged Crit +1%",
+  C: "+4%", //Heavy Inf Dmg // Colosseum
+  PoA: "+2%", //Infantry HP
+  SF: "+2%", //Ranged HP
+  TA: "+2%", //Heavy Inf HP
+  FC: "+60", //current era goods
+  GW: "+1", //RP/day
+  SP: "+2%", //Bastion HP
+  Tikal: "+5%", //Capital Goods
+  CI: "+1%", //Ranged Crit
   // Stories and Myths
-  LToP: "RP regen ×2.5%",
-  V: "All Units Dmg +1.5%",
-  P: "Capital Goods +5%",
-  CoB: "Cavalry Speed +10%, Bazaar +10%",
+  LToP: "×2.5%", //RP regen
+  V: "+1.5%", //All Units Dmg
+  P: "+5%", //Capital Goods
+  CoB: "+10%, +10%", //Cavalry Speed, Bazaar
 };
 
 // ─── Wonder assembly ──────────────────────────────────────────────────────────
@@ -150,7 +150,7 @@ function assembleWonder(raw: (typeof WONDER_DATA)[number]): Wonder {
     synergyBonus: raw.meta.synergy
       ? (SYNERGY_BONUS_LABELS[raw.meta.code] ?? null)
       : null,
-    rarity: "Epic",
+    rarity: (raw.meta.rarity ?? "Rare") as "Rare" | "Legendary",
     maxLevel: 30,
   };
 

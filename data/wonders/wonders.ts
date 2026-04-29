@@ -9,6 +9,7 @@ export const data = [
       group: "Ancient World",
       slot: "Capital City",
       materials: ["Temple", "Temple"],
+      rarity: "Rare",
       synergy: { raw: "Temple" },
     },
     bonuses: [
@@ -18,7 +19,7 @@ export const data = [
         values: [10.0, 13.0, 15.0, 16.5, 18.0, 19.5, 20.5, 22.0, 23.0, 24.0, 24.5, 25.5, 26.5, 27.0, 28.0, 28.5, 29.0, 30.0, 30.5, 31.0, 31.5, 32.5, 33.0, 33.5, 34.0, 34.5, 35.0, 35.5, 36.0, 36.5],
       },
       {
-        type: "research_points_per_day",
+        type: "rp_per_day",
         icons: ["research", null],
         values: [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4],
       },
@@ -32,6 +33,7 @@ export const data = [
       group: "Ancient World",
       slot: "Capital City",
       materials: ["Nature", "Palace"],
+      rarity: "Rare",
       synergy: { raw: "Palace" },
     },
     bonuses: [
@@ -55,6 +57,7 @@ export const data = [
       group: "Ancient World",
       slot: "Capital City",
       materials: ["Statue", "Statue"],
+      rarity: "Rare",
       synergy: { raw: "Statue" },
     },
     bonuses: [
@@ -73,6 +76,7 @@ export const data = [
       group: "Ancient World",
       slot: "Capital City",
       materials: ["Temple", "Temple"],
+      rarity: "Rare",
       synergy: { raw: "Statue" },
     },
     bonuses: [
@@ -96,6 +100,7 @@ export const data = [
       group: "Ancient World",
       slot: "Egypt",
       materials: ["Temple", "Temple"],
+      rarity: "Rare",
       synergy: { raw: "Temple" },
     },
     bonuses: [
@@ -119,6 +124,7 @@ export const data = [
       group: "Ancient World",
       slot: "Egypt",
       materials: ["Statue", "Statue"],
+      rarity: "Rare",
       synergy: { raw: "Statue" },
     },
     bonuses: [
@@ -142,6 +148,7 @@ export const data = [
       group: "Ancient World",
       slot: "Egypt",
       materials: ["Palace", "Palace"],
+      rarity: "Legendary",
       synergy: { raw: "Statue" },
     },
     bonuses: [
@@ -151,7 +158,7 @@ export const data = [
         values: [5.0, 6.4, 7.5, 8.4, 9.1, 9.8, 10.4, 10.9, 11.4, 11.9, 12.3, 12.8, 13.2, 13.5, 13.9, 14.3, 14.6, 14.9, 15.3, 15.6, 15.9, 16.2, 16.5, 16.7, 17.0, 17.3, 17.5, 17.8, 18.0, 18.3],
       },
       {
-        type: "research_points_per_day",
+        type: "rp_per_day",
         icons: ["research", null],
         values: [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4],
       },
@@ -165,6 +172,7 @@ export const data = [
       group: "Ancient World",
       slot: "Capital City",
       materials: ["Temple", "Temple"],
+      rarity: "Rare",
       synergy: { raw: "Temple" },
     },
     bonuses: [
@@ -183,6 +191,7 @@ export const data = [
       group: "Ancient World",
       slot: "Capital City",
       materials: ["Naval", "Temple"],
+      rarity: "Rare",
       synergy: { raw: "Naval" },
     },
     bonuses: [
@@ -254,6 +263,7 @@ export const data = [
       group: "Great Empires",
       slot: "Capital City",
       materials: ["Temple", "Temple"],
+      rarity: "Rare",
       synergy: null,
     },
     bonuses: [
@@ -277,6 +287,7 @@ export const data = [
       group: "Great Empires",
       slot: "Capital City",
       materials: ["Arena", "Fortress"],
+      rarity: "Rare",
       synergy: { raw: "Statue" },
     },
     bonuses: [
@@ -300,6 +311,7 @@ export const data = [
       group: "Great Empires",
       slot: "Capital City",
       materials: ["Palace", "Fortress"],
+      rarity: "Rare",
       synergy: { raw: "Fortress" },
     },
     bonuses: [
@@ -323,6 +335,7 @@ export const data = [
       group: "Great Empires",
       slot: "Capital City",
       materials: ["Nature", "Fortress"],
+      rarity: "Legendary",
       synergy: { raw: "Fortress" },
     },
     bonuses: [
@@ -387,6 +400,7 @@ export const data = [
       group: "Great Empires",
       slot: "China",
       materials: ["Fortress", "Fortress"],
+      rarity: "Legendary",
       synergy: { raw: "Fortress" },
     },
     bonuses: [
@@ -396,7 +410,7 @@ export const data = [
         values: [2.5, 3.2, 3.7, 4.2, 4.5, 4.9, 5.2, 5.4, 5.7, 5.9, 6.2, 6.4, 6.6, 6.8, 7.0, 7.1, 7.3, 7.5, 7.6, 7.8, 7.9, 8.1, 8.2, 8.4, 8.5, 8.6, 8.8, 8.9, 9.0, 9.1],
       },
       {
-        type: "research_points_per_day",
+        type: "rp_per_day",
         icons: ["research", null],
         values: [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4],
       },
@@ -410,6 +424,7 @@ export const data = [
       group: "Great Empires",
       slot: "Maya Empire",
       materials: ["Palace", "Fortress"],
+      rarity: "Rare",
       synergy: { raw: "Fortress" },
     },
     bonuses: [
@@ -456,6 +471,7 @@ export const data = [
       group: "Great Empires",
       slot: "Maya Empire",
       materials: ["Temple", "Arena"],
+      rarity: "Legendary",
       synergy: { raw: "Arena" },
     },
     bonuses: [
@@ -481,6 +497,7 @@ export const data = [
       group: "Stories and Myths",
       slot: "Capital City",
       materials: ["Palace", "Fortress"],
+      rarity: "Rare",
       synergy: null,
     },
     bonuses: [
@@ -550,6 +567,7 @@ export const data = [
       group: "Stories and Myths",
       slot: "Viking Kingdom",
       materials: ["Naval", "Naval"],
+      rarity: "Rare",
       synergy: null,
     },
     bonuses: [
@@ -573,6 +591,7 @@ export const data = [
       group: "Stories and Myths",
       slot: "Viking Kingdom",
       materials: ["Arena", "Arena"],
+      rarity: "Legendary",
       synergy: { raw: "Palace" },
     },
     bonuses: [
@@ -596,6 +615,7 @@ export const data = [
       group: "Stories and Myths",
       slot: "Viking Kingdom",
       materials: ["Nature", "Statue"],
+      rarity: "Rare",
       synergy: null,
     },
     bonuses: [
@@ -614,6 +634,7 @@ export const data = [
       group: "Stories and Myths",
       slot: "Arabia",
       materials: ["Temple", "Fortress"],
+      rarity: "Rare",
       synergy: { raw: "Temple" },
     },
     bonuses: [
@@ -642,6 +663,7 @@ export const data = [
       group: "Stories and Myths",
       slot: "Arabia",
       materials: ["Palace", "Palace"],
+      rarity: "Legendary",
       synergy: { raw: "Palace" },
     },
     bonuses: [

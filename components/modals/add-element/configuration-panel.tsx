@@ -124,6 +124,7 @@ const EraSelector = memo<EraSelectorProps>(
         placeholder="Select an era"
         drawerClassName="h-[60vh]"
         nested={nested}
+        alignItemWithTrigger={true}
       />
     );
   },

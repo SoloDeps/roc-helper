@@ -237,8 +237,22 @@ const PERCENT_TYPES = new Set([
   "research_regen_boost",
 ]);
 
+const INTEGER_TYPES = new Set([
+  "rp_per_day",
+  "arabia_worker_slots",
+  "compass_slots",
+  "donation_gears",
+  "goods_quantity",
+  "previous_era_goods",
+  "previous_era_goods_quantity",
+  "research_point_cap",
+  "trade_worker_slots",
+  "worker_slots",
+]);
+
 export function getBonusFormat(type: string): BonusFormat {
   if (PERCENT_TYPES.has(type)) return "percent";
+  if (INTEGER_TYPES.has(type)) return "integer";
   return "flat";
 }
 
@@ -253,6 +267,10 @@ export function formatBonusValue(type: string, value: number): string {
     const sign = value >= 0 ? "+" : "";
     const formatted = Number.isInteger(value) ? `${value}` : value.toFixed(1);
     return `${sign}${formatted}%`;
+  }
+  if (fmt === "integer") {
+    // const sign = value > 0 ? "+" : "";
+    return `+${value}`;
   }
   // flat: integer for slots/counts, otherwise one decimal
   return Number.isInteger(value) ? `${value}` : value.toFixed(1);

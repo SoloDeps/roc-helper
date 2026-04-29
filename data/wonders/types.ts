@@ -67,7 +67,7 @@ export interface WonderMeta {
   synergyTag: MaterialType | null;
   /** Short display string for the synergy bonus (e.g. "+1 RP/day") */
   synergyBonus: string | null;
-  rarity: "Epic" | "Legendary";
+  rarity: "Rare" | "Legendary";
   maxLevel: number;
 }
 

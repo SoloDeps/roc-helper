@@ -7,10 +7,17 @@
 // Uses the same pattern as the rest of the app:
 //   - useLiveQuery for reactive reads
 //   - plain async functions for writes
+//
+// Data lives in roc_wonders_db (see wonders-schema.ts),
+// isolated from roc_wiki_db so that resetting the Calculator
+// never wipes wonder data.
 // ============================================================
 
 import { useLiveQuery } from "dexie-react-hooks";
-import { getWikiDB, type UserWonderEntity } from "@/lib/db/schema";
+import { getWondersDB, type UserWonderEntity } from "@/lib/db/wonders-schema";
+
+// Re-export the entity type so consumers can import from a single place.
+export type { UserWonderEntity };
 
 // ─── Read hooks ──────────────────────────────────────────────────────────────
 
@@ -18,7 +25,7 @@ import { getWikiDB, type UserWonderEntity } from "@/lib/db/schema";
 export function useUserWondersMap(): Record<string, UserWonderEntity> {
   return (
     useLiveQuery(async () => {
-      const db = getWikiDB();
+      const db = getWondersDB();
       const rows = await db.userWonders.toArray();
       return Object.fromEntries(rows.map((r) => [r.code, r]));
     }, []) ?? {}
@@ -27,7 +34,7 @@ export function useUserWondersMap(): Record<string, UserWonderEntity> {
 
 /** Returns a single user wonder entry, or undefined if not owned. */
 export function useUserWonder(code: string): UserWonderEntity | undefined {
-  return useLiveQuery(() => getWikiDB().userWonders.get(code), [code]);
+  return useLiveQuery(() => getWondersDB().userWonders.get(code), [code]);
 }
 
 /** Returns true if the user owns the wonder with the given code. */
@@ -43,23 +50,23 @@ export function useIsWonderOwned(code: string): boolean {
  */
 export async function addOrUpdateUserWonder(
   code: string,
-  currentLevel: number
+  currentLevel: number,
 ): Promise<void> {
-  const db = getWikiDB();
+  const db = getWondersDB();
   await db.userWonders.put({ code, currentLevel });
 }
 
 /** Removes a wonder from the user's collection. */
 export async function removeUserWonder(code: string): Promise<void> {
-  const db = getWikiDB();
+  const db = getWondersDB();
   await db.userWonders.delete(code);
 }
 
 /** Updates only the current level of an already-owned wonder. */
 export async function updateWonderLevel(
   code: string,
-  currentLevel: number
+  currentLevel: number,
 ): Promise<void> {
-  const db = getWikiDB();
+  const db = getWondersDB();
   await db.userWonders.update(code, { currentLevel });
 }
