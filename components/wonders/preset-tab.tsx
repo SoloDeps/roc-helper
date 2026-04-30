@@ -29,7 +29,7 @@ import {
 // ─── Main Presets Tab ─────────────────────────────────────────────────────────
 
 export interface PresetTabProps {
-  ownedMap: Record<string, { code: string; currentLevel: number }>;
+  ownedMap: Record<string, { code: string; lvl: number }>;
 }
 
 export function PresetTab({ ownedMap }: PresetTabProps) {

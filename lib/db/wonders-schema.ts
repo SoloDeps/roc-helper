@@ -15,7 +15,7 @@ import Dexie, { type Table } from "dexie";
  * Represents a Wonder owned by the user.
  * Keyed by Wonder short code (e.g. "SH", "LToP").
  *
- * `currentLevel` — the level the user has currently reached (0–30).
+ * `lvl` — the level the user has currently reached (0–30).
  *
  * Future fields to add for City Planner:
  *   targetLevel?: number;
@@ -25,7 +25,7 @@ export interface UserWonderEntity {
   /** Wonder short code — primary key (e.g. "SH", "LToP"). */
   code: string;
   /** Current level reached by the user (0–30). 0 = owned but not levelled. */
-  currentLevel: number;
+  lvl: number;
 }
 
 // ─── Database class ──────────────────────────────────────────────────────────
@@ -39,7 +39,7 @@ export class RocWondersDB extends Dexie {
     // v1 — initial wonders table.
     // Primary key = wonder code (e.g. "SH").
     this.version(1).stores({
-      userWonders: "code,currentLevel",
+      userWonders: "code,lvl",
     });
   }
 }

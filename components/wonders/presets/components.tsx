@@ -437,7 +437,7 @@ export function PresetWonderCard({
 
 interface PresetSlotProps {
   entry: WonderPresetEntry | null;
-  ownedMap: Record<string, { code: string; currentLevel: number }>;
+  ownedMap: Record<string, { code: string; lvl: number }>;
   onAdd: () => void;
   onRemove: () => void;
   onLevelChange: (level: number | null) => void;
@@ -457,7 +457,7 @@ export function PresetSlot({
   return (
     <PresetWonderCard
       entry={entry}
-      ownedLevel={ownedMap[entry.code]?.currentLevel}
+      ownedLevel={ownedMap[entry.code]?.lvl}
       onLevelChange={onLevelChange}
       onRemove={onRemove}
       onReplace={onAdd}

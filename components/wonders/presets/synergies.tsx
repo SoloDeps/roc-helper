@@ -170,7 +170,7 @@ export function WonderBoostsPanel({
 }: {
   codes: string[];
   entries?: (WonderPresetEntry | null)[];
-  ownedMap?: Record<string, { code: string; currentLevel: number }>;
+  ownedMap?: Record<string, { code: string; lvl: number }>;
   className?: string;
 }) {
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
@@ -186,10 +186,10 @@ export function WonderBoostsPanel({
         if (entries) {
           const entry = entries.find((e) => e?.code === code);
           if (entry) {
-            effectiveLevel = entry.level ?? ownedMap?.[code]?.currentLevel ?? 1;
+            effectiveLevel = entry.level ?? ownedMap?.[code]?.lvl ?? 1;
           }
         } else if (ownedMap?.[code]) {
-          effectiveLevel = ownedMap[code].currentLevel;
+          effectiveLevel = ownedMap[code].lvl;
         }
 
         const boosts = getWonderBoosts(wonder, effectiveLevel);
@@ -284,7 +284,7 @@ export function MobileSynergyDrawer({
 }: {
   codes: string[];
   entries?: (WonderPresetEntry | null)[];
-  ownedMap?: Record<string, { code: string; currentLevel: number }>;
+  ownedMap?: Record<string, { code: string; lvl: number }>;
 }) {
   const [open, setOpen] = useState(false);
 

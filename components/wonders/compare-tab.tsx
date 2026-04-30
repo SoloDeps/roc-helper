@@ -50,7 +50,7 @@ interface BonusRow {
 function getSlotCodes(
   slot: CompareSlot,
   savedPresets: UserPreset[],
-  ownedMap: Record<string, { code: string; currentLevel: number }>,
+  ownedMap: Record<string, { code: string; lvl: number }>,
 ): string[] {
   if (slot.savedPresetId) {
     const p = savedPresets.find((x) => x.id === slot.savedPresetId);
@@ -67,7 +67,7 @@ function getEffectiveLevel(
   code: string,
   slot: CompareSlot,
   savedPresets: UserPreset[],
-  ownedMap: Record<string, { code: string; currentLevel: number }>,
+  ownedMap: Record<string, { code: string; lvl: number }>,
 ): number {
   if (slot.savedPresetId) {
     const preset = savedPresets.find((x) => x.id === slot.savedPresetId);
@@ -78,7 +78,7 @@ function getEffectiveLevel(
       if (entry?.level != null) return entry.level;
     }
   }
-  return ownedMap[code]?.currentLevel ?? 1;
+  return ownedMap[code]?.lvl ?? 1;
 }
 
 /**
@@ -89,7 +89,7 @@ function aggregateBonuses(
   codes: string[],
   slot: CompareSlot,
   savedPresets: UserPreset[],
-  ownedMap: Record<string, { code: string; currentLevel: number }>,
+  ownedMap: Record<string, { code: string; lvl: number }>,
 ): Map<string, AggregatedBonus> {
   const map = new Map<string, AggregatedBonus>();
 
@@ -500,7 +500,7 @@ function ComparisonTable({
 // ─── Compare Tab ──────────────────────────────────────────────────────────────
 
 export interface CompareTabProps {
-  ownedMap: Record<string, { code: string; currentLevel: number }>;
+  ownedMap: Record<string, { code: string; lvl: number }>;
 }
 
 export function CompareTab({ ownedMap }: CompareTabProps) {

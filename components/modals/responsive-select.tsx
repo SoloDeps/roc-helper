@@ -71,7 +71,7 @@ const DrawerSelectContent = React.memo<{
               variant="ghost"
               onClick={() => handleSelect(option.value)}
               className={cn(
-                "w-full justify-between h-12 px-4 mb-1 rounded-lg",
+                "w-full justify-between h-12 px-4 mb-1 rounded-lg capitalize",
                 isSelected && "bg-accent",
               )}
             >
@@ -221,7 +221,7 @@ export function ResponsiveSelect({
             )}
             onClick={readOnly ? (e) => e.preventDefault() : undefined}
           >
-            <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center gap-3 min-w-0 capitalize">
               {selectedOption?.imageUrl ? (
                 <Image
                   src={selectedOption.imageUrl}

@@ -8,6 +8,7 @@ import {
   ArrowRightLeft,
   Trophy,
   SlidersHorizontal,
+  CheckCheck,
 } from "lucide-react";
 import { ResponsiveSelect } from "@/components/modals/responsive-select";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,10 @@ import { cn } from "@/lib/utils";
 import { WONDERS, WONDER_CODES } from "@/data/wonders/index";
 import type { WonderGroup, MaterialType } from "@/data/wonders/types";
 
-import { useUserWondersMap } from "@/lib/stores/wonders-store";
+import {
+  useUserWondersMap,
+  unlockAllWonders,
+} from "@/lib/stores/wonders-store";
 
 import { WonderGameCard } from "@/components/wonders/wonder-card";
 import { PresetTab } from "@/components/wonders/preset-tab";
@@ -77,20 +81,20 @@ const TABS = [
     icon: Landmark,
     description: "Manage your wonders. Click to view details and progress.",
   },
-  {
-    value: "presets",
-    label: "Presets",
-    icon: LayoutGrid,
-    description:
-      "Browse and apply preset wonder configurations optimized for different strategies.",
-  },
-  {
-    value: "compare",
-    label: "Compare",
-    icon: ArrowRightLeft,
-    description:
-      "Compare wonders side by side to make the best choice for your build.",
-  },
+  // {
+  //   value: "presets",
+  //   label: "Presets",
+  //   icon: LayoutGrid,
+  //   description:
+  //     "Browse and apply preset wonder configurations optimized for different strategies.",
+  // },
+  // {
+  //   value: "compare",
+  //   label: "Compare",
+  //   icon: ArrowRightLeft,
+  //   description:
+  //     "Compare wonders side by side to make the best choice for your build.",
+  // },
 ];
 
 // ─── Group section header ─────────────────────────────────────────────────────
@@ -112,7 +116,7 @@ function GroupedGrid({
   wonders: ReturnType<(typeof WONDER_CODES)["map"]> extends Array<infer T>
     ? Array<NonNullable<T>>
     : never;
-  ownedMap: Record<string, { code: string; currentLevel: number }>;
+  ownedMap: Record<string, { code: string; lvl: number }>;
 }) {
   const grouped = useMemo(
     () =>
@@ -143,7 +147,7 @@ function GroupedGrid({
               <WonderGameCard
                 key={wonder.meta.code}
                 wonder={wonder as any}
-                currentLevel={ownedMap[wonder.meta.code]?.currentLevel}
+                currentLevel={ownedMap[wonder.meta.code]?.lvl}
               />
             ))}
           </div>
@@ -160,7 +164,7 @@ function AllWondersTabContent({
   material,
   slot,
 }: {
-  ownedMap: Record<string, { code: string; currentLevel: number }>;
+  ownedMap: Record<string, { code: string; lvl: number }>;
   material: string;
   slot: string;
 }) {
@@ -198,8 +202,8 @@ function FilterSelects({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-3", className)}>
-      <div className="space-y-1">
+    <div className={cn("flex flex-col gap-6 md:gap-4", className)}>
+      <div className="space-y-3 md:space-y-1">
         <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
           Material
         </p>
@@ -209,10 +213,10 @@ function FilterSelects({
           options={MATERIAL_OPTIONS}
           placeholder="All types"
           className="w-full h-9"
-          drawerBtnClassName="h-9"
+          // drawerBtnClassName="h-9"
         />
       </div>
-      <div className="space-y-1.5">
+      <div className="space-y-3 md:space-y-1">
         <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
           City slot
         </p>
@@ -222,7 +226,7 @@ function FilterSelects({
           options={SLOT_OPTIONS}
           placeholder="All cities"
           className="w-full h-9"
-          drawerBtnClassName="h-9"
+          // drawerBtnClassName="h-9"
         />
       </div>
     </div>
@@ -237,12 +241,14 @@ function MobileFilterDrawer({
   slot,
   onSlot,
   hasActiveFilters,
+  ownedMap,
 }: {
   material: string;
   onMaterial: (v: string) => void;
   slot: string;
   onSlot: (v: string) => void;
   hasActiveFilters: boolean;
+  ownedMap: Record<string, { code: string; lvl: number }>;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -269,6 +275,7 @@ function MobileFilterDrawer({
           <DrawerHeader className="px-0 pt-4 pb-4">
             <DrawerTitle>Filters</DrawerTitle>
           </DrawerHeader>
+          <UnlockAllButton ownedMap={ownedMap} />
           <FilterSelects
             material={material}
             onMaterial={(v) => {
@@ -282,8 +289,7 @@ function MobileFilterDrawer({
           {hasActiveFilters && (
             <Button
               variant="ghost"
-              size="sm"
-              className="mt-4 text-muted-foreground"
+              className="mt-4 text-destructive hover:text-destructive"
               onClick={() => {
                 onMaterial("all");
                 onSlot("all");
@@ -299,20 +305,76 @@ function MobileFilterDrawer({
   );
 }
 
+// ─── Unlock All Button ────────────────────────────────────────────────────────
+
+function UnlockAllButton({
+  ownedMap,
+}: {
+  ownedMap: Record<string, { code: string; lvl: number }>;
+}) {
+  const [state, setState] = useState<"idle" | "confirm" | "loading">("idle");
+
+  const allUnlocked = WONDER_CODES.every((c) => c in ownedMap);
+
+  const handleClick = async () => {
+    if (state === "idle") {
+      setState("confirm");
+      // Auto-reset after 3s if no confirmation
+      setTimeout(() => setState((s) => (s === "confirm" ? "idle" : s)), 3000);
+      return;
+    }
+    if (state === "confirm") {
+      setState("loading");
+      try {
+        await unlockAllWonders(WONDER_CODES, 1, false);
+      } finally {
+        setState("idle");
+      }
+    }
+  };
+
+  if (allUnlocked) return null;
+
+  return (
+    <Button
+      variant="outline"
+      onClick={handleClick}
+      disabled={state === "loading"}
+      className={cn(
+        "w-full mt-3",
+        state === "confirm"
+          ? "bg-amber-400/15 border-amber-400/60 text-amber-600 dark:text-amber-400"
+          : "bg-transparent border-border text-muted-foreground hover:text-foreground hover:border-foreground/30",
+        state === "loading" && "opacity-50 cursor-not-allowed",
+      )}
+    >
+      <CheckCheck
+        size={13}
+        className={cn(state === "confirm" && "text-amber-500")}
+      />
+      {state === "loading"
+        ? "Unlocking…"
+        : state === "confirm"
+          ? "Confirm unlock all?"
+          : "Unlock all wonders"}
+    </Button>
+  );
+}
+
 // ─── Sidebar progress widget ──────────────────────────────────────────────────
 
 function SidebarProgressWidget({
   ownedMap,
 }: {
-  ownedMap: Record<string, { code: string; currentLevel: number }>;
+  ownedMap: Record<string, { code: string; lvl: number }>;
 }) {
   const total = WONDER_CODES.length;
   const unlocked = WONDER_CODES.filter((c) => c in ownedMap).length;
   const pct = total > 0 ? Math.round((unlocked / total) * 100) : 0;
 
   return (
-    <div className="pt-4 border-t border-border">
-      <div className="px-3 py-3 rounded-lg bg-muted/50 space-y-2">
+    <div className="border-t border-border">
+      <div className="px-3 py-3 mt-3 rounded-lg bg-muted/50 space-y-2">
         <div className="flex items-center gap-1.5">
           <Trophy size={12} className="text-amber-500 shrink-0" />
           <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
@@ -355,13 +417,15 @@ function SidebarNav({
 }: {
   activeTab: string;
   onTabChange: (value: string) => void;
-  ownedMap: Record<string, { code: string; currentLevel: number }>;
+  ownedMap: Record<string, { code: string; lvl: number }>;
   isAllTab: boolean;
   material: string;
   onMaterial: (v: string) => void;
   slot: string;
   onSlot: (v: string) => void;
 }) {
+  const hasActiveFilters = material !== "all" || slot !== "all";
+
   return (
     <nav className="hidden lg:flex flex-col justify-between w-[190px] xl:w-[220px] shrink-0 sticky top-[72px] h-[calc(100vh-72px)] pr-4 pb-4">
       {/* Top: tabs + filtres conditionnels */}
@@ -418,8 +482,8 @@ function SidebarNav({
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className="border-t border-border pt-4">
-                <p className="text-[12px] font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+              <div className="border-y border-border pt-4 pb-3">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground mb-3">
                   Filters
                 </p>
                 <FilterSelects
@@ -428,7 +492,20 @@ function SidebarNav({
                   slot={slot}
                   onSlot={onSlot}
                 />
+                {hasActiveFilters && (
+                  <Button
+                    variant="ghost"
+                    className="mt-3 w-full text-destructive hover:text-destructive"
+                    onClick={() => {
+                      onMaterial("all");
+                      onSlot("all");
+                    }}
+                  >
+                    Reset filters
+                  </Button>
+                )}
               </div>
+              <UnlockAllButton ownedMap={ownedMap} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -459,10 +536,12 @@ function HorizontalNav({
   slot: string;
   onSlot: (v: string) => void;
 }) {
+  const hasActiveFilters = material !== "all" || slot !== "all";
+
   return (
-    <div className="hidden md:flex lg:hidden sticky top-0 z-30 bg-background border-b border-border mb-4 -mx-4 px-4 items-center justify-between">
+    <div className="hidden md:flex lg:hidden sticky top-0 z-30 h-12 border-b border-border mb-4 -mx-4 px-4 items-center justify-between">
       {/* Tabs à gauche */}
-      <div className="flex">
+      <div className="flex h-full">
         {TABS.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.value;
@@ -504,23 +583,35 @@ function HorizontalNav({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="flex items-center gap-2 py-1.5"
+            className="flex justify-center h-full py-2 items-center gap-1.5"
           >
+            {hasActiveFilters && (
+              <Button
+                variant="ghost"
+                className="text-destructive hover:text-destructive w-28"
+                onClick={() => {
+                  onMaterial("all");
+                  onSlot("all");
+                }}
+              >
+                Reset filters
+              </Button>
+            )}
             <ResponsiveSelect
               value={material}
               onValueChange={onMaterial}
               options={MATERIAL_OPTIONS}
               placeholder="All types"
-              className="w-32 h-8"
-              drawerBtnClassName="h-8"
+              className="w-32"
+              drawerBtnClassName="h-9"
             />
             <ResponsiveSelect
               value={slot}
               onValueChange={onSlot}
               options={SLOT_OPTIONS}
               placeholder="All cities"
-              className="w-36 h-8"
-              drawerBtnClassName="h-8"
+              className="w-32"
+              drawerBtnClassName="h-9"
             />
           </motion.div>
         )}
@@ -594,7 +685,7 @@ export default function WondersPage() {
   return (
     <>
       {/* Bottom nav (mobile) */}
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      {/* <BottomNav activeTab={activeTab} onTabChange={setActiveTab} /> */}
 
       <div className="flex min-h-0 flex-1 container-wrapper">
         <div className="w-full mx-auto py-2 md:pt-4">
@@ -646,6 +737,7 @@ export default function WondersPage() {
                           slot={slot}
                           onSlot={setSlot}
                           hasActiveFilters={hasActiveFilters}
+                          ownedMap={ownedMap}
                         />
                       </div>
                     )}
