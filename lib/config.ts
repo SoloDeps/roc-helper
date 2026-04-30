@@ -26,6 +26,10 @@ export const siteConfig = {
       label: "Help",
     },
     {
+      href: "/wonders",
+      label: "Wonders",
+    },
+    {
       href: "https://riseofcultures.wiki.gg/",
       label: "Wiki",
       external: true,

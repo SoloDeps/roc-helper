@@ -38,12 +38,33 @@ export interface CampaignEntity {
   cp: number;     // 0 | 1
 }
 
+// ─── World Wonders ───────────────────────────────────────────────────────────
+
+/**
+ * Represents a Wonder owned by the user.
+ * Keyed by Wonder short code (e.g. "SH", "LToP").
+ *
+ * `currentLevel` — the level the user has currently reached (0–30).
+ *
+ * Future fields to add for City Planner:
+ *   targetLevel?: number;
+ *   slotIndex?: number;   // which capital/allied slot (0–3)
+ */
+export interface UserWonderEntity {
+  /** Wonder short code — primary key (e.g. "SH", "LToP"). */
+  code: string;
+  /** Current level reached by the user (0–30). 0 = owned but not levelled. */
+  currentLevel: number;
+}
+
 export class RocWikiDB extends Dexie {
   buildings!: Table<BuildingEntity, string>;
   technos!: Table<TechnoEntity, string>;
   ottomanAreas!: Table<OttomanAreaEntity, string>;
   ottomanTradePosts!: Table<OttomanTradePostEntity, string>;
   campaigns!: Table<CampaignEntity, string>;
+  // v5 — World Wonders
+  userWonders!: Table<UserWonderEntity, string>;
 
   constructor() {
     super("roc_wiki_db");
@@ -55,8 +76,6 @@ export class RocWikiDB extends Dexie {
       ottomanTradePosts: "id,hidden",
     });
 
-    // Ajout du champ cp (completed) pour séparer la progression du research tree
-    // du hidden du calculator. Pas de migration : cp démarre à 0 pour tous.
     this.version(2).stores({
       buildings: "id,hidden",
       technos: "id,hidden,cp",
@@ -64,8 +83,6 @@ export class RocWikiDB extends Dexie {
       ottomanTradePosts: "id,hidden",
     });
 
-    // Ajout du level 6 sur les trade posts (villages/cities EG et LG standard).
-    // Pas de migration de données : lvl6 démarre à 0 pour tous.
     this.version(3).stores({
       buildings: "id,hidden",
       technos: "id,hidden,cp",
@@ -73,13 +90,24 @@ export class RocWikiDB extends Dexie {
       ottomanTradePosts: "id,hidden",
     });
 
-    // Ajout de la table campaigns pour tracker la progression des régions.
     this.version(4).stores({
       buildings: "id,hidden",
       technos: "id,hidden,cp",
       ottomanAreas: "id,hidden",
       ottomanTradePosts: "id,hidden",
       campaigns: "id,hidden,cp",
+    });
+
+    // v5 — add userWonders table.
+    // Primary key = wonder code (e.g. "SH").
+    // No data migration needed; table starts empty.
+    this.version(5).stores({
+      buildings: "id,hidden",
+      technos: "id,hidden,cp",
+      ottomanAreas: "id,hidden",
+      ottomanTradePosts: "id,hidden",
+      campaigns: "id,hidden,cp",
+      userWonders: "code,currentLevel",
     });
   }
 }

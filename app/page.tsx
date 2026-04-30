@@ -14,6 +14,7 @@ export default function Home() {
               height={200}
               className="object-cover size-full select-none"
               draggable={false}
+              priority
             />
             <div className="absolute inset-0">
               <div className="flex flex-col items-start justify-center p-4 size-full bg-gradient-to-r from-white/40 via-white/10 to-transparent">
