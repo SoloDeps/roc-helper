@@ -272,10 +272,12 @@ function MobileFilterDrawer({
 
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerContent className="px-4 pb-8">
-          <DrawerHeader className="px-0 pt-4 pb-4">
+          <DrawerHeader className="px-0 pt-4 pb-2">
             <DrawerTitle>Filters</DrawerTitle>
           </DrawerHeader>
-          <UnlockAllButton ownedMap={ownedMap} />
+          <div className="mb-4">
+            <UnlockAllButton ownedMap={ownedMap} />
+          </div>
           <FilterSelects
             material={material}
             onMaterial={(v) => {
@@ -309,27 +311,21 @@ function MobileFilterDrawer({
 
 function UnlockAllButton({
   ownedMap,
+  compact = false,
 }: {
   ownedMap: Record<string, { code: string; lvl: number }>;
+  compact?: boolean;
 }) {
-  const [state, setState] = useState<"idle" | "confirm" | "loading">("idle");
+  const [loading, setLoading] = useState(false);
 
   const allUnlocked = WONDER_CODES.every((c) => c in ownedMap);
 
   const handleClick = async () => {
-    if (state === "idle") {
-      setState("confirm");
-      // Auto-reset after 3s if no confirmation
-      setTimeout(() => setState((s) => (s === "confirm" ? "idle" : s)), 3000);
-      return;
-    }
-    if (state === "confirm") {
-      setState("loading");
-      try {
-        await unlockAllWonders(WONDER_CODES, 1, false);
-      } finally {
-        setState("idle");
-      }
+    setLoading(true);
+    try {
+      await unlockAllWonders(WONDER_CODES, 1, false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -338,25 +334,19 @@ function UnlockAllButton({
   return (
     <Button
       variant="outline"
+      size={compact ? "sm" : "default"}
       onClick={handleClick}
-      disabled={state === "loading"}
+      disabled={loading}
       className={cn(
-        "w-full mt-3",
-        state === "confirm"
-          ? "bg-amber-400/15 border-amber-400/60 text-amber-600 dark:text-amber-400"
-          : "bg-transparent border-border text-muted-foreground hover:text-foreground hover:border-foreground/30",
-        state === "loading" && "opacity-50 cursor-not-allowed",
+        "h-11 md:h-9 ",
+        compact
+          ? "shrink-0 text-muted-foreground hover:text-foreground"
+          : "w-full mt-3 bg-transparent border-border text-muted-foreground hover:text-foreground hover:border-foreground/30",
+        loading && "opacity-50 cursor-not-allowed",
       )}
     >
-      <CheckCheck
-        size={13}
-        className={cn(state === "confirm" && "text-amber-500")}
-      />
-      {state === "loading"
-        ? "Unlocking…"
-        : state === "confirm"
-          ? "Confirm unlock all?"
-          : "Unlock all wonders"}
+      <CheckCheck size={13} />
+      {loading ? "Unlocking…" : "Unlock all wonders"}
     </Button>
   );
 }
@@ -539,7 +529,7 @@ function HorizontalNav({
   const hasActiveFilters = material !== "all" || slot !== "all";
 
   return (
-    <div className="hidden md:flex lg:hidden sticky top-0 z-30 h-12 border-b border-border mb-4 -mx-4 px-4 items-center justify-between">
+    <div className="hidden md:flex lg:hidden fixed top-[50px] left-0 right-0 z-40 h-12 border-b border-border px-6 items-center justify-between bg-background-200">
       {/* Tabs à gauche */}
       <div className="flex h-full">
         {TABS.map((tab) => {
@@ -688,7 +678,7 @@ export default function WondersPage() {
       {/* <BottomNav activeTab={activeTab} onTabChange={setActiveTab} /> */}
 
       <div className="flex min-h-0 flex-1 container-wrapper">
-        <div className="w-full mx-auto py-2 md:pt-4">
+        <div className="w-full mx-auto lg:pt-4">
           {/* ── Horizontal nav (MD only) — tabs + filtres ── */}
           <HorizontalNav
             activeTab={activeTab}
@@ -699,6 +689,8 @@ export default function WondersPage() {
             slot={slot}
             onSlot={setSlot}
           />
+          {/* Spacer pour compenser le HorizontalNav fixed (MD only) */}
+          <div className="hidden md:block lg:hidden h-12 mb-4" />
 
           <div className="flex gap-4 xl:gap-5 items-start">
             {/* ── Sidebar (LG+) — tabs + filtres + widget ── */}
@@ -719,26 +711,31 @@ export default function WondersPage() {
               {activeTabConfig && (
                 <div className="mb-4">
                   {/* Mobile: titre + bouton filtre sur même ligne */}
-                  <div className="flex items-start justify-between gap-3 md:block">
+                  <div className="flex items-center justify-between gap-3">
                     <div>
                       <h1 className="text-lg font-semibold leading-tight">
                         {activeTabConfig.label}
                       </h1>
-                      <p className="text-[15px] text-muted-foreground mt-0.5 hidden sm:block">
+                      <p className="text-[15px] text-muted-foreground mt-0.5 hidden sm:flex">
                         {activeTabConfig.description}
                       </p>
                     </div>
                     {/* Bouton filtre — mobile seulement, onglet Wonders */}
                     {isAllTab && (
-                      <div className="md:hidden shrink-0">
-                        <MobileFilterDrawer
-                          material={material}
-                          onMaterial={setMaterial}
-                          slot={slot}
-                          onSlot={setSlot}
-                          hasActiveFilters={hasActiveFilters}
-                          ownedMap={ownedMap}
-                        />
+                      <div className="lg:hidden shrink-0 flex items-center gap-2">
+                        <div className="hidden md:flex">
+                          <UnlockAllButton ownedMap={ownedMap} compact />
+                        </div>
+                        <div className="md:hidden">
+                          <MobileFilterDrawer
+                            material={material}
+                            onMaterial={setMaterial}
+                            slot={slot}
+                            onSlot={setSlot}
+                            hasActiveFilters={hasActiveFilters}
+                            ownedMap={ownedMap}
+                          />
+                        </div>
                       </div>
                     )}
                   </div>

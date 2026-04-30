@@ -367,7 +367,7 @@ export function WonderGameCard({ wonder, currentLevel }: WonderGameCardProps) {
                   "cursor-pointer hover:scale-[1.02] origin-center",
                 )}
                 style={{ transform: `translateY(${offsetPx}px)` }}
-                title="Voir les détails du Wonder"
+                title="View Wonder details"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/0 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 left-0 right-0 px-2 pb-2 pt-6 pointer-events-none">
@@ -439,11 +439,11 @@ export function WonderGameCard({ wonder, currentLevel }: WonderGameCardProps) {
           if (!o) handleDrawerClose();
         }}
       >
-        <DrawerContent className="px-4 pb-6 h-[40vh]">
+        <DrawerContent className="px-4 pb-6 h-[35vh]">
           <DrawerHeader className="px-0 pt-4 pb-3">
             <DrawerTitle>{wonder.meta.name}</DrawerTitle>
           </DrawerHeader>
-          <div className="space-y-6 pt-4">
+          <div className="space-y-9 pt-5">
             <EditControls
               wonder={wonder}
               draft={draft}

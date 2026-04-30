@@ -159,6 +159,36 @@ export interface SynergyResult {
   count: number;
 }
 
+// ─── Bonus Value ───────────────────────────────────────────────────────────────
+
+/** A single resolved bonus entry at a given level. */
+export interface BonusValue {
+  type: string;
+  label: string;
+}
+
+// ─── Goods Entry ───────────────────────────────────────────────────────────────
+
+/** A single goods cost entry for a Wonder level. */
+export interface GoodsEntry {
+  iconKey: string;
+  amount: number;
+  gears: number;
+}
+
+// ─── Wonder Filter ─────────────────────────────────────────────────────────────
+
+/** Filter shape used by filterWonders() in presets.ts. */
+export interface WonderFilter {
+  group?: WonderGroup;
+  slot?: WonderSlot;
+  rarity?: "Rare" | "Legendary";
+  material?: MaterialType;
+  /** Filter by synergy tag — matches wonders whose synergies include this MaterialType. */
+  synergyTag?: MaterialType | "";
+  searchQuery?: string;
+}
+
 // ─── Cost types (unchanged) ───────────────────────────────────────────────────
 
 export type CostEntry = { amount: number; gears: number };
