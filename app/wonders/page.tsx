@@ -37,13 +37,13 @@ const WONDER_GROUPS: WonderGroup[] = [
 ];
 
 const ALL_MATERIALS: MaterialType[] = [
-  "Arena",
-  "Fortress",
-  "Nature",
-  "Naval",
-  "Palace",
-  "Statue",
-  "Temple",
+  "arena",
+  "fortress",
+  "nature",
+  "naval",
+  "palace",
+  "statue",
+  "temple",
 ];
 
 const ALL_SLOTS = [

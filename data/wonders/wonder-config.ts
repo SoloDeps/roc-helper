@@ -96,13 +96,13 @@ export const WONDER_IMAGE_OFFSET_PX: Record<string, number> = {
 // ─── Material colors ──────────────────────────────────────────────────────────
 
 export const MATERIAL_COLORS: Record<MaterialType, string> = {
-  Statue:   "bg-[#f36e3d] text-white",
-  Temple:   "bg-[#f9931e] text-white",
-  Nature:   "bg-[#51a963] text-white",
-  Palace:   "bg-[#c37be4] text-white",
-  Naval:    "bg-[#3f8ddb] text-white",
-  Arena:    "bg-[#990b0b] text-white",
-  Fortress: "bg-[#414cea] text-white",
+  statue:   "bg-[#f36e3d] text-white",
+  temple:   "bg-[#f9931e] text-white",
+  nature:   "bg-[#51a963] text-white",
+  palace:   "bg-[#c37be4] text-white",
+  naval:    "bg-[#3f8ddb] text-white",
+  arena:    "bg-[#990b0b] text-white",
+  fortress: "bg-[#414cea] text-white",
 };
 
 // ─── Cost table selector ──────────────────────────────────────────────────────

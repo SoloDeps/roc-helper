@@ -3,6 +3,7 @@ import type {
   WonderMeta,
   WonderLevel,
   WonderBonus,
+  WonderSynergy,
   MaterialType,
   WonderGroup,
   WonderGroupCode,
@@ -96,44 +97,18 @@ function resolveSlotLabel(slot: WonderSlot): string {
   return slot;
 }
 
-/**
- * Maps the raw synergy tag from wonders.ts to the synergyBonus display string.
- * This is a fixed label per Wonder (not computed from level values).
- * Synergy multipliers are computed at runtime in wonders-utils.ts.
- */
-const SYNERGY_BONUS_LABELS: Record<string, string> = {
-  // Ancient World
-  SH: "+1/day",
-  HG: "+8%", //food
-  SoZ: "+4%", //Infantry Dmg 
-  ToA: "+4%", //Ranged Dmg
-  ToM: "+100", //primary goods
-  LoA: "+5%", //Trade Goods
-  CoR: "+5%", //Donations: Gears
-  CP: "+60", //previous era goods
-  GS: "+4%", //Cavalry Dmg
-  AS: "+1", //RP/day
-  // Great Empires
-  C: "+4%", //Heavy Inf Dmg // Colosseum
-  PoA: "+2%", //Infantry HP
-  SF: "+2%", //Ranged HP
-  TA: "+2%", //Heavy Inf HP
-  FC: "+60", //current era goods
-  GW: "+1", //RP/day
-  SP: "+2%", //Bastion HP
-  Tikal: "+5%", //Capital Goods
-  CI: "+1%", //Ranged Crit
-  // Stories and Myths
-  LToP: "×2.5%", //RP regen
-  V: "+1.5%", //All Units Dmg
-  P: "+5%", //Capital Goods
-  CoB: "+10%, +10%", //Cavalry Speed, Bazaar
-};
-
 // ─── Wonder assembly ──────────────────────────────────────────────────────────
 
 function assembleWonder(raw: (typeof WONDER_DATA)[number]): Wonder {
   const groupCode = resolveGroupCode(raw.meta.group as WonderGroup);
+
+  // Build the synergies array directly from the raw data.
+  // Each entry already carries its own icons and bonus string — no lookup needed.
+  const synergies: WonderSynergy[] = (raw.meta.synergies ?? []).map((s) => ({
+    tag: s.raw as MaterialType,
+    icons: s.icons as [string, string | null],
+    bonus: s.bonus,
+  }));
 
   const meta: WonderMeta = {
     code: raw.meta.code,
@@ -144,12 +119,7 @@ function assembleWonder(raw: (typeof WONDER_DATA)[number]): Wonder {
     slotLabel: resolveSlotLabel(raw.meta.slot as WonderSlot),
     material1: raw.meta.materials[0] as MaterialType,
     material2: raw.meta.materials[1] as MaterialType,
-    synergyTag: raw.meta.synergy
-      ? (raw.meta.synergy.raw as MaterialType)
-      : null,
-    synergyBonus: raw.meta.synergy
-      ? (SYNERGY_BONUS_LABELS[raw.meta.code] ?? null)
-      : null,
+    synergies,
     rarity: (raw.meta.rarity ?? "Rare") as "Rare" | "Legendary",
     maxLevel: 30,
   };

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { memo, useState, useCallback } from "react";
 import type { MaterialType } from "@/data/wonders/types";
+import { imagesUrl, MATERIAL_ICONS } from "@/lib/catalog";
 
 // ─── Icon path resolution ─────────────────────────────────────────────────────
 //
@@ -11,28 +12,26 @@ import type { MaterialType } from "@/data/wonders/types";
 // /images/icons/ so the resolver can find it without touching the file tree.
 
 const ICON_PATH_OVERRIDES: Record<string, string> = {
-  // goods / economy
+  ...imagesUrl,
+  ...MATERIAL_ICONS,
+  // goods
   coin: "/images/goods/coins.webp",
   food: "/images/goods/food.webp",
   research: "/images/goods/research_points.webp",
-  goods: "/images/goods/goods.webp",
-  goods_chest: "/images/goods/goods_chest.webp",
   mead: "/images/goods/mead.webp",
-  // game_icons — workers, slots, etc.
-  worker: "/images/game_icons/icon_workers_capital.webp",
-  trade_worker: "/images/game_icons/icon_trade_worker.webp",
-  arabia_worker: "/images/game_icons/icon_arabia_worker.webp",
+  chest_good: "/images/icons/icon_chest_good.webp",
+  mystery_chest: "/images/icons/icon_mystery_chest_gold.webp",
+  // game_icons
+  capital_worker: "/images/game_icons/icon_workers_capital.webp",
+  arabia_worker: "/images/icons/icon_workers_city_arabia.webp",
+  // trade
+  icon_trading: "/images/technos/features/icon_trading.webp",
+  trade_worker: "/images/icons/icon_workers_trading.webp",
+  trade_slot_cooldown_boost: "/images/icons/icon_tradeslot_cooldown_boost.webp",
+  gears: "/images/goods/gears.webp",
   compass: "/images/game_icons/icon_compass.webp",
-  gears: "/images/game_icons/icon_gears.webp",
-  mystery_chest: "/images/game_icons/icon_mystery_chest.webp",
-  trade_slot_cooldown_boost: "/images/game_icons/icon_trade_slot_cooldown.webp",
-  bazaar_boost: "/images/game_icons/icon_bazaar_boost.webp",
-  // slot crests (used as main icon with "goods" overlay)
-  egypt_crest: "/images/wonders/crests/egypt.webp",
-  maya_crest: "/images/wonders/crests/maya.webp",
-  arabia_crest: "/images/wonders/crests/arabia.webp",
-  // synergy — lightning bolt icon shown next to the material tag
-  // Update this path to wherever your synergy icon lives in /public
+  bazaar_boost: "/images/icons/icon_bazaar_boost.webp",
+  // synergy
   synergy: "/images/game_icons/icon_synergy.webp",
 };
 
@@ -50,18 +49,6 @@ export function resolveIconPath(key: string): string {
 }
 
 const FALLBACK_SRC = "/images/goods/default.webp";
-
-// ─── Material icons (for synergy badge) ──────────────────────────────────────
-
-const MATERIAL_ICONS: Record<MaterialType, string> = {
-  Arena: "/images/wonders/material/arena.webp",
-  Fortress: "/images/wonders/material/fortress.webp",
-  Nature: "/images/wonders/material/nature.webp",
-  Naval: "/images/wonders/material/naval.webp",
-  Palace: "/images/wonders/material/palace.webp",
-  Statue: "/images/wonders/material/statue.webp",
-  Temple: "/images/wonders/material/temple.webp",
-};
 
 // ─── Fallback-aware image ─────────────────────────────────────────────────────
 //
@@ -142,29 +129,29 @@ export const StatsBadge = memo(function StatsBadge({
           <FallbackImage
             src={MATERIAL_ICONS[materialIcon]}
             alt={materialIcon}
-            width={16}
-            height={16}
-            className="size-[25px] select-none opacity-80"
+            width={25}
+            height={25}
+            className="h-[25px] w-auto select-none shrink-0"
           />
         )}
 
         {/* Main icon with optional overlay */}
-        <div className="relative size-[25px] shrink-0">
+        <div className="relative shrink-0">
           <FallbackImage
             src={resolveIconPath(mainKey)}
             alt={alt}
             width={25}
             height={25}
-            className="size-[25px] select-none"
+            className="h-[25px] w-auto select-none shrink-0"
           />
           {overlayKey && (
             <FallbackImage
               src={resolveIconPath(overlayKey)}
               alt=""
               ariaHidden
-              width={14}
-              height={14}
-              className="absolute -bottom-0.5 -right-1 h-[14px] w-auto select-none drop-shadow-sm"
+              width={15}
+              height={15}
+              className="absolute -bottom-0.5 -right-1 h-[15px] w-auto select-none drop-shadow-sm"
             />
           )}
         </div>

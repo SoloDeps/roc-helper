@@ -142,7 +142,7 @@ export function ResponsiveSelect({
         >
           <SelectTrigger
             className={cn(
-              "w-full font-medium text-sm",
+              "w-full font-medium text-sm capitalize",
               readOnly && "cursor-default",
               selectClassName,
             )}
@@ -183,7 +183,7 @@ export function ResponsiveSelect({
             >
               {options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 capitalize">
                     {option.imageUrl && (
                       <Image
                         src={option.imageUrl}

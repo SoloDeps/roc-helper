@@ -1,3 +1,5 @@
+import { MaterialType } from "@/data/wonders/types";
+
 // #region TYPES
 export type ItemType = "category" | "subcategory" | "building" | "era";
 export type CatalogItem = Category | Subcategory | Building | Era;
@@ -176,7 +178,19 @@ export const imagesUrl = {
   maya: "/images/city_crest/icon_city_crest_maya.webp",
   ottoman: "/images/city_crest/icon_city_crest_ottoman.webp",
   vikings: "/images/city_crest/icon_city_crest_vikings.webp",
+  // default
+  good: "/images/goods/default.webp",
 } as const;
+
+export const MATERIAL_ICONS: Record<MaterialType, string> = {
+  arena: "/images/wonders/material/arena.webp",
+  fortress: "/images/wonders/material/fortress.webp",
+  nature: "/images/wonders/material/nature.webp",
+  naval: "/images/wonders/material/naval.webp",
+  palace: "/images/wonders/material/palace.webp",
+  statue: "/images/wonders/material/statue.webp",
+  temple: "/images/wonders/material/temple.webp",
+};
 
 // ============================================================================
 // CATALOG

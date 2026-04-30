@@ -1,13 +1,13 @@
 // ─── Material Types ────────────────────────────────────────────────────────────
 
 export type MaterialType =
-  | "Arena"
-  | "Fortress"
-  | "Nature"
-  | "Naval"
-  | "Palace"
-  | "Statue"
-  | "Temple";
+  | "arena"
+  | "fortress"
+  | "nature"
+  | "naval"
+  | "palace"
+  | "statue"
+  | "temple";
 
 export type WonderGroup =
   | "Ancient World"
@@ -52,6 +52,22 @@ export interface ResolvedBonus {
   value: number;
 }
 
+// ─── Synergy ───────────────────────────────────────────────────────────────────
+
+/**
+ * A single synergy entry for a Wonder.
+ * A wonder can have multiple synergies (e.g. CoB has cavalry speed + bazaar).
+ * - `tag`   : the MaterialType that activates this synergy
+ * - `icons` : [mainIcon, overlayIcon | null] – same shape as WonderBonus.icons
+ * - `bonus` : pre-formatted display string, e.g. "+2%", "×2.5%"
+ *             NOT a number — never needs formatBonusValue()
+ */
+export interface WonderSynergy {
+  tag: MaterialType;
+  icons: [string, string | null];
+  bonus: string;
+}
+
 // ─── Wonder Meta ───────────────────────────────────────────────────────────────
 
 export interface WonderMeta {
@@ -63,10 +79,12 @@ export interface WonderMeta {
   slotLabel: string;
   material1: MaterialType;
   material2: MaterialType;
-  /** The material tag this wonder listens to for synergy activation */
-  synergyTag: MaterialType | null;
-  /** Short display string for the synergy bonus (e.g. "+1 RP/day") */
-  synergyBonus: string | null;
+  /**
+   * All synergy entries for this wonder.
+   * Empty array = no synergy.
+   * Replaces the old synergyTag / synergyBonus / synergyIcons fields.
+   */
+  synergies: WonderSynergy[];
   rarity: "Rare" | "Legendary";
   maxLevel: number;
 }

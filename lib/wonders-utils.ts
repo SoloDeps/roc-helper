@@ -32,6 +32,7 @@ export interface WonderWithSynergy {
   name: string;
   synergyActive: boolean;
   synergyCount: number;
+  /** First synergy bonus string, kept for backwards compat — prefer synergies[] */
   synergyBonus: string | null;
   activatedBy: string[];
 }
@@ -40,8 +41,8 @@ export function computeSynergies(codes: string[]): WonderWithSynergy[] {
   const wonders = codes.map((c) => WONDERS[c]).filter(Boolean);
 
   return wonders.map((w) => {
-    const tag = w.meta.synergyTag;
-    if (!tag) {
+    // A wonder has no synergy if its synergies array is empty
+    if (w.meta.synergies.length === 0) {
       return {
         code: w.meta.code,
         name: w.meta.name,
@@ -52,9 +53,14 @@ export function computeSynergies(codes: string[]): WonderWithSynergy[] {
       };
     }
 
+    // Collect all material tags this wonder listens to (may have duplicates for multi-synergy)
+    const tags = new Set(w.meta.synergies.map((s) => s.tag));
+
     const activators = wonders.filter((other) => {
       if (other.meta.code === w.meta.code) return false;
-      return other.meta.material1 === tag || other.meta.material2 === tag;
+      return (
+        tags.has(other.meta.material1) || tags.has(other.meta.material2)
+      );
     });
 
     return {
@@ -62,7 +68,8 @@ export function computeSynergies(codes: string[]): WonderWithSynergy[] {
       name: w.meta.name,
       synergyActive: activators.length > 0,
       synergyCount: activators.length,
-      synergyBonus: w.meta.synergyBonus,
+      // Keep first synergy bonus string for callers that only need one
+      synergyBonus: w.meta.synergies[0]?.bonus ?? null,
       activatedBy: activators.map((a) => a.meta.name),
     };
   });
@@ -107,7 +114,7 @@ export interface WonderBoostItem {
 
 /**
  * Returns all bonuses for `wonder` at `level`, ready to display.
- * Does NOT include synergy bonuses (those are handled by SynergyPanel).
+ * Does NOT include synergy bonuses (those are handled by SynergyPanel / WonderHeader).
  */
 export function getWonderBoosts(
   wonder: Wonder,
@@ -125,16 +132,19 @@ export function getWonderBoosts(
 
 /**
  * Builds the display string for a synergy at a given activator count.
- * Uses the static `synergyBonus` label from WonderMeta.
- * e.g.  synergyBonus = "+1 RP/day", count = 3  →  "+1 RP/day ×3"
+ * Uses the static `bonus` string from WonderSynergy (already pre-formatted).
+ * e.g.  bonus = "+2%", count = 3  →  "+2% ×3"
+ *
+ * Pass the synergy index when a wonder has multiple synergies.
  */
 export function getSynergyDisplayValue(
   wonder: Wonder,
   _level: number,
   activatorCount: number,
+  synergyIndex = 0,
 ): string | null {
   if (!wonder || activatorCount <= 0) return null;
-  const base = wonder.meta.synergyBonus;
+  const base = wonder.meta.synergies[synergyIndex]?.bonus;
   if (!base) return null;
   return activatorCount > 1 ? `${base} ×${activatorCount}` : base;
 }
@@ -230,6 +240,7 @@ const PERCENT_TYPES = new Set([
   "ranged_critical_hit_boost",
   "cavalry_hit_rate",
   "heavy_infantry_recruitment_time_reduction",
+  "carcassonne_recruitment_time_reduction",
   "recruitment_time_reduction",
   "trade_slot_cooldown_reduction",
   "bazaar_offer_boost",
@@ -259,7 +270,11 @@ export function getBonusFormat(type: string): BonusFormat {
 /**
  * Formats a numeric bonus value for display.
  * - percent → "+18.3%"
- * - flat    → raw number (worker slots, RP/day, goods amounts, etc.)
+ * - integer → "+4"
+ * - flat    → raw number (goods amounts, etc.)
+ *
+ * NOTE: synergy bonuses are pre-formatted strings in WonderSynergy.bonus
+ * and must NOT go through this function.
  */
 export function formatBonusValue(type: string, value: number): string {
   const fmt = getBonusFormat(type);
@@ -269,7 +284,6 @@ export function formatBonusValue(type: string, value: number): string {
     return `${sign}${formatted}%`;
   }
   if (fmt === "integer") {
-    // const sign = value > 0 ? "+" : "";
     return `+${value}`;
   }
   // flat: integer for slots/counts, otherwise one decimal

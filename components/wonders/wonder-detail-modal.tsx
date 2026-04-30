@@ -39,6 +39,7 @@ import { StatsBadge } from "./stats-badge";
 import { getBonusLabel, formatBonusValue } from "@/lib/wonders-utils";
 import { ResponsiveSelect } from "../modals/responsive-select";
 import { Badge } from "../ui/badge";
+import { MATERIAL_ICONS } from "@/lib/catalog";
 
 // ─── Icon resolution ───────────────────────────────────────────────────────────
 
@@ -47,16 +48,6 @@ const RESOURCE_ICONS: Record<string, string> = {
   food: "/images/goods/food.webp",
   rp: "/images/goods/research_points.webp",
   worker: "/images/game_icons/icon_workers_capital.webp",
-};
-
-const MATERIAL_ICONS: Record<MaterialType, string> = {
-  Arena: "/images/wonders/material/arena.webp",
-  Fortress: "/images/wonders/material/fortress.webp",
-  Nature: "/images/wonders/material/nature.webp",
-  Naval: "/images/wonders/material/naval.webp",
-  Palace: "/images/wonders/material/palace.webp",
-  Statue: "/images/wonders/material/statue.webp",
-  Temple: "/images/wonders/material/temple.webp",
 };
 
 function getResourceIconSrc(type: string): string {
@@ -720,14 +711,16 @@ function WonderHeader({
                 />
               );
             })}
-            {wonder.meta.synergyBonus && wonder.meta.synergyTag && (
+
+            {wonder.meta.synergies.map((syn, i) => (
               <StatsBadge
-                icons={["synergy", null]}
-                value={wonder.meta.synergyBonus}
-                alt={`Synergy: ${wonder.meta.synergyBonus}`}
-                materialIcon={wonder.meta.synergyTag}
+                key={i}
+                icons={syn.icons}
+                materialIcon={syn.tag}
+                value={syn.bonus}
+                alt={`Synergy: ${syn.bonus}`}
               />
-            )}
+            ))}
           </div>
         )}
       </div>
@@ -920,18 +913,11 @@ function WonderDetailContent({
                       rpLabel={10}
                     />
                   )}
-                  {totals.coinTotal > 0 && (
+                  {totals.blueprints > 0 && (
                     <ResourceBadge
-                      icon={RESOURCE_ICONS.coin}
-                      value={fmtCompact(totals.coinTotal)}
-                      alt="Coins"
-                    />
-                  )}
-                  {totals.foodTotal > 0 && (
-                    <ResourceBadge
-                      icon={RESOURCE_ICONS.food}
-                      value={fmtCompact(totals.foodTotal)}
-                      alt="Food"
+                      icon={`/images/wonders/bp/${wonder.meta.name.toLowerCase().replace(/\s+/g, "")}.webp`}
+                      value={formatNumber(totals.blueprints)}
+                      alt="Blueprints"
                     />
                   )}
                   {mat1 !== mat2 ? (
@@ -962,11 +948,18 @@ function WonderDetailContent({
                       />
                     )
                   )}
-                  {totals.blueprints > 0 && (
+                  {totals.coinTotal > 0 && (
                     <ResourceBadge
-                      icon={`/images/wonders/bp/${wonder.meta.name.toLowerCase().replace(/\s+/g, "")}.webp`}
-                      value={formatNumber(totals.blueprints)}
-                      alt="Blueprints"
+                      icon={RESOURCE_ICONS.coin}
+                      value={fmtCompact(totals.coinTotal)}
+                      alt="Coins"
+                    />
+                  )}
+                  {totals.foodTotal > 0 && (
+                    <ResourceBadge
+                      icon={RESOURCE_ICONS.food}
+                      value={fmtCompact(totals.foodTotal)}
+                      alt="Food"
                     />
                   )}
                   {Array.from(totals.goodsByKey.entries()).map(
