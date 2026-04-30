@@ -697,7 +697,7 @@ function WonderHeader({
         </div>
 
         {/* Bonus badges at current level — grid so they align with resources */}
-        {currentLevel !== undefined && currentLevel > 0 && (
+        {currentLevel !== undefined && currentLevel > 0 ? (
           <div className="grid grid-cols-3 gap-1 mt-0.5">
             {wonder.bonuses.map((b, i) => {
               const val = b.values[currentLevel - 1] ?? 0;
@@ -722,6 +722,10 @@ function WonderHeader({
               />
             ))}
           </div>
+        ) : (
+          <p className="mt-1.5 text-sm font-medium text-muted-foreground">
+            Unlock the Wonder to see bonuses
+          </p>
         )}
       </div>
 
