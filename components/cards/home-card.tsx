@@ -10,6 +10,7 @@ interface CardData {
   href?: string;
   locked?: boolean;
   badge?: string;
+  new?: boolean;
 }
 
 const cards: CardData[] = [
@@ -35,27 +36,28 @@ const cards: CardData[] = [
     href: "/research-tree",
   },
   {
+    title: "Wonders",
+    description: "Track your wonders progress and plan your presets",
+    icon: "/images/game_icons/icon_flat_research_points.webp",
+    illustration: "/images/technos/bronze_age/ba_8.webp",
+    href: "/wonders",
+    new: true,
+  },
+  {
     title: "Help",
     description: "Learn how to use RoC Helper and explore its features",
     icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/high_middle_ages/hm_16.webp",
     href: "/help",
   },
-  // {
-  //   title: "Wonders",
-  //   description: "Track your wonders progress and plan your presets",
-  //   icon: "/images/game_icons/icon_flat_research_points.webp",
-  //   illustration: "/images/technos/bronze_age/ba_8.webp",
-  //   href: "/wonders",
-  // },
-  // {
-  //   title: "Coming Soon",
-  //   description: "Something is taking shape in the shadows...",
-  //   icon: "/images/game_icons/icon_flat_scout.webp",
-  //   illustration: "/images/technos/minoan_era/me_6.webp",
-  //   locked: true,
-  //   badge: "Coming Soon",
-  // },
+  {
+    title: "Coming Soon",
+    description: "Something is taking shape in the shadows...",
+    icon: "/images/game_icons/icon_flat_scout.webp",
+    illustration: "/images/technos/minoan_era/me_6.webp",
+    locked: true,
+    badge: "Coming Soon",
+  },
 ];
 
 function HomeCard({ data }: { data: CardData }) {
@@ -74,15 +76,17 @@ function HomeCard({ data }: { data: CardData }) {
       <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-card/80 to-transparent z-10 pointer-events-none" />
 
       {/* Illustration — right side, overflows bottom */}
-      <div className="absolute bottom-3 right-3 z-20 h-auto w-22 pointer-events-none">
+      <div className="absolute bottom-3 right-3 z-20 h-auto w-[84px] pointer-events-none">
         <Image
           src={data.illustration}
           alt=""
-          width={88}
-          height={88}
-          className="object-contains size-full select-none"
+          width={84}
+          height={84}
+          className="object-contain size-full select-none"
           draggable={false}
-          priority
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
       </div>
 
@@ -93,6 +97,12 @@ function HomeCard({ data }: { data: CardData }) {
           <h2 className="text-[17px] md:text-lg font-bold leading-tight text-foreground truncate">
             {data.title}
           </h2>
+          {data.new && (
+            <span
+              className="flex size-2 rounded-full bg-blue-500 dark:bg-blue-400"
+              title="New"
+            ></span>
+          )}
         </div>
 
         {/* Description */}

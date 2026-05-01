@@ -21,7 +21,7 @@ const leftNavLinks = [
     external: false,
     icon: null,
   },
-  // { href: "/wonders", label: "Wonders", external: false, icon: null },
+  { href: "/wonders", label: "Wonders", external: false, icon: null },
 ];
 
 const rightNavLinks = [
