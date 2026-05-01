@@ -361,15 +361,26 @@ export function WonderGameCard({ wonder, currentLevel }: WonderGameCardProps) {
                 alt={wonder.meta.name}
                 onClick={() => setDetailOpen(true)}
                 draggable={false}
+                width={200}
+                height={200}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className={cn(
-                  "w-full h-auto transition-all duration-300 group-hover:brightness-110 select-none scale-100",
+                  "wonder-img",
+                  "w-full h-auto select-none cursor-pointer",
+                  "transition-[transform,filter] brightness-100 duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                  "group-hover:brightness-110",
                   !isUnlocked && "grayscale brightness-[0.75]",
-                  "cursor-pointer hover:scale-[1.02] origin-center",
                 )}
-                style={{ transform: `translateY(${offsetPx}px)` }}
+                style={
+                  {
+                    "--wonder-offset": `${Math.round(offsetPx)}px`,
+                  } as React.CSSProperties
+                }
                 title="View Wonder details"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/0 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 left-0 right-0 px-2 pb-2 pt-6 pointer-events-none">
                 <div className="flex flex-wrap gap-1 mb-1">
                   <MaterialTag material={wonder.meta.material1} />

@@ -273,6 +273,18 @@
   .campaign-badge {
     @apply !bg-amber-200 dark:!bg-amber-300 !text-amber-950 !border-amber-400/60 dark:!border-amber-300;
   }
+
+  .wonder-img {
+  transform: translateY(var(--wonder-offset, 0px));
+  transform-origin: center top;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* ← no filter here, that's the key */
+}
+
+.wonder-img:hover {
+  transform: translateY(var(--wonder-offset, 0px)) scale(1.02);
+  will-change: transform;
+}
 }
 
 @layer utilities {

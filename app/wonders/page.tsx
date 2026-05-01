@@ -163,10 +163,12 @@ function AllWondersTabContent({
   ownedMap,
   material,
   slot,
+  hideMaxed,
 }: {
   ownedMap: Record<string, { code: string; lvl: number }>;
   material: string;
   slot: string;
+  hideMaxed: boolean;
 }) {
   const filtered = useMemo(
     () =>
@@ -178,9 +180,14 @@ function AllWondersTabContent({
         )
           return false;
         if (slot !== "all" && w.meta.slot !== slot) return false;
+        if (hideMaxed) {
+          const owned = ownedMap[w.meta.code];
+          const maxLvl = (w as any).levels?.length ?? (w as any).meta?.maxLevel;
+          if (owned && maxLvl != null && owned.lvl >= maxLvl) return false;
+        }
         return true;
       }),
-    [material, slot],
+    [material, slot, hideMaxed, ownedMap],
   );
 
   return <GroupedGrid wonders={filtered as any} ownedMap={ownedMap} />;
@@ -193,12 +200,16 @@ function FilterSelects({
   onMaterial,
   slot,
   onSlot,
+  hideMaxed,
+  onHideMaxed,
   className,
 }: {
   material: string;
   onMaterial: (v: string) => void;
   slot: string;
   onSlot: (v: string) => void;
+  hideMaxed: boolean;
+  onHideMaxed: (v: boolean) => void;
   className?: string;
 }) {
   return (
@@ -229,6 +240,23 @@ function FilterSelects({
           // drawerBtnClassName="h-9"
         />
       </div>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => onHideMaxed(!hideMaxed)}
+        className={cn(
+          "w-full justify-between gap-2 h-12 md:h-9 mt-3 md:mt-2 font-medium",
+          hideMaxed && "border-primary text-primary bg-primary/5",
+        )}
+      >
+        Hide all maxed
+        <input
+          type="checkbox"
+          readOnly
+          checked={hideMaxed}
+          className="pointer-events-none h-3.5 w-3.5 accent-primary"
+        />
+      </Button>
     </div>
   );
 }
@@ -240,6 +268,8 @@ function MobileFilterDrawer({
   onMaterial,
   slot,
   onSlot,
+  hideMaxed,
+  onHideMaxed,
   hasActiveFilters,
   ownedMap,
 }: {
@@ -247,6 +277,8 @@ function MobileFilterDrawer({
   onMaterial: (v: string) => void;
   slot: string;
   onSlot: (v: string) => void;
+  hideMaxed: boolean;
+  onHideMaxed: (v: boolean) => void;
   hasActiveFilters: boolean;
   ownedMap: Record<string, { code: string; lvl: number }>;
 }) {
@@ -271,7 +303,7 @@ function MobileFilterDrawer({
       </Button>
 
       <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerContent className="px-4 pb-8">
+        <DrawerContent className="px-4 pb-8 h-[55vh]">
           <DrawerHeader className="px-0 pt-4 pb-2">
             <DrawerTitle>Filters</DrawerTitle>
           </DrawerHeader>
@@ -287,6 +319,8 @@ function MobileFilterDrawer({
             onSlot={(v) => {
               onSlot(v);
             }}
+            hideMaxed={hideMaxed}
+            onHideMaxed={onHideMaxed}
           />
           {hasActiveFilters && (
             <Button
@@ -295,6 +329,7 @@ function MobileFilterDrawer({
               onClick={() => {
                 onMaterial("all");
                 onSlot("all");
+                onHideMaxed(false);
                 setOpen(false);
               }}
             >
@@ -338,7 +373,7 @@ function UnlockAllButton({
       onClick={handleClick}
       disabled={loading}
       className={cn(
-        "h-11 md:h-9 ",
+        "h-11 md:h-9",
         compact
           ? "shrink-0 text-muted-foreground hover:text-foreground"
           : "w-full mt-3 bg-transparent border-border text-muted-foreground hover:text-foreground hover:border-foreground/30",
@@ -404,6 +439,8 @@ function SidebarNav({
   onMaterial,
   slot,
   onSlot,
+  hideMaxed,
+  onHideMaxed,
 }: {
   activeTab: string;
   onTabChange: (value: string) => void;
@@ -413,8 +450,10 @@ function SidebarNav({
   onMaterial: (v: string) => void;
   slot: string;
   onSlot: (v: string) => void;
+  hideMaxed: boolean;
+  onHideMaxed: (v: boolean) => void;
 }) {
-  const hasActiveFilters = material !== "all" || slot !== "all";
+  const hasActiveFilters = material !== "all" || slot !== "all" || hideMaxed;
 
   return (
     <nav className="hidden lg:flex flex-col justify-between w-[190px] xl:w-[220px] shrink-0 sticky top-[72px] h-[calc(100vh-72px)] pr-4 pb-4">
@@ -481,6 +520,8 @@ function SidebarNav({
                   onMaterial={onMaterial}
                   slot={slot}
                   onSlot={onSlot}
+                  hideMaxed={hideMaxed}
+                  onHideMaxed={onHideMaxed}
                 />
                 {hasActiveFilters && (
                   <Button
@@ -489,6 +530,7 @@ function SidebarNav({
                     onClick={() => {
                       onMaterial("all");
                       onSlot("all");
+                      onHideMaxed(false);
                     }}
                   >
                     Reset filters
@@ -517,6 +559,8 @@ function HorizontalNav({
   onMaterial,
   slot,
   onSlot,
+  hideMaxed,
+  onHideMaxed,
 }: {
   activeTab: string;
   onTabChange: (value: string) => void;
@@ -525,8 +569,10 @@ function HorizontalNav({
   onMaterial: (v: string) => void;
   slot: string;
   onSlot: (v: string) => void;
+  hideMaxed: boolean;
+  onHideMaxed: (v: boolean) => void;
 }) {
-  const hasActiveFilters = material !== "all" || slot !== "all";
+  const hasActiveFilters = material !== "all" || slot !== "all" || hideMaxed;
 
   return (
     <div className="hidden md:flex lg:hidden fixed top-[50px] left-0 right-0 z-40 h-12 border-b border-border px-6 items-center justify-between bg-background-200">
@@ -582,11 +628,29 @@ function HorizontalNav({
                 onClick={() => {
                   onMaterial("all");
                   onSlot("all");
+                  onHideMaxed(false);
                 }}
               >
                 Reset filters
               </Button>
             )}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onHideMaxed(!hideMaxed)}
+              className={cn(
+                "h-9 gap-1.5 font-normal",
+                hideMaxed && "border-primary text-primary bg-primary/5",
+              )}
+            >
+              Hide maxed
+              <input
+                type="checkbox"
+                readOnly
+                checked={hideMaxed}
+                className="pointer-events-none h-3 w-3 accent-primary"
+              />
+            </Button>
             <ResponsiveSelect
               value={material}
               onValueChange={onMaterial}
@@ -667,10 +731,11 @@ export default function WondersPage() {
   const [activeTab, setActiveTab] = useState("all");
   const [material, setMaterial] = useState("all");
   const [slot, setSlot] = useState("all");
+  const [hideMaxed, setHideMaxed] = useState(false);
 
   const activeTabConfig = TABS.find((t) => t.value === activeTab);
   const isAllTab = activeTab === "all";
-  const hasActiveFilters = material !== "all" || slot !== "all";
+  const hasActiveFilters = material !== "all" || slot !== "all" || hideMaxed;
 
   return (
     <>
@@ -688,6 +753,8 @@ export default function WondersPage() {
             onMaterial={setMaterial}
             slot={slot}
             onSlot={setSlot}
+            hideMaxed={hideMaxed}
+            onHideMaxed={setHideMaxed}
           />
           {/* Spacer pour compenser le HorizontalNav fixed (MD only) */}
           <div className="hidden md:block lg:hidden h-12 mb-4" />
@@ -703,6 +770,8 @@ export default function WondersPage() {
               onMaterial={setMaterial}
               slot={slot}
               onSlot={setSlot}
+              hideMaxed={hideMaxed}
+              onHideMaxed={setHideMaxed}
             />
 
             {/* ── Main content ── */}
@@ -732,6 +801,8 @@ export default function WondersPage() {
                             onMaterial={setMaterial}
                             slot={slot}
                             onSlot={setSlot}
+                            hideMaxed={hideMaxed}
+                            onHideMaxed={setHideMaxed}
                             hasActiveFilters={hasActiveFilters}
                             ownedMap={ownedMap}
                           />
@@ -761,6 +832,7 @@ export default function WondersPage() {
                     ownedMap={ownedMap}
                     material={material}
                     slot={slot}
+                    hideMaxed={hideMaxed}
                   />
                 )}
                 {activeTab === "presets" && <PresetTab ownedMap={ownedMap} />}
