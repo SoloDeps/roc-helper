@@ -12,7 +12,7 @@
  */
 
 import { useMemo, useState, memo, useCallback } from "react";
-import { Check, X, List, BarChart2 } from "lucide-react";
+import { Check, X, List, BarChart2, ExternalLink } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,7 @@ import { getBonusLabel, formatBonusValue } from "@/lib/wonders-utils";
 import { ResponsiveSelect } from "../modals/responsive-select";
 import { Badge } from "../ui/badge";
 import { MATERIAL_ICONS } from "@/lib/catalog";
+import Link from "next/link";
 
 // ─── Icon resolution ───────────────────────────────────────────────────────────
 
@@ -729,12 +730,30 @@ function WonderHeader({
         )}
       </div>
 
+      <Button
+        variant="outline"
+        size="sm"
+        className="rounded-md h-7 w-auto shrink-0 absolute top-2.5 right-14 text-muted-foreground"
+        asChild
+      >
+        <Link
+          href={`https://riseofcultures.wiki.gg/wiki/World_Wonders/${wonder.meta.name.replace(
+            / /g,
+            "_"
+          )}`}
+          target="_blank"
+        >
+          Wiki
+          <ExternalLink className="size-4" />
+        </Link>
+      </Button>
+
       {/* Close button */}
       <Button
         variant="ghost"
         size="icon"
         onClick={onClose}
-        className="rounded-full h-8 w-8 shrink-0 self-start absolute top-2 right-3"
+        className="rounded-md size-8 shrink-0 self-start absolute top-2 right-3"
         aria-label="Close"
       >
         <X className="h-4 w-4" />
