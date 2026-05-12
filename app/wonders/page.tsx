@@ -81,20 +81,20 @@ const TABS = [
     icon: Landmark,
     description: "Manage your wonders. Click to view details and progress.",
   },
-  // {
-  //   value: "presets",
-  //   label: "Presets",
-  //   icon: LayoutGrid,
-  //   description:
-  //     "Browse and apply preset wonder configurations optimized for different strategies.",
-  // },
-  // {
-  //   value: "compare",
-  //   label: "Compare",
-  //   icon: ArrowRightLeft,
-  //   description:
-  //     "Compare wonders side by side to make the best choice for your build.",
-  // },
+  {
+    value: "presets",
+    label: "Presets",
+    icon: LayoutGrid,
+    description:
+      "Browse and apply preset wonder configurations optimized for different strategies.",
+  },
+  {
+    value: "compare",
+    label: "Compare",
+    icon: ArrowRightLeft,
+    description:
+      "Compare wonders side by side to make the best choice for your build.",
+  },
 ];
 
 // ─── Group section header ─────────────────────────────────────────────────────
@@ -505,10 +505,14 @@ function SidebarNav({
           {isAllTab && (
             <motion.div
               key="sidebar-filters"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
+              // initial={{ opacity: 0, height: 0 }}
+              // animate={{ opacity: 1, height: "auto" }}
+              // exit={{ opacity: 0, height: 0 }}
+              // transition={{ duration: 0.2 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
               className="overflow-hidden"
             >
               <div className="border-y border-border pt-4 pb-3">
@@ -740,7 +744,7 @@ export default function WondersPage() {
   return (
     <>
       {/* Bottom nav (mobile) */}
-      {/* <BottomNav activeTab={activeTab} onTabChange={setActiveTab} /> */}
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
 
       <div className="flex min-h-0 flex-1 container-wrapper">
         <div className="w-full mx-auto lg:pt-4">

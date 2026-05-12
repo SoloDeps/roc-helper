@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Zap, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
+import { Zap, TrendingUp, ChevronDown, ChevronUp, EyeOff, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,89 +16,31 @@ import {
   getWonderBoosts,
   getBonusLabel,
   formatBonusValue,
+  getBonusDescription,
 } from "@/lib/wonders-utils";
 import { WONDERS } from "@/data/wonders/index";
 import type { WonderPresetEntry } from "@/data/wonders/types";
-
-// ─── Icon renderer ────────────────────────────────────────────────────────────
-//
-// Resolves icon keys to image paths. Adjust ICON_BASE_PATH to match your asset
-// structure. `overlayIcon` is rendered smaller at bottom-right when present.
-
-const ICON_BASE_PATH = "/images/icons";
-
-function BonusIcon({
-  main,
-  overlay,
-  size = 20,
-}: {
-  main: string;
-  overlay: string | null;
-  size?: number;
-}) {
-  return (
-    <span
-      className="relative inline-flex shrink-0"
-      style={{ width: size, height: size }}
-    >
-      {/* Main icon */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={`${ICON_BASE_PATH}/${main}.webp`}
-        alt=""
-        width={size}
-        height={size}
-        className="object-contain"
-      />
-      {/* Optional overlay icon – bottom-right, smaller */}
-      {overlay && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={`${ICON_BASE_PATH}/${overlay}.webp`}
-          alt=""
-          width={Math.round(size * 0.55)}
-          height={Math.round(size * 0.55)}
-          className="absolute bottom-0 right-0 object-contain z-10"
-        />
-      )}
-    </span>
-  );
-}
+import { StatsBadge } from "@/components/wonders/stats-badge";
 
 // ─── Synergy value multiplier ─────────────────────────────────────────────────
-//
-// Extracts the numeric part of a synergyBonus string, multiplies it by count,
-// then reconstructs the string with the same unit/suffix.
-//
-// Examples:
-//   "+1 RP/day"           × 6  →  "+6 RP/day (6)"
-//   "+100 primary goods"  × 6  →  "+600 primary goods (6)"
-//   "+5%"                 × 6  →  "+30% (6)"
-//   "Ranged Crit +1%"     × 1  →  "Ranged Crit +1% (1)"
 
 function multiplySynergyBonus(bonus: string, count: number): string {
-  // Match an optional sign, then digits (with optional decimal), then the rest
   const match = bonus.match(/^(.*?)([+-]?\d+(?:\.\d+)?)(.*)$/);
   if (!match) return `${bonus} (${count})`;
-
-  const prefix = match[1]; // e.g. "" or "Ranged Crit "
+  const prefix = match[1];
   const rawValue = parseFloat(match[2]);
-  const suffix = match[3]; // e.g. "%" or " RP/day" or " primary goods"
-
+  const suffix = match[3];
   const multiplied = rawValue * count;
-
-  // Keep decimals only if necessary
   const formatted = Number.isInteger(multiplied)
     ? String(multiplied)
     : multiplied.toFixed(1).replace(/\.0$/, "");
-
-  // Preserve original sign for positive values
   const sign = rawValue >= 0 && !match[2].startsWith("-") ? "+" : "";
-
   return `${prefix}${sign}${formatted}${suffix} (${count})`;
 }
 
 // ─── Synergy Panel ────────────────────────────────────────────────────────────
+// Uses StatsBadge with the real icons from wonder.meta.synergies[i].icons
+// and materialIcon from syn.tag — exactly like WonderDetailModal does.
 
 export function SynergyPanel({
   codes,
@@ -112,7 +54,25 @@ export function SynergyPanel({
     [codes],
   );
 
-  if (synergies.length === 0) return null;
+  // Collect full synergy data (icons + tag) from the actual wonder meta
+  const synergyBadges = useMemo(() => {
+    return synergies.flatMap((s) => {
+      const wonder = WONDERS[s.code];
+      if (!wonder) return [];
+      return wonder.meta.synergies.map((syn) => ({
+        key: `${s.code}-${syn.tag}`,
+        icons: syn.icons,
+        materialIcon: syn.tag,
+        value: s.synergyBonus
+          ? multiplySynergyBonus(s.synergyBonus, s.synergyCount)
+          : `×${s.synergyCount}`,
+        alt: s.name,
+        description: `${s.name}: ${s.synergyBonus ? multiplySynergyBonus(s.synergyBonus, s.synergyCount) : `×${s.synergyCount}`} — activated by ${s.synergyCount} wonder${s.synergyCount > 1 ? "s" : ""}`,
+      }));
+    });
+  }, [synergies]);
+
+  if (synergyBadges.length === 0) return null;
 
   return (
     <div
@@ -127,19 +87,18 @@ export function SynergyPanel({
           Active Synergies ({synergies.length})
         </p>
       </div>
-      <div className="space-y-1">
-        {synergies.map((s) => (
-          <div
-            key={s.code}
-            className="flex items-start justify-between gap-2 text-xs"
-          >
-            <span className="text-foreground/80 font-medium">{s.name}</span>
-            <span className="text-amber-600 dark:text-amber-400 font-semibold text-right shrink-0">
-              {s.synergyBonus
-                ? multiplySynergyBonus(s.synergyBonus, s.synergyCount)
-                : `×${s.synergyCount}`}
-            </span>
-          </div>
+
+      {/* 2-column grid — same as WonderDetailModal */}
+      <div className="grid grid-cols-2 gap-1.5">
+        {synergyBadges.map((b) => (
+          <StatsBadge
+            key={b.key}
+            icons={b.icons as [string, string | null]}
+            materialIcon={b.materialIcon}
+            value={b.value}
+            alt={b.alt}
+            description={b.description}
+          />
         ))}
       </div>
     </div>
@@ -147,14 +106,13 @@ export function SynergyPanel({
 }
 
 // ─── Wonder Boosts Panel ──────────────────────────────────────────────────────
-//
-// Lists all bonus types for each active wonder at its effective level.
-// Labels come from getBonusLabel(type); values from formatBonusValue(type, value).
-// Icons are rendered by BonusIcon using bonus.icons[0] and bonus.icons[1].
+// Split into two sub-columns: capital wonders (left) | allied wonders (right)
+// Each wonder section: name header + 2-col StatsBadge grid (real icons from boost.icons)
 
 interface WonderBoostRow {
   wonderCode: string;
   wonderName: string;
+  slotType: "capital" | "allied";
   boosts: {
     type: string;
     icons: [string, string | null];
@@ -162,16 +120,62 @@ interface WonderBoostRow {
   }[];
 }
 
+function WonderBoostSection({
+  w,
+  collapsed,
+  onToggle,
+}: {
+  w: WonderBoostRow;
+  collapsed: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <button
+        onClick={onToggle}
+        aria-expanded={!collapsed}
+        className="w-full flex items-center justify-between gap-1 text-xs font-semibold text-foreground/90 hover:text-foreground transition-colors"
+      >
+        <span className="truncate min-w-0">{w.wonderName}</span>
+        {collapsed ? (
+          <ChevronDown className="size-3 shrink-0 text-muted-foreground" />
+        ) : (
+          <ChevronUp className="size-3 shrink-0 text-muted-foreground" />
+        )}
+      </button>
+
+      {!collapsed && (
+        <div className="grid grid-cols-2 gap-1.5 pl-1">
+          {w.boosts.map((boost, i) => (
+            <StatsBadge
+              key={i}
+              icons={boost.icons}
+              value={formatBonusValue(boost.type, boost.value)}
+              alt={getBonusLabel(boost.type)}
+              description={getBonusDescription(boost.type, boost.value)}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function WonderBoostsPanel({
   codes,
   entries,
   ownedMap,
   className,
+  // Capital codes and allied codes for the 2-column split
+  capitalCodes,
+  alliedCodes,
 }: {
   codes: string[];
   entries?: (WonderPresetEntry | null)[];
   ownedMap?: Record<string, { code: string; lvl: number }>;
   className?: string;
+  capitalCodes?: string[];
+  alliedCodes?: string[];
 }) {
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
@@ -181,32 +185,36 @@ export function WonderBoostsPanel({
         const wonder = WONDERS[code];
         if (!wonder) return null;
 
-        // Resolve effective level: preset entry → owned level → fallback 1
         let effectiveLevel = 1;
         if (entries) {
           const entry = entries.find((e) => e?.code === code);
-          if (entry) {
-            effectiveLevel = entry.level ?? ownedMap?.[code]?.lvl ?? 1;
-          }
+          if (entry) effectiveLevel = entry.level ?? ownedMap?.[code]?.lvl ?? 1;
         } else if (ownedMap?.[code]) {
           effectiveLevel = ownedMap[code].lvl;
         }
 
         const boosts = getWonderBoosts(wonder, effectiveLevel);
+        const isAllied = alliedCodes?.includes(code) ?? false;
 
         return {
           wonderCode: code,
           wonderName: wonder.meta.name,
+          slotType: isAllied ? "allied" : "capital",
           boosts,
         } satisfies WonderBoostRow;
       })
       .filter((w): w is WonderBoostRow => w !== null && w.boosts.length > 0);
-  }, [codes, entries, ownedMap]);
+  }, [codes, entries, ownedMap, alliedCodes]);
 
   if (wonderBoosts.length === 0) return null;
 
   const toggleCollapse = (code: string) =>
     setCollapsed((prev) => ({ ...prev, [code]: !prev[code] }));
+
+  // Split into capital / allied groups
+  const capitalBoosts = wonderBoosts.filter((w) => w.slotType === "capital");
+  const alliedBoosts = wonderBoosts.filter((w) => w.slotType === "allied");
+  const hasSplit = capitalCodes !== undefined && (capitalBoosts.length > 0 || alliedBoosts.length > 0);
 
   return (
     <div
@@ -222,60 +230,142 @@ export function WonderBoostsPanel({
         </p>
       </div>
 
-      <div className="space-y-2">
-        {wonderBoosts.map((w) => {
-          const isCollapsed = collapsed[w.wonderCode] ?? false;
-          return (
-            <div key={w.wonderCode} className="space-y-1">
-              {/* Header: wonder name + collapse toggle */}
-              <button
-                onClick={() => toggleCollapse(w.wonderCode)}
-                className="w-full flex items-center justify-between gap-1 text-xs font-semibold text-foreground/90 hover:text-foreground transition-colors"
-              >
-                <span className="truncate">{w.wonderName}</span>
-                {isCollapsed ? (
-                  <ChevronDown className="size-3 shrink-0 text-muted-foreground" />
-                ) : (
-                  <ChevronUp className="size-3 shrink-0 text-muted-foreground" />
-                )}
-              </button>
-
-              {/* Bonus rows */}
-              {!isCollapsed && (
-                <div className="pl-2 space-y-0.5 border-l border-sky-300/50 dark:border-sky-700/40">
-                  {w.boosts.map((boost, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center justify-between gap-2 text-xs"
-                    >
-                      {/* Icon + label */}
-                      <span className="flex items-center gap-1 text-foreground/70 min-w-0">
-                        <BonusIcon
-                          main={boost.icons[0]}
-                          overlay={boost.icons[1]}
-                          size={16}
-                        />
-                        <span className="truncate">
-                          {getBonusLabel(boost.type)}
-                        </span>
-                      </span>
-                      {/* Value */}
-                      <span className="text-sky-600 dark:text-sky-400 font-semibold text-right shrink-0">
-                        {formatBonusValue(boost.type, boost.value)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+      {hasSplit ? (
+        // Two-column split: capital | allied
+        <div className="grid grid-cols-2 gap-x-4 gap-y-0">
+          {/* Capital column */}
+          <div className="space-y-3">
+            {capitalBoosts.length > 0 && (
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                Capital
+              </p>
+            )}
+            {capitalBoosts.map((w) => (
+              <WonderBoostSection
+                key={w.wonderCode}
+                w={w}
+                collapsed={collapsed[w.wonderCode] ?? false}
+                onToggle={() => toggleCollapse(w.wonderCode)}
+              />
+            ))}
+          </div>
+          {/* Allied column */}
+          <div className="space-y-3">
+            {alliedBoosts.length > 0 && (
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                Allied
+              </p>
+            )}
+            {alliedBoosts.map((w) => (
+              <WonderBoostSection
+                key={w.wonderCode}
+                w={w}
+                collapsed={collapsed[w.wonderCode] ?? false}
+                onToggle={() => toggleCollapse(w.wonderCode)}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        // Single column (no split info — fallback, used in MobileSynergyDrawer)
+        <div className="space-y-3">
+          {wonderBoosts.map((w) => (
+            <WonderBoostSection
+              key={w.wonderCode}
+              w={w}
+              collapsed={collapsed[w.wonderCode] ?? false}
+              onToggle={() => toggleCollapse(w.wonderCode)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-// ─── Mobile Synergies Drawer ──────────────────────────────────────────────────
+// ─── StatsSection ─────────────────────────────────────────────────────────────
+// The top stats bar with 1/3 synergy + 2/3 boosts grid and Hide toggle.
+// Replaces the old "hidden md:flex xl:hidden" + "hidden xl:flex" duplication.
+
+export function StatsSection({
+  codes,
+  entries,
+  ownedMap,
+  capitalCodes,
+  alliedCodes,
+  className,
+}: {
+  codes: string[];
+  entries?: (WonderPresetEntry | null)[];
+  ownedMap?: Record<string, { code: string; lvl: number }>;
+  capitalCodes?: string[];
+  alliedCodes?: string[];
+  className?: string;
+}) {
+  const [visible, setVisible] = useState(true);
+  const hasWonders = codes.length > 0;
+
+  return (
+    <div className={cn("space-y-2", className)}>
+      {/* Header row with Hide toggle */}
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+          Stats
+        </p>
+        {hasWonders && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setVisible((v) => !v)}
+            aria-pressed={visible}
+            className="h-6 px-2 gap-1 text-[11px] text-muted-foreground hover:text-foreground"
+          >
+            {visible ? (
+              <>
+                <EyeOff className="size-3" />
+                Hide
+              </>
+            ) : (
+              <>
+                <Eye className="size-3" />
+                Show
+              </>
+            )}
+          </Button>
+        )}
+      </div>
+
+      {/* Empty state */}
+      {!hasWonders && (
+        <p className="text-xs text-muted-foreground">
+          Add wonders to see stats
+        </p>
+      )}
+
+      {/* 1/3 + 2/3 grid */}
+      {hasWonders && visible && (
+        <div className="grid grid-cols-3 gap-3 items-start">
+          {/* Synergy — 1 col */}
+          <div className="col-span-1">
+            <SynergyPanel codes={codes} />
+          </div>
+          {/* Boosts — 2 cols */}
+          <div className="col-span-2">
+            <WonderBoostsPanel
+              codes={codes}
+              entries={entries}
+              ownedMap={ownedMap}
+              capitalCodes={capitalCodes}
+              alliedCodes={alliedCodes}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Mobile Synergies Drawer — UNCHANGED ─────────────────────────────────────
 
 export function MobileSynergyDrawer({
   codes,
@@ -354,7 +444,7 @@ export function MobileSynergyDrawer({
               </p>
             )}
 
-            {/* Wonder Boosts */}
+            {/* Wonder Boosts — single column in drawer */}
             {hasBoosts && (
               <div className="space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400">

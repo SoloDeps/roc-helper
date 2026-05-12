@@ -21,9 +21,8 @@ import {
   WonderPickerModal,
 } from "./presets/components";
 import {
-  SynergyPanel,
-  WonderBoostsPanel,
   MobileSynergyDrawer,
+  StatsSection,
 } from "./presets/synergies";
 
 // ─── Main Presets Tab ─────────────────────────────────────────────────────────
@@ -54,16 +53,33 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
   } | null>(null);
   const [editingName, setEditingName] = useState(false);
 
+  // All codes in preset
   const codes = useMemo(
     () => (activePreset ? getPresetCodes(activePreset) : []),
     [activePreset],
   );
 
-  // Toutes les entries du preset (capital + allied) pour passer au WonderBoostsPanel
-  const allEntries = useMemo(() => {
-    if (!activePreset) return [];
-    return [...activePreset.capital, ...activePreset.allied];
-  }, [activePreset]);
+  // Capital and allied codes separately — for the 2-column boosts split
+  const capitalCodes = useMemo(
+    () =>
+      (activePreset?.capital ?? [])
+        .filter((e): e is NonNullable<typeof e> => e !== null)
+        .map((e) => e.code),
+    [activePreset],
+  );
+  const alliedCodes = useMemo(
+    () =>
+      (activePreset?.allied ?? [])
+        .filter((e): e is NonNullable<typeof e> => e !== null)
+        .map((e) => e.code),
+    [activePreset],
+  );
+
+  // All entries for level resolution in boosts panel
+  const allEntries = useMemo(
+    () => (activePreset ? [...activePreset.capital, ...activePreset.allied] : []),
+    [activePreset],
+  );
 
   const handleSelectWonder = useCallback(
     (code: string) => {
@@ -96,7 +112,7 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
 
   return (
     <div className="space-y-4">
-      {/* ── Selector de presets ── */}
+      {/* ── Preset selector ── */}
       <div className="flex gap-2 overflow-x-auto no-scrollbar pb-0.5">
         {presets.map((p) => (
           <button
@@ -112,6 +128,7 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
             {p.name}
           </button>
         ))}
+        {/* Wrap in arrow fn — prevents React event object being passed as `name` arg */}
         <button
           onClick={() => addPreset()}
           className="shrink-0 px-3 py-1.5 rounded-lg text-xs border border-dashed border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all flex items-center gap-1"
@@ -120,12 +137,11 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
         </button>
       </div>
 
-      {/* ── Header mobile : label + bouton drawer synergies ── */}
+      {/* ── Header mobile: label + synergy drawer button ── */}
       <div className="flex items-center justify-between gap-3 md:hidden">
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Preset slots
         </p>
-        {/* On passe entries et ownedMap pour que le drawer affiche aussi les boosts */}
         <MobileSynergyDrawer
           codes={codes}
           entries={allEntries}
@@ -134,9 +150,10 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
       </div>
 
       <div className="flex flex-col xl:flex-row gap-4 items-start">
-        {/* ── Zone principale Capital + Allies ── */}
+        {/* ── Main area: header + stats (md–xl) + grids ── */}
         <div className="flex-1 min-w-0 max-w-[1050px] space-y-4">
-          {/* ── Preset header : nom + bouton ... poussé à droite ── */}
+
+          {/* ── Preset name + options ── */}
           <div className="flex items-center gap-2">
             {editingName ? (
               <input
@@ -157,7 +174,6 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
               </button>
             )}
 
-            {/* flex-1 pousse le menu ··· tout à droite */}
             <div className="flex-1" />
 
             <DropdownMenu>
@@ -170,9 +186,7 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
                 <DropdownMenuItem onClick={() => setEditingName(true)}>
                   Rename
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => duplicatePreset(activePreset.id)}
-                >
+                <DropdownMenuItem onClick={() => duplicatePreset(activePreset.id)}>
                   <Copy className="size-3.5 mr-2" /> Duplicate
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => clearPreset(activePreset.id)}>
@@ -189,30 +203,18 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
             </DropdownMenu>
           </div>
 
-          {/* ── Synergies + Boosts inline : md → xl uniquement ── */}
-          <div className="hidden md:flex xl:hidden flex-col gap-3">
-            <SynergyPanel codes={codes} />
-            <WonderBoostsPanel
+          {/* ── Stats section: md → xl inline (hidden on mobile — drawer handles it) ── */}
+          <div className="hidden md:block xl:hidden">
+            <StatsSection
               codes={codes}
               entries={allEntries}
               ownedMap={ownedMap}
+              capitalCodes={capitalCodes}
+              alliedCodes={alliedCodes}
             />
           </div>
 
-          {/* ── Grilles Capital City + Allied Cultures ── */}
-          {/*
-            FIX hauteur empty slot :
-            On ajoute `items-start` sur la grille pour que chaque cellule
-            ne s'étire plus automatiquement. La PresetWonderCard définit sa propre
-            hauteur, et l'EmptySlotCard utilise h-full + min-h pour s'adapter
-            à sa cellule sans imposer une hauteur fixe à la ligne.
-
-            Alternative : `grid-rows-[auto]` est le comportement par défaut,
-            mais `items-start` empêche le stretch implicite entre colonnes
-            de la même rangée. Si vous voulez que les slots vides s'alignent
-            avec les wonder cards de la même rangée (même ligne de grille),
-            retirez `items-start` et gardez uniquement h-full sur EmptySlotCard.
-          */}
+          {/* ── Wonder grids: Capital City + Allied Cultures ── */}
           <div className="flex flex-col md:flex-row gap-4">
             {/* Capital City */}
             <div className="flex-1 min-w-0 space-y-4">
@@ -280,13 +282,14 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
           </div>
         </div>
 
-        {/* ── Colonne synergies + boosts droite : xl+ uniquement ── */}
-        <div className="hidden xl:flex flex-col gap-3 w-[280px] shrink-0">
-          <SynergyPanel codes={codes} />
-          <WonderBoostsPanel
+        {/* ── Right sidebar: stats at xl+ ── */}
+        <div className="hidden xl:flex flex-col gap-3 w-[300px] shrink-0">
+          <StatsSection
             codes={codes}
             entries={allEntries}
             ownedMap={ownedMap}
+            capitalCodes={capitalCodes}
+            alliedCodes={alliedCodes}
           />
         </div>
       </div>

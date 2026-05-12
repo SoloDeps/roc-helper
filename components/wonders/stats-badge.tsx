@@ -1,61 +1,64 @@
+"use client";
+
 import Image from "next/image";
-import { memo, useState, useCallback } from "react";
+import { memo, useState, useCallback, useEffect } from "react";
 import type { MaterialType } from "@/data/wonders/types";
 import { imagesUrl, MATERIAL_ICONS } from "@/lib/catalog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 // ─── Icon path resolution ─────────────────────────────────────────────────────
-//
-// Icons live in different folders depending on type.
-// Priority: ICON_PATH_OVERRIDES (exact match) → /images/icons/<key>.webp
-//
-// Add entries to ICON_PATH_OVERRIDES for any icon that does NOT live under
-// /images/icons/ so the resolver can find it without touching the file tree.
 
 const ICON_PATH_OVERRIDES: Record<string, string> = {
   ...imagesUrl,
   ...MATERIAL_ICONS,
-  // goods
   coin: "/images/goods/coins.webp",
   food: "/images/goods/food.webp",
   research: "/images/goods/research_points.webp",
   mead: "/images/goods/mead.webp",
   chest_good: "/images/icons/icon_chest_good.webp",
   mystery_chest: "/images/icons/icon_mystery_chest_gold.webp",
-  // game_icons
   capital_worker: "/images/game_icons/icon_workers_capital.webp",
   arabia_worker: "/images/icons/icon_workers_city_arabia.webp",
-  // trade
   icon_trading: "/images/technos/features/icon_trading.webp",
   trade_worker: "/images/icons/icon_workers_trading.webp",
   trade_slot_cooldown_boost: "/images/icons/icon_tradeslot_cooldown_boost.webp",
   gears: "/images/goods/gears.webp",
   compass: "/images/game_icons/icon_compass.webp",
   bazaar_boost: "/images/icons/icon_bazaar_boost.webp",
-  // synergy
   synergy: "/images/game_icons/icon_synergy.webp",
 };
 
-/**
- * Resolves an icon key to its full image path.
- *
- * Resolution order:
- * 1. Exact match in ICON_PATH_OVERRIDES
- * 2. /images/icons/<key>.webp  (stat icons, unit icons, boost overlays…)
- *
- * If neither loads, the <Image> onError handler falls back to FALLBACK_SRC.
- */
 export function resolveIconPath(key: string): string {
   return ICON_PATH_OVERRIDES[key] ?? `/images/icons/${key}.webp`;
 }
 
 const FALLBACK_SRC = "/images/goods/default.webp";
 
+// ─── Client-only touch detection hook ────────────────────────────────────────
+// Runs only on the client (useEffect) to avoid SSR hydration mismatches.
+
+function useIsTouch(): boolean {
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    setIsTouch(
+      typeof window !== "undefined" &&
+        window.matchMedia("(hover: none) and (pointer: coarse)").matches,
+    );
+  }, []);
+  return isTouch;
+}
+
 // ─── Fallback-aware image ─────────────────────────────────────────────────────
-//
-// Owns its own error state so it can swap to FALLBACK_SRC on load failure.
-// Initial src comes from a lazy useState initializer — no useEffect needed,
-// so there are no cascading renders (avoids the ESLint
-// "Calling setState synchronously within an effect" warning).
 
 interface FallbackImageProps {
   src: string;
@@ -94,21 +97,15 @@ const FallbackImage = memo(function FallbackImage({
 // ─── StatsBadge ───────────────────────────────────────────────────────────────
 
 interface StatsBadgeProps {
-  /**
-   * Tuple from WonderBonus.icons: [mainIcon, overlayIcon | null].
-   * - mainIcon   : icon key, resolved via resolveIconPath()
-   * - overlayIcon: when present, rendered as a small badge bottom-right (14 px)
-   */
+  /** Tuple from WonderBonus.icons: [mainIcon, overlayIcon | null] */
   icons: [string, string | null];
   /** Pre-formatted value string, e.g. "+18.3%", "4", "300" */
   value: string;
-  /** Accessible label for the badge (bonus type label is a good default) */
+  /** Accessible label for the badge */
   alt: string;
-  /**
-   * Optional material type shown as a small leading icon on the far left.
-   * Use this for synergy badges so the trigger material is immediately visible.
-   * Layout: [material icon] [main icon + overlay] ··· [value]
-   */
+  /** Human-readable description shown in tooltip (desktop) or popover (touch) */
+  description?: string;
+  /** Optional material type shown as a small leading icon */
   materialIcon?: MaterialType;
 }
 
@@ -116,15 +113,31 @@ export const StatsBadge = memo(function StatsBadge({
   icons,
   value,
   alt,
+  description,
   materialIcon,
 }: StatsBadgeProps) {
   const [mainKey, overlayKey] = icons;
+  const isTouch = useIsTouch();
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
-  return (
-    <div className="flex items-center justify-between px-2 rounded-md bg-background-100 border border-alpha-200 h-9 shrink-0 gap-1.5">
-      {/* Left side: optional material icon + main icon with overlay */}
+  const badgeInner = (
+    <div
+      className="flex items-center justify-between px-2 rounded-md bg-background-100 border border-alpha-200 h-9 shrink-0 gap-1.5 cursor-default select-none"
+      role={description ? "button" : undefined}
+      tabIndex={description ? 0 : undefined}
+      aria-label={description ? (description ?? alt) : alt}
+      onKeyDown={
+        description && isTouch
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setPopoverOpen((v) => !v);
+              }
+            }
+          : undefined
+      }
+    >
       <div className="flex items-center gap-1 shrink-0">
-        {/* Material icon — only for synergy badges */}
         {materialIcon && (
           <FallbackImage
             src={MATERIAL_ICONS[materialIcon]}
@@ -134,8 +147,6 @@ export const StatsBadge = memo(function StatsBadge({
             className="h-[25px] w-auto select-none shrink-0"
           />
         )}
-
-        {/* Main icon with optional overlay */}
         <div className="relative shrink-0">
           <FallbackImage
             src={resolveIconPath(mainKey)}
@@ -156,9 +167,33 @@ export const StatsBadge = memo(function StatsBadge({
           )}
         </div>
       </div>
-
-      {/* Value */}
       <span className="text-sm font-medium tabular-nums">{value}</span>
     </div>
+  );
+
+  if (!description) return badgeInner;
+
+  if (isTouch) {
+    return (
+      <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+        <PopoverTrigger asChild>
+          <div onClick={() => setPopoverOpen((v) => !v)}>{badgeInner}</div>
+        </PopoverTrigger>
+        <PopoverContent side="top" className="text-xs max-w-[200px] py-1.5 px-2.5">
+          {description}
+        </PopoverContent>
+      </Popover>
+    );
+  }
+
+  return (
+    <TooltipProvider delayDuration={300}>
+      <Tooltip>
+        <TooltipTrigger asChild>{badgeInner}</TooltipTrigger>
+        <TooltipContent side="top" className="text-xs max-w-[200px]">
+          {description}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 });

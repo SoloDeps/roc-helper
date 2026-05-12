@@ -289,3 +289,29 @@ export function formatBonusValue(type: string, value: number): string {
   // flat: integer for slots/counts, otherwise one decimal
   return Number.isInteger(value) ? `${value}` : value.toFixed(1);
 }
+
+// ─── Bonus description ────────────────────────────────────────────────────────
+
+/**
+ * Converts a bonus type + numeric value into a human-readable sentence.
+ * Examples:
+ *   coins_production, 21   → "Increases coin production by 21%"
+ *   rp_per_day, 4          → "Provides +4 research points per day"
+ *   worker_slots, 2        → "Adds +2 worker slots"
+ */
+export function getBonusDescription(type: string, value: number): string {
+  const fmt = getBonusFormat(type);
+  const formatted = formatBonusValue(type, value);
+  const label = getBonusLabel(type).toLowerCase();
+
+  if (fmt === "percent") {
+    return `Increases ${label} by ${formatted}`;
+  }
+  if (type === "rp_per_day") {
+    return `Provides ${formatted} research points per day`;
+  }
+  if (type.endsWith("_slots") || type.endsWith("_slot")) {
+    return `Adds ${formatted} ${label}`;
+  }
+  return `Grants ${formatted} ${label}`;
+}
