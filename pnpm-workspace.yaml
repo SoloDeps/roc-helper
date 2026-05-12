@@ -1,3 +1,9 @@
-ignoredBuiltDependencies:
+# pnpm-workspace.yaml
+allowBuilds:
+  sharp: true
+  msw: true
+  unrs-resolver: true
+onlyBuiltDependencies:
   - sharp
+  - msw
   - unrs-resolver
