@@ -24,29 +24,46 @@ interface ContentItem {
 }
 
 const content: Record<"male" | "female" | "male2", ContentItem> = {
-  female: {
-    imgClass: "h-64 left-[72px] hidden md:block",
-    image: "/images/characters/female_lge.png",
-    textClass: "ps-5 md:ps-40",
-    text: "Glad to see you, Sire!",
-    description:
-      "Here, you can view and adjust the resources you need.\nFelix could use your help on the other side!",
-  },
-  male: {
-    imgClass: "h-64 left-14 hidden md:block",
-    image: "/images/characters/male_lge.png",
-    textClass: "ps-5 md:ps-40",
-    text: "I hope you're doing well, Chief!",
-    description:
-      "We should start adding new buildings to the list to better track the resources we'll need for them.",
-  },
+  // female: {
+  //   imgClass: "h-64 left-[72px] hidden md:block",
+  //   image: "/images/characters/female_lge.webp",
+  //   textClass: "ps-5 md:ps-40",
+  //   text: "Glad to see you, Sire!",
+  //   description:
+  //     "Here, you can view and adjust the resources you need.\nFelix could use your help on the other side!",
+  // },
+  // male: {
+  //   imgClass: "h-64 left-14 hidden md:block",
+  //   image: "/images/characters/male_lge.webp",
+  //   textClass: "ps-5 md:ps-40",
+  //   text: "I hope you're doing well, Chief!",
+  //   description:
+  //     "We should start adding new buildings to the list to better track the resources we'll need for them.",
+  // },
   male2: {
     imgClass: "h-56 left-28 hidden md:block",
-    image: "/images/characters/male2_lge.png",
+    image: "/images/characters/male2_lge.webp",
     textClass: "ps-5 md:ps-52",
     text: "What are you up to, Chief?",
     description:
       "Everything's hidden here...\nUnhide some items to see your resources!",
+  },
+  // Temporary
+  female: {
+    imgClass: "h-60 left-[95px] hidden md:block",
+    image: "/images/characters/female_japan.webp",
+    textClass: "ps-5 md:ps-44",
+    text: "Welcome, distant friend.",
+    description:
+      "Here, you can view the resources you need.\nMay you find everything in its right place.",
+  },
+  male: {
+    imgClass: "h-60 left-28 hidden md:block",
+    image: "/images/characters/male_japan.webp",
+    textClass: "ps-5 md:ps-52",
+    text: "So, you have come.",
+    description:
+      "A great work cannot be rushed.\nA wise lord raises new halls before the empire can flourish.",
   },
 };
 
@@ -68,7 +85,7 @@ export function EmptyOutline({ perso, type }: EmptyType) {
   };
 
   return (
-    <div className="relative max-w-xl w-full h-48 border rounded-xl border-alpha-400 bg-background-300 shadow-xs">
+    <div className="relative max-w-xl md:min-w-xl w-full h-48 border rounded-xl border-alpha-400 bg-background-300 shadow-xs">
       <div
         className={`${content[perso].textClass} relative size-full p-4 flex flex-col justify-center gap-3 text-center`}
       >

@@ -41,7 +41,6 @@ const cards: CardData[] = [
     icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/bronze_age/ba_8.webp",
     href: "/wonders",
-    new: true,
   },
   {
     title: "Help",
