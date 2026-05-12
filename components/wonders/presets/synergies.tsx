@@ -1,7 +1,21 @@
 "use client";
 
+<<<<<<< Updated upstream
 import { useState, useMemo } from "react";
 import { Zap, TrendingUp, ChevronDown, ChevronUp, EyeOff, Eye } from "lucide-react";
+=======
+import { useState, useMemo, useRef, useEffect } from "react";
+import {
+  Zap,
+  TrendingUp,
+  ChevronDown,
+  ChevronUp,
+  EyeOff,
+  Eye,
+  ChevronsDown,
+  ChevronsUp,
+} from "lucide-react";
+>>>>>>> Stashed changes
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +33,7 @@ import {
   getBonusDescription,
 } from "@/lib/wonders-utils";
 import { WONDERS } from "@/data/wonders/index";
+<<<<<<< Updated upstream
 import type { WonderPresetEntry } from "@/data/wonders/types";
 import { StatsBadge } from "@/components/wonders/stats-badge";
 
@@ -27,6 +42,43 @@ import { StatsBadge } from "@/components/wonders/stats-badge";
 function multiplySynergyBonus(bonus: string, count: number): string {
   const match = bonus.match(/^(.*?)([+-]?\d+(?:\.\d+)?)(.*)$/);
   if (!match) return `${bonus} (${count})`;
+=======
+import type { WonderPresetEntry, MaterialType } from "@/data/wonders/types";
+import { StatsBadge } from "@/components/wonders/stats-badge";
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const MAX_HEIGHT = 345;
+
+// Material display order + labels
+const MATERIAL_ORDER: MaterialType[] = [
+  "arena",
+  "fortress",
+  "nature",
+  "naval",
+  "palace",
+  "statue",
+  "temple",
+];
+
+const MATERIAL_LABEL: Record<MaterialType, string> = {
+  arena: "Arena",
+  fortress: "Fortress",
+  nature: "Nature",
+  naval: "Naval",
+  palace: "Palace",
+  statue: "Statue",
+  temple: "Temple",
+};
+
+// ─── Synergy value — just the base value, no count in parens ────────────────
+
+function formatSynergyValue(bonus: string, count: number): string {
+  if (count <= 1) return bonus;
+  // Multiply the numeric part by count, no trailing "(N)"
+  const match = bonus.match(/^(.*?)([+-]?\d+(?:\.\d+)?)(.*)$/);
+  if (!match) return bonus;
+>>>>>>> Stashed changes
   const prefix = match[1];
   const rawValue = parseFloat(match[2]);
   const suffix = match[3];
@@ -35,7 +87,69 @@ function multiplySynergyBonus(bonus: string, count: number): string {
     ? String(multiplied)
     : multiplied.toFixed(1).replace(/\.0$/, "");
   const sign = rawValue >= 0 && !match[2].startsWith("-") ? "+" : "";
+<<<<<<< Updated upstream
   return `${prefix}${sign}${formatted}${suffix} (${count})`;
+=======
+  return `${prefix}${sign}${formatted}${suffix}`;
+}
+
+// ─── ExpandablePanel ──────────────────────────────────────────────────────────
+// Wraps any content with a max-height + "Show more / Show less" toggle.
+// If content fits within MAX_HEIGHT, no button is rendered.
+
+function ExpandablePanel({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [needsExpand, setNeedsExpand] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    // Use ResizeObserver so it re-checks when wonders are added/removed
+    const ro = new ResizeObserver(() => {
+      setNeedsExpand(el.scrollHeight > MAX_HEIGHT + 2);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div className={className}>
+      <div
+        ref={contentRef}
+        className="overflow-hidden transition-all duration-300"
+        style={{ maxHeight: needsExpand && !expanded ? MAX_HEIGHT : undefined }}
+      >
+        {children}
+      </div>
+
+      {needsExpand && (
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          className="w-full flex items-center justify-center gap-1 pt-2 text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {expanded ? (
+            <>
+              <ChevronsUp className="size-3" />
+              Show less
+            </>
+          ) : (
+            <>
+              <ChevronsDown className="size-3" />
+              Show more
+            </>
+          )}
+        </button>
+      )}
+    </div>
+  );
+>>>>>>> Stashed changes
 }
 
 // ─── Synergy Panel ────────────────────────────────────────────────────────────
@@ -54,6 +168,7 @@ export function SynergyPanel({
     [codes],
   );
 
+<<<<<<< Updated upstream
   // Collect full synergy data (icons + tag) from the actual wonder meta
   const synergyBadges = useMemo(() => {
     return synergies.flatMap((s) => {
@@ -73,6 +188,59 @@ export function SynergyPanel({
   }, [synergies]);
 
   if (synergyBadges.length === 0) return null;
+=======
+  // Build badge data from real synergy icons — group by material1
+  const grouped = useMemo(() => {
+    type Badge = {
+      key: string;
+      icons: [string, string | null];
+      materialIcon: MaterialType;
+      value: string;
+      alt: string;
+      description: string;
+      material: MaterialType;
+    };
+
+    const byMaterial = new Map<MaterialType, Badge[]>();
+
+    synergies.forEach((s) => {
+      const wonder = WONDERS[s.code];
+      if (!wonder) return;
+      const mat = wonder.meta.material1;
+
+      wonder.meta.synergies.forEach((syn) => {
+        const value = s.synergyBonus
+          ? formatSynergyValue(s.synergyBonus, s.synergyCount)
+          : `×${s.synergyCount}`;
+        const description = `${s.name} — ${value}, activated by ${s.synergyCount} wonder${s.synergyCount > 1 ? "s" : ""}`;
+
+        const badge: Badge = {
+          key: `${s.code}-${syn.tag}`,
+          icons: syn.icons as [string, string | null],
+          materialIcon: syn.tag,
+          value,
+          alt: s.name,
+          description,
+          material: mat,
+        };
+
+        const list = byMaterial.get(mat) ?? [];
+        list.push(badge);
+        byMaterial.set(mat, list);
+      });
+    });
+
+    // Return sorted by MATERIAL_ORDER
+    return MATERIAL_ORDER.filter((m) => byMaterial.has(m)).map((m) => ({
+      material: m,
+      badges: byMaterial.get(m)!,
+    }));
+  }, [synergies]);
+
+  if (grouped.length === 0) return null;
+
+  const totalCount = synergies.length;
+>>>>>>> Stashed changes
 
   return (
     <div
@@ -84,10 +252,11 @@ export function SynergyPanel({
       <div className="flex items-center gap-1.5">
         <Zap className="size-3.5 text-amber-500" />
         <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">
-          Active Synergies ({synergies.length})
+          Active Synergies ({totalCount})
         </p>
       </div>
 
+<<<<<<< Updated upstream
       {/* 2-column grid — same as WonderDetailModal */}
       <div className="grid grid-cols-2 gap-1.5">
         {synergyBadges.map((b) => (
@@ -101,17 +270,54 @@ export function SynergyPanel({
           />
         ))}
       </div>
+=======
+      <ExpandablePanel>
+        <div className="space-y-2">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
+            Grouped by material
+          </p>
+          {grouped.map(({ material, badges }) => (
+            <div key={material} className="space-y-1.5">
+              {/* Material group label */}
+              <p className="text-xs font-semibold text-foreground/90">
+                {MATERIAL_LABEL[material]}
+              </p>
+              {/* 2-col badge grid */}
+              <div className="grid grid-cols-2 gap-1.5">
+                {badges.map((b) => (
+                  <StatsBadge
+                    key={b.key}
+                    icons={b.icons}
+                    materialIcon={b.materialIcon}
+                    value={b.value}
+                    alt={b.alt}
+                    description={b.description}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </ExpandablePanel>
+>>>>>>> Stashed changes
     </div>
   );
 }
 
 // ─── Wonder Boosts Panel ──────────────────────────────────────────────────────
+<<<<<<< Updated upstream
 // Split into two sub-columns: capital wonders (left) | allied wonders (right)
 // Each wonder section: name header + 2-col StatsBadge grid (real icons from boost.icons)
+=======
+>>>>>>> Stashed changes
 
 interface WonderBoostRow {
   wonderCode: string;
   wonderName: string;
+<<<<<<< Updated upstream
+=======
+  material: MaterialType;
+>>>>>>> Stashed changes
   slotType: "capital" | "allied";
   boosts: {
     type: string;
@@ -161,12 +367,44 @@ function WonderBoostSection({
   );
 }
 
+<<<<<<< Updated upstream
+=======
+// Flat list of wonders within a slot column — no material grouping
+function GroupedBoostColumn({
+  wonders,
+  collapsed,
+  onToggle,
+}: {
+  wonders: WonderBoostRow[];
+  collapsed: Record<string, boolean>;
+  onToggle: (code: string) => void;
+}) {
+  if (wonders.length === 0) return null;
+
+  return (
+    <div className="space-y-2">
+      {wonders.map((w) => (
+        <WonderBoostSection
+          key={w.wonderCode}
+          w={w}
+          collapsed={collapsed[w.wonderCode] ?? false}
+          onToggle={() => onToggle(w.wonderCode)}
+        />
+      ))}
+    </div>
+  );
+}
+
+>>>>>>> Stashed changes
 export function WonderBoostsPanel({
   codes,
   entries,
   ownedMap,
   className,
+<<<<<<< Updated upstream
   // Capital codes and allied codes for the 2-column split
+=======
+>>>>>>> Stashed changes
   capitalCodes,
   alliedCodes,
 }: {
@@ -199,9 +437,14 @@ export function WonderBoostsPanel({
         return {
           wonderCode: code,
           wonderName: wonder.meta.name,
+<<<<<<< Updated upstream
           slotType: isAllied ? "allied" : "capital",
+=======
+          material: wonder.meta.material1,
+          slotType: isAllied ? ("allied" as const) : ("capital" as const),
+>>>>>>> Stashed changes
           boosts,
-        } satisfies WonderBoostRow;
+        };
       })
       .filter((w): w is WonderBoostRow => w !== null && w.boosts.length > 0);
   }, [codes, entries, ownedMap, alliedCodes]);
@@ -211,10 +454,19 @@ export function WonderBoostsPanel({
   const toggleCollapse = (code: string) =>
     setCollapsed((prev) => ({ ...prev, [code]: !prev[code] }));
 
+<<<<<<< Updated upstream
   // Split into capital / allied groups
   const capitalBoosts = wonderBoosts.filter((w) => w.slotType === "capital");
   const alliedBoosts = wonderBoosts.filter((w) => w.slotType === "allied");
   const hasSplit = capitalCodes !== undefined && (capitalBoosts.length > 0 || alliedBoosts.length > 0);
+=======
+  const hasSplit =
+    capitalCodes !== undefined &&
+    (capitalCodes.length > 0 || (alliedCodes?.length ?? 0) > 0);
+
+  const capitalBoosts = wonderBoosts.filter((w) => w.slotType === "capital");
+  const alliedBoosts = wonderBoosts.filter((w) => w.slotType === "allied");
+>>>>>>> Stashed changes
 
   return (
     <div
@@ -230,6 +482,7 @@ export function WonderBoostsPanel({
         </p>
       </div>
 
+<<<<<<< Updated upstream
       {hasSplit ? (
         // Two-column split: capital | allied
         <div className="grid grid-cols-2 gap-x-4 gap-y-0">
@@ -241,6 +494,42 @@ export function WonderBoostsPanel({
               </p>
             )}
             {capitalBoosts.map((w) => (
+=======
+      <ExpandablePanel>
+        {hasSplit ? (
+          <div className="grid grid-cols-2 gap-x-4">
+            {/* Capital column */}
+            <div className="space-y-1">
+              {capitalBoosts.length > 0 && (
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
+                  Capital
+                </p>
+              )}
+              <GroupedBoostColumn
+                wonders={capitalBoosts}
+                collapsed={collapsed}
+                onToggle={toggleCollapse}
+              />
+            </div>
+            {/* Allied column */}
+            <div className="space-y-1">
+              {alliedBoosts.length > 0 && (
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
+                  Allied
+                </p>
+              )}
+              <GroupedBoostColumn
+                wonders={alliedBoosts}
+                collapsed={collapsed}
+                onToggle={toggleCollapse}
+              />
+            </div>
+          </div>
+        ) : (
+          // Single column fallback (drawer)
+          <div className="space-y-3">
+            {wonderBoosts.map((w) => (
+>>>>>>> Stashed changes
               <WonderBoostSection
                 key={w.wonderCode}
                 w={w}
@@ -249,6 +538,7 @@ export function WonderBoostsPanel({
               />
             ))}
           </div>
+<<<<<<< Updated upstream
           {/* Allied column */}
           <div className="space-y-3">
             {alliedBoosts.length > 0 && (
@@ -277,6 +567,83 @@ export function WonderBoostsPanel({
               onToggle={() => toggleCollapse(w.wonderCode)}
             />
           ))}
+=======
+        )}
+      </ExpandablePanel>
+    </div>
+  );
+}
+
+// ─── StatsSection ─────────────────────────────────────────────────────────────
+
+export function StatsSection({
+  codes,
+  entries,
+  ownedMap,
+  capitalCodes,
+  alliedCodes,
+  className,
+}: {
+  codes: string[];
+  entries?: (WonderPresetEntry | null)[];
+  ownedMap?: Record<string, { code: string; lvl: number }>;
+  capitalCodes?: string[];
+  alliedCodes?: string[];
+  className?: string;
+}) {
+  const [visible, setVisible] = useState(true);
+  const hasWonders = codes.length > 0;
+
+  return (
+    <div className={cn("space-y-2", className)}>
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+          Stats
+        </p>
+        {hasWonders && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setVisible((v) => !v)}
+            aria-pressed={visible}
+            className="h-6 px-2 gap-1 text-[11px] text-muted-foreground hover:text-foreground"
+          >
+            {visible ? (
+              <>
+                <EyeOff className="size-3" />
+                Hide
+              </>
+            ) : (
+              <>
+                <Eye className="size-3" />
+                Show
+              </>
+            )}
+          </Button>
+        )}
+      </div>
+
+      {!hasWonders && (
+        <p className="text-xs text-muted-foreground">
+          Add wonders to see stats
+        </p>
+      )}
+
+      {hasWonders && visible && (
+        <div className="grid grid-cols-3 gap-3 items-start">
+          <div className="col-span-1">
+            <SynergyPanel codes={codes} />
+          </div>
+          <div className="col-span-2">
+            <WonderBoostsPanel
+              codes={codes}
+              entries={entries}
+              ownedMap={ownedMap}
+              capitalCodes={capitalCodes}
+              alliedCodes={alliedCodes}
+            />
+          </div>
+>>>>>>> Stashed changes
         </div>
       )}
     </div>
@@ -417,7 +784,6 @@ export function MobileSynergyDrawer({
           </DrawerHeader>
 
           <div className="space-y-4 overflow-y-auto">
-            {/* Synergies */}
             {hasSynergies ? (
               <div className="space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-widest text-amber-600 dark:text-amber-400">
@@ -431,7 +797,7 @@ export function MobileSynergyDrawer({
                     <span className="font-medium">{s.name}</span>
                     <span className="text-amber-600 dark:text-amber-400 font-semibold shrink-0">
                       {s.synergyBonus
-                        ? multiplySynergyBonus(s.synergyBonus, s.synergyCount)
+                        ? formatSynergyValue(s.synergyBonus, s.synergyCount)
                         : `×${s.synergyCount}`}
                     </span>
                   </div>
@@ -444,7 +810,10 @@ export function MobileSynergyDrawer({
               </p>
             )}
 
+<<<<<<< Updated upstream
             {/* Wonder Boosts — single column in drawer */}
+=======
+>>>>>>> Stashed changes
             {hasBoosts && (
               <div className="space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400">
