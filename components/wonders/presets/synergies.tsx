@@ -1,9 +1,5 @@
 "use client";
 
-<<<<<<< Updated upstream
-import { useState, useMemo } from "react";
-import { Zap, TrendingUp, ChevronDown, ChevronUp, EyeOff, Eye } from "lucide-react";
-=======
 import { useState, useMemo, useRef, useEffect } from "react";
 import {
   Zap,
@@ -15,7 +11,6 @@ import {
   ChevronsDown,
   ChevronsUp,
 } from "lucide-react";
->>>>>>> Stashed changes
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,16 +28,6 @@ import {
   getBonusDescription,
 } from "@/lib/wonders-utils";
 import { WONDERS } from "@/data/wonders/index";
-<<<<<<< Updated upstream
-import type { WonderPresetEntry } from "@/data/wonders/types";
-import { StatsBadge } from "@/components/wonders/stats-badge";
-
-// ─── Synergy value multiplier ─────────────────────────────────────────────────
-
-function multiplySynergyBonus(bonus: string, count: number): string {
-  const match = bonus.match(/^(.*?)([+-]?\d+(?:\.\d+)?)(.*)$/);
-  if (!match) return `${bonus} (${count})`;
-=======
 import type { WonderPresetEntry, MaterialType } from "@/data/wonders/types";
 import { StatsBadge } from "@/components/wonders/stats-badge";
 
@@ -78,7 +63,6 @@ function formatSynergyValue(bonus: string, count: number): string {
   // Multiply the numeric part by count, no trailing "(N)"
   const match = bonus.match(/^(.*?)([+-]?\d+(?:\.\d+)?)(.*)$/);
   if (!match) return bonus;
->>>>>>> Stashed changes
   const prefix = match[1];
   const rawValue = parseFloat(match[2]);
   const suffix = match[3];
@@ -87,9 +71,6 @@ function formatSynergyValue(bonus: string, count: number): string {
     ? String(multiplied)
     : multiplied.toFixed(1).replace(/\.0$/, "");
   const sign = rawValue >= 0 && !match[2].startsWith("-") ? "+" : "";
-<<<<<<< Updated upstream
-  return `${prefix}${sign}${formatted}${suffix} (${count})`;
-=======
   return `${prefix}${sign}${formatted}${suffix}`;
 }
 
@@ -149,7 +130,6 @@ function ExpandablePanel({
       )}
     </div>
   );
->>>>>>> Stashed changes
 }
 
 // ─── Synergy Panel ────────────────────────────────────────────────────────────
@@ -168,27 +148,6 @@ export function SynergyPanel({
     [codes],
   );
 
-<<<<<<< Updated upstream
-  // Collect full synergy data (icons + tag) from the actual wonder meta
-  const synergyBadges = useMemo(() => {
-    return synergies.flatMap((s) => {
-      const wonder = WONDERS[s.code];
-      if (!wonder) return [];
-      return wonder.meta.synergies.map((syn) => ({
-        key: `${s.code}-${syn.tag}`,
-        icons: syn.icons,
-        materialIcon: syn.tag,
-        value: s.synergyBonus
-          ? multiplySynergyBonus(s.synergyBonus, s.synergyCount)
-          : `×${s.synergyCount}`,
-        alt: s.name,
-        description: `${s.name}: ${s.synergyBonus ? multiplySynergyBonus(s.synergyBonus, s.synergyCount) : `×${s.synergyCount}`} — activated by ${s.synergyCount} wonder${s.synergyCount > 1 ? "s" : ""}`,
-      }));
-    });
-  }, [synergies]);
-
-  if (synergyBadges.length === 0) return null;
-=======
   // Build badge data from real synergy icons — group by material1
   const grouped = useMemo(() => {
     type Badge = {
@@ -240,7 +199,6 @@ export function SynergyPanel({
   if (grouped.length === 0) return null;
 
   const totalCount = synergies.length;
->>>>>>> Stashed changes
 
   return (
     <div
@@ -256,21 +214,6 @@ export function SynergyPanel({
         </p>
       </div>
 
-<<<<<<< Updated upstream
-      {/* 2-column grid — same as WonderDetailModal */}
-      <div className="grid grid-cols-2 gap-1.5">
-        {synergyBadges.map((b) => (
-          <StatsBadge
-            key={b.key}
-            icons={b.icons as [string, string | null]}
-            materialIcon={b.materialIcon}
-            value={b.value}
-            alt={b.alt}
-            description={b.description}
-          />
-        ))}
-      </div>
-=======
       <ExpandablePanel>
         <div className="space-y-2">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
@@ -299,25 +242,16 @@ export function SynergyPanel({
           ))}
         </div>
       </ExpandablePanel>
->>>>>>> Stashed changes
     </div>
   );
 }
 
 // ─── Wonder Boosts Panel ──────────────────────────────────────────────────────
-<<<<<<< Updated upstream
-// Split into two sub-columns: capital wonders (left) | allied wonders (right)
-// Each wonder section: name header + 2-col StatsBadge grid (real icons from boost.icons)
-=======
->>>>>>> Stashed changes
 
 interface WonderBoostRow {
   wonderCode: string;
   wonderName: string;
-<<<<<<< Updated upstream
-=======
   material: MaterialType;
->>>>>>> Stashed changes
   slotType: "capital" | "allied";
   boosts: {
     type: string;
@@ -367,8 +301,6 @@ function WonderBoostSection({
   );
 }
 
-<<<<<<< Updated upstream
-=======
 // Flat list of wonders within a slot column — no material grouping
 function GroupedBoostColumn({
   wonders,
@@ -395,16 +327,11 @@ function GroupedBoostColumn({
   );
 }
 
->>>>>>> Stashed changes
 export function WonderBoostsPanel({
   codes,
   entries,
   ownedMap,
   className,
-<<<<<<< Updated upstream
-  // Capital codes and allied codes for the 2-column split
-=======
->>>>>>> Stashed changes
   capitalCodes,
   alliedCodes,
 }: {
@@ -437,12 +364,8 @@ export function WonderBoostsPanel({
         return {
           wonderCode: code,
           wonderName: wonder.meta.name,
-<<<<<<< Updated upstream
-          slotType: isAllied ? "allied" : "capital",
-=======
           material: wonder.meta.material1,
           slotType: isAllied ? ("allied" as const) : ("capital" as const),
->>>>>>> Stashed changes
           boosts,
         };
       })
@@ -454,19 +377,12 @@ export function WonderBoostsPanel({
   const toggleCollapse = (code: string) =>
     setCollapsed((prev) => ({ ...prev, [code]: !prev[code] }));
 
-<<<<<<< Updated upstream
-  // Split into capital / allied groups
-  const capitalBoosts = wonderBoosts.filter((w) => w.slotType === "capital");
-  const alliedBoosts = wonderBoosts.filter((w) => w.slotType === "allied");
-  const hasSplit = capitalCodes !== undefined && (capitalBoosts.length > 0 || alliedBoosts.length > 0);
-=======
   const hasSplit =
     capitalCodes !== undefined &&
     (capitalCodes.length > 0 || (alliedCodes?.length ?? 0) > 0);
 
   const capitalBoosts = wonderBoosts.filter((w) => w.slotType === "capital");
   const alliedBoosts = wonderBoosts.filter((w) => w.slotType === "allied");
->>>>>>> Stashed changes
 
   return (
     <div
@@ -482,19 +398,6 @@ export function WonderBoostsPanel({
         </p>
       </div>
 
-<<<<<<< Updated upstream
-      {hasSplit ? (
-        // Two-column split: capital | allied
-        <div className="grid grid-cols-2 gap-x-4 gap-y-0">
-          {/* Capital column */}
-          <div className="space-y-3">
-            {capitalBoosts.length > 0 && (
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                Capital
-              </p>
-            )}
-            {capitalBoosts.map((w) => (
-=======
       <ExpandablePanel>
         {hasSplit ? (
           <div className="grid grid-cols-2 gap-x-4">
@@ -529,7 +432,6 @@ export function WonderBoostsPanel({
           // Single column fallback (drawer)
           <div className="space-y-3">
             {wonderBoosts.map((w) => (
->>>>>>> Stashed changes
               <WonderBoostSection
                 key={w.wonderCode}
                 w={w}
@@ -538,36 +440,6 @@ export function WonderBoostsPanel({
               />
             ))}
           </div>
-<<<<<<< Updated upstream
-          {/* Allied column */}
-          <div className="space-y-3">
-            {alliedBoosts.length > 0 && (
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                Allied
-              </p>
-            )}
-            {alliedBoosts.map((w) => (
-              <WonderBoostSection
-                key={w.wonderCode}
-                w={w}
-                collapsed={collapsed[w.wonderCode] ?? false}
-                onToggle={() => toggleCollapse(w.wonderCode)}
-              />
-            ))}
-          </div>
-        </div>
-      ) : (
-        // Single column (no split info — fallback, used in MobileSynergyDrawer)
-        <div className="space-y-3">
-          {wonderBoosts.map((w) => (
-            <WonderBoostSection
-              key={w.wonderCode}
-              w={w}
-              collapsed={collapsed[w.wonderCode] ?? false}
-              onToggle={() => toggleCollapse(w.wonderCode)}
-            />
-          ))}
-=======
         )}
       </ExpandablePanel>
     </div>
@@ -634,89 +506,6 @@ export function StatsSection({
           <div className="col-span-1">
             <SynergyPanel codes={codes} />
           </div>
-          <div className="col-span-2">
-            <WonderBoostsPanel
-              codes={codes}
-              entries={entries}
-              ownedMap={ownedMap}
-              capitalCodes={capitalCodes}
-              alliedCodes={alliedCodes}
-            />
-          </div>
->>>>>>> Stashed changes
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ─── StatsSection ─────────────────────────────────────────────────────────────
-// The top stats bar with 1/3 synergy + 2/3 boosts grid and Hide toggle.
-// Replaces the old "hidden md:flex xl:hidden" + "hidden xl:flex" duplication.
-
-export function StatsSection({
-  codes,
-  entries,
-  ownedMap,
-  capitalCodes,
-  alliedCodes,
-  className,
-}: {
-  codes: string[];
-  entries?: (WonderPresetEntry | null)[];
-  ownedMap?: Record<string, { code: string; lvl: number }>;
-  capitalCodes?: string[];
-  alliedCodes?: string[];
-  className?: string;
-}) {
-  const [visible, setVisible] = useState(true);
-  const hasWonders = codes.length > 0;
-
-  return (
-    <div className={cn("space-y-2", className)}>
-      {/* Header row with Hide toggle */}
-      <div className="flex items-center justify-between gap-2">
-        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-          Stats
-        </p>
-        {hasWonders && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setVisible((v) => !v)}
-            aria-pressed={visible}
-            className="h-6 px-2 gap-1 text-[11px] text-muted-foreground hover:text-foreground"
-          >
-            {visible ? (
-              <>
-                <EyeOff className="size-3" />
-                Hide
-              </>
-            ) : (
-              <>
-                <Eye className="size-3" />
-                Show
-              </>
-            )}
-          </Button>
-        )}
-      </div>
-
-      {/* Empty state */}
-      {!hasWonders && (
-        <p className="text-xs text-muted-foreground">
-          Add wonders to see stats
-        </p>
-      )}
-
-      {/* 1/3 + 2/3 grid */}
-      {hasWonders && visible && (
-        <div className="grid grid-cols-3 gap-3 items-start">
-          {/* Synergy — 1 col */}
-          <div className="col-span-1">
-            <SynergyPanel codes={codes} />
-          </div>
-          {/* Boosts — 2 cols */}
           <div className="col-span-2">
             <WonderBoostsPanel
               codes={codes}
@@ -810,10 +599,6 @@ export function MobileSynergyDrawer({
               </p>
             )}
 
-<<<<<<< Updated upstream
-            {/* Wonder Boosts — single column in drawer */}
-=======
->>>>>>> Stashed changes
             {hasBoosts && (
               <div className="space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400">
