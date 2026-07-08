@@ -697,7 +697,7 @@ export const technos_FA: TechnoData[] = [
     id: "fa_16",
     name: "Knights",
     column: 6,
-    required: ["fa_12", "fa_13", "fa_14", "fa_15"],
+    required: ["fa_12", "fa_13", "fa_15"],
     costs: {
       research_points: 120,
       coins: 5200000,
