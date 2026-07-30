@@ -109,6 +109,7 @@ interface SelectionCtx {
   pathNodeIds: Set<string>;
   ancestorsOfFrom: Set<string>;
   completedIds: Set<string>;
+  pendingIds: Set<string>;
   onToggleComplete: (id: string) => void;
 }
 
@@ -121,6 +122,7 @@ const SelectionContext = createContext<SelectionCtx>({
   pathNodeIds: new Set(),
   ancestorsOfFrom: new Set(),
   completedIds: new Set(),
+  pendingIds: new Set(),
   onToggleComplete: () => {},
 });
 
@@ -137,12 +139,14 @@ function CampaignNodeWithContext({ id, data, selected }: any) {
     pathNodeIds,
     ancestorsOfFrom,
     completedIds,
+    pendingIds,
     onToggleComplete,
   } = useContext(SelectionContext);
 
   const { name, scout, boss } = data;
 
   const isCompleted = completedIds.has(id);
+  const isPending = pendingIds.has(id);
   const isSelectMode = mode === "select";
   const hasSelection = isSelectMode && selectedNodeId !== null;
   const isSelected = isSelectMode && (selected || id === selectedNodeId);
@@ -249,12 +253,18 @@ function CampaignNodeWithContext({ id, data, selected }: any) {
         <div
           role="checkbox"
           aria-checked={isCompleted}
+          aria-disabled={isPending}
           onClick={(e) => {
             e.stopPropagation();
+            // Ignore les clics répétés tant que le toggle précédent
+            // n'a pas fini d'être écrit en base — évite les races où
+            // deux écritures concurrentes liraient un état obsolète.
+            if (isPending) return;
             onToggleComplete(id);
           }}
           className={cn(
-            "shrink-0 mr-2 size-5 rounded border-2 flex items-center justify-center transition-all cursor-pointer",
+            "shrink-0 mr-2 size-5 rounded border-2 flex items-center justify-center transition-all",
+            isPending ? "opacity-50 cursor-wait" : "cursor-pointer",
             isCompleted
               ? "bg-green-500 border-green-500"
               : "border-muted-foreground/40 hover:border-green-600 dark:hover:border-green-400",
@@ -440,33 +450,71 @@ export function CampaignTreeDesktop({
     [pathNodeIds, regions],
   );
 
+  // File d'attente qui sérialise tous les toggles (complet/incomplet) pour
+  // éviter que deux clics rapprochés ne se chevauchent avec un état stale.
+  const toggleQueueRef = useRef<Promise<void>>(Promise.resolve());
+  const pendingIdsRef = useRef<Set<string>>(new Set());
+  const [pendingIds, setPendingIds] = useState<Set<string>>(new Set());
+
   const onToggleComplete = useCallback(
-    async (regionId: string) => {
-      const db = getWikiDB();
-      const isCurrentlyCompleted = completedIds.has(regionId);
-      if (!isCurrentlyCompleted) {
-        const ids = [regionId, ...collectAncestorIds(regionId, regions)];
-        const existing = await db.campaigns.bulkGet(ids);
-        await db.campaigns.bulkPut(
-          ids.map((id, i) => ({
-            ...(existing[i] ?? { id, hidden: 0 }),
-            id,
-            cp: 1,
-          })),
-        );
-      } else {
-        const ids = [regionId, ...collectDescendantIds(regionId, regions)];
-        const existing = await db.campaigns.bulkGet(ids);
-        await db.campaigns.bulkPut(
-          ids.map((id, i) => ({
-            ...(existing[i] ?? { id, hidden: 0 }),
-            id,
-            cp: 0,
-          })),
-        );
-      }
+    (regionId: string) => {
+      // Un clic sur une région déjà en cours de traitement est ignoré :
+      // le clic précédent n'a pas encore été committé en base.
+      if (pendingIdsRef.current.has(regionId)) return;
+
+      pendingIdsRef.current.add(regionId);
+      setPendingIds(new Set(pendingIdsRef.current));
+
+      // Chaque appel est chaîné après le précédent : garantit un ordre
+      // d'exécution strictement séquentiel, quel que soit l'ordre ou la
+      // vitesse des clics de l'utilisateur.
+      toggleQueueRef.current = toggleQueueRef.current
+        .then(async () => {
+          const db = getWikiDB();
+
+          // Lecture + écriture dans UNE SEULE transaction Dexie : l'état
+          // "isCurrentlyCompleted" est relu depuis la base au moment exact
+          // de l'écriture, jamais depuis le `completedIds` React (qui peut
+          // être périmé de quelques dizaines/centaines de ms après un clic
+          // précédent). C'est cette lecture obsolète qui causait des
+          // ensembles de régions "complétées" incohérents selon le
+          // pattern de clics, et donc des totaux de récompenses erronés.
+          await db.transaction("rw", db.campaigns, async () => {
+            const current = await db.campaigns.get(regionId);
+            const isCurrentlyCompleted = !!current?.cp;
+
+            if (!isCurrentlyCompleted) {
+              const ids = [regionId, ...collectAncestorIds(regionId, regions)];
+              const existing = await db.campaigns.bulkGet(ids);
+              await db.campaigns.bulkPut(
+                ids.map((id, i) => ({
+                  ...(existing[i] ?? { id, hidden: 0 }),
+                  id,
+                  cp: 1,
+                })),
+              );
+            } else {
+              const ids = [regionId, ...collectDescendantIds(regionId, regions)];
+              const existing = await db.campaigns.bulkGet(ids);
+              await db.campaigns.bulkPut(
+                ids.map((id, i) => ({
+                  ...(existing[i] ?? { id, hidden: 0 }),
+                  id,
+                  cp: 0,
+                })),
+              );
+            }
+          });
+        })
+        .catch((err) => {
+          console.error("onToggleComplete failed:", err);
+        })
+        .finally(() => {
+          pendingIdsRef.current.delete(regionId);
+          setPendingIds(new Set(pendingIdsRef.current));
+        });
     },
-    [completedIds, regions],
+    [regions],
   );
 
   const { baseNodes, baseEdges } = useMemo(() => {
@@ -762,6 +810,7 @@ export function CampaignTreeDesktop({
       pathNodeIds,
       ancestorsOfFrom,
       completedIds,
+      pendingIds,
       onToggleComplete,
     }),
     [
@@ -773,6 +822,7 @@ export function CampaignTreeDesktop({
       pathNodeIds,
       ancestorsOfFrom,
       completedIds,
+      pendingIds,
       onToggleComplete,
     ],
   );

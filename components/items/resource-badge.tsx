@@ -1,6 +1,6 @@
 import { slugify } from "@/lib/utils";
 import Image from "next/image";
-import { memo, useState, useCallback } from "react";
+import { memo, useEffect, useState, useCallback } from "react";
 
 interface ResourceBadgeProps {
   icon: string;
@@ -21,6 +21,20 @@ export const ResourceBadge = memo(function ResourceBadge({
   rpLabel,
 }: ResourceBadgeProps) {
   const [src, setSrc] = useState(icon);
+
+  // BUGFIX: `useState(icon)` only sets the initial value on mount. If this
+  // component instance gets reused by React (e.g. because a parent list
+  // keys its items by array index instead of a stable resource id — see
+  // RegionRewardList in campaign-details-panel.tsx / -drawer.tsx), the
+  // `icon` prop can change on a re-render without `src` ever updating,
+  // leaving a stale image (e.g. an "expansion" icon) displayed next to a
+  // correct, freshly-updated `value` (e.g. "100" for gears). Explicitly
+  // syncing `src` to the `icon` prop whenever it changes fixes this at
+  // the source, regardless of how the parent keys its list.
+  useEffect(() => {
+    setSrc(icon);
+  }, [icon]);
+
   const handleError = useCallback(
     () => setSrc("/images/goods/default.webp"),
     [],

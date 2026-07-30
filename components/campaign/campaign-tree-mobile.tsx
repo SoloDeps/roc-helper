@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState, useCallback, useRef } from "react";
 import { CampaignDetailsDrawer } from "./campaign-details-drawer";
 import { CampaignPathDrawer } from "./campaign-path-drawer";
 import {
@@ -29,6 +29,7 @@ import {
 interface CampaignCardProps {
   region: CampaignRegion;
   isCompleted: boolean;
+  isPending: boolean;
   onToggleComplete: (id: string) => void;
   onShowDetails: (region: CampaignRegion) => void;
 }
@@ -36,6 +37,7 @@ interface CampaignCardProps {
 function CampaignCard({
   region,
   isCompleted,
+  isPending,
   onToggleComplete,
   onShowDetails,
 }: CampaignCardProps) {
@@ -92,15 +94,22 @@ function CampaignCard({
       <button
         onClick={(e) => {
           e.stopPropagation();
+          // Ignore les clics répétés tant que le toggle précédent n'a pas
+          // fini d'être écrit en base — évite les races où deux écritures
+          // concurrentes liraient un état obsolète.
+          if (isPending) return;
           onToggleComplete(region.id);
         }}
+        disabled={isPending}
         className={cn(
           "absolute right-2.5 top-1/2 -translate-y-1/2 shrink-0 size-6 rounded border-2 flex items-center justify-center transition-all z-10",
+          isPending ? "opacity-50 cursor-wait" : "",
           isCompleted
             ? "bg-green-500 border-green-500"
             : "border-muted-foreground/30 hover:border-green-600/70 dark:hover:border-green-400/70",
         )}
         aria-label={isCompleted ? "Mark as incomplete" : "Mark as completed"}
+        aria-disabled={isPending}
       >
         {isCompleted && <Check className="size-[18px] text-white stroke-4" />}
       </button>
@@ -237,35 +246,75 @@ export function CampaignTreeMobile({ regions, eraId }: CampaignTreeMobileProps) 
 
   // ── Handlers ─────────────────────────────────────────────────────────────
 
+  // File d'attente qui sérialise tous les toggles (complet/incomplet) pour
+  // éviter que deux clics rapprochés ne se chevauchent avec un état stale.
+  const toggleQueueRef = useRef<Promise<void>>(Promise.resolve());
+  const pendingIdsRef = useRef<Set<string>>(new Set());
+  const [pendingIds, setPendingIds] = useState<Set<string>>(new Set());
+
   // Toggle complete with ancestors/descendants — mirrors desktop + tech-tree-mobile
   const handleToggleComplete = useCallback(
-    async (id: string) => {
+    (id: string) => {
       if (mode !== "select") return;
-      const db = getWikiDB();
-      const isCurrentlyCompleted = completedIds.has(id);
-      if (!isCurrentlyCompleted) {
-        const idsToComplete = [id, ...collectAncestorIds(id)];
-        const existing = await db.campaigns.bulkGet(idsToComplete);
-        await db.campaigns.bulkPut(
-          idsToComplete.map((rid, i) => ({
-            ...(existing[i] ?? { id: rid, hidden: 0 }),
-            id: rid,
-            cp: 1,
-          })),
-        );
-      } else {
-        const idsToUncheck = [id, ...collectDescendantIds(id)];
-        const existing = await db.campaigns.bulkGet(idsToUncheck);
-        await db.campaigns.bulkPut(
-          idsToUncheck.map((rid, i) => ({
-            ...(existing[i] ?? { id: rid, hidden: 0 }),
-            id: rid,
-            cp: 0,
-          })),
-        );
-      }
+
+      // Un clic sur une région déjà en cours de traitement est ignoré :
+      // le clic précédent n'a pas encore été committé en base.
+      if (pendingIdsRef.current.has(id)) return;
+
+      pendingIdsRef.current.add(id);
+      setPendingIds(new Set(pendingIdsRef.current));
+
+      // Chaque appel est chaîné après le précédent : garantit un ordre
+      // d'exécution strictement séquentiel, quel que soit l'ordre ou la
+      // vitesse des clics de l'utilisateur.
+      toggleQueueRef.current = toggleQueueRef.current
+        .then(async () => {
+          const db = getWikiDB();
+
+          // Lecture + écriture dans UNE SEULE transaction Dexie : l'état
+          // "isCurrentlyCompleted" est relu depuis la base au moment exact
+          // de l'écriture, jamais depuis le `completedIds` React (qui peut
+          // être périmé de quelques dizaines/centaines de ms après un clic
+          // précédent). C'est cette lecture obsolète qui causait des
+          // ensembles de régions "complétées" incohérents selon le
+          // pattern de clics, et donc des totaux de récompenses erronés
+          // (ex: "100 expansions" au lieu de "100 gears" pour le Boss).
+          await db.transaction("rw", db.campaigns, async () => {
+            const current = await db.campaigns.get(id);
+            const isCurrentlyCompleted = !!current?.cp;
+
+            if (!isCurrentlyCompleted) {
+              const idsToComplete = [id, ...collectAncestorIds(id)];
+              const existing = await db.campaigns.bulkGet(idsToComplete);
+              await db.campaigns.bulkPut(
+                idsToComplete.map((rid, i) => ({
+                  ...(existing[i] ?? { id: rid, hidden: 0 }),
+                  id: rid,
+                  cp: 1,
+                })),
+              );
+            } else {
+              const idsToUncheck = [id, ...collectDescendantIds(id)];
+              const existing = await db.campaigns.bulkGet(idsToUncheck);
+              await db.campaigns.bulkPut(
+                idsToUncheck.map((rid, i) => ({
+                  ...(existing[i] ?? { id: rid, hidden: 0 }),
+                  id: rid,
+                  cp: 0,
+                })),
+              );
+            }
+          });
+        })
+        .catch((err) => {
+          console.error("handleToggleComplete failed:", err);
+        })
+        .finally(() => {
+          pendingIdsRef.current.delete(id);
+          setPendingIds(new Set(pendingIdsRef.current));
+        });
     },
-    [mode, completedIds, collectAncestorIds, collectDescendantIds],
+    [mode, collectAncestorIds, collectDescendantIds],
   );
 
   // Open details drawer — list only, not from graph
@@ -532,6 +581,7 @@ export function CampaignTreeMobile({ regions, eraId }: CampaignTreeMobileProps) 
                       <CampaignCard
                         region={region}
                         isCompleted={completedIds.has(region.id)}
+                        isPending={pendingIds.has(region.id)}
                         onToggleComplete={handleToggleComplete}
                         onShowDetails={mode === "select" ? handleShowDetails : () => {}}
                       />

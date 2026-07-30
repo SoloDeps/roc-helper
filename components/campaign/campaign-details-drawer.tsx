@@ -27,7 +27,7 @@ function RegionRewardList({
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
           {others.map((reward, i) => (
             <ResourceBadge
-              key={i}
+              key={`${reward.resource}-${i}`}
               icon={getItemIconLocal(reward.resource)}
               value={formatNumber(reward.amount)}
               alt={reward.resource}
@@ -154,7 +154,7 @@ export function CampaignDetailsDrawer({
                           <div className="flex flex-col flex-1 gap-1 shrink-0">
                             {part.rewards.map((reward, j) => (
                               <ResourceBadge
-                                key={j}
+                                key={`${reward.resource}-${j}`}
                                 icon={getItemIconLocal(reward.resource)}
                                 value={formatNumber(reward.amount)}
                                 alt={reward.resource}
