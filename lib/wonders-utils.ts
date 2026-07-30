@@ -2,9 +2,9 @@ import { WONDERS } from "@/data/wonders/index";
 import type {
   Wonder,
   SynergyResult,
-  UserPreset,
   WonderPresetEntry,
   ResolvedBonus,
+  MaterialType,
 } from "@/data/wonders/types";
 
 // ─── Resolve bonus at a specific level ────────────────────────────────────────
@@ -25,12 +25,68 @@ export function getResolvedBonuses(
   }));
 }
 
+// ─── Tag contributions (handles countsAs multiplier) ─────────────────────────
+
+/**
+ * Returns a map of tag → weighted contribution for a single wonder.
+ * If the wonder has `countsAs`, those multipliers replace the default 1
+ * for the listed tags. Material tags not in `countsAs` still contribute 1.
+ * Wonders without `countsAs` contribute 1 per unique material tag.
+ */
+export function getTagContributions(
+  wonder: Wonder,
+): Map<MaterialType, number> {
+  const countsAs = wonder.meta.countsAs;
+  const result = new Map<MaterialType, number>();
+
+  if (countsAs && countsAs.length > 0) {
+    const covered = new Set(countsAs.map((c) => c.tag));
+    for (const entry of countsAs) {
+      result.set(entry.tag, entry.multiplier);
+    }
+    if (!covered.has(wonder.meta.material1)) {
+      result.set(wonder.meta.material1, 1);
+    }
+    if (
+      wonder.meta.material2 !== wonder.meta.material1 &&
+      !covered.has(wonder.meta.material2)
+    ) {
+      result.set(wonder.meta.material2, 1);
+    }
+  } else {
+    result.set(wonder.meta.material1, 1);
+    if (wonder.meta.material2 !== wonder.meta.material1) {
+      result.set(wonder.meta.material2, 1);
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Computes the total weighted count per material tag across all given wonder codes.
+ * Used by the UI to display per-tag totals in the restructured Active Synergies panel.
+ */
+export function computeTagCounts(codes: string[]): Record<MaterialType, number> {
+  const result: Record<string, number> = {};
+  for (const code of codes) {
+    const wonder = WONDERS[code];
+    if (!wonder) continue;
+    const contributions = getTagContributions(wonder);
+    for (const [tag, weight] of contributions) {
+      result[tag] = (result[tag] ?? 0) + weight;
+    }
+  }
+  return result as Record<MaterialType, number>;
+}
+
 // ─── Synergy computation ──────────────────────────────────────────────────────
 
 export interface WonderWithSynergy {
   code: string;
   name: string;
   synergyActive: boolean;
+  /** Weighted count of activators (accounts for countsAs multipliers) */
   synergyCount: number;
   /** First synergy bonus string, kept for backwards compat — prefer synergies[] */
   synergyBonus: string | null;
@@ -53,24 +109,35 @@ export function computeSynergies(codes: string[]): WonderWithSynergy[] {
       };
     }
 
-    // Collect all material tags this wonder listens to (may have duplicates for multi-synergy)
+    // Collect all material tags this wonder listens to
     const tags = new Set(w.meta.synergies.map((s) => s.tag));
 
-    const activators = wonders.filter((other) => {
-      if (other.meta.code === w.meta.code) return false;
-      return (
-        tags.has(other.meta.material1) || tags.has(other.meta.material2)
-      );
-    });
+    let weightedCount = 0;
+    const activatorNames: string[] = [];
+
+    for (const other of wonders) {
+      if (other.meta.code === w.meta.code) continue;
+      const contributions = getTagContributions(other);
+      let contributed = 0;
+      for (const [tag, weight] of contributions) {
+        if (tags.has(tag)) {
+          contributed = Math.max(contributed, weight);
+        }
+      }
+      if (contributed > 0) {
+        weightedCount += contributed;
+        activatorNames.push(other.meta.name);
+      }
+    }
 
     return {
       code: w.meta.code,
       name: w.meta.name,
-      synergyActive: activators.length > 0,
-      synergyCount: activators.length,
+      synergyActive: weightedCount > 0,
+      synergyCount: weightedCount,
       // Keep first synergy bonus string for callers that only need one
       synergyBonus: w.meta.synergies[0]?.bonus ?? null,
-      activatedBy: activators.map((a) => a.meta.name),
+      activatedBy: activatorNames,
     };
   });
 }

@@ -46,7 +46,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Providers>
-          <div className="max-h-screen-patched min-h-screen-patched flex w-full flex-col overflow-auto bg-background-200">
+          <div id="app-scroll-container" className="max-h-screen-patched min-h-screen-patched flex w-full flex-col overflow-auto bg-background-200">
             <TailwindIndicator />
             <SiteHeader />
             {children}

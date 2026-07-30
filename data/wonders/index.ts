@@ -110,6 +110,11 @@ function assembleWonder(raw: (typeof WONDER_DATA)[number]): Wonder {
     bonus: s.bonus,
   }));
 
+  const countsAs = raw.meta.countsAs?.map((c) => ({
+    tag: c.tag as MaterialType,
+    multiplier: c.multiplier,
+  }));
+
   const meta: WonderMeta = {
     code: raw.meta.code,
     name: raw.meta.name,
@@ -120,6 +125,7 @@ function assembleWonder(raw: (typeof WONDER_DATA)[number]): Wonder {
     material1: raw.meta.materials[0] as MaterialType,
     material2: raw.meta.materials[1] as MaterialType,
     synergies,
+    countsAs: countsAs && countsAs.length > 0 ? countsAs : undefined,
     rarity: (raw.meta.rarity ?? "Rare") as "Rare" | "Legendary",
     maxLevel: 30,
   };

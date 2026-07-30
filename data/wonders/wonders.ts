@@ -9,7 +9,7 @@ export const data = [
       slot: "Capital City",
       materials: ["temple", "temple"],
       rarity: "Rare",
-      synergies: [{ raw: "temple", icons: ["coin", null], bonus: "+1/day" }],
+      synergies: [{ raw: "temple", icons: ["research", null], bonus: "+1/day" }],
     },
     bonuses: [
       {
@@ -711,7 +711,7 @@ export const data = [
       slot: "Capital City",
       materials: ["nature", "temple"],
       synergies: [
-        { raw: "nature", icons: ["research", "icon_time_boost"], bonus: "×2.5%" },
+        { raw: "nature", icons: ["research", "icon_time_boost"], bonus: "+2.5%" },
       ],
     },
     bonuses: [
@@ -772,6 +772,7 @@ export const data = [
       slot: "Viking Kingdom",
       materials: ["naval", "naval"],
       rarity: "Rare",
+      countsAs: [{ tag: "naval", multiplier: 2 }],
       synergies: [],
     },
     bonuses: [
@@ -842,6 +843,10 @@ export const data = [
       slot: "Viking Kingdom",
       materials: ["nature", "statue"],
       rarity: "Rare",
+      countsAs: [
+        { tag: "nature", multiplier: 2 },
+        { tag: "statue", multiplier: 2 },
+      ],
       synergies: [],
     },
     bonuses: [

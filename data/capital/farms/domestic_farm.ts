@@ -724,6 +724,33 @@ export const domesticFarm: BuildingData = {
       },
     },
     {
+      level: 27,
+      era: "FA",
+      max_qty: 9,
+      upgrade: {
+        coins: 1400000,
+        food: 640000,
+        goods: [
+          {
+            amount: 1060,
+            resource: "primary_fa",
+          },
+          {
+            amount: 1060,
+            resource: "tertiary_fa",
+          },
+          {
+            amount: 1080,
+            resource: "ceramic_treasure",
+          },
+          {
+            amount: 720,
+            resource: "gold_treasure",
+          },
+        ],
+      },
+    },
+    {
       level: 28,
       era: "IE",
       max_qty: 9,

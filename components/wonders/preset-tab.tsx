@@ -1,19 +1,9 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import { Plus, Copy, Trash2, MoreHorizontal } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 import { useUserPresets } from "@/lib/stores/user-presets-store";
-import { getPresetCodes } from "@/lib/wonders-utils";
+import { getPresetCodes, computeSynergies, getWonderBoosts } from "@/lib/wonders-utils";
+import { WONDERS } from "@/data/wonders/index";
 
 import {
   PresetTabSkeleton,
@@ -23,8 +13,11 @@ import {
 import {
   SynergyPanel,
   WonderBoostsPanel,
-  MobileSynergyDrawer,
 } from "./presets/synergies";
+import { SwitchableSection } from "./presets/switchable-section";
+import { PresetSwitcher } from "./presets/preset-switcher";
+import { PresetActions } from "./presets/preset-actions";
+import { TabsContent } from "@/components/ui/tabs";
 
 // ─── Main Presets Tab ─────────────────────────────────────────────────────────
 
@@ -45,6 +38,7 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
     setWonder,
     clearPreset,
     duplicatePreset,
+    maxAllWonders,
   } = useUserPresets();
 
   const [pickerState, setPickerState] = useState<{
@@ -64,6 +58,33 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
     if (!activePreset) return [];
     return [...activePreset.capital, ...activePreset.allied];
   }, [activePreset]);
+
+  // Counts for inline summary near preset name
+  const synergyCount = useMemo(
+    () => computeSynergies(codes).filter((s) => s.synergyActive).length,
+    [codes],
+  );
+  const boostCount = useMemo(() => {
+    let total = 0;
+    for (const entry of allEntries) {
+      if (!entry) continue;
+      const wonder = WONDERS[entry.code];
+      if (!wonder) continue;
+      const level = entry.level ?? ownedMap[entry.code]?.lvl ?? 1;
+      if (getWonderBoosts(wonder, level).length > 0) total++;
+    }
+    return total;
+  }, [allEntries, ownedMap]);
+
+  // Split codes by slot type for 2-column WonderBoostsPanel
+  const capitalCodes = useMemo(
+    () => activePreset.capital.filter((e): e is NonNullable<typeof e> => e !== null).map((e) => e.code),
+    [activePreset],
+  );
+  const alliedCodes = useMemo(
+    () => activePreset.allied.filter((e): e is NonNullable<typeof e> => e !== null).map((e) => e.code),
+    [activePreset],
+  );
 
   const handleSelectWonder = useCallback(
     (code: string) => {
@@ -95,201 +116,228 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
   }
 
   return (
-    <div className="space-y-4">
-      {/* ── Selector de presets ── */}
-      <div className="flex gap-2 overflow-x-auto no-scrollbar pb-0.5">
-        {presets.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => setActivePresetId(p.id)}
-            className={cn(
-              "shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all",
-              p.id === activePresetId
-                ? "bg-amber-400 text-amber-950 border-amber-400"
-                : "bg-card border-border text-muted-foreground hover:border-foreground/30",
-            )}
-          >
-            {p.name}
-          </button>
-        ))}
-        <button
-          onClick={() => addPreset()}
-          className="shrink-0 px-3 py-1.5 rounded-lg text-xs border border-dashed border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all flex items-center gap-1"
-        >
-          <Plus className="size-3" /> New
-        </button>
-      </div>
+    <div className="space-y-4 pb-8">
+      <div className="@container flex items-center gap-2 w-full max-w-[1050px]">
+        <PresetSwitcher
+          presets={presets}
+          activePresetId={activePresetId!}
+          onSelect={setActivePresetId}
+          onAddPreset={() => addPreset()}
+        />
 
-      {/* ── Header mobile : label + bouton drawer synergies ── */}
-      <div className="flex items-center justify-between gap-3 md:hidden">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-          Preset slots
-        </p>
-        {/* On passe entries et ownedMap pour que le drawer affiche aussi les boosts */}
-        <MobileSynergyDrawer
-          codes={codes}
-          entries={allEntries}
-          ownedMap={ownedMap}
+        {editingName ? (
+          <input
+            autoFocus
+            value={activePreset.name}
+            maxLength={30}
+            onChange={(e) => renamePreset(activePreset.id, e.target.value)}
+            onBlur={() => setEditingName(false)}
+            onKeyDown={(e) => e.key === "Enter" && setEditingName(false)}
+            className="w-40 h-8 bg-muted rounded-md px-2.5 text-sm font-semibold outline-none focus:ring-1 focus:ring-ring"
+          />
+        ) : null}
+
+        {(synergyCount > 0 || boostCount > 0) && (
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {synergyCount} synergy{synergyCount !== 1 ? "s" : ""} · {boostCount} boost{boostCount !== 1 ? "s" : ""}
+          </span>
+        )}
+
+        <div className="flex-1" />
+
+        <PresetActions
+          onRename={() => setEditingName(true)}
+          onDuplicate={() => duplicatePreset(activePreset.id)}
+          onMaxAll={() => maxAllWonders(activePreset.id)}
+          onClear={() => clearPreset(activePreset.id)}
+          onDelete={() => deletePreset(activePreset.id)}
         />
       </div>
 
-      <div className="flex flex-col xl:flex-row gap-4 items-start">
-        {/* ── Zone principale Capital + Allies ── */}
-        <div className="flex-1 min-w-0 max-w-[1050px] space-y-4">
-          {/* ── Preset header : nom + bouton ... poussé à droite ── */}
-          <div className="flex items-center gap-2">
-            {editingName ? (
-              <input
-                autoFocus
-                value={activePreset.name}
-                maxLength={30}
-                onChange={(e) => renamePreset(activePreset.id, e.target.value)}
-                onBlur={() => setEditingName(false)}
-                onKeyDown={(e) => e.key === "Enter" && setEditingName(false)}
-                className="w-64 h-8 bg-muted rounded-md px-2.5 text-sm font-semibold outline-none focus:ring-1 focus:ring-ring"
-              />
-            ) : (
-              <button
-                onClick={() => setEditingName(true)}
-                className="text-left text-sm font-semibold hover:text-primary transition-colors h-8"
-              >
-                {activePreset.name}
-              </button>
-            )}
-
-            {/* flex-1 pousse le menu ··· tout à droite */}
-            <div className="flex-1" />
-
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="size-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setEditingName(true)}>
-                  Rename
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => duplicatePreset(activePreset.id)}
-                >
-                  <Copy className="size-3.5 mr-2" /> Duplicate
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => clearPreset(activePreset.id)}>
-                  Clear all wonders
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => deletePreset(activePreset.id)}
-                  className="text-destructive focus:text-destructive"
-                >
-                  <Trash2 className="size-3.5 mr-2" /> Delete preset
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          {/* ── Synergies + Boosts inline : md → xl uniquement ── */}
-          <div className="hidden md:flex xl:hidden flex-col gap-3">
-            <SynergyPanel codes={codes} />
-            <WonderBoostsPanel
-              codes={codes}
-              entries={allEntries}
-              ownedMap={ownedMap}
-            />
-          </div>
-
+          <div className="w-full max-w-[1050px] space-y-4">
           {/* ── Grilles Capital City + Allied Cultures ── */}
-          {/*
-            FIX hauteur empty slot :
-            On ajoute `items-start` sur la grille pour que chaque cellule
-            ne s'étire plus automatiquement. La PresetWonderCard définit sa propre
-            hauteur, et l'EmptySlotCard utilise h-full + min-h pour s'adapter
-            à sa cellule sans imposer une hauteur fixe à la ligne.
+          <SwitchableSection
+            tabs={[
+              { value: "capital", label: "Capital city" },
+              { value: "allied", label: "Allied cultures" },
+            ]}
+            defaultValue="capital"
+            wide={
+              <div className="flex gap-4 w-full">
+                {/* Capital City */}
+                <div className="flex-1 min-w-0 space-y-4">
+                  <p className="text-[13px] font-semibold uppercase tracking-widest text-muted-foreground">
+                    Capital City
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-6 items-start">
+                    {[0, 1, 2, 3].map((idx) => {
+                      const entry = activePreset.capital[idx];
+                      return (
+                        <PresetSlot
+                          key={idx}
+                          entry={entry ?? null}
+                          ownedMap={ownedMap}
+                          onAdd={() =>
+                            setPickerState({
+                              open: true,
+                              slotType: "capital",
+                              slotIndex: idx,
+                            })
+                          }
+                          onRemove={() =>
+                            setWonder(activePresetId!, "capital", idx, null)
+                          }
+                          onLevelChange={(lv) =>
+                            handleLevelChange("capital", idx, lv)
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
 
-            Alternative : `grid-rows-[auto]` est le comportement par défaut,
-            mais `items-start` empêche le stretch implicite entre colonnes
-            de la même rangée. Si vous voulez que les slots vides s'alignent
-            avec les wonder cards de la même rangée (même ligne de grille),
-            retirez `items-start` et gardez uniquement h-full sur EmptySlotCard.
-          */}
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* Capital City */}
-            <div className="flex-1 min-w-0 space-y-4">
-              <p className="text-[13px] font-semibold uppercase tracking-widest text-muted-foreground">
-                Capital City
-              </p>
-              <div className="grid grid-cols-2 gap-x-3 gap-y-6 items-start">
-                {[0, 1, 2, 3].map((idx) => {
-                  const entry = activePreset.capital[idx];
-                  return (
-                    <PresetSlot
-                      key={idx}
-                      entry={entry ?? null}
-                      ownedMap={ownedMap}
-                      onAdd={() =>
-                        setPickerState({
-                          open: true,
-                          slotType: "capital",
-                          slotIndex: idx,
-                        })
-                      }
-                      onRemove={() =>
-                        setWonder(activePresetId!, "capital", idx, null)
-                      }
-                      onLevelChange={(lv) =>
-                        handleLevelChange("capital", idx, lv)
-                      }
-                    />
-                  );
-                })}
+                {/* Allied Cultures */}
+                <div className="flex-1 min-w-0 space-y-4">
+                  <p className="text-[13px] font-semibold uppercase tracking-widest text-muted-foreground">
+                    Allied Cultures
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-6 items-start">
+                    {[0, 1, 2, 3].map((idx) => {
+                      const entry = activePreset.allied[idx];
+                      return (
+                        <PresetSlot
+                          key={idx}
+                          entry={entry ?? null}
+                          ownedMap={ownedMap}
+                          onAdd={() =>
+                            setPickerState({
+                              open: true,
+                              slotType: "allied",
+                              slotIndex: idx,
+                            })
+                          }
+                          onRemove={() =>
+                            setWonder(activePresetId!, "allied", idx, null)
+                          }
+                          onLevelChange={(lv) =>
+                            handleLevelChange("allied", idx, lv)
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-            </div>
-
-            {/* Allied Cultures */}
-            <div className="flex-1 min-w-0 space-y-4">
-              <p className="text-[13px] font-semibold uppercase tracking-widest text-muted-foreground">
-                Allied Cultures
-              </p>
-              <div className="grid grid-cols-2 gap-x-3 gap-y-6 items-start">
-                {[0, 1, 2, 3].map((idx) => {
-                  const entry = activePreset.allied[idx];
-                  return (
-                    <PresetSlot
-                      key={idx}
-                      entry={entry ?? null}
-                      ownedMap={ownedMap}
-                      onAdd={() =>
-                        setPickerState({
-                          open: true,
-                          slotType: "allied",
-                          slotIndex: idx,
-                        })
-                      }
-                      onRemove={() =>
-                        setWonder(activePresetId!, "allied", idx, null)
-                      }
-                      onLevelChange={(lv) =>
-                        handleLevelChange("allied", idx, lv)
-                      }
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Colonne synergies + boosts droite : xl+ uniquement ── */}
-        <div className="hidden xl:flex flex-col gap-3 w-[280px] shrink-0">
-          <SynergyPanel codes={codes} />
-          <WonderBoostsPanel
-            codes={codes}
-            entries={allEntries}
-            ownedMap={ownedMap}
+            }
+            narrow={
+              <>
+                <TabsContent value="capital" className="space-y-4">
+                  <p className="text-[13px] font-semibold uppercase tracking-widest text-muted-foreground">
+                    Capital City
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-6 items-start">
+                    {[0, 1, 2, 3].map((idx) => {
+                      const entry = activePreset.capital[idx];
+                      return (
+                        <PresetSlot
+                          key={idx}
+                          entry={entry ?? null}
+                          ownedMap={ownedMap}
+                          onAdd={() =>
+                            setPickerState({
+                              open: true,
+                              slotType: "capital",
+                              slotIndex: idx,
+                            })
+                          }
+                          onRemove={() =>
+                            setWonder(activePresetId!, "capital", idx, null)
+                          }
+                          onLevelChange={(lv) =>
+                            handleLevelChange("capital", idx, lv)
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                </TabsContent>
+                <TabsContent value="allied" className="space-y-4">
+                  <p className="text-[13px] font-semibold uppercase tracking-widest text-muted-foreground">
+                    Allied Cultures
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-6 items-start">
+                    {[0, 1, 2, 3].map((idx) => {
+                      const entry = activePreset.allied[idx];
+                      return (
+                        <PresetSlot
+                          key={idx}
+                          entry={entry ?? null}
+                          ownedMap={ownedMap}
+                          onAdd={() =>
+                            setPickerState({
+                              open: true,
+                              slotType: "allied",
+                              slotIndex: idx,
+                            })
+                          }
+                          onRemove={() =>
+                            setWonder(activePresetId!, "allied", idx, null)
+                          }
+                          onLevelChange={(lv) =>
+                            handleLevelChange("allied", idx, lv)
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                </TabsContent>
+              </>
+            }
           />
         </div>
-      </div>
+
+        {/* ── Synergies + Boosts ── */}
+        <div className="w-full">
+          <SwitchableSection
+            tabs={[
+              { value: "synergies", label: "Active synergies" },
+              { value: "boosts", label: "Wonder boosts" },
+            ]}
+            defaultValue="synergies"
+            wide={
+              <div className="grid grid-cols-2 md:grid-cols-3 w-full max-w-262.5 gap-3">
+                <div className="md:col-span-1">
+                  <SynergyPanel codes={codes} />
+                </div>
+                <div className="md:col-span-2">
+                  <WonderBoostsPanel
+                    codes={codes}
+                    entries={allEntries}
+                    ownedMap={ownedMap}
+                    capitalCodes={capitalCodes}
+                    alliedCodes={alliedCodes}
+                  />
+                </div>
+              </div>
+            }
+            narrow={
+              <>
+                <TabsContent value="synergies">
+                  <SynergyPanel codes={codes} />
+                </TabsContent>
+                <TabsContent value="boosts">
+                  <WonderBoostsPanel
+                    codes={codes}
+                    entries={allEntries}
+                    ownedMap={ownedMap}
+                    capitalCodes={capitalCodes}
+                    alliedCodes={alliedCodes}
+                  />
+                </TabsContent>
+              </>
+            }
+          />
+        </div>
 
       {/* ── Wonder picker modal ── */}
       <WonderPickerModal

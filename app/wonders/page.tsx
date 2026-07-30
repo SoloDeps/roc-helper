@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Landmark,
@@ -19,6 +19,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { WONDERS, WONDER_CODES } from "@/data/wonders/index";
 import type { WonderGroup, MaterialType } from "@/data/wonders/types";
@@ -74,28 +75,55 @@ const GRID =
 
 // ─── Tab config ───────────────────────────────────────────────────────────────
 
+const DEFAULT_SIDEBAR_BREAKPOINT = 1024;
+
 const TABS = [
   {
     value: "all",
     label: "Wonders",
     icon: Landmark,
     description: "Manage your wonders. Click to view details and progress.",
+    sidebarBreakpoint: DEFAULT_SIDEBAR_BREAKPOINT,
   },
-  // {
-  //   value: "presets",
-  //   label: "Presets",
-  //   icon: LayoutGrid,
-  //   description:
-  //     "Browse and apply preset wonder configurations optimized for different strategies.",
-  // },
-  // {
-  //   value: "compare",
-  //   label: "Compare",
-  //   icon: ArrowRightLeft,
-  //   description:
-  //     "Compare wonders side by side to make the best choice for your build.",
-  // },
-];
+  {
+    value: "presets",
+    label: "Presets",
+    icon: LayoutGrid,
+    description:
+      "Browse and apply preset wonder configurations optimized for different strategies.",
+    sidebarBreakpoint: 1200,
+  },
+  {
+    value: "compare",
+    label: "Compare",
+    icon: ArrowRightLeft,
+    description:
+      "Compare wonders side by side to make the best choice for your build.",
+    sidebarBreakpoint: DEFAULT_SIDEBAR_BREAKPOINT,
+  },
+] as const;
+
+// ─── Container width hook ─────────────────────────────────────────────────────
+
+function useContainerWidth<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    setWidth(el.getBoundingClientRect().width);
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setWidth(entry.contentRect.width);
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return [ref, width] as const;
+}
 
 // ─── Group section header ─────────────────────────────────────────────────────
 
@@ -431,6 +459,7 @@ function SidebarProgressWidget({
 // ─── Vertical Sidebar Nav (LG+) ──────────────────────────────────────────────
 
 function SidebarNav({
+  show,
   activeTab,
   onTabChange,
   ownedMap,
@@ -442,6 +471,7 @@ function SidebarNav({
   hideMaxed,
   onHideMaxed,
 }: {
+  show: boolean;
   activeTab: string;
   onTabChange: (value: string) => void;
   ownedMap: Record<string, { code: string; lvl: number }>;
@@ -456,7 +486,10 @@ function SidebarNav({
   const hasActiveFilters = material !== "all" || slot !== "all" || hideMaxed;
 
   return (
-    <nav className="hidden lg:flex flex-col justify-between w-[190px] xl:w-[220px] shrink-0 sticky top-[72px] h-[calc(100vh-72px)] pr-4 pb-4">
+    <nav className={cn(
+      show ? 'flex' : 'hidden',
+      'flex-col justify-between w-[190px] xl:w-[220px] shrink-0 sticky top-[72px] h-[calc(100vh-72px)] pr-4 pb-4',
+    )}>
       {/* Top: tabs + filtres conditionnels */}
       <div className="absolute top-0 right-0 bottom-0 hidden h-full w-px bg-linear-to-b from-transparent via-border to-transparent lg:flex"></div>
       <div className="space-y-4">
@@ -552,6 +585,7 @@ function SidebarNav({
 // ─── Horizontal Tab Nav (MD only) ────────────────────────────────────────────
 
 function HorizontalNav({
+  showSidebar,
   activeTab,
   onTabChange,
   isAllTab,
@@ -561,7 +595,9 @@ function HorizontalNav({
   onSlot,
   hideMaxed,
   onHideMaxed,
+  ownedMap,
 }: {
+  showSidebar: boolean;
   activeTab: string;
   onTabChange: (value: string) => void;
   isAllTab: boolean;
@@ -571,11 +607,15 @@ function HorizontalNav({
   onSlot: (v: string) => void;
   hideMaxed: boolean;
   onHideMaxed: (v: boolean) => void;
+  ownedMap: Record<string, { code: string; lvl: number }>;
 }) {
   const hasActiveFilters = material !== "all" || slot !== "all" || hideMaxed;
 
   return (
-    <div className="hidden md:flex lg:hidden fixed top-[50px] left-0 right-0 z-40 h-12 border-b border-border px-6 items-center justify-between bg-background-200">
+    <div className={cn(
+      showSidebar ? 'hidden' : 'flex',
+      'fixed top-[50px] left-0 right-0 z-40 h-12 border-b border-border px-3 md:px-6 items-center justify-between bg-background-200',
+    )}>
       {/* Tabs à gauche */}
       <div className="flex h-full">
         {TABS.map((tab) => {
@@ -586,7 +626,7 @@ function HorizontalNav({
               key={tab.value}
               onClick={() => onTabChange(tab.value)}
               className={cn(
-                "relative flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-colors duration-150",
+                "relative flex items-center gap-1.5 px-3 md:px-4 py-2.5 text-sm font-medium transition-colors duration-150",
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
@@ -597,7 +637,7 @@ function HorizontalNav({
                 size={15}
                 className="opacity-70 shrink-0"
               />
-              {tab.label}
+              <span className="hidden md:inline">{tab.label}</span>
               {isActive && (
                 <motion.div
                   layoutId="horizontal-nav-underline"
@@ -619,7 +659,7 @@ function HorizontalNav({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="flex justify-center h-full py-2 items-center gap-1.5"
+            className="hidden md:flex justify-center h-full py-2 items-center gap-1.5"
           >
             {hasActiveFilters && (
               <Button
@@ -670,6 +710,22 @@ function HorizontalNav({
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Filtres à droite (mobile) — icône drawer, remplace le bloc desktop ci-dessus */}
+      {isAllTab && (
+        <div className="flex md:hidden items-center h-full">
+          <MobileFilterDrawer
+            material={material}
+            onMaterial={onMaterial}
+            slot={slot}
+            onSlot={onSlot}
+            hideMaxed={hideMaxed}
+            onHideMaxed={onHideMaxed}
+            hasActiveFilters={hasActiveFilters}
+            ownedMap={ownedMap}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -724,123 +780,190 @@ function BottomNav({
   );
 }
 
+// ─── Skeleton de chargement ───────────────────────────────────────────────────
+
+function WondersPageSkeleton() {
+  return (
+    <>
+      <nav className="hidden lg:flex flex-col justify-between w-[190px] xl:w-[220px] shrink-0 sticky top-[72px] h-[calc(100vh-72px)] pr-4 pb-4">
+        <div className="space-y-4 w-full animate-pulse">
+          <div className="space-y-0.5">
+            {TABS.map((tab) => (
+              <Skeleton key={tab.value} className="h-10 w-full rounded-lg" />
+            ))}
+          </div>
+          <div className="border-y border-border pt-4 pb-3 space-y-3">
+            <Skeleton className="h-3 w-16" />
+            <Skeleton className="h-9 w-full" />
+            <Skeleton className="h-9 w-full" />
+          </div>
+        </div>
+        <Skeleton className="h-20 w-full rounded-lg animate-pulse" />
+      </nav>
+      <div className="flex-1 min-w-0 pt-1 animate-pulse">
+        <div className="mb-4">
+          <Skeleton className="h-6 w-48" />
+          <Skeleton className="h-4 w-96 mt-1.5 hidden sm:block" />
+        </div>
+        <div className={GRID}>
+          {Array.from({ length: 12 }).map((_, i) => (
+            <Skeleton key={i} className="aspect-[3/4] rounded-xl" />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function WondersPage() {
   const ownedMap = useUserWondersMap();
-  const [activeTab, setActiveTab] = useState("all");
+
+  const [{ mounted, activeTab }, setHydration] = useState({
+    mounted: false,
+    activeTab: "all" as string,
+  });
+
+  const handleTabChange = useCallback((value: string) => {
+    setHydration((prev) => ({ ...prev, activeTab: value }));
+    const hash = value === "all" ? "" : value;
+    if (hash) {
+      history.replaceState(null, "", `#${hash}`);
+    } else {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    document.getElementById("app-scroll-container")?.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const tab = TABS.some((t) => t.value === hash) ? hash : "all";
+    queueMicrotask(() => {
+      setHydration({ mounted: true, activeTab: tab });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const onHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      const tab = TABS.some((t) => t.value === hash) ? hash : "all";
+      setHydration((prev) => ({ ...prev, activeTab: tab }));
+      document.getElementById("app-scroll-container")?.scrollTo(0, 0);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [mounted]);
+
   const [material, setMaterial] = useState("all");
   const [slot, setSlot] = useState("all");
   const [hideMaxed, setHideMaxed] = useState(false);
 
+  const [containerRef, containerWidth] = useContainerWidth<HTMLDivElement>();
+
   const activeTabConfig = TABS.find((t) => t.value === activeTab);
+  const sidebarBreakpoint = activeTabConfig?.sidebarBreakpoint ?? DEFAULT_SIDEBAR_BREAKPOINT;
+  const showSidebar = containerWidth >= sidebarBreakpoint;
   const isAllTab = activeTab === "all";
   const hasActiveFilters = material !== "all" || slot !== "all" || hideMaxed;
 
   return (
     <>
       {/* Bottom nav (mobile) */}
-      {/* <BottomNav activeTab={activeTab} onTabChange={setActiveTab} /> */}
+      {/* <BottomNav activeTab={activeTab} onTabChange={handleTabChange} /> */}
 
       <div className="flex min-h-0 flex-1 container-wrapper">
         <div className="w-full mx-auto lg:pt-4">
-          {/* ── Horizontal nav (MD only) — tabs + filtres ── */}
-          <HorizontalNav
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-            isAllTab={isAllTab}
-            material={material}
-            onMaterial={setMaterial}
-            slot={slot}
-            onSlot={setSlot}
-            hideMaxed={hideMaxed}
-            onHideMaxed={setHideMaxed}
-          />
-          {/* Spacer pour compenser le HorizontalNav fixed (MD only) */}
-          <div className="hidden md:block lg:hidden h-12 mb-4" />
+          {!mounted ? (
+            <>
+              <div className="flex lg:hidden fixed top-[50px] left-0 right-0 z-40 h-12 border-b border-border px-3 items-center gap-4 bg-background-200">
+                {TABS.map((tab) => (
+                  <Skeleton key={tab.value} className="h-5 w-16 rounded" />
+                ))}
+              </div>
+              <div className="block lg:hidden h-12 mb-4" />
+            </>
+          ) : (
+            <>
+              <HorizontalNav
+                showSidebar={showSidebar}
+                activeTab={activeTab}
+                onTabChange={handleTabChange}
+                isAllTab={isAllTab}
+                material={material}
+                onMaterial={setMaterial}
+                slot={slot}
+                onSlot={setSlot}
+                hideMaxed={hideMaxed}
+                onHideMaxed={setHideMaxed}
+                ownedMap={ownedMap}
+              />
+              <div className={cn(
+                showSidebar ? 'hidden' : 'block',
+                'h-12 mb-4',
+              )} />
+            </>
+          )}
 
-          <div className="flex gap-4 xl:gap-5 items-start">
-            {/* ── Sidebar (LG+) — tabs + filtres + widget ── */}
-            <SidebarNav
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-              ownedMap={ownedMap}
-              isAllTab={isAllTab}
-              material={material}
-              onMaterial={setMaterial}
-              slot={slot}
-              onSlot={setSlot}
-              hideMaxed={hideMaxed}
-              onHideMaxed={setHideMaxed}
-            />
+          <div ref={containerRef} className="flex gap-4 xl:gap-5 items-start @container">
+            {!mounted ? (
+              <WondersPageSkeleton />
+            ) : (
+              <>
+                <SidebarNav
+                  show={showSidebar}
+                  activeTab={activeTab}
+                  onTabChange={handleTabChange}
+                  ownedMap={ownedMap}
+                  isAllTab={isAllTab}
+                  material={material}
+                  onMaterial={setMaterial}
+                  slot={slot}
+                  onSlot={setSlot}
+                  hideMaxed={hideMaxed}
+                  onHideMaxed={setHideMaxed}
+                />
 
-            {/* ── Main content ── */}
-            <div className="flex-1 min-w-0 pt-1">
-              {/* ── Header: title + description + bouton filtre mobile ── */}
-              {activeTabConfig && (
-                <div className="mb-4">
-                  {/* Mobile: titre + bouton filtre sur même ligne */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <h1 className="text-lg font-semibold leading-tight">
-                        {activeTabConfig.label}
-                      </h1>
-                      <p className="text-[15px] text-muted-foreground mt-0.5 hidden sm:flex">
+                <div className="flex-1 min-w-0 pt-1">
+                  {activeTabConfig && (
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <h1 className="text-lg font-semibold leading-tight">
+                            {activeTabConfig.label}
+                          </h1>
+                          <p className="text-[15px] text-muted-foreground mt-0.5 hidden sm:flex">
+                            {activeTabConfig.description}
+                          </p>
+                        </div>
+                        {isAllTab && (
+                          <div className="lg:hidden shrink-0 hidden md:flex items-center gap-2">
+                            <UnlockAllButton ownedMap={ownedMap} compact />
+                          </div>
+                        )}
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-0.5 sm:hidden">
                         {activeTabConfig.description}
                       </p>
                     </div>
-                    {/* Bouton filtre — mobile seulement, onglet Wonders */}
-                    {isAllTab && (
-                      <div className="lg:hidden shrink-0 flex items-center gap-2">
-                        <div className="hidden md:flex">
-                          <UnlockAllButton ownedMap={ownedMap} compact />
-                        </div>
-                        <div className="md:hidden">
-                          <MobileFilterDrawer
-                            material={material}
-                            onMaterial={setMaterial}
-                            slot={slot}
-                            onSlot={setSlot}
-                            hideMaxed={hideMaxed}
-                            onHideMaxed={setHideMaxed}
-                            hasActiveFilters={hasActiveFilters}
-                            ownedMap={ownedMap}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  {/* MD+: description pleine largeur sous le titre (LG sidebar gère les filtres) */}
-                  <p className="text-sm text-muted-foreground mt-0.5 sm:hidden">
-                    {activeTabConfig.description}
-                  </p>
-                </div>
-              )}
+                  )}
 
-              {/* Tab contents */}
-              <div className="min-h-dvh">
-                {/* <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0, y: 0 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -3 }}
-                    transition={{ duration: 0.2 }}
-                  > */}
-                {activeTab === "all" && (
-                  <AllWondersTabContent
-                    ownedMap={ownedMap}
-                    material={material}
-                    slot={slot}
-                    hideMaxed={hideMaxed}
-                  />
-                )}
-                {activeTab === "presets" && <PresetTab ownedMap={ownedMap} />}
-                {activeTab === "compare" && <CompareTab ownedMap={ownedMap} />}
-                {/* </motion.div>
-                </AnimatePresence> */}
-              </div>
-            </div>
+                  <div className="min-h-dvh">
+                    {activeTab === "all" && (
+                      <AllWondersTabContent
+                        ownedMap={ownedMap}
+                        material={material}
+                        slot={slot}
+                        hideMaxed={hideMaxed}
+                      />
+                    )}
+                    {activeTab === "presets" && <PresetTab ownedMap={ownedMap} />}
+                    {activeTab === "compare" && <CompareTab ownedMap={ownedMap} />}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -80,7 +80,7 @@ export function EmptySlotCard({ onAdd }: EmptySlotCardProps) {
       onClick={onAdd}
       // h-full : s'adapte à la hauteur de la cellule grille (dictée par la wonder card voisine)
       // min-h-[200px] : hauteur minimale quand toute la ligne est vide
-      className="group flex items-center justify-center w-full h-full min-h-[200px] rounded-lg border-2 border-dashed border-border hover:border-primary/40 transition-colors text-muted-foreground hover:text-foreground"
+      className="group flex items-center justify-center w-full h-full min-h-[250px] rounded-lg border-2 border-dashed border-border hover:border-primary/40 transition-colors text-muted-foreground hover:text-foreground"
     >
       <span className="flex items-center gap-1.5 text-xs font-medium">
         <Plus className="size-3.5" />
@@ -119,7 +119,7 @@ export function WonderPickerContent({
 
   return (
     <div className="overflow-y-auto h-full px-4 pb-6 pt-6">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-5">
         {filtered.map((w) => {
           const imageSrc = WONDER_IMAGE_MAP[w.meta.code];
           const offsetPx = WONDER_IMAGE_OFFSET_PX[w.meta.code] ?? 0;
@@ -128,7 +128,7 @@ export function WonderPickerContent({
             <button
               key={w.meta.code}
               onClick={() => onSelect(w.meta.code)}
-              className="group relative flex flex-col rounded-lg bg-card hover:ring-2 hover:ring-amber-400/70 hover:shadow-md transition-all text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="group relative flex flex-col rounded-lg bg-card hover:shadow-md transition-all text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
             >
               <div className="relative w-full h-[180px] shrink-0 pt-6 -mt-6 overflow-hidden rounded-lg">
                 {imageSrc ? (
@@ -285,7 +285,10 @@ export function PresetWonderCard({
   return (
     <div className="group relative flex flex-col rounded-lg bg-card">
       {/* ── Zone image ── */}
-      <div className="relative w-full h-[200px] shrink-0 pt-6 -mt-6 overflow-hidden">
+      <div
+        className="relative w-full h-[200px] shrink-0 pt-6 -mt-6 overflow-hidden cursor-pointer"
+        onClick={onReplace}
+      >
         {imageSrc ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -322,7 +325,7 @@ export function PresetWonderCard({
               </p>
             </div>
             <button
-              onClick={onRemove}
+              onClick={(e) => { e.stopPropagation(); onRemove(); }}
               className="absolute top-7 right-1.5 size-5 rounded-full bg-black/60 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/80 z-10"
               title="Remove from preset"
             >
@@ -363,14 +366,14 @@ export function PresetWonderCard({
             </div>
             <div className="flex gap-1.5">
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
-                className="h-7 text-xs rounded-sm px-2 text-amber-600 hover:text-amber-600 hover:bg-amber-400/10"
+                className="h-7 text-xs rounded-sm px-2 hover:bg-amber-400/10"
                 onClick={() => setDraft(maxLevel)}
               >
                 Max
               </Button>
-              {ownedLevel !== undefined && (
+              {/* {ownedLevel !== undefined && (
                 <Button
                   variant="ghost"
                   size="sm"
@@ -380,7 +383,7 @@ export function PresetWonderCard({
                 >
                   Auto
                 </Button>
-              )}
+              )} */}
               <div className="flex-1" />
               <Button
                 variant="outline"

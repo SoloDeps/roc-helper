@@ -85,6 +85,13 @@ export interface WonderMeta {
    * Replaces the old synergyTag / synergyBonus / synergyIcons fields.
    */
   synergies: WonderSynergy[];
+  /**
+   * Optional multiplier override for how this wonder counts toward material tag totals.
+   * e.g. `[{ tag: "naval", multiplier: 2 }]` means this wonder counts as 2 Naval
+   * instead of 1 when computing per-tag counts for synergy activation.
+   * Each tag not listed contributes its default of 1.
+   */
+  countsAs?: { tag: MaterialType; multiplier: number }[];
   rarity: "Rare" | "Legendary";
   maxLevel: number;
 }
