@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect, type ReactNode } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, Minus, Plus, X } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Eye, Minus, Plus, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { WONDERS } from "@/data/wonders/index";
@@ -359,11 +359,15 @@ function SlotHeaderCell({
       open={isOpen}
       onOpenChange={onOpenChange}
       trigger={
-        <button className="group w-full h-full flex items-center justify-center gap-1.5 px-2 py-3 min-w-0 cursor-pointer hover:bg-muted/50 transition-colors">
+        <button
+          className="group w-full h-full flex items-center justify-center gap-1.5 px-2 py-3 min-w-0 cursor-pointer hover:bg-muted/50 transition-colors"
+          title="Voir les wonders de ce preset"
+        >
           {dot}
           <span className="text-xs font-bold truncate text-foreground/80 group-hover:text-primary transition-colors">
             {name}
           </span>
+          <Eye className="size-[18px] shrink-0 ml-1 text-muted-foreground/50 group-hover:text-primary transition-colors" />
         </button>
       }
       className="p-0 gap-0 flex flex-col overflow-hidden md:max-w-md md:h-[min(720px,85vh)] h-[80vh]"
@@ -473,7 +477,7 @@ function GroupedCompareTable({
   return (
     <div className="@container -mx-2 sm:-mx-4 md:mx-0 rounded-none md:rounded-xl border border-border overflow-hidden shadow-sm">
       <div className="flex items-center justify-between px-3 py-2 bg-muted/60 border-b border-border">
-        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">{title}</span>
+        <span className="text-[12px] font-black uppercase tracking-widest text-muted-foreground/60">{title}</span>
         {toolbarRight}
       </div>
 
@@ -494,22 +498,22 @@ function GroupedCompareTable({
         ))}
       </div>
 
-      <div className="divide-y divide-border/50">
+      <div>
         {groups.map((group) => (
           <div key={group.header}>
-            <div className="px-3 py-1.5 bg-muted/30 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+            <div className="px-3 py-1.5 bg-muted/30 border-b border-border/60 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
               {group.header}
             </div>
-            {group.rows.map((row, i) => (
+            {group.rows.map((row) => (
               <div
                 key={row.key}
-                className={cn("grid group transition-colors", gridClass, i % 2 === 0 ? "bg-background hover:bg-muted/40" : "bg-muted/20 hover:bg-muted/50")}
+                className={cn("grid group transition-colors bg-background", gridClass)}
               >
-                <div className="min-w-0">
+                <div className="min-w-0 border-b border-border/60">
                   <IconLabelCell icons={row.icons} label={row.label} />
                 </div>
                 {row.cells.map((cell, i2) => (
-                  <div key={i2} className="border-l border-border/60 py-2.5 px-4 min-h-[44px]">
+                  <div key={i2} className="border-l border-b border-border/60 py-2.5 px-4 min-h-[44px]">
                     <ValueCell cell={cell} />
                   </div>
                 ))}
@@ -519,11 +523,11 @@ function GroupedCompareTable({
         ))}
       </div>
 
-      <div className="border-t border-border bg-muted/50 px-4 py-2 flex items-center justify-between">
-        <span className="text-[10px] text-muted-foreground">
+      <div className="bg-muted/50 px-4 py-2 flex items-center justify-between">
+        <span className="text-xs text-muted-foreground">
           {rowCount} row{rowCount === 1 ? "" : "s"}
         </span>
-        <span className="flex items-center gap-3 text-[10px] text-muted-foreground">
+        <span className="flex items-center gap-3 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
             <span className="inline-block size-2 rounded-full bg-emerald-500" />
             Best
@@ -614,7 +618,7 @@ function PresetSelector({
       >
         <span
           className={cn(
-            "inline-flex items-center justify-center size-5 rounded-full text-[10px] font-black shrink-0",
+            "inline-flex items-center justify-center size-5 rounded-full text-[11px] font-black shrink-0",
             style.chip,
           )}
         >
@@ -649,7 +653,7 @@ function PresetSelector({
         <div className="absolute top-full left-0 right-0 mt-1.5 z-50 rounded-xl border border-border bg-popover shadow-xl shadow-black/10 p-2 space-y-2 max-h-72 overflow-y-auto">
           {selectableSavedPresets.length > 0 && (
             <>
-              <p className="px-2 pt-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+              <p className="px-2 pt-1 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
                 My presets
               </p>
               {selectableSavedPresets.map((p) => (
@@ -816,7 +820,7 @@ export function CompareTab({ ownedMap }: CompareTabProps) {
         toolbarRight={
           <label
             className={cn(
-              "flex items-center gap-1.5 text-[11px] font-medium select-none",
+              "flex items-center gap-1.5 text-xs font-medium select-none",
               canFilterBoostDiffOnly
                 ? "text-muted-foreground cursor-pointer"
                 : "text-muted-foreground/40 cursor-not-allowed",
@@ -834,7 +838,7 @@ export function CompareTab({ ownedMap }: CompareTabProps) {
               checked={showBoostDiffOnly && canFilterBoostDiffOnly}
               disabled={!canFilterBoostDiffOnly}
               onChange={() => setShowBoostDiffOnly((v) => !v)}
-              className="size-3.5 rounded border-border accent-amber-500 disabled:cursor-not-allowed"
+              className="size-4 rounded border-border accent-amber-500 disabled:cursor-not-allowed"
             />
             Differences only
           </label>
@@ -852,7 +856,7 @@ export function CompareTab({ ownedMap }: CompareTabProps) {
         toolbarRight={
           <label
             className={cn(
-              "flex items-center gap-1.5 text-[11px] font-medium select-none",
+              "flex items-center gap-1.5 text-xs font-medium select-none",
               canFilterSynergyDiffOnly
                 ? "text-muted-foreground cursor-pointer"
                 : "text-muted-foreground/40 cursor-not-allowed",
@@ -870,7 +874,7 @@ export function CompareTab({ ownedMap }: CompareTabProps) {
               checked={showSynergyDiffOnly && canFilterSynergyDiffOnly}
               disabled={!canFilterSynergyDiffOnly}
               onChange={() => setShowSynergyDiffOnly((v) => !v)}
-              className="size-3.5 rounded border-border accent-amber-500 disabled:cursor-not-allowed"
+              className="size-4 rounded border-border accent-amber-500 disabled:cursor-not-allowed"
             />
             Differences only
           </label>
