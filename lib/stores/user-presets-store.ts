@@ -27,10 +27,10 @@ function loadPresets(): UserPreset[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [createEmptyPreset("My Preset 1")];
+    if (!raw) return [createEmptyPreset("Preset 1")];
     return JSON.parse(raw) as UserPreset[];
   } catch {
-    return [createEmptyPreset("My Preset 1")];
+    return [createEmptyPreset("Preset 1")];
   }
 }
 
@@ -113,7 +113,7 @@ export function useUserPresets() {
               : prev.activePresetId;
           return { presets: next, activePresetId: nextActiveId };
         }
-        const replacement = createEmptyPreset("My Preset 1");
+        const replacement = createEmptyPreset("Preset 1");
         return { presets: [replacement], activePresetId: replacement.id };
       });
     },
