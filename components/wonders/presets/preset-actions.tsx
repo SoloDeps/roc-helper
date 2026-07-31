@@ -46,7 +46,7 @@ export function PresetActions({
             <Button
               variant="ghost"
               size="icon"
-              className="size-8"
+              className="size-9 text-muted-foreground hover:text-foreground"
               onClick={onMaxAll}
             >
               <ArrowBigUp className="size-5" />
@@ -59,7 +59,7 @@ export function PresetActions({
             <Button
               variant="ghost"
               size="icon"
-              className="size-8"
+              className="size-9 text-muted-foreground hover:text-foreground"
               onClick={onRename}
             >
               <Pencil className="size-5" />
@@ -72,7 +72,7 @@ export function PresetActions({
             <Button
               variant="ghost"
               size="icon"
-              className="size-8"
+              className="size-9 text-muted-foreground hover:text-foreground"
               onClick={onDuplicate}
             >
               <Copy className="size-5" />
@@ -85,7 +85,7 @@ export function PresetActions({
             <Button
               variant="ghost"
               size="icon"
-              className="size-8"
+              className="size-9 text-muted-foreground hover:text-foreground"
               onClick={onClear}
             >
               <Eraser className="size-5" />
@@ -98,7 +98,7 @@ export function PresetActions({
             <Button
               variant="ghost"
               size="icon"
-              className="size-8 text-destructive hover:text-destructive"
+              className="size-9 text-destructive hover:text-destructive"
               onClick={onDelete}
             >
               <Trash2 className="size-5" />
@@ -112,12 +112,14 @@ export function PresetActions({
       <div className="flex @min-[640px]:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="size-8">
+            <Button variant="ghost" size="icon" className="size-9">
               <MoreHorizontal className="size-5" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={onRename}>Rename</DropdownMenuItem>
+            <DropdownMenuItem onClick={onRename}>
+              <Pencil className="size-5 mr-3" /> Rename
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={onDuplicate}>
               <Copy className="size-5 mr-3" /> Duplicate
             </DropdownMenuItem>

@@ -40,7 +40,7 @@ export function PresetSwitcher({
       <Button
         variant="outline"
         size="icon"
-        className="size-8 shrink-0 disabled:pointer-events-auto disabled:cursor-not-allowed"
+        className="size-9 shrink-0 disabled:pointer-events-auto disabled:cursor-not-allowed"
         disabled={index <= 0}
         onClick={() => goTo(index - 1)}
       >
@@ -63,26 +63,21 @@ export function PresetSwitcher({
       <Button
         variant="outline"
         size="icon"
-        className="size-8 shrink-0 disabled:pointer-events-auto disabled:cursor-not-allowed"
+        className="size-9 shrink-0 disabled:pointer-events-auto disabled:cursor-not-allowed"
         disabled={index >= presets.length - 1}
         onClick={() => goTo(index + 1)}
       >
         <ChevronRight className="size-4" />
       </Button>
 
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="size-8 shrink-0 border-dashed"
-            onClick={onAddPreset}
-          >
-            <Plus className="size-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>Add new preset</TooltipContent>
-      </Tooltip>
+      <Button
+        variant="outline"
+        className="shrink-0 border-dashed ml-1"
+        onClick={onAddPreset}
+      >
+        <Plus className="size-4" />
+        <span className="hidden md:inline">New preset</span>
+      </Button>
     </div>
   );
 }

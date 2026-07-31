@@ -117,31 +117,34 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
 
   return (
     <div className="space-y-4 pb-8">
-      <div className="@container flex items-center gap-2 w-full max-w-[1050px]">
-        <PresetSwitcher
-          presets={presets}
-          activePresetId={activePresetId!}
-          onSelect={setActivePresetId}
-          onAddPreset={() => addPreset()}
-        />
-
-        {editingName ? (
-          <input
-            autoFocus
-            value={activePreset.name}
-            maxLength={30}
-            onChange={(e) => renamePreset(activePreset.id, e.target.value)}
-            onBlur={() => setEditingName(false)}
-            onKeyDown={(e) => e.key === "Enter" && setEditingName(false)}
-            className="w-40 h-8 bg-muted rounded-md px-2.5 text-sm font-semibold outline-none focus:ring-1 focus:ring-ring"
+      <div className="@container flex items-start gap-2 w-full max-w-[1050px]">
+        <div className="flex gap-2 flex-col md:flex-row">
+          <PresetSwitcher
+            presets={presets}
+            activePresetId={activePresetId!}
+            onSelect={setActivePresetId}
+            onAddPreset={() => addPreset()}
           />
-        ) : null}
 
-        {(synergyCount > 0 || boostCount > 0) && (
+          {editingName ? (
+            <input
+              autoFocus
+              value={activePreset.name}
+              maxLength={30}
+              onChange={(e) => renamePreset(activePreset.id, e.target.value)}
+              onBlur={() => setEditingName(false)}
+              onKeyDown={(e) => e.key === "Enter" && setEditingName(false)}
+              className="w-full md:w-[150px] h-9 bg-muted rounded-md px-2.5 text-sm font-semibold outline-none focus:ring-1 focus:ring-ring"
+            />
+          ) : null}
+
+        </div>
+
+        {/* {(synergyCount > 0 || boostCount > 0) && (
           <span className="text-xs text-muted-foreground tabular-nums">
             {synergyCount} synergy{synergyCount !== 1 ? "s" : ""} · {boostCount} boost{boostCount !== 1 ? "s" : ""}
           </span>
-        )}
+        )} */}
 
         <div className="flex-1" />
 

@@ -626,7 +626,7 @@ function HorizontalNav({
               key={tab.value}
               onClick={() => onTabChange(tab.value)}
               className={cn(
-                "relative flex items-center gap-1.5 px-3 md:px-4 py-2.5 text-sm font-medium transition-colors duration-150",
+                "relative flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-colors duration-150",
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
@@ -634,7 +634,7 @@ function HorizontalNav({
             >
               <Icon
                 aria-hidden="true"
-                size={15}
+                size={19}
                 className="opacity-70 shrink-0"
               />
               <span className="hidden md:inline">{tab.label}</span>
