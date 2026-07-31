@@ -85,22 +85,22 @@ const TABS = [
     description: "Manage your wonders. Click to view details and progress.",
     sidebarBreakpoint: DEFAULT_SIDEBAR_BREAKPOINT,
   },
-  {
-    value: "presets",
-    label: "Presets",
-    icon: LayoutGrid,
-    description:
-      "Browse and apply preset wonder configurations optimized for different strategies.",
-    sidebarBreakpoint: 1200,
-  },
-  {
-    value: "compare",
-    label: "Compare",
-    icon: ArrowRightLeft,
-    description:
-      "Compare wonders side by side to make the best choice for your build.",
-    sidebarBreakpoint: DEFAULT_SIDEBAR_BREAKPOINT,
-  },
+  // {
+  //   value: "presets",
+  //   label: "Presets",
+  //   icon: LayoutGrid,
+  //   description:
+  //     "Browse and apply preset wonder configurations optimized for different strategies.",
+  //   sidebarBreakpoint: 1200,
+  // },
+  // {
+  //   value: "compare",
+  //   label: "Compare",
+  //   icon: ArrowRightLeft,
+  //   description:
+  //     "Compare wonders side by side to make the best choice for your build.",
+  //   sidebarBreakpoint: DEFAULT_SIDEBAR_BREAKPOINT,
+  // },
 ] as const;
 
 // ─── Container width hook ─────────────────────────────────────────────────────
