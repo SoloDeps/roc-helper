@@ -267,7 +267,7 @@ export const data = [
     },
     bonuses: [
       {
-        type: "goods_production",
+        type: "trade_bonus",
         icons: ["icon_trading", null],
         values: [
           5.0, 7.0, 8.3, 9.4, 10.3, 11.1, 11.8, 12.4, 12.9, 13.5, 14.0, 14.4,

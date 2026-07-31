@@ -20,6 +20,7 @@ interface PresetSwitcherProps {
   activePresetId: string;
   onSelect: (id: string) => void;
   onAddPreset: () => void;
+  atLimit?: boolean;
 }
 
 export function PresetSwitcher({
@@ -27,6 +28,7 @@ export function PresetSwitcher({
   activePresetId,
   onSelect,
   onAddPreset,
+  atLimit = false,
 }: PresetSwitcherProps) {
   const index = presets.findIndex((p) => p.id === activePresetId);
 
@@ -70,14 +72,24 @@ export function PresetSwitcher({
         <ChevronRight className="size-4" />
       </Button>
 
-      <Button
-        variant="outline"
-        className="shrink-0 border-dashed ml-1"
-        onClick={onAddPreset}
-      >
-        <Plus className="size-4" />
-        <span className="hidden md:inline">New preset</span>
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="shrink-0 ml-1">
+            <Button
+              variant="outline"
+              className="disabled:pointer-events-auto disabled:cursor-not-allowed"
+              disabled={atLimit}
+              onClick={onAddPreset}
+            >
+              <Plus className="size-4" />
+              <span className="hidden md:inline">New preset</span>
+            </Button>
+          </span>
+        </TooltipTrigger>
+        {atLimit && (
+          <TooltipContent>Preset limit reached ({presets.length} max)</TooltipContent>
+        )}
+      </Tooltip>
     </div>
   );
 }

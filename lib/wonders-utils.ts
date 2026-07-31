@@ -261,6 +261,7 @@ export const BONUS_LABELS: Record<string, string> = {
   recruitment_time_reduction: "Recruit Time ↓",
   // Economy
   donation_gears: "Donation Gears",
+  trade_bonus: "Trade Bonus",
   trade_slot_cooldown_reduction: "Trade Slot Cooldown ↓",
   bazaar_offer_boost: "Bazaar Offer Boost",
   chest_drop_chance: "Chest Drop Chance",
@@ -309,6 +310,7 @@ const PERCENT_TYPES = new Set([
   "heavy_infantry_recruitment_time_reduction",
   "carcassonne_recruitment_time_reduction",
   "recruitment_time_reduction",
+  "trade_bonus",
   "trade_slot_cooldown_reduction",
   "bazaar_offer_boost",
   "chest_drop_chance",

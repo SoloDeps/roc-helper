@@ -28,6 +28,7 @@ interface PresetActionsProps {
   onMaxAll: () => void;
   onClear: () => void;
   onDelete: () => void;
+  duplicateDisabled?: boolean;
 }
 
 export function PresetActions({
@@ -36,6 +37,7 @@ export function PresetActions({
   onMaxAll,
   onClear,
   onDelete,
+  duplicateDisabled = false,
 }: PresetActionsProps) {
   return (
     <div>
@@ -69,16 +71,21 @@ export function PresetActions({
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-9 text-muted-foreground hover:text-foreground"
-              onClick={onDuplicate}
-            >
-              <Copy className="size-5" />
-            </Button>
+            <span>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-9 text-muted-foreground hover:text-foreground disabled:pointer-events-auto disabled:cursor-not-allowed"
+                disabled={duplicateDisabled}
+                onClick={onDuplicate}
+              >
+                <Copy className="size-5" />
+              </Button>
+            </span>
           </TooltipTrigger>
-          <TooltipContent>Duplicate</TooltipContent>
+          <TooltipContent>
+            {duplicateDisabled ? "Preset limit reached" : "Duplicate"}
+          </TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -120,7 +127,7 @@ export function PresetActions({
             <DropdownMenuItem onClick={onRename}>
               <Pencil className="size-5 mr-3" /> Rename
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={onDuplicate}>
+            <DropdownMenuItem onClick={onDuplicate} disabled={duplicateDisabled}>
               <Copy className="size-5 mr-3" /> Duplicate
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onMaxAll}>

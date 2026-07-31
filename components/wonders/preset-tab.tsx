@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import { useUserPresets } from "@/lib/stores/user-presets-store";
+import { useUserPresets, MAX_PRESETS } from "@/lib/stores/user-presets-store";
 import { getPresetCodes, computeSynergies, getWonderBoosts } from "@/lib/wonders-utils";
 import { WONDERS } from "@/data/wonders/index";
 
@@ -47,6 +47,7 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
     slotIndex: number;
   } | null>(null);
   const [editingName, setEditingName] = useState(false);
+  const atLimit = presets.length >= MAX_PRESETS;
 
   const codes = useMemo(
     () => (activePreset ? getPresetCodes(activePreset) : []),
@@ -78,11 +79,21 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
 
   // Split codes by slot type for 2-column WonderBoostsPanel
   const capitalCodes = useMemo(
-    () => activePreset.capital.filter((e): e is NonNullable<typeof e> => e !== null).map((e) => e.code),
+    () =>
+      !activePreset
+        ? []
+        : activePreset.capital
+            .filter((e): e is NonNullable<typeof e> => e !== null)
+            .map((e) => e.code),
     [activePreset],
   );
   const alliedCodes = useMemo(
-    () => activePreset.allied.filter((e): e is NonNullable<typeof e> => e !== null).map((e) => e.code),
+    () =>
+      !activePreset
+        ? []
+        : activePreset.allied
+            .filter((e): e is NonNullable<typeof e> => e !== null)
+            .map((e) => e.code),
     [activePreset],
   );
 
@@ -124,6 +135,7 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
             activePresetId={activePresetId!}
             onSelect={setActivePresetId}
             onAddPreset={() => addPreset()}
+            atLimit={atLimit}
           />
 
           {editingName ? (
@@ -154,6 +166,7 @@ export function PresetTab({ ownedMap }: PresetTabProps) {
           onMaxAll={() => maxAllWonders(activePreset.id)}
           onClear={() => clearPreset(activePreset.id)}
           onDelete={() => deletePreset(activePreset.id)}
+          duplicateDisabled={atLimit}
         />
       </div>
 

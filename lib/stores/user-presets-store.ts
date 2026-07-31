@@ -1,12 +1,24 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+// ============================================================
+// ROC Helper – User Presets Store
+//
+// Thin helpers around the Dexie `userPresets` table.
+// Uses the same pattern as the rest of the app (see wonders-store.ts):
+//   - useLiveQuery for reactive reads
+//   - plain async functions for writes
+//
+// Data lives in roc_presets_db (see presets-schema.ts).
+// ============================================================
+
+import { useState, useCallback, useEffect } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
 import type { UserPreset, WonderPresetEntry } from "@/data/wonders/types";
 import { WONDERS } from "@/data/wonders/index";
+import { getPresetsDB } from "@/lib/db/presets-schema";
 
-// ─── Storage Key ───────────────────────────────────────────────────────────────
-
-const STORAGE_KEY = "roc-helper:user-presets";
+// Nombre max de presets par utilisateur (limite UX, pas une contrainte de stockage)
+export const MAX_PRESETS = 12;
 
 // ─── Default empty preset factory ─────────────────────────────────────────────
 
@@ -21,69 +33,46 @@ export function createEmptyPreset(name = "New Preset"): UserPreset {
   };
 }
 
-// ─── Load / Save ──────────────────────────────────────────────────────────────
-
-function loadPresets(): UserPreset[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [createEmptyPreset("Preset 1")];
-    return JSON.parse(raw) as UserPreset[];
-  } catch {
-    return [createEmptyPreset("Preset 1")];
-  }
-}
-
-function savePresets(presets: UserPreset[]): void {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(presets));
-  } catch {
-    // quota exceeded, ignore
-  }
-}
-
-// ─── Combined state type ────────────────────────────────────────────────────────
-
-type PresetsState = {
-  presets: UserPreset[];
-  activePresetId: string | null;
-};
-
-function getInitialState(): PresetsState {
-  const loaded = loadPresets();
-  return { presets: loaded, activePresetId: loaded[0]?.id ?? null };
-}
+const maxOutSlots = (
+  arr: (WonderPresetEntry | null)[],
+): (WonderPresetEntry | null)[] =>
+  arr.map((entry) => {
+    if (!entry) return entry;
+    const wonder = WONDERS[entry.code];
+    if (!wonder) return entry;
+    return { ...entry, level: wonder.meta.maxLevel };
+  });
 
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 
 export function useUserPresets() {
-  const [state, setState] = useState<PresetsState>(getInitialState);
+  const db = getPresetsDB();
 
-  const { presets, activePresetId } = state;
-
-  // FIX: hasHydrated — true immédiatement si on est côté client (cas SPA/CSR),
-  // false côté serveur. Le useEffect le passe à true après le premier mount client,
-  // ce qui couvre Next.js SSR sans provoquer de flash.
-  const [hasHydrated, setHasHydrated] = useState<boolean>(
-    () => typeof window !== "undefined",
+  // Réactif : n'importe quel composant (preset-tab, compare-tab, futur layout
+  // builder...) voit les mêmes données à jour, sans passer par un contexte.
+  const presetsQuery = useLiveQuery(
+    () => db.userPresets.orderBy("createdAt").toArray(),
+    [],
   );
 
-  // Couvre le cas SSR uniquement : si on était côté serveur (hasHydrated = false),
-  // on charge les vraies données après le mount et on signale l'hydration.
-  useEffect(() => {
-    if (!hasHydrated) {
-      const loaded = loadPresets();
-      setState({ presets: loaded, activePresetId: loaded[0]?.id ?? null });
-      setHasHydrated(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const hasHydrated = presetsQuery !== undefined;
+  const presets = presetsQuery ?? [];
 
-  // Persist on change
+  const [activePresetId, setActivePresetId] = useState<string | null>(null);
+
+  // Crée un preset par défaut pour un nouvel utilisateur, une fois la DB chargée.
   useEffect(() => {
-    if (presets.length > 0) savePresets(presets);
-  }, [presets]);
+    if (hasHydrated && presets.length === 0) {
+      db.userPresets.add(createEmptyPreset("Preset 1"));
+    }
+  }, [hasHydrated, presets.length, db]);
+
+  // Sélectionne le premier preset dès qu'aucun n'est actif.
+  useEffect(() => {
+    if (!activePresetId && presets.length > 0) {
+      setActivePresetId(presets[0].id);
+    }
+  }, [activePresetId, presets]);
 
   const activePreset =
     presets.find((p) => p.id === activePresetId) ?? presets[0] ?? null;
@@ -91,107 +80,95 @@ export function useUserPresets() {
   // ── Mutators ──
 
   const addPreset = useCallback(
-    (name?: string) => {
-      const newP = createEmptyPreset(name ?? `Preset ${presets.length + 1}`);
-      setState((prev) => ({
-        presets: [...prev.presets, newP],
-        activePresetId: newP.id,
-      }));
+    async (name?: string) => {
+      const count = await db.userPresets.count();
+      if (count >= MAX_PRESETS) return null;
+      const newP = createEmptyPreset(name ?? `Preset ${count + 1}`);
+      await db.userPresets.add(newP);
+      setActivePresetId(newP.id);
       return newP;
     },
-    [presets.length],
+    [db],
   );
 
   const deletePreset = useCallback(
-    (id: string) => {
-      setState((prev) => {
-        const next = prev.presets.filter((p) => p.id !== id);
-        if (next.length > 0) {
-          const nextActiveId =
-            prev.activePresetId === id
-              ? (prev.presets.find((p) => p.id !== id)?.id ?? next[0].id)
-              : prev.activePresetId;
-          return { presets: next, activePresetId: nextActiveId };
-        }
-        const replacement = createEmptyPreset("Preset 1");
-        return { presets: [replacement], activePresetId: replacement.id };
-      });
+    async (id: string) => {
+      await db.userPresets.delete(id);
+      if (activePresetId !== id) return;
+      const remaining = presets.filter((p) => p.id !== id);
+      if (remaining.length > 0) {
+        setActivePresetId(remaining[0].id);
+        return;
+      }
+      const replacement = createEmptyPreset("Preset 1");
+      await db.userPresets.add(replacement);
+      setActivePresetId(replacement.id);
     },
-    [],
+    [db, activePresetId, presets],
   );
 
-  const renamePreset = useCallback((id: string, name: string) => {
-    setState((prev) => ({
-      ...prev,
-      presets: prev.presets.map((p) =>
-        p.id === id ? { ...p, name, updatedAt: Date.now() } : p,
-      ),
-    }));
-  }, []);
+  const renamePreset = useCallback(
+    async (id: string, name: string) => {
+      await db.userPresets.update(id, { name, updatedAt: Date.now() });
+    },
+    [db],
+  );
 
   const setWonder = useCallback(
-    (
+    async (
       presetId: string,
       slotType: "capital" | "allied",
       slotIndex: number,
       entry: WonderPresetEntry | null,
     ) => {
-      setState((prev) => ({
-        ...prev,
-        presets: prev.presets.map((p) => {
-          if (p.id !== presetId) return p;
-          const arr = [...p[slotType]];
-          arr[slotIndex] = entry;
-          return { ...p, [slotType]: arr, updatedAt: Date.now() };
-        }),
-      }));
+      const preset = await db.userPresets.get(presetId);
+      if (!preset) return;
+      const arr = [...preset[slotType]];
+      arr[slotIndex] = entry;
+
+      const changes: Partial<UserPreset> = { updatedAt: Date.now() };
+      if (slotType === "capital") {
+        changes.capital = arr;
+      } else {
+        changes.allied = arr;
+      }
+
+      await db.userPresets.update(presetId, changes);
     },
-    [],
+    [db],
   );
 
-  const clearPreset = useCallback((presetId: string) => {
-    setState((prev) => ({
-      ...prev,
-      presets: prev.presets.map((p) =>
-        p.id === presetId
-          ? {
-              ...p,
-              capital: [null, null, null, null],
-              allied: [null, null, null, null],
-              updatedAt: Date.now(),
-            }
-          : p,
-      ),
-    }));
-  }, []);
+  const clearPreset = useCallback(
+    async (presetId: string) => {
+      await db.userPresets.update(presetId, {
+        capital: [null, null, null, null],
+        allied: [null, null, null, null],
+        updatedAt: Date.now(),
+      });
+    },
+    [db],
+  );
 
   // Met le level de toutes les wonders déjà présentes dans le preset à leur
   // maxLevel respectif, en une seule fois (capital + allied).
-  const maxAllWonders = useCallback((presetId: string) => {
-    setState((prev) => ({
-      ...prev,
-      presets: prev.presets.map((p) => {
-        if (p.id !== presetId) return p;
-        const maxOut = (arr: (WonderPresetEntry | null)[]) =>
-          arr.map((entry) => {
-            if (!entry) return entry;
-            const wonder = WONDERS[entry.code];
-            if (!wonder) return entry;
-            return { ...entry, level: wonder.meta.maxLevel };
-          });
-        return {
-          ...p,
-          capital: maxOut(p.capital),
-          allied: maxOut(p.allied),
-          updatedAt: Date.now(),
-        };
-      }),
-    }));
-  }, []);
+  const maxAllWonders = useCallback(
+    async (presetId: string) => {
+      const preset = await db.userPresets.get(presetId);
+      if (!preset) return;
+      await db.userPresets.update(presetId, {
+        capital: maxOutSlots(preset.capital),
+        allied: maxOutSlots(preset.allied),
+        updatedAt: Date.now(),
+      });
+    },
+    [db],
+  );
 
   const duplicatePreset = useCallback(
-    (id: string) => {
-      const source = presets.find((p) => p.id === id);
+    async (id: string) => {
+      const count = await db.userPresets.count();
+      if (count >= MAX_PRESETS) return;
+      const source = await db.userPresets.get(id);
       if (!source) return;
       const copy: UserPreset = {
         ...source,
@@ -200,14 +177,10 @@ export function useUserPresets() {
         createdAt: Date.now(),
         updatedAt: Date.now(),
       };
-      setState((prev) => {
-        const idx = prev.presets.findIndex((p) => p.id === id);
-        const next = [...prev.presets];
-        next.splice(idx + 1, 0, copy);
-        return { presets: next, activePresetId: copy.id };
-      });
+      await db.userPresets.add(copy);
+      setActivePresetId(copy.id);
     },
-    [presets],
+    [db],
   );
 
   return {
@@ -215,8 +188,7 @@ export function useUserPresets() {
     activePreset,
     activePresetId,
     hasHydrated,
-    setActivePresetId: (id: string | null) =>
-      setState((prev) => ({ ...prev, activePresetId: id })),
+    setActivePresetId,
     addPreset,
     deletePreset,
     renamePreset,
