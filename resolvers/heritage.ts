@@ -128,17 +128,35 @@ export function keeperAmplifierMultiplier(reputationLevel: number): number {
  * permettrait d'en tirer un entier — inventer « arrondi au supérieur » offrirait
  * un ouvrier gratuit dès le rang 8, « à l'inférieur » n'aurait jamais d'effet.
  *
- * On n'amplifie donc pas ces trois-là. `culture_points`, lui, RESTE amplifié :
- * c'est une quantité produite par le bâtiment, exactement ce que la loca vise
- * (seul son affichage est arrondi, cf. `formatBonusValue`).
+ * On n'amplifie donc pas ces trois-là. `culture_points`, lui, était supposé
+ * RESTER amplifié — hypothèse écartée, voir ⚠️ ci-dessous.
  *
  * Le jour où une mesure en jeu montre un compteur discret amplifié, c'est cette
  * seule liste qu'il faut corriger — la règle d'arrondi mesurée avec.
+ *
+ * ⚠️ CONFIRMÉ EN JEU — `culture_points` N'EST PAS AMPLIFIÉ, CONTRAIREMENT À
+ * L'HYPOTHÈSE CI-DESSUS. Vault ATH niveau 30, Gardien rang 6 (« +5% to
+ * production and boosts » affiché sur la carte du Gardien) : la popup
+ * « Améliorations au niveau 30 » du jeu affiche un bonus culturel de 2 420,
+ * exactement la valeur BRUTE de la formule (`200 + 30×niveau +
+ * 4×niveau×max(0, âge−4)` à Late Gothic Era = 2 420), sans les +5% attendus
+ * (2 541). Les trois autres bonus du même niveau (régénération de tentative,
+ * PV d'infanterie, réduction du temps de recrutement) montrent eux un écart
+ * de quelques dixièmes de point cohérent avec un simple arrondi d'affichage
+ * autour de la valeur amplifiée — seule la Culture diffère de la totalité des
+ * +5%, signe qu'elle n'est pas concernée par l'amplificateur.
+ *
+ * `CultureComponentDTO` est un troisième type de composant, distinct de
+ * `ProductionComponentDTO` et `BuildingBoostComponentDTO` que la loca vise
+ * (« production and boosts ») — cette mesure confirme que ce troisième type
+ * en est exclu, malgré `culture_points` qui a l'air d'une production continue
+ * comme une autre.
  */
 export const KEEPER_AMPLIFIER_EXEMPT_TYPES: ReadonlySet<string> = new Set([
   "worker_slots",
   "culture_range",
   "regeneration_cap",
+  "culture_points",
 ]);
 
 /**
