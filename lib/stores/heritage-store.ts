@@ -14,6 +14,7 @@
 // ============================================================
 
 import { useLiveQuery } from "dexie-react-hooks";
+import { useMemo } from "react";
 
 import {
   getHeritageDB,
@@ -36,17 +37,33 @@ export type { UserHeritageVaultEntity };
  * niveaux différents : c'est ce qui faisait « sauter » les nombres à chaque
  * changement de vault. Indistinguable d'un `undefined` sans ce marqueur, car
  * une ligne absente rend elle aussi `undefined`.
+ *
+ * ⚠️ LA FUSION EST MÉMOÏSÉE SUR `result` — ex-crash en prod (« Too many
+ * re-renders », React #301). Sans `useMemo`, ce spread construisait un objet
+ * NEUF à CHAQUE rendu, identique en valeur mais jamais `===` au précédent.
+ * `HeritageVaultContent` (`heritage-vault-view.tsx`) compare pourtant `shown.
+ * owned` par référence pour geler l'affichage le temps qu'un changement de
+ * vault se résolve : un objet qui change d'identité à chaque rendu sans
+ * changer de valeur y redéclenchait un `setShown` à CHAQUE rendu — boucle de
+ * rendu infinie dès qu'un rendu suivant survenait pour une autre raison (ex.
+ * `hydrateBuildingSelectionsStore`). `useLiveQuery` garde `result` stable tant
+ * que Dexie n'a rien réémis (cf. `dexie-react-hooks`) : le mémoïser dessus
+ * suffit à casser la boucle.
  */
 export function useUserHeritageVault(themeId: string): UserHeritageVaultEntity | null {
   const result = useLiveQuery(
     async () => ({ themeId, row: await getHeritageDB().userHeritageVaults.get(themeId) }),
     [themeId],
   );
-  if (result === undefined || result.themeId !== themeId) return null;
   // Fusion sur le défaut, pas un simple `??` : une ligne écrite avant l'ajout
   // d'un champ (ex. `xpProgress`) existe déjà en base sans lui — Dexie la rend
   // telle quelle, sans migration puisque le champ n'est pas indexé.
-  return { ...emptyOwnedHeritageVault(themeId), ...result.row };
+  const merged = useMemo(
+    () => (result === undefined ? null : { ...emptyOwnedHeritageVault(themeId), ...result.row }),
+    [themeId, result],
+  );
+  if (result === undefined || result.themeId !== themeId) return null;
+  return merged;
 }
 
 /** Écrit les champs donnés, en créant la ligne au besoin. */
