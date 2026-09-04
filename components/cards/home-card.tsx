@@ -46,7 +46,7 @@ const cards: CardData[] = [
     title: "Technologies",
     description: "Explore technologies and plan your research path",
     illustration: "/images/technos/kingdom_of_sicily/ks_41.webp",
-    href: "/research-tree",
+    href: "/technologies",
   },
   {
     title: "Wonders",
