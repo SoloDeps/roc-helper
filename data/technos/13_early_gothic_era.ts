@@ -1499,6 +1499,10 @@ export const technos_EG: TechnoData[] = [
           amount: 4200,
           resource: "tertiary_hm",
         },
+        {
+          amount: 1700,
+          resource: "secondary_eg",
+        },
       ],
     },
     allied: "ottoman",

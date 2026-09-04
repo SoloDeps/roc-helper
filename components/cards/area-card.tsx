@@ -14,6 +14,7 @@ import type { HydratedOttomanArea } from "@/lib/db/data-hydration";
 import Image from "next/image";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { trade_post_table } from "@/data/allieds/ottoman/trade_posts";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 interface AreaCardProps {
   area: HydratedOttomanArea;
@@ -47,16 +48,13 @@ export function AreaCard({
     if (!goods?.length) return null;
 
     return goods.map((g, i) => {
-      const match = g.resource.match(
-        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-      );
+      const parsed = parseRankGoodKey(g.resource);
       let goodName = g.resource;
 
-      if (match) {
-        const [, priority, era] = match;
+      if (parsed) {
         const resolvedName = getGoodNameFromPriorityEra(
-          priority,
-          era,
+          parsed.priority,
+          parsed.era,
           userSelections,
         );
         //  Use resolved name if found, otherwise fallback to "default"

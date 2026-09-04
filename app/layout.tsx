@@ -18,10 +18,10 @@ const fontPro = localFont({
 
 export const metadata: Metadata = {
   title: "RoC Helper",
-  description: "Resource calculator and research tree planner for Rise of Cultures",
+  description: "Resource calculator and technology tree planner for Rise of Cultures",
   openGraph: {
     title: "RoC Helper",
-    description: "Resource calculator and research tree planner for Rise of Cultures",
+    description: "Resource calculator and technology tree planner for Rise of Cultures",
     url: "https://roc-helper.com",
     images: [{ url: "https://roc-helper.com/icon1.png" }],
     type: "website",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "RoC Helper",
-    description: "Resource calculator and research tree planner for Rise of Cultures",
+    description: "Resource calculator and technology tree planner for Rise of Cultures",
     images: ["https://roc-helper.com/icon1.png"],
   },
 };

@@ -13,9 +13,9 @@ import {
   computeSynergies,
   computeTagCounts,
   getWonderBoosts,
-  getBonusLabel,
-  formatBonusValue,
-} from "@/lib/wonders-utils";
+} from "@/resolvers/wonders";
+import type { WonderBoostItem } from "@/resolvers/wonders";
+import { getBonusLabel, formatBonusValue, bonusKey } from "@/resolvers/bonus";
 import { WONDERS } from "@/data/wonders/index";
 import type { WonderPresetEntry, MaterialType } from "@/data/wonders/types";
 import { resolveIconPath } from "@/components/wonders/stats-badge";
@@ -291,11 +291,7 @@ interface WonderBoostRow {
   wonderName: string;
   material: MaterialType;
   slotType: "capital" | "allied";
-  boosts: {
-    type: string;
-    icons: [string, string | null];
-    value: number;
-  }[];
+  boosts: WonderBoostItem[];
 }
 
 function WonderBoostSection({ w }: { w: WonderBoostRow }) {
@@ -305,16 +301,16 @@ function WonderBoostSection({ w }: { w: WonderBoostRow }) {
         {w.wonderName}
       </p>
       <div className="space-y-1 pl-1">
-        {w.boosts.map((boost, i) => (
+        {w.boosts.map((boost) => (
           <div
-            key={i}
+            key={bonusKey(boost)}
             className="flex items-center justify-between gap-2 px-2 py-1.5 rounded-md border border-border bg-background h-9"
           >
             <div className="flex items-center gap-2 min-w-0 shrink-0">
               <div className="relative shrink-0 size-6">
                 <img
                   src={resolveIconPath(boost.icons[0])}
-                  alt={getBonusLabel(boost.type)}
+                  alt={getBonusLabel(boost.type, boost.instance)}
                   className="size-6 object-contain"
                 />
                 {boost.icons[1] && (
@@ -326,11 +322,11 @@ function WonderBoostSection({ w }: { w: WonderBoostRow }) {
                 )}
               </div>
               <span className="text-xs font-medium truncate">
-                {getBonusLabel(boost.type)}
+                {getBonusLabel(boost.type, boost.instance)}
               </span>
             </div>
             <span className="text-xs font-semibold tabular-nums shrink-0">
-              {formatBonusValue(boost.type, boost.value)}
+              {formatBonusValue(boost.format, boost.value)}
             </span>
           </div>
         ))}

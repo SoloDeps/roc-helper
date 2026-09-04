@@ -1,4 +1,5 @@
 import { MaterialType } from "@/data/wonders/types";
+import { ERAS, type EraDefinition } from "@/data/config";
 
 // #region TYPES
 export type ItemType = "category" | "subcategory" | "building" | "era";
@@ -29,12 +30,11 @@ export interface Category {
   items?: "@eras";
 }
 
-export interface Era {
-  abbr: string;
-  id: string;
-  name: string;
-  image: string;
-}
+/**
+ * Une ère du jeu.
+ * Alias de EraDefinition — la structure est définie une seule fois dans data/config.ts.
+ */
+export type Era = EraDefinition;
 
 /**
  * Item affichable dans la navigation (UI)
@@ -55,92 +55,11 @@ export interface NavigableItem {
 
 export const FALLBACK_IMAGE = "/images/game_icons/icon_flat_home.webp";
 
-export const ERAS: Era[] = [
-  {
-    abbr: "SA",
-    id: "stone_age",
-    name: "Stone Age",
-    image: "/eras/1_SA_cover.webp",
-  },
-  {
-    abbr: "BA",
-    id: "bronze_age",
-    name: "Bronze Age",
-    image: "/eras/2_BA_cover.webp",
-  },
-  {
-    abbr: "ME",
-    id: "minoan_era",
-    name: "Minoan Era",
-    image: "/eras/3_ME_cover.webp",
-  },
-  {
-    abbr: "CG",
-    id: "classical_greece",
-    name: "Classical Greece",
-    image: "/eras/4_CG_cover.webp",
-  },
-  {
-    abbr: "ER",
-    id: "early_rome",
-    name: "Early Rome",
-    image: "/eras/5_ER_cover.webp",
-  },
-  {
-    abbr: "RE",
-    id: "roman_empire",
-    name: "Roman Empire",
-    image: "/eras/6_RE_cover.webp",
-  },
-  {
-    abbr: "BE",
-    id: "byzantine_era",
-    name: "Byzantine Era",
-    image: "/eras/7_BE_cover.webp",
-  },
-  {
-    abbr: "AF",
-    id: "age_of_the_franks",
-    name: "Age of the Franks",
-    image: "/eras/8_AoF_cover.webp",
-  },
-  {
-    abbr: "FA",
-    id: "feudal_age",
-    name: "Feudal Age",
-    image: "/eras/9_FA_cover.webp",
-  },
-  {
-    abbr: "IE",
-    id: "iberian_era",
-    name: "Iberian Era",
-    image: "/eras/10_IE_cover.webp",
-  },
-  {
-    abbr: "KS",
-    id: "kingdom_of_sicily",
-    name: "Kingdom of Sicily",
-    image: "/eras/11_KoS_cover.webp",
-  },
-  {
-    abbr: "HM",
-    id: "high_middle_ages",
-    name: "High Middle Ages",
-    image: "/eras/12_HMA_cover.webp",
-  },
-  {
-    abbr: "EG",
-    id: "early_gothic_era",
-    name: "Early Gothic Era",
-    image: "/eras/13_EGE_cover.webp",
-  },
-  {
-    abbr: "LG",
-    id: "late_gothic_era",
-    name: "Late Gothic Era",
-    image: "/eras/14_LGE_cover.webp",
-  },
-];
+/**
+ * Les 14 ères du jeu, dans l'ordre chronologique.
+ * Ré-export de la source unique (data/config.ts) — ne pas redéclarer ici.
+ */
+export { ERAS };
 
 export const imagesUrl = {
   home: "/images/game_icons/icon_flat_home.webp",
@@ -149,6 +68,7 @@ export const imagesUrl = {
   museum: "/images/game_icons/icon_flat_museum.webp",
   research: "/images/game_icons/icon_flat_research_points.webp",
   barracks: "/images/game_icons/icon_flat_barracks.webp",
+  cultureBoost: "/images/game_icons/icon_flat_culture_boost.webp",
   cultureSite: "/images/game_icons/icon_flat_cultureSite.webp",
   info: "/images/game_icons/icon_flat_info.webp",
   workshop: "/images/game_icons/icon_flat_workshop.webp",

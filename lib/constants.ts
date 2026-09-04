@@ -1,5 +1,10 @@
-export type Era = (typeof eras)[number];
-export type EraAbbr = (typeof eras)[number]["abbr"];
+import { ERAS, type EraDefinition } from "@/data/config";
+import type { EraCode } from "@/types/shared";
+
+/** Une ère du jeu — alias de EraDefinition (source : data/config.ts). */
+export type Era = EraDefinition;
+/** Code court d'une ère, ex. "LG" — alias de EraCode (source : types/shared.ts). */
+export type EraAbbr = EraCode;
 export type alliedCity =
   | "egypt"
   | "china"
@@ -8,92 +13,11 @@ export type alliedCity =
   | "arabia"
   | "ottoman_empire";
 
-export const eras = [
-  {
-    name: "Stone Age",
-    abbr: "SA",
-    id: "stone_age",
-    image: "/eras/1_SA_cover.webp",
-  },
-  {
-    name: "Bronze Age",
-    abbr: "BA",
-    id: "bronze_age",
-    image: "/eras/2_BA_cover.webp",
-  },
-  {
-    name: "Minoan Era",
-    abbr: "ME",
-    id: "minoan_era",
-    image: "/eras/3_ME_cover.webp",
-  },
-  {
-    name: "Classical Greece",
-    abbr: "CG",
-    id: "classical_greece",
-    image: "/eras/4_CG_cover.webp",
-  },
-  {
-    name: "Early Rome",
-    abbr: "ER",
-    id: "early_rome",
-    image: "/eras/5_ER_cover.webp",
-  },
-  {
-    name: "Roman Empire",
-    abbr: "RE",
-    id: "roman_empire",
-    image: "/eras/6_RE_cover.webp",
-  },
-  {
-    name: "Byzantine Era",
-    abbr: "BE",
-    id: "byzantine_era",
-    image: "/eras/7_BE_cover.webp",
-  },
-  {
-    name: "Age of the Franks",
-    abbr: "AF",
-    id: "age_of_the_franks",
-    image: "/eras/8_AoF_cover.webp",
-  },
-  {
-    name: "Feudal Age",
-    abbr: "FA",
-    id: "feudal_age",
-    image: "/eras/9_FA_cover.webp",
-  },
-  {
-    name: "Iberian Era",
-    abbr: "IE",
-    id: "iberian_era",
-    image: "/eras/10_IE_cover.webp",
-  },
-  {
-    name: "Kingdom of Sicily",
-    abbr: "KS",
-    id: "kingdom_of_sicily",
-    image: "/eras/11_KoS_cover.webp",
-  },
-  {
-    name: "High Middle Ages",
-    abbr: "HM",
-    id: "high_middle_ages",
-    image: "/eras/12_HMA_cover.webp",
-  },
-  {
-    name: "Early Gothic Era",
-    abbr: "EG",
-    id: "early_gothic_era",
-    image: "/eras/13_EGE_cover.webp",
-  },
-  {
-    name: "Late Gothic Era",
-    abbr: "LG",
-    id: "late_gothic_era",
-    image: "/eras/14_LGE_cover.webp",
-  },
-] as const;
+/**
+ * Les 14 ères du jeu, dans l'ordre chronologique.
+ * Ré-export de la source unique (data/config.ts) — ne pas redéclarer ici.
+ */
+export const eras: EraDefinition[] = ERAS;
 
 // ========================================
 // COULEURS - Centralisées
@@ -165,36 +89,6 @@ export const buildingsAbbr = [
 ];
 
 /**
- * Max quantity par ère pour chaque position de workshop capital.
- * Format : { era: [primary, secondary, tertiary] }
- * Tous les workshops d'un même groupe ont les mêmes max_qty.
- *
- * Groupe 0 (BA→RE) : Tailor / Stone Mason / Artisan
- * Groupe 1 (BE→HM) : Scribe / Carpenter / Spice Merchant
- * Groupe 2 (EG→LG) : Jeweler / Alchemist / Glassblower
- */
-export const WORKSHOP_MAX_QTY: Partial<
-  Record<EraAbbr, [number, number, number]>
-> = {
-  // Groupe 0 — max_qty identique pour les 3 workshops
-  BA: [1, 1, 1],
-  ME: [2, 1, 1],
-  CG: [3, 1, 1],
-  ER: [4, 1, 1],
-  RE: [4, 1, 1],
-  // Groupe 1
-  BE: [3, 1, 1],
-  AF: [4, 1, 1],
-  FA: [4, 1, 1],
-  IE: [4, 1, 1],
-  KS: [4, 1, 1],
-  HM: [4, 1, 1],
-  // Groupe 2
-  EG: [3, 1, 1],
-  LG: [4, 1, 1],
-} as const;
-
-/**
  * Ères disponibles pour les workshops capital, dans l'ordre chronologique.
  */
 export const WORKSHOP_ERAS: EraAbbr[] = [
@@ -227,202 +121,256 @@ export const WORKSHOP_ERAS: EraAbbr[] = [
 //   wu_zhu: "/images/thumb/Wu_Zhu.png/32px-Wu_Zhu.png",
 // } as const;
 
+/**
+ * Bien produit par chaque atelier, par ère.
+ *
+ * `key`  — identifiant interne du bien, celui qu'écrivent les fichiers de
+ *          `data/**` et le nom du fichier d'icône. Aligné sur
+ *          `ResourceDefinitionDTO.id` du game design.
+ * `name` — libellé affiché. Il DIVERGE de la clé sur trois biens, parce que le
+ *          jeu lui-même porte deux chaînes : `_Name` (singulier, l'objet) et
+ *          `_TechnologyName` (pluriel, l'arbre de recherche). L'app affiche le
+ *          pluriel pour `elixier` et `embellishment` — on le garde.
+ *
+ * ⚠️ Ne PAS redériver la clé depuis `name` : c'est ce que faisait le code
+ * (`slugify(meta.name)`), et c'est ce qui imposait les alias `secretary_desk` /
+ * `elixirs` / `embellishments`.
+ */
 export const goodsUrlByEra: Record<
   EraAbbr,
-  Record<string, { name: string; url: string }>
+  Record<string, { key: string; name: string; url: string }>
 > = {
-  SA: {
-    tailor: {
-      name: "Wool",
-      url: "/images/thumb/3/34/Wool.png/32px-Wool.png",
-    },
-    stone_mason: {
-      name: "Alabaster Idol",
-      url: "/images/thumb/6/6e/Alabaster_Idol.png/32px-Alabaster_Idol.png",
-    },
-    artisan: {
-      name: "Bronze Bracelet",
-      url: "/images/thumb/3/3c/Bronze_Bracelet.png/32px-Bronze_Bracelet.png",
-    },
-  },
+  // ⚠️ L'Âge de pierre n'a AUCUN bien : le premier atelier du jeu est
+  // `Building_BronzeAge_Workshop_*`, et le game design ne déclare aucune
+  // `ResourceDefinitionDTO` de `resourceType: "good"` en `age: "StoneAge"`.
+  //
+  // Cette entrée dupliquait mot pour mot celle de BA. Comme la résolution
+  // inverse (`getPriorityKeyFromGoodName`) balaye les ères dans l'ordre de
+  // `eras` et retourne la PREMIÈRE correspondance, les trois biens du Bronze
+  // tombaient toujours dans un seau `*_sa` — 60 lignes de coût sur
+  // 10 bâtiments étaient rangées sous l'Âge de pierre.
+  //
+  // Laissée vide plutôt que supprimée : le type est un `Record<EraAbbr, …>`,
+  // et `eras` continue de citer SA. Les deux consommateurs traversent l'objet
+  // vide sans rien trouver, ce qui est le comportement voulu.
+  SA: {},
   BA: {
     tailor: {
+      key: "wool",
       name: "Wool",
       url: "/images/thumb/3/34/Wool.png/32px-Wool.png",
     },
     stone_mason: {
+      key: "alabaster_idol",
       name: "Alabaster Idol",
       url: "/images/thumb/6/6e/Alabaster_Idol.png/32px-Alabaster_Idol.png",
     },
     artisan: {
+      key: "bronze_bracelet",
       name: "Bronze Bracelet",
       url: "/images/thumb/3/3c/Bronze_Bracelet.png/32px-Bronze_Bracelet.png",
     },
   },
   ME: {
     tailor: {
+      key: "linen_shirt",
       name: "Linen Shirt",
       url: "/images/thumb/8/8a/Linen_Shirt.png/32px-Linen_Shirt.png",
     },
     stone_mason: {
+      key: "marble_bust",
       name: "Marble Bust",
       url: "/images/thumb/b/b1/Marble_Bust.png/32px-Marble_Bust.png",
     },
     artisan: {
+      key: "iron_pendant",
       name: "Iron Pendant",
       url: "/images/thumb/6/62/Iron_Pendant.png/32px-Iron_Pendant.png",
     },
   },
   CG: {
     tailor: {
+      key: "toga",
       name: "Toga",
       url: "/images/thumb/a/a3/Toga.png/32px-Toga.png",
     },
     stone_mason: {
+      key: "column",
       name: "Column",
       url: "/images/thumb/5/5e/Column.png/32px-Column.png",
     },
     artisan: {
+      key: "silver_ring",
       name: "Silver Ring",
       url: "/images/thumb/c/cc/Silver_Ring.png/32px-Silver_Ring.png",
     },
   },
   ER: {
     tailor: {
+      key: "tunic",
       name: "Tunic",
       url: "/images/thumb/5/5b/Tunic.png/32px-Tunic.png",
     },
     stone_mason: {
+      key: "stone_tablet",
       name: "Stone Tablet",
       url: "/images/thumb/0/04/Stone_Tablet.png/32px-Stone_Tablet.png",
     },
     artisan: {
+      key: "gold_laurel",
       name: "Gold Laurel",
       url: "/images/thumb/e/e3/Gold_Laurel.png/32px-Gold_Laurel.png",
     },
   },
   RE: {
     tailor: {
+      key: "cape",
       name: "Cape",
       url: "/images/thumb/6/6e/Cape.png/32px-Cape.png",
     },
     stone_mason: {
+      key: "mosaic",
       name: "Mosaic",
       url: "/images/thumb/f/f4/Mosaic.png/32px-Mosaic.png",
     },
     artisan: {
+      key: "goblet",
       name: "Goblet",
       url: "/images/thumb/b/b2/Goblet.png/32px-Goblet.png",
     },
   },
   BE: {
     scribe: {
+      key: "parchment",
       name: "Parchment",
       url: "/images/thumb/4/48/Parchment.png/32px-Parchment.png",
     },
     carpenter: {
+      key: "planks",
       name: "Planks",
       url: "/images/thumb/b/b9/Planks.png/32px-Planks.png",
     },
     spice_merchant: {
+      key: "pepper",
       name: "Pepper",
       url: "/images/thumb/5/50/Pepper.png/32px-Pepper.png",
     },
   },
   AF: {
     scribe: {
+      key: "ink",
       name: "Ink",
       url: "/images/thumb/e/e1/Ink.png/32px-Ink.png",
     },
     carpenter: {
+      key: "cartwheel",
       name: "Cartwheel",
       url: "/images/thumb/c/c2/Cartwheel.png/32px-Cartwheel.png",
     },
     spice_merchant: {
+      key: "salt",
       name: "Salt",
       url: "/images/thumb/7/77/Salt.png/32px-Salt.png",
     },
   },
   FA: {
     scribe: {
+      key: "manuscript",
       name: "Manuscript",
       url: "/images/thumb/7/73/Manuscript.png/32px-Manuscript.png",
     },
     carpenter: {
+      key: "barrel",
       name: "Barrel",
       url: "/images/thumb/a/a1/Barrel.png/32px-Barrel.png",
     },
     spice_merchant: {
+      key: "herbs",
       name: "Herbs",
       url: "/images/thumb/7/79/Herbs.png/32px-Herbs.png",
     },
   },
   IE: {
     scribe: {
+      key: "wax_seal",
       name: "Wax Seal",
       url: "/images/thumb/c/c1/Wax_Seal.png/32px-Wax_Seal.png",
     },
     carpenter: {
+      key: "door",
       name: "Door",
       url: "/images/thumb/3/36/Door.png/32px-Door.png",
     },
     spice_merchant: {
+      key: "saffron",
       name: "Saffron",
       url: "/images/thumb/8/8c/Saffron.png/32px-Saffron.png",
     },
   },
   KS: {
     scribe: {
+      key: "tome",
       name: "Tome",
       url: "/images/thumb/8/8e/Tome.png/32px-Tome.png",
     },
     carpenter: {
+      key: "wardrobe",
       name: "Wardrobe",
       url: "/images/thumb/1/15/Wardrobe.png/32px-Wardrobe.png",
     },
     spice_merchant: {
+      key: "chili",
       name: "Chili",
       url: "/images/thumb/d/de/Chili.png/32px-Chili.png",
     },
   },
   HM: {
     scribe: {
+      key: "grimoire",
       name: "Grimoire",
       url: "/images/thumb/2/2a/Grimoire.png/32px-Grimoire.png",
     },
     carpenter: {
+      key: "secretary",
       name: "Secretary Desk",
       url: "/images/thumb/8/85/Secretary_Desk.png/32px-Secretary_Desk.png",
     },
     spice_merchant: {
+      key: "cinnamon",
       name: "Cinnamon",
       url: "/images/thumb/1/1b/Cinnamon.png/32px-Cinnamon.png",
     },
   },
   EG: {
     jeweler: {
+      key: "fine_jewelry",
       name: "Fine Jewelry",
       url: "/images/thumb/a/af/Fine_Jewelry.png/32px-Fine_Jewelry.png",
     },
     alchemist: {
+      key: "ointment",
       name: "Ointment",
       url: "/images/thumb/5/5c/Ointment.png/32px-Ointment.png",
     },
     glassblower: {
+      key: "lead_glass",
       name: "Lead Glass",
       url: "/images/thumb/e/e2/Lead_Glass.png/32px-Lead_Glass.png",
     },
   },
   LG: {
     jeweler: {
+      key: "embellishment",
       name: "Embellishments",
       url: "/images/thumb/a/af/Embellishments.png/32px-Embellishments.png",
     },
     alchemist: {
+      key: "elixier",
       name: "Elixirs",
       url: "/images/thumb/5/5c/Elixirs.png/32px-Elixirs.png",
     },
     glassblower: {
+      key: "stained_glass",
       name: "Stained Glass",
       url: "/images/thumb/e/e2/Stained_Glass.png/32px-Stained_Glass.png",
     },
@@ -432,6 +380,20 @@ export const goodsUrlByEra: Record<
 // ========================================
 // CATÉGORISATION DES RESSOURCES
 // ========================================
+
+/**
+ * Clé de bien → son entrée d'affichage (`key`, `name`, `url`).
+ *
+ * Dérivé de `goodsUrlByEra`, jamais redéclaré. Permet de retrouver le libellé
+ * d'un bien à partir de sa seule clé, sans passer par l'atelier producteur —
+ * utile quand le joueur n'a pas classé ses ateliers.
+ */
+export const GOOD_META_BY_KEY: Record<string, { key: string; name: string; url: string }> =
+  Object.fromEntries(
+    Object.values(goodsUrlByEra).flatMap((era) =>
+      Object.values(era).map((meta) => [meta.key, meta]),
+    ),
+  );
 
 // Priorités des goods par ère (primary, secondary, tertiary)
 export const PRIORITY_TYPES = ["primary", "secondary", "tertiary"] as const;
@@ -445,13 +407,9 @@ export function makePriorityKey(priority: PriorityType, era: EraAbbr): string {
   return `${priority}_${era.toLowerCase()}`;
 }
 
-/**
- * Vérifier si une clé est au format priority_era
- * Accepte: Primary_CG, primary_cg, SECONDARY_BA, etc.
- */
-export function isPriorityGoodKey(key: string): boolean {
-  return /^(primary|secondary|tertiary)_[a-z]{2}$/i.test(key);
-}
+// Le contrat « clé au format priority_era » vit désormais dans
+// `resolvers/goods-keys.ts` (`isRankGoodKey` / `parseRankGoodKey`), seul
+// endroit où la forme d'une clé de rang est décrite.
 
 // Mapping des goods par civilisation pour le regroupement des other goods
 export const goodsByCivilization: Record<
@@ -607,209 +565,6 @@ export const skipBuildingLimit = [
   "large_culture_site",
   "ottoman_empire_ship",
 ];
-
-export const limitCapitalBuildingsByEra: Record<
-  EraAbbr,
-  Record<string, number>
-> = {
-  SA: {
-    domestic_farm: 2,
-    rural_farm: 3,
-    small_home: 7,
-    compact_culture_site: 4,
-    moderate_culture_site: 2,
-    infantry_barracks: 2,
-  },
-  BA: {
-    domestic_farm: 3,
-    rural_farm: 4,
-    small_home: 12,
-    average_home: 2,
-    little_culture_site: 3,
-    compact_culture_site: 5,
-    moderate_culture_site: 2,
-    infantry_barracks: 2,
-    workshops: 1,
-  },
-  ME: {
-    domestic_farm: 4,
-    rural_farm: 5,
-    small_home: 14,
-    average_home: 4,
-    little_culture_site: 4,
-    compact_culture_site: 6,
-    moderate_culture_site: 3,
-    infantry_barracks: 2,
-    workshops: 2,
-  },
-  CG: {
-    domestic_farm: 5,
-    rural_farm: 7,
-    small_home: 18,
-    average_home: 5,
-    little_culture_site: 4,
-    compact_culture_site: 7,
-    moderate_culture_site: 3,
-    infantry_barracks: 2,
-    workshops: 3,
-  },
-  ER: {
-    domestic_farm: 6,
-    rural_farm: 8,
-    small_home: 20,
-    average_home: 6,
-    little_culture_site: 5,
-    compact_culture_site: 8,
-    moderate_culture_site: 3,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  RE: {
-    domestic_farm: 7,
-    rural_farm: 9,
-    small_home: 22,
-    average_home: 7,
-    little_culture_site: 6,
-    compact_culture_site: 8,
-    moderate_culture_site: 4,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  BE: {
-    domestic_farm: 8,
-    rural_farm: 9,
-    small_home: 24,
-    average_home: 8,
-    little_culture_site: 7,
-    compact_culture_site: 9,
-    moderate_culture_site: 4,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  AF: {
-    domestic_farm: 8,
-    rural_farm: 10,
-    small_home: 25,
-    average_home: 9,
-    little_culture_site: 7,
-    compact_culture_site: 9,
-    moderate_culture_site: 4,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  FA: {
-    domestic_farm: 9,
-    rural_farm: 10,
-    small_home: 26,
-    average_home: 10,
-    little_culture_site: 7,
-    compact_culture_site: 9,
-    moderate_culture_site: 4,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  IE: {
-    domestic_farm: 9,
-    rural_farm: 11,
-    small_home: 27,
-    average_home: 11,
-    little_culture_site: 7,
-    compact_culture_site: 9,
-    moderate_culture_site: 4,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  KS: {
-    domestic_farm: 10,
-    rural_farm: 11,
-    small_home: 28,
-    average_home: 12,
-    little_culture_site: 7,
-    compact_culture_site: 9,
-    moderate_culture_site: 5,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  HM: {
-    domestic_farm: 10,
-    rural_farm: 12,
-    small_home: 29,
-    average_home: 13,
-    little_culture_site: 8,
-    compact_culture_site: 9,
-    moderate_culture_site: 5,
-    infantry_barracks: 2,
-    workshops: 4,
-  },
-  EG: {
-    domestic_farm: 11,
-    rural_farm: 13,
-    small_home: 30,
-    average_home: 14,
-    little_culture_site: 9,
-    compact_culture_site: 9,
-    moderate_culture_site: 6,
-    infantry_barracks: 2,
-    workshops: 3,
-    shipyard: 9,
-    seafarer_house: 14,
-    common_warehouse: 8,
-  },
-  LG: {
-    domestic_farm: 11,
-    rural_farm: 13,
-    small_home: 31,
-    average_home: 15,
-    little_culture_site: 10,
-    compact_culture_site: 9,
-    moderate_culture_site: 6,
-    infantry_barracks: 2,
-    workshops: 3,
-    shipyard: 13,
-    seafarer_house: 18,
-    common_warehouse: 12,
-    lighthouse: 5,
-    pier: 5,
-  },
-};
-
-// prettier-ignore
-export const limitLuxuriousBuildingsByEra: Record<
-  EraAbbr,
-  Record<string, number>
-> = {
-  SA: { luxurious_home: 2, luxurious_farm: 1, luxurious_culture_site: 2 },
-  BA: { luxurious_home: 4, luxurious_farm: 3, luxurious_culture_site: 2 },
-  ME: { luxurious_home: 5, luxurious_farm: 4, luxurious_culture_site: 3 },
-  CG: { luxurious_home: 6, luxurious_farm: 4, luxurious_culture_site: 4 },
-  ER: { luxurious_home: 7, luxurious_farm: 5, luxurious_culture_site: 5 },
-  RE: { luxurious_home: 8, luxurious_farm: 6, luxurious_culture_site: 6 },
-  BE: { luxurious_home: 9, luxurious_farm: 7, luxurious_culture_site: 6 },
-  AF: { luxurious_home: 9, luxurious_farm: 7, luxurious_culture_site: 7 },
-  FA: { luxurious_home: 9, luxurious_farm: 7, luxurious_culture_site: 7 },
-  IE: { luxurious_home: 10, luxurious_farm: 8, luxurious_culture_site: 7 },
-  KS: { luxurious_home: 11, luxurious_farm: 8, luxurious_culture_site: 8 },
-  HM: { luxurious_home: 12, luxurious_farm: 8, luxurious_culture_site: 8 },
-  EG: { luxurious_home: 12, luxurious_farm: 8, luxurious_culture_site: 8, luxurious_seafarer_house: 2, large_warehouse: 2 },
-  LG: { luxurious_home: 12, luxurious_farm: 8, luxurious_culture_site: 8, luxurious_seafarer_house: 2, large_warehouse: 2 },
-};
-
-// Merge CapitalBuildings and LuxuriousBuildings
-export const limitAllBuildingsByEra: Record<
-  EraAbbr,
-  Record<string, number>
-> = Object.fromEntries(
-  Object.keys({
-    ...limitCapitalBuildingsByEra,
-    ...limitLuxuriousBuildingsByEra,
-  }).map((era) => [
-    era,
-    {
-      ...limitCapitalBuildingsByEra[era as EraAbbr],
-      ...limitLuxuriousBuildingsByEra[era as EraAbbr],
-    },
-  ]),
-) as Record<EraAbbr, Record<string, number>>;
 
 export const limitAlliedBuildingsByEra: Record<
   alliedCity,

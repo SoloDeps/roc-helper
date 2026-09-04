@@ -17,15 +17,15 @@ export const jewelerWorkshop: BuildingData = {
         goods: [
           {
             amount: 5500,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 5500,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 5500,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -40,15 +40,15 @@ export const jewelerWorkshop: BuildingData = {
         goods: [
           {
             amount: 5500,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 5500,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 5500,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },
@@ -58,15 +58,15 @@ export const jewelerWorkshop: BuildingData = {
         goods: [
           {
             amount: 3000,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 3000,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 3000,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },

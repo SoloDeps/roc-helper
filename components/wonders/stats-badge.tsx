@@ -19,8 +19,10 @@ const ICON_PATH_OVERRIDES: Record<string, string> = {
   food: "/images/goods/food.webp",
   research: "/images/goods/research_points.webp",
   mead: "/images/goods/mead.webp",
-  chest_good: "/images/icons/icon_chest_good.webp",
-  mystery_chest: "/images/icons/icon_mystery_chest_gold.webp",
+  // chests — tous les visuels de coffre vivent sous /images/chests/, quel que
+  // soit le domaine qui les affiche (merveilles, campagne, Heritage Vault).
+  chest_good: "/images/chests/icon_chest_good.webp",
+  mystery_chest: "/images/chests/icon_mystery_chest_gold.webp",
   // game_icons
   capital_worker: "/images/game_icons/icon_workers_capital.webp",
   arabia_worker: "/images/icons/icon_workers_city_arabia.webp",
@@ -53,11 +55,16 @@ const FALLBACK_SRC = "/images/goods/default.webp";
 // ─── Fallback-aware image ─────────────────────────────────────────────────────
 //
 // Owns its own error state so it can swap to FALLBACK_SRC on load failure.
-// Initial src comes from a lazy useState initializer — no useEffect needed,
-// so there are no cascading renders (avoids the ESLint
-// "Calling setState synchronously within an effect" warning).
+// `prevSrc` recalcule `imgSrc` PENDANT le rendu quand `src` change — motif
+// « adjusting state when a prop changes », pas un effet : un composant qui
+// vit assez longtemps pour voir `src` changer (une icône dont l'identité
+// dépend d'un choix du joueur, ex. le classement d'ateliers du Heritage
+// Vault) doit reprendre l'erreur à zéro plutôt que de garder l'ancienne
+// image ou un état d'erreur qui ne correspond plus à la nouvelle URL.
+// Un `useState(src)` seul le figeait au premier montage : correct tant que
+// `src` ne changeait jamais pour une même instance, faux dès qu'il change.
 
-interface FallbackImageProps {
+export interface FallbackImageProps {
   src: string;
   alt: string;
   width: number;
@@ -66,7 +73,7 @@ interface FallbackImageProps {
   ariaHidden?: boolean;
 }
 
-const FallbackImage = memo(function FallbackImage({
+export const FallbackImage = memo(function FallbackImage({
   src,
   alt,
   width,
@@ -75,6 +82,11 @@ const FallbackImage = memo(function FallbackImage({
   ariaHidden,
 }: FallbackImageProps) {
   const [imgSrc, setImgSrc] = useState(src);
+  const [prevSrc, setPrevSrc] = useState(src);
+  if (src !== prevSrc) {
+    setPrevSrc(src);
+    setImgSrc(src);
+  }
   const handleError = useCallback(() => setImgSrc(FALLBACK_SRC), []);
 
   return (

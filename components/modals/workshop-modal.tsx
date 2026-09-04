@@ -9,6 +9,7 @@ import { buildingsAbbr } from "@/lib/constants";
 import { getGoodsImg } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useBuildingSelectionsStore } from "@/lib/stores/building-selections-store";
 
 interface WorkshopModalProps {
   variant?: "default" | "outline" | "ghost";
@@ -56,6 +57,11 @@ function saveSelections(selections: BuildingSelections) {
   } catch (error) {
     console.error("Failed to save selections:", error);
   }
+
+  // Second canal, synchrone : voir lib/stores/building-selections-store.ts.
+  // N'affecte pas la ligne ci-dessus, qui reste la seule que lisent
+  // Calculator/Technologies/Wonders.
+  useBuildingSelectionsStore.getState().setSelections(selections);
 }
 
 // ============================================================================
@@ -336,11 +342,48 @@ export function WorkshopModal({
   btnClass,
 }: WorkshopModalProps) {
   const [open, setOpen] = useState(false);
-  //  Lu une seule fois au mount via initializer lazy — pas de lecture localStorage à chaque render
-  const [showPulse, setShowPulse] = useState(
-    () =>
-      typeof window !== "undefined" && !localStorage.getItem(WORKSHOP_SEEN_KEY),
-  );
+  /**
+   * ⚠️ LU APRÈS LE MONTAGE, JAMAIS AU PREMIER RENDU — sinon l'hydratation casse.
+   *
+   * L'initializer lisait `localStorage` derrière un `typeof window`. Les deux
+   * rendus ne pouvaient alors PAS coïncider : côté serveur `window` n'existe
+   * pas, `showPulse` valait `false` et le HTML ne portait aucune pastille ;
+   * côté client la clé était absente, `showPulse` valait `true` et la pastille
+   * apparaissait. React comparait deux arbres différents et jetait
+   * « Hydration failed », sur TOUTE page portant ce bouton.
+   *
+   * Le `typeof window` ne protégeait donc de rien : il ne faisait qu'ancrer la
+   * divergence. L'état part maintenant de ce que le serveur rend (`false`), et
+   * l'effet — qui ne s'exécute qu'au client — l'allume si la pastille n'a jamais
+   * été vue. Un rendu de plus, pas de saut visible : la pastille est une
+   * incitation, pas une information qu'on attend.
+   *
+   * ⚠️ `queueMicrotask` — l'idiome déjà employé par `useSessionStorageState` et
+   * par le garde `mounted` de `HeritageVaultView`, pour la même raison : un
+   * `setState` synchrone dans un effet déclenche un rendu en cascade pendant la
+   * phase de commit, ce que `react-hooks/set-state-in-effect` refuse à juste
+   * titre. Différer d'une microtâche sort la mise à jour de cette phase sans
+   * rien retarder de perceptible.
+   *
+   * Le `try/catch` suit la même règle que `useSessionStorageState` :
+   * `localStorage` lève en navigation privée stricte, et un effet qui jette
+   * casserait le bouton entier pour un ornement.
+   */
+  const [showPulse, setShowPulse] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (cancelled) return;
+      try {
+        if (localStorage.getItem(WORKSHOP_SEEN_KEY) === null) setShowPulse(true);
+      } catch {
+        // Stockage indisponible : pas de pastille, le bouton reste utilisable.
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleOpenChange = (val: boolean) => {
     if (val && showPulse) {

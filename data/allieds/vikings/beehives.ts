@@ -11,21 +11,21 @@ export const vikingBeehive: BuildingData = {
     {
       level: 1,
       era: "FA",
-      max_qty: 21,
+      max_qty: 11,
       construction: {
         pennies: 2000,
         goods: [
           {
             amount: 590,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 590,
-            resource: "salt",
+            resource: "tertiary_af",
           },
           {
             amount: 590,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
         ],
       },
@@ -33,7 +33,7 @@ export const vikingBeehive: BuildingData = {
     {
       level: 2,
       era: "FA",
-      max_qty: 21,
+      max_qty: 11,
       upgrade: {
         pennies: 15000,
         goods: [
@@ -59,7 +59,7 @@ export const vikingBeehive: BuildingData = {
     {
       level: 3,
       era: "FA",
-      max_qty: 21,
+      max_qty: 11,
       upgrade: {
         pennies: 48000,
         goods: [

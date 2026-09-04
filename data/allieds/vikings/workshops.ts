@@ -11,21 +11,21 @@ export const vikingTavern: BuildingData = {
     {
       level: 1,
       era: "FA",
-      max_qty: 9,
+      max_qty: 5,
       construction: {
         pennies: 4000,
         goods: [
           {
             amount: 885,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 885,
-            resource: "salt",
+            resource: "tertiary_af",
           },
           {
             amount: 885,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
         ],
       },
@@ -39,15 +39,15 @@ export const vikingTavern: BuildingData = {
         goods: [
           {
             amount: 2720,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 2720,
-            resource: "salt",
+            resource: "tertiary_af",
           },
           {
             amount: 2720,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
         ],
       },
@@ -72,15 +72,15 @@ export const vikingExpeditionPier: BuildingData = {
         goods: [
           {
             amount: 1770,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 1770,
-            resource: "salt",
+            resource: "tertiary_af",
           },
           {
             amount: 1770,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
         ],
       },
@@ -124,7 +124,7 @@ export const vikingLuxuriousSailorPort: BuildingData = {
     {
       level: 1,
       era: "FA",
-      max_qty: 4,
+      max_qty: 2,
       construction: {
         gems: 890,
       },

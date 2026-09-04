@@ -14,6 +14,22 @@ import {
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import Image from "next/image";
 
+/**
+ * Plafond de hauteur du popup desktop : une dizaine d'options, puis on scrolle
+ * DEDANS.
+ *
+ * Par défaut, `SelectContent` monte jusqu'à
+ * `--radix-select-content-available-height`, c'est-à-dire toute la hauteur
+ * libre de la fenêtre : une liste de 60 niveaux s'étirait du haut au bas de
+ * l'écran pour trois valeurs utiles. Le tiroir mobile, lui, était déjà borné
+ * (`max-h-[50vh]`) — c'est le desktop qui manquait.
+ *
+ * `max-h-80` = 320 px ≈ 10 options de 32 px. À passer via `contentClassName`,
+ * pas appliqué d'office : les listes courtes (une ère, deux choix) n'ont rien
+ * à y gagner, et ce composant sert dans toute l'application.
+ */
+export const SELECT_TEN_OPTIONS = "max-h-80";
+
 interface SelectOption {
   value: string;
   label: string;
@@ -35,6 +51,8 @@ interface ResponsiveSelectProps {
   rotateChevron?: boolean;
   nested?: boolean;
   drawerClassName?: string;
+  /** Classes du POPUP desktop — cf. `SELECT_TEN_OPTIONS` pour plafonner sa hauteur. */
+  contentClassName?: string;
   // ✅ CORRIGÉ : alignItemWithTrigger utilise toujours popper en interne
   // car item-aligned casse dans les modales Radix (bug portal/focus-scope)
   alignItemWithTrigger?: boolean;
@@ -114,6 +132,7 @@ export function ResponsiveSelect({
   alignItemWithTrigger = false,
   nested = false,
   drawerClassName,
+  contentClassName,
 }: ResponsiveSelectProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [open, setOpen] = React.useState(false);
@@ -175,11 +194,11 @@ export function ResponsiveSelect({
               sideOffset={alignItemWithTrigger ? 0 : 4}
               align={alignItemWithTrigger ? "start" : "center"}
               // ✅ Contraindre la largeur pour coller au trigger quand aligné
-              className={
-                alignItemWithTrigger
-                  ? "w-[var(--radix-select-trigger-width)] max-h-[min(var(--radix-select-content-available-height),300px)]"
-                  : undefined
-              }
+              className={cn(
+                alignItemWithTrigger &&
+                  "w-[var(--radix-select-trigger-width)] max-h-[min(var(--radix-select-content-available-height),300px)]",
+                contentClassName,
+              )}
             >
               {options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>

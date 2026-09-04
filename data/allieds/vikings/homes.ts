@@ -11,21 +11,21 @@ export const vikingWorkerHome: BuildingData = {
     {
       level: 1,
       era: "FA",
-      max_qty: 30,
+      max_qty: 15,
       construction: {
         pennies: 1000,
         goods: [
           {
             amount: 235,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 235,
-            resource: "salt",
+            resource: "tertiary_af",
           },
           {
             amount: 235,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
         ],
       },
@@ -33,7 +33,7 @@ export const vikingWorkerHome: BuildingData = {
     {
       level: 2,
       era: "FA",
-      max_qty: 30,
+      max_qty: 15,
       upgrade: {
         pennies: 5000,
         goods: [
@@ -59,7 +59,7 @@ export const vikingWorkerHome: BuildingData = {
     {
       level: 3,
       era: "FA",
-      max_qty: 30,
+      max_qty: 15,
       upgrade: {
         pennies: 12000,
         goods: [
@@ -170,21 +170,21 @@ export const vikingSailorHome: BuildingData = {
     {
       level: 1,
       era: "FA",
-      max_qty: 20,
+      max_qty: 10,
       construction: {
         pennies: 3500,
         goods: [
           {
             amount: 470,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 470,
-            resource: "salt",
+            resource: "tertiary_af",
           },
           {
             amount: 470,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
         ],
       },
@@ -192,7 +192,7 @@ export const vikingSailorHome: BuildingData = {
     {
       level: 2,
       era: "FA",
-      max_qty: 20,
+      max_qty: 10,
       upgrade: {
         pennies: 15000,
         goods: [
@@ -218,7 +218,7 @@ export const vikingSailorHome: BuildingData = {
     {
       level: 3,
       era: "FA",
-      max_qty: 20,
+      max_qty: 10,
       upgrade: {
         pennies: 42000,
         goods: [
@@ -329,7 +329,7 @@ export const vikingLuxuriousHome: BuildingData = {
     {
       level: 3,
       era: "FA",
-      max_qty: 10,
+      max_qty: 5,
       construction: {
         gems: 990,
       },

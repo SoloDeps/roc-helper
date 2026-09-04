@@ -18,7 +18,7 @@ import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn, formatNumber } from "@/lib/utils";
-import type { Wonder, MaterialType } from "@/data/wonders/types";
+import type { Wonder, MaterialType, BonusFormat } from "@/data/wonders/types";
 
 import {
   WONDER_IMAGE_MAP,
@@ -36,11 +36,12 @@ import { getItemIconLocal, getGoodNameFromPriorityEra } from "@/lib/utils";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
 import { ResourceBadge } from "../items/resource-badge";
 import { StatsBadge } from "./stats-badge";
-import { getBonusLabel, formatBonusValue } from "@/lib/wonders-utils";
+import { getBonusLabel, formatBonusValue, bonusKey } from "@/resolvers/bonus";
 import { ResponsiveSelect } from "../modals/responsive-select";
 import { Badge } from "../ui/badge";
 import { MATERIAL_ICONS } from "@/lib/catalog";
 import Link from "next/link";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 // ─── Icon resolution ───────────────────────────────────────────────────────────
 
@@ -147,6 +148,9 @@ interface RangeTotals {
 interface BonusDelta {
   type: string;
   icons: [string, string | null];
+  format: BonusFormat;
+  /** Rank among this wonder's bonuses of the same `type` — drives label + React key. */
+  instance: number;
   baseValue: number;
   finalValue: number;
   perLevel: { level: number; value: number }[];
@@ -248,6 +252,8 @@ function computeBonusDeltas(
     return {
       type: bonus.type,
       icons: bonus.icons as [string, string | null],
+      format: bonus.format,
+      instance: bonus.instance,
       baseValue,
       finalValue,
       perLevel,
@@ -262,12 +268,20 @@ function getActiveBonusDeltas(deltas: BonusDelta[]): BonusDelta[] {
 function getBonusGainsAtLevel(
   wonder: Wonder,
   level: number,
-): { type: string; icons: [string, string | null]; delta: number }[] {
+): {
+  type: string;
+  icons: [string, string | null];
+  format: BonusFormat;
+  instance: number;
+  delta: number;
+}[] {
   if (level <= 1) {
     return wonder.bonuses
       .map((b) => ({
         type: b.type,
         icons: b.icons as [string, string | null],
+        format: b.format,
+        instance: b.instance,
         delta: b.values[0] ?? 0,
       }))
       .filter((b) => b.delta !== 0);
@@ -280,13 +294,17 @@ function getBonusGainsAtLevel(
     .map((b) => ({
       type: b.type,
       icons: b.icons as [string, string | null],
+      format: b.format,
+      instance: b.instance,
       prevVal: b.values[prev] ?? 0,
       currVal: b.values[curr] ?? 0,
     }))
     .filter((b) => b.currVal !== b.prevVal)
-    .map(({ type, icons, prevVal, currVal }) => ({
+    .map(({ type, icons, format, instance, prevVal, currVal }) => ({
       type,
       icons,
+      format,
+      instance,
       // delta = bonus gained at this specific level (e.g. +1.5%, not +13.5% cumulative)
       delta: currVal - prevVal,
     }));
@@ -295,11 +313,11 @@ function getBonusGainsAtLevel(
 // ─── Goods resolution ────────────────────────────────────────────────────────
 
 function resolveGoodsIcon(iconKey: string, userSelections: string[][]): string {
-  const m = iconKey.match(/^(primary|secondary|tertiary)_([a-z]+)$/i);
-  if (m) {
+  const parsed = parseRankGoodKey(iconKey);
+  if (parsed) {
     const resolvedName = getGoodNameFromPriorityEra(
-      m[1],
-      m[2].toUpperCase(),
+      parsed.priority,
+      parsed.era,
       userSelections,
     );
     return getItemIconLocal(resolvedName || "default");
@@ -376,12 +394,12 @@ function LevelCostRow({
         )} */}
 
         {/* StatsBadges — same grid columns as resources */}
-        {bonusGains.map((b, i) => (
+        {bonusGains.map((b) => (
           <StatsBadge
-            key={i}
+            key={bonusKey(b)}
             icons={b.icons}
-            value={`${formatBonusValue(b.type, b.delta)}`}
-            alt={getBonusLabel(b.type)}
+            value={`${formatBonusValue(b.format, b.delta)}`}
+            alt={getBonusLabel(b.type, b.instance)}
           />
         ))}
       </div>
@@ -497,14 +515,14 @@ function BonusSummaryCard({
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5">
         {deltas.map((delta) => {
           const gained = delta.finalValue - delta.baseValue;
-          const formatted = formatBonusValue(delta.type, gained);
+          const formatted = formatBonusValue(delta.format, gained);
 
           return (
             <StatsBadge
-              key={delta.type}
+              key={bonusKey(delta)}
               icons={delta.icons}
               value={formatted}
-              alt={getBonusLabel(delta.type)}
+              alt={getBonusLabel(delta.type, delta.instance)}
             />
           );
         })}
@@ -700,15 +718,15 @@ function WonderHeader({
         {/* Bonus badges at current level — grid so they align with resources */}
         {currentLevel !== undefined && currentLevel > 0 ? (
           <div className="grid grid-cols-3 gap-1 mt-0.5">
-            {wonder.bonuses.map((b, i) => {
+            {wonder.bonuses.map((b) => {
               const val = b.values[currentLevel - 1] ?? 0;
               if (val === 0) return null;
               return (
                 <StatsBadge
-                  key={i}
+                  key={bonusKey(b)}
                   icons={b.icons as [string, string | null]}
-                  value={formatBonusValue(b.type, val)}
-                  alt={getBonusLabel(b.type)}
+                  value={formatBonusValue(b.format, val)}
+                  alt={getBonusLabel(b.type, b.instance)}
                 />
               );
             })}

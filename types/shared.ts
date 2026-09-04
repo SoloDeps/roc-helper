@@ -65,6 +65,11 @@ export interface BuildingData {
   category: string;
   subcategory: string;
   imageName: string;
+  /** `BuildingDefinition.type` du game design (`home`, `farm`, `evolving`…). */
+  buildingType?: string;
+  /** Empreinte au sol en cases, constante sur toute la chaîne d'upgrade. */
+  width?: number;
+  height?: number;
   levels: BuildingLevel[]; // TOUS les niveaux, même 40+
 }
 

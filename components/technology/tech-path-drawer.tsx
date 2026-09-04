@@ -11,6 +11,7 @@ import {
 } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 interface TechPathDrawerProps {
   open: boolean;
@@ -58,13 +59,12 @@ export function TechPathDrawer({
   }, [pathTechs, toTech?.id]);
 
   const goodsBadges = totalGoods.map((g, i) => {
-    const match = g.resource.match(
-      /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-    );
+    const parsed = parseRankGoodKey(g.resource);
     let goodName = g.resource;
-    if (match) {
-      const [, p, e] = match;
-      goodName = getGoodNameFromPriorityEra(p, e, userSelections) || "default";
+    if (parsed) {
+      goodName =
+        getGoodNameFromPriorityEra(parsed.priority, parsed.era, userSelections) ||
+        "default";
     }
     return (
       <ResourceBadge

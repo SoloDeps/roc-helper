@@ -17,15 +17,15 @@ export const commonWarehouse: BuildingData = {
         goods: [
           {
             amount: 1500,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 1500,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 1500,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -36,19 +36,19 @@ export const commonWarehouse: BuildingData = {
       max_qty: 13,
       construction: {
         coins: 1000000,
+        aspers: 30000,
         goods: [
-          { amount: 30000, resource: 'aspers' },
           {
             amount: 1500,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 1500,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 1500,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },

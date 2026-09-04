@@ -16,12 +16,13 @@ const leftNavLinks = [
   { href: "/calculator", label: "Calculator", external: false, icon: null },
   { href: "/campaign", label: "Campaign", external: false, icon: null },
   {
-    href: "/research-tree",
-    label: "Research Tree",
+    href: "/technologies",
+    label: "Technologies",
     external: false,
     icon: null,
   },
   { href: "/wonders", label: "Wonders", external: false, icon: null },
+  { href: "/vault", label: "Vault", external: false, icon: null },
 ];
 
 const rightNavLinks = [

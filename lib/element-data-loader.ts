@@ -1,5 +1,6 @@
 import type { BuildingData } from "@/types/shared";
 import { ELEMENT_DATA_REGISTRY } from "@/data/registry";
+import { DEFAULT_MAX_QTY } from "@/data/config";
 import { ERAS } from "./catalog";
 
 // Get element data by catalog ID
@@ -15,8 +16,9 @@ export function getBuildingData(elementId: string): BuildingData | null {
   return null;
 }
 
-// Créer le mapping une seule fois
-const ERA_ORDER = Object.fromEntries(
+// Index de tri abbr → position chronologique, dérivé de ERAS (source unique).
+// Nommé distinctement de ERA_ORDER (data/config.ts), qui est la liste ordonnée.
+const ERA_INDEX_BY_ABBR = Object.fromEntries(
   ERAS.map((era, index) => [era.abbr, index]),
 );
 
@@ -26,7 +28,7 @@ export function getAvailableEras(data: BuildingData): string[] {
   const eras = [...new Set(data.levels.map((l) => l.era))];
 
   return eras.sort((a, b) => {
-    return (ERA_ORDER[a] ?? 999) - (ERA_ORDER[b] ?? 999);
+    return (ERA_INDEX_BY_ABBR[a] ?? 999) - (ERA_INDEX_BY_ABBR[b] ?? 999);
   });
 }
 
@@ -50,69 +52,29 @@ export function getLevelsForEraAndType(
     .map((l) => ({
       level: l.level,
       costs: l[type],
-      maxQty: l.max_qty || 40,
+      maxQty: l.max_qty || DEFAULT_MAX_QTY,
     }))
     .sort((a, b) => a.level - b.level);
 }
 
-// Calculate total costs for selected levels
-export function calculateTotalCosts(
-  data: BuildingData,
-  selectedLevels: number[],
-  quantity: number,
-  buildingType: "construction" | "upgrade",
-): {
-  resources: Record<string, number>;
-  goods: Array<{ type: string; amount: number }>;
-} {
-  const resources: Record<string, number> = {};
-  const goodsMap = new Map<string, number>();
-
-  if (!data?.levels) {
-    return { resources, goods: [] };
-  }
-
-  selectedLevels.forEach((levelNum) => {
-    const levelData = data.levels.find((l) => l.level === levelNum);
-    if (!levelData) return;
-
-    const costs = levelData[buildingType];
-    if (!costs) return;
-
-    Object.entries(costs).forEach(([key, value]) => {
-      if (key === "goods" && Array.isArray(value)) {
-        value.forEach((g: any) => {
-          const existing = goodsMap.get(g.resource);
-          goodsMap.set(g.resource, (existing || 0) + g.amount * quantity);
-        });
-      } else if (typeof value === "number") {
-        resources[key] = (resources[key] || 0) + value * quantity;
-      }
-    });
-  });
-
-  const goods = Array.from(goodsMap.entries()).map(([type, amount]) => ({
-    type,
-    amount,
-  }));
-
-  return { resources, goods };
-}
+// L'agrégation de coûts vit désormais dans `resolvers/costs.ts` (`sumCosts`).
+// `calculateTotalCosts` était exportée ici sans aucun importeur, et perdait
+// silencieusement les ressources d'un coût imbriqué `{ resources, goods }`.
 
 // Get max quantity for an element in a specific era
 export function getMaxQuantity(data: BuildingData, era: string): number {
-  if (!data?.levels) return 40;
+  if (!data?.levels) return DEFAULT_MAX_QTY;
 
   const eraLevels = data.levels.filter((l) => l.era === era);
-  if (eraLevels.length === 0) return 40;
+  if (eraLevels.length === 0) return DEFAULT_MAX_QTY;
 
   // Ne conserver que les max_qty explicitement définis pour ne pas
-  // polluer Math.max avec le fallback 40 sur les niveaux sans max_qty.
+  // polluer Math.max avec le fallback DEFAULT_MAX_QTY sur les niveaux sans max_qty.
   const defined = eraLevels
     .map((l) => l.max_qty)
     .filter((q): q is number => q !== undefined);
 
-  return defined.length > 0 ? Math.max(...defined) : 40;
+  return defined.length > 0 ? Math.max(...defined) : DEFAULT_MAX_QTY;
 }
 
 // Check if a level has construction data

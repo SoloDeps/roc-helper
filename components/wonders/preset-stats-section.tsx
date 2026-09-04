@@ -15,13 +15,9 @@ import { useState, useMemo } from "react";
 import { Zap, TrendingUp, ChevronDown, ChevronUp, Eye, EyeOff } from "lucide-react";
 // import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-  computeSynergies,
-  getWonderBoosts,
-  getBonusLabel,
-  formatBonusValue,
-  // getBonusDescription,
-} from "@/lib/wonders-utils";
+import { computeSynergies, getWonderBoosts } from "@/resolvers/wonders";
+import type { WonderBoostItem } from "@/resolvers/wonders";
+import { getBonusLabel, formatBonusValue, bonusKey } from "@/resolvers/bonus";
 import { WONDERS } from "@/data/wonders/index";
 // import { StatsBadge } from "@/components/wonders/stats-badge";
 import type { WonderPresetEntry } from "@/data/wonders/types";
@@ -86,7 +82,7 @@ const MAX_VISIBLE = 5;
 interface WonderBoostRow {
   wonderCode: string;
   wonderName: string;
-  boosts: { type: string; icons: [string, string | null]; value: number }[];
+  boosts: WonderBoostItem[];
 }
 
 function WonderBoostsPanel({
@@ -159,16 +155,18 @@ function WonderBoostsPanel({
                   id={`boosts-${w.wonderCode}`}
                   className="pl-2 space-y-0.5 border-l border-sky-300/50 dark:border-sky-700/40"
                 >
-                  {w.boosts.map((boost, i) => (
+                  {w.boosts.map((boost) => (
                     <div
-                      key={i}
+                      key={bonusKey(boost)}
                       className="flex items-center justify-between gap-2 text-xs"
                     >
                       <span className="flex items-center gap-1 text-foreground/70 min-w-0 truncate">
-                        <span className="truncate">{getBonusLabel(boost.type)}</span>
+                        <span className="truncate">
+                          {getBonusLabel(boost.type, boost.instance)}
+                        </span>
                       </span>
                       <span className="text-sky-600 dark:text-sky-400 font-semibold text-right shrink-0">
-                        {formatBonusValue(boost.type, boost.value)}
+                        {formatBonusValue(boost.format, boost.value)}
                       </span>
                     </div>
                   ))}

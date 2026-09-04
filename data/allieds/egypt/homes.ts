@@ -10,7 +10,7 @@ export const egyptSmallHome: BuildingData = {
     {
       level: 1,
       era: "ME",
-      max_qty: 12,
+      max_qty: 8,
       construction: {
         deben: 100,
       },
@@ -18,7 +18,7 @@ export const egyptSmallHome: BuildingData = {
     {
       level: 2,
       era: "ME",
-      max_qty: 12,
+      max_qty: 8,
       upgrade: {
         deben: 1900,
         goods: [
@@ -36,7 +36,7 @@ export const egyptSmallHome: BuildingData = {
     {
       level: 3,
       era: "ME",
-      max_qty: 12,
+      max_qty: 8,
       upgrade: {
         deben: 5300,
         goods: [
@@ -154,7 +154,7 @@ export const egyptAverageHome: BuildingData = {
     {
       level: 1,
       era: "ME",
-      max_qty: 6,
+      max_qty: 4,
       construction: {
         deben: 600,
       },
@@ -162,7 +162,7 @@ export const egyptAverageHome: BuildingData = {
     {
       level: 2,
       era: "ME",
-      max_qty: 6,
+      max_qty: 4,
       upgrade: {
         deben: 5600,
         goods: [
@@ -180,7 +180,7 @@ export const egyptAverageHome: BuildingData = {
     {
       level: 3,
       era: "ME",
-      max_qty: 6,
+      max_qty: 4,
       upgrade: {
         deben: 16000,
         goods: [
@@ -298,7 +298,7 @@ export const egyptLuxuriousHome: BuildingData = {
     {
       level: 3,
       era: "ME",
-      max_qty: 8,
+      max_qty: 4,
       construction: {
         gems: 750,
       },

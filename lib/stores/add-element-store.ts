@@ -2,13 +2,18 @@
 
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { getCatalogItem, ERAS } from "@/lib/catalog";
+import { getCatalogItem } from "@/lib/catalog";
 import { getBuildingData } from "@/lib/element-data-loader";
 import { getWikiDB } from "@/lib/db/schema";
 import { useAddBuilding } from "@/hooks/use-database";
-import { slugify } from "@/lib/utils";
-import { buildingsAbbr } from "@/lib/constants";
 import { toast } from "sonner";
+import {
+  isPositionWorkshop,
+  resolvePositionWorkshop,
+  buildBuildingId,
+  buildWorkshopBuildingId,
+  readWorkshopSelections,
+} from "@/resolvers/workshops";
 
 // ============================================================================
 // TYPES
@@ -121,32 +126,6 @@ const DEFAULT_PRESET: PresetSelection = {
 // HELPERS
 // ============================================================================
 
-const PRIORITIES = ["primary", "secondary", "tertiary"] as const;
-
-function generateBuildingId(
-  category: string,
-  elementId: string,
-  era: string,
-  level: number,
-  type: "construction" | "upgrade",
-): string {
-  // Si c'est un workshop capital, remplacer le nom concret par la position
-  if (category === "capital") {
-    const groupIndex = buildingsAbbr.findIndex((group) =>
-      group.abbreviations.some((abbr) => abbr === era.toUpperCase()),
-    );
-    if (groupIndex >= 0) {
-      const buildings = buildingsAbbr[groupIndex].buildings;
-      const posIndex = buildings.findIndex(
-        (b) => b.toLowerCase().replace(/\s+/g, "_") === elementId.toLowerCase(),
-      );
-      if (posIndex >= 0) {
-        return `${category}_${PRIORITIES[posIndex]}_workshop_${type}_${era}_${level}`;
-      }
-    }
-  }
-  return `${category}_${elementId}_${type}_${era}_${level}`;
-}
 
 // function parseBuildingCosts(rawCosts: any): {
 //   resources: Record<string, number>;
@@ -561,32 +540,37 @@ export function useSubmitElement() {
       throw new Error("Invalid path: missing category or element");
     }
 
-    // Résoudre primary/secondary/tertiary_workshop → vrai elementId
-    const resolvedElementId = (() => {
-      const SUFFIX = "_workshop";
-      if (!path.elementId.endsWith(SUFFIX)) return path.elementId;
-      const priority = path.elementId.slice(
-        0,
-        -SUFFIX.length,
-      ) as (typeof PRIORITIES)[number];
-      if (!PRIORITIES.includes(priority)) return path.elementId;
-      const priorityIndex = PRIORITIES.indexOf(priority);
-      const groupIndex = buildingsAbbr.findIndex((g) =>
-        g.abbreviations.some((a) => a === config.selectedEra.toUpperCase()),
-      );
-      if (groupIndex < 0) return path.elementId;
-      try {
-        const stored = localStorage.getItem("local:buildingSelections");
-        const selections = stored ? JSON.parse(stored) : [];
-        const selected = selections[groupIndex]?.[priorityIndex];
-        if (selected) return selected.toLowerCase().replace(/\s+/g, "_");
-      } catch {
-        /* ignore */
-      }
-      return buildingsAbbr[groupIndex].buildings[priorityIndex]
-        .toLowerCase()
-        .replace(/\s+/g, "_");
-    })();
+    // Position d'atelier (primary/secondary/tertiary_workshop), le cas échéant.
+    // La position n'est JAMAIS re-dérivée d'un nom concret : c'est elle qui
+    // sert à générer l'ID (voir resolvers/workshops.ts, tête de fichier).
+    const workshopResolution = isPositionWorkshop(path.elementId)
+      ? resolvePositionWorkshop(
+          path.elementId,
+          config.selectedEra,
+          readWorkshopSelections(),
+        )
+      : null;
+
+    const resolvedElementId = workshopResolution
+      ? workshopResolution.buildingId
+      : path.elementId;
+
+    const makeBuildingId = (level: number) =>
+      workshopResolution
+        ? buildWorkshopBuildingId(
+            path.categoryId!,
+            workshopResolution.priority,
+            config.buildingType,
+            config.selectedEra,
+            level,
+          )
+        : buildBuildingId(
+            path.categoryId!,
+            resolvedElementId,
+            config.buildingType,
+            config.selectedEra,
+            level,
+          );
 
     const id = `${path.categoryId}_${resolvedElementId}`;
     const elementData = getBuildingData(id);
@@ -608,13 +592,7 @@ export function useSubmitElement() {
     const duplicateItems: string[] = [];
 
     for (const levelConfig of selectedLevels) {
-      const buildingId = generateBuildingId(
-        path.categoryId!,
-        resolvedElementId,
-        config.selectedEra,
-        levelConfig.level,
-        config.buildingType,
-      );
+      const buildingId = makeBuildingId(levelConfig.level);
 
       const existing = await db.buildings.get(buildingId);
       if (existing) {
@@ -661,13 +639,7 @@ export function useSubmitElement() {
           return;
         }
 
-        const buildingId = generateBuildingId(
-          path.categoryId!,
-          resolvedElementId,
-          config.selectedEra,
-          levelConfig.level,
-          config.buildingType,
-        );
+        const buildingId = makeBuildingId(levelConfig.level);
 
         if (!firstElementId) {
           firstElementId = `${path.categoryId}_${resolvedElementId}`;

@@ -15,6 +15,13 @@ interface ResponsiveModalProps {
   onOpenChange?: (open: boolean) => void;
   children: React.ReactNode;
   className?: string;
+  /**
+   * Nom accessible de la boîte — le titre visible, mot pour mot.
+   *
+   * Sans lui, Dialog comme Drawer retombent sur un nom générique (« Dialog »,
+   * « Drawer Content ») : toutes les modales de l'app s'annoncent alors pareil.
+   */
+  title?: string;
 }
 
 export function ResponsiveModal({
@@ -23,6 +30,7 @@ export function ResponsiveModal({
   onOpenChange,
   children,
   className,
+  title,
 }: ResponsiveModalProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -31,9 +39,10 @@ export function ResponsiveModal({
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent 
+        <DialogContent
           className={className}
           showCloseButton={false}
+          title={title}
         >
           {children}
         </DialogContent>
@@ -45,7 +54,7 @@ export function ResponsiveModal({
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent className={className}>
+      <DrawerContent className={className} title={title}>
         {children}
       </DrawerContent>
     </Drawer>

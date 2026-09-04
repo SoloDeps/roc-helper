@@ -40,15 +40,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 2020,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 2020,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 2020,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -58,15 +58,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 1180,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 1180,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 1180,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -122,15 +122,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 7150,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 7150,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 7150,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -140,15 +140,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 2385,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 2385,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 2385,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -163,15 +163,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 10900,
-            resource: "planks",
+            resource: "primary_be",
           },
           {
             amount: 10900,
-            resource: "parchment",
+            resource: "secondary_be",
           },
           {
             amount: 10900,
-            resource: "pepper",
+            resource: "tertiary_be",
           },
         ],
       },
@@ -181,15 +181,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 3100,
-            resource: "planks",
+            resource: "primary_be",
           },
           {
             amount: 3100,
-            resource: "parchment",
+            resource: "secondary_be",
           },
           {
             amount: 3100,
-            resource: "pepper",
+            resource: "tertiary_be",
           },
         ],
       },
@@ -204,15 +204,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 10900,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 10900,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 10900,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -222,15 +222,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 4005,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 4005,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 4005,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -245,15 +245,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 10950,
-            resource: "barrel",
+            resource: "primary_fa",
           },
           {
             amount: 10950,
-            resource: "manuscript",
+            resource: "secondary_fa",
           },
           {
             amount: 10950,
-            resource: "herbs",
+            resource: "tertiary_fa",
           },
         ],
       },
@@ -263,15 +263,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 4680,
-            resource: "barrel",
+            resource: "primary_fa",
           },
           {
             amount: 4680,
-            resource: "manuscript",
+            resource: "secondary_fa",
           },
           {
             amount: 4680,
-            resource: "herbs",
+            resource: "tertiary_fa",
           },
         ],
       },
@@ -286,15 +286,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 10950,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 10950,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 10950,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -304,15 +304,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 5330,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 5330,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 5330,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -327,15 +327,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 11000,
-            resource: "wardrobe",
+            resource: "primary_ks",
           },
           {
             amount: 11000,
-            resource: "tome",
+            resource: "secondary_ks",
           },
           {
             amount: 11000,
-            resource: "chili",
+            resource: "tertiary_ks",
           },
         ],
       },
@@ -345,15 +345,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 6130,
-            resource: "wardrobe",
+            resource: "primary_ks",
           },
           {
             amount: 6130,
-            resource: "tome",
+            resource: "secondary_ks",
           },
           {
             amount: 6130,
-            resource: "chili",
+            resource: "tertiary_ks",
           },
         ],
       },
@@ -364,19 +364,19 @@ export const heavyInfantryBarracks: BuildingData = {
       max_qty: 1,
       construction: {
         coins: 80000000,
-        food: 50000000,
+        food: 49000000,
         goods: [
           {
             amount: 11200,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 11200,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 11200,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },
@@ -386,15 +386,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 8000,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 8000,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 8000,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -409,15 +409,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 11400,
-            resource: "stained_glass",
+            resource: "tertiary_lg",
           },
           {
             amount: 11400,
-            resource: "embellishments",
+            resource: "primary_lg",
           },
           {
             amount: 11400,
-            resource: "elixirs",
+            resource: "secondary_lg",
           },
         ],
       },
@@ -427,15 +427,15 @@ export const heavyInfantryBarracks: BuildingData = {
         goods: [
           {
             amount: 9870,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 9870,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 9870,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },

@@ -109,15 +109,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 52,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 52,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 52,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -127,15 +127,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 15,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 15,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 15,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -299,15 +299,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 880,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 880,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 880,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -317,15 +317,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 225,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 225,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 225,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -481,15 +481,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 3105,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 3105,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 3105,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -499,15 +499,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 370,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 370,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 370,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -671,15 +671,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 4750,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 4750,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 4750,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -689,15 +689,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 635,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 635,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 635,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -861,15 +861,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 4800,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 4800,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 4800,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -879,15 +879,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 815,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 815,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 815,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -1051,15 +1051,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 6000,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 6000,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 6000,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -1069,15 +1069,15 @@ export const ruralFarm: BuildingData = {
         goods: [
           {
             amount: 1200,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 1200,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 1200,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },

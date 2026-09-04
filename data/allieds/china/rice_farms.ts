@@ -10,22 +10,22 @@ export const chinaRiceFarm: BuildingData = {
     {
       level: 1,
       era: "ER",
-      max_qty: 12,
+      max_qty: 6,
       construction: {
         wu_zhu: 1000,
         rice: 800,
         goods: [
           {
             amount: 260,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
           {
             amount: 260,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 260,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
         ],
       },
@@ -33,7 +33,7 @@ export const chinaRiceFarm: BuildingData = {
     {
       level: 2,
       era: "ER",
-      max_qty: 12,
+      max_qty: 6,
       upgrade: {
         wu_zhu: 42000,
         rice: 17000,
@@ -56,7 +56,7 @@ export const chinaRiceFarm: BuildingData = {
     {
       level: 3,
       era: "ER",
-      max_qty: 12,
+      max_qty: 6,
       upgrade: {
         wu_zhu: 63000,
         rice: 26000,
@@ -166,7 +166,7 @@ export const chinaLuxuriousRiceFarm: BuildingData = {
     {
       level: 3,
       era: "ER",
-      max_qty: 8,
+      max_qty: 4,
       construction: {
         gems: 590,
       },

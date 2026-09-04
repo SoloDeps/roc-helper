@@ -27,29 +27,73 @@ export type WonderSlot =
 // ─── Bonus ─────────────────────────────────────────────────────────────────────
 
 /**
- * A single bonus type defined for a Wonder.
- * - `type`   : snake_case identifier used for display mapping and logic (e.g. "infantry_damage")
- * - `icons`  : [mainIcon, overlayIcon | null] – icon keys resolved by the UI
- * - `values` : 30 numeric values, one per level (index 0 = level 1)
+ * How a bonus value is rendered. Carried as DATA on every bonus, straight from
+ * the extraction — never re-derived from a hand-maintained dictionary. That
+ * double source is what let `donation_gears` render as `+42` instead of `+42%`.
+ *
+ * - `percent`  → a rate applied to something else: `+18.3%`
+ * - `integer`  → a whole-number gain: `+4`
+ * - `flat`     → a raw quantity granted (goods amounts, slot counts): `12`
+ * - `absolute` → a production OUTPUT per cycle, not a modifier of one. Buildings
+ *   introduce it: `ProductionComponentDTO.producedResources[]` gives an amount
+ *   (1 800 coins per 6 h), where `coins_production` & co. are percent boosts.
+ *   Reusing `percent` there would render a quantity as a rate; reusing `flat`
+ *   would lose the fact that the number is a throughput, and drop the thousands
+ *   grouping these values need to stay readable.
+ *
+ * Wonders and Technologies never produce `absolute` — their local mirrors of
+ * this union (`WonderBonusFormat`, `TechnologyBonusFormat`) stay narrower on
+ * purpose, and remain assignable to this one.
+ */
+export type BonusFormat = "percent" | "integer" | "flat" | "absolute";
+
+/**
+ * What a bonus is narrowed to, when the game design narrows it.
+ * `null` = no declared narrowing (army-wide stats, production rewards, worker grants).
+ *
+ * This used to live only inside the displayed icon (a city crest, a unit glyph),
+ * so two `goods_production` on two different cities were the same `type` and
+ * indistinguishable without reading the artwork. `icons` still carries the
+ * display; `scope` carries the meaning.
+ */
+export type BonusScope =
+  | { kind: "city"; value: string }
+  | { kind: "buildingGroup"; value: string }
+  | { kind: "unitType"; value: string };
+
+/**
+ * A single bonus defined for a Wonder.
+ * - `type`     : CANONICAL snake_case identifier (e.g. "infantry_damage"). Never
+ *                carries an ordinal suffix, so summing by `type` alone is correct.
+ * - `icons`    : [mainIcon, overlayIcon | null] – icon keys resolved by the UI
+ * - `values`   : 30 numeric values, one per level (index 0 = level 1)
+ * - `format`   : rendering style, from the extraction
+ * - `scope`    : declared target narrowing, or null
+ * - `instance` : 1-based rank among this wonder's bonuses sharing the same `type`
  */
 export interface WonderBonus {
   type: string;
   icons: [string, string | null];
   values: number[];
+  format: BonusFormat;
+  scope: BonusScope | null;
+  instance: number;
 }
 
 // ─── Level Bonus (resolved at a specific level) ────────────────────────────────
 
 /**
  * A bonus resolved at a specific level. Derived from WonderBonus at render time.
- * - `type`  : same as WonderBonus.type
- * - `icons` : same as WonderBonus.icons
- * - `value` : values[level - 1]
+ * Carries `format` / `scope` / `instance` through unchanged — the UI formats
+ * from `format`, never from `type`.
  */
 export interface ResolvedBonus {
   type: string;
   icons: [string, string | null];
   value: number;
+  format: BonusFormat;
+  scope: BonusScope | null;
+  instance: number;
 }
 
 // ─── Synergy ───────────────────────────────────────────────────────────────────
@@ -122,8 +166,6 @@ export interface Wonder {
    * Use `bonus.values[level - 1]` to get the value at a given level.
    */
   bonuses: WonderBonus[];
-  /** Level-specific cost data, keyed by level number (1–30) */
-  levels: Record<number, WonderLevel>;
 }
 
 // ─── Preset ────────────────────────────────────────────────────────────────────
@@ -185,7 +227,7 @@ export interface GoodsEntry {
 
 // ─── Wonder Filter ─────────────────────────────────────────────────────────────
 
-/** Filter shape used by filterWonders() in presets.ts. */
+/** Filter shape for the wonders list. Currently no consumer — the wonders page filters inline. */
 export interface WonderFilter {
   group?: WonderGroup;
   slot?: WonderSlot;

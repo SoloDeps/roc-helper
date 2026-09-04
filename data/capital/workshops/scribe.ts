@@ -17,15 +17,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 1000,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 1000,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 1000,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -40,15 +40,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 4720,
-            resource: "planks",
+            resource: "primary_be",
           },
           {
             amount: 4720,
-            resource: "parchment",
+            resource: "secondary_be",
           },
           {
             amount: 4720,
-            resource: "pepper",
+            resource: "tertiary_be",
           },
         ],
       },
@@ -58,15 +58,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 1350,
-            resource: "planks",
+            resource: "primary_be",
           },
           {
             amount: 1350,
-            resource: "parchment",
+            resource: "secondary_be",
           },
           {
             amount: 1350,
-            resource: "pepper",
+            resource: "tertiary_be",
           },
         ],
       },
@@ -81,15 +81,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 4750,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 4750,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 4750,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -99,15 +99,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 1740,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 1740,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 1740,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -122,15 +122,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 4800,
-            resource: "barrel",
+            resource: "primary_fa",
           },
           {
             amount: 4800,
-            resource: "manuscript",
+            resource: "secondary_fa",
           },
           {
             amount: 4800,
-            resource: "herbs",
+            resource: "tertiary_fa",
           },
         ],
       },
@@ -140,15 +140,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 2035,
-            resource: "barrel",
+            resource: "primary_fa",
           },
           {
             amount: 2035,
-            resource: "manuscript",
+            resource: "secondary_fa",
           },
           {
             amount: 2035,
-            resource: "herbs",
+            resource: "tertiary_fa",
           },
         ],
       },
@@ -163,15 +163,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 4850,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 4850,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 4850,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -181,15 +181,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 2315,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 2315,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 2315,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -204,15 +204,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 4900,
-            resource: "wardrobe",
+            resource: "primary_ks",
           },
           {
             amount: 4900,
-            resource: "tome",
+            resource: "secondary_ks",
           },
           {
             amount: 4900,
-            resource: "chili",
+            resource: "tertiary_ks",
           },
         ],
       },
@@ -222,15 +222,15 @@ export const scribeWorkshop: BuildingData = {
         goods: [
           {
             amount: 2665,
-            resource: "wardrobe",
+            resource: "primary_ks",
           },
           {
             amount: 2665,
-            resource: "tome",
+            resource: "secondary_ks",
           },
           {
             amount: 2665,
-            resource: "chili",
+            resource: "tertiary_ks",
           },
         ],
       },

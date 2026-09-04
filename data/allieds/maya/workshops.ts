@@ -16,15 +16,15 @@ export const mayaChronicler: BuildingData = {
         goods: [
           {
             amount: 750,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 750,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 750,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -48,15 +48,15 @@ export const mayaMaskSculptor: BuildingData = {
         goods: [
           {
             amount: 750,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 750,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 750,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },

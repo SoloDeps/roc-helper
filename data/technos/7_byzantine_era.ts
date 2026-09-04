@@ -1123,7 +1123,7 @@ export const technos_BE: TechnoData[] = [
     required: ["be_24", "be_25", "be_26"],
     costs: {
       research_points: 61,
-      coins: 1000000,
+      coins: 1050000,
       food: 949000,
       goods: [
         {
@@ -1229,7 +1229,7 @@ export const technos_BE: TechnoData[] = [
     required: ["be_28"],
     costs: {
       research_points: 60,
-      coins: 1000000,
+      coins: 1020000,
       food: 928000,
       goods: [
         {
@@ -1332,7 +1332,7 @@ export const technos_BE: TechnoData[] = [
     required: ["be_30", "be_31"],
     costs: {
       research_points: 71,
-      coins: 1200000,
+      coins: 1210000,
       food: 1100000,
       goods: [
         {
@@ -1368,7 +1368,7 @@ export const technos_BE: TechnoData[] = [
     required: ["be_32"],
     costs: {
       research_points: 61,
-      coins: 1000000,
+      coins: 1030000,
       food: 938000,
       goods: [
         {
@@ -1401,8 +1401,8 @@ export const technos_BE: TechnoData[] = [
     required: ["be_33"],
     costs: {
       research_points: 67,
-      coins: 1100000,
-      food: 1000000,
+      coins: 1140000,
+      food: 1030000,
       goods: [
         {
           amount: 6620,
@@ -1438,7 +1438,7 @@ export const technos_BE: TechnoData[] = [
     required: ["be_34"],
     costs: {
       research_points: 59,
-      coins: 1000000,
+      coins: 1020000,
       food: 921000,
       goods: [
         {
@@ -1475,7 +1475,7 @@ export const technos_BE: TechnoData[] = [
     required: ["be_34"],
     costs: {
       research_points: 60,
-      coins: 1000000,
+      coins: 1020000,
       food: 925000,
       goods: [
         {
@@ -1507,8 +1507,8 @@ export const technos_BE: TechnoData[] = [
     required: ["be_35"],
     costs: {
       research_points: 65,
-      coins: 1100000,
-      food: 1000000,
+      coins: 1110000,
+      food: 1010000,
       goods: [
         {
           amount: 2320,
@@ -1540,7 +1540,7 @@ export const technos_BE: TechnoData[] = [
     required: ["be_36"],
     costs: {
       research_points: 60,
-      coins: 1000000,
+      coins: 1030000,
       food: 935000,
       goods: [
         {
@@ -1573,8 +1573,8 @@ export const technos_BE: TechnoData[] = [
     required: ["be_37", "be_38", "be_39", "be_40"],
     costs: {
       research_points: 72,
-      coins: 1200000,
-      food: 1100000,
+      coins: 1230000,
+      food: 1120000,
       goods: [
         {
           amount: 2060,

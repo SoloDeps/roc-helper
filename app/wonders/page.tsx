@@ -210,7 +210,7 @@ function AllWondersTabContent({
         if (slot !== "all" && w.meta.slot !== slot) return false;
         if (hideMaxed) {
           const owned = ownedMap[w.meta.code];
-          const maxLvl = (w as any).levels?.length ?? (w as any).meta?.maxLevel;
+          const maxLvl = w.meta.maxLevel;
           if (owned && maxLvl != null && owned.lvl >= maxLvl) return false;
         }
         return true;

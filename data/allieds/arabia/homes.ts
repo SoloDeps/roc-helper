@@ -16,15 +16,15 @@ export const arabiaMediumHome: BuildingData = {
         goods: [
           {
             amount: 840,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 840,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 840,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },

@@ -81,6 +81,10 @@ export const campaign_SA: CampaignRegion[] = [
     id: "sa_5",
     name: "Sabertooth Ford",
     column: 4,
+    // Marque posée PAR DÉFAUT, non vérifiée en jeu : la campagne n'est pas
+    // rejouable. Dernière région de son meneur (Blizzardclaw) et une seule
+    // partie — la signature exacte des 27 autres boss. Voir scripts/extract/campaign.ts.
+    boss: true,
     required: ["sa_4"],
     scout: { coins: 250, duration: 600 },
     regionRewards: [

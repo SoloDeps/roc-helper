@@ -100,7 +100,7 @@ export const campaign_LG: CampaignRegion[] = [
     id: "lg_4",
     name: "Ironbridge Crossing",
     column: 3,
-    required: ["lg_3"],
+    required: ["lg_2", "lg_3"],
     scout: { coins: 1600000, duration: 16200 },
     regionRewards: [
       { resource: "expansion_capital", amount: 1 },
@@ -767,7 +767,6 @@ export const campaign_LG: CampaignRegion[] = [
     scout: { coins: 2000000, duration: 43200 },
     boss: true,
     regionRewards: [
-      { resource: "trading_culture_ottomanempire", amount: 1 },
       { resource: "gears", amount: 400 },
       { resource: "wonder_orb", amount: 1 },
     ],

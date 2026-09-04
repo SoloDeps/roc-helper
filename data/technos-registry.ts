@@ -49,40 +49,7 @@ export function getAvailableTechEras(): string[] {
   return Object.keys(TECHNOLOGY_REGISTRY);
 }
 
-/**
- * Calculate total costs for an array of technologies
- * Used for displaying the aggregated card
- */
-export function calculateTotalTechnoCosts(technos: TechnoData[]): {
-  resources: Record<string, number>;
-  goods: Array<{ resource: string; amount: number }>;
-} {
-  const resources: Record<string, number> = {};
-  const goodsMap = new Map<string, number>();
-
-  technos.forEach((techno) => {
-    // Aggregate resources
-    Object.entries(techno.costs).forEach(([key, value]) => {
-      if (key === "goods" && Array.isArray(value)) {
-        // Aggregate goods
-        value.forEach((good) => {
-          const existing = goodsMap.get(good.resource);
-          goodsMap.set(good.resource, (existing || 0) + good.amount);
-        });
-      } else if (typeof value === "number") {
-        // Aggregate numeric resources
-        resources[key] = (resources[key] || 0) + value;
-      }
-    });
-  });
-
-  const goods = Array.from(goodsMap.entries()).map(([resource, amount]) => ({
-    resource,
-    amount,
-  }));
-
-  return { resources, goods };
-}
-
+// L'agrégation de coûts vit désormais dans `resolvers/costs.ts` (`sumCosts`).
+// `calculateTotalTechnoCosts` était exportée ici sans aucun importeur.
 
 

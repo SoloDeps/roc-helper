@@ -10,7 +10,7 @@ export const egyptGoldMine: BuildingData = {
     {
       level: 1,
       era: "ME",
-      max_qty: 4,
+      max_qty: 2,
       construction: {
         deben: 1200,
       },
@@ -18,7 +18,7 @@ export const egyptGoldMine: BuildingData = {
     {
       level: 2,
       era: "ME",
-      max_qty: 4,
+      max_qty: 2,
       upgrade: {
         deben: 9300,
         goods: [
@@ -36,7 +36,7 @@ export const egyptGoldMine: BuildingData = {
     {
       level: 3,
       era: "ME",
-      max_qty: 4,
+      max_qty: 2,
       upgrade: {
         deben: 26000,
         goods: [
@@ -154,7 +154,7 @@ export const egyptLuxuriousGoldMine: BuildingData = {
     {
       level: 3,
       era: "ME",
-      max_qty: 3,
+      max_qty: 1,
       construction: {
         gems: 490,
       },

@@ -16,6 +16,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { RewardCard } from "@/components/cards/reward-card";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 // ============================================================================
 // TechDetailsPanel
@@ -47,16 +48,13 @@ export function TechDetailsPanel({ tech, onClose }: TechDetailsPanelProps) {
     if (!goods?.length) return null;
 
     return goods.map((g, i) => {
-      const match = g.resource.match(
-        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-      );
+      const parsed = parseRankGoodKey(g.resource);
       let goodName = g.resource;
 
-      if (match) {
-        const [, priority, era] = match;
+      if (parsed) {
         const resolvedName = getGoodNameFromPriorityEra(
-          priority,
-          era,
+          parsed.priority,
+          parsed.era,
           userSelections,
         );
         goodName = resolvedName || "default";

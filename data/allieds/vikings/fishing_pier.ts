@@ -11,21 +11,21 @@ export const vikingFishingPier: BuildingData = {
     {
       level: 1,
       era: "FA",
-      max_qty: 11,
+      max_qty: 6,
       construction: {
         pennies: 1500,
         goods: [
           {
             amount: 1180,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 1180,
-            resource: "salt",
+            resource: "tertiary_af",
           },
           {
             amount: 1180,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
         ],
       },
@@ -33,7 +33,7 @@ export const vikingFishingPier: BuildingData = {
     {
       level: 2,
       era: "FA",
-      max_qty: 11,
+      max_qty: 6,
       upgrade: {
         pennies: 20000,
         goods: [
@@ -59,7 +59,7 @@ export const vikingFishingPier: BuildingData = {
     {
       level: 3,
       era: "FA",
-      max_qty: 11,
+      max_qty: 6,
       upgrade: {
         pennies: 76000,
         goods: [
@@ -120,7 +120,7 @@ export const vikingFishingPier: BuildingData = {
             resource: "secondary_ie",
           },
           {
-            amount: 525,
+            amount: 540,
             resource: "spice_treasure",
           },
           {
@@ -170,7 +170,7 @@ export const vikingLuxuriousFishingPier: BuildingData = {
     {
       level: 3,
       era: "FA",
-      max_qty: 6,
+      max_qty: 3,
       construction: {
         gems: 650,
       },

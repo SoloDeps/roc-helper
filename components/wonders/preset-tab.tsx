@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { useUserPresets, MAX_PRESETS } from "@/lib/stores/user-presets-store";
-import { getPresetCodes, computeSynergies, getWonderBoosts } from "@/lib/wonders-utils";
+import { getPresetCodes, computeSynergies, getWonderBoosts } from "@/resolvers/wonders";
 import { WONDERS } from "@/data/wonders/index";
 
 import {

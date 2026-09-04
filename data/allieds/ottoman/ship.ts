@@ -2,11 +2,21 @@ import { BuildingData } from "@/types/shared";
 
 export const ottomanEmpireShip: BuildingData = {
   id: "ottoman-ship",
-  name: "Ottoman Ship",
+  name: "Ottoman Empire Ship",
   category: "ottoman",
   subcategory: "ships",
   imageName: "Ottoman_Empire_Ship_Lv",
   levels: [
+    // Le niveau 1 ne coûte RIEN : `Building_Harbor_Ship_OttomanEmpire_1` ne porte
+    // ni `ConstructionComponentDTO` ni upgrade entrant. Le navire est débloqué,
+    // pas acheté. Sans construction ni upgrade, `getLevelsForEraAndType` ne le
+    // montre dans aucune des deux listes — il est là pour que la chaîne parte
+    // bien de 1, comme dans le jeu.
+    {
+      level: 1,
+      era: "EG",
+      max_qty: 1,
+    },
     {
       level: 2,
       era: "EG",

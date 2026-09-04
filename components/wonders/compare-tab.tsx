@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 import { WONDERS } from "@/data/wonders/index";
 import type { UserPreset, WonderPresetEntry, MaterialType } from "@/data/wonders/types";
-import { getPresetCodes, formatBonusValue, getBonusLabel, computeSynergies } from "@/lib/wonders-utils";
+import { getPresetCodes, computeSynergies } from "@/resolvers/wonders";
+import { formatBonusValue, getBonusLabel, bonusKey } from "@/resolvers/bonus";
 import { useUserPresets } from "@/lib/stores/user-presets-store";
 import { resolveIconPath } from "@/components/wonders/stats-badge";
 import { formatSynergyValue, parseSynergyMagnitude, MATERIAL_LABEL } from "./presets/synergies";
@@ -137,9 +138,14 @@ function buildWonderGroups(
           if (v === best) tone = "best";
           else if (v === worst) tone = "worst";
         }
-        return { display: v === null ? null : formatBonusValue(bonus.type, v), tone };
+        return { display: v === null ? null : formatBonusValue(bonus.format, v), tone };
       });
-      return { key: `${code}-${bonus.type}`, icons: bonus.icons as [string, string | null], label: getBonusLabel(bonus.type), cells };
+      return {
+        key: `${code}-${bonusKey(bonus)}`,
+        icons: bonus.icons as [string, string | null],
+        label: getBonusLabel(bonus.type, bonus.instance),
+        cells,
+      };
     });
 
     groups.push({ header: wonder.meta.name, rows });

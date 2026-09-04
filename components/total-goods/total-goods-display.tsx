@@ -18,11 +18,20 @@ import {
   MAIN_RESOURCE_ORDER,
   PRIORITY_TYPES,
   makePriorityKey,
-  isPriorityGoodKey,
   getExcludedItems,
   isAlliedCityResource,
+  GOOD_META_BY_KEY,
+  type PriorityType,
 } from "@/lib/constants";
-import { getBuildingFromLocal, slugify, getItemIconLocal } from "@/lib/utils";
+import { isRankGoodKey } from "@/resolvers/goods-keys";
+import { GOOD_ERA_POSITION } from "@/data/config";
+import {
+  getBuildingFromLocal,
+  getPriorityKeyFromGoodName,
+  hasCompleteWorkshopRanking,
+  slugify,
+  getItemIconLocal,
+} from "@/lib/utils";
 import { ResourceBlock } from "./resource-block";
 import { TotalResourcesSkeleton } from "@/components/loading-skeletons";
 import { EmptyOutline } from "@/components/cards/empty-card";
@@ -100,8 +109,6 @@ function useTotalCosts(
       return {
         main: {},
         goods: new Map<string, number>(),
-        byEra: new Map<string, Map<string, number>>(),
-        byCity: new Map<string, Map<string, number>>(),
       };
     }
 
@@ -110,43 +117,17 @@ function useTotalCosts(
 }
 
 /**
- * Hook pour convertir un good réel en format priority
+ * Hook pour convertir un good réel en format priority.
+ *
+ * La logique vit dans `getPriorityKeyFromGoodName` (lib/utils.ts) : hors React,
+ * donc testable. Ce hook n'en est que la mémoïsation par `selections`.
  */
 function useGoodToPriorityConverter(selections: string[][]) {
-  return useMemo(() => {
-    return (goodName: string): string | null => {
-      if (!selections || selections.length === 0) return null;
-
-      const normalizedGoodName = slugify(goodName);
-
-      for (const era of eras) {
-        const abbr = era.abbr as EraAbbr;
-        const goodsForEra = goodsUrlByEra[abbr];
-
-        if (!goodsForEra) continue;
-
-        const priorities: Array<"primary" | "secondary" | "tertiary"> = [
-          "primary",
-          "secondary",
-          "tertiary",
-        ];
-
-        for (const priority of priorities) {
-          const building = getBuildingFromLocal(priority, abbr, selections);
-          if (!building) continue;
-
-          const normalizedBuilding = slugify(building);
-          const goodMeta = goodsForEra[normalizedBuilding];
-
-          if (goodMeta && slugify(goodMeta.name) === normalizedGoodName) {
-            return makePriorityKey(priority, abbr);
-          }
-        }
-      }
-
-      return null;
-    };
-  }, [selections]);
+  return useMemo(
+    () => (goodName: string): string | null =>
+      getPriorityKeyFromGoodName(goodName, selections),
+    [selections],
+  );
 }
 
 /**
@@ -155,26 +136,46 @@ function useGoodToPriorityConverter(selections: string[][]) {
 function useNormalizedPriorityGoods(
   goodsMap: Map<string, number>,
   convertGoodToPriority: (goodName: string) => string | null,
+  selections: string[][],
 ) {
   return useMemo(() => {
     const priorityMap = new Map<string, number>();
+    const resourceMap = new Map<string, string>();
 
     // Traiter tous les goods
     goodsMap.forEach((amount, type) => {
       let finalKey: string | null = null;
 
       // Cas 1: C'est déjà un priority good
-      if (isPriorityGoodKey(type)) {
+      if (isRankGoodKey(type)) {
         finalKey = type.toLowerCase();
       }
-      // Cas 2: C'est un nom de good réel
+      // Cas 2: C'est un nom de good réel — le classement du joueur dit dans
+      // quel emplacement il tombe.
       else {
-        finalKey = convertGoodToPriority(type);
+        const position = GOOD_ERA_POSITION[type];
+        // Une ère se range ENTIÈREMENT selon le joueur, ou entièrement selon le
+        // jeu — jamais un mélange, qui ferait fusionner deux biens dans le même
+        // emplacement (voir `hasCompleteWorkshopRanking`).
+        const byPlayer =
+          !position || hasCompleteWorkshopRanking(position.era, selections);
+        finalKey = byPlayer ? convertGoodToPriority(type) : null;
+        // Cas 3: pas de classement exploitable. Sans repli, le bien quitterait
+        // les blocs d'ère pour « OTHERS » et le panneau perdrait ses en-têtes.
+        if (!finalKey && position) {
+          finalKey = makePriorityKey(
+            PRIORITY_TYPES[position.index],
+            position.era as EraAbbr,
+          );
+        }
       }
 
       // Si on a trouvé une clé valide, l'ajouter/fusionner
       if (finalKey) {
         priorityMap.set(finalKey, (priorityMap.get(finalKey) ?? 0) + amount);
+        // On retient QUEL bien a rempli l'emplacement : c'est lui qui donne le
+        // libellé et l'icône, plus l'atelier classé par le joueur.
+        if (!isRankGoodKey(type)) resourceMap.set(finalKey, type);
       }
     });
 
@@ -189,8 +190,8 @@ function useNormalizedPriorityGoods(
       });
     });
 
-    return priorityMap;
-  }, [goodsMap, convertGoodToPriority]);
+    return { priorityMap, resourceMap };
+  }, [goodsMap, convertGoodToPriority, selections]);
 }
 
 /**
@@ -205,11 +206,14 @@ function useOtherGoods(
 
     goodsMap.forEach((amount, type) => {
       // Ignorer les priority goods
-      if (isPriorityGoodKey(type)) return;
+      if (isRankGoodKey(type)) return;
 
-      // Vérifier si ce good a été converti en priority good
+      // Vérifier si ce good a été converti en priority good…
       const convertedKey = convertGoodToPriority(type);
       if (convertedKey) return;
+      // …ou rangé par le repli ci-dessus (bien de la capitale, joueur sans
+      // classement). Sinon il apparaîtrait deux fois.
+      if (GOOD_ERA_POSITION[type]) return;
 
       otherMap.set(type, (otherMap.get(type) ?? 0) + amount);
     });
@@ -224,6 +228,7 @@ function useOtherGoods(
 function useEraBlocks(
   selections: string[][],
   normalizedPriorityGoods: Map<string, number>,
+  resourceByPriorityKey: Map<string, string>,
 ) {
   return useMemo(() => {
     if (!selections || selections.length === 0) {
@@ -242,11 +247,29 @@ function useEraBlocks(
           normalizedPriorityGoods.get(makePriorityKey("tertiary", abbr)) ?? 0,
       };
 
-      const getGoodMeta = (priority: string) => {
+      // Le libellé d'un emplacement.
+      //
+      // Règle : une ligne ne nomme un bien que si le joueur a nommé l'atelier
+      // QUI LE PRODUIT. Sinon `undefined`, et `ResourceBlock` retombe sur le
+      // placeholder d'origine (caisse + « Primary »/« Secondary »/« Tertiary »).
+      //
+      // ⚠️ C'est bien le bien POSÉ sur la ligne qu'on teste, pas l'atelier que
+      // le joueur aurait classé à cette position. Sous classement partiel les
+      // montants sont rangés dans l'ordre du jeu (cf. `hasCompleteWorkshopRanking`)
+      // : nommer la ligne d'après le classement afficherait « Bronze Bracelet »
+      // au-dessus du montant de l'alabaster idol. Libellé et chiffre doivent
+      // toujours désigner la même chose.
+      const getGoodMeta = (priority: PriorityType) => {
+        const filled = resourceByPriorityKey.get(makePriorityKey(priority, abbr));
+        if (filled) {
+          return getPriorityKeyFromGoodName(filled, selections) !== null
+            ? GOOD_META_BY_KEY[filled]
+            : undefined;
+        }
+        // Emplacement sans montant : rien à contredire, on garde le libellé de
+        // l'atelier classé par le joueur (comportement d'origine).
         const building = getBuildingFromLocal(priority, abbr, selections);
-        if (!building) return undefined;
-        const normalized = slugify(building);
-        return goodsUrlByEra[abbr]?.[normalized];
+        return building ? goodsUrlByEra[abbr]?.[slugify(building)] : undefined;
       };
 
       const primaryMeta = getGoodMeta("primary");
@@ -257,24 +280,24 @@ function useEraBlocks(
         title: era.name,
         resources: [
           {
-            icon: primaryMeta?.name
-              ? `/images/goods/${slugify(primaryMeta.name)}.webp`
+            icon: primaryMeta
+              ? `/images/goods/${primaryMeta.key}.webp`
               : "/images/goods/default.webp",
             name: primaryMeta?.name ?? "Primary",
             amount: amounts.primary,
             difference: amounts.primary,
           },
           {
-            icon: secondaryMeta?.name
-              ? `/images/goods/${slugify(secondaryMeta.name)}.webp`
+            icon: secondaryMeta
+              ? `/images/goods/${secondaryMeta.key}.webp`
               : "/images/goods/default.webp",
             name: secondaryMeta?.name ?? "Secondary",
             amount: amounts.secondary,
             difference: amounts.secondary,
           },
           {
-            icon: tertiaryMeta?.name
-              ? `/images/goods/${slugify(tertiaryMeta.name)}.webp`
+            icon: tertiaryMeta
+              ? `/images/goods/${tertiaryMeta.key}.webp`
               : "/images/goods/default.webp",
             name: tertiaryMeta?.name ?? "Tertiary",
             amount: amounts.tertiary,
@@ -287,7 +310,7 @@ function useEraBlocks(
           amounts.tertiary === 0,
       };
     });
-  }, [selections, normalizedPriorityGoods]);
+  }, [selections, normalizedPriorityGoods, resourceByPriorityKey]);
 }
 
 /**
@@ -443,12 +466,14 @@ export function TotalGoodsDisplay({
   // DATA PROCESSING
   // ========================================
   const convertGoodToPriority = useGoodToPriorityConverter(selections);
-  const normalizedPriorityGoods = useNormalizedPriorityGoods(
-    totals.goods,
-    convertGoodToPriority,
-  );
+  const { priorityMap: normalizedPriorityGoods, resourceMap: resourceByPriorityKey } =
+    useNormalizedPriorityGoods(totals.goods, convertGoodToPriority, selections);
   const otherGoods = useOtherGoods(totals.goods, convertGoodToPriority);
-  const eraBlocks = useEraBlocks(selections, normalizedPriorityGoods);
+  const eraBlocks = useEraBlocks(
+    selections,
+    normalizedPriorityGoods,
+    resourceByPriorityKey,
+  );
   const otherGoodsByCiv = useOtherGoodsByCiv(otherGoods, totals.main);
   const mainResources = useMainResources(totals.main);
 

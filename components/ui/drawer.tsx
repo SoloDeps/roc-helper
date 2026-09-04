@@ -53,15 +53,21 @@ function DrawerOverlay({
   );
 }
 
+/**
+ * `title` nomme le tiroir pour un lecteur d'écran — voir la note de
+ * `DialogContent`. Le repli « Drawer Content » ne dit rien de ce qu'on ouvre :
+ * il ne reste que pour les tiroirs qui n'en passent pas encore.
+ */
 function DrawerContent({
   className,
   children,
+  title,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Content>) {
+}: React.ComponentProps<typeof DrawerPrimitive.Content> & { title?: string }) {
   return (
     <DrawerPortal data-slot="drawer-portal">
       <VisuallyHidden.Root>
-        <DrawerTitle>Drawer Content</DrawerTitle>
+        <DrawerTitle>{title ?? "Drawer Content"}</DrawerTitle>
       </VisuallyHidden.Root>
       <DrawerOverlay />
       <DrawerPrimitive.Content

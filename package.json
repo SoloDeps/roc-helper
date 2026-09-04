@@ -7,7 +7,16 @@
     "build": "next build",
     "start": "npx serve out",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "extract:wonders": "tsc scripts/extract/wonders.ts --outDir .extract-build --rootDir . --module commonjs --target es2022 --moduleResolution node --esModuleInterop --strict --skipLibCheck && node .extract-build/scripts/extract/wonders.js",
+    "extract:technos": "tsc scripts/extract/technologies.ts --outDir .extract-build --rootDir . --module commonjs --target es2022 --moduleResolution node --esModuleInterop --strict --skipLibCheck && node .extract-build/scripts/extract/technologies.js",
+    "diff:technos": "tsc -p tsconfig.scripts.json && node .extract-build/scripts/diff/technologies.js",
+    "extract:campaign": "tsc scripts/extract/campaign.ts --outDir .extract-build --rootDir . --module commonjs --target es2022 --moduleResolution node --esModuleInterop --strict --skipLibCheck && node .extract-build/scripts/extract/campaign.js",
+    "diff:campaign": "tsc -p tsconfig.scripts.json && node .extract-build/scripts/diff/campaign.js",
+    "extract:buildings": "tsc scripts/extract/buildings.ts --outDir .extract-build --rootDir . --module commonjs --target es2022 --moduleResolution node --esModuleInterop --strict --skipLibCheck && node .extract-build/scripts/extract/buildings.js",
+    "diff:buildings": "tsc -p tsconfig.scripts.json && node --require ./scripts/alias-register.js .extract-build/scripts/diff/buildings.js",
+    "extract:heritage": "tsc -p tsconfig.scripts.json && node --require ./scripts/alias-register.js .extract-build/scripts/extract/heritage.js",
+    "diff:heritage": "tsc -p tsconfig.scripts.json && node --require ./scripts/alias-register.js .extract-build/scripts/diff/heritage.js"
   },
   "dependencies": {
     "@dagrejs/dagre": "^2.0.4",

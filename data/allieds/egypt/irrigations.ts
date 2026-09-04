@@ -45,7 +45,7 @@ export const egyptChannel: BuildingData = {
   levels: [
     {
       level: 1,
-      era: "ME",
+      era: "CG",
       max_qty: 4,
       construction: {
         deben: 16000,
@@ -63,7 +63,7 @@ export const egyptWaterPump: BuildingData = {
   levels: [
     {
       level: 1,
-      era: "ME",
+      era: "CG",
       max_qty: 4,
       construction: {
         deben: 7200,
@@ -99,7 +99,7 @@ export const egyptFountain: BuildingData = {
   levels: [
     {
       level: 1,
-      era: "ME",
+      era: "CG",
       max_qty: 4,
       construction: {
         gems: 690,

@@ -14,6 +14,8 @@ import {
 } from "@/lib/utils";
 import type { HydratedTechno } from "@/lib/db/data-hydration";
 import { useSelectEra } from "@/lib/stores/technology-page-store";
+import { sumCosts, toGoodsArray } from "@/resolvers/costs";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 interface TechnoCardProps {
   era: string;
@@ -37,44 +39,13 @@ export function TechnoCard({
   // Agrège uniquement les technos cp=false (non complétées)
   const aggregatedData = useMemo(() => {
     const remaining = technos.filter((t) => !t.cp);
-
-    if (remaining.length === 0) {
-      return {
-        totalResearch: 0,
-        totalCoins: 0,
-        totalFood: 0,
-        goods: [] as Array<{ resource: string; amount: number }>,
-        technoCount: technos.length,
-        remainingCount: 0,
-      };
-    }
-
-    const resources: Record<string, number> = {};
-    const goodsMap = new Map<string, number>();
-
-    remaining.forEach((techno) => {
-      Object.entries(techno.costs).forEach(([key, value]) => {
-        if (key === "goods" && Array.isArray(value)) {
-          value.forEach((good) => {
-            goodsMap.set(
-              good.resource,
-              (goodsMap.get(good.resource) || 0) + good.amount,
-            );
-          });
-        } else if (typeof value === "number") {
-          resources[key] = (resources[key] || 0) + value;
-        }
-      });
-    });
+    const totals = sumCosts(remaining.map((t) => ({ costs: t.costs })));
 
     return {
-      totalResearch: resources.research_points || 0,
-      totalCoins: resources.coins || 0,
-      totalFood: resources.food || 0,
-      goods: Array.from(goodsMap.entries()).map(([resource, amount]) => ({
-        resource,
-        amount,
-      })),
+      totalResearch: totals.main.research_points || 0,
+      totalCoins: totals.main.coins || 0,
+      totalFood: totals.main.food || 0,
+      goods: toGoodsArray(totals.goods),
       technoCount: technos.length,
       remainingCount: remaining.length,
     };
@@ -85,13 +56,13 @@ export function TechnoCard({
   //  Extract eraId from era prop (era prop is already the eraId in snake_case)
   const eraId = era;
 
-  //  Handle customize click - Navigate to research tree with this era
+  //  Handle customize click - Navigate to the technologies page with this era
   const handleCustomize = () => {
     if (eraId) {
-      // Set this era as selected in the research tree store
+      // Set this era as selected in the technologies store
       selectEra(eraId);
-      // Navigate to research tree page
-      router.push("/research-tree");
+      // Navigate to the technologies page
+      router.push("/technologies");
     }
   };
 
@@ -129,16 +100,13 @@ export function TechnoCard({
     if (!aggregatedData.goods || aggregatedData.goods.length === 0) return null;
 
     return aggregatedData.goods.map((g, i) => {
-      const match = g.resource.match(
-        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-      );
+      const parsed = parseRankGoodKey(g.resource);
       let goodName = g.resource;
 
-      if (match) {
-        const [, priority, eraCode] = match;
+      if (parsed) {
         const resolvedName = getGoodNameFromPriorityEra(
-          priority,
-          eraCode,
+          parsed.priority,
+          parsed.era,
           userSelections,
         );
         goodName = resolvedName || "default";
@@ -250,7 +218,7 @@ export function TechnoCard({
                   variant="ghost"
                   className="rounded-sm h-6"
                   onClick={handleCustomize}
-                  title="View in research tree"
+                  title="View in Technologies"
                 >
                   Customize
                 </Button>
@@ -323,7 +291,7 @@ export function TechnoCard({
                 variant="outline"
                 className="rounded-sm h-[34px]"
                 onClick={handleCustomize}
-                title="View in research tree"
+                title="View in Technologies"
               >
                 Customize
               </Button>

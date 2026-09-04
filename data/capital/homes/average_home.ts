@@ -79,15 +79,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 45,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 45,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 45,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -97,15 +97,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 12,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 12,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 12,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -269,15 +269,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 735,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 735,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 735,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -287,15 +287,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 185,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 185,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 185,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -451,15 +451,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 2595,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 2595,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 2595,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -469,15 +469,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 310,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 310,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 310,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -641,15 +641,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 3975,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 3975,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 3975,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -659,15 +659,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 530,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 530,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 530,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -831,15 +831,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 4025,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 4025,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 4025,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -849,15 +849,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 680,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 680,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 680,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -1021,15 +1021,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 5000,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 5000,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 5000,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -1039,15 +1039,15 @@ export const averageHome: BuildingData = {
         goods: [
           {
             amount: 1400,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 1400,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 1400,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },

@@ -2,7 +2,7 @@ import { BuildingData } from "@/types/shared";
 
 export const shipyards: BuildingData = {
   id: "capital-ships-shipyards",
-  name: "Shipyards",
+  name: "Shipyard",
   category: "capital",
   subcategory: "ships",
   imageName: "Shipyard_Lv",
@@ -17,15 +17,15 @@ export const shipyards: BuildingData = {
         goods: [
           {
             amount: 2500,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 2500,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 2500,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -57,15 +57,15 @@ export const shipyards: BuildingData = {
         goods: [
           {
             amount: 1500,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 1500,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 1500,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
           {
             amount: 3000,

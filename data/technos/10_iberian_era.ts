@@ -8,8 +8,8 @@ export const technos_IE: TechnoData[] = [
     required: [],
     costs: {
       research_points: 81,
-      coins: 5300000,
-      food: 1200000,
+      coins: 5380000,
+      food: 1220000,
       goods: [
         {
           amount: 3950,
@@ -60,8 +60,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_0"],
     costs: {
       research_points: 100,
-      coins: 6800000,
-      food: 1100000,
+      coins: 6870000,
+      food: 1110000,
       goods: [
         {
           amount: 7700,
@@ -110,8 +110,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_0"],
     costs: {
       research_points: 115,
-      coins: 5600000,
-      food: 2500000,
+      coins: 5680000,
+      food: 2550000,
       goods: [
         {
           amount: 4320,
@@ -146,8 +146,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_0"],
     costs: {
       research_points: 71,
-      coins: 1900000,
-      food: 1200000,
+      coins: 1950000,
+      food: 1220000,
       goods: [
         {
           amount: 11350,
@@ -204,8 +204,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_1", "ie_2"],
     costs: {
       research_points: 57,
-      coins: 5400000,
-      food: 1500000,
+      coins: 5420000,
+      food: 1550000,
       goods: [
         {
           amount: 2000,
@@ -245,8 +245,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_3"],
     costs: {
       research_points: 77,
-      coins: 2100000,
-      food: 2400000,
+      coins: 2110000,
+      food: 2440000,
       goods: [
         {
           amount: 4690,
@@ -298,8 +298,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_3"],
     costs: {
       research_points: 105,
-      coins: 7200000,
-      food: 4100000,
+      coins: 7290000,
+      food: 4110000,
       goods: [
         {
           amount: 4440,
@@ -346,8 +346,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_4"],
     costs: {
       research_points: 90,
-      coins: 2400000,
-      food: 4200000,
+      coins: 2460000,
+      food: 4220000,
       goods: [
         {
           amount: 11350,
@@ -378,8 +378,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_4"],
     costs: {
       research_points: 88,
-      coins: 3200000,
-      food: 4100000,
+      coins: 3260000,
+      food: 4110000,
       goods: [
         {
           amount: 6170,
@@ -414,8 +414,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_5", "ie_6"],
     costs: {
       research_points: 135,
-      coins: 3300000,
-      food: 1400000,
+      coins: 3360000,
+      food: 1440000,
       goods: [
         {
           amount: 7700,
@@ -462,8 +462,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_7", "ie_8"],
     costs: {
       research_points: 120,
-      coins: 3800000,
-      food: 2100000,
+      coins: 3890000,
+      food: 2110000,
       goods: [
         {
           amount: 4280,
@@ -498,7 +498,7 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_9"],
     costs: {
       research_points: 88,
-      coins: 2200000,
+      coins: 2230000,
       food: 4000000,
       goods: [
         {
@@ -541,8 +541,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_9"],
     costs: {
       research_points: 67,
-      coins: 5300000,
-      food: 2800000,
+      coins: 5310000,
+      food: 2890000,
       goods: [
         {
           amount: 4940,
@@ -584,8 +584,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_10"],
     costs: {
       research_points: 89,
-      coins: 6800000,
-      food: 2500000,
+      coins: 6830000,
+      food: 2550000,
       goods: [
         {
           amount: 3130,
@@ -626,8 +626,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_10"],
     costs: {
       research_points: 63,
-      coins: 3500000,
-      food: 2300000,
+      coins: 3540000,
+      food: 2330000,
       goods: [
         {
           amount: 1330,
@@ -663,8 +663,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_11", "ie_12"],
     costs: {
       research_points: 92,
-      coins: 5700000,
-      food: 2800000,
+      coins: 5770000,
+      food: 2890000,
       goods: [
         {
           amount: 7160,
@@ -706,8 +706,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_11", "ie_12"],
     costs: {
       research_points: 82,
-      coins: 4200000,
-      food: 4200000,
+      coins: 4230000,
+      food: 4220000,
       goods: [
         {
           amount: 3460,
@@ -744,8 +744,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_13", "ie_14"],
     costs: {
       research_points: 125,
-      coins: 4700000,
-      food: 2300000,
+      coins: 4710000,
+      food: 2330000,
       goods: [
         {
           amount: 2080,
@@ -780,8 +780,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_15", "ie_16"],
     costs: {
       research_points: 80,
-      coins: 5100000,
-      food: 1400000,
+      coins: 5150000,
+      food: 1440000,
       goods: [
         {
           amount: 2470,
@@ -810,11 +810,11 @@ export const technos_IE: TechnoData[] = [
     id: "ie_19",
     name: "Long-Distance Seafaring",
     column: 6,
-    required: ["ie_15", "ie_16"],
+    required: ["ie_16"],
     costs: {
       research_points: 110,
-      coins: 1900000,
-      food: 2400000,
+      coins: 1960000,
+      food: 2440000,
       goods: [
         {
           amount: 2670,
@@ -851,8 +851,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_17"],
     costs: {
       research_points: 92,
-      coins: 4200000,
-      food: 2800000,
+      coins: 4230000,
+      food: 2890000,
       goods: [
         {
           amount: 5180,
@@ -883,8 +883,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_18", "ie_19"],
     costs: {
       research_points: 78,
-      coins: 3200000,
-      food: 1600000,
+      coins: 3260000,
+      food: 1670000,
       goods: [
         {
           amount: 4120,
@@ -921,8 +921,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_20", "ie_21"],
     costs: {
       research_points: 92,
-      coins: 5600000,
-      food: 2800000,
+      coins: 5650000,
+      food: 2890000,
       goods: [
         {
           amount: 2350,
@@ -953,8 +953,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_20"],
     costs: {
       research_points: 75,
-      coins: 2500000,
-      food: 3800000,
+      coins: 2570000,
+      food: 3890000,
       goods: [
         {
           amount: 5680,
@@ -985,8 +985,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_20", "ie_21"],
     costs: {
       research_points: 92,
-      coins: 4400000,
-      food: 1100000,
+      coins: 4430000,
+      food: 1110000,
       goods: [
         {
           amount: 3090,
@@ -1024,7 +1024,7 @@ export const technos_IE: TechnoData[] = [
     costs: {
       research_points: 57,
       coins: 2300000,
-      food: 3700000,
+      food: 3770000,
       goods: [
         {
           amount: 4440,
@@ -1062,7 +1062,7 @@ export const technos_IE: TechnoData[] = [
     costs: {
       research_points: 130,
       coins: 2800000,
-      food: 1700000,
+      food: 1780000,
       goods: [
         {
           amount: 3460,
@@ -1097,8 +1097,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_24", "ie_25"],
     costs: {
       research_points: 99,
-      coins: 5800000,
-      food: 4100000,
+      coins: 5840000,
+      food: 4110000,
       goods: [
         {
           amount: 2080,
@@ -1130,8 +1130,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_24", "ie_25"],
     costs: {
       research_points: 77,
-      coins: 1700000,
-      food: 3700000,
+      coins: 1730000,
+      food: 3770000,
       goods: [
         {
           amount: 4770,
@@ -1168,8 +1168,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_26"],
     costs: {
       research_points: 84,
-      coins: 4800000,
-      food: 2200000,
+      coins: 4850000,
+      food: 2220000,
       goods: [
         {
           amount: 2840,
@@ -1200,8 +1200,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_26"],
     costs: {
       research_points: 69,
-      coins: 5800000,
-      food: 2600000,
+      coins: 5840000,
+      food: 2660000,
       goods: [
         {
           amount: 6420,
@@ -1237,7 +1237,7 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_27"],
     costs: {
       research_points: 105,
-      coins: 2900000,
+      coins: 2940000,
       food: 4000000,
       goods: [
         {
@@ -1271,7 +1271,7 @@ export const technos_IE: TechnoData[] = [
     costs: {
       research_points: 94,
       coins: 1700000,
-      food: 1200000,
+      food: 1220000,
       goods: [
         {
           amount: 13800,
@@ -1308,8 +1308,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_29", "ie_30", "ie_31"],
     costs: {
       research_points: 135,
-      coins: 3000000,
-      food: 4400000,
+      coins: 3030000,
+      food: 4440000,
       goods: [
         {
           amount: 1780,
@@ -1344,8 +1344,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_31", "ie_32"],
     costs: {
       research_points: 67,
-      coins: 2200000,
-      food: 3600000,
+      coins: 2270000,
+      food: 3660000,
       goods: [
         {
           amount: 1410,
@@ -1382,8 +1382,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_31", "ie_32"],
     costs: {
       research_points: 91,
-      coins: 6000000,
-      food: 1200000,
+      coins: 6020000,
+      food: 1220000,
       goods: [
         {
           amount: 6660,
@@ -1415,8 +1415,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_33"],
     costs: {
       research_points: 100,
-      coins: 4600000,
-      food: 1600000,
+      coins: 4620000,
+      food: 1670000,
       goods: [
         {
           amount: 11350,
@@ -1452,8 +1452,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_33"],
     costs: {
       research_points: 105,
-      coins: 6100000,
-      food: 3600000,
+      coins: 6160000,
+      food: 3660000,
       goods: [
         {
           amount: 4440,
@@ -1484,7 +1484,7 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_34", "ie_35"],
     costs: {
       research_points: 77,
-      coins: 3900000,
+      coins: 3950000,
       food: 3000000,
       goods: [
         {
@@ -1522,8 +1522,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_34", "ie_35"],
     costs: {
       research_points: 90,
-      coins: 4200000,
-      food: 1700000,
+      coins: 4210000,
+      food: 1780000,
       goods: [
         {
           amount: 1630,
@@ -1556,7 +1556,7 @@ export const technos_IE: TechnoData[] = [
     costs: {
       research_points: 82,
       coins: 6200000,
-      food: 1300000,
+      food: 1330000,
       goods: [
         {
           amount: 4440,
@@ -1592,8 +1592,8 @@ export const technos_IE: TechnoData[] = [
     required: ["ie_40"],
     costs: {
       research_points: 100,
-      coins: 4900000,
-      food: 3100000,
+      coins: 4990000,
+      food: 3110000,
       goods: [
         {
           amount: 5430,

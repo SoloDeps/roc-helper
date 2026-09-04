@@ -10,21 +10,21 @@ export const mayaObsidianQuarry: BuildingData = {
     {
       level: 1,
       era: "BE",
-      max_qty: 5,
+      max_qty: 3,
       construction: {
         cocoa: 10000,
         goods: [
           {
             amount: 625,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 625,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 625,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -32,7 +32,7 @@ export const mayaObsidianQuarry: BuildingData = {
     {
       level: 2,
       era: "BE",
-      max_qty: 5,
+      max_qty: 3,
       upgrade: {
         cocoa: 92000,
         goods: [
@@ -58,7 +58,7 @@ export const mayaObsidianQuarry: BuildingData = {
     {
       level: 3,
       era: "BE",
-      max_qty: 5,
+      max_qty: 3,
       upgrade: {
         cocoa: 120000,
         goods: [
@@ -168,21 +168,21 @@ export const mayaJadeQuarry: BuildingData = {
     {
       level: 1,
       era: "BE",
-      max_qty: 5,
+      max_qty: 3,
       construction: {
         cocoa: 10000,
         goods: [
           {
             amount: 625,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 625,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 625,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -190,7 +190,7 @@ export const mayaJadeQuarry: BuildingData = {
     {
       level: 2,
       era: "BE",
-      max_qty: 5,
+      max_qty: 3,
       upgrade: {
         cocoa: 92000,
         goods: [
@@ -216,7 +216,7 @@ export const mayaJadeQuarry: BuildingData = {
     {
       level: 3,
       era: "BE",
-      max_qty: 5,
+      max_qty: 3,
       upgrade: {
         cocoa: 120000,
         goods: [

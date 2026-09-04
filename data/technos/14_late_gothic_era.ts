@@ -1549,6 +1549,10 @@ export const technos_LG: TechnoData[] = [
           amount: 4900,
           resource: "tertiary_eg",
         },
+        {
+          amount: 1950,
+          resource: "secondary_lg",
+        },
       ],
     },
     rewards: [

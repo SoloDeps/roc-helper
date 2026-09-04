@@ -17,15 +17,15 @@ export const seafarerHouse: BuildingData = {
         goods: [
           {
             amount: 1000,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 1000,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 1000,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },

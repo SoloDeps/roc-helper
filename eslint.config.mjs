@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Sortie de compilation des scripts d'extraction (scripts/extract).
+    ".extract-build/**",
+    // Données générées par scripts/extract — leur contrat de types
+    // (data/wonders/generated/types.ts) reste lui bien vérifié.
+    "data/**/generated/*.generated.ts",
   ]),
 ]);
 

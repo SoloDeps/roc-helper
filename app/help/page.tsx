@@ -83,7 +83,7 @@ export default function Help() {
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="p-4 rounded-lg border border-alpha-300 bg-background-300/50">
                     <h3 className="mt-0 mb-2 text-base font-semibold">
-                      🧭 Research Tree
+                      🧭 Technologies
                     </h3>
                     <p>
                       View the full tech tree, track unlocked technologies, and
@@ -234,7 +234,7 @@ export default function Help() {
 
                 <ul className="list-disc pl-6 space-y-1">
                   <li>
-                    Open the <strong>Research Tree</strong>
+                    Open <strong>Technologies</strong>
                   </li>
                   <li>
                     Look at the order in which goods technologies appear in your

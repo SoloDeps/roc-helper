@@ -8,8 +8,8 @@ export const technos_FA: TechnoData[] = [
     required: [],
     costs: {
       research_points: 62,
-      coins: 1200000,
-      food: 1000000,
+      coins: 1230000,
+      food: 1050000,
       goods: [
         {
           amount: 3680,
@@ -50,8 +50,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_0"],
     costs: {
       research_points: 97,
-      coins: 3400000,
-      food: 2500000,
+      coins: 3440000,
+      food: 2590000,
       goods: [
         {
           amount: 2590,
@@ -95,7 +95,7 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_0"],
     costs: {
       research_points: 88,
-      coins: 4800000,
+      coins: 4820000,
       food: 1800000,
       goods: [
         {
@@ -138,8 +138,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_1"],
     costs: {
       research_points: 73,
-      coins: 1400000,
-      food: 1200000,
+      coins: 1490000,
+      food: 1240000,
       goods: [
         {
           amount: 9800,
@@ -179,7 +179,7 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_1"],
     costs: {
       research_points: 85,
-      coins: 5100000,
+      coins: 5150000,
       food: 969000,
       goods: [
         {
@@ -224,8 +224,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_2"],
     costs: {
       research_points: 11,
-      coins: 1700000,
-      food: 1600000,
+      coins: 1760000,
+      food: 1630000,
       goods: [
         {
           amount: 1520,
@@ -276,8 +276,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_3", "fa_4"],
     costs: {
       research_points: 61,
-      coins: 1300000,
-      food: 1300000,
+      coins: 1360000,
+      food: 1350000,
       goods: [
         {
           amount: 1840,
@@ -317,8 +317,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_4"],
     costs: {
       research_points: 65,
-      coins: 3700000,
-      food: 1800000,
+      coins: 3740000,
+      food: 1850000,
       goods: [
         {
           amount: 9760,
@@ -358,7 +358,7 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_5"],
     costs: {
       research_points: 16,
-      coins: 3900000,
+      coins: 3990000,
       food: 777000,
       goods: [
         {
@@ -411,8 +411,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_6", "fa_7", "fa_8"],
     costs: {
       research_points: 105,
-      coins: 3000000,
-      food: 2900000,
+      coins: 3070000,
+      food: 2960000,
       goods: [
         {
           amount: 2440,
@@ -448,7 +448,7 @@ export const technos_FA: TechnoData[] = [
     costs: {
       research_points: 22,
       coins: 1700000,
-      food: 1600000,
+      food: 1610000,
       goods: [
         {
           amount: 2840,
@@ -507,8 +507,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_8"],
     costs: {
       research_points: 110,
-      coins: 1700000,
-      food: 2200000,
+      coins: 1790000,
+      food: 2220000,
       goods: [
         {
           amount: 5300,
@@ -550,8 +550,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_9"],
     costs: {
       research_points: 74,
-      coins: 1500000,
-      food: 2900000,
+      coins: 1550000,
+      food: 2960000,
       goods: [
         {
           amount: 2450,
@@ -582,8 +582,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_9"],
     costs: {
       research_points: 61,
-      coins: 2400000,
-      food: 2600000,
+      coins: 2450000,
+      food: 2660000,
       goods: [
         {
           amount: 1640,
@@ -614,8 +614,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_10", "fa_11"],
     costs: {
       research_points: 84,
-      coins: 3600000,
-      food: 1900000,
+      coins: 3620000,
+      food: 1990000,
       goods: [
         {
           amount: 3030,
@@ -657,8 +657,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_10", "fa_11"],
     costs: {
       research_points: 89,
-      coins: 2300000,
-      food: 1400000,
+      coins: 2380000,
+      food: 1480000,
       goods: [
         {
           amount: 3530,
@@ -700,7 +700,7 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_12", "fa_13", "fa_15"],
     costs: {
       research_points: 120,
-      coins: 5200000,
+      coins: 5270000,
       food: 851000,
       goods: [
         {
@@ -736,8 +736,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_14", "fa_15"],
     costs: {
       research_points: 62,
-      coins: 1300000,
-      food: 1300000,
+      coins: 1390000,
+      food: 1310000,
       goods: [
         {
           amount: 5660,
@@ -769,8 +769,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_14", "fa_15"],
     costs: {
       research_points: 75,
-      coins: 2900000,
-      food: 1200000,
+      coins: 2960000,
+      food: 1210000,
       goods: [
         {
           amount: 8670,
@@ -808,7 +808,7 @@ export const technos_FA: TechnoData[] = [
     costs: {
       research_points: 62,
       coins: 2500000,
-      food: 2500000,
+      food: 2550000,
       goods: [
         {
           amount: 2260,
@@ -844,8 +844,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_17", "fa_18"],
     costs: {
       research_points: 64,
-      coins: 4800000,
-      food: 1000000,
+      coins: 4820000,
+      food: 1040000,
       goods: [
         {
           amount: 3610,
@@ -887,8 +887,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_19"],
     costs: {
       research_points: 125,
-      coins: 2400000,
-      food: 3300000,
+      coins: 2420000,
+      food: 3330000,
       goods: [
         {
           amount: 6620,
@@ -919,8 +919,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_20"],
     costs: {
       research_points: 65,
-      coins: 3600000,
-      food: 1500000,
+      coins: 3650000,
+      food: 1580000,
       goods: [
         {
           amount: 2600,
@@ -962,8 +962,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_21", "fa_22"],
     costs: {
       research_points: 71,
-      coins: 3900000,
-      food: 1300000,
+      coins: 3950000,
+      food: 1370000,
       goods: [
         {
           amount: 1870,
@@ -994,8 +994,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_21", "fa_22"],
     costs: {
       research_points: 59,
-      coins: 1300000,
-      food: 1600000,
+      coins: 1390000,
+      food: 1670000,
       goods: [
         {
           amount: 2340,
@@ -1026,8 +1026,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_22"],
     costs: {
       research_points: 65,
-      coins: 5100000,
-      food: 2000000,
+      coins: 5160000,
+      food: 2040000,
       goods: [
         {
           amount: 3440,
@@ -1069,8 +1069,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_22"],
     costs: {
       research_points: 80,
-      coins: 4000000,
-      food: 2400000,
+      coins: 4030000,
+      food: 2410000,
       goods: [
         {
           amount: 4180,
@@ -1117,8 +1117,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_23", "fa_24"],
     costs: {
       research_points: 74,
-      coins: 3200000,
-      food: 2900000,
+      coins: 3250000,
+      food: 2960000,
       goods: [
         {
           amount: 10600,
@@ -1149,8 +1149,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_23", "fa_24"],
     costs: {
       research_points: 96,
-      coins: 3400000,
-      food: 1100000,
+      coins: 3430000,
+      food: 1180000,
       goods: [
         {
           amount: 4330,
@@ -1186,8 +1186,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_25", "fa_26"],
     costs: {
       research_points: 68,
-      coins: 1400000,
-      food: 2900000,
+      coins: 1440000,
+      food: 2980000,
       goods: [
         {
           amount: 2260,
@@ -1224,8 +1224,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_27", "fa_28"],
     costs: {
       research_points: 140,
-      coins: 1600000,
-      food: 3300000,
+      coins: 1640000,
+      food: 3370000,
       goods: [
         {
           amount: 3090,
@@ -1260,8 +1260,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_29"],
     costs: {
       research_points: 65,
-      coins: 1500000,
-      food: 2200000,
+      coins: 1540000,
+      food: 2240000,
       goods: [
         {
           amount: 8280,
@@ -1298,8 +1298,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_29"],
     costs: {
       research_points: 88,
-      coins: 4300000,
-      food: 1500000,
+      coins: 4310000,
+      food: 1590000,
       goods: [
         {
           amount: 12150,
@@ -1341,8 +1341,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_30"],
     costs: {
       research_points: 74,
-      coins: 3500000,
-      food: 1400000,
+      coins: 3570000,
+      food: 1490000,
       goods: [
         {
           amount: 3720,
@@ -1378,8 +1378,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_30"],
     costs: {
       research_points: 68,
-      coins: 2900000,
-      food: 2600000,
+      coins: 2930000,
+      food: 2660000,
       goods: [
         {
           amount: 2330,
@@ -1415,7 +1415,7 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_31", "fa_32"],
     costs: {
       research_points: 75,
-      coins: 5100000,
+      coins: 5140000,
       food: 873000,
       goods: [
         {
@@ -1458,8 +1458,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_31", "fa_32"],
     costs: {
       research_points: 83,
-      coins: 1300000,
-      food: 2200000,
+      coins: 1380000,
+      food: 2220000,
       goods: [
         {
           amount: 7970,
@@ -1496,7 +1496,7 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_33", "fa_34"],
     costs: {
       research_points: 81,
-      coins: 410000,
+      coins: 4180000,
       food: 910000,
       goods: [
         {
@@ -1528,8 +1528,8 @@ export const technos_FA: TechnoData[] = [
     required: ["fa_35", "fa_36"],
     costs: {
       research_points: 91,
-      coins: 5100000,
-      food: 3000000,
+      coins: 5140000,
+      food: 3060000,
       goods: [
         {
           amount: 8380,

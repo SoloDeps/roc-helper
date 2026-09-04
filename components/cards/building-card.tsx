@@ -15,6 +15,7 @@ import {
 } from "@/lib/utils";
 import { useBuilding } from "@/hooks/use-database";
 import type { HydratedBuilding } from "@/lib/db/data-hydration";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 interface BuildingCardProps {
   buildingId?: string;
@@ -70,16 +71,13 @@ export function BuildingCard({
     if (!goods?.length) return null;
 
     return goods.map((g) => {
-      const match = g.resource.match(
-        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-      );
+      const parsed = parseRankGoodKey(g.resource);
       let goodName = g.resource;
 
-      if (match) {
-        const [, priority, era] = match;
+      if (parsed) {
         const resolvedName = getGoodNameFromPriorityEra(
-          priority,
-          era,
+          parsed.priority,
+          parsed.era,
           userSelections,
         );
         goodName = resolvedName || "default";

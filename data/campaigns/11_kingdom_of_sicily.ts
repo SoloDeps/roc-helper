@@ -353,7 +353,7 @@ export const campaign_KS = [
   },
   {
     id: "ks_12",
-    name: "Sand swept Plains",
+    name: "Sandswept Plains",
     column: 6,
     required: ["ks_10"],
     scout: { coins: 1200000, duration: 14400 },

@@ -1,6 +1,13 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { buildingsAbbr, EraAbbr, goodsUrlByEra } from "./constants";
+import {
+  buildingsAbbr,
+  eras,
+  EraAbbr,
+  goodsUrlByEra,
+  makePriorityKey,
+  PriorityType,
+} from "./constants";
 import { imagesUrl } from "./catalog";
 
 export const selectorGoods: Record<string, string> = {
@@ -62,7 +69,9 @@ export function getBuildingFromLocal(
   );
 
   // return building if valid, otherwise undefined
-  return groupIndex !== -1 ? buildings[groupIndex][priorityIndex] : undefined;
+  // `buildings[groupIndex]` peut manquer : localStorage corrompu, ou tableau
+  // plus court que `buildingsAbbr` après l'ajout d'un groupe d'ères.
+  return groupIndex !== -1 ? buildings[groupIndex]?.[priorityIndex] : undefined;
 }
 
 export function isValidData(data: unknown): boolean {
@@ -128,15 +137,144 @@ export function getGoodNameFromPriorityEra(
   const goodMeta =
     goodsUrlByEra[era.toUpperCase() as EraAbbr]?.[normalizedBuilding];
 
-  return goodMeta?.name ? slugify(goodMeta.name) : null;
+  // La CLÉ, pas le libellé : le retour alimente `getItemIconLocal` et sert
+  // d'identifiant de bien. Les trois biens dont le libellé diverge de la clé
+  // (`secretary`/"Secretary Desk", `elixier`/"Elixirs",
+  // `embellishment`/"Embellishments") tomberaient sinon sur une icône absente.
+  return goodMeta?.key ?? null;
 }
 
+/**
+ * Résolution INVERSE de `getGoodNameFromPriorityEra` : d'une CLÉ de bien
+ * (`"cape"`, `"secretary"`) vers la clé de priorité du joueur (`"tertiary_re"`).
+ *
+ * Compare sur `goodsUrlByEra[…].key`, jamais sur le libellé : les deux
+ * divergent sur trois biens (cf. le commentaire de `goodsUrlByEra`).
+ *
+ * Cherche dans quel SLOT ce joueur a rangé l'atelier qui fabrique ce bien, au
+ * lieu de demander ce que contient un slot donné. C'est ce qui rend un coût
+ * écrit en bien concret indépendant du classement : le classement est appliqué
+ * ici puis ré-appliqué à l'affichage, et les deux s'annulent.
+ *
+ * ⚠️ Retourne la PREMIÈRE ère qui correspond. Le contrat est donc que deux ères
+ * ne partagent jamais un nom de bien — c'est vrai du jeu (un bien appartient à
+ * un `age`), et `goodsUrlByEra` doit le rester : le doublon `SA`/`BA` rangeait
+ * les trois biens du Bronze sous l'Âge de pierre. Un test fige cette unicité.
+ *
+ * `null` quand le joueur n'a pas classé l'atelier producteur — le bien reste
+ * affiché, mais dans le bloc « autres biens ».
+ *
+ * Extrait de `useGoodToPriorityConverter` (components/total-goods/
+ * total-goods-display.tsx), qui l'appelle désormais, pour que ce chemin soit
+ * testable hors React.
+ */
+export function getPriorityKeyFromGoodName(
+  goodName: string,
+  userSelections: string[][],
+): string | null {
+  if (!userSelections || userSelections.length === 0) return null;
+
+  const normalizedGoodName = slugify(goodName);
+
+  for (const era of eras) {
+    const abbr = era.abbr as EraAbbr;
+    const goodsForEra = goodsUrlByEra[abbr];
+    if (!goodsForEra) continue;
+
+    for (const priority of ["primary", "secondary", "tertiary"] as PriorityType[]) {
+      const building = getBuildingFromLocal(priority, abbr, userSelections);
+      if (!building) continue;
+
+      const normalizedBuilding = slugify(building);
+      const goodMeta = goodsForEra[normalizedBuilding];
+
+      if (goodMeta && goodMeta.key === normalizedGoodName) {
+        return makePriorityKey(priority, abbr);
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Le joueur a-t-il classé les TROIS ateliers de cette ère ?
+ *
+ * La popup remplit les trois emplacements ou aucun (le tertiaire est déduit),
+ * mais un classement laissé à mi-chemin existe : `["Artisan", "", ""]`.
+ *
+ * ⚠️ Garde-fou indispensable au repli sur l'ordre du jeu. Mélanger les deux
+ * règles de placement dans une même ère les fait entrer en collision : avec
+ * `["Artisan", "", ""]`, le classement met `bronze_bracelet` (Artisan) en
+ * `primary_ba` pendant que le repli y met aussi `alabaster_idol` (order 1), et
+ * les deux montants fusionnent. Une ère se range donc entièrement selon le
+ * joueur, ou entièrement selon le jeu.
+ */
+export function hasCompleteWorkshopRanking(
+  era: string,
+  userSelections: string[][],
+): boolean {
+  return (["primary", "secondary", "tertiary"] as PriorityType[]).every(
+    (priority) => Boolean(getBuildingFromLocal(priority, era, userSelections)),
+  );
+}
+
+/**
+ * ⚠️ LES « RESSOURCES » QUI NE SONT PAS DES BIENS.
+ *
+ * `getItemIconLocal` envoie toute clé vers `/images/goods/<clé>.webp` — juste
+ * pour un bien, faux pour ce qui n'en est pas un et vit dans un dossier dédié.
+ * Deux cas dans le projet, et aucun ne se devine depuis la clé (ni le dossier,
+ * ni le préfixe `icon_` que la clé ne porte pas) :
+ *  - `chest_puzzlepieces` : un COFFRE, versé par les régions de campagne
+ *    (`data/campaigns/*`), rangé avec tous les autres coffres ;
+ *  - `negotiation_wildcard` : un objet d'inventaire, versé par le coffre
+ *    World Fair du Heritage Vault.
+ *
+ * Cette table ne liste QUE ces écarts — jamais une ressource que
+ * `/images/goods/` sert déjà correctement.
+ */
+const RESOURCE_ICON_OVERRIDES: Record<string, string> = {
+  chest_puzzlepieces: "/images/chests/icon_chest_puzzlepieces.webp",
+  negotiation_wildcard: "/images/inventory/icon_negotiation_wildcard.webp",
+};
+
 export function getItemIconLocal(type: string): string {
+  const override = RESOURCE_ICON_OVERRIDES[type];
+  if (override !== undefined) return override;
   const normalized = slugify(type);
   if (normalized && normalized !== "default") {
     return `/images/goods/${normalized}.webp`;
   }
   return `/images/goods/default.webp`;
+}
+
+/**
+ * Icône d'un OBJET D'INVENTAIRE (`InventoryItem_RefillBarracks_Infantry`,
+ * `InventoryItem_AgeUpgradeKit_Evolving`…), dossier dédié — jamais
+ * `/images/goods/`, un objet d'inventaire n'est pas un bien. Même modèle que
+ * `getItemIconLocal` : slugify + repli sur `default.webp`.
+ */
+export function getInventoryItemIconLocal(type: string): string {
+  const normalized = slugify(type);
+  if (normalized && normalized !== "default") {
+    return `/images/inventory/${normalized}.webp`;
+  }
+  return `/images/inventory/default.webp`;
+}
+
+/**
+ * Icône d'une UNITÉ (`Unit_CurrentEra_AztecMainTemple_Animal_Crocodiles`…),
+ * dossier dédié — jamais `/images/goods/`, conceptuellement le mauvais
+ * dossier pour une unité. Même modèle que `getItemIconLocal` : slugify +
+ * repli sur `default.webp`.
+ */
+export function getUnitIconLocal(type: string): string {
+  const normalized = slugify(type);
+  if (normalized && normalized !== "default") {
+    return `/images/units/${normalized}.webp`;
+  }
+  return `/images/units/default.webp`;
 }
 
 export function getCityCrestIconLocal(type: string): string {

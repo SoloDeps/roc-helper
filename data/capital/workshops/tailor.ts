@@ -26,15 +26,15 @@ export const tailorWorkshop: BuildingData = {
         goods: [
           {
             amount: 52,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 52,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 52,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -44,15 +44,15 @@ export const tailorWorkshop: BuildingData = {
         goods: [
           {
             amount: 24,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 24,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 24,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -108,15 +108,15 @@ export const tailorWorkshop: BuildingData = {
         goods: [
           {
             amount: 880,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 880,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 880,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -126,15 +126,15 @@ export const tailorWorkshop: BuildingData = {
         goods: [
           {
             amount: 515,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 515,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 515,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },

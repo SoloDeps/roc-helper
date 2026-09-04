@@ -7,15 +7,24 @@ import {
   HydratedTechno,
 } from "@/lib/db/data-hydration";
 import type { CampaignEntity } from "@/lib/db/schema";
-import type { CampaignRegion } from "@/types/campaign-types";
 import { ERAS } from "@/lib/catalog";
 import { getCampaignsByEra } from "@/data/campaigns/campaigns-registry";
+import { sumCosts, type CostEntry } from "@/resolvers/costs";
 
+/**
+ * Le total du Calculator.
+ *
+ * L'agrégation elle-même vit dans `resolvers/costs.ts` (`sumCosts`). Ce module
+ * ne fait plus que deux choses : décider **ce qui compte** (les règles de
+ * masquage et de complétion, propres au Calculator) et le lui passer.
+ *
+ * `accumulateCosts` a été retiré : c'était l'une des cinq copies de
+ * l'algorithme d'agrégation (§6.4 du doc `data-contracts.md`), et la seule à
+ * valider ses entrées. C'est ce comportement-là qui a été retenu pour tous.
+ */
 export interface ResourceTotals {
   main: Record<string, number>;
   goods: Map<string, number>;
-  byEra: Map<string, Map<string, number>>;
-  byCity: Map<string, Map<string, number>>;
 }
 
 export function calculateTotalCosts(
@@ -25,184 +34,77 @@ export function calculateTotalCosts(
   tradePosts: HydratedOttomanTradePost[],
   campaignEntities?: CampaignEntity[],
 ): ResourceTotals {
-  const totals: ResourceTotals = {
-    main: {},
-    goods: new Map(),
-    byEra: new Map(),
-    byCity: new Map(),
-  };
+  const entries: CostEntry[] = [];
 
-  // Buildings
+  // Buildings — la quantité multiplie ressources ET biens
   for (const building of buildings) {
     if (building.hidden) continue;
-    accumulateCosts(totals, building.costs, building.quantity);
+    entries.push({ costs: building.costs, multiplier: building.quantity });
   }
 
   // Technos — exclure si hidden (masquée calculator) OU cp=true (déjà complétée)
   for (const techno of technos) {
     if (techno.hidden || techno.cp) continue;
-    accumulateCosts(totals, techno.costs, 1);
+    entries.push({ costs: techno.costs });
   }
 
   // Areas
   for (const area of areas) {
     if (area.hidden) continue;
-    accumulateCosts(totals, area.costs, 1);
+    entries.push({ costs: area.costs });
   }
 
   // Trade Posts
   for (const tp of tradePosts) {
     if (tp.hidden) continue;
-    accumulateCosts(totals, tp.costs, 1);
+    entries.push({ costs: tp.costs });
   }
 
-  // Campaigns — aggregate scout coins for non-hidden, non-completed regions
-  if (campaignEntities && campaignEntities.length > 0) {
-    // Build map eraId → set of completed IDs
-    const completedIds = new Set(
-      campaignEntities.filter((r) => !!r.cp).map((r) => r.id),
-    );
-    const hiddenIds = new Set(
-      campaignEntities.filter((r) => !!r.hidden).map((r) => r.id),
-    );
-
-    // Get unique era IDs from campaign entities
-    const eraIds = new Set<string>();
-    campaignEntities.forEach((c) => {
-      const abbr = c.id.match(/^([a-z]+)_/)?.[1];
-      if (abbr) {
-        const era = ERAS.find((e) => e.abbr.toLowerCase() === abbr);
-        if (era) eraIds.add(era.id);
-      }
-    });
-
-    eraIds.forEach((eraId) => {
-      const staticRegions = getCampaignsByEra(eraId);
-      for (const region of staticRegions) {
-        if (completedIds.has(region.id)) continue;
-        if (hiddenIds.has(region.id)) continue;
-        // Only count if this region was added to DB
-        const isAdded = campaignEntities.some((c) => c.id === region.id);
-        if (!isAdded) continue;
-        // Accumulate scout cost
-        totals.main["coins"] = (totals.main["coins"] ?? 0) + region.scout.coins;
-      }
-    });
+  // Campaigns — le coût d'exploration des régions ni complétées ni masquées.
+  // Seule source dont le coût n'est pas un objet `Costs` : il est reconstruit
+  // ici pour passer par le même chemin d'agrégation que les autres.
+  for (const coins of scoutCoins(campaignEntities)) {
+    entries.push({ costs: { coins } });
   }
 
-  return totals;
+  return sumCosts(entries);
 }
 
-function accumulateCosts(
-  totals: ResourceTotals,
-  costs: Record<string, any>,
-  multiplier: number,
-) {
-  // Traiter costs.resources (coins, food, etc.)
-  if (costs.resources && typeof costs.resources === "object") {
-    for (const [key, value] of Object.entries(costs.resources)) {
-      if (typeof value === "number") {
-        totals.main[key] = (totals.main[key] ?? 0) + value * multiplier;
-      }
+/**
+ * Les coûts d'exploration à compter, dans l'ordre des ères puis des régions.
+ *
+ * Une région ne compte que si elle est présente en base (l'utilisateur l'a
+ * ajoutée), non complétée et non masquée.
+ */
+function scoutCoins(campaignEntities?: CampaignEntity[]): number[] {
+  if (!campaignEntities || campaignEntities.length === 0) return [];
+
+  const completedIds = new Set(
+    campaignEntities.filter((r) => !!r.cp).map((r) => r.id),
+  );
+  const hiddenIds = new Set(
+    campaignEntities.filter((r) => !!r.hidden).map((r) => r.id),
+  );
+  const addedIds = new Set(campaignEntities.map((r) => r.id));
+
+  // Ères concernées, déduites du préfixe des IDs (ex: "re_3" → Roman Empire)
+  const eraIds = new Set<string>();
+  for (const c of campaignEntities) {
+    const abbr = c.id.match(/^([a-z]+)_/)?.[1];
+    if (!abbr) continue;
+    const era = ERAS.find((e) => e.abbr.toLowerCase() === abbr);
+    if (era) eraIds.add(era.id);
+  }
+
+  const coins: number[] = [];
+  for (const eraId of eraIds) {
+    for (const region of getCampaignsByEra(eraId)) {
+      if (completedIds.has(region.id)) continue;
+      if (hiddenIds.has(region.id)) continue;
+      if (!addedIds.has(region.id)) continue;
+      coins.push(region.scout.coins);
     }
   }
 
-  //  Traiter costs.goods avec format { resource: "...", amount: ... }
-  if (costs.goods && Array.isArray(costs.goods)) {
-    for (const good of costs.goods) {
-      //  Protection: vérifier que resource existe
-      if (!good.resource || typeof good.resource !== "string") {
-        console.warn("⚠️ Invalid good detected in costs:", good);
-        continue;
-      }
-
-      if (typeof good.amount !== "number") {
-        console.warn("⚠️ Invalid amount in good:", good);
-        continue;
-      }
-
-      const current = totals.goods.get(good.resource) ?? 0;
-      totals.goods.set(good.resource, current + good.amount * multiplier);
-    }
-  }
-
-  // Fallback: traiter les anciennes structures plates
-  for (const [key, value] of Object.entries(costs)) {
-    if (key === "resources" || key === "goods") continue; // Déjà traités ci-dessus
-
-    if (key === "goods" && Array.isArray(value)) {
-      for (const good of value) {
-        if (!good.resource || typeof good.resource !== "string") continue;
-
-        const current = totals.goods.get(good.resource) ?? 0;
-        totals.goods.set(good.resource, current + good.amount * multiplier);
-      }
-    } else if (typeof value === "number") {
-      totals.main[key] = (totals.main[key] ?? 0) + value * multiplier;
-    }
-  }
-}
-
-export function groupGoodsByEra(
-  goods: Map<string, number>,
-  userSelections: string[][],
-): Map<string, Map<string, number>> {
-  const byEra = new Map<string, Map<string, number>>();
-
-  goods.forEach((amount, resource) => {
-    //  Protection: vérifier que resource est valide
-    if (!resource || typeof resource !== "string") {
-      console.warn("⚠️ Invalid good resource in grouping:", resource);
-      return;
-    }
-
-    const match = resource.match(/^(primary|secondary|tertiary)_([a-z]{2})$/i);
-
-    if (match) {
-      const [, priority, era] = match;
-      const eraKey = era.toUpperCase();
-
-      if (!byEra.has(eraKey)) {
-        byEra.set(eraKey, new Map());
-      }
-
-      byEra.get(eraKey)!.set(resource, amount);
-    }
-  });
-
-  return byEra;
-}
-
-export function groupGoodsByCity(
-  goods: Map<string, number>,
-): Map<string, Map<string, number>> {
-  const byCity = new Map<string, Map<string, number>>();
-
-  const ottomanGoods = [
-    "wheat",
-    "pomegranate",
-    "confection",
-    "syrup",
-    "mohair",
-    "apricot",
-    "tea",
-    "brocade",
-  ];
-
-  goods.forEach((amount, resource) => {
-    //  Protection: vérifier que resource est valide
-    if (!resource || typeof resource !== "string") {
-      console.warn("⚠️ Invalid good resource in city grouping:", resource);
-      return;
-    }
-
-    if (ottomanGoods.includes(resource.toLowerCase())) {
-      if (!byCity.has("OTTOMAN")) {
-        byCity.set("OTTOMAN", new Map());
-      }
-      byCity.get("OTTOMAN")!.set(resource, amount);
-    }
-  });
-
-  return byCity;
+  return coins;
 }

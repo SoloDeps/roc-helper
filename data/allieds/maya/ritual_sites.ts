@@ -16,15 +16,15 @@ export const mayaSmallRitualSite: BuildingData = {
         goods: [
           {
             amount: 225,
-            resource: "cape",
+            resource: "tertiary_re",
           },
           {
             amount: 225,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 225,
-            resource: "goblet",
+            resource: "secondary_re",
           },
         ],
       },
@@ -48,15 +48,15 @@ export const mayaAverageRitualSite: BuildingData = {
         goods: [
           {
             amount: 350,
-            resource: "cape",
+            resource: "tertiary_re",
           },
           {
             amount: 350,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 350,
-            resource: "goblet",
+            resource: "secondary_re",
           },
         ],
       },

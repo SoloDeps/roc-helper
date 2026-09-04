@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 interface CardData {
   title: string;
   description: string;
-  icon: string;
   illustration: string;
   href?: string;
   locked?: boolean;
@@ -17,45 +16,43 @@ const cards: CardData[] = [
   {
     title: "Calculator",
     description: "Plan buildings and track the resources you'll need",
-    icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/high_middle_ages/hm_13.webp",
     href: "/calculator",
   },
   {
     title: "Campaign",
     description: "Track your campaign progress and scout regions",
-    icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/iberian_era/ie_31.webp",
     href: "/campaign",
   },
   {
-    title: "Research Tree",
+    title: "Heritage Vault",
+    description: "Plan what to spend and track your Vault progress",
+    illustration: "/images/vault/icon_heritage.webp",
+    href: "/vault",
+    new: true,
+  },
+  {
+    title: "Layout Builder",
+    description: "Design every city and calculate production with all your bonuses",
+    illustration: "/images/technos/minoan_era/me_6.webp",
+    // illustration: "/images/technos/late_gothic_era/lg_22.webp",
+    href: "/layout-builder",
+    // new: true,
+    locked: true,
+    badge: "Coming Soon",
+  },
+  {
+    title: "Technologies",
     description: "Explore technologies and plan your research path",
-    icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/kingdom_of_sicily/ks_41.webp",
     href: "/research-tree",
   },
   {
     title: "Wonders",
     description: "Track your wonders progress and plan your presets",
-    icon: "/images/game_icons/icon_flat_research_points.webp",
     illustration: "/images/technos/bronze_age/ba_8.webp",
     href: "/wonders",
-  },
-  {
-    title: "Help",
-    description: "Learn how to use RoC Helper and explore its features",
-    icon: "/images/game_icons/icon_flat_research_points.webp",
-    illustration: "/images/technos/high_middle_ages/hm_16.webp",
-    href: "/help",
-  },
-  {
-    title: "Coming Soon",
-    description: "Something is taking shape in the shadows...",
-    icon: "/images/game_icons/icon_flat_scout.webp",
-    illustration: "/images/technos/minoan_era/me_6.webp",
-    locked: true,
-    badge: "Coming Soon",
   },
 ];
 
@@ -96,7 +93,12 @@ function HomeCard({ data }: { data: CardData }) {
           <h2 className="text-[17px] md:text-lg font-bold leading-tight text-foreground truncate">
             {data.title}
           </h2>
-          {data.new && (
+          {data.badge && (
+            <span className="inline-flex items-center rounded-sm border border-border px-2 py-0.5 text-xs font-medium text-muted-foreground whitespace-nowrap">
+              {data.badge}
+            </span>
+          )}
+          {data.new && !data.badge && (
             <span
               className="flex size-2 rounded-full bg-blue-500 dark:bg-blue-400"
               title="New"

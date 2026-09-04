@@ -1,23 +1,14 @@
+import { ERAS } from "@/data/config";
+
 /**
- * Mapping des ERA IDs (snake_case) vers leurs abréviations (2 lettres)
+ * Mapping des ERA IDs (snake_case) vers leurs abréviations (2 lettres minuscules)
  * Utilisé pour générer les IDs de technos au format: [abbr]_[index]
+ *
+ * Dérivé de ERAS (data/config.ts) — ne pas redéclarer la liste des ères ici.
  */
-export const ERA_ID_TO_ABBR: Record<string, string> = {
-  stone_age: "sa",
-  bronze_age: "ba",
-  minoan_era: "me",
-  classical_greece: "cg",
-  early_rome: "er",
-  roman_empire: "re",
-  byzantine_era: "be",
-  age_of_the_franks: "af",
-  feudal_age: "fa",
-  iberian_era: "ie",
-  kingdom_of_sicily: "ks",
-  high_middle_ages: "hm",
-  early_gothic_era: "eg",
-  late_gothic_era: "lg",
-};
+export const ERA_ID_TO_ABBR: Record<string, string> = Object.fromEntries(
+  ERAS.map((era) => [era.id, era.abbr.toLowerCase()]),
+);
 
 /**
  * Mapping inverse: ABBR vers ERA_ID

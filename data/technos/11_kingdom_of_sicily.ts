@@ -9,7 +9,7 @@ export const technos_KS: TechnoData[] = [
     costs: {
       research_points: 81,
       coins: 2200000,
-      food: 2400000,
+      food: 2490000,
       goods: [
         {
           amount: 9250,
@@ -60,8 +60,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_0"],
     costs: {
       research_points: 82,
-      coins: 4400000,
-      food: 2300000,
+      coins: 4450000,
+      food: 2320000,
       goods: [
         {
           amount: 8830,
@@ -92,8 +92,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_0"],
     costs: {
       research_points: 77,
-      coins: 4400000,
-      food: 2800000,
+      coins: 4450000,
+      food: 2870000,
       goods: [
         {
           amount: 6900,
@@ -137,7 +137,7 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_0"],
     costs: {
       research_points: 105,
-      coins: 7500000,
+      coins: 7540000,
       food: 2800000,
       goods: [
         {
@@ -176,8 +176,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_1"],
     costs: {
       research_points: 89,
-      coins: 2400000,
-      food: 2200000,
+      coins: 2430000,
+      food: 2250000,
       goods: [
         {
           amount: 12950,
@@ -208,8 +208,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_2"],
     costs: {
       research_points: 115,
-      coins: 2500000,
-      food: 4900000,
+      coins: 2550000,
+      food: 4990000,
       goods: [
         {
           amount: 8170,
@@ -244,8 +244,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_3"],
     costs: {
       research_points: 31,
-      coins: 4700000,
-      food: 3500000,
+      coins: 4750000,
+      food: 3550000,
       goods: [
         {
           amount: 4070,
@@ -299,8 +299,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_3"],
     costs: {
       research_points: 21,
-      coins: 5300000,
-      food: 4700000,
+      coins: 5320000,
+      food: 4720000,
       goods: [
         {
           amount: 7460,
@@ -337,8 +337,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_4", "ks_5"],
     costs: {
       research_points: 95,
-      coins: 1800000,
-      food: 1600000,
+      coins: 1840000,
+      food: 1620000,
       goods: [
         {
           amount: 5110,
@@ -369,8 +369,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_6"],
     costs: {
       research_points: 73,
-      coins: 2300000,
-      food: 1300000,
+      coins: 2320000,
+      food: 1320000,
       goods: [
         {
           amount: 4820,
@@ -412,8 +412,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_6"],
     costs: {
       research_points: 98,
-      coins: 4100000,
-      food: 2400000,
+      coins: 4180000,
+      food: 2450000,
       goods: [
         {
           amount: 8130,
@@ -460,8 +460,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_7"],
     costs: {
       research_points: 96,
-      coins: 5500000,
-      food: 2300000,
+      coins: 5530000,
+      food: 2320000,
       goods: [
         {
           amount: 4750,
@@ -503,8 +503,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_8"],
     costs: {
       research_points: 77,
-      coins: 6700000,
-      food: 5100000,
+      coins: 6710000,
+      food: 5150000,
       goods: [
         {
           amount: 5330,
@@ -540,8 +540,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_8"],
     costs: {
       research_points: 125,
-      coins: 5400000,
-      food: 5300000,
+      coins: 5430000,
+      food: 5350000,
       goods: [
         {
           amount: 16400,
@@ -576,8 +576,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_8"],
     costs: {
       research_points: 96,
-      coins: 2300000,
-      food: 5100000,
+      coins: 2340000,
+      food: 5150000,
       goods: [
         {
           amount: 4920,
@@ -608,8 +608,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_8", "ks_9", "ks_10", "ks_11"],
     costs: {
       research_points: 110,
-      coins: 1800000,
-      food: 1800000,
+      coins: 1860000,
+      food: 1830000,
       goods: [
         {
           amount: 4380,
@@ -664,7 +664,7 @@ export const technos_KS: TechnoData[] = [
     costs: {
       research_points: 105,
       coins: 5800000,
-      food: 2900000,
+      food: 2970000,
       goods: [
         {
           amount: 4800,
@@ -700,8 +700,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_14", "ks_15"],
     costs: {
       research_points: 84,
-      coins: 7100000,
-      food: 3300000,
+      coins: 7110000,
+      food: 3350000,
       goods: [
         {
           amount: 15450,
@@ -736,8 +736,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_15"],
     costs: {
       research_points: 81,
-      coins: 2700000,
-      food: 4600000,
+      coins: 2770000,
+      food: 4660000,
       goods: [
         {
           amount: 5770,
@@ -774,8 +774,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_15"],
     costs: {
       research_points: 84,
-      coins: 5700000,
-      food: 1900000,
+      coins: 5740000,
+      food: 1960000,
       goods: [
         {
           amount: 6230,
@@ -822,8 +822,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_16", "ks_17"],
     costs: {
       research_points: 80,
-      coins: 6300000,
-      food: 2900000,
+      coins: 6370000,
+      food: 2950000,
       goods: [
         {
           amount: 4800,
@@ -854,7 +854,7 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_18"],
     costs: {
       research_points: 97,
-      coins: 3900000,
+      coins: 3930000,
       food: 1800000,
       goods: [
         {
@@ -910,7 +910,7 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_19"],
     costs: {
       research_points: 86,
-      coins: 5700000,
+      coins: 5720000,
       food: 3100000,
       goods: [
         {
@@ -948,8 +948,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_20"],
     costs: {
       research_points: 135,
-      coins: 2400000,
-      food: 4600000,
+      coins: 2490000,
+      food: 4690000,
       goods: [
         {
           amount: 16000,
@@ -984,8 +984,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_21", "ks_22"],
     costs: {
       research_points: 105,
-      coins: 6100000,
-      food: 4500000,
+      coins: 6160000,
+      food: 4550000,
       goods: [
         {
           amount: 5220,
@@ -1028,7 +1028,7 @@ export const technos_KS: TechnoData[] = [
     costs: {
       research_points: 105,
       coins: 4100000,
-      food: 3900000,
+      food: 3990000,
       goods: [
         {
           amount: 9240,
@@ -1071,7 +1071,7 @@ export const technos_KS: TechnoData[] = [
     costs: {
       research_points: 89,
       coins: 6800000,
-      food: 3700000,
+      food: 3790000,
       goods: [
         {
           amount: 4510,
@@ -1102,8 +1102,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_23"],
     costs: {
       research_points: 105,
-      coins: 5900000,
-      food: 1500000,
+      coins: 5990000,
+      food: 1570000,
       goods: [
         {
           amount: 6900,
@@ -1134,8 +1134,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_24"],
     costs: {
       research_points: 92,
-      coins: 2200000,
-      food: 2600000,
+      coins: 2260000,
+      food: 2670000,
       goods: [
         {
           amount: 5840,
@@ -1173,7 +1173,7 @@ export const technos_KS: TechnoData[] = [
     costs: {
       research_points: 76,
       coins: 3500000,
-      food: 3900000,
+      food: 3930000,
       goods: [
         {
           amount: 15250,
@@ -1210,8 +1210,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_26", "ks_27", "ks_28"],
     costs: {
       research_points: 140,
-      coins: 6400000,
-      food: 2300000,
+      coins: 6460000,
+      food: 2390000,
       goods: [
         {
           amount: 5970,
@@ -1246,7 +1246,7 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_28"],
     costs: {
       research_points: 95,
-      coins: 2800000,
+      coins: 2850000,
       food: 3500000,
       goods: [
         {
@@ -1292,8 +1292,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_29"],
     costs: {
       research_points: 84,
-      coins: 1700000,
-      food: 2700000,
+      coins: 1770000,
+      food: 2730000,
       goods: [
         {
           amount: 13550,
@@ -1340,8 +1340,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_30"],
     costs: {
       research_points: 95,
-      coins: 2900000,
-      food: 3000000,
+      coins: 2910000,
+      food: 3050000,
       goods: [
         {
           amount: 4930,
@@ -1378,7 +1378,7 @@ export const technos_KS: TechnoData[] = [
     costs: {
       research_points: 110,
       coins: 5800000,
-      food: 3300000,
+      food: 3330000,
       goods: [
         {
           amount: 5910,
@@ -1419,7 +1419,7 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_31", "ks_32"],
     costs: {
       research_points: 125,
-      coins: 4800000,
+      coins: 4860000,
       food: 1500000,
       goods: [
         {
@@ -1457,8 +1457,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_33", "ks_35"],
     costs: {
       research_points: 80,
-      coins: 6100000,
-      food: 4300000,
+      coins: 6160000,
+      food: 4320000,
       goods: [
         {
           amount: 6560,
@@ -1494,8 +1494,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_34", "ks_35"],
     costs: {
       research_points: 100,
-      coins: 2300000,
-      food: 2700000,
+      coins: 2360000,
+      food: 2790000,
       goods: [
         {
           amount: 4490,
@@ -1530,8 +1530,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_35"],
     costs: {
       research_points: 105,
-      coins: 2800000,
-      food: 2700000,
+      coins: 2850000,
+      food: 2790000,
       goods: [
         {
           amount: 13300,
@@ -1568,8 +1568,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_35"],
     costs: {
       research_points: 81,
-      coins: 2300000,
-      food: 4200000,
+      coins: 2380000,
+      food: 4260000,
       goods: [
         {
           amount: 5350,
@@ -1609,8 +1609,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_36", "ks_37"],
     costs: {
       research_points: 145,
-      coins: 3400000,
-      food: 2000000,
+      coins: 3420000,
+      food: 2020000,
       goods: [
         {
           amount: 5930,
@@ -1641,8 +1641,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_38"],
     costs: {
       research_points: 105,
-      coins: 2900000,
-      food: 3700000,
+      coins: 2930000,
+      food: 3720000,
       goods: [
         {
           amount: 11050,
@@ -1682,7 +1682,7 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_39"],
     costs: {
       research_points: 83,
-      coins: 7300000,
+      coins: 7330000,
       food: 4600000,
       goods: [
         {
@@ -1715,8 +1715,8 @@ export const technos_KS: TechnoData[] = [
     required: ["ks_40", "ks_41", "ks_42"],
     costs: {
       research_points: 115,
-      coins: 5200000,
-      food: 4800000,
+      coins: 5280000,
+      food: 4830000,
       goods: [
         {
           amount: 13350,

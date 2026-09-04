@@ -11,6 +11,7 @@ import {
 } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 interface TechPathPanelProps {
   fromTech: TechnoData | null; // null = mode "tous les ancêtres"
@@ -59,14 +60,12 @@ export function TechPathPanel({
   }, [pathTechs]);
 
   const goodsBadges = totalGoods.map((g, i) => {
-    const match = g.resource.match(
-      /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-    );
+    const parsed = parseRankGoodKey(g.resource);
     let goodName = g.resource;
-    if (match) {
-      const [, priority, era] = match;
+    if (parsed) {
       goodName =
-        getGoodNameFromPriorityEra(priority, era, userSelections) || "default";
+        getGoodNameFromPriorityEra(parsed.priority, parsed.era, userSelections) ||
+        "default";
     }
     return (
       <ResourceBadge

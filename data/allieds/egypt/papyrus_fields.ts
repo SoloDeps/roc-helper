@@ -10,7 +10,7 @@ export const egyptPapyrusField: BuildingData = {
     {
       level: 1,
       era: "ME",
-      max_qty: 4,
+      max_qty: 2,
       construction: {
         deben: 1000,
       },
@@ -18,7 +18,7 @@ export const egyptPapyrusField: BuildingData = {
     {
       level: 2,
       era: "ME",
-      max_qty: 4,
+      max_qty: 2,
       upgrade: {
         deben: 7400,
         goods: [
@@ -36,7 +36,7 @@ export const egyptPapyrusField: BuildingData = {
     {
       level: 3,
       era: "ME",
-      max_qty: 4,
+      max_qty: 2,
       upgrade: {
         deben: 21000,
         goods: [
@@ -154,7 +154,7 @@ export const egyptLuxuriousPapyrusField: BuildingData = {
     {
       level: 3,
       era: "ME",
-      max_qty: 3,
+      max_qty: 1,
       construction: {
         gems: 490,
       },

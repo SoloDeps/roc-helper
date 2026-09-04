@@ -17,15 +17,15 @@ export const chinaThreadProcessor: BuildingData = {
         goods: [
           {
             amount: 245,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
           {
             amount: 245,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 245,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
         ],
       },
@@ -50,15 +50,15 @@ export const chinaSilkWorkshop: BuildingData = {
         goods: [
           {
             amount: 300,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
           {
             amount: 300,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 300,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
         ],
       },

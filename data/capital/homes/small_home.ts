@@ -109,15 +109,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 17,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 17,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 17,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -127,15 +127,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 5,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 5,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 5,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -291,15 +291,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 295,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 295,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 295,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -309,15 +309,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 75,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 75,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 75,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -473,15 +473,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 1035,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 1035,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 1035,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -491,15 +491,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 125,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 125,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 125,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -663,15 +663,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 1600,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 1600,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 1600,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -681,15 +681,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 210,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 210,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 210,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -853,15 +853,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 1650,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 1650,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 1650,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -871,15 +871,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 275,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 275,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 275,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -1043,15 +1043,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 2500,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 2500,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 2500,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -1061,15 +1061,15 @@ export const smallHome: BuildingData = {
         goods: [
           {
             amount: 700,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 700,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 700,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },

@@ -10,22 +10,22 @@ export const chinaSmallHome: BuildingData = {
     {
       level: 1,
       era: "ER",
-      max_qty: 25,
+      max_qty: 15,
       construction: {
         wu_zhu: 80,
         rice: 100,
         goods: [
           {
             amount: 50,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
           {
             amount: 50,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 50,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
         ],
       },
@@ -33,7 +33,7 @@ export const chinaSmallHome: BuildingData = {
     {
       level: 2,
       era: "ER",
-      max_qty: 25,
+      max_qty: 15,
       upgrade: {
         wu_zhu: 5600,
         rice: 3400,
@@ -56,7 +56,7 @@ export const chinaSmallHome: BuildingData = {
     {
       level: 3,
       era: "ER",
-      max_qty: 25,
+      max_qty: 15,
       upgrade: {
         wu_zhu: 8300,
         rice: 5100,
@@ -166,22 +166,22 @@ export const chinaAverageHome: BuildingData = {
     {
       level: 1,
       era: "ER",
-      max_qty: 8,
+      max_qty: 5,
       construction: {
         wu_zhu: 480,
         rice: 600,
         goods: [
           {
             amount: 210,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
           {
             amount: 210,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 210,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
         ],
       },
@@ -189,7 +189,7 @@ export const chinaAverageHome: BuildingData = {
     {
       level: 2,
       era: "ER",
-      max_qty: 8,
+      max_qty: 5,
       upgrade: {
         wu_zhu: 20000,
         rice: 14000,
@@ -212,7 +212,7 @@ export const chinaAverageHome: BuildingData = {
     {
       level: 3,
       era: "ER",
-      max_qty: 8,
+      max_qty: 5,
       upgrade: {
         wu_zhu: 30000,
         rice: 20000,
@@ -322,7 +322,7 @@ export const chinaLuxuriousHome: BuildingData = {
     {
       level: 3,
       era: "ER",
-      max_qty: 11,
+      max_qty: 5,
       construction: {
         gems: 850,
       },

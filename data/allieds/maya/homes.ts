@@ -10,21 +10,21 @@ export const mayaWorkerHome: BuildingData = {
     {
       level: 1,
       era: "BE",
-      max_qty: 23,
+      max_qty: 15,
       construction: {
         cocoa: 2500,
         goods: [
           {
             amount: 250,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 250,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 250,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -32,7 +32,7 @@ export const mayaWorkerHome: BuildingData = {
     {
       level: 2,
       era: "BE",
-      max_qty: 23,
+      max_qty: 15,
       upgrade: {
         cocoa: 12000,
         goods: [
@@ -58,7 +58,7 @@ export const mayaWorkerHome: BuildingData = {
     {
       level: 3,
       era: "BE",
-      max_qty: 23,
+      max_qty: 15,
       upgrade: {
         cocoa: 16000,
         goods: [
@@ -168,21 +168,21 @@ export const mayaPriestHome: BuildingData = {
     {
       level: 1,
       era: "BE",
-      max_qty: 13,
+      max_qty: 6,
       construction: {
         cocoa: 5000,
         goods: [
           {
             amount: 500,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 500,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 500,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -190,7 +190,7 @@ export const mayaPriestHome: BuildingData = {
     {
       level: 2,
       era: "BE",
-      max_qty: 13,
+      max_qty: 6,
       upgrade: {
         cocoa: 44000,
         goods: [
@@ -216,7 +216,7 @@ export const mayaPriestHome: BuildingData = {
     {
       level: 3,
       era: "BE",
-      max_qty: 13,
+      max_qty: 6,
       upgrade: {
         cocoa: 58000,
         goods: [

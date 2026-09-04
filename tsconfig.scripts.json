@@ -1,0 +1,27 @@
+{
+  // Compilation des scripts hors-app (scripts/**). L'app est en `noEmit` +
+  // `moduleResolution: bundler` ; ces scripts tournent sous Node, et certains
+  // — le diff — importent `data/**`, qui utilise l'alias `@/*`. D'où ce
+  // tsconfig dédié plutôt que des options passées en ligne de commande : `paths`
+  // n'existe pas en flag `tsc`.
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "outDir": ".extract-build",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": { "@/*": ["./*"] }
+  },
+  "files": [
+    "scripts/diff/technologies.ts",
+    "scripts/diff/campaign.ts",
+    "scripts/diff/buildings.ts",
+    "scripts/extract/heritage.ts",
+    "scripts/diff/heritage.ts"
+  ]
+}

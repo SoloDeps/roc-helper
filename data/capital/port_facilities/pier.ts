@@ -16,15 +16,15 @@ export const pier: BuildingData = {
         goods: [
           {
             amount: 1800,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 1800,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 1800,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },

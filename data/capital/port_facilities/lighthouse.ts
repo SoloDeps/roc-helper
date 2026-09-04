@@ -16,15 +16,15 @@ export const lighthouse: BuildingData = {
         goods: [
           {
             amount: 2300,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 2300,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 2300,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },

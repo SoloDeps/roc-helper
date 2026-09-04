@@ -742,7 +742,7 @@ export function ItemList() {
           {/* TECHNOLOGIES ACCORDION */}
           {technosByEra.size > 0 && !hideTechnos && (
             <>
-              <SectionHeader label="Research Tree" />
+              <SectionHeader label="Technologies" />
               <ReusableAccordion
                 id="all-technologies"
                 title="Technologies"

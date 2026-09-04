@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -47,18 +48,37 @@ function DialogOverlay({
   );
 }
 
+/**
+ * ⚠️ TOUTE BOÎTE A UN TITRE, ET IL NE SE VOIT PAS.
+ *
+ * Radix EXIGE un `Dialog.Title` : c'est lui qui nomme la boîte pour un lecteur
+ * d'écran. Il était rendu en clair, hors du contenu, avec le texte « Dialog » —
+ * d'où deux défauts d'un coup : un bandeau de texte pleine largeur sous la
+ * boîte, et le même nom (« Dialog ») annoncé pour TOUTES les modales de l'app.
+ *
+ * Il est donc masqué visuellement (`VisuallyHidden`, présent dans l'arbre
+ * d'accessibilité) et prend le titre réel quand l'appelant en donne un. Le repli
+ * ne sert qu'à satisfaire Radix pour les boîtes qui n'en passent pas encore.
+ */
 function DialogContent({
   className,
   children,
   showCloseButton = true,
+  title,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean;
+  /** Nom accessible de la boîte. Reprendre mot pour mot le titre visible. */
+  title?: string;
 }) {
   return (
     <DialogPortal>
       <DialogOverlay />
-      <DialogPrimitive.Title data-slot="dialog-title">Dialog</DialogPrimitive.Title>
+      <VisuallyHidden.Root>
+        <DialogPrimitive.Title data-slot="dialog-title">
+          {title ?? "Dialog"}
+        </DialogPrimitive.Title>
+      </VisuallyHidden.Root>
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(

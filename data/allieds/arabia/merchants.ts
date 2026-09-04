@@ -10,21 +10,21 @@ export const arabiaMerchant: BuildingData = {
     {
       level: 1,
       era: "KS",
-      max_qty: 16,
+      max_qty: 8,
       construction: {
         dirham: 7500,
         goods: [
           {
             amount: 1795,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 1795,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 1795,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -32,7 +32,7 @@ export const arabiaMerchant: BuildingData = {
     {
       level: 2,
       era: "KS",
-      max_qty: 16,
+      max_qty: 8,
       upgrade: {
         dirham: 30000,
         goods: [
@@ -58,7 +58,7 @@ export const arabiaMerchant: BuildingData = {
     {
       level: 3,
       era: "KS",
-      max_qty: 16,
+      max_qty: 8,
       upgrade: {
         dirham: 61000,
         goods: [
@@ -177,6 +177,9 @@ export const arabiaLuxuriousMerchant: BuildingData = {
       level: 6,
       era: "HM",
       max_qty: 4,
+      construction: {
+        gems: 1180,
+      },
       upgrade: {
         gems: 490,
       },

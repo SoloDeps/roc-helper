@@ -16,15 +16,15 @@ export const arabiaCamelFarm: BuildingData = {
         goods: [
           {
             amount: 2395,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 2395,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 2395,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },

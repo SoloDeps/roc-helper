@@ -103,15 +103,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 72,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 72,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 72,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -121,15 +121,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 21,
-            resource: "alabaster_idol",
+            resource: "primary_ba",
           },
           {
             amount: 21,
-            resource: "bronze_bracelet",
+            resource: "secondary_ba",
           },
           {
             amount: 21,
-            resource: "wool",
+            resource: "tertiary_ba",
           },
         ],
       },
@@ -293,15 +293,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 1250,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 1250,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 1250,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -311,15 +311,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 315,
-            resource: "column",
+            resource: "primary_cg",
           },
           {
             amount: 315,
-            resource: "silver_ring",
+            resource: "secondary_cg",
           },
           {
             amount: 315,
-            resource: "toga",
+            resource: "tertiary_cg",
           },
         ],
       },
@@ -475,15 +475,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 4405,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 4405,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 4405,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -493,15 +493,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 520,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 520,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 520,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -665,15 +665,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 6725,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 6725,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 6725,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -683,15 +683,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 900,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 900,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 900,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -729,7 +729,7 @@ export const domesticFarm: BuildingData = {
       max_qty: 9,
       upgrade: {
         coins: 1400000,
-        food: 640000,
+        food: 610000,
         goods: [
           {
             amount: 1060,
@@ -855,15 +855,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 6775,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 6775,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 6775,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -873,15 +873,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 1155,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 1155,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 1155,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -1045,15 +1045,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 8000,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 8000,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 8000,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -1063,15 +1063,15 @@ export const domesticFarm: BuildingData = {
         goods: [
           {
             amount: 2000,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 2000,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 2000,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },

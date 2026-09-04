@@ -18,6 +18,7 @@ import type {
   OttomanTradePostEntry,
 } from "@/data/presets";
 import type { EraAbbr } from "@/lib/constants";
+import { buildBuildingId } from "@/resolvers/workshops";
 
 // ============================================================================
 // TECHNO SUBMISSION
@@ -350,8 +351,13 @@ export function useSubmitPreset() {
               // ── Building (default) ────────────────────────────────────────
             } else {
               const e = entry as BuildingEntry;
-              // Format: {category}_{buildingId}_{type}_{era}_{level}
-              const buildingId = `${section.category}_${e.buildingId}_${e.type}_${e.era}_${e.level}`;
+              const buildingId = buildBuildingId(
+                section.category,
+                e.buildingId,
+                e.type,
+                e.era,
+                e.level,
+              );
               const existing = await db.buildings.get(buildingId);
               if (!existing) {
                 buildingsToAdd.push({ id: buildingId, qty: e.qty, hidden: 0 });

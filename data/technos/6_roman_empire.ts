@@ -890,7 +890,7 @@ export const technos_RE: TechnoData[] = [
     required: ["re_18", "re_19"],
     costs: {
       research_points: 62,
-      coins: 1000000,
+      coins: 1030000,
       food: 800000,
       goods: [
         {
@@ -968,7 +968,7 @@ export const technos_RE: TechnoData[] = [
     required: ["re_21"],
     costs: {
       research_points: 63,
-      coins: 1000000,
+      coins: 1050000,
       food: 817000,
       goods: [
         {
@@ -1007,7 +1007,7 @@ export const technos_RE: TechnoData[] = [
     required: ["re_21"],
     costs: {
       research_points: 70,
-      coins: 1100000,
+      coins: 1160000,
       food: 906000,
       goods: [
         {
@@ -1157,7 +1157,7 @@ export const technos_RE: TechnoData[] = [
     costs: {
       research_points: 78,
       coins: 1300000,
-      food: 1000000,
+      food: 1010000,
       goods: [
         {
           amount: 9000,
@@ -1189,7 +1189,7 @@ export const technos_RE: TechnoData[] = [
   {
     id: "re_30",
     name: "Chinese Consensus",
-    column: 30,
+    column: 10,
     required: ["re_29"],
     costs: {
       research_points: 37,

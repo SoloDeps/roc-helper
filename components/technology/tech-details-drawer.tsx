@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import type { TechnoData } from "@/types/shared";
 import { useBuildingSelections } from "@/hooks/use-building-selections";
 import { RewardCard } from "@/components/cards/reward-card";
+import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
 interface TechDetailsDrawerProps {
   tech: TechnoData | null;
@@ -48,16 +49,13 @@ export function TechDetailsDrawer({
     if (!goods?.length) return null;
 
     return goods.map((g, i) => {
-      const match = g.resource.match(
-        /^(Primary|Secondary|Tertiary)_([A-Z]{2})$/i,
-      );
+      const parsed = parseRankGoodKey(g.resource);
       let goodName = g.resource;
 
-      if (match) {
-        const [, priority, era] = match;
+      if (parsed) {
         const resolvedName = getGoodNameFromPriorityEra(
-          priority,
-          era,
+          parsed.priority,
+          parsed.era,
           userSelections,
         );
         goodName = resolvedName || "default";

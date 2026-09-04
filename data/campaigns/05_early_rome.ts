@@ -399,7 +399,7 @@ export const campaign_ER: CampaignRegion[] = [
     scout: { coins: 102000, duration: 6000 },
     regionRewards: [
       { resource: "expansion_china", amount: 2 },
-      { resource: "commander_alexanderthegreat", amount: 1, name: "Commander Alexander The Great" },
+      { resource: "commander_alexanderthegreat", amount: 1, name: "Commander Alexander the Great" },
       { resource: "gears", amount: 25 },
     ],
     parts: [

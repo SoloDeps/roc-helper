@@ -40,15 +40,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 8925,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 8925,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 8925,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -58,15 +58,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 2980,
-            resource: "mosaic",
+            resource: "primary_re",
           },
           {
             amount: 2980,
-            resource: "goblet",
+            resource: "secondary_re",
           },
           {
             amount: 2980,
-            resource: "cape",
+            resource: "tertiary_re",
           },
         ],
       },
@@ -81,15 +81,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 13600,
-            resource: "planks",
+            resource: "primary_be",
           },
           {
             amount: 13600,
-            resource: "parchment",
+            resource: "secondary_be",
           },
           {
             amount: 13600,
-            resource: "pepper",
+            resource: "tertiary_be",
           },
         ],
       },
@@ -99,15 +99,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 3880,
-            resource: "planks",
+            resource: "primary_be",
           },
           {
             amount: 3880,
-            resource: "parchment",
+            resource: "secondary_be",
           },
           {
             amount: 3880,
-            resource: "pepper",
+            resource: "tertiary_be",
           },
         ],
       },
@@ -122,15 +122,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 13650,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 13650,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 13650,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -140,15 +140,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 5005,
-            resource: "cartwheel",
+            resource: "primary_af",
           },
           {
             amount: 5005,
-            resource: "ink",
+            resource: "secondary_af",
           },
           {
             amount: 5005,
-            resource: "salt",
+            resource: "tertiary_af",
           },
         ],
       },
@@ -163,15 +163,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 13650,
-            resource: "barrel",
+            resource: "primary_fa",
           },
           {
             amount: 13650,
-            resource: "manuscript",
+            resource: "secondary_fa",
           },
           {
             amount: 13650,
-            resource: "herbs",
+            resource: "tertiary_fa",
           },
         ],
       },
@@ -181,15 +181,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 5855,
-            resource: "barrel",
+            resource: "primary_fa",
           },
           {
             amount: 5855,
-            resource: "manuscript",
+            resource: "secondary_fa",
           },
           {
             amount: 5855,
-            resource: "herbs",
+            resource: "tertiary_fa",
           },
         ],
       },
@@ -204,15 +204,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 13700,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 13700,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 13700,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -222,15 +222,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 6660,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 6660,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 6660,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -245,15 +245,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 13700,
-            resource: "wardrobe",
+            resource: "primary_ks",
           },
           {
             amount: 13700,
-            resource: "tome",
+            resource: "secondary_ks",
           },
           {
             amount: 13700,
-            resource: "chili",
+            resource: "tertiary_ks",
           },
         ],
       },
@@ -263,15 +263,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 7660,
-            resource: "wardrobe",
+            resource: "primary_ks",
           },
           {
             amount: 7660,
-            resource: "tome",
+            resource: "secondary_ks",
           },
           {
             amount: 7660,
-            resource: "chili",
+            resource: "tertiary_ks",
           },
         ],
       },
@@ -286,15 +286,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 14000,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 14000,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 14000,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },
@@ -304,15 +304,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 10000,
-            resource: "secretary_desk",
+            resource: "primary_hm",
           },
           {
             amount: 10000,
-            resource: "grimoire",
+            resource: "secondary_hm",
           },
           {
             amount: 10000,
-            resource: "cinnamon",
+            resource: "tertiary_hm",
           },
         ],
       },
@@ -327,15 +327,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 14300,
-            resource: "stained_glass",
+            resource: "tertiary_lg",
           },
           {
             amount: 14300,
-            resource: "embellishments",
+            resource: "primary_lg",
           },
           {
             amount: 14300,
-            resource: "elixirs",
+            resource: "secondary_lg",
           },
         ],
       },
@@ -345,15 +345,15 @@ export const siegeBarracks: BuildingData = {
         goods: [
           {
             amount: 12340,
-            resource: "lead_glass",
+            resource: "tertiary_eg",
           },
           {
             amount: 12340,
-            resource: "fine_jewelry",
+            resource: "primary_eg",
           },
           {
             amount: 12340,
-            resource: "ointment",
+            resource: "secondary_eg",
           },
         ],
       },

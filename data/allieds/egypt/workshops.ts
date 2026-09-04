@@ -11,7 +11,7 @@ export const egyptGoldsmith: BuildingData = {
     {
       level: 1,
       era: "ME",
-      max_qty: 3,
+      max_qty: 2,
       construction: {
         deben: 2500,
       },
@@ -21,7 +21,7 @@ export const egyptGoldsmith: BuildingData = {
       era: "CG",
       max_qty: 3,
       upgrade: {
-        deben: 78.5,
+        deben: 78500,
         goods: [
           {
             amount: 320,
@@ -56,7 +56,7 @@ export const egyptPapyrusPress: BuildingData = {
     {
       level: 1,
       era: "ME",
-      max_qty: 3,
+      max_qty: 2,
       construction: {
         deben: 2000,
       },

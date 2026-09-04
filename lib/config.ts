@@ -18,8 +18,8 @@ export const siteConfig = {
       label: "Campaign",
     },
     {
-      href: "/research-tree",
-      label: "Research Tree",
+      href: "/technologies",
+      label: "Technologies",
     },
     {
       href: "/help",
@@ -28,6 +28,10 @@ export const siteConfig = {
     {
       href: "/wonders",
       label: "Wonders",
+    },
+    {
+      href: "/vault",
+      label: "Vault",
     },
     {
       href: "https://riseofcultures.wiki.gg/",

@@ -9,7 +9,7 @@ export const arabiaCoffeeBrewer: BuildingData = {
   imageName: "Arabia_Coffee_Brewer",
   levels: [
     {
-      level: 2,
+      level: 1,
       era: "KS",
       max_qty: 2,
       construction: {
@@ -17,15 +17,15 @@ export const arabiaCoffeeBrewer: BuildingData = {
         goods: [
           {
             amount: 4180,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 4180,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 4180,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -42,7 +42,7 @@ export const arabiaIncenseMaker: BuildingData = {
   imageName: "Arabia_Incense_Maker",
   levels: [
     {
-      level: 2,
+      level: 1,
       era: "KS",
       max_qty: 2,
       construction: {
@@ -50,15 +50,15 @@ export const arabiaIncenseMaker: BuildingData = {
         goods: [
           {
             amount: 4180,
-            resource: "wax_seal",
+            resource: "secondary_ie",
           },
           {
             amount: 4180,
-            resource: "door",
+            resource: "primary_ie",
           },
           {
             amount: 4180,
-            resource: "saffron",
+            resource: "tertiary_ie",
           },
         ],
       },
@@ -75,7 +75,7 @@ export const arabiaCarpetFactory: BuildingData = {
   imageName: "Arabia_Carpet_Factory",
   levels: [
     {
-      level: 2,
+      level: 1,
       era: "HM",
       max_qty: 2,
       construction: {
@@ -108,7 +108,7 @@ export const arabiaOilLampCrafter: BuildingData = {
   imageName: "Arabia_Oil_Lamp_Crafter",
   levels: [
     {
-      level: 2,
+      level: 1,
       era: "HM",
       max_qty: 2,
       construction: {

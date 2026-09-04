@@ -112,11 +112,11 @@ export const technos_AF: TechnoData[] = [
           resource: "secondary_re",
         },
         {
-          amount: 2360,
+          amount: 1410,
           resource: "primary_be",
         },
         {
-          amount: 1410,
+          amount: 2360,
           resource: "tertiary_be",
         },
       ],
@@ -150,7 +150,7 @@ export const technos_AF: TechnoData[] = [
     costs: {
       research_points: 45,
       coins: 563000,
-      food: 1000000,
+      food: 1090000,
       goods: [
         {
           amount: 3350,
@@ -192,7 +192,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_1", "af_2"],
     costs: {
       research_points: 32,
-      coins: 1500000,
+      coins: 1550000,
       food: 495000,
       goods: [
         {
@@ -225,7 +225,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_3"],
     costs: {
       research_points: 60,
-      coins: 1500000,
+      coins: 1540000,
       food: 777000,
       goods: [
         {
@@ -268,8 +268,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_3"],
     costs: {
       research_points: 67,
-      coins: 2100000,
-      food: 1800000,
+      coins: 2150000,
+      food: 1860000,
       goods: [
         {
           amount: 3940,
@@ -311,8 +311,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_4"],
     costs: {
       research_points: 55,
-      coins: 1100000,
-      food: 1600000,
+      coins: 1160000,
+      food: 1650000,
       goods: [
         {
           amount: 2260,
@@ -352,8 +352,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_4"],
     costs: {
       research_points: 57,
-      coins: 1700000,
-      food: 1100000,
+      coins: 1740000,
+      food: 1180000,
       goods: [
         {
           amount: 2510,
@@ -388,7 +388,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_5", "af_6"],
     costs: {
       research_points: 61,
-      coins: 1400000,
+      coins: 1450000,
       food: 1600000,
       goods: [
         {
@@ -426,7 +426,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_7", "af_8", "af_9"],
     costs: {
       research_points: 49,
-      coins: 1000000,
+      coins: 1070000,
       food: 791000,
       goods: [
         {
@@ -463,7 +463,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_9"],
     costs: {
       research_points: 54,
-      coins: 1000000,
+      coins: 1030000,
       food: 542000,
       goods: [
         {
@@ -501,7 +501,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_9"],
     costs: {
       research_points: 57,
-      coins: 1600000,
+      coins: 1670000,
       food: 735000,
       goods: [
         {
@@ -539,8 +539,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_10"],
     costs: {
       research_points: 50,
-      coins: 1300000,
-      food: 1500000,
+      coins: 1390000,
+      food: 1540000,
       goods: [
         {
           amount: 1320,
@@ -571,8 +571,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_11", "af_12"],
     costs: {
       research_points: 70,
-      coins: 1300000,
-      food: 1400000,
+      coins: 1310000,
+      food: 1470000,
       goods: [
         {
           amount: 6350,
@@ -609,8 +609,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_11", "af_12"],
     costs: {
       research_points: 52,
-      coins: 1400000,
-      food: 1100000,
+      coins: 1480000,
+      food: 1140000,
       goods: [
         {
           amount: 1000,
@@ -642,8 +642,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_13"],
     costs: {
       research_points: 48,
-      coins: 1400000,
-      food: 1000000,
+      coins: 1450000,
+      food: 1070000,
       goods: [
         {
           amount: 2300,
@@ -754,7 +754,7 @@ export const technos_AF: TechnoData[] = [
     costs: {
       research_points: 68,
       coins: 742000,
-      food: 1300000,
+      food: 1350000,
       goods: [
         {
           amount: 1190,
@@ -791,7 +791,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_16", "af_17", "af_18"],
     costs: {
       research_points: 58,
-      coins: 1500000,
+      coins: 1560000,
       food: 617000,
       goods: [
         {
@@ -820,11 +820,11 @@ export const technos_AF: TechnoData[] = [
     id: "af_21",
     name: "Pottery Wheel",
     column: 7,
-    required: ["af_16", "af_17", "af_18", "af_19"],
+    required: ["af_16", "af_17", "af_19"],
     costs: {
       research_points: 69,
       coins: 870000,
-      food: 1700000,
+      food: 1760000,
       goods: [
         {
           amount: 2850,
@@ -855,7 +855,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_18", "af_19"],
     costs: {
       research_points: 54,
-      coins: 2100000,
+      coins: 2110000,
       food: 509000,
       goods: [
         {
@@ -893,8 +893,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_18", "af_19"],
     costs: {
       research_points: 68,
-      coins: 1700000,
-      food: 1000000,
+      coins: 1790000,
+      food: 1060000,
       goods: [
         {
           amount: 1410,
@@ -927,7 +927,7 @@ export const technos_AF: TechnoData[] = [
     costs: {
       research_points: 56,
       coins: 853000,
-      food: 1100000,
+      food: 1180000,
       goods: [
         {
           amount: 3420,
@@ -962,8 +962,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_22", "af_23"],
     costs: {
       research_points: 50,
-      coins: 1100000,
-      food: 1500000,
+      coins: 1170000,
+      food: 1560000,
       goods: [
         {
           amount: 2650,
@@ -1000,7 +1000,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_22", "af_23"],
     costs: {
       research_points: 56,
-      coins: 1800000,
+      coins: 1880000,
       food: 1700000,
       goods: [
         {
@@ -1038,8 +1038,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_24"],
     costs: {
       research_points: 56,
-      coins: 1500000,
-      food: 1100000,
+      coins: 1520000,
+      food: 1190000,
       goods: [
         {
           amount: 6240,
@@ -1071,7 +1071,7 @@ export const technos_AF: TechnoData[] = [
     costs: {
       research_points: 57,
       coins: 690000,
-      food: 1200000,
+      food: 1290000,
       goods: [
         {
           amount: 1290,
@@ -1107,7 +1107,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_25", "af_26"],
     costs: {
       research_points: 64,
-      coins: 1100000,
+      coins: 1160000,
       food: 603000,
       goods: [
         {
@@ -1145,8 +1145,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_25", "af_26"],
     costs: {
       research_points: 70,
-      coins: 1300000,
-      food: 1500000,
+      coins: 1360000,
+      food: 1570000,
       goods: [
         {
           amount: 5470,
@@ -1178,8 +1178,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_27", "af_28"],
     costs: {
       research_points: 65,
-      coins: 2300000,
-      food: 100000,
+      coins: 2340000,
+      food: 1030000,
       goods: [
         {
           amount: 2500,
@@ -1210,8 +1210,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_29", "af_30"],
     costs: {
       research_points: 77,
-      coins: 1100000,
-      food: 1200000,
+      coins: 1120000,
+      food: 1220000,
       goods: [
         {
           amount: 1280,
@@ -1281,7 +1281,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_31", "af_32", "af_33"],
     costs: {
       research_points: 69,
-      coins: 1600000,
+      coins: 1610000,
       food: 787000,
       goods: [
         {
@@ -1313,8 +1313,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_31", "af_32", "af_33"],
     costs: {
       research_points: 68,
-      coins: 1200000,
-      food: 1300000,
+      coins: 1290000,
+      food: 1370000,
       goods: [
         {
           amount: 6920,
@@ -1350,7 +1350,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_31", "af_32", "af_33"],
     costs: {
       research_points: 58,
-      coins: 1300000,
+      coins: 1360000,
       food: 1600000,
       goods: [
         {
@@ -1388,7 +1388,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_34", "af_35"],
     costs: {
       research_points: 58,
-      coins: 1500000,
+      coins: 1540000,
       food: 881000,
       goods: [
         {
@@ -1425,7 +1425,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_36"],
     costs: {
       research_points: 48,
-      coins: 1700000,
+      coins: 1760000,
       food: 843000,
       goods: [
         {
@@ -1463,19 +1463,19 @@ export const technos_AF: TechnoData[] = [
     required: ["af_36"],
     costs: {
       research_points: 77,
-      coins: 840000,
-      food: 1200000,
+      coins: 1160000,
+      food: 1510000,
       goods: [
         {
-          amount: 1110,
+          amount: 1470,
           resource: "tertiary_be",
         },
         {
-          amount: 2940,
+          amount: 3920,
           resource: "secondary_af",
         },
         {
-          amount: 1230,
+          amount: 1630,
           resource: "tertiary_af",
         },
       ],
@@ -1501,7 +1501,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_37"],
     costs: {
       research_points: 60,
-      coins: 1700000,
+      coins: 1790000,
       food: 848000,
       goods: [
         {
@@ -1538,7 +1538,7 @@ export const technos_AF: TechnoData[] = [
     required: ["af_38", "af_39"],
     costs: {
       research_points: 63,
-      coins: 2000000,
+      coins: 2090000,
       food: 838000,
       goods: [
         {
@@ -1576,8 +1576,8 @@ export const technos_AF: TechnoData[] = [
     required: ["af_40", "af_41"],
     costs: {
       research_points: 105,
-      coins: 2100000,
-      food: 1200000,
+      coins: 2150000,
+      food: 1240000,
       goods: [
         {
           amount: 1600,
