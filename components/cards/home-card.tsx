@@ -30,7 +30,9 @@ const cards: CardData[] = [
     description: "Plan what to spend and track your Vault progress",
     illustration: "/images/vault/icon_heritage.webp",
     href: "/vault",
-    new: true,
+    // new: true,
+    locked: true,
+    badge: "Coming Soon",
   },
   {
     title: "Layout Builder",
