@@ -262,7 +262,7 @@ function KeeperPanel({
   // régler, le gardien, plutôt que par un rappel décoratif qui repoussait le
   // sélecteur d'un demi-écran vers le bas.
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm min-h-67.5">
       <div>
         <h3 className="text-sm font-bold text-foreground">Keeper</h3>
         <p className="text-[12px] text-muted-foreground">
@@ -292,10 +292,10 @@ function KeeperPanel({
           <button
             onClick={onImport}
             title="Copy your real keeper rank from the Infos tab"
-            className="flex h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-border bg-background-100 px-2.5 text-[12px] font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+            className="flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-border bg-background-100 px-2.5 text-[12px] font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
           >
             <Download size={13} aria-hidden="true" />
-            Import
+            Import your Keeper level
           </button>
         </div>
         {pointsToNextLevel !== null && (
@@ -531,7 +531,7 @@ function OfferSlotCard({
     return (
       <button
         onClick={onPickerOpen}
-        className="flex min-h-36 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border px-2 text-center text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+        className="flex min-h-67.5 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border px-2 text-center text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
       >
         <Plus className="size-4" aria-hidden="true" />
         <span className="text-[12px] font-semibold">{SLOT_META[slotIndex].title}</span>
