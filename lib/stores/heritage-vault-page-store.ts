@@ -5,12 +5,12 @@ import { persist } from "zustand/middleware";
 import type { EraCode } from "@/types/shared";
 
 // Ère affichée dans le Heritage Vault : contrairement au vault sélectionné et
-// à son niveau (bac à sable de simulation, `sessionStorage` — voir
-// `useSessionStorageState`), l'ère EST la progression du joueur : il ne peut
-// pas revenir en arrière dans le jeu, donc pas de raison qu'elle se
-// réinitialise à chaque redémarrage. Même mécanisme que
-// `technology-page-store` / `campaign-page-store` : persist Zustand, donc
-// `localStorage`.
+// à son niveau (bac à sable de simulation — voir `useLocalStorageState`,
+// clé `localStorage` par thème/vault, mais vidée par défaut à chaque nouveau
+// thème), l'ère EST la progression du joueur : il ne peut pas revenir en
+// arrière dans le jeu, donc une clé UNIQUE (pas par thème) qui ne se
+// réinitialise jamais. Même mécanisme que `technology-page-store` /
+// `campaign-page-store` : persist Zustand, donc `localStorage`.
 interface HeritageVaultPageState {
   era: EraCode | null;
   setEra: (era: EraCode) => void;

@@ -28,7 +28,7 @@ import { ResponsiveSelect, SELECT_TEN_OPTIONS } from "@/components/modals/respon
 import { EffectIcon } from "@/components/heritage/effect-icon";
 import { XpProgressBar } from "@/components/heritage/xp-progress-bar";
 import BuildingCounter from "@/components/items/building-counter";
-import { useSessionStorageState } from "@/hooks/use-session-storage-state";
+import { useLocalStorageState } from "@/hooks/use-local-storage-state";
 import {
   ALLIED_CIVILIZATION_LABEL_ORDER,
   alliedGoodCivilization,
@@ -65,7 +65,7 @@ import {
 // courte et où une saisie impossible n'est plus proposée.
 //
 // ⚠️ LE PANNEAU GARDIEN EST UN BAC À SABLE DISTINCT DE CELUI DE LA COMBINATION
-// (clé `sessionStorage` propre) : rien n'empêche de vouloir simuler un rang de
+// (clé `localStorage` propre) : rien n'empêche de vouloir simuler un rang de
 // départ différent ici. Le bouton d'import copie le rang RÉEL (Dexie), dans un
 // seul sens, comme partout ailleurs dans ce module.
 //
@@ -128,7 +128,7 @@ function emptySlots(): SlotState[] {
 }
 
 /**
- * Une case relue de `sessionStorage` d'avant le mode « From production » n'a
+ * Une case relue de `localStorage` d'avant le mode « From production » n'a
  * ni `stock` ni `dailyProduction` : on les remet à 0 à la lecture plutôt que
  * de laisser un `undefined` traverser `keeperExchangeForecast`.
  *
@@ -980,19 +980,19 @@ export function KeeperOffersTab({
   vault: ResolvedHeritageVault;
   selections: string[][];
 }) {
-  const [storedSlots, setSlots] = useSessionStorageState<SlotState[]>(
+  const [storedSlots, setSlots] = useLocalStorageState<SlotState[]>(
     `heritage-keeper-offers:${vault.themeId}`,
     emptySlots(),
   );
-  const [keeperState, setKeeperState] = useSessionStorageState<KeeperState>(
+  const [keeperState, setKeeperState] = useLocalStorageState<KeeperState>(
     `heritage-keeper-offers-keeper:${vault.themeId}`,
     EMPTY_KEEPER,
   );
-  const [mode, setMode] = useSessionStorageState<InputMode>(
+  const [mode, setMode] = useLocalStorageState<InputMode>(
     `heritage-keeper-offers-mode:${vault.themeId}`,
     "manual",
   );
-  const [weeks, setWeeks] = useSessionStorageState<number>(
+  const [weeks, setWeeks] = useLocalStorageState<number>(
     `heritage-keeper-offers-weeks:${vault.themeId}`,
     DEFAULT_WEEKS,
   );

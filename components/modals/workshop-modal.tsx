@@ -365,14 +365,14 @@ export function WorkshopModal({
    * été vue. Un rendu de plus, pas de saut visible : la pastille est une
    * incitation, pas une information qu'on attend.
    *
-   * ⚠️ `queueMicrotask` — l'idiome déjà employé par `useSessionStorageState` et
+   * ⚠️ `queueMicrotask` — l'idiome déjà employé par `useLocalStorageState` et
    * par le garde `mounted` de `HeritageVaultView`, pour la même raison : un
    * `setState` synchrone dans un effet déclenche un rendu en cascade pendant la
    * phase de commit, ce que `react-hooks/set-state-in-effect` refuse à juste
    * titre. Différer d'une microtâche sort la mise à jour de cette phase sans
    * rien retarder de perceptible.
    *
-   * Le `try/catch` suit la même règle que `useSessionStorageState` :
+   * Le `try/catch` suit la même règle que `useLocalStorageState` :
    * `localStorage` lève en navigation privée stricte, et un effet qui jette
    * casserait le bouton entier pour un ornement.
    */

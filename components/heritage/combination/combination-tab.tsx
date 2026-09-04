@@ -33,7 +33,7 @@ import { getHeritageBuildingImageUrl } from "@/lib/heritage-images";
 import { ResponsiveModal } from "@/components/modals/responsive-modal";
 import { ResponsiveSelect, SELECT_TEN_OPTIONS } from "@/components/modals/responsive-select";
 import { BuildingImage } from "@/components/heritage/building-image";
-import { useSessionStorageState } from "@/hooks/use-session-storage-state";
+import { useLocalStorageState } from "@/hooks/use-local-storage-state";
 import { VaultPanel } from "./vault-panel";
 import { TotalsTable } from "./totals-table";
 import { RegenerationReadouts } from "./regeneration-readout";
@@ -54,10 +54,10 @@ import { OptimizerPanel } from "./optimizer-panel";
 // et d'inventaire de jetons, remplacé en tête de colonne par le bâtiment
 // d'héritage lui-même.
 //
-// ⚠️ TOUT L'ÉTAT EST LOCAL À L'ONGLET (`sessionStorage`, par thème) et VIDE au
-// départ : c'est un bac à sable, distinct de la progression Dexie qu'il ne
-// touche jamais. Le bouton d'import du panneau de vault est le seul pont, et il
-// va dans un seul sens.
+// ⚠️ TOUT L'ÉTAT EST PERSISTÉ EN `localStorage` (par thème) et VIDE la
+// première fois : c'est un bac à sable, distinct de la progression Dexie qu'il
+// ne touche jamais. Le bouton d'import du panneau de vault est le seul pont, et
+// il va dans un seul sens.
 // ============================================================
 
 interface CardState {
@@ -204,11 +204,11 @@ export function CombinationTab({
   eligibleBuildings: HeritageEligibleBuilding[];
   selections: string[][];
 }) {
-  const [cards, setCards] = useSessionStorageState<CardState[]>(
+  const [cards, setCards] = useLocalStorageState<CardState[]>(
     `heritage-combination-cards:${vault.themeId}`,
     [],
   );
-  const [vaultState, setVaultState] = useSessionStorageState<VaultState>(
+  const [vaultState, setVaultState] = useLocalStorageState<VaultState>(
     `heritage-combination-vault:${vault.themeId}`,
     EMPTY_VAULT,
   );

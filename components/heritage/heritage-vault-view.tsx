@@ -25,7 +25,7 @@ import {
   hydrateBuildingSelectionsStore,
   useBuildingSelectionsStore,
 } from "@/lib/stores/building-selections-store";
-import { useSessionStorageState } from "@/hooks/use-session-storage-state";
+import { useLocalStorageState } from "@/hooks/use-local-storage-state";
 import {
   useHeritageVaultEra,
   useSetHeritageVaultEra,
@@ -99,7 +99,7 @@ export function HeritageVaultView() {
 }
 
 function HeritageVaultContent() {
-  const [vaultKey, setVaultKey] = useSessionStorageState<string>(
+  const [vaultKey, setVaultKey] = useLocalStorageState<string>(
     "heritage-vault-key",
     HERITAGE_VAULTS[0].key,
   );

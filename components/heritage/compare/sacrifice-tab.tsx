@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Plus, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -33,7 +33,7 @@ import {
 import { BuildingImage } from "@/components/heritage/building-image";
 import { XpProgressBar } from "@/components/heritage/xp-progress-bar";
 import BuildingCounter from "@/components/items/building-counter";
-import { useSessionStorageState } from "@/hooks/use-session-storage-state";
+import { useLocalStorageState } from "@/hooks/use-local-storage-state";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { BeforeAfterTable, buildBeforeAfterRows } from "./before-after-table";
 
@@ -45,7 +45,7 @@ import { BeforeAfterTable, buildBeforeAfterRows } from "./before-after-table";
 // après sacrifice, pas un compte de niveaux retirés — les jetons se déduisent
 // du delta.
 //
-// Tout l'état de cet onglet vit en `sessionStorage`, par vault : c'est un bac à
+// Tout l'état de cet onglet vit en `localStorage`, par vault : c'est un bac à
 // sable de simulation, distinct de la progression stockée en Dexie. Le niveau
 // du vault y est donc lui aussi local.
 // ============================================================
@@ -335,11 +335,29 @@ function VaultAggregateCard({
   totalTokens: number;
   selections: string[][];
 }) {
-  // La clé inclut le niveau : changer de niveau remet la progression à zéro
-  // sans effet dédié, le palier suivant n'ayant pas le même coût.
-  const [xpProgress, setXpProgress] = useSessionStorageState<number>(
-    `heritage-sacrifice-xp:${vault.themeId}:${vaultLevel}`,
-    0,
+  // UNE SEULE clé par bâtiment : seule la progression COURANTE nous intéresse.
+  //
+  // ⚠️ LE NIVEAU EST DANS LA VALEUR, PAS DANS LA CLÉ. Changer de niveau doit
+  // toujours remettre la progression à zéro — le palier suivant n'a pas le même
+  // coût, reporter les XP du précédent afficherait un total faux. La version
+  // d'avant obtenait ça en mettant le niveau DANS la clé
+  // (`...xp:<thème>:<niveau>`), mais en `localStorage` chaque niveau visité
+  // laissait sa clé derrière lui : jusqu'à 60 clés mortes par bâtiment.
+  // Ranger le niveau à côté de la valeur donne la même remise à zéro, dérivée
+  // au rendu (donc sans effet ni `setState` en cascade), pour une seule clé.
+  const [storedXp, setStoredXp] = useLocalStorageState<{ level: number; xp: number }>(
+    `heritage-sacrifice-xp:${vault.themeId}`,
+    { level: vaultLevel, xp: 0 },
+  );
+  // Une progression enregistrée pour un AUTRE niveau ne vaut rien ici : elle
+  // est ignorée au rendu, et remplacée dès la première saisie.
+  const xpProgress = storedXp.level === vaultLevel ? storedXp.xp : 0;
+  // Identité stable : `XpProgressBar` passe ce rappel à `useDebouncedCallback`,
+  // dont le `useCallback` a le rappel en dépendance — une fonction recréée à
+  // chaque rendu y reconstruirait le différé sans raison.
+  const setXpProgress = useCallback(
+    (xp: number) => setStoredXp({ level: vaultLevel, xp }),
+    [vaultLevel, setStoredXp],
   );
 
   const xpMax = getHeritageUpgradeCost(vault.key, vaultLevel)?.xp ?? 0;
@@ -447,15 +465,15 @@ export function SacrificeTab({
   eligibleBuildings: HeritageEligibleBuilding[];
   selections: string[][];
 }) {
-  const [cards, setCards] = useSessionStorageState<CardState[]>(
+  const [cards, setCards] = useLocalStorageState<CardState[]>(
     `heritage-sacrifice-cards:${vault.themeId}`,
     [],
   );
-  const [localVaultLevel, setLocalVaultLevel] = useSessionStorageState<number>(
+  const [localVaultLevel, setLocalVaultLevel] = useLocalStorageState<number>(
     `heritage-sacrifice-level:${vault.themeId}`,
     vault.level,
   );
-  const [inventory, setInventory] = useSessionStorageState<Record<string, number>>(
+  const [inventory, setInventory] = useLocalStorageState<Record<string, number>>(
     `heritage-sacrifice-inventory:${vault.themeId}`,
     {},
   );
