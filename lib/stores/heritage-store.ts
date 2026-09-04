@@ -114,3 +114,22 @@ export async function unequipHeritageEffect(
   );
   await updateUserHeritageVault(themeId, { equipped });
 }
+
+/**
+ * Vide tous les slots donnés d'un coup — un groupe entier (Production OU
+ * Boost), jamais le vault en entier : niveau, xp, gardien et achats restent
+ * intacts, seuls les effets équipés dans CES slots sont retirés.
+ */
+export async function resetHeritageEffectSlots(
+  themeId: string,
+  slotIds: string[],
+): Promise<void> {
+  const db = getHeritageDB();
+  const current = await db.userHeritageVaults.get(themeId);
+  if (current === undefined) return;
+  const slotIdSet = new Set(slotIds);
+  const equipped = Object.fromEntries(
+    Object.entries(current.equipped).filter(([slotId]) => !slotIdSet.has(slotId)),
+  );
+  await updateUserHeritageVault(themeId, { equipped });
+}

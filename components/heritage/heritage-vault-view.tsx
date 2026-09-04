@@ -9,6 +9,8 @@ import {
   HERITAGE_VAULTS,
   computeTargetVaultLevel,
   getEligibleEvolvingBuildings,
+  getHeritageVaultBySlug,
+  heritageVaultSlug,
   resolveHeritageVault,
 } from "@/resolvers/heritage";
 import {
@@ -25,7 +27,6 @@ import {
   hydrateBuildingSelectionsStore,
   useBuildingSelectionsStore,
 } from "@/lib/stores/building-selections-store";
-import { useLocalStorageState } from "@/hooks/use-local-storage-state";
 import {
   useHeritageVaultEra,
   useSetHeritageVaultEra,
@@ -43,12 +44,46 @@ import {
   heritageTabPanelId,
 } from "@/components/heritage/vault-view/vault-tabs";
 import { EffectBlock } from "@/components/heritage/vault-view/effect-block";
+import { ResetEffectGroupButton } from "@/components/heritage/vault-view/reset-effect-group-button";
 import { ShowCostsToggle } from "@/components/heritage/vault-view/show-costs-toggle";
 import { TotalSummary } from "@/components/heritage/vault-view/total-summary";
 import { OverviewTable } from "@/components/heritage/vault-view/overview-table";
 import { EligibleBuildingsList } from "@/components/heritage/vault-view/eligible-buildings-list";
 import { HeritageVaultSkeleton } from "@/components/heritage/vault-view/vault-skeleton";
-import type { HeritageTab } from "@/components/heritage/vault-view/constants";
+import {
+  DEFAULT_HERITAGE_TAB,
+  getHeritageTabBySlug,
+  heritageTabSlug,
+  type HeritageTab,
+} from "@/components/heritage/vault-view/constants";
+
+/**
+ * Query string de `/vault` : `?b=<bâtiment>&tab=<onglet>` (ex. `?b=ath&tab=progression`).
+ * Une seule route statique, jamais de segment dynamique — copier-coller l'URL
+ * suffit à partager le même bâtiment/onglet SANS provoquer la moindre
+ * navigation Next (voir `syncQueryString` : `history.replaceState` brut, pas
+ * `router.replace`, pour ne jamais redéclencher le layout ni refetcher quoi
+ * que ce soit en changeant simplement d'onglet).
+ */
+const BUILDING_QUERY_PARAM = "b";
+const TAB_QUERY_PARAM = "tab";
+
+function readVaultKeyFromLocation(): string | null {
+  const slug = new URLSearchParams(window.location.search).get(BUILDING_QUERY_PARAM);
+  return slug ? (getHeritageVaultBySlug(slug)?.key ?? null) : null;
+}
+
+function readTabFromLocation(): HeritageTab | null {
+  const slug = new URLSearchParams(window.location.search).get(TAB_QUERY_PARAM);
+  return slug ? getHeritageTabBySlug(slug) : null;
+}
+
+function syncQueryString(vaultKey: string, tab: HeritageTab) {
+  const params = new URLSearchParams(window.location.search);
+  params.set(BUILDING_QUERY_PARAM, heritageVaultSlug(vaultKey));
+  params.set(TAB_QUERY_PARAM, heritageTabSlug(tab));
+  window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+}
 
 // ============================================================
 // Page /vault : sélecteur de vault et de niveau en tête, puis les onglets.
@@ -98,11 +133,52 @@ export function HeritageVaultView() {
   return mounted ? <HeritageVaultContent /> : <HeritageVaultSkeleton />;
 }
 
+function readStoredVaultKey(): string {
+  try {
+    const raw = localStorage.getItem("heritage-vault-key");
+    if (raw !== null) {
+      const parsed = JSON.parse(raw) as string;
+      if (HERITAGE_VAULTS.some((entry) => entry.key === parsed)) return parsed;
+    }
+  } catch {
+    // localStorage indisponible (navigation privée stricte) ou valeur corrompue.
+  }
+  return HERITAGE_VAULTS[0].key;
+}
+
 function HeritageVaultContent() {
-  const [vaultKey, setVaultKey] = useLocalStorageState<string>(
-    "heritage-vault-key",
-    HERITAGE_VAULTS[0].key,
+  // Bâtiment : `?b=` s'il est présent (lien partagé), sinon le dernier
+  // consulté par CE navigateur — seul le bâtiment a cette mémoire, l'onglet
+  // repart toujours d'Overview sans `?tab=` explicite (comme avant l'URL).
+  //
+  // ⚠️ INITIALISÉS EN LECTURE PARESSEUSE (fonction passée à `useState`), PAS
+  // PAR UN EFFET. `HeritageVaultContent` n'est monté qu'APRÈS le garde
+  // `mounted` de `HeritageVaultView` — `window` existe donc déjà au premier
+  // rendu. Un effet aurait introduit une course avec `useLocalStorageState`
+  // (son hydratation passe par une microtask) : la valeur par défaut de CE
+  // hook écrasait alors le `?b=` de l'URL, lu de façon synchrone juste après.
+  const [vaultKey, setVaultKey] = useState<string>(
+    () => readVaultKeyFromLocation() ?? readStoredVaultKey(),
   );
+  const [activeTab, setActiveTab] = useState<HeritageTab>(
+    () => readTabFromLocation() ?? DEFAULT_HERITAGE_TAB,
+  );
+  // Bâtiment persisté (localStorage) pour la prochaine visite de `/vault` sans
+  // `?b=` — l'onglet, lui, ne l'est pas : il repart toujours d'Overview, comme
+  // avant l'introduction de l'URL.
+  useEffect(() => {
+    try {
+      localStorage.setItem("heritage-vault-key", JSON.stringify(vaultKey));
+    } catch {
+      // idem — pas fatal, seul le repli de la prochaine visite en pâtit.
+    }
+  }, [vaultKey]);
+  // Répercuté sur l'URL à chaque changement — `history.replaceState` brut
+  // (pas `router.replace`) : un simple changement d'onglet ne doit RIEN
+  // recharger, ni layout ni page, juste réécrire la barre d'adresse.
+  useEffect(() => {
+    syncQueryString(vaultKey, activeTab);
+  }, [vaultKey, activeTab]);
   // Persisté (localStorage), pas en session : voir `heritage-vault-page-store`.
   // `null` tant que rien n'a jamais été choisi (première visite, ou storage
   // vidé) — on retombe alors sur la dernière ère du jeu plutôt que Byzantine.
@@ -110,7 +186,6 @@ function HeritageVaultContent() {
   const setSavedEra = useSetHeritageVaultEra();
   const era = savedEra ?? HERITAGE_VAULT_DEFAULT_ERA;
   const setEra = setSavedEra;
-  const [activeTab, setActiveTab] = useState<HeritageTab>("infos");
   const [switchOpen, setSwitchOpen] = useState(false);
   const [showCosts, setShowCosts] = useState(false);
 
@@ -180,6 +255,12 @@ function HeritageVaultContent() {
   }
 
   const themeId = catalogue.themeId;
+  const productionSlotIds = vault.slots
+    .filter((slot) => slot.group === "production")
+    .map((slot) => slot.id);
+  const boostSlotIds = vault.slots
+    .filter((slot) => slot.group === "boost")
+    .map((slot) => slot.id);
   const xpToNext = vault.upgradeCost?.xp ?? 0;
   // Le game design ne plafonne pas le rang de gardien : le tableau extrait
   // s'arrête à `vault.maxLevel` (60), mais la formule Lua se prolonge au-delà
@@ -256,7 +337,14 @@ function HeritageVaultContent() {
                   }
                   unequip={(slotId) => unequipHeritageEffect(themeId, slotId)}
                   action={
-                    <ShowCostsToggle checked={showCosts} onCheckedChange={setShowCosts} />
+                    <div className="flex items-center gap-2">
+                      <ShowCostsToggle checked={showCosts} onCheckedChange={setShowCosts} />
+                      <ResetEffectGroupButton
+                        themeId={themeId}
+                        groupLabel="Production"
+                        slotIds={productionSlotIds}
+                      />
+                    </div>
                   }
                 />
                 <EffectBlock
@@ -269,6 +357,13 @@ function HeritageVaultContent() {
                     equipHeritageEffect(themeId, slotId, effectId)
                   }
                   unequip={(slotId) => unequipHeritageEffect(themeId, slotId)}
+                  action={
+                    <ResetEffectGroupButton
+                      themeId={themeId}
+                      groupLabel="Boost"
+                      slotIds={boostSlotIds}
+                    />
+                  }
                 />
                 <TotalSummary vault={vault} selections={selections} />
               </div>

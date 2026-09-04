@@ -282,6 +282,21 @@ export function getHeritageVaultByTheme(themeId: string): HeritageVault | null {
   return BY_THEME.get(themeId) ?? null;
 }
 
+/**
+ * Segment d'URL d'un vault, ex. `heritage_ath` → `ath`. Le préfixe est commun
+ * aux 13 clés (voir `HERITAGE_EXTRACT`) et n'apporte rien à l'URL — l'enlever
+ * donne des liens courts (`/vault/ath/progression`) plutôt que redondants
+ * (`/vault/heritage_ath/progression`).
+ */
+export function heritageVaultSlug(key: string): string {
+  return key.replace(/^heritage_/, "");
+}
+
+/** Résout un segment d'URL vers son vault, ou `null` si inconnu. */
+export function getHeritageVaultBySlug(slug: string): HeritageVault | null {
+  return HERITAGE_VAULTS.find((vault) => heritageVaultSlug(vault.key) === slug) ?? null;
+}
+
 /** Les 29 courbes de prix du gardien. ⚠️ Les OFFRES, elles, n'existent pas. */
 export const KEEPER_OFFER_FORMULAS: HeritageKeeperOfferFormula[] =
   HERITAGE_EXTRACT.keeperOfferFormulas;
