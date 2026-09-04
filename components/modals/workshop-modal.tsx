@@ -58,10 +58,17 @@ function saveSelections(selections: BuildingSelections) {
     console.error("Failed to save selections:", error);
   }
 
-  // Second canal, synchrone : voir lib/stores/building-selections-store.ts.
+  // Second canal : voir lib/stores/building-selections-store.ts.
   // N'affecte pas la ligne ci-dessus, qui reste la seule que lisent
   // Calculator/Technologies/Wonders.
-  useBuildingSelectionsStore.getState().setSelections(selections);
+  //  Déféré comme l'event "storage" ci-dessus : ce store a des abonnés
+  // (ex. HeritageVaultContent) et saveSelections() est invoqué depuis le
+  // updater passé à setSelections (React peut l'exécuter en phase de rendu).
+  // Un set() Zustand synchrone ici déclenchait "Cannot update a component
+  // while rendering a different component".
+  queueMicrotask(() => {
+    useBuildingSelectionsStore.getState().setSelections(selections);
+  });
 }
 
 // ============================================================================

@@ -80,10 +80,11 @@ function alliedGoodName(key: string): string {
 
 /**
  * L'ordre d'affichage voulu des sections du sélecteur « Allied culture » —
- * demandé nommément (Égypte, Chine, Maya, Arabie, Ottomans), Vikings ajoutés
- * en fin de liste : deux de ses biens (`ceramic_treasure`, `spice_treasure`)
- * sont dans le catalogue, les omettre aurait été un retour en arrière muet
- * sur une civilisation déjà couverte.
+ * l'ordre du JEU, celui dans lequel les villes alliées apparaissent au fil
+ * de la progression (même ordre que `goodsByCivilization`, `lib/constants.ts`,
+ * qui reflète l'ordre brut d'extraction du jeu) : Égypte, Chine, Maya,
+ * Vikings, Arabie, Ottomans — pas l'ordre alphabétique ni l'ordre de demande
+ * initiale.
  *
  * Clés de `goodsByCivilization` (`lib/constants.ts`) — le même regroupement
  * que le Calculator, jamais redéclaré ici.
@@ -92,18 +93,18 @@ export const ALLIED_CIVILIZATION_ORDER = [
   "EGYPT",
   "CHINA",
   "MAYA EMPIRE",
+  "VIKING KINGDOM",
   "ARABIA",
   "OTTOMAN EMPIRE",
-  "VIKING KINGDOM",
 ] as const;
 
 const ALLIED_CIVILIZATION_LABELS: Record<(typeof ALLIED_CIVILIZATION_ORDER)[number], string> = {
   EGYPT: "Egypt",
   CHINA: "China",
   "MAYA EMPIRE": "Maya",
+  "VIKING KINGDOM": "Vikings",
   ARABIA: "Arabia",
   "OTTOMAN EMPIRE": "Ottoman",
-  "VIKING KINGDOM": "Vikings",
 };
 
 /**

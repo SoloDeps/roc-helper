@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, LayoutGrid } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { EraCode } from "@/types/shared";
@@ -165,6 +165,18 @@ export function VaultHeader({
                   onClick={() => onShiftVault(-1)}
                 >
                   <ChevronLeft size={14} aria-hidden="true" />
+                </Button>
+                {/* Bouton explicite entre les deux flèches — clic sur le nom
+                    seul (`onOpenSwitch`, ci-dessus) n'était pas identifié
+                    comme ouvrant une modale par une partie des joueurs. */}
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="size-8 rounded-lg"
+                  aria-label={`Browse all heritages (currently ${vault.name})`}
+                  onClick={onOpenSwitch}
+                >
+                  <LayoutGrid size={14} aria-hidden="true" />
                 </Button>
                 <Button
                   variant="outline"
