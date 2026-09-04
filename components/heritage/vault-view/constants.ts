@@ -19,7 +19,7 @@ export const HERITAGE_TABS = [
   { value: "infos", label: "Overview", slug: "overview" },
   { value: "sacrifice", label: "Sacrifice", slug: "sacrifice" },
   { value: "combination", label: "Combination", slug: "combination" },
-  { value: "progression", label: "Level Table", slug: "progression" },
+  { value: "progression", label: "Level Table", slug: "level-tab" },
   { value: "keeperOffers", label: "Keeper Offers", slug: "keeper-offers" },
 ] as const;
 

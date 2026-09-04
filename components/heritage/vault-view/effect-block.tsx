@@ -12,6 +12,7 @@ export function EffectBlock({
   showCosts,
   equip,
   unequip,
+  titleAction,
   action,
 }: {
   title: string;
@@ -21,6 +22,8 @@ export function EffectBlock({
   showCosts: boolean;
   equip: (slotId: string, effectId: string) => void;
   unequip: (slotId: string) => void;
+  /** Collé au titre, à gauche — le reset du groupe, distinct de `action`. */
+  titleAction?: ReactNode;
   action?: ReactNode;
 }) {
   const slots = vault.slots
@@ -30,9 +33,12 @@ export function EffectBlock({
   return (
     <div>
       <div className="mb-2 flex items-center justify-between gap-2">
-        <h2 className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-          {title}
-        </h2>
+        <div className="flex items-center gap-1">
+          <h2 className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+            {title}
+          </h2>
+          {titleAction}
+        </div>
         {action}
       </div>
       {/* Même échelle que les grilles de badges du projet (cartes de zone, de

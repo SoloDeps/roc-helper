@@ -336,15 +336,15 @@ function HeritageVaultContent() {
                     equipHeritageEffect(themeId, slotId, effectId)
                   }
                   unequip={(slotId) => unequipHeritageEffect(themeId, slotId)}
+                  titleAction={
+                    <ResetEffectGroupButton
+                      themeId={themeId}
+                      groupLabel="Production"
+                      slotIds={productionSlotIds}
+                    />
+                  }
                   action={
-                    <div className="flex items-center gap-2">
-                      <ShowCostsToggle checked={showCosts} onCheckedChange={setShowCosts} />
-                      <ResetEffectGroupButton
-                        themeId={themeId}
-                        groupLabel="Production"
-                        slotIds={productionSlotIds}
-                      />
-                    </div>
+                    <ShowCostsToggle checked={showCosts} onCheckedChange={setShowCosts} />
                   }
                 />
                 <EffectBlock
@@ -357,7 +357,7 @@ function HeritageVaultContent() {
                     equipHeritageEffect(themeId, slotId, effectId)
                   }
                   unequip={(slotId) => unequipHeritageEffect(themeId, slotId)}
-                  action={
+                  titleAction={
                     <ResetEffectGroupButton
                       themeId={themeId}
                       groupLabel="Boost"
