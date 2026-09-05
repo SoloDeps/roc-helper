@@ -78,6 +78,23 @@ function readTabFromLocation(): HeritageTab | null {
   return slug ? getHeritageTabBySlug(slug) : null;
 }
 
+const HERITAGE_VAULT_TAB_SESSION_KEY = "heritage-vault-tab";
+
+// `sessionStorage`, pas `localStorage` : contrairement au bâtiment (mémoire
+// entre deux visites, potentiellement à plusieurs jours d'écart), l'onglet ne
+// doit survivre qu'à une navigation DANS le même onglet de navigateur — aller
+// sur une autre page du site puis revenir sur `/vault` doit retrouver l'onglet
+// quitté, mais rouvrir le site plus tard doit repartir d'Overview.
+function readStoredTab(): HeritageTab | null {
+  try {
+    const raw = sessionStorage.getItem(HERITAGE_VAULT_TAB_SESSION_KEY);
+    return raw ? getHeritageTabBySlug(raw) : null;
+  } catch {
+    // sessionStorage indisponible (navigation privée stricte) — pas fatal.
+    return null;
+  }
+}
+
 function syncQueryString(vaultKey: string, tab: HeritageTab) {
   const params = new URLSearchParams(window.location.search);
   params.set(BUILDING_QUERY_PARAM, heritageVaultSlug(vaultKey));
@@ -147,9 +164,11 @@ function readStoredVaultKey(): string {
 }
 
 function HeritageVaultContent() {
-  // Bâtiment : `?b=` s'il est présent (lien partagé), sinon le dernier
-  // consulté par CE navigateur — seul le bâtiment a cette mémoire, l'onglet
-  // repart toujours d'Overview sans `?tab=` explicite (comme avant l'URL).
+  // Bâtiment et onglet : `?b=`/`?tab=` s'ils sont présents (lien partagé),
+  // sinon le dernier consulté — le bâtiment en `localStorage` (survit à la
+  // fermeture du navigateur), l'onglet en `sessionStorage` (voir
+  // `readStoredTab` : ne doit survivre qu'à une navigation dans le même
+  // onglet navigateur, pas à une nouvelle session).
   //
   // ⚠️ INITIALISÉS EN LECTURE PARESSEUSE (fonction passée à `useState`), PAS
   // PAR UN EFFET. `HeritageVaultContent` n'est monté qu'APRÈS le garde
@@ -161,11 +180,10 @@ function HeritageVaultContent() {
     () => readVaultKeyFromLocation() ?? readStoredVaultKey(),
   );
   const [activeTab, setActiveTab] = useState<HeritageTab>(
-    () => readTabFromLocation() ?? DEFAULT_HERITAGE_TAB,
+    () => readTabFromLocation() ?? readStoredTab() ?? DEFAULT_HERITAGE_TAB,
   );
   // Bâtiment persisté (localStorage) pour la prochaine visite de `/vault` sans
-  // `?b=` — l'onglet, lui, ne l'est pas : il repart toujours d'Overview, comme
-  // avant l'introduction de l'URL.
+  // `?b=`.
   useEffect(() => {
     try {
       localStorage.setItem("heritage-vault-key", JSON.stringify(vaultKey));
@@ -173,6 +191,16 @@ function HeritageVaultContent() {
       // idem — pas fatal, seul le repli de la prochaine visite en pâtit.
     }
   }, [vaultKey]);
+  // Onglet persisté (sessionStorage, voir `readStoredTab`) pour retrouver la
+  // même vue en revenant sur `/vault` depuis une autre page DU MÊME onglet
+  // navigateur — mais pas au-delà, une nouvelle session repart d'Overview.
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(HERITAGE_VAULT_TAB_SESSION_KEY, heritageTabSlug(activeTab));
+    } catch {
+      // idem — pas fatal.
+    }
+  }, [activeTab]);
   // Répercuté sur l'URL à chaque changement — `history.replaceState` brut
   // (pas `router.replace`) : un simple changement d'onglet ne doit RIEN
   // recharger, ni layout ni page, juste réécrire la barre d'adresse.
