@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, LayoutGrid } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -11,7 +11,9 @@ import {
 } from "@/resolvers/heritage";
 import {
   HERITAGE_KEEPER_IMAGE_URL,
+  decodeHeritageVaultPortrait,
   getHeritageVaultPortraitOffset,
+  getHeritageVaultPortraitSize,
   getHeritageVaultPortraitUrl,
 } from "@/resolvers/heritage-portraits";
 import { ResponsiveModal } from "@/components/modals/responsive-modal";
@@ -54,15 +56,27 @@ import { heritageEventLabel } from "@/components/heritage/effect-display";
 // parfois à la ligne) et un portrait collé en bas laissait un vide au-dessus
 // de sa tête. Il y est donc CENTRÉ verticalement, toujours à gauche du texte.
 //
+// Sous `lg`, portrait et titres sont VOLONTAIREMENT plus petits qu'avant —
+// alignés sur le format compact du panneau Heritage building de l'onglet
+// Combination (`components/heritage/combination/vault-panel.tsx`), qui sert
+// de référence visuelle sur mobile.
+//
+// ⚠️ LE `offset` PAR THÈME (`getHeritageVaultPortraitOffset`) NE S'APPLIQUE
+// QU'À PARTIR DE `lg`. Ces corrections en px sont calées à l'œil sur le
+// portrait `h-32` du bureau ; appliquées telles quelles au portrait `h-16`
+// (deux fois plus petit) sous `lg`, elles décalaient le portrait bien au-delà
+// de ce qu'il fallait. D'où les variables CSS `--portrait-offset-*` pour ne
+// brancher le `transform` que dans la classe `lg:`.
+//
 // Deux cotes sont calées sur la mesure, pas à vue :
 //  · le retrait de portrait (`pl-*`) suit la largeur réelle de l'image —
-//    100 px à `h-25` posée à `left-3`, soit 112 px de bord à bord, ~128 px à
-//    `h-32` — d'où `pl-28` puis `pl-40`, au même palier `lg` que l'image et
+//    64 px à `h-16` posée à `left-3`, soit 76 px de bord à bord, ~128 px à
+//    `h-32` — d'où `pl-19` puis `pl-40`, au même palier `lg` que l'image et
 //    que la bascule d'ancrage.
-//  · `min-h-30` est une hauteur PLANCHER, jamais un plafond. En `h-30` fixe,
-//    la barre d'xp sortait de la carte dès que les sélecteurs passaient à la
-//    ligne, et atterrissait sur la barre d'onglets dont elle interceptait les
-//    clics.
+//  · `min-h-20` (mobile) / `min-h-30` (`lg`) sont des hauteurs PLANCHER,
+//    jamais un plafond. En hauteur fixe, la barre d'xp sortait de la carte
+//    dès que les sélecteurs passaient à la ligne, et atterrissait sur la
+//    barre d'onglets dont elle interceptait les clics.
 // ============================================================
 
 interface VaultHeaderProps {
@@ -99,8 +113,33 @@ export function VaultHeader({
   onOpenSwitch,
 }: VaultHeaderProps) {
   const [keeperOpen, setKeeperOpen] = useState(false);
-  const portraitUrl = getHeritageVaultPortraitUrl(vault.themeId);
-  const portraitOffset = getHeritageVaultPortraitOffset(vault.themeId);
+
+  // ⚠️ LE PORTRAIT AFFICHÉ SUIT `displayedThemeId`, PAS `vault.themeId`
+  // DIRECTEMENT. `src` et `transform` (l'offset) sont déjà posés en un seul
+  // commit React (vérifié) — le décalage venait d'ailleurs : le navigateur
+  // décode le nouveau bitmap de façon asynchrone (`decoding="async"`) et peut
+  // continuer d'afficher l'ANCIEN personnage pendant ce temps, déjà repositionné
+  // par le NOUVEAU `transform` — ce qui se lit comme un saut. En ne basculant
+  // `displayedThemeId` qu'une fois `decodeHeritageVaultPortrait` résolu, l'ancien
+  // portrait ET son offset restent affichés ENSEMBLE jusqu'à ce que le nouveau
+  // soit prêt à peindre, puis les deux changent d'un coup.
+  const [displayedThemeId, setDisplayedThemeId] = useState(vault.themeId);
+  useEffect(() => {
+    if (vault.themeId === displayedThemeId) return;
+    let cancelled = false;
+    const url = getHeritageVaultPortraitUrl(vault.themeId);
+    const ready = url ? decodeHeritageVaultPortrait(url) : Promise.resolve();
+    ready.then(() => {
+      if (!cancelled) setDisplayedThemeId(vault.themeId);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [vault.themeId, displayedThemeId]);
+
+  const portraitUrl = getHeritageVaultPortraitUrl(displayedThemeId);
+  const portraitOffset = getHeritageVaultPortraitOffset(displayedThemeId);
+  const portraitSize = getHeritageVaultPortraitSize(displayedThemeId);
 
   return (
     <header className="mb-4 grid grid-cols-1 gap-3 lg:mb-5 lg:grid-cols-2">
@@ -112,7 +151,7 @@ export function VaultHeader({
             donc `object-contain` ne les recadre pas ; elle ne sert QUE de
             garde-fou si un futur portrait est proportionnellement plus
             large (ex. `Hercules`, 672×512, le plus large des 13). */}
-        <div className="relative min-h-30">
+        <div className="relative min-h-20 lg:min-h-30">
           {portraitUrl && (
             <button
               type="button"
@@ -124,14 +163,23 @@ export function VaultHeader({
               <img
                 src={portraitUrl}
                 alt={vault.name}
+                // ⚠️ `width`/`height` FIXES (les dimensions réelles du
+                // fichier, pas une taille d'affichage) : sans elles, changer
+                // de vault fait retomber la balise à une taille intrinsèque
+                // inconnue le temps du décodage — même en cache — et le
+                // portrait semble « sauter » à son apparition. Le CSS
+                // (`h-16`/`lg:h-32`) reste seul maître de la taille affichée.
+                width={portraitSize?.width}
+                height={portraitSize?.height}
                 draggable={false}
                 loading="eager"
                 decoding="async"
-                className="pointer-events-none h-25 w-auto max-w-none select-none object-contain object-bottom-left lg:h-32"
+                className="pointer-events-none h-16 w-auto max-w-none select-none object-contain object-bottom-left lg:h-32 lg:[transform:translate(var(--portrait-offset-x),var(--portrait-offset-y))]"
                 style={
-                  portraitOffset.x !== 0 || portraitOffset.y !== 0
-                    ? { transform: `translate(${portraitOffset.x}px, ${portraitOffset.y}px)` }
-                    : undefined
+                  {
+                    "--portrait-offset-x": `${portraitOffset.x}px`,
+                    "--portrait-offset-y": `${portraitOffset.y}px`,
+                  } as CSSProperties
                 }
               />
             </button>
@@ -139,7 +187,7 @@ export function VaultHeader({
           <div
             className={cn(
               "relative z-10 flex h-full flex-col justify-between gap-1 p-3 py-2",
-              portraitUrl && "pl-28 lg:pl-40",
+              portraitUrl && "pl-19 lg:pl-40",
             )}
           >
             <div className="flex items-start justify-between gap-2">
@@ -149,10 +197,10 @@ export function VaultHeader({
                 aria-label={`Change heritage (currently ${vault.name})`}
                 className="min-w-0 cursor-pointer appearance-none border-0 bg-transparent p-0 text-left"
               >
-                <h1 className="truncate text-lg font-bold leading-tight text-foreground hover:underline">
+                <h1 className="truncate text-sm font-bold leading-tight text-foreground hover:underline lg:text-lg">
                   {vault.name}
                 </h1>
-                <p className="truncate text-sm font-medium text-muted-foreground">
+                <p className="truncate text-[12px] font-medium text-muted-foreground lg:text-sm">
                   {heritageEventLabel(vault)}
                 </p>
               </button>
@@ -245,9 +293,9 @@ export function VaultHeader({
         <button
           type="button"
           onClick={() => setKeeperOpen(true)}
-          className="flex w-full cursor-pointer items-center gap-3 rounded-b-xl border-t border-border bg-background-100 px-3 py-2.5 text-left transition-colors hover:bg-muted/50 active:bg-muted/60 lg:hidden"
+          className="flex w-full cursor-pointer items-center gap-3 rounded-b-xl border-t border-border bg-background-100 pl-6 pr-4 py-2.5 text-left transition-colors hover:bg-muted/50 active:bg-muted/60 lg:hidden"
         >
-          <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted/40">
+          <span className="flex size-12 shrink-0 items-center justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={HERITAGE_KEEPER_IMAGE_URL}
@@ -256,10 +304,10 @@ export function VaultHeader({
               draggable={false}
               loading="eager"
               decoding="async"
-              className="pointer-events-none h-9 w-auto max-w-none select-none object-contain"
+              className="pointer-events-none h-12 w-auto max-w-none select-none object-contain"
             />
           </span>
-          <span className="min-w-0 flex-1">
+          <span className="min-w-0 flex-1 pl-1">
             <span className="block text-[13px] font-semibold leading-tight text-foreground">
               Keeper · Lv. {vault.keeper.reputationLevel}
             </span>

@@ -22,24 +22,101 @@
  * fois calé dans ce gabarit commun. `{ x, y }` (en px, positif = droite/bas)
  * corrige ce cas au cas par cas ; `{ x: 0, y: 0 }` — le défaut — ne change
  * rien. À ajuster à l'œil dans l'app, jamais deviné.
+ *
+ * `width`/`height` sont les dimensions RÉELLES du fichier (relevées au pixel
+ * près via `sips -g pixelWidth -g pixelHeight`, PAS déduites du CSS). Elles
+ * doivent être posées comme attributs HTML sur la balise `<img>` — voir
+ * `getHeritageVaultPortraitSize` — sinon le navigateur ne connaît le ratio
+ * largeur/hauteur du portrait qu'une fois l'image décodée : le temps d'un
+ * changement de vault, la balise (même `src` remplacé sur le même nœud DOM)
+ * retombe à une taille intrinsèque nulle/inconnue avant de sauter à sa taille
+ * finale au décodage, ce qui se voit comme le portrait « repositionné » à son
+ * apparition — même préchargé en cache, car décoder n'est pas la même chose
+ * que peindre. Fixer `width`/`height` fige le ratio dès le premier rendu, y
+ * compris pendant le chargement, donc plus aucun saut.
  */
 const PORTRAIT_BY_THEME_SUFFIX: Record<
   string,
-  { file: string; offset?: { x: number; y: number } }
+  { file: string; width: number; height: number; offset?: { x: number; y: number } }
 > = {
-  Heritage_Celtic: { file: "Questgiver_StoneAge_Aedan_fullbody.webp", offset: { x: 0, y: 0 } },
-  Heritage_Mongol: { file: "Questgiver_StoneAge_GenghisKhan_fullbody.webp", offset: { x: 0, y: 0 } },
-  Heritage_Greek: { file: "Questgiver_ClassicGreece_Hercules_fullbody.webp", offset: { x: -33, y: 0 } },
-  Heritage_Persian: { file: "Questgiver_StoneAge_Scheherazade_fullbody.webp", offset: { x: 40, y: 0 } },
-  Heritage_Polynesian: { file: "Questgiver_StoneAge_Maori_fullbody.webp", offset: { x: 20, y: 0 } },
-  Heritage_Japan: { file: "Questgiver_StoneAge_Geisha_fullbody.webp", offset: { x: 20, y: 0 } },
-  Heritage_MaliEmpire: { file: "Questgiver_StoneAge_MansaMusa_fullbody.webp", offset: { x: 20, y: 0 } },
-  Heritage_WorldFair: { file: "Questgiver_StoneAge_NikolaTesla_fullbody.webp", offset: { x: 10, y: 0 } },
-  Heritage_Aztec: { file: "Questgiver_StoneAge_Moctezuma_fullbody.webp", offset: { x: -5, y: 0 } },
-  Heritage_Halloween: { file: "Questgiver_StoneAge_Dracula_fullbody.webp", offset: { x: 20, y: 0 } },
-  Heritage_Thai: { file: "Questgiver_StoneAge_QueenSuriyothai_fullbody.webp", offset: { x: 20, y: 0 } },
-  Heritage_Winter: { file: "Questgiver_StoneAge_Margarete_fullbody.webp", offset: { x: 16, y: 0 } },
-  Heritage_ATH: { file: "Questgiver_StoneAge_PirateCaptain_fullbody.webp", offset: { x: 20, y: 0 } },
+  Heritage_Celtic: {
+    file: "Questgiver_StoneAge_Aedan_fullbody.webp",
+    width: 512,
+    height: 512,
+    offset: { x: 0, y: 0 },
+  },
+  Heritage_Mongol: {
+    file: "Questgiver_StoneAge_GenghisKhan_fullbody.webp",
+    width: 507,
+    height: 507,
+    offset: { x: 0, y: 0 },
+  },
+  Heritage_Greek: {
+    file: "Questgiver_ClassicGreece_Hercules_fullbody.webp",
+    width: 672,
+    height: 512,
+    offset: { x: -33, y: 0 },
+  },
+  Heritage_Persian: {
+    file: "Questgiver_StoneAge_Scheherazade_fullbody.webp",
+    width: 233,
+    height: 512,
+    offset: { x: 40, y: 0 },
+  },
+  Heritage_Polynesian: {
+    file: "Questgiver_StoneAge_Maori_fullbody.webp",
+    width: 402,
+    height: 512,
+    offset: { x: 20, y: 0 },
+  },
+  Heritage_Japan: {
+    file: "Questgiver_StoneAge_Geisha_fullbody.webp",
+    width: 392,
+    height: 512,
+    offset: { x: 20, y: 0 },
+  },
+  Heritage_MaliEmpire: {
+    file: "Questgiver_StoneAge_MansaMusa_fullbody.webp",
+    width: 380,
+    height: 511,
+    offset: { x: 20, y: 0 },
+  },
+  Heritage_WorldFair: {
+    file: "Questgiver_StoneAge_NikolaTesla_fullbody.webp",
+    width: 448,
+    height: 489,
+    offset: { x: 10, y: 0 },
+  },
+  Heritage_Aztec: {
+    file: "Questgiver_StoneAge_Moctezuma_fullbody.webp",
+    width: 512,
+    height: 512,
+    offset: { x: -5, y: 0 },
+  },
+  Heritage_Halloween: {
+    file: "Questgiver_StoneAge_Dracula_fullbody.webp",
+    width: 375,
+    height: 512,
+    offset: { x: 20, y: 0 },
+  },
+  Heritage_Thai: {
+    file: "Questgiver_StoneAge_QueenSuriyothai_fullbody.webp",
+    width: 316,
+    height: 512,
+    offset: { x: 20, y: 0 },
+  },
+  Heritage_Winter: {
+    file: "Questgiver_StoneAge_Margarete_fullbody.webp",
+    width: 379,
+    height: 490,
+    offset: { x: 16, y: 0 },
+  },
+  Heritage_ATH: {
+    file: "Questgiver_StoneAge_PirateCaptain_fullbody.webp",
+    width: 402,
+    height: 512,
+    offset: { x: 20, y: 0 },
+  },
 };
 
 /** `heritage_vault.Heritage_Celtic` → le suffixe qui indexe la table ci-dessus. */
@@ -67,6 +144,20 @@ export function getHeritageVaultPortraitOffset(themeId: string): { x: number; y:
   return entry?.offset ?? { x: 0, y: 0 };
 }
 
+/**
+ * Les dimensions intrinsèques (px) du fichier portrait — à poser en attributs
+ * `width`/`height` sur la balise `<img>`, JAMAIS seulement en CSS. Voir la
+ * doc de la table : c'est ce qui évite au navigateur de faire retomber la
+ * balise à une taille inconnue le temps du décodage à chaque changement de
+ * vault. `null` pour un thème sans entrée.
+ */
+export function getHeritageVaultPortraitSize(
+  themeId: string,
+): { width: number; height: number } | null {
+  const entry = PORTRAIT_BY_THEME_SUFFIX[themeSuffix(themeId)];
+  return entry === undefined ? null : { width: entry.width, height: entry.height };
+}
+
 /** Image générique du gardien — une seule pour les 13 vaults, pas de variante. */
 export const HERITAGE_KEEPER_IMAGE_URL = "/images/vault/keeper.webp";
 
@@ -79,16 +170,56 @@ export const HERITAGE_VAULT_PORTRAIT_URLS: readonly string[] = Object.values(
 ).map((entry) => `/images/vault/characters/${entry.file}`);
 
 /**
- * Précharge les 13 portraits en mémoire (`new Image()`, jamais montés dans le
+ * URLs déjà DÉCODÉES (pas seulement téléchargées) — voir
+ * `decodeHeritageVaultPortrait`. Un simple `img.src = url` ne fait que lancer
+ * la requête réseau ; le décodage du bitmap (coûteux pour un WebP) reste à
+ * faire au moment où la balise visible en a besoin. Ce cache évite de
+ * redécoder un portrait déjà vu.
+ */
+const decodedPortraitUrls = new Set<string>();
+
+/**
+ * Décode un portrait en mémoire et résout une fois le bitmap PRÊT À PEINDRE
+ * (pas seulement téléchargé) — `HTMLImageElement.decode()`, pas `img.src`
+ * seul. Sert de porte : `VaultHeader` n'affiche un nouveau portrait qu'une
+ * fois cette promesse résolue, jamais avant, pour ne jamais montrer la
+ * balise visible avec un `src`/`transform` déjà à jour mais un bitmap pas
+ * encore prêt (ce qui se lisait comme un décalage/saut à l'apparition — le
+ * navigateur pouvant continuer d'afficher l'ANCIEN personnage, déjà repositionné
+ * par le nouveau `transform`, le temps que le nouveau décode).
+ *
+ * Résout aussi (sans rejeter) en cas d'échec de décodage : un portrait qui ne
+ * décode pas ne doit pas bloquer indéfiniment l'affichage, juste ne pas
+ * bénéficier de la garantie de synchronisation. No-op résolu immédiatement
+ * côté serveur.
+ */
+export function decodeHeritageVaultPortrait(url: string): Promise<void> {
+  if (typeof window === "undefined" || decodedPortraitUrls.has(url)) {
+    return Promise.resolve();
+  }
+  const img = new window.Image();
+  img.src = url;
+  return img
+    .decode()
+    .then(() => {
+      decodedPortraitUrls.add(url);
+    })
+    .catch(() => {
+      // Décodage impossible (format non supporté, requête annulée...) — pas
+      // fatal, voir la doc ci-dessus.
+    });
+}
+
+/**
+ * Précharge ET décode les 13 portraits en mémoire (jamais montés dans le
  * DOM) pour que la bascule d'un vault à l'autre affiche le portrait déjà
- * décodé — sans ce préchargement, chaque changement lance une requête réseau
+ * prêt — sans ça, chaque changement lance une requête réseau ET un décodage,
  * et l'image (avec son `offset` déjà appliqué) apparaît après coup, ce qui se
  * lit comme un décalage. No-op côté serveur (`Image` n'existe pas hors DOM).
  */
 export function preloadHeritageVaultPortraits(): void {
   if (typeof window === "undefined") return;
   for (const url of HERITAGE_VAULT_PORTRAIT_URLS) {
-    const img = new window.Image();
-    img.src = url;
+    void decodeHeritageVaultPortrait(url);
   }
 }
