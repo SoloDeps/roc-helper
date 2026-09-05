@@ -14,13 +14,16 @@ import {
   CITY_IDS,
   fitsInCells,
   fixedCulturePoints,
-  getCityGrid,
+  getCityMap,
+  getCityMaps,
+  isCityMapUnlocked,
   isBuildableType,
-  listCityGrids,
+  listCityMaps,
   rotatedFootprint,
   slotAt,
   unlockedCells,
 } from "@/resolvers/city-grid";
+import type { CityMap } from "@/resolvers/city-grid";
 
 describe("grille de ville — extraction", () => {
   it("6 villes, 832 cases, 0 point indéterminé", () => {
@@ -144,47 +147,73 @@ describe("grille de ville — extraction", () => {
   });
 });
 
-describe("grille de ville — résolution", () => {
-  it("8 grilles jouables pour 6 villes", () => {
-    const grids = listCityGrids();
-    expect(grids.map((g) => g.key)).toEqual([
-      "City_Arabia|LAND",
-      "City_Capital|LAND",
-      "City_Capital|HARBOR",
-      "City_China|LAND",
-      "City_Egypt|LAND",
-      "City_Mayas|LAND",
-      "City_Vikings|LAND",
-      "City_Vikings|WATER",
+describe("grille de ville — cartes jouables", () => {
+  // Le cœur du découpage : une surface n'est pas une carte. Le port en est
+  // une (boîte disjointe de la Capitale) ; l'eau viking non (boîte imbriquée
+  // dans la carte viking).
+  it("7 cartes pour 6 villes — le port est séparé, l'eau viking non", () => {
+    const areas = listCityMaps();
+    expect(areas.map((a) => `${a.key} (${a.label})`)).toEqual([
+      "City_Arabia|LAND (Arabia)",
+      "City_Capital|LAND (Capital City)",
+      "City_Capital|HARBOR (Harbor)",
+      "City_China|LAND (China)",
+      "City_Egypt|LAND (Egypt)",
+      "City_Mayas|LAND (Maya Empire)",
+      "City_Vikings|LAND (Viking Kingdom)",
     ]);
     expect(CITY_IDS.length).toBe(6);
+    // L'eau viking est un TERRAIN de la carte viking, pas une carte.
+    const vikings = getCityMap("City_Vikings|LAND")!;
+    expect(vikings.surfaces).toEqual(["LAND", "WATER"]);
+    expect(getCityMap("City_Vikings|WATER")).toBeNull();
   });
 
-  // Le cas qui justifie tout le découpage par surface : traiter Capital comme
-  // une grille unique donnerait 12x19 au lieu de 12x10, avec 9 rangées vides
-  // entre la ville et son port.
-  it("Capital est bien deux grilles disjointes, pas une de 12x19", () => {
-    const land = getCityGrid("City_Capital", "LAND");
-    const harbor = getCityGrid("City_Capital", "HARBOR");
-    expect(land).not.toBeNull();
-    expect(harbor).not.toBeNull();
+  // Régression du besoin produit : ouvrir la Capitale ne doit jamais faire
+  // apparaître le Port, et inversement.
+  it("Capitale et Port sont deux cartes étanches", () => {
+    const land = getCityMap("City_Capital|LAND")!;
+    const harbor = getCityMap("City_Capital|HARBOR")!;
 
-    expect(land!.cols).toBe(12);
-    expect(land!.rows).toBe(10);
-    expect(land!.slots.length).toBe(120);
-    expect(land!.sparse).toBe(false); // pavage complet
-    expect(land!.bounds).toEqual({ x: 3, y: 11, width: 48, height: 40 });
+    expect(land.cols).toBe(12);
+    expect(land.rows).toBe(10);
+    expect(land.slots.length).toBe(120);
+    expect(land.sparse).toBe(false); // pavage complet
+    expect(land.surfaces).toEqual(["LAND"]);
 
-    expect(harbor!.slots.length).toBe(42);
-    expect(harbor!.bounds.y).toBeLessThan(0); // le port est au nord, en y négatif
-    expect(harbor!.bounds.y + harbor!.bounds.height).toBeLessThan(land!.bounds.y);
+    expect(harbor.slots.length).toBe(42);
+    expect(harbor.surfaces).toEqual(["HARBOR"]);
+
+    // Aucune case, aucune cellule en commun.
+    const landIds = new Set(land.slots.map((s) => s.id));
+    expect(harbor.slots.some((s) => landIds.has(s.id))).toBe(false);
+    const landCells = buildableCells(land);
+    expect([...buildableCells(harbor)].some((c) => landCells.has(c))).toBe(false);
+
+    // Et deux cadrages disjoints : le port est au nord, en y négatif.
+    expect(harbor.bounds.y).toBeLessThan(0);
+    expect(harbor.bounds.y + harbor.bounds.height).toBeLessThanOrEqual(land.bounds.y);
   });
 
-  it("une surface absente retourne null plutôt que de lever", () => {
-    expect(getCityGrid("City_Mayas", "HARBOR")).toBeNull();
-    expect(getCityGrid("City_Mayas", "WATER")).toBeNull();
-    expect(getCityGrid("City_Inexistante", "LAND")).toBeNull();
-    expect(getCityGrid("City_Mayas", "LAND")).not.toBeNull();
+  it("les deux cartes de Capital partitionnent exactement ses cases constructibles", () => {
+    const areas = getCityMaps("City_Capital");
+    expect(areas.length).toBe(2);
+    const total = areas.reduce((t, a) => t + a.slots.length, 0);
+    expect(total).toBe(162); // 120 terrestres + 42 portuaires
+  });
+
+  it("une carte inexistante retourne null plutôt que de lever", () => {
+    expect(getCityMap("City_Mayas|HARBOR")).toBeNull();
+    expect(getCityMap("City_Inexistante|LAND")).toBeNull();
+    expect(getCityMaps("City_Inexistante")).toEqual([]);
+    expect(getCityMap("City_Mayas|LAND")).not.toBeNull();
+  });
+
+  it("la carte terrestre passe toujours en premier", () => {
+    for (const cityId of CITY_IDS) {
+      const areas = getCityMaps(cityId);
+      expect(areas[0].surface, cityId).toBe("LAND");
+    }
   });
 
   it("BLOCKER et connecteurs ne sont jamais constructibles", () => {
@@ -194,24 +223,33 @@ describe("grille de ville — résolution", () => {
     expect(isBuildableType("CONNECTOR")).toBe(false);
     expect(isBuildableType("DETACHED_CONNECTOR")).toBe(false);
 
-    for (const grid of listCityGrids()) {
-      for (const slot of grid.slots) {
-        expect(isBuildableType(slot.type), `${grid.key} ${slot.id}`).toBe(true);
+    for (const area of listCityMaps()) {
+      for (const slot of area.slots) {
+        expect(isBuildableType(slot.type), `${area.key} ${slot.id}`).toBe(true);
       }
     }
   });
 
   it("chaque case développe exactement expansionSize² cellules", () => {
-    for (const grid of listCityGrids()) {
-      const cells = buildableCells(grid);
-      expect(cells.size, grid.key).toBe(
-        grid.slots.length * grid.expansionSize * grid.expansionSize,
+    for (const area of listCityMaps()) {
+      expect(buildableCells(area).size, area.key).toBe(
+        area.slots.length * area.expansionSize * area.expansionSize,
       );
     }
   });
 
-  // L'encodage entier doit être injectif sur la plage réelle des coordonnées
-  // (-25..51) : une collision ferait passer un placement invalide.
+  // C'est ce filtrage par terrain qui interdira un bâtiment terrestre sur
+  // l'eau : les deux jeux de cellules d'une même carte sont disjoints.
+  it("les cellules se filtrent par terrain à l'intérieur d'une carte", () => {
+    const vikings = getCityMap("City_Vikings|LAND")!;
+    const land = buildableCells(vikings, "LAND");
+    const water = buildableCells(vikings, "WATER");
+    expect(land.size).toBe(116 * 9);
+    expect(water.size).toBe(36 * 9);
+    expect([...water].some((c) => land.has(c))).toBe(false);
+    expect(land.size + water.size).toBe(buildableCells(vikings).size);
+  });
+
   it("cellKey est injectif sur la plage de coordonnées réelle", () => {
     const seen = new Set<number>();
     for (let x = -32; x <= 64; x++) {
@@ -224,49 +262,98 @@ describe("grille de ville — résolution", () => {
   });
 
   it("le placement suit le terrain débloqué, pas la bounding box", () => {
-    const grid = getCityGrid("City_Capital", "LAND")!;
-    const unlocked = unlockedCells(grid, grid.defaultUnlockedIds);
-    // 6 cases débloquées au départ, 4x4 unités chacune.
-    expect(grid.defaultUnlockedIds.size).toBe(6);
+    const area = getCityMap("City_Capital|LAND")!;
+    const unlocked = unlockedCells(area, area.defaultUnlockedIds);
+    expect(area.defaultUnlockedIds.size).toBe(6);
     expect(unlocked.size).toBe(6 * 16);
 
-    const origin = grid.slots.find((s) => grid.defaultUnlockedIds.has(s.id))!;
-    // Un 2x2 tient dans une case débloquée…
+    const origin = area.slots.find((s) => area.defaultUnlockedIds.has(s.id))!;
     expect(fitsInCells({ x: origin.x, y: origin.y, width: 2, height: 2 }, unlocked)).toBe(true);
-    // …et le coin de la bounding box ne suffit pas si sa case est verrouillée.
-    const locked = grid.slots.find((s) => !grid.defaultUnlockedIds.has(s.id))!;
+    const locked = area.slots.find((s) => !area.defaultUnlockedIds.has(s.id))!;
     expect(fitsInCells({ x: locked.x, y: locked.y, width: 1, height: 1 }, unlocked)).toBe(false);
   });
 
-  it("slotAt retrouve la case d'une cellule, et null hors grille", () => {
-    const grid = getCityGrid("City_Capital", "LAND")!;
-    const slot = grid.slots[0];
-    expect(slotAt(grid, slot.x, slot.y)?.id).toBe(slot.id);
-    expect(slotAt(grid, slot.x + grid.expansionSize - 1, slot.y)?.id).toBe(slot.id);
-    expect(slotAt(grid, 9999, 9999)).toBeNull();
+  it("slotAt retrouve la case d'une cellule, et null hors carte", () => {
+    const area = getCityMap("City_Capital|LAND")!;
+    const slot = area.slots[0];
+    expect(slotAt(area, slot.x, slot.y)?.id).toBe(slot.id);
+    expect(slotAt(area, slot.x + area.expansionSize - 1, slot.y)?.id).toBe(slot.id);
+    expect(slotAt(area, 9999, 9999)).toBeNull();
   });
 
-  it("les zones de culture sont rattachées à la surface qu'elles recoupent", () => {
-    const arabia = getCityGrid("City_Arabia", "LAND")!;
+  it("les zones de culture sont rattachées à la carte qu'elles recoupent", () => {
+    const arabia = getCityMap("City_Arabia|LAND")!;
     expect(arabia.cultureAreas.length).toBe(6);
     expect(fixedCulturePoints(arabia)).toBe(1800);
-    expect(fixedCulturePoints(getCityGrid("City_Capital", "LAND")!)).toBe(0);
+    expect(fixedCulturePoints(getCityMap("City_Capital|LAND")!)).toBe(0);
+    expect(fixedCulturePoints(getCityMap("City_Capital|HARBOR")!)).toBe(0);
   });
 
-  it("les bâtiments fixes sont rattachés à la surface de leur case porteuse", () => {
-    const arabia = getCityGrid("City_Arabia", "LAND")!;
+  it("les bâtiments fixes sont rattachés à la carte de leur case porteuse", () => {
+    const arabia: CityMap = getCityMap("City_Arabia|LAND")!;
     expect(arabia.fixedBuildings.length).toBe(9);
     for (const fixed of arabia.fixedBuildings) {
-      // Ils tombent dans le cadrage de la grille, sans être sur une case
-      // constructible (leur case est un CONNECTOR).
       expect(fixed.x).toBeGreaterThanOrEqual(arabia.bounds.x);
       expect(fixed.x).toBeLessThan(arabia.bounds.x + arabia.bounds.width);
       expect(fixed.y).toBeGreaterThanOrEqual(arabia.bounds.y);
       expect(fixed.y).toBeLessThan(arabia.bounds.y + arabia.bounds.height);
+      // Leur case est un CONNECTOR : invisible depuis les cases constructibles.
       expect(slotAt(arabia, fixed.x, fixed.y), fixed.buildingId).toBeNull();
     }
-    // Aucune autre grille n'en hérite.
-    expect(getCityGrid("City_Capital", "LAND")!.fixedBuildings).toEqual([]);
+    expect(getCityMap("City_Capital|LAND")!.fixedBuildings).toEqual([]);
+  });
+
+  // Besoin produit : un joueur qui n'a pas atteint EG ne doit pas se voir
+  // proposer le Port. Le plancher est DÉDUIT de la palette, pas codé en dur.
+  it("le Port n'est jouable qu'à partir de EG", () => {
+    const harbor = getCityMap("City_Capital|HARBOR")!;
+    expect(harbor.minEra).toBe("EG");
+    expect(isCityMapUnlocked(harbor, "HM")).toBe(false);
+    expect(isCityMapUnlocked(harbor, "EG")).toBe(true);
+    expect(isCityMapUnlocked(harbor, "LG")).toBe(true);
+
+    // La Capitale, elle, est jouable dès la première ère.
+    const capital = getCityMap("City_Capital|LAND")!;
+    expect(capital.minEra).toBe("SA");
+    expect(isCityMapUnlocked(capital, "SA")).toBe(true);
+  });
+
+  it("l'ère plancher de chaque carte", () => {
+    expect(
+      Object.fromEntries(listCityMaps().map((m) => [m.key, m.minEra])),
+    ).toEqual({
+      "City_Arabia|LAND": "KS",
+      "City_Capital|LAND": "SA",
+      "City_Capital|HARBOR": "EG",
+      "City_China|LAND": "ER",
+      "City_Egypt|LAND": "ME",
+      "City_Mayas|LAND": "BE",
+      "City_Vikings|LAND": "FA",
+    });
+  });
+
+  it("le catalogue se filtre par ère, sans jamais perdre la Capitale", () => {
+    expect(listCityMaps({ era: "SA" }).map((m) => m.key)).toEqual([
+      "City_Capital|LAND",
+    ]);
+    // À HM, tout est ouvert sauf le Port (EG) et l'Arabie (KS)… non : KS < HM.
+    const hm = listCityMaps({ era: "HM" }).map((m) => m.key);
+    expect(hm).toContain("City_Arabia|LAND");
+    expect(hm).not.toContain("City_Capital|HARBOR");
+    // À EG, le Port apparaît.
+    expect(listCityMaps({ era: "EG" }).map((m) => m.key)).toContain(
+      "City_Capital|HARBOR",
+    );
+    // Sans filtre, les 7.
+    expect(listCityMaps().length).toBe(7);
+  });
+
+  // L'eau viking s'ouvre en même temps que sa carte : elle ne crée pas de
+  // plancher distinct, contrairement au Port.
+  it("l'eau viking ne décale pas l'ère de sa carte", () => {
+    const vikings = getCityMap("City_Vikings|LAND")!;
+    expect(vikings.minEra).toBe("FA");
+    expect(vikings.surfaces).toEqual(["LAND", "WATER"]);
   });
 
   it("une rotation de 90° inverse l'emprise, 180° la laisse intacte", () => {

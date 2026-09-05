@@ -140,10 +140,31 @@ export interface CityGridSurface {
    * le port ne l'est pas — la grille n'est donc pas toujours rectangulaire.
    */
   sparse: boolean;
+  /**
+   * Âge (`AgeDefinition.id`) du plus ancien bâtiment de la palette de cette
+   * surface — l'ère à partir de laquelle elle devient jouable.
+   *
+   * ⚠️ DÉDUIT, jamais déclaré. Aucun champ du game design ne dit « le Port
+   * s'ouvre à EarlyGothicEra » ; ce qui est mesuré, c'est qu'aucun des 22
+   * bâtiments HARBOR n'existe avant. Corroboré par le jeu (Port accessible en
+   * EG/LG, eau viking en FA/IE). `null` si la palette n'a aucun âge lisible.
+   */
+  minAge: string | null;
+  /**
+   * Taille de la palette de cette surface — les `BuildingDefinitionDTO` dont
+   * `expansionSubType` correspond. LAND en concentre l'écrasante majorité.
+   */
+  buildingCount: number;
 }
 
 export interface CityGridExtract {
   cityId: string;
+  /**
+   * `Base.Cities.<id>_Name` (6/6 traduites). Repli sur `cityId` si la clé
+   * disparaissait — C7 : libellé absent, pas erreur. Le repli est signalé
+   * dans `warnings`.
+   */
+  cityLabel: string;
   /** Côté d'une case d'expansion, en unités monde. 3 ou 4 selon la ville. */
   expansionSize: number;
   slots: ExpansionSlotExtract[];

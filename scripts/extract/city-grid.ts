@@ -1,7 +1,7 @@
 // ============================================================
 // ROC Helper – Extraction du domaine Grille de ville
 //
-// Lit `source/gamedesign.json` et écrit
+// Lit `source/gamedesign.json` + `source/loca.json` et écrit
 // `data/city-grid/generated/city-grid.generated.ts`.
 //
 // Le game design est la SEULE source de vérité. Aucune donnée de l'ancien
@@ -13,6 +13,9 @@
 //   - §7.3 : `CityInitDefinitionDTO` — les cases débloquées au démarrage
 //   - §7.2 : `ExpansionCostsDTO` — DÉLIBÉRÉMENT ignoré (hors besoin produit,
 //            cf. point B3 : le Layout Builder n'utilise pas les coûts)
+//   - §2   : `BuildingDefinitionDTO.expansionSubType` — MÊME vocabulaire que
+//            celui des cases. C'est la jointure qui donne, par surface, la
+//            palette de bâtiments et donc l'ÈRE PLANCHER de la surface.
 // Conventions          : docs/game-schema/00-conventions.md
 //   - C2 : pas de `@type` sur les objets imbriqués monomorphes
 //          (`initialGridAreas[]` n'en a pas — normal, ce n'est pas une anomalie)
@@ -20,6 +23,8 @@
 //          NOMBRES, pas des int64 en string
 //   - C5 : `cityInitDefinition` est une copie intégrale — lue comme une
 //          référence résolue, sans aller chercher l'entité racine
+//   - C7 : libellé via `Base.Cities.<City.id>_Name` ; une clé absente est un
+//          libellé absent, pas une erreur
 //
 // Usage : pnpm extract:city-grid
 // ============================================================
@@ -167,6 +172,21 @@ interface RawCity {
   definition: JsonObject;
 }
 
+/** `Base.Cities.City_Capital_Name` → « Capital City ». C7. */
+function readLoca(root: string): Map<string, string> {
+  const file = path.join(root, "source", "loca.json");
+  const parsed = JSON.parse(fs.readFileSync(file, "utf8")) as Json;
+  const envelope = asObject(asArray(asObject(parsed)["content"])[0]);
+  const labels = new Map<string, string>();
+  for (const entry of asArray(envelope["translations"])) {
+    const e = asObject(entry);
+    const key = asString(e["key"]);
+    const value = asString(asArray(e["values"])[0]);
+    if (key !== null && value !== null) labels.set(key, value);
+  }
+  return labels;
+}
+
 function readGameDesign(root: string): {
   entities: Json[];
   checksum: string;
@@ -290,8 +310,69 @@ function extractSlot(entity: JsonObject): {
   };
 }
 
+/**
+ * Plancher d'ère et volume de palette par (ville, surface).
+ *
+ * `BuildingDefinitionDTO.expansionSubType` emploie le MÊME vocabulaire que
+ * celui des cases : 22 bâtiments HARBOR, 12 WATER, 659 sans sous-type. La
+ * jointure (ville, surface) donne donc la palette exacte d'une surface, et
+ * l'âge le plus ancien de cette palette est l'ère à partir de laquelle la
+ * surface devient jouable.
+ *
+ * ⚠️ Déduction, pas déclaration : aucun champ ne dit « le Port s'ouvre à
+ * EarlyGothicEra ». Ce qui est mesuré, c'est qu'AUCUN bâtiment portuaire
+ * n'existe avant cet âge. Le résultat est corroboré par le jeu (le Port
+ * s'ouvre en EG/LG), et c'est cette corroboration qui autorise à s'en servir
+ * comme d'un plancher.
+ */
+function indexPalettes(
+  entities: Json[],
+): Map<string, { minAge: string | null; buildingCount: number }> {
+  // AgeDefinitionDTO.order : `order` est un int32 ici (C3/P2) et n'est PAS
+  // dense — il saute 16 (00-conventions.md §6). On s'en sert pour comparer,
+  // jamais comme index.
+  const ageOrder = new Map<string, number>();
+  for (const entity of entities) {
+    if (typeName(entity) !== "AgeDefinitionDTO") continue;
+    const e = asObject(entity);
+    const id = asString(e["id"]);
+    const order = asNumber(e["order"]);
+    if (id !== null && order !== null) ageOrder.set(id, order);
+  }
+
+  const palettes = new Map<string, { minAge: string | null; buildingCount: number }>();
+  for (const entity of entities) {
+    if (typeName(entity) !== "BuildingDefinitionDTO") continue;
+    const e = asObject(entity);
+    const surface = parseSurface(e["expansionSubType"], `${asString(e["id"])}.expansionSubType`);
+    const age = asString(e["age"]);
+    // `cities[]` porte une seule ville sur les 693 (mesuré) ; on indexe
+    // néanmoins toutes ses entrées plutôt que de supposer la cardinalité.
+    for (const city of asArray(e["cities"])) {
+      const cityId = asString(city);
+      if (cityId === null) continue;
+      const key = `${cityId}|${surface}`;
+      const current = palettes.get(key) ?? { minAge: null, buildingCount: 0 };
+      current.buildingCount += 1;
+      if (age !== null) {
+        const previous = current.minAge;
+        if (
+          previous === null ||
+          (ageOrder.get(age) ?? Infinity) < (ageOrder.get(previous) ?? Infinity)
+        ) {
+          current.minAge = age;
+        }
+      }
+      palettes.set(key, current);
+    }
+  }
+  return palettes;
+}
+
 export function extractCityGrid(root: string): CityGridExtractBundle {
   const { entities, checksum, serverVersion } = readGameDesign(root);
+  const loca = readLoca(root);
+  const palettes = indexPalettes(entities);
 
   const cities: RawCity[] = [];
   const expansionsByCity = new Map<string, JsonObject[]>();
@@ -380,6 +461,10 @@ export function extractCityGrid(root: string): CityGridExtractBundle {
       if (!bounds) continue;
       const cols = bounds.width / expansionSize;
       const rows = bounds.height / expansionSize;
+      const palette = palettes.get(`${city.id}|${surface}`);
+      if (!palette || palette.buildingCount === 0) {
+        cityWarnings.push(`surface ${surface} : aucun bâtiment dans le catalogue`);
+      }
       surfaces.push({
         surface,
         buildableCount: buildable.length,
@@ -387,11 +472,19 @@ export function extractCityGrid(root: string): CityGridExtractBundle {
         cols,
         rows,
         sparse: buildable.length < cols * rows,
+        minAge: palette?.minAge ?? null,
+        buildingCount: palette?.buildingCount ?? 0,
       });
+    }
+
+    const label = loca.get(`Base.Cities.${city.id}_Name`);
+    if (label === undefined) {
+      cityWarnings.push(`libellé absent : Base.Cities.${city.id}_Name`);
     }
 
     extracted.push({
       cityId: city.id,
+      cityLabel: label ?? city.id,
       expansionSize,
       slots,
       surfaces,
@@ -447,7 +540,10 @@ function main(): void {
   for (const city of bundle.cities) {
     slots += city.slots.length;
     const surfaces = city.surfaces
-      .map((s) => `${s.surface} ${s.cols}x${s.rows}=${s.buildableCount}${s.sparse ? "*" : ""}`)
+      .map(
+        (s) =>
+          `${s.surface} ${s.cols}x${s.rows}=${s.buildableCount}${s.sparse ? "*" : ""} dès ${s.minAge ?? "?"} (${s.buildingCount} bât.)`,
+      )
       .join(", ");
     buildable += city.surfaces.reduce((t, s) => t + s.buildableCount, 0);
     lines.push(

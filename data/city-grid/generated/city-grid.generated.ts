@@ -10,6 +10,7 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
   "cities": [
     {
       "cityId": "City_Arabia",
+      "cityLabel": "Arabia",
       "expansionSize": 3,
       "slots": [
         {
@@ -1843,7 +1844,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 15,
           "rows": 15,
-          "sparse": true
+          "sparse": true,
+          "minAge": "KingdomOfSicily",
+          "buildingCount": 31
         }
       ],
       "defaultUnlockedIds": [
@@ -1983,6 +1986,7 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
     },
     {
       "cityId": "City_Capital",
+      "cityLabel": "Capital City",
       "expansionSize": 4,
       "slots": [
         {
@@ -3854,7 +3858,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 12,
           "rows": 10,
-          "sparse": false
+          "sparse": false,
+          "minAge": "DawnAge",
+          "buildingCount": 486
         },
         {
           "surface": "HARBOR",
@@ -3867,7 +3873,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 7,
           "rows": 6,
-          "sparse": false
+          "sparse": false,
+          "minAge": "EarlyGothicEra",
+          "buildingCount": 22
         }
       ],
       "defaultUnlockedIds": [
@@ -3884,6 +3892,7 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
     },
     {
       "cityId": "City_China",
+      "cityLabel": "China",
       "expansionSize": 4,
       "slots": [
         {
@@ -4539,7 +4548,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 10,
           "rows": 8,
-          "sparse": true
+          "sparse": true,
+          "minAge": "EarlyRome",
+          "buildingCount": 30
         }
       ],
       "defaultUnlockedIds": [
@@ -4559,6 +4570,7 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
     },
     {
       "cityId": "City_Egypt",
+      "cityLabel": "Egypt",
       "expansionSize": 4,
       "slots": [
         {
@@ -4966,7 +4978,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 7,
           "rows": 7,
-          "sparse": true
+          "sparse": true,
+          "minAge": "MinoanEra",
+          "buildingCount": 42
         }
       ],
       "defaultUnlockedIds": [
@@ -5003,6 +5017,7 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
     },
     {
       "cityId": "City_Mayas",
+      "cityLabel": "Maya Empire",
       "expansionSize": 4,
       "slots": [
         {
@@ -5530,7 +5545,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 8,
           "rows": 8,
-          "sparse": false
+          "sparse": false,
+          "minAge": "ByzantineEra",
+          "buildingCount": 43
         }
       ],
       "defaultUnlockedIds": [
@@ -5545,6 +5562,7 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
     },
     {
       "cityId": "City_Vikings",
+      "cityLabel": "Viking Kingdom",
       "expansionSize": 3,
       "slots": [
         {
@@ -7054,7 +7072,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 14,
           "rows": 13,
-          "sparse": true
+          "sparse": true,
+          "minAge": "FeudalAge",
+          "buildingCount": 27
         },
         {
           "surface": "WATER",
@@ -7067,7 +7087,9 @@ export const CITY_GRID_EXTRACT: CityGridExtractBundle = {
           },
           "cols": 6,
           "rows": 9,
-          "sparse": true
+          "sparse": true,
+          "minAge": "FeudalAge",
+          "buildingCount": 12
         }
       ],
       "defaultUnlockedIds": [

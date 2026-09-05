@@ -29,6 +29,22 @@ Contexte projet pour Claude Code. Lire avant toute modification touchant au fron
 - `pnpm start` sert `out/` via `serve` — ne pas confondre avec un serveur Next.js classique.
 - Les scripts `extract:*` / `diff:*` sont des outils de build-time (Node), indépendants du runtime Next.js — ne pas les traiter comme faisant partie de l'app.
 
+## Layout Builder
+
+Chantier en cours sur la branche `feat/layout-builder`. **Lire
+[`docs/architecture/layout-builder/README.md`](docs/architecture/layout-builder/README.md)
+avant toute tâche** touchant `lib/layout/`, `components/layout-builder/`,
+`resolvers/city-grid.ts`, `data/city-grid/` ou `scripts/extract/city-grid.ts`.
+
+Ce dossier porte l'état d'avancement (quelle phase, quoi ensuite), les
+décisions de performance et le modèle de données. Il se met à jour **à chaque
+fin de phase** — la procédure est en bas de son README.
+
+Trois termes à ne pas confondre : **carte** (`CityMap`, l'unité de travail —
+Capitale et Port sont deux cartes), **surface** (`SurfaceCode`, le terrain
+d'une case) et **ère** (`EraCode`). On dit « carte », jamais « aire » :
+homophone d'« ère ».
+
 ## Quand un doute existe
 
 Si une fonctionnalité Next.js semble intéressante mais dépend d'un serveur (voir liste des interdits ci-dessus), le signaler explicitement plutôt que de l'implémenter silencieusement.
