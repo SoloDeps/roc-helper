@@ -41,6 +41,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# extraction/diff scripts build output (tsc -p tsconfig.scripts.json)
+/.extract-build/
+
 # source
 /source
 

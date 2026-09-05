@@ -15,6 +15,7 @@
     "diff:campaign": "tsc -p tsconfig.scripts.json && node .extract-build/scripts/diff/campaign.js",
     "extract:buildings": "tsc scripts/extract/buildings.ts --outDir .extract-build --rootDir . --module commonjs --target es2022 --moduleResolution node --esModuleInterop --strict --skipLibCheck && node .extract-build/scripts/extract/buildings.js",
     "diff:buildings": "tsc -p tsconfig.scripts.json && node --require ./scripts/alias-register.js .extract-build/scripts/diff/buildings.js",
+    "extract:city-grid": "tsc -p tsconfig.scripts.json && node --require ./scripts/alias-register.js .extract-build/scripts/extract/city-grid.js",
     "extract:heritage": "tsc -p tsconfig.scripts.json && node --require ./scripts/alias-register.js .extract-build/scripts/extract/heritage.js",
     "diff:heritage": "tsc -p tsconfig.scripts.json && node --require ./scripts/alias-register.js .extract-build/scripts/diff/heritage.js"
   },

@@ -22,6 +22,7 @@
     "scripts/diff/campaign.ts",
     "scripts/diff/buildings.ts",
     "scripts/extract/heritage.ts",
-    "scripts/diff/heritage.ts"
+    "scripts/diff/heritage.ts",
+    "scripts/extract/city-grid.ts"
   ]
 }
