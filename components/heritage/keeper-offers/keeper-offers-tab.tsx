@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, Download, Plus, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Download, Info, Plus, X } from "lucide-react";
 
 import { cn, formatNumber } from "@/lib/utils";
 import {
@@ -25,6 +25,7 @@ import {
 } from "@/resolvers/heritage-keeper-offers";
 import { ResponsiveModal } from "@/components/modals/responsive-modal";
 import { ResponsiveSelect, SELECT_TEN_OPTIONS } from "@/components/modals/responsive-select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { EffectIcon } from "@/components/heritage/effect-icon";
 import { XpProgressBar } from "@/components/heritage/xp-progress-bar";
 import BuildingCounter from "@/components/items/building-counter";
@@ -943,17 +944,25 @@ function ModeSwitch({
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <div className="flex gap-1 rounded-lg bg-background-100 p-1">
+    // ⚠️ MÊME HABILLAGE QUE LE SEGMENTÉ DE LEVEL TABLE (`AXIS_OPTIONS`,
+    // `progression-tab.tsx`) — repris à l'identique sur demande : cadre
+    // `border border-border p-0.5`, pastille active `bg-background
+    // shadow-sm`, `text-[13px] font-medium`. Et même traitement pour le
+    // texte d'accompagnement : une icône `Info` + popover au clic, pas une
+    // phrase permanente à côté — elle suffit à dire qu'il y a plus à lire
+    // sans pousser les 4 cases plus bas sur mobile.
+    <div className="flex items-center gap-2">
+      <div className="inline-flex rounded-lg border border-border p-0.5">
         {options.map((option) => (
           <button
             key={option.value}
+            type="button"
             onClick={() => onChange(option.value)}
             aria-pressed={mode === option.value}
             className={cn(
-              "cursor-pointer rounded-md px-3 py-1.5 text-[12px] font-medium transition-colors",
+              "cursor-pointer rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors",
               mode === option.value
-                ? "bg-card text-foreground shadow-sm"
+                ? "bg-background text-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground",
             )}
           >
@@ -961,14 +970,22 @@ function ModeSwitch({
           </button>
         ))}
       </div>
-      {/* 12 px, pas 11 : les descriptions étaient jugées trop petites. Elles
-          sont donc à la fois plus grosses et plus courtes — la place gagnée
-          vient du texte retiré, pas de la marge. */}
-      <p className="text-[12px] text-muted-foreground">
-        {mode === "manual"
-          ? "You set the number of exchanges."
-          : "You set your stock and daily output."}
-      </p>
+      <Popover>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            aria-label="More details about this mode"
+            className="cursor-pointer rounded-full p-0.5 text-muted-foreground/90 hover:text-foreground"
+          >
+            <Info size={18} aria-hidden="true" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent align="start" className="w-80 p-3 text-sm text-muted-foreground">
+          {mode === "manual"
+            ? "You set the number of exchanges."
+            : "You set your stock and daily output."}
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }
