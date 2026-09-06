@@ -923,14 +923,18 @@ interface ChestLeaf {
  * en pondérant chacune par les `chances` de tout `MysteryChestRewardDTO`
  * traversé en chemin.
  *
- * `null` dès que la donnée sort de ce cas simple : un `chances`/`rewards` de
- * longueur différente ou une chance manquante (donnée incohérente), ou tout
- * type de feuille qui n'est PAS un `ResourceRewardDTO` (relique, ticket, kit
- * d'inventaire, pièce de bâtiment…) — un lot de ce genre n'a pas de
- * « montant » à faire remonter en espérance, et rester `null` laisse
- * `actionAmount`/`actionResourceDescriptors` hors de ce cas, exactement comme
- * avant cette fonction (§7/§8 de `03-batiments.md`, toujours hors scope pour
- * eux).
+ * ⚠️ Une feuille qui n'est PAS un `ResourceRewardDTO` (relique, ticket, kit
+ * d'inventaire, pièce de bâtiment…) rend `[]`, PAS `null` — elle pèse dans le
+ * total des `chances` du tirage (elle dilue donc l'espérance des ressources
+ * nommées) sans faire échouer tout le sous-arbre. Vérifié en jeu sur la
+ * Madraza : le tirage « 5 % pièce de personnalisation / 80 % 1 PR / 15 % 3 PR »
+ * rend bien 0,8×1 + 0,15×3 = 1,25 PR/jour en moyenne — pas un tiret vide comme
+ * avant cette fonction, quand la seule présence de la pièce de personnalisation
+ * annulait toute la ligne de production.
+ *
+ * `null` seulement quand la STRUCTURE du tirage est incohérente : un
+ * `chances`/`rewards` de longueur différente, une chance manquante, ou plus
+ * d'une entrée dans un `RewardDefinitionDTO.rewards[]`.
  */
 function chestLeaves(node: JsonObject, weight: number): ChestLeaf[] | null {
   const type = shortType(node);
@@ -960,7 +964,7 @@ function chestLeaves(node: JsonObject, weight: number): ChestLeaf[] | null {
     }
     return leaves;
   }
-  return null;
+  return [];
 }
 
 /**
@@ -1010,6 +1014,134 @@ function expectedChestValue(then: JsonObject): number | null {
     return round(leaves.reduce((sum, leaf) => sum + leaf.amount * leaf.weight, 0));
   }
   return null;
+}
+
+/**
+ * `dynamicDefinitionId` de toute branche `DynamicActionChangeRewardDTO`
+ * atteignable dans un nœud de récompense — un tirage qui, au lieu de verser
+ * une ressource, RENVOIE vers une autre table dynamique (§ci-dessous). Recensé
+ * en `Set` pour détecter le cas à plusieurs cibles distinctes, hors scope.
+ */
+function chestRedirectTargets(node: JsonObject): Set<string> {
+  const type = shortType(node);
+  if (type === "RewardDefinitionDTO" || type === "MysteryChestRewardDTO") {
+    const targets = new Set<string>();
+    for (const raw of asArray(node.rewards)) {
+      for (const id of chestRedirectTargets(asObject(raw))) targets.add(id);
+    }
+    return targets;
+  }
+  if (type === "DynamicActionChangeRewardDTO") {
+    const id = asString(node.dynamicDefinitionId);
+    return id === null ? new Set() : new Set([id]);
+  }
+  return new Set();
+}
+
+/**
+ * Probabilité ABSOLUE (produit des `chances` traversées) de tomber sur LA
+ * redirection `targetId`, dans un nœud de récompense. Miroir de `chestLeaves`,
+ * mais qui pondère une redirection au lieu d'une feuille `ResourceRewardDTO` —
+ * toute autre feuille (ticket, relique…) pèse 0 sans invalider le sous-arbre.
+ *
+ * `null` seulement sur une structure incohérente (mêmes conditions que
+ * `chestLeaves`) : la redirection reste alors non résolue, par sécurité.
+ */
+function chestRedirectWeight(node: JsonObject, weight: number, targetId: string): number | null {
+  const type = shortType(node);
+  if (type === "RewardDefinitionDTO") {
+    const children = asArray(node.rewards).map(asObject);
+    if (children.length !== 1) return null;
+    return chestRedirectWeight(children[0], weight, targetId);
+  }
+  if (type === "DynamicActionChangeRewardDTO") {
+    return asString(node.dynamicDefinitionId) === targetId ? weight : 0;
+  }
+  if (type === "MysteryChestRewardDTO") {
+    const children = asArray(node.rewards).map(asObject);
+    const chances = asArray(node.chances).map(asNumber);
+    if (children.length === 0 || children.length !== chances.length) return null;
+    const total = chances.reduce((sum: number, c) => sum + (c ?? 0), 0);
+    if (total <= 0) return null;
+    let sum = 0;
+    for (const [i, child] of children.entries()) {
+      const chance = chances[i];
+      if (chance === null) return null;
+      const sub = chestRedirectWeight(child, weight * (chance / total), targetId);
+      if (sub === null) return null;
+      sum += sub;
+    }
+    return sum;
+  }
+  return 0;
+}
+
+/**
+ * ⚠️ COFFRE DONT UNE BRANCHE REDIRIGE VERS UNE AUTRE PRODUCTION.
+ *
+ * Certains `evolving` habillent leur VRAIE production — une courbe par âge,
+ * comme toutes les autres — d'un tirage à chances qui, le reste du temps,
+ * verse un objet hors scope (ticket, relique, pièce de perso…). La Madraza
+ * (`..._Food_and_BarracksRefill_Chest`) rend 95 % du temps un
+ * `DynamicActionChangeRewardDTO` pointant vers `..._Food` (une courbe par âge
+ * ordinaire), et 5 % un ticket de remplissage caserne — jamais de ressource.
+ *
+ * Cette probabilité de redirection est ELLE-MÊME indexée par niveau (5 % → 20 %
+ * sur la Madraza, à ses propres paliers) — un axe distinct de celui, par âge,
+ * de la production visée. Le résultat est leur PRODUIT, point par point :
+ * `effective[niveau] = P(redirection, niveau) × valeur(âge, niveau)`. Les deux
+ * courbes sortent déjà DENSES d'`assembleCurve` (un point par niveau, jamais
+ * de paliers à recaler), la multiplication est donc directe.
+ *
+ * `null` dès que la donnée sort de ce cas simple : plusieurs redirections
+ * distinctes dans le même tirage, une chance manquante, ou une cible qui n'est
+ * pas elle-même une courbe par âge.
+ */
+function resolveChestRedirectProduction(
+  ctx: BonusContext,
+  producedId: string,
+): { descriptor: string; ageCurve: BuildingAgeCurve } | null {
+  const definition = ctx.src.byId.get(producedId);
+  if (definition === undefined) return null;
+  const mapping = firstMapping(definition);
+  if (shortType(mapping) !== "BuildingLevelDynamicChangeDTO") return null;
+
+  const targets = new Set<string>();
+  for (const row of asArray(mapping.values)) {
+    const then = asObject(asObject(row).then);
+    for (const raw of asArray(then.rewards)) {
+      for (const id of chestRedirectTargets(asObject(raw))) targets.add(id);
+    }
+  }
+  if (targets.size !== 1) return null;
+  const [targetId] = targets;
+
+  const nested = buildAgeCurve(ctx.src, targetId, ctx.curveLength, ACTION_AXIS, ctx.warnings);
+  if (nested === null) return null;
+  const descriptor = producedDescriptors(ctx.src, targetId)[0];
+  if (descriptor === undefined) return null;
+
+  const weightCurve = buildCurve(mapping, producedId, null, ctx.curveLength, (then) => {
+    for (const raw of asArray(then.rewards)) {
+      const weight = chestRedirectWeight(asObject(raw), 1, targetId);
+      if (weight !== null) return weight;
+    }
+    return null;
+  });
+  if (weightCurve === null) return null;
+
+  const entries = nested.entries.map((entry) => ({
+    ...entry,
+    curve: {
+      ...entry.curve,
+      effective: entry.curve.effective.map((value, i) => {
+        const weight = weightCurve.effective[i];
+        return value === null || weight === null ? null : round(value * weight);
+      }),
+    },
+  }));
+
+  return { descriptor, ageCurve: { ...nested, entries } };
 }
 
 /**
@@ -1676,7 +1808,22 @@ function extractBonuses(definition: JsonObject, ctx: BonusContext): BuildingBonu
   ): void => {
     const componentType = "ProductionComponentDTO";
     const descriptors = producedDescriptors(ctx.src, producedId);
-    if (descriptors.length === 0) return;
+    if (descriptors.length === 0) {
+      const redirect = resolveChestRedirectProduction(ctx, producedId);
+      if (redirect === null) return;
+      push(
+        projectProducedResource(redirect.descriptor).projection,
+        componentId,
+        componentType,
+        null,
+        null,
+        periodSeconds,
+        `producedDynamicActionChange[${producedId}] → redirection pondérée par niveau vers ${redirect.ageCurve.definitionId}`,
+        PRODUCTION_REASON,
+        redirect.ageCurve,
+      );
+      return;
+    }
 
     const ageCurve = buildAgeCurve(ctx.src, producedId, ctx.curveLength, ACTION_AXIS, ctx.warnings);
     if (ageCurve !== null) {
