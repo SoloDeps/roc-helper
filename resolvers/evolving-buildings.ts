@@ -120,6 +120,9 @@ export interface ResolvedEvolvingBonus {
   resources: string[];
   /** Période du cycle de production en secondes. `null` hors production. */
   periodSeconds: number | null;
+  /** `true` quand `value` est une espérance de tirage, pas une quantité
+   * garantie — cf. `BuildingBonus.isChestExpectation`. */
+  isChestExpectation: boolean;
 }
 
 /**
@@ -181,6 +184,7 @@ function resolveOne(bonus: BuildingBonus, age: string, level: number): ResolvedE
     instance: bonus.instance,
     resources: reading?.resources ?? [],
     periodSeconds: bonus.periodSeconds,
+    isChestExpectation: bonus.isChestExpectation,
   };
 }
 

@@ -315,9 +315,10 @@ function bonusIconsBase(
  * `formatBonusValue`. Ce formateur est partagé avec les Wonders, les
  * Technologies et les Bâtiments, où rien n'a été mesuré et où l'imposer
  * affirmerait une valeur sans l'avoir vue en jeu. Seule exception connue :
- * `research_points_output`, dont l'extraction (`scripts/extract/buildings.ts`,
- * `flooredFormula`) arrondit déjà VERS LE BAS au-delà du dernier palier
- * tabulé — voir `CHEST_EXPECTED_VALUE_TYPES` ci-dessous.
+ * tout bonus `isChestExpectation`, dont l'extraction
+ * (`scripts/extract/buildings.ts`, `flooredFormula`) arrondit déjà VERS LE BAS
+ * au-delà du dernier palier tabulé — voir le drapeau sur `describeHeritageBonus`
+ * ci-dessous.
  *
  * Aucun effet de bord sur les valeurs non amplifiées : les 24 360 valeurs
  * `absolute`/`integer` des 13 vaults sont ENTIÈRES sur les 8 ères jouables
@@ -347,17 +348,22 @@ function scaleForDisplay(format: DisplayableBonus["format"], raw: number): numbe
 }
 
 /**
- * Types dont la courbe peut rendre une VALEUR ATTENDUE de coffre, pas
- * toujours une livraison entière — `research_points_output` en tête.
- *
- * En dessous d'un certain niveau, plusieurs `evolving` ne versent pas un
- * montant fixe de points de recherche mais un COFFRE qui tire au sort entre
- * plusieurs montants (Celtic Broch, palier 4 : 80 % de chances de 1 PR, 20 %
- * de 2 PR) : `resolveEvolvingBuilding` y rend directement l'ESPÉRANCE du
- * tirage (`scripts/extract/buildings.ts`, `expectedChestValue`) — 1,2 dans cet
- * exemple, jamais livré en un coup, mais la moyenne sur beaucoup de tirages.
- * C'est la présentation du wiki (riseofcultures.wiki.gg) pour ces mêmes
- * paliers, vérifiée palier par palier contre `source/gamedesign.json`.
+ * `bonus.isChestExpectation` — posé à l'extraction (`BuildingBonus`,
+ * `scripts/extract/buildings.ts`) — plutôt qu'une liste de TYPES : un même
+ * type (`goods_output`, `food_output`…) porte tantôt une production garantie,
+ * tantôt l'espérance d'un tirage à chances selon le bâtiment, jamais l'un ou
+ * l'autre de façon fixe par type. `research_points_output` fut longtemps le
+ * seul cas connu (d'où l'ancienne liste blanche `CHEST_EXPECTED_VALUE_TYPES`,
+ * remplacée ici) : en dessous d'un certain niveau, plusieurs `evolving` ne
+ * versent pas un montant fixe mais un COFFRE qui tire au sort entre plusieurs
+ * montants (Celtic Broch, palier 4 : 80 % de chances de 1 PR, 20 % de 2 PR) —
+ * `resolveEvolvingBuilding` y rend directement l'ESPÉRANCE du tirage
+ * (`expectedChestValue`) — 1,2 dans cet exemple, jamais livré en un coup, mais
+ * la moyenne sur beaucoup de tirages. C'est la présentation du wiki
+ * (riseofcultures.wiki.gg) pour ces mêmes paliers, vérifiée palier par palier
+ * contre `source/gamedesign.json`. La Madraza (nourriture, points de
+ * recherche) et l'Exhibition (biens) suivent la même logique sur d'autres
+ * types de ressource, d'où le passage au drapeau générique.
  *
  * Au-delà de ce palier, le coffre se transforme en un montant RÉEL et FIXE :
  * l'extraction (`flooredFormula`) arrondit alors déjà vers le bas — la valeur
@@ -370,7 +376,6 @@ function scaleForDisplay(format: DisplayableBonus["format"], raw: number): numbe
  * Rien à amplifier ici : ces bâtiments n'ont pas de gardien, `raw` reste
  * `bonus.value` quel que soit `amplified`.
  */
-const CHEST_EXPECTED_VALUE_TYPES = new Set(["research_points_output"]);
 
 /**
  * Ce qu'une carte d'effet affiche pour un bonus.
@@ -402,7 +407,7 @@ export function describeHeritageBonus(
   const detail =
     bonus.periodSeconds === null ? null : `/ ${formatDuration(bonus.periodSeconds)}`;
 
-  if (CHEST_EXPECTED_VALUE_TYPES.has(bonus.type)) {
+  if (bonus.isChestExpectation) {
     return {
       src,
       overlaySrc,

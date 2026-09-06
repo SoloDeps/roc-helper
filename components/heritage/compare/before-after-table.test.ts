@@ -43,7 +43,7 @@ describe("buildBeforeAfterRows — lecture des séparateurs de milliers", () => 
     expect(rows[0].tone).toBe("down");
   });
 
-  // `describeHeritageBonus` (`CHEST_EXPECTED_VALUE_TYPES`) affiche l'espérance
+  // `describeHeritageBonus` (`bonus.isChestExpectation`) affiche l'espérance
   // d'un coffre en `toLocaleString("fr-FR", …)` — virgule DÉCIMALE, sans
   // suffixe ni groupement de milliers. Confondue avec la virgule de
   // `formatBonusValue` (« 1,460 » = 1460), une baisse ressortait « up ».

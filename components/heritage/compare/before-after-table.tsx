@@ -51,7 +51,7 @@ const MAGNITUDE_UNITS: Record<string, number> = { K: 1e3, M: 1e6, B: 1e9 };
 
 /**
  * ⚠️ SANS SUFFIXE, LE NOMBRE DE CHIFFRES APRÈS LA VIRGULE TRANCHE AUSSI.
- * `describeHeritageBonus` (`CHEST_EXPECTED_VALUE_TYPES`) affiche l'espérance
+ * `describeHeritageBonus` (`bonus.isChestExpectation`) affiche l'espérance
  * d'un coffre en `toLocaleString("fr-FR", …)` — virgule DÉCIMALE, jamais
  * groupée par milliers, et sans suffixe : « 2,6 », « 2,35 ». Traitées comme le
  * reste (virgule = séparateur de milliers), elles devenaient 26 et 235 — une

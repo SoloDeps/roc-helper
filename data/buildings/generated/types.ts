@@ -204,6 +204,17 @@ export interface BuildingBonus {
   periodSeconds: number | null;
   /** Ressource concernée, en clé projet (`primary_ba`, `coins`…). `null` sinon. */
   resource: string | null;
+  /**
+   * `true` quand `value`/`curve`/`ageCurve` portent une ESPÉRANCE statistique
+   * sur un tirage à chances (`MysteryChestRewardDTO`), pas une quantité
+   * réellement livrée à coup sûr — le Celtic Broch en dessous d'un certain
+   * niveau, ou la Madraza, versent un coffre, pas un montant fixe. `false`
+   * pour une production/un coût ordinaire, y compris quand `format` est
+   * `"absolute"` sur les deux. Consommé par `describeHeritageBonus`
+   * (`components/heritage/effect-display.ts`) pour afficher la décimale au
+   * lieu d'arrondir comme une livraison entière.
+   */
+  isChestExpectation: boolean;
 }
 
 /**

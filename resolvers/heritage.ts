@@ -544,6 +544,9 @@ export interface ResolvedHeritageBonus {
   /** Ressources produites, en clé projet. Vide hors production. */
   resources: string[];
   periodSeconds: number | null;
+  /** `true` quand `value`/`amplified` est une espérance de tirage, pas une
+   * quantité garantie — cf. `BuildingBonus.isChestExpectation`. */
+  isChestExpectation: boolean;
 }
 
 export interface ResolvedHeritageEffect {
@@ -634,6 +637,7 @@ function resolveOne(
     instance: bonus.instance,
     resources: reading?.resources ?? [],
     periodSeconds: bonus.periodSeconds,
+    isChestExpectation: bonus.isChestExpectation,
   };
 }
 

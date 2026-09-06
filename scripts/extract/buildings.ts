@@ -794,6 +794,15 @@ function buildCurve(
   modifier: number | null,
   maxLevel: number,
   read: (then: JsonObject) => number | null = payloadValue,
+  /**
+   * Repli sur `read === actionAmount` quand omis — MAIS un `read` qui
+   * ENROBE `actionAmount` (`actionAmountTracked`, un autre témoin) n'est
+   * JAMAIS `actionAmount` par référence : ces appelants doivent passer
+   * cette valeur explicitement, sous peine de perdre le plancher de la
+   * formule de continuation en silence (`assembleCurve`, doc de
+   * `buildCurve` ci-dessus).
+   */
+  flooredFormula?: boolean,
 ): BuildingCurve | null {
   if (shortType(mapping) !== "BuildingLevelDynamicChangeDTO") return null;
 
@@ -810,7 +819,7 @@ function buildCurve(
     formula,
     asNumber(formulaCase.valueLimit),
     null,
-    read === actionAmount,
+    flooredFormula ?? read === actionAmount,
   );
 }
 
@@ -1192,6 +1201,31 @@ function actionAmount(then: JsonObject): number | null {
 }
 
 /**
+ * `actionAmount`, avec un témoin de bord (`tracker.usedChest`) posé à `true`
+ * dès qu'UN SEUL palier retombe sur `expectedChestValue()` — pas de montant
+ * garanti (`resourceChanges`/`GoodRewardDTO`) à ce palier. Une seule table
+ * peut mélanger les deux sources d'un palier à l'autre (le Celtic Broch verse
+ * un montant fixe en fin de barème, un coffre en dessous) : le témoin reste
+ * grossier, à l'échelle du bonus entier — la même granularité que
+ * `CHEST_EXPECTED_VALUE_TYPES` avant lui, jamais plus fine.
+ */
+function actionAmountTracked(then: JsonObject, tracker: { usedChest: boolean }): number | null {
+  for (const change of asArray(then.resourceChanges)) {
+    const amount = asNumber(asObject(change).amount);
+    if (amount !== null) return amount;
+  }
+  for (const reward of asArray(then.rewards)) {
+    const object = asObject(reward);
+    if (shortType(object) !== "GoodRewardDTO") continue;
+    const amount = asNumber(object.amount);
+    if (amount !== null) return amount;
+  }
+  const chest = expectedChestValue(then);
+  if (chest !== null) tracker.usedChest = true;
+  return chest;
+}
+
+/**
  * Ressources d'une table par niveau, table et formule réunies.
  *
  * ⚠️ Les deux ne coïncident pas toujours : 7 tables ne tabulent qu'un arbre de
@@ -1248,6 +1282,8 @@ function buildAgeCurve(
   maxLevel: number,
   reader: AgeAxisReader,
   warnings: string[],
+  /** Transmis tel quel à `buildCurve` — voir sa doc sur `read` enrobant `actionAmount`. */
+  flooredFormula?: boolean,
 ): BuildingAgeCurve | null {
   const definition = src.byId.get(definitionId);
   if (definition === undefined) {
@@ -1281,7 +1317,7 @@ function buildAgeCurve(
       continue;
     }
     const leafMapping = firstMapping(leaf);
-    const curve = buildCurve(leafMapping, leafId, null, maxLevel, reader.value);
+    const curve = buildCurve(leafMapping, leafId, null, maxLevel, reader.value, flooredFormula);
     if (curve === null) continue;
     entries.push({
       age,
@@ -1766,6 +1802,7 @@ function extractBonuses(definition: JsonObject, ctx: BonusContext): BuildingBonu
     descriptor: string,
     reason: string,
     ageCurve: BuildingAgeCurve | null = null,
+    isChestExpectation = false,
   ): void => {
     ctx.gaps.note(projection, {
       chainKey: ctx.chainKey,
@@ -1788,6 +1825,7 @@ function extractBonuses(definition: JsonObject, ctx: BonusContext): BuildingBonu
       ageCurve,
       periodSeconds,
       resource: ageCurve === null ? projection.resource : null,
+      isChestExpectation,
     });
   };
 
@@ -1811,6 +1849,9 @@ function extractBonuses(definition: JsonObject, ctx: BonusContext): BuildingBonu
     if (descriptors.length === 0) {
       const redirect = resolveChestRedirectProduction(ctx, producedId);
       if (redirect === null) return;
+      // ⚠️ TOUJOURS un coffre : cette branche n'existe QUE parce que la
+      // ressource directe a échoué à se résoudre — `resolveChestRedirectProduction`
+      // ne rend jamais autre chose qu'une redirection pondérée par un tirage.
       push(
         projectProducedResource(redirect.descriptor).projection,
         componentId,
@@ -1821,11 +1862,24 @@ function extractBonuses(definition: JsonObject, ctx: BonusContext): BuildingBonu
         `producedDynamicActionChange[${producedId}] → redirection pondérée par niveau vers ${redirect.ageCurve.definitionId}`,
         PRODUCTION_REASON,
         redirect.ageCurve,
+        true,
       );
       return;
     }
 
-    const ageCurve = buildAgeCurve(ctx.src, producedId, ctx.curveLength, ACTION_AXIS, ctx.warnings);
+    const ageTracker = { usedChest: false };
+    const trackedAxis: AgeAxisReader = {
+      ...ACTION_AXIS,
+      value: (then) => actionAmountTracked(then, ageTracker),
+    };
+    const ageCurve = buildAgeCurve(
+      ctx.src,
+      producedId,
+      ctx.curveLength,
+      trackedAxis,
+      ctx.warnings,
+      true,
+    );
     if (ageCurve !== null) {
       push(
         projectProducedResource(descriptors[0]).projection,
@@ -1837,15 +1891,24 @@ function extractBonuses(definition: JsonObject, ctx: BonusContext): BuildingBonu
         `producedDynamicActionChange[${producedId}] — ${ageCurve.entries.length} âges`,
         PRODUCTION_REASON,
         ageCurve,
+        ageTracker.usedChest,
       );
       return;
     }
 
     const definition = ctx.src.byId.get(producedId);
+    const levelTracker = { usedChest: false };
     const curve =
       definition === undefined
         ? null
-        : buildCurve(firstMapping(definition), producedId, null, ctx.curveLength, actionAmount);
+        : buildCurve(
+            firstMapping(definition),
+            producedId,
+            null,
+            ctx.curveLength,
+            (then) => actionAmountTracked(then, levelTracker),
+            true,
+          );
     if (curve === null) {
       ctx.warnings.push(`Production dynamique non résolue : ${producedId}`);
       return;
@@ -1861,6 +1924,8 @@ function extractBonuses(definition: JsonObject, ctx: BonusContext): BuildingBonu
         periodSeconds,
         `producedDynamicActionChange[${producedId}] → ${descriptor}`,
         PRODUCTION_REASON,
+        null,
+        levelTracker.usedChest,
       );
     }
   };

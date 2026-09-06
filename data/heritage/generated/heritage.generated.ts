@@ -11,8 +11,8 @@ import type { HeritageExtractBundle } from "./types";
 /** Extraction complète et fidèle du domaine Heritage Vault. */
 export const HERITAGE_EXTRACT: HeritageExtractBundle = {
   "generatedFrom": {
-    "gameDesignChecksum": "T3rQfllrrK7Q_c3f7a67c84112e8d27c89ebccd70b9e9",
-    "locaChecksum": "MktHieEX38ba",
+    "gameDesignChecksum": "klSMVaOasuuT_c3f7a67c84112e8d27c89ebccd70b9e9",
+    "locaChecksum": "tzzVTHxBlRow",
     "locale": "en_DK"
   },
   "playerAgeOrderByAge": {
@@ -2260,7 +2260,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -2428,7 +2429,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -3155,7 +3157,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -3320,7 +3323,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -5318,7 +5322,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -5463,7 +5468,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -5693,7 +5699,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -5866,7 +5873,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -7990,7 +7998,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -8163,7 +8172,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -10624,7 +10634,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -10797,7 +10808,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -10962,7 +10974,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -12960,7 +12973,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -13105,7 +13119,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -13335,7 +13350,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -13508,7 +13524,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -51397,7 +51414,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -53493,7 +53511,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -53666,7 +53685,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -54198,7 +54218,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -56196,7 +56217,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -56341,7 +56363,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -58339,7 +58362,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -58512,7 +58536,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -58742,7 +58767,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -58915,7 +58941,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -61039,7 +61066,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -61207,7 +61235,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -63303,7 +63332,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -63476,7 +63506,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -64071,7 +64102,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -64244,7 +64276,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -66368,7 +66401,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -66536,7 +66570,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -68534,7 +68569,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -70532,7 +70568,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -70677,7 +70714,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -70842,7 +70880,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -71015,7 +71054,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -73139,7 +73179,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -73312,7 +73353,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -75671,7 +75713,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -77669,7 +77712,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -77814,7 +77858,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -78044,7 +78089,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -78212,7 +78258,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -80336,7 +80383,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -80504,7 +80552,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -82600,7 +82649,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -82773,7 +82823,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -104981,7 +105032,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -107436,7 +107488,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -107609,7 +107662,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -109705,7 +109759,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -109878,7 +109933,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -111974,7 +112030,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -113972,7 +114029,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -114117,7 +114175,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -114620,7 +114679,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -116744,7 +116804,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -116917,7 +116978,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -119280,7 +119342,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -121278,7 +121341,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -121423,7 +121487,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -123519,7 +123584,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -123687,7 +123753,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -125357,7 +125424,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -127481,7 +127549,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -127654,7 +127723,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -140347,7 +140417,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -140875,7 +140946,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -141048,7 +141120,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -143172,7 +143245,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -143345,7 +143419,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -143575,7 +143650,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -143748,7 +143824,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -209609,7 +209686,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -211705,7 +211783,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -211878,7 +211957,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -212605,7 +212685,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -214603,7 +214684,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -214872,7 +214954,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -216968,7 +217051,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -218966,7 +219050,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -219111,7 +219196,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -225924,7 +226010,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -228020,7 +228107,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -228193,7 +228281,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -228723,7 +228812,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -228891,7 +228981,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -230889,7 +230980,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -232887,7 +232979,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -233032,7 +233125,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -235156,7 +235250,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -235329,7 +235424,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -242142,7 +242238,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -244266,7 +244363,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -244439,7 +244537,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -246924,7 +247023,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -247092,7 +247192,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -247257,7 +247358,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -249255,7 +249357,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -249400,7 +249503,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -251398,7 +251502,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -251571,7 +251676,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -253695,7 +253801,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -253868,7 +253975,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -275885,7 +275993,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -276480,7 +276589,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -278478,7 +278588,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -278623,7 +278734,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -280621,7 +280733,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -280789,7 +280902,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -280954,7 +281068,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -281122,7 +281237,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -283218,7 +283334,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -283391,7 +283508,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -285515,7 +285633,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -285688,7 +285807,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -288047,7 +288167,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -288217,7 +288338,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "treasure_hunt_attempt"
+              "resource": "treasure_hunt_attempt",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -288447,7 +288569,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -290445,7 +290568,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -290590,7 +290714,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -297112,7 +297237,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "treasure_hunt_attempt"
+              "resource": "treasure_hunt_attempt",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -297277,7 +297403,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -297450,7 +297577,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],
@@ -303952,7 +304080,8 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "rewards": [],

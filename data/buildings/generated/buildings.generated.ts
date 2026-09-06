@@ -133,7 +133,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -146,7 +147,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -159,7 +161,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -213,7 +216,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -226,7 +230,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -239,7 +244,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -293,7 +299,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -306,7 +313,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -319,7 +327,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -369,7 +378,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -382,7 +392,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -395,7 +406,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -449,7 +461,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -462,7 +475,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -475,7 +489,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -529,7 +544,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -542,7 +558,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -555,7 +572,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -621,7 +639,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "carpet"
+              "resource": "carpet",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -634,7 +653,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "carpet"
+              "resource": "carpet",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -647,7 +667,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "carpet"
+              "resource": "carpet",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -696,7 +717,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -709,7 +731,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -740,7 +763,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -753,7 +777,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -821,7 +846,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "coffee"
+              "resource": "coffee",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -834,7 +860,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "coffee"
+              "resource": "coffee",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -847,7 +874,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "coffee"
+              "resource": "coffee",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -913,7 +941,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "incense"
+              "resource": "incense",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -926,7 +955,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "incense"
+              "resource": "incense",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -939,7 +969,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "incense"
+              "resource": "incense",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1007,7 +1038,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -1020,7 +1052,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -1090,7 +1123,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1103,7 +1137,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1157,7 +1192,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1170,7 +1206,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1224,7 +1261,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1237,7 +1275,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1287,7 +1326,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1300,7 +1340,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1354,7 +1395,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1367,7 +1409,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1421,7 +1464,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1434,7 +1478,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1502,7 +1547,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -1515,7 +1561,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -1566,7 +1613,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -1579,7 +1627,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -1630,7 +1679,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -1643,7 +1693,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -1711,7 +1762,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "oil_lamp"
+              "resource": "oil_lamp",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -1724,7 +1776,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "oil_lamp"
+              "resource": "oil_lamp",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -1737,7 +1790,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "oil_lamp"
+              "resource": "oil_lamp",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1793,7 +1847,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1806,7 +1861,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1842,7 +1898,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -1855,7 +1912,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "dirham"
+              "resource": "dirham",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -1911,7 +1969,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -1924,7 +1983,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -1982,7 +2042,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -1995,7 +2056,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2008,7 +2070,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2049,7 +2112,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2062,7 +2126,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2075,7 +2140,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_dinar"
+              "resource": "gold_dinar",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2131,7 +2197,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "coffee"
+              "resource": "coffee",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2144,7 +2211,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "incense"
+              "resource": "incense",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2185,7 +2253,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "coffee"
+              "resource": "coffee",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2198,7 +2267,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "incense"
+              "resource": "incense",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2211,7 +2281,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "oil_lamp"
+              "resource": "oil_lamp",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2224,7 +2295,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "carpet"
+              "resource": "carpet",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2292,7 +2364,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -2305,7 +2378,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -2377,7 +2451,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ointment"
+              "resource": "ointment",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2450,7 +2525,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ointment"
+              "resource": "ointment",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2463,7 +2539,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "elixier"
+              "resource": "elixier",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2521,7 +2598,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "bronze_bracelet"
+              "resource": "bronze_bracelet",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2594,7 +2672,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "bronze_bracelet"
+              "resource": "bronze_bracelet",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2607,7 +2686,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "iron_pendant"
+              "resource": "iron_pendant",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2680,7 +2760,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "bronze_bracelet"
+              "resource": "bronze_bracelet",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2693,7 +2774,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "iron_pendant"
+              "resource": "iron_pendant",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2706,7 +2788,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "silver_ring"
+              "resource": "silver_ring",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2779,7 +2862,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "bronze_bracelet"
+              "resource": "bronze_bracelet",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2792,7 +2876,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "iron_pendant"
+              "resource": "iron_pendant",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2805,7 +2890,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "silver_ring"
+              "resource": "silver_ring",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2818,7 +2904,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "gold_laurel"
+              "resource": "gold_laurel",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -2891,7 +2978,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "bronze_bracelet"
+              "resource": "bronze_bracelet",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2904,7 +2992,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "iron_pendant"
+              "resource": "iron_pendant",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2917,7 +3006,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "silver_ring"
+              "resource": "silver_ring",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2930,7 +3020,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_laurel"
+              "resource": "gold_laurel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -2943,7 +3034,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "goblet"
+              "resource": "goblet",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3003,7 +3095,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3016,7 +3109,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3062,7 +3156,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3075,7 +3170,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3121,7 +3217,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3134,7 +3231,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3209,7 +3307,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3222,7 +3321,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3280,7 +3380,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3293,7 +3394,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3351,7 +3453,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3364,7 +3467,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3439,7 +3543,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3452,7 +3557,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3510,7 +3616,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3523,7 +3630,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3581,7 +3689,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3594,7 +3703,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3669,7 +3779,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3682,7 +3793,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3736,7 +3848,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3749,7 +3862,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3803,7 +3917,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3816,7 +3931,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3891,7 +4007,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3904,7 +4021,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -3962,7 +4080,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -3975,7 +4094,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4033,7 +4153,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4046,7 +4167,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4121,7 +4243,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4134,7 +4257,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4192,7 +4316,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4205,7 +4330,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4263,7 +4389,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4276,7 +4403,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4351,7 +4479,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4364,7 +4493,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4422,7 +4552,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4435,7 +4566,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4493,7 +4625,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4506,7 +4639,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4581,7 +4715,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4594,7 +4729,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4652,7 +4788,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4665,7 +4802,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4723,7 +4861,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4736,7 +4875,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4811,7 +4951,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4824,7 +4965,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4882,7 +5024,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4895,7 +5038,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -4953,7 +5097,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -4966,7 +5111,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5041,7 +5187,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5054,7 +5201,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5112,7 +5260,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5125,7 +5274,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5183,7 +5333,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5196,7 +5347,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5271,7 +5423,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5284,7 +5437,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5342,7 +5496,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5355,7 +5510,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5413,7 +5569,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5426,7 +5583,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5501,7 +5659,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5514,7 +5673,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5572,7 +5732,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5585,7 +5746,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5643,7 +5805,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5656,7 +5819,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5735,7 +5899,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -5748,7 +5913,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5818,7 +5984,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "planks"
+              "resource": "planks",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5891,7 +6058,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "planks"
+              "resource": "planks",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -5904,7 +6072,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "cartwheel"
+              "resource": "cartwheel",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -5977,7 +6146,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "planks"
+              "resource": "planks",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -5990,7 +6160,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "cartwheel"
+              "resource": "cartwheel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6003,7 +6174,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "barrel"
+              "resource": "barrel",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -6076,7 +6248,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "planks"
+              "resource": "planks",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6089,7 +6262,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "cartwheel"
+              "resource": "cartwheel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6102,7 +6276,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "barrel"
+              "resource": "barrel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6115,7 +6290,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "door"
+              "resource": "door",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -6188,7 +6364,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "planks"
+              "resource": "planks",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6201,7 +6378,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "cartwheel"
+              "resource": "cartwheel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6214,7 +6392,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "barrel"
+              "resource": "barrel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6227,7 +6406,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "door"
+              "resource": "door",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6240,7 +6420,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "wardrobe"
+              "resource": "wardrobe",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -6313,7 +6494,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "planks"
+              "resource": "planks",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6326,7 +6508,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "cartwheel"
+              "resource": "cartwheel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6339,7 +6522,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "barrel"
+              "resource": "barrel",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6352,7 +6536,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "door"
+              "resource": "door",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6365,7 +6550,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "wardrobe"
+              "resource": "wardrobe",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -6378,7 +6564,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "secretary"
+              "resource": "secretary",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7205,7 +7392,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7218,7 +7406,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7231,7 +7420,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7262,7 +7452,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7275,7 +7466,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7288,7 +7480,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7319,7 +7512,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7332,7 +7526,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7345,7 +7540,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7358,7 +7554,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7371,7 +7568,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7402,7 +7600,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7415,7 +7614,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7428,7 +7628,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7441,7 +7642,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7454,7 +7656,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7485,7 +7688,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7498,7 +7702,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7511,7 +7716,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7524,7 +7730,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7537,7 +7744,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7568,7 +7776,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7581,7 +7790,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7594,7 +7804,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7607,7 +7818,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7620,7 +7832,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7651,7 +7864,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7664,7 +7878,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7677,7 +7892,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7690,7 +7906,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7703,7 +7920,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7734,7 +7952,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7747,7 +7966,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7760,7 +7980,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7773,7 +7994,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7786,7 +8008,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7817,7 +8040,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7830,7 +8054,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7843,7 +8068,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7856,7 +8082,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7869,7 +8096,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7900,7 +8128,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7913,7 +8142,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -7926,7 +8156,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -7939,7 +8170,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -7952,7 +8184,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -7983,7 +8216,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -7996,7 +8230,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8009,7 +8244,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -8022,7 +8258,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -8035,7 +8272,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8066,7 +8304,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -8079,7 +8318,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8092,7 +8332,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -8105,7 +8346,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -8118,7 +8360,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8149,7 +8392,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -8162,7 +8406,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8175,7 +8420,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -8188,7 +8434,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -8201,7 +8448,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8232,7 +8480,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -8245,7 +8494,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8258,7 +8508,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -8271,7 +8522,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -8284,7 +8536,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8315,7 +8568,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -8328,7 +8582,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8341,7 +8596,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -8354,7 +8610,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -8367,7 +8624,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8607,7 +8865,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8620,7 +8879,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8661,7 +8921,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8674,7 +8935,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8715,7 +8977,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8728,7 +8991,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8769,7 +9033,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8782,7 +9047,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -8823,7 +9089,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -8836,7 +9103,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9131,7 +9399,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -9144,7 +9413,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9198,7 +9468,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -9415,7 +9686,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 80100,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9451,7 +9723,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 73800,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9487,7 +9760,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 67500,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9523,7 +9797,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 61200,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9559,7 +9834,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 54900,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9595,7 +9871,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 48600,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9631,7 +9908,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 42300,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9667,7 +9945,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 36000,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -9703,7 +9982,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "gears"
+              "resource": "gears",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -10000,7 +10280,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -10013,7 +10294,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -11211,7 +11493,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -11506,7 +11789,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -11560,7 +11844,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -11573,7 +11858,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -11586,7 +11872,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -11891,7 +12178,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12037,7 +12325,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12050,7 +12339,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12081,7 +12371,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12094,7 +12385,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12107,7 +12399,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12143,7 +12436,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12156,7 +12450,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12169,7 +12464,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12205,7 +12501,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12218,7 +12515,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12231,7 +12529,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12267,7 +12566,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12280,7 +12580,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12293,7 +12594,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12329,7 +12631,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12342,7 +12645,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12355,7 +12659,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12391,7 +12696,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12404,7 +12710,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12417,7 +12724,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12453,7 +12761,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12466,7 +12775,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12479,7 +12789,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12515,7 +12826,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12528,7 +12840,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12541,7 +12854,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12577,7 +12891,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -12590,7 +12905,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12603,7 +12919,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12659,7 +12976,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -12672,7 +12990,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -12910,7 +13229,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -13489,7 +13809,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 0,
-              "resource": "wonder_help_actions"
+              "resource": "wonder_help_actions",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -13871,7 +14192,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 0,
-              "resource": "wonder_help_request"
+              "resource": "wonder_help_request",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14166,7 +14488,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14179,7 +14502,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14239,7 +14563,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14252,7 +14577,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14303,7 +14629,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14316,7 +14643,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14367,7 +14695,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14380,7 +14709,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14431,7 +14761,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14444,7 +14775,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14495,7 +14827,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14508,7 +14841,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14559,7 +14893,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14572,7 +14907,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14623,7 +14959,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14636,7 +14973,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14687,7 +15025,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14700,7 +15039,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14751,7 +15091,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14764,7 +15105,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14815,7 +15157,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14828,7 +15171,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14879,7 +15223,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14892,7 +15237,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -14943,7 +15289,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -14956,7 +15303,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15007,7 +15355,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -15020,7 +15369,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15071,7 +15421,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -15084,7 +15435,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -15135,7 +15487,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15193,7 +15546,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15251,7 +15605,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15309,7 +15664,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15369,7 +15725,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15411,7 +15768,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15424,7 +15782,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15466,7 +15825,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15479,7 +15839,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15530,7 +15891,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15543,7 +15905,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15556,7 +15919,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15602,7 +15966,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15615,7 +15980,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15628,7 +15994,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15674,7 +16041,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15687,7 +16055,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15700,7 +16069,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15775,7 +16145,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15788,7 +16159,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15801,7 +16173,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15859,7 +16232,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15872,7 +16246,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15885,7 +16260,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -15943,7 +16319,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15956,7 +16333,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -15969,7 +16347,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16044,7 +16423,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16057,7 +16437,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16070,7 +16451,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16128,7 +16510,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16141,7 +16524,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16154,7 +16538,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16212,7 +16597,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16225,7 +16611,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16238,7 +16625,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16313,7 +16701,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16326,7 +16715,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16339,7 +16729,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16393,7 +16784,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16406,7 +16798,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16419,7 +16812,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16473,7 +16867,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16486,7 +16881,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16499,7 +16895,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16574,7 +16971,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16587,7 +16985,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16600,7 +16999,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16658,7 +17058,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16671,7 +17072,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16684,7 +17086,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16742,7 +17145,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16755,7 +17159,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16768,7 +17173,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16843,7 +17249,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16856,7 +17263,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16869,7 +17277,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -16927,7 +17336,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16940,7 +17350,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -16953,7 +17364,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17011,7 +17423,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17024,7 +17437,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17037,7 +17451,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17112,7 +17527,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17125,7 +17541,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17138,7 +17555,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17196,7 +17614,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17209,7 +17628,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17222,7 +17642,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17280,7 +17701,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17293,7 +17715,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17306,7 +17729,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17381,7 +17805,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17394,7 +17819,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17407,7 +17833,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17465,7 +17892,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17478,7 +17906,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17491,7 +17920,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17549,7 +17979,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17562,7 +17993,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17575,7 +18007,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17650,7 +18083,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17663,7 +18097,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17676,7 +18111,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17734,7 +18170,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17747,7 +18184,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17760,7 +18198,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17818,7 +18257,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17831,7 +18271,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17844,7 +18285,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -17919,7 +18361,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17932,7 +18375,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -17945,7 +18389,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18003,7 +18448,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18016,7 +18462,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18029,7 +18476,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18087,7 +18535,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18100,7 +18549,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18113,7 +18563,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18188,7 +18639,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18201,7 +18653,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18214,7 +18667,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18272,7 +18726,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18285,7 +18740,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18298,7 +18754,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18356,7 +18813,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18369,7 +18827,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18382,7 +18841,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18457,7 +18917,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18470,7 +18931,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18483,7 +18945,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18541,7 +19004,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18554,7 +19018,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18567,7 +19032,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -18625,7 +19091,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18638,7 +19105,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -18651,7 +19119,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -19175,7 +19644,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "worker_slots",
@@ -19341,7 +19811,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -21417,7 +21888,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -21876,7 +22348,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -23924,7 +24397,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -24082,7 +24556,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -25002,7 +25477,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -25369,7 +25845,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -27417,7 +27894,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -27579,7 +28057,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -27724,7 +28203,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -28187,7 +28667,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -30235,7 +30716,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -30397,7 +30879,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -30759,7 +31242,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "infantry_damage",
@@ -30912,7 +31396,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -31832,7 +32317,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -32208,7 +32694,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -35348,7 +35835,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -36640,7 +37128,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -37123,7 +37612,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -39171,7 +39661,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -39333,7 +39824,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -40253,7 +40745,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -40657,7 +41150,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             },
             {
               "type": "goods_output",
@@ -41997,7 +42491,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -42444,7 +42939,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -44520,7 +45016,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": true
             },
             {
               "type": "food_output",
@@ -46596,7 +47093,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -49530,7 +50028,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -49692,7 +50191,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -49886,7 +50386,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             }
           ],
           "warnings": []
@@ -50293,7 +50794,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -53405,7 +53907,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -53571,7 +54074,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -54695,7 +55199,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -55134,7 +55639,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "recruitment_time_reduction",
@@ -55379,7 +55885,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -56299,7 +56806,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -57649,7 +58157,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": true
             },
             {
               "type": "goods_output",
@@ -58929,7 +59438,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -61733,7 +62243,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -62113,7 +62624,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -65169,7 +65681,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -65331,7 +65844,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -66503,7 +67017,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -69195,7 +69710,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": true
             }
           ],
           "warnings": []
@@ -69602,7 +70118,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -72378,7 +72895,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -72532,7 +73050,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -72742,7 +73261,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             }
           ],
           "warnings": []
@@ -73170,7 +73690,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             },
             {
               "type": "goods_output",
@@ -73364,7 +73885,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "negotiation_wildcard"
+              "resource": "negotiation_wildcard",
+              "isChestExpectation": true
             },
             {
               "type": "goods_output",
@@ -74524,7 +75046,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -74931,7 +75454,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -77819,7 +78343,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -77977,7 +78502,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -78187,7 +78713,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             }
           ],
           "warnings": []
@@ -78583,7 +79110,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -81651,7 +82179,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -81813,7 +82342,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -82027,7 +82557,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             }
           ],
           "warnings": []
@@ -82486,7 +83017,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "worker_slots",
@@ -82660,7 +83192,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -83568,7 +84101,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -84127,7 +84661,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "worker_slots",
@@ -84301,7 +84836,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -84760,7 +85296,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -86808,7 +87345,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -86970,7 +87508,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -89046,7 +89585,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -89473,7 +90013,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -89651,7 +90192,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -90919,7 +91461,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -91295,7 +91838,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -92387,7 +92931,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -95415,7 +95960,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -95974,7 +96520,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -98022,7 +98569,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -98184,7 +98732,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -99104,7 +99653,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -101870,7 +102420,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -102032,7 +102583,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -102238,7 +102790,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             },
             {
               "type": "food_output",
@@ -105154,7 +105707,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": true
             }
           ],
           "warnings": []
@@ -105546,7 +106100,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -106598,7 +107153,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -109514,7 +110070,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -109744,7 +110301,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             },
             {
               "type": "heavy_infantry_hp",
@@ -109897,7 +110455,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -110817,7 +111376,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -111473,7 +112033,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "worker_slots",
@@ -111643,7 +112204,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -112899,7 +113461,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -113458,7 +114021,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -115506,7 +116070,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -115668,7 +116233,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -116107,7 +116673,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "worker_slots",
@@ -116269,7 +116836,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -118345,7 +118913,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -118712,7 +119281,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -118862,7 +119432,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -121740,7 +122311,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -121753,7 +122325,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -123033,7 +123606,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -123497,7 +124071,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -126441,7 +127016,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -126607,7 +127183,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -126773,7 +127350,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -127212,7 +127790,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -129260,7 +129839,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -129422,7 +130002,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -129572,7 +130153,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -129995,7 +130577,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -132043,7 +132626,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -132209,7 +132793,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -133465,7 +134050,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -133868,7 +134454,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -135944,7 +136531,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -136094,7 +136682,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -136481,7 +137070,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -139005,7 +139595,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": true
             },
             {
               "type": "goods_output",
@@ -140189,7 +140780,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -141397,7 +141989,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -141856,7 +142449,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "worker_slots",
@@ -142030,7 +142624,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -142513,7 +143108,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -142663,7 +143259,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -143571,7 +144168,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -144042,7 +144640,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "regeneration_cap",
@@ -144200,7 +144799,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "treasure_hunt_attempt"
+              "resource": "treasure_hunt_attempt",
+              "isChestExpectation": false
             },
             {
               "type": "regeneration_speed",
@@ -144386,7 +144986,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "treasure_hunt_attempt"
+              "resource": "treasure_hunt_attempt",
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -146462,7 +147063,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -146838,7 +147440,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -148130,7 +148733,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -151158,7 +151762,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -151530,7 +152135,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_points",
@@ -154530,7 +155136,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -154692,7 +155299,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -155804,7 +156412,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -156180,7 +156789,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "research_points_output",
@@ -156374,7 +156984,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "research_points"
+              "resource": "research_points",
+              "isChestExpectation": true
             },
             {
               "type": "goods_output",
@@ -157858,7 +158469,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
                 ]
               },
               "periodSeconds": 86400,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -157928,7 +158540,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "lead_glass"
+              "resource": "lead_glass",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -158001,7 +158614,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "lead_glass"
+              "resource": "lead_glass",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -158014,7 +158628,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "stained_glass"
+              "resource": "stained_glass",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -158822,7 +159437,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -158890,7 +159506,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -158958,7 +159575,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159026,7 +159644,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159094,7 +159713,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159162,7 +159782,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159230,7 +159851,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159298,7 +159920,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159366,7 +159989,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159434,7 +160058,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159502,7 +160127,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159570,7 +160196,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -159638,7 +160265,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               },
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160523,7 +161151,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fine_jewelry"
+              "resource": "fine_jewelry",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160596,7 +161225,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fine_jewelry"
+              "resource": "fine_jewelry",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -160609,7 +161239,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "embellishment"
+              "resource": "embellishment",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160669,7 +161300,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -160682,7 +161314,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160733,7 +161366,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -160746,7 +161380,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160797,7 +161432,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -160810,7 +161446,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160861,7 +161498,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -160874,7 +161512,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160925,7 +161564,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -160938,7 +161578,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -160989,7 +161630,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161002,7 +161644,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161053,7 +161696,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161066,7 +161710,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161117,7 +161762,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161130,7 +161776,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161181,7 +161828,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161194,7 +161842,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161245,7 +161894,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161258,7 +161908,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161309,7 +161960,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161322,7 +161974,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -161392,7 +162045,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161405,7 +162059,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161465,7 +162120,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161478,7 +162134,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161529,7 +162186,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161542,7 +162200,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161593,7 +162252,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161606,7 +162266,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161657,7 +162318,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161670,7 +162332,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161721,7 +162384,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161734,7 +162398,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161785,7 +162450,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161798,7 +162464,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161849,7 +162516,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161862,7 +162530,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161913,7 +162582,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161926,7 +162596,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -161977,7 +162648,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -161990,7 +162662,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162041,7 +162714,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162054,7 +162728,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162105,7 +162780,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162118,7 +162794,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162169,7 +162846,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162182,7 +162860,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162233,7 +162912,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162246,7 +162926,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -162343,7 +163024,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162356,7 +163038,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162407,7 +163090,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162420,7 +163104,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162471,7 +163156,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162484,7 +163170,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162535,7 +163222,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162548,7 +163236,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162599,7 +163288,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162612,7 +163302,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162663,7 +163354,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162676,7 +163368,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162727,7 +163420,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162740,7 +163434,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162791,7 +163486,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162804,7 +163500,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162855,7 +163552,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162868,7 +163566,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162919,7 +163618,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162932,7 +163632,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -162983,7 +163684,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -162996,7 +163698,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163047,7 +163750,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -163060,7 +163764,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163111,7 +163816,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -163124,7 +163830,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163175,7 +163882,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -163188,7 +163896,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -163385,7 +164094,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "wheat"
+              "resource": "wheat",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163398,7 +164108,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "pomegranate"
+              "resource": "pomegranate",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163411,7 +164122,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "confection"
+              "resource": "confection",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163424,7 +164136,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "syrup"
+              "resource": "syrup",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163495,7 +164208,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "wheat"
+              "resource": "wheat",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163508,7 +164222,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "pomegranate"
+              "resource": "pomegranate",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163521,7 +164236,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "apricot"
+              "resource": "apricot",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163534,7 +164250,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "mohair"
+              "resource": "mohair",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163547,7 +164264,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "confection"
+              "resource": "confection",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163560,7 +164278,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "syrup"
+              "resource": "syrup",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163573,7 +164292,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "tea"
+              "resource": "tea",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163586,7 +164306,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "brocade"
+              "resource": "brocade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163636,7 +164357,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "wheat"
+              "resource": "wheat",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163649,7 +164371,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "pomegranate"
+              "resource": "pomegranate",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163662,7 +164385,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "apricot"
+              "resource": "apricot",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163675,7 +164399,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "mohair"
+              "resource": "mohair",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163688,7 +164413,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "confection"
+              "resource": "confection",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163701,7 +164427,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "syrup"
+              "resource": "syrup",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163714,7 +164441,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "tea"
+              "resource": "tea",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -163727,7 +164455,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "brocade"
+              "resource": "brocade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163795,7 +164524,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -163808,7 +164538,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -163821,7 +164552,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "wheat"
+              "resource": "wheat",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -163834,7 +164566,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "pomegranate"
+              "resource": "pomegranate",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163890,7 +164623,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -163903,7 +164637,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -163946,7 +164681,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -163959,7 +164695,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164002,7 +164739,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164015,7 +164753,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164058,7 +164797,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164071,7 +164811,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164114,7 +164855,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164127,7 +164869,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164170,7 +164913,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164183,7 +164927,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164226,7 +164971,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164239,7 +164985,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164282,7 +165029,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164295,7 +165043,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164338,7 +165087,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164351,7 +165101,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164394,7 +165145,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164407,7 +165159,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164450,7 +165203,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164463,7 +165217,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164506,7 +165261,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164519,7 +165275,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164562,7 +165319,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164575,7 +165333,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164618,7 +165377,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -164631,7 +165391,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -164687,7 +165448,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164728,7 +165490,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164741,7 +165504,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164754,7 +165518,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164797,7 +165562,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164810,7 +165576,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164823,7 +165590,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164864,7 +165632,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164877,7 +165646,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164890,7 +165660,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -164933,7 +165704,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164946,7 +165718,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -164959,7 +165732,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165002,7 +165776,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165015,7 +165790,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165028,7 +165804,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165071,7 +165848,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165084,7 +165862,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165097,7 +165876,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165140,7 +165920,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165153,7 +165934,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165166,7 +165948,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165209,7 +165992,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165222,7 +166006,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165235,7 +166020,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165278,7 +166064,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165291,7 +166078,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165304,7 +166092,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165347,7 +166136,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165360,7 +166150,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165373,7 +166164,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165416,7 +166208,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165429,7 +166222,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165442,7 +166236,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165485,7 +166280,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165498,7 +166294,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -165511,7 +166308,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165594,7 +166392,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165607,7 +166406,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165648,7 +166448,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165661,7 +166462,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165704,7 +166506,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165717,7 +166520,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165758,7 +166562,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165771,7 +166576,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165814,7 +166620,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165827,7 +166634,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165870,7 +166678,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165883,7 +166692,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165926,7 +166736,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165939,7 +166750,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -165982,7 +166794,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -165995,7 +166808,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166038,7 +166852,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -166051,7 +166866,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166094,7 +166910,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -166107,7 +166924,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166150,7 +166968,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -166163,7 +166982,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166206,7 +167026,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -166219,7 +167040,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166262,7 +167084,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -166275,7 +167098,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166318,7 +167142,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -166331,7 +167156,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166387,7 +167213,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -166400,7 +167227,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166443,7 +167271,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -166456,7 +167285,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 14400,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166512,7 +167342,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "wheat"
+              "resource": "wheat",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166525,7 +167356,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "pomegranate"
+              "resource": "pomegranate",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166538,7 +167370,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "confection"
+              "resource": "confection",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166551,7 +167384,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "syrup"
+              "resource": "syrup",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -166594,7 +167428,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "wheat"
+              "resource": "wheat",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166607,7 +167442,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "pomegranate"
+              "resource": "pomegranate",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166620,7 +167456,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "apricot"
+              "resource": "apricot",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166633,7 +167470,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "mohair"
+              "resource": "mohair",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166646,7 +167484,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "confection"
+              "resource": "confection",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166659,7 +167498,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "syrup"
+              "resource": "syrup",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166672,7 +167512,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "tea"
+              "resource": "tea",
+              "isChestExpectation": false
             },
             {
               "type": "goods_capacity",
@@ -166685,7 +167526,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "brocade"
+              "resource": "brocade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -167549,7 +168391,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -167594,7 +168437,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 30,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -167636,7 +168480,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167649,7 +168494,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -167691,7 +168537,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167704,7 +168551,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -167755,7 +168603,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167768,7 +168617,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167781,7 +168631,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -167827,7 +168678,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167840,7 +168692,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167853,7 +168706,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -167899,7 +168753,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167912,7 +168767,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -167925,7 +168781,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168000,7 +168857,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168013,7 +168871,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168026,7 +168885,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168084,7 +168944,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168097,7 +168958,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168110,7 +168972,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168168,7 +169031,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168181,7 +169045,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168194,7 +169059,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168269,7 +169135,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168282,7 +169149,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168295,7 +169163,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168353,7 +169222,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168366,7 +169236,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168379,7 +169250,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168437,7 +169309,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168450,7 +169323,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168463,7 +169337,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168538,7 +169413,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168551,7 +169427,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168564,7 +169441,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168618,7 +169496,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168631,7 +169510,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168644,7 +169524,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168698,7 +169579,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168711,7 +169593,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168724,7 +169607,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168799,7 +169683,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168812,7 +169697,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168825,7 +169711,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168883,7 +169770,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168896,7 +169784,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168909,7 +169798,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -168967,7 +169857,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168980,7 +169871,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -168993,7 +169885,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169068,7 +169961,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169081,7 +169975,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169094,7 +169989,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169152,7 +170048,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169165,7 +170062,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169178,7 +170076,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169236,7 +170135,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169249,7 +170149,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169262,7 +170163,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169337,7 +170239,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169350,7 +170253,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169363,7 +170267,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169421,7 +170326,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169434,7 +170340,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169447,7 +170354,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169505,7 +170413,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169518,7 +170427,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169531,7 +170441,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169606,7 +170517,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169619,7 +170531,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169632,7 +170545,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169690,7 +170604,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169703,7 +170618,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169716,7 +170632,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169774,7 +170691,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169787,7 +170705,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169800,7 +170719,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169875,7 +170795,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169888,7 +170809,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169901,7 +170823,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -169959,7 +170882,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169972,7 +170896,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -169985,7 +170910,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170043,7 +170969,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170056,7 +170983,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170069,7 +170997,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170144,7 +171073,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170157,7 +171087,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170170,7 +171101,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170228,7 +171160,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170241,7 +171174,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170254,7 +171188,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170312,7 +171247,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170325,7 +171261,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170338,7 +171275,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170413,7 +171351,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170426,7 +171365,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170439,7 +171379,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170497,7 +171438,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170510,7 +171452,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170523,7 +171466,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170581,7 +171525,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170594,7 +171539,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170607,7 +171553,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170682,7 +171629,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170695,7 +171643,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170708,7 +171657,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170766,7 +171716,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170779,7 +171730,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170792,7 +171744,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -170850,7 +171803,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170863,7 +171817,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             },
             {
               "type": "food_output",
@@ -170876,7 +171831,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "food"
+              "resource": "food",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -171011,7 +171967,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "parchment"
+              "resource": "parchment",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -171084,7 +172041,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "parchment"
+              "resource": "parchment",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171097,7 +172055,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ink"
+              "resource": "ink",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -171170,7 +172129,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "parchment"
+              "resource": "parchment",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171183,7 +172143,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ink"
+              "resource": "ink",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171196,7 +172157,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "manuscript"
+              "resource": "manuscript",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -171269,7 +172231,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "parchment"
+              "resource": "parchment",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171282,7 +172245,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ink"
+              "resource": "ink",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171295,7 +172259,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "manuscript"
+              "resource": "manuscript",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171308,7 +172273,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "wax_seal"
+              "resource": "wax_seal",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -171381,7 +172347,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "parchment"
+              "resource": "parchment",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171394,7 +172361,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ink"
+              "resource": "ink",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171407,7 +172375,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "manuscript"
+              "resource": "manuscript",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171420,7 +172389,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "wax_seal"
+              "resource": "wax_seal",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171433,7 +172403,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "tome"
+              "resource": "tome",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -171506,7 +172477,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "parchment"
+              "resource": "parchment",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171519,7 +172491,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ink"
+              "resource": "ink",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171532,7 +172505,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "manuscript"
+              "resource": "manuscript",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171545,7 +172519,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "wax_seal"
+              "resource": "wax_seal",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171558,7 +172533,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "tome"
+              "resource": "tome",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -171571,7 +172547,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "grimoire"
+              "resource": "grimoire",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172173,7 +173150,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172186,7 +173164,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172228,7 +173207,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172241,7 +173221,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172283,7 +173264,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172296,7 +173278,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172347,7 +173330,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172360,7 +173344,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172406,7 +173391,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172419,7 +173405,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172465,7 +173452,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172478,7 +173466,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172553,7 +173542,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172566,7 +173556,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172616,7 +173607,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172629,7 +173621,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172687,7 +173680,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172700,7 +173694,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172775,7 +173770,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172788,7 +173784,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172846,7 +173843,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172859,7 +173857,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -172917,7 +173916,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -172930,7 +173930,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173005,7 +174006,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173018,7 +174020,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173072,7 +174075,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173085,7 +174089,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173139,7 +174144,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173152,7 +174158,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173227,7 +174234,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173240,7 +174248,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173298,7 +174307,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173311,7 +174321,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173369,7 +174380,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173382,7 +174394,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173457,7 +174470,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173470,7 +174484,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173528,7 +174543,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173541,7 +174557,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173599,7 +174616,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173612,7 +174630,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173687,7 +174706,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173700,7 +174720,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173758,7 +174779,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173771,7 +174793,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173829,7 +174852,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173842,7 +174866,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173917,7 +174942,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -173930,7 +174956,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -173988,7 +175015,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174001,7 +175029,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174059,7 +175088,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174072,7 +175102,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174147,7 +175178,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174160,7 +175192,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174218,7 +175251,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174231,7 +175265,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174289,7 +175324,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174302,7 +175338,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174377,7 +175414,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174390,7 +175428,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174448,7 +175487,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174461,7 +175501,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174519,7 +175560,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174532,7 +175574,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174607,7 +175650,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174620,7 +175664,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174678,7 +175723,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174691,7 +175737,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174749,7 +175796,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174762,7 +175810,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174837,7 +175886,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174850,7 +175900,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174908,7 +175959,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174921,7 +175973,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -174979,7 +176032,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -174992,7 +176046,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175071,7 +176126,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "coins_output",
@@ -175084,7 +176140,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "coins"
+              "resource": "coins",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175156,7 +176213,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -175169,7 +176227,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175223,7 +176282,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -175236,7 +176296,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175311,7 +176372,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -175324,7 +176386,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175382,7 +176445,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -175395,7 +176459,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "aspers"
+              "resource": "aspers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175465,7 +176530,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "pepper"
+              "resource": "pepper",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175538,7 +176604,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "pepper"
+              "resource": "pepper",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175551,7 +176618,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "salt"
+              "resource": "salt",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175624,7 +176692,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "pepper"
+              "resource": "pepper",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175637,7 +176706,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "salt"
+              "resource": "salt",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175650,7 +176720,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "herbs"
+              "resource": "herbs",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175723,7 +176794,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "pepper"
+              "resource": "pepper",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175736,7 +176808,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "salt"
+              "resource": "salt",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175749,7 +176822,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "herbs"
+              "resource": "herbs",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175762,7 +176836,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "saffron"
+              "resource": "saffron",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175835,7 +176910,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "pepper"
+              "resource": "pepper",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175848,7 +176924,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "salt"
+              "resource": "salt",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175861,7 +176938,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "herbs"
+              "resource": "herbs",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175874,7 +176952,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "saffron"
+              "resource": "saffron",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175887,7 +176966,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "chili"
+              "resource": "chili",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -175960,7 +177040,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "pepper"
+              "resource": "pepper",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175973,7 +177054,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "salt"
+              "resource": "salt",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175986,7 +177068,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "herbs"
+              "resource": "herbs",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -175999,7 +177082,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "saffron"
+              "resource": "saffron",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176012,7 +177096,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "chili"
+              "resource": "chili",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176025,7 +177110,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "cinnamon"
+              "resource": "cinnamon",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176083,7 +177169,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "alabaster_idol"
+              "resource": "alabaster_idol",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176156,7 +177243,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "alabaster_idol"
+              "resource": "alabaster_idol",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176169,7 +177257,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "marble_bust"
+              "resource": "marble_bust",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176242,7 +177331,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "alabaster_idol"
+              "resource": "alabaster_idol",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176255,7 +177345,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "marble_bust"
+              "resource": "marble_bust",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176268,7 +177359,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "column"
+              "resource": "column",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176341,7 +177433,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "alabaster_idol"
+              "resource": "alabaster_idol",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176354,7 +177447,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "marble_bust"
+              "resource": "marble_bust",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176367,7 +177461,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "column"
+              "resource": "column",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176380,7 +177475,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "stone_tablet"
+              "resource": "stone_tablet",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176453,7 +177549,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "alabaster_idol"
+              "resource": "alabaster_idol",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176466,7 +177563,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "marble_bust"
+              "resource": "marble_bust",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176479,7 +177577,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "column"
+              "resource": "column",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176492,7 +177591,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "stone_tablet"
+              "resource": "stone_tablet",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176505,7 +177605,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "mosaic"
+              "resource": "mosaic",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176563,7 +177664,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "wool"
+              "resource": "wool",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176636,7 +177738,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "wool"
+              "resource": "wool",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176649,7 +177752,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "linen_shirt"
+              "resource": "linen_shirt",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176722,7 +177826,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "wool"
+              "resource": "wool",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176735,7 +177840,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "linen_shirt"
+              "resource": "linen_shirt",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176748,7 +177854,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "toga"
+              "resource": "toga",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176821,7 +177928,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "wool"
+              "resource": "wool",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176834,7 +177942,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "linen_shirt"
+              "resource": "linen_shirt",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176847,7 +177956,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "toga"
+              "resource": "toga",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176860,7 +177970,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 5400,
-              "resource": "tunic"
+              "resource": "tunic",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -176933,7 +178044,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "wool"
+              "resource": "wool",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176946,7 +178058,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "linen_shirt"
+              "resource": "linen_shirt",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176959,7 +178072,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "toga"
+              "resource": "toga",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176972,7 +178086,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "tunic"
+              "resource": "tunic",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -176985,7 +178100,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "cape"
+              "resource": "cape",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177057,7 +178173,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177070,7 +178187,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177124,7 +178242,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177137,7 +178256,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177191,7 +178311,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177204,7 +178325,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177258,7 +178380,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177271,7 +178394,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177329,7 +178453,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177342,7 +178467,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177400,7 +178526,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177413,7 +178540,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177485,7 +178613,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177498,7 +178627,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177511,7 +178641,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177565,7 +178696,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177578,7 +178710,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177591,7 +178724,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177645,7 +178779,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177658,7 +178793,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177671,7 +178807,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177725,7 +178862,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177738,7 +178876,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177751,7 +178890,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177809,7 +178949,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177822,7 +178963,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177835,7 +178977,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177893,7 +179036,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177906,7 +179050,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177919,7 +179064,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -177968,7 +179114,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177981,7 +179128,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -177994,7 +179142,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178025,7 +179174,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178038,7 +179188,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178051,7 +179202,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178123,7 +179275,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "clay"
+              "resource": "clay",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178136,7 +179289,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "clay"
+              "resource": "clay",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178149,7 +179303,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "clay"
+              "resource": "clay",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178198,7 +179353,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "kaolin"
+              "resource": "kaolin",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178211,7 +179367,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "kaolin"
+              "resource": "kaolin",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178224,7 +179381,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "kaolin"
+              "resource": "kaolin",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178273,7 +179431,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "moth_cocoons"
+              "resource": "moth_cocoons",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178286,7 +179445,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "moth_cocoons"
+              "resource": "moth_cocoons",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178299,7 +179459,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "moth_cocoons"
+              "resource": "moth_cocoons",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178369,7 +179530,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "porcelain"
+              "resource": "porcelain",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178382,7 +179544,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "porcelain"
+              "resource": "porcelain",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178395,7 +179558,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "porcelain"
+              "resource": "porcelain",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178451,7 +179615,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178464,7 +179629,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178502,7 +179668,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178515,7 +179682,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178571,7 +179739,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178584,7 +179753,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178597,7 +179767,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178635,7 +179806,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178648,7 +179820,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178661,7 +179834,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "rice"
+              "resource": "rice",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178731,7 +179905,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "silk"
+              "resource": "silk",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178744,7 +179919,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "silk"
+              "resource": "silk",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -178757,7 +179933,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "silk"
+              "resource": "silk",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178829,7 +180006,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178842,7 +180020,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178896,7 +180075,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178909,7 +180089,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -178963,7 +180144,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -178976,7 +180158,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179030,7 +180213,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -179043,7 +180227,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179101,7 +180286,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -179114,7 +180300,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179172,7 +180359,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -179185,7 +180373,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "wu_zhu"
+              "resource": "wu_zhu",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179255,7 +180444,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "silk_threads"
+              "resource": "silk_threads",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179268,7 +180458,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "silk_threads"
+              "resource": "silk_threads",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179281,7 +180472,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "silk_threads"
+              "resource": "silk_threads",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179337,7 +180529,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179350,7 +180543,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179363,7 +180557,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179409,7 +180604,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179422,7 +180618,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179435,7 +180632,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179489,7 +180687,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179502,7 +180701,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179515,7 +180715,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179565,7 +180766,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179578,7 +180780,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179591,7 +180794,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179649,7 +180853,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179662,7 +180867,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179675,7 +180881,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179733,7 +180940,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179746,7 +180954,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -179759,7 +180968,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179815,7 +181025,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -179828,7 +181039,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179874,7 +181086,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -179887,7 +181100,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -179941,7 +181155,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -179954,7 +181169,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180004,7 +181220,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -180017,7 +181234,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180075,7 +181293,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -180088,7 +181307,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180146,7 +181366,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -180159,7 +181380,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180215,7 +181437,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 120,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180228,7 +181451,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180241,7 +181465,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180287,7 +181512,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180300,7 +181526,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180313,7 +181540,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180367,7 +181595,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180380,7 +181609,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180393,7 +181623,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180443,7 +181674,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180456,7 +181688,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180469,7 +181702,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180527,7 +181761,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180540,7 +181775,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180553,7 +181789,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180611,7 +181848,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180624,7 +181862,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -180637,7 +181876,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180693,7 +181933,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -180706,7 +181947,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -180757,7 +181999,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -180770,7 +182013,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180801,7 +182045,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -180814,7 +182059,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180872,7 +182118,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -180885,7 +182132,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -180941,7 +182189,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "ankh"
+              "resource": "ankh",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -180993,7 +182242,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "ankh"
+              "resource": "ankh",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181006,7 +182256,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "golden_mask"
+              "resource": "golden_mask",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181062,7 +182313,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -181075,7 +182327,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -181133,7 +182386,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -181146,7 +182400,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -181202,7 +182457,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "papyrus_scroll"
+              "resource": "papyrus_scroll",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181254,7 +182510,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "papyrus_scroll"
+              "resource": "papyrus_scroll",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181267,7 +182524,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ceremonial_dress"
+              "resource": "ceremonial_dress",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181323,7 +182581,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181336,7 +182595,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181349,7 +182609,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181385,7 +182646,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181398,7 +182660,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181411,7 +182674,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "gold_ore"
+              "resource": "gold_ore",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181467,7 +182731,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -181480,7 +182745,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181516,7 +182782,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -181529,7 +182796,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181585,7 +182853,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181598,7 +182867,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181611,7 +182881,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181647,7 +182918,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 600,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181660,7 +182932,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1800,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -181673,7 +182946,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "papyrus"
+              "resource": "papyrus",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181729,7 +183003,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -181742,7 +183017,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181788,7 +183064,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -181801,7 +183078,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181855,7 +183133,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -181868,7 +183147,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181918,7 +183198,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -181931,7 +183212,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -181989,7 +183271,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -182002,7 +183285,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182060,7 +183344,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -182073,7 +183358,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "deben"
+              "resource": "deben",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182129,7 +183415,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -182142,7 +183429,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -182200,7 +183488,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -182213,7 +183502,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -182283,7 +183573,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182296,7 +183587,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182309,7 +183601,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182363,7 +183656,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182376,7 +183670,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182389,7 +183684,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182443,7 +183739,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182456,7 +183753,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182469,7 +183767,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182537,7 +183836,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -182550,7 +183850,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -182618,7 +183919,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "headdress"
+              "resource": "headdress",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182631,7 +183933,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "headdress"
+              "resource": "headdress",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182644,7 +183947,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "headdress"
+              "resource": "headdress",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182710,7 +184014,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "calendar_stone"
+              "resource": "calendar_stone",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182723,7 +184028,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "calendar_stone"
+              "resource": "calendar_stone",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182736,7 +184042,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "calendar_stone"
+              "resource": "calendar_stone",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182785,7 +184092,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -182798,7 +184106,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182829,7 +184138,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -182842,7 +184152,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182912,7 +184223,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182925,7 +184237,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -182938,7 +184251,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -182992,7 +184306,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183005,7 +184320,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183018,7 +184334,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183072,7 +184389,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183085,7 +184403,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183098,7 +184417,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183148,7 +184468,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183161,7 +184482,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183174,7 +184496,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183228,7 +184551,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183241,7 +184565,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183254,7 +184579,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183308,7 +184634,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183321,7 +184648,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183334,7 +184662,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183400,7 +184729,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "ancestor_mask"
+              "resource": "ancestor_mask",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183413,7 +184743,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "ancestor_mask"
+              "resource": "ancestor_mask",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183426,7 +184757,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ancestor_mask"
+              "resource": "ancestor_mask",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183494,7 +184826,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183507,7 +184840,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183520,7 +184854,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183574,7 +184909,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183587,7 +184923,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183600,7 +184937,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183654,7 +184992,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183667,7 +185006,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183680,7 +185020,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183730,7 +185071,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183743,7 +185085,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183756,7 +185099,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183810,7 +185154,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183823,7 +185168,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183836,7 +185182,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183890,7 +185237,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183903,7 +185251,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183916,7 +185265,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -183972,7 +185322,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183985,7 +185336,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -183998,7 +185350,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "feathers"
+              "resource": "feathers",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184054,7 +185407,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "maya_priest_slots",
@@ -184067,7 +185421,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184080,7 +185435,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184116,7 +185472,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "maya_priest_slots",
@@ -184129,7 +185486,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184142,7 +185500,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184196,7 +185555,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184209,7 +185569,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184222,7 +185583,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184235,7 +185597,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184273,7 +185636,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184286,7 +185650,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "jade"
+              "resource": "jade",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184299,7 +185664,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184312,7 +185678,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "obsidian"
+              "resource": "obsidian",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184368,7 +185735,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -184381,7 +185749,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -184439,7 +185808,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ancestor_mask"
+              "resource": "ancestor_mask",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184452,7 +185822,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "calendar_stone"
+              "resource": "calendar_stone",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184490,7 +185861,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ancestor_mask"
+              "resource": "ancestor_mask",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184503,7 +185875,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "calendar_stone"
+              "resource": "calendar_stone",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184516,7 +185889,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "headdress"
+              "resource": "headdress",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -184529,7 +185903,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ritual_dagger"
+              "resource": "ritual_dagger",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184597,7 +185972,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184610,7 +185986,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184664,7 +186041,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184677,7 +186055,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184731,7 +186110,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184744,7 +186124,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184794,7 +186175,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184807,7 +186189,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184861,7 +186244,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184874,7 +186258,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -184928,7 +186313,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -184941,7 +186327,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185007,7 +186394,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "ritual_dagger"
+              "resource": "ritual_dagger",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185020,7 +186408,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "ritual_dagger"
+              "resource": "ritual_dagger",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185033,7 +186422,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "ritual_dagger"
+              "resource": "ritual_dagger",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185101,7 +186491,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "culture_range",
@@ -185114,7 +186505,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -185184,7 +186576,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -185197,7 +186590,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185251,7 +186645,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -185264,7 +186659,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185318,7 +186714,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -185331,7 +186728,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185381,7 +186779,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -185394,7 +186793,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185448,7 +186848,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -185461,7 +186862,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185515,7 +186917,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -185528,7 +186931,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "cocoa"
+              "resource": "cocoa",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185596,7 +187000,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185609,7 +187014,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185622,7 +187028,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185676,7 +187083,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185689,7 +187097,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185702,7 +187111,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185756,7 +187166,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185769,7 +187180,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185782,7 +187194,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185832,7 +187245,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185845,7 +187259,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185858,7 +187273,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185912,7 +187328,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185925,7 +187342,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -185938,7 +187356,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -185992,7 +187411,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186005,7 +187425,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186018,7 +187439,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "honey"
+              "resource": "honey",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186086,7 +187508,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186099,7 +187522,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186112,7 +187536,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186166,7 +187591,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186179,7 +187605,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186192,7 +187619,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186246,7 +187674,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186259,7 +187688,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186272,7 +187702,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186322,7 +187753,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186335,7 +187767,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186348,7 +187781,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186402,7 +187836,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186415,7 +187850,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186428,7 +187864,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186482,7 +187919,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186495,7 +187933,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186508,7 +187947,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186565,7 +188005,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -186616,7 +188057,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -186629,7 +188071,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186660,7 +188103,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -186673,7 +188117,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 28800,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186784,7 +188229,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -186842,7 +188288,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "vikings_sailor_slots",
@@ -186855,7 +188302,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -186868,7 +188316,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186904,7 +188353,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "vikings_sailor_slots",
@@ -186917,7 +188367,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -186930,7 +188381,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 86400,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -186986,7 +188438,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -186999,7 +188452,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187012,7 +188466,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187048,7 +188503,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187061,7 +188517,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187074,7 +188531,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "fish"
+              "resource": "fish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187211,7 +188669,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -187224,7 +188683,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187278,7 +188738,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -187291,7 +188752,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187345,7 +188807,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -187358,7 +188821,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187408,7 +188872,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -187421,7 +188886,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187475,7 +188941,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -187488,7 +188955,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187542,7 +189010,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -187555,7 +189024,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 43200,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187665,7 +189135,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "mead"
+              "resource": "mead",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187678,7 +189149,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "mead"
+              "resource": "mead",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187691,7 +189163,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "mead"
+              "resource": "mead",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187739,7 +189212,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "mead"
+              "resource": "mead",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187752,7 +189226,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "mead"
+              "resource": "mead",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187765,7 +189240,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "mead"
+              "resource": "mead",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187778,7 +189254,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 1200,
-              "resource": "stockfish"
+              "resource": "stockfish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187791,7 +189268,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 3600,
-              "resource": "stockfish"
+              "resource": "stockfish",
+              "isChestExpectation": false
             },
             {
               "type": "goods_output",
@@ -187804,7 +189282,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 7200,
-              "resource": "stockfish"
+              "resource": "stockfish",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -187863,7 +189342,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": "mead"
+              "resource": "mead",
+              "isChestExpectation": false
             }
           ],
           "warnings": [
@@ -187933,7 +189413,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -187946,7 +189427,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -188000,7 +189482,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -188013,7 +189496,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -188067,7 +189551,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -188080,7 +189565,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -188130,7 +189616,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -188143,7 +189630,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -188197,7 +189685,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -188210,7 +189699,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []
@@ -188264,7 +189754,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": null,
-              "resource": null
+              "resource": null,
+              "isChestExpectation": false
             },
             {
               "type": "allied_currency_output",
@@ -188277,7 +189768,8 @@ export const BUILDING_EXTRACT: BuildingExtractBundle = {
               "curve": null,
               "ageCurve": null,
               "periodSeconds": 21600,
-              "resource": "pennies"
+              "resource": "pennies",
+              "isChestExpectation": false
             }
           ],
           "warnings": []

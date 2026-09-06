@@ -1089,6 +1089,10 @@ function bonusPusher(ctx: EffectContext, bonuses: BuildingBonus[]) {
         ageCurve === null || ageCurve.entries.every((entry) => entry.resources.length === 0)
           ? projection.resource
           : null,
+      // Les Wonders n'ont pas de tirage à chances (`MysteryChestRewardDTO`) —
+      // ce module ne touche jamais `expectedChestValue`/`chestLeaves`, propres
+      // au domaine Bâtiments (`scripts/extract/buildings.ts`). Toujours `false`.
+      isChestExpectation: false,
     });
   };
 }

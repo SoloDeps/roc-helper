@@ -65,6 +65,7 @@ describe("`describeCultureEffect`", () => {
         value: 100,
         resources: [],
         periodSeconds: null,
+        isChestExpectation: false,
       },
     ];
     expect(describeCultureEffect(onlyPoints, [])).toBeNull();
