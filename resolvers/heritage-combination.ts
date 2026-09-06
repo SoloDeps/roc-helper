@@ -50,6 +50,8 @@ export interface CombinableBonus {
   instance: number;
   resources: string[];
   periodSeconds: number | null;
+  /** Espérance de tirage plutôt que montant garanti — cf. `BuildingBonus.isChestExpectation`. */
+  isChestExpectation: boolean;
 }
 
 /** Un porteur de bonus dans le cumul : le vault, ou un évolutif. */
