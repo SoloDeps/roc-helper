@@ -160,6 +160,20 @@ function resourceIcon(resource: string, good: string | null): string {
 }
 
 /**
+ * Ressources qui ne sont PAS des biens ordinaires : un JOKER/OBJET versé par
+ * un coffre, jamais stocké ni produit en soi — une ligne `isChestExpectation`
+ * doit s'afficher comme le coffre qui la verse, pas comme un bien classique.
+ * `negotiation_wildcard` (World Fair Exhibition) est le seul cas connu : le
+ * même visuel que `CHEST_ICON_BY_FAMILY` pose déjà pour ce coffre côté arbre
+ * de récompense (`icon_chest_joker_goods.webp`) — repris ici tel quel pour la
+ * ligne de production équivalente, plutôt qu'un second nom de fichier pour la
+ * même image.
+ */
+const CHEST_ITEM_RESOURCES: Record<string, { icon: string; label: string }> = {
+  negotiation_wildcard: { icon: "/images/chests/icon_chest_joker_goods.webp", label: "Chest" },
+};
+
+/**
  * Les overlays de repli : l'icône principale dit SUR QUOI porte le bonus (la
  * boussole, les points de recherche), l'overlay dit CE QU'IL LUI FAIT.
  *
@@ -255,6 +269,8 @@ function bonusIconsBase(
 
   const resource = bonus.resources[0];
   if (resource !== undefined) {
+    const chestItem = CHEST_ITEM_RESOURCES[resource];
+    if (chestItem !== undefined) return { src: chestItem.icon, overlaySrc: null, good: null };
     const good = resolveRankGood(resource, selections, contextEra);
     return { src: resourceIcon(resource, good), overlaySrc: null, good };
   }
@@ -398,12 +414,15 @@ export function describeHeritageBonus(
 ): HeritageBonusDisplay {
   const raw = amplified ? (bonus.amplified ?? bonus.value) : bonus.value;
   const { src, overlaySrc, good } = bonusIcons(bonus, selections, contextEra);
+  const chestItem = CHEST_ITEM_RESOURCES[bonus.resources[0] ?? ""];
   // ⚠️ Rang non résolu : l'ère qualifie le libellé, sans quoi deux paliers de
   // biens du même vault sont indiscernables (cf. `rankEraLabel`).
   const label =
-    good === null
-      ? qualifyWithEra(bonus.label, rankEraLabel(bonus.resources, contextEra))
-      : (GOOD_META_BY_KEY[good]?.name ?? good);
+    chestItem !== undefined
+      ? chestItem.label
+      : good === null
+        ? qualifyWithEra(bonus.label, rankEraLabel(bonus.resources, contextEra))
+        : (GOOD_META_BY_KEY[good]?.name ?? good);
   const detail =
     bonus.periodSeconds === null ? null : `/ ${formatDuration(bonus.periodSeconds)}`;
 
