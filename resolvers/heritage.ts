@@ -426,6 +426,31 @@ export function getKeeperReputationCost(key: string, reputationLevel: number): n
 }
 
 /**
+ * Points de réputation cumulés pour amener le gardien du rang 1 à `reputationLevel`.
+ *
+ * Même convention que `getHeritageCumulativeXp` (rang ≤ 1 → 0), mais sommée à la
+ * volée plutôt que lue dans une colonne tabulée : contrairement à l'xp du vault
+ * (`xpPerLevel.cumulative`, bornée à `maxLevel`), le barème de réputation n'a pas
+ * de cumul pré-calculé — `getKeeperReputationCost` prolonge sa formule Lua sans
+ * plafond déclaré (voir sa doc), donc rien à tabuler d'avance au-delà.
+ */
+export function getKeeperCumulativeReputation(
+  key: string,
+  reputationLevel: number,
+): number | null {
+  if (EXTRACT_BY_KEY.get(key) === undefined) return null;
+  const target = Math.trunc(reputationLevel);
+  if (target <= 1) return 0;
+  let sum = 0;
+  for (let level = 1; level < target; level += 1) {
+    const cost = getKeeperReputationCost(key, level);
+    if (cost === null) return null;
+    sum += cost;
+  }
+  return sum;
+}
+
+/**
  * Rang de gardien observable en jeu. Distinct de `vault.maxLevel` (60), qui ne
  * borne que le niveau du vault : le barème de réputation extrait s'arrête
  * aussi à 60, mais `keeperAmplifierMultiplier`/`getKeeperReputationCost`

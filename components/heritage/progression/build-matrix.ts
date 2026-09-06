@@ -4,15 +4,25 @@ import { bonusKey } from "@/resolvers/bonus";
 import {
   KEEPER_AMPLIFIER_EXEMPT_TYPES,
   amplifyBonusValue,
+  getHeritageCumulativeXp,
+  getHeritageUpgradeCost,
+  getKeeperCumulativeReputation,
+  getKeeperReputationCost,
   keeperAmplifierMultiplier,
+  resolveChestRewards,
   resolveHeritageVault,
   type ResolvedHeritageBonus,
   type ResolvedHeritageEffect,
   type ResolvedHeritageVault,
 } from "@/resolvers/heritage";
 import {
+  chestRewardIcon,
+  chestRewardLabel,
+  chestRewardQuantity,
+  chestRootLabel,
   describeCultureEffect,
   describeHeritageBonus,
+  isChestReward,
 } from "@/components/heritage/effect-display";
 
 // ============================================================
@@ -53,11 +63,18 @@ export interface ProgressionColumn {
   overlaySrc: string | null;
   /**
    * `false` sur les compteurs discrets exemptés d'amplification (convention
-   * (b bis) du resolver) : ces colonnes-là restent PLATES quand le rang de
-   * gardien varie, et le tableau doit pouvoir le dire plutôt que de laisser
-   * croire à un bug.
+   * (b bis) du resolver) ET sur les colonnes à coffre (`kind: "chest"`, pas de
+   * gardien à composer sur un tirage) : ces colonnes-là restent PLATES quand
+   * le rang de gardien varie, et le tableau doit pouvoir le dire plutôt que de
+   * laisser croire à un bug.
    */
   keeperAmplified: boolean;
+  /**
+   * `"chest"` pour un palier qui ne verse qu'un tirage (pas de bonus nommé,
+   * cf. `describeChestEffect`) — sa valeur vient de `chestRewardQuantity`, lue
+   * niveau par niveau sur l'arbre de récompense, jamais réamplifiée.
+   */
+  kind: "bonus" | "chest";
 }
 
 export interface ProgressionRow {
@@ -66,6 +83,18 @@ export interface ProgressionRow {
   keeperLevel: number;
   /** L'amplificateur du gardien de la ligne, en points de pourcentage. */
   amplifierPercent: number;
+  /**
+   * Coût pour ATTEINDRE cette ligne depuis la précédente — des jetons
+   * d'évolution (xp) sur l'axe « vault », des points de réputation sur l'axe
+   * « keeper » (voir `ProgressionMatrix.costUnit`). `0` sur la première ligne
+   * de l'axe (rien à payer pour être déjà au niveau/rang 1), jamais `null` :
+   * contrairement aux colonnes de bonus, ce coût est un fait de catalogue,
+   * défini à toute ligne du tableau — y compris au-delà du niveau courant du
+   * joueur.
+   */
+  levelCost: number;
+  /** Coût cumulé depuis le niveau/rang 1 jusqu'à cette ligne INCLUSE. */
+  cumulativeCost: number;
   /** Une entrée par colonne, `null` tant que le palier n'est pas atteint. */
   values: (string | null)[];
 }
@@ -73,6 +102,8 @@ export interface ProgressionRow {
 export interface ProgressionMatrix {
   columns: ProgressionColumn[];
   rows: ProgressionRow[];
+  /** Ce que comptent `levelCost`/`cumulativeCost` sur CET axe. */
+  costUnit: "tokens" | "reputation";
 }
 
 export interface ProgressionMatrixInput {
@@ -117,20 +148,27 @@ function isCultureEffect(effect: ResolvedHeritageEffect): boolean {
  * icône de la lecture (`resources`), qui n'existe qu'une fois le palier atteint
  * — les lire au niveau max garantit un en-tête complet dès la première ligne.
  *
- * Les effets sans bonus nommable (paliers à COFFRE seul) n'ont pas de colonne :
- * leur seule valeur chiffrable est « 1 coffre par collecte » à tous les niveaux
- * (cf. `describeChestEffect`), une colonne constante qui n'apprendrait rien.
- * L'onglet Infos les liste déjà (`OverviewTable`).
+ * Les effets sans bonus nommable (paliers à COFFRE seul) ont une colonne
+ * « chest » — voir `buildChestColumn` — SAUF quand le tirage mélange des
+ * branches à montants différents : sans accord entre les branches,
+ * `chestRewardQuantity` rend `null` et il n'y a rien de fiable à tabuler
+ * (`describeChestEffect` applique la même règle). L'onglet Infos garde alors
+ * ces paliers (`OverviewTable`), qui n'a pas besoin de cet accord.
  */
 export function buildProgressionColumns(
   vault: ResolvedHeritageVault,
+  era: EraCode,
   selections: string[][],
 ): ProgressionColumn[] {
   const columns: ProgressionColumn[] = [];
   const sorted = [...vault.effects].sort((a, b) => a.minLevel - b.minLevel);
 
   for (const effect of sorted) {
-    if (effect.bonuses.length === 0) continue;
+    if (effect.bonuses.length === 0) {
+      const chest = buildChestColumn(effect, era, selections);
+      if (chest !== null) columns.push(chest);
+      continue;
+    }
 
     // Culture : UNE colonne pour deux bonus, comme partout ailleurs dans le
     // module (`describeCultureEffect`) — « 496 (1x1) » est une seule donnée de
@@ -148,6 +186,7 @@ export function buildProgressionColumns(
           src: display.src,
           overlaySrc: display.overlaySrc,
           keeperAmplified: true,
+          kind: "bonus",
         });
         continue;
       }
@@ -164,11 +203,41 @@ export function buildProgressionColumns(
         src: display.src,
         overlaySrc: display.overlaySrc,
         keeperAmplified: !KEEPER_AMPLIFIER_EXEMPT_TYPES.has(bonus.type),
+        kind: "bonus",
       });
     }
   }
 
   return columns;
+}
+
+/**
+ * La colonne d'un palier à coffre, lue au niveau où IL SE DÉBLOQUE
+ * (`rewardsAtUnlock`, jamais `rewards` qui suit le niveau courant du joueur —
+ * même raison que `OverviewTable`, une colonne ne doit ni apparaître ni
+ * disparaître au fil des lignes). `null` quand rien n'est à tabuler : pas de
+ * racine de tirage, ou des branches qui ne s'accordent pas sur un montant
+ * commun (`chestRewardQuantity`).
+ */
+function buildChestColumn(
+  effect: ResolvedHeritageEffect,
+  era: EraCode,
+  selections: string[][],
+): ProgressionColumn | null {
+  if (effect.rewardsAtUnlock === null) return null;
+  const [reward] = resolveChestRewards(effect.rewardsAtUnlock, effect.minLevel, era);
+  if (reward === undefined || chestRewardQuantity(reward) === null) return null;
+  return {
+    key: `${effect.id}#chest`,
+    effectId: effect.id,
+    minLevel: effect.minLevel,
+    group: effect.group,
+    label: isChestReward(reward) ? chestRootLabel(reward) : chestRewardLabel(reward, selections),
+    src: chestRewardIcon(reward, selections),
+    overlaySrc: null,
+    keeperAmplified: false,
+    kind: "chest",
+  };
 }
 
 /** Le bonus, ré-amplifié au rang de gardien de la LIGNE. */
@@ -184,6 +253,7 @@ function rowValues(
   vault: ResolvedHeritageVault,
   columns: ProgressionColumn[],
   multiplier: number,
+  era: EraCode,
   selections: string[][],
 ): (string | null)[] {
   const effectById = new Map(vault.effects.map((effect) => [effect.id, effect]));
@@ -193,6 +263,23 @@ function rowValues(
     // ⚠️ `null`, jamais « 0 » : le palier n'est pas atteint, le jeu ne dit rien
     // à ce niveau-là. Écrire un zéro ferait croire à un bonus nul.
     if (effect === undefined || !effect.unlocked) return null;
+
+    // Coffre : lu au niveau COURANT de la ligne (`effect.rewards`, pas
+    // `rewardsAtUnlock`) — c'est justement ce qui varie d'une ligne à l'autre
+    // (ex. Celtic « Barracks Refill Ticket » : 1 à son palier, davantage plus
+    // haut). Jamais réamplifié par le gardien (`kind: "chest"` ⇒
+    // `keeperAmplified: false`) : rien dans le game design ne le suggère.
+    if (column.kind === "chest") {
+      if (effect.rewards === null) return null;
+      const [reward] = resolveChestRewards(effect.rewards, vault.level, era);
+      if (reward === undefined) return null;
+      // Repli sur `1` (coffres/tickets ouverts, toujours 1 par collecte) si le
+      // tirage devient hétérogène à CE niveau précis — même convention que
+      // `describeChestEffect`, pour ne jamais laisser une cellule vide alors
+      // que la colonne existe (bâtie sur un niveau où le montant était bien
+      // homogène, cf. `buildChestColumn`).
+      return (chestRewardQuantity(reward) ?? 1).toLocaleString("fr-FR");
+    }
 
     const bonuses = effect.bonuses.map((bonus) => reamplify(bonus, multiplier));
 
@@ -224,7 +311,7 @@ export function buildProgressionMatrix(
 
   const skeleton = resolveAt(vaultKey, maxVaultLevel, era);
   if (skeleton === null) return null;
-  const columns = buildProgressionColumns(skeleton, selections);
+  const columns = buildProgressionColumns(skeleton, era, selections);
 
   if (axis === "keeper") {
     // Un seul niveau de vault : une seule résolution, puis 99 amplifications.
@@ -235,15 +322,21 @@ export function buildProgressionMatrix(
     const rows = Array.from({ length: maxKeeperLevel }, (_, index) => {
       const keeperLevel = index + 1;
       const multiplier = keeperAmplifierMultiplier(keeperLevel);
+      // Rang 1 : rien à payer pour y être déjà — `getKeeperReputationCost`
+      // donnerait le coût du rang SUIVANT, pas celui-ci.
+      const levelCost =
+        keeperLevel === 1 ? 0 : (getKeeperReputationCost(vaultKey, keeperLevel - 1) ?? 0);
       return {
         key: `k${keeperLevel}`,
         vaultLevel,
         keeperLevel,
         amplifierPercent: multiplier * 100,
-        values: rowValues(resolved, columns, multiplier, selections),
+        levelCost,
+        cumulativeCost: getKeeperCumulativeReputation(vaultKey, keeperLevel) ?? 0,
+        values: rowValues(resolved, columns, multiplier, era, selections),
       };
     });
-    return { columns, rows };
+    return { columns, rows, costUnit: "reputation" };
   }
 
   // Axe « vault » : le rang de gardien est constant, son multiplicateur aussi.
@@ -253,15 +346,21 @@ export function buildProgressionMatrix(
   for (let vaultLevel = 1; vaultLevel <= maxVaultLevel; vaultLevel += 1) {
     const resolved = resolveAt(vaultKey, vaultLevel, era);
     if (resolved === null) continue;
+    // Niveau 1 : rien à payer — `getHeritageUpgradeCost` donnerait le coût
+    // POUR MONTER au niveau suivant, pas celui déjà acquis.
+    const levelCost =
+      vaultLevel === 1 ? 0 : (getHeritageUpgradeCost(vaultKey, vaultLevel - 1)?.xp ?? 0);
     rows.push({
       key: `v${vaultLevel}`,
       vaultLevel,
       keeperLevel,
       amplifierPercent: multiplier * 100,
-      values: rowValues(resolved, columns, multiplier, selections),
+      levelCost,
+      cumulativeCost: getHeritageCumulativeXp(vaultKey, vaultLevel) ?? 0,
+      values: rowValues(resolved, columns, multiplier, era, selections),
     });
   }
-  return { columns, rows };
+  return { columns, rows, costUnit: "tokens" };
 }
 
 // ─── Export ──────────────────────────────────────────────────────────────────
@@ -286,10 +385,13 @@ export function toDelimitedText(
   const visible = matrix.columns
     .map((column, index) => ({ column, index }))
     .filter(({ column }) => visibleKeys.has(column.key));
+  const costLabel = matrix.costUnit === "tokens" ? "tokens" : "reputation";
   const header = [
     "Vault level",
     "Keeper level",
     "Amplifier",
+    `Level ${costLabel}`,
+    `Total ${costLabel}`,
     // Le palier désambiguïse deux colonnes homonymes (« Goods » au niveau 1
     // et au niveau 28 sur le vault Celtic) — même règle qu'en en-tête.
     ...visible.map(({ column }) => `${column.label} (lvl ${column.minLevel})`),
@@ -298,6 +400,8 @@ export function toDelimitedText(
     String(row.vaultLevel),
     String(row.keeperLevel),
     `+${row.amplifierPercent.toFixed(0)}%`,
+    String(row.levelCost),
+    String(row.cumulativeCost),
     ...visible.map(({ index }) => row.values[index] ?? ""),
   ]);
 

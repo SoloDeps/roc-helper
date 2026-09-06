@@ -529,11 +529,17 @@ export function describeChestEffect(
     // « Chest reward » pour 9 des 10 coffres Heritage — le Celtic est un
     // TICKET, pas un coffre (cf. `chestRootLabel`/`TICKET_LABEL_BY_FAMILY`).
     label: reward === undefined ? "Chest reward" : chestRootLabel(reward),
-    // Le nombre de COFFRES/TICKETS versés, pas un montant à l'intérieur —
-    // chaque palier n'a jamais qu'UNE seule racine de tirage (vérifié sur les
-    // 65 paliers à coffre de l'extraction, aucune exception) : un par
-    // collecte, toujours.
-    value: "1",
+    // ⚠️ LE CONTENU QUAND IL EST CHIFFRABLE, LE NOMBRE DE COFFRES SINON.
+    // `chestRewardQuantity` descend dans l'arbre et ne rend un chiffre que si
+    // TOUTES les branches du tirage s'accordent dessus (ex. Celtic « Barracks
+    // Refill Ticket » : 5 types de troupe à 20 % chacun, mais `3` dans chaque
+    // branche à ce niveau) — jamais une moyenne pondérée sur des montants qui
+    // diffèrent réellement. Quand ça arrive (pool hétérogène, ex. items +
+    // biens de montants différents), on retombe sur `1` : le nombre de
+    // coffres/tickets ouverts par collecte, toujours 1 (chaque palier n'a
+    // jamais qu'UNE racine de tirage, vérifié sur les 65 paliers à coffre de
+    // l'extraction) — moins parlant que le contenu exact, mais jamais vide.
+    value: reward === undefined ? "—" : (chestRewardQuantity(reward)?.toLocaleString("fr-FR") ?? "1"),
     detail: null,
   };
 }
@@ -905,6 +911,42 @@ export function chestRewardAmount(reward: ResolvedChestReward): number | null {
   const collect = (node: ResolvedChestReward) => {
     if (node.children.length === 0) {
       if (node.resources.length > 0) leaves.push(node);
+      return;
+    }
+    node.children.forEach(collect);
+  };
+  reward.children.forEach(collect);
+
+  if (leaves.length === 0) return null;
+  const [first, ...rest] = leaves.map(leafAmount);
+  return first === null || rest.some((amount) => amount !== first) ? null : first;
+}
+
+/**
+ * Le montant COMMUN à toutes les branches d'un tirage — ce que le joueur
+ * reçoit, quel que soit le lot tiré (ex. Celtic « Barracks Refill Ticket » :
+ * 5 types de troupe à 20 % chacun, mais `3` dans chaque branche à ce niveau).
+ * `null` dès qu'une branche n'a pas de montant, ou que les montants diffèrent
+ * réellement : jamais une moyenne pondérée sur des lots qui ne sont pas
+ * interchangeables.
+ *
+ * ⚠️ DIFFÈRE DE `chestRewardAmount` — QUI FILTRE SUR `resources`.
+ *
+ * `chestRewardAmount` ne collecte que les feuilles PORTEUSES DE RESSOURCES
+ * (pensé pour un lot de BIENS affiché à côté de son icône, `ChestRewardRow`) :
+ * un ticket d'inventaire (`InventoryItem_RefillBarracks_*`) n'a pas de
+ * `resources` et serait donc ignoré — feuilles vides, `null` à tort. Cette
+ * fonction-ci sert la vue d'ENSEMBLE d'un palier (`describeChestEffect`, le
+ * tableau Level Table) : elle veut savoir CE QUE LE PALIER VERSE, quelle que
+ * soit la nature de la récompense — elle ne filtre donc aucune feuille.
+ */
+export function chestRewardQuantity(reward: ResolvedChestReward): number | null {
+  if (reward.children.length === 0) return leafAmount(reward);
+
+  const leaves: ResolvedChestReward[] = [];
+  const collect = (node: ResolvedChestReward) => {
+    if (node.children.length === 0) {
+      leaves.push(node);
       return;
     }
     node.children.forEach(collect);

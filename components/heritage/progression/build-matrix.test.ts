@@ -3,6 +3,10 @@ import { describe, expect, it } from "vitest";
 import {
   KEEPER_AMPLIFIER_EXEMPT_TYPES,
   HERITAGE_KEEPER_MAX_REPUTATION_LEVEL,
+  getHeritageCumulativeXp,
+  getHeritageUpgradeCost,
+  getKeeperCumulativeReputation,
+  getKeeperReputationCost,
   keeperAmplifierMultiplier,
   resolveHeritageVault,
 } from "@/resolvers/heritage";
@@ -19,6 +23,10 @@ import { buildProgressionMatrix, toDelimitedText } from "./build-matrix";
 //     qui évite 99 résolutions, et la seule qui puisse diverger en silence.
 //  4. Les compteurs discrets exemptés restent plats sur l'axe « gardien ».
 //  5. L'export garde l'alignement valeurs/colonnes quand une colonne est masquée.
+//  6. Le coût par ligne (`levelCost`/`cumulativeCost`) compte des jetons sur
+//     l'axe « vault », des points de réputation sur l'axe « keeper » — jamais
+//     mélangés, et toujours cohérent avec les resolvers dont il n'est qu'un
+//     assemblage.
 // ============================================================
 
 const BASE = {
@@ -94,6 +102,56 @@ describe("`buildProgressionMatrix`", () => {
     for (const row of matrix.rows) expect(row.values[index]).toBe(first);
   });
 
+  it("l'axe « vault » compte des jetons, cohérents avec `getHeritageUpgradeCost`/`getHeritageCumulativeXp`", () => {
+    const matrix = buildProgressionMatrix({ ...BASE, axis: "vault", pinnedLevel: 12 })!;
+    expect(matrix.costUnit).toBe("tokens");
+
+    const level1 = matrix.rows[0];
+    expect(level1.levelCost).toBe(0);
+    expect(level1.cumulativeCost).toBe(0);
+
+    const level5 = matrix.rows.find((row) => row.vaultLevel === 5)!;
+    expect(level5.levelCost).toBe(getHeritageUpgradeCost("heritage_celtic", 4)!.xp);
+    expect(level5.cumulativeCost).toBe(getHeritageCumulativeXp("heritage_celtic", 5));
+
+    // Le cumul avance bien du montant du niveau précédent.
+    for (let i = 1; i < matrix.rows.length; i += 1) {
+      expect(matrix.rows[i].cumulativeCost).toBe(
+        matrix.rows[i - 1].cumulativeCost + matrix.rows[i].levelCost,
+      );
+    }
+  });
+
+  it("l'axe « keeper » compte des points de réputation, cohérents avec `getKeeperReputationCost`/`getKeeperCumulativeReputation`", () => {
+    const matrix = buildProgressionMatrix({ ...BASE, axis: "keeper", pinnedLevel: 30 })!;
+    expect(matrix.costUnit).toBe("reputation");
+
+    const rank1 = matrix.rows[0];
+    expect(rank1.levelCost).toBe(0);
+    expect(rank1.cumulativeCost).toBe(0);
+
+    const rank12 = matrix.rows.find((row) => row.keeperLevel === 12)!;
+    expect(rank12.levelCost).toBe(getKeeperReputationCost("heritage_celtic", 11));
+    expect(rank12.cumulativeCost).toBe(getKeeperCumulativeReputation("heritage_celtic", 12));
+  });
+
+  it("tabule un palier à coffre dont toutes les branches s'accordent sur un montant — le ticket de recharge Celtic", () => {
+    const matrix = buildProgressionMatrix({ ...BASE, axis: "vault", pinnedLevel: 1 })!;
+    const ticket = matrix.columns.find((column) => column.minLevel === 7)!;
+    expect(ticket.label).toBe("Barracks refill ticket");
+    expect(ticket.keeperAmplified).toBe(false);
+
+    const valueAt = (level: number) =>
+      matrix.rows.find((row) => row.vaultLevel === level)!.values[
+        matrix.columns.indexOf(ticket)
+      ];
+    expect(valueAt(6)).toBeNull(); // pas encore débloqué
+    expect(valueAt(7)).toBe("1");
+    expect(valueAt(21)).toBe("1");
+    expect(valueAt(22)).toBe("2"); // la quantité grandit avec le niveau du vault
+    expect(valueAt(42)).toBe("3");
+  });
+
   it("rend `null` sur une clé de vault inconnue", () => {
     expect(
       buildProgressionMatrix({ ...BASE, vaultKey: "nope", axis: "vault", pinnedLevel: 1 }),
@@ -113,16 +171,20 @@ describe("`toDelimitedText`", () => {
       "Vault level",
       "Keeper level",
       "Amplifier",
+      "Level tokens",
+      "Total tokens",
       `${kept.label} (lvl ${kept.minLevel})`,
     ]);
 
     const lastRow = matrix.rows[matrix.rows.length - 1];
-    expect(lines[lines.length - 1].split("\t")[3]).toBe(lastRow.values[1]);
+    expect(lines[lines.length - 1].split("\t")[5]).toBe(lastRow.values[1]);
   });
 
   it("échappe les guillemets en CSV", () => {
     const matrix = buildProgressionMatrix({ ...BASE, axis: "vault", pinnedLevel: 1 })!;
     const csv = toDelimitedText(matrix, new Set(), "csv");
-    expect(csv.split("\n")[0]).toBe('"Vault level","Keeper level","Amplifier"');
+    expect(csv.split("\n")[0]).toBe(
+      '"Vault level","Keeper level","Amplifier","Level tokens","Total tokens"',
+    );
   });
 });

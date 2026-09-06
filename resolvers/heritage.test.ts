@@ -17,6 +17,7 @@ import {
   getHeritageVault,
   getHeritageVaultByTheme,
   computeTargetKeeperLevel,
+  getKeeperCumulativeReputation,
   getKeeperReputationCost,
   heritageXpFromDonation,
   keeperAmplifierMultiplier,
@@ -195,6 +196,16 @@ describe("progression du vault", () => {
     // Aucun plafond n'est déclaré : au-delà du dernier rang extrait, la formule
     // est prolongée plutôt que bornée en silence.
     expect(getKeeperReputationCost("heritage_celtic", 100)).toBe(500);
+  });
+
+  it("cumule la réputation du gardien depuis le rang 1 — Σ 5×rang", () => {
+    // 0 : déjà au rang 1, rien à payer.
+    expect(getKeeperCumulativeReputation("heritage_celtic", 1)).toBe(0);
+    // cost(1)+cost(2)+cost(3) = 5+10+15 = 30 pour atteindre le rang 4.
+    expect(getKeeperCumulativeReputation("heritage_celtic", 4)).toBe(30);
+    // 5 × (11×12/2) = 330 pour atteindre le rang 12, identique sur les 13 vaults.
+    expect(getKeeperCumulativeReputation("heritage_celtic", 12)).toBe(330);
+    expect(getKeeperCumulativeReputation("heritage_inexistant", 4)).toBeNull();
   });
 });
 

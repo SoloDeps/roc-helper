@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { Check, Columns3, Copy, Download, Info } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 import {
   HERITAGE_KEEPER_MAX_REPUTATION_LEVEL,
   type ResolvedHeritageVault,
@@ -312,6 +312,12 @@ export function ProgressionTab({
                   Amplifier
                 </th>
               )}
+              <th className="whitespace-nowrap px-3 py-2 text-right font-semibold">
+                {axis === "vault" ? "Level tokens" : "Level reputation"}
+              </th>
+              <th className="whitespace-nowrap px-3 py-2 text-right font-semibold">
+                {axis === "vault" ? "Total tokens" : "Total reputation"}
+              </th>
               {visible.map(({ column }) => (
                 <th
                   key={column.key}
@@ -378,6 +384,12 @@ export function ProgressionTab({
                     +{row.amplifierPercent.toFixed(0)}%
                   </td>
                 )}
+                <td className="px-3 py-1.5 text-right tabular-nums text-muted-foreground">
+                  {formatNumber(row.levelCost)}
+                </td>
+                <td className="px-3 py-1.5 text-right tabular-nums text-muted-foreground">
+                  {formatNumber(row.cumulativeCost)}
+                </td>
                 {visible.map(({ column, index }) => (
                   <td
                     key={column.key}
