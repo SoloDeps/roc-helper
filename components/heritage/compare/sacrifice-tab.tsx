@@ -592,13 +592,16 @@ export function SacrificeTab({
               <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
                 Tokens in inventory
               </p>
-              {/* Le total vit à CÔTÉ DU TITRE, pas dans le panneau : il compte
-                  dans le sacrifice que le panneau soit ouvert ou replié, et
-                  posé à l'intérieur il disparaissait au repli — ou changeait de
-                  place à chaque bascule. */}
-              {inventoryTotal > 0 && (
+              {/* Le total vit à CÔTÉ DU TITRE quand le panneau est REPLIÉ : il
+                  compte dans le sacrifice même quand on ne voit plus les
+                  cartes. Une fois le panneau ouvert, la ligne "Total" en bas
+                  du panneau prend le relais — inutile de répéter le même
+                  nombre à deux endroits, et le "Total :" ci-dessous évite
+                  déjà toute confusion avec les autres pastilles du même
+                  style (jetons/effets équipés, niveaux…). */}
+              {!inventoryOpen && inventoryTotal > 0 && (
                 <span className="shrink-0 rounded-md border border-border bg-background-100 px-2 py-0.5 text-[11px] font-semibold tabular-nums text-muted-foreground">
-                  {inventoryTotal} token{inventoryTotal !== 1 ? "s" : ""}
+                  Total: {inventoryTotal} token{inventoryTotal !== 1 ? "s" : ""}
                 </span>
               )}
               <div className="flex-1" />
@@ -636,6 +639,19 @@ export function SacrificeTab({
                       }
                     />
                   ))}
+                </div>
+                {/* Ligne de total explicitement libellée, à même hauteur que
+                    les cartes qu'elle somme. Elle seule doit être lue comme
+                    "le total des jetons en inventaire" — la pastille du
+                    titre ci-dessus dit maintenant "Total :" pour ne pas se
+                    confondre avec un autre nombre (niveaux, effets…). */}
+                <div className="mt-2 flex items-center justify-between border-t border-border pt-2">
+                  <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                    Total
+                  </span>
+                  <span className="text-[13px] font-semibold tabular-nums text-foreground">
+                    {inventoryTotal} token{inventoryTotal !== 1 ? "s" : ""}
+                  </span>
                 </div>
               </div>
             )}
