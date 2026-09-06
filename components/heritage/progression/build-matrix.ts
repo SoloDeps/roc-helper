@@ -149,11 +149,11 @@ function isCultureEffect(effect: ResolvedHeritageEffect): boolean {
  * — les lire au niveau max garantit un en-tête complet dès la première ligne.
  *
  * Les effets sans bonus nommable (paliers à COFFRE seul) ont une colonne
- * « chest » — voir `buildChestColumn` — SAUF quand le tirage mélange des
- * branches à montants différents : sans accord entre les branches,
- * `chestRewardQuantity` rend `null` et il n'y a rien de fiable à tabuler
- * (`describeChestEffect` applique la même règle). L'onglet Infos garde alors
- * ces paliers (`OverviewTable`), qui n'a pas besoin de cet accord.
+ * « chest » — voir `buildChestColumn` — dès qu'une racine de tirage existe,
+ * même si ses branches ne s'accordent pas sur un montant commun : la valeur
+ * retombe alors sur `1` (coffres/tickets ouverts) plutôt que de faire
+ * disparaître la colonne entière (`describeChestEffect` applique la même
+ * règle).
  */
 export function buildProgressionColumns(
   vault: ResolvedHeritageVault,
@@ -215,9 +215,12 @@ export function buildProgressionColumns(
  * La colonne d'un palier à coffre, lue au niveau où IL SE DÉBLOQUE
  * (`rewardsAtUnlock`, jamais `rewards` qui suit le niveau courant du joueur —
  * même raison que `OverviewTable`, une colonne ne doit ni apparaître ni
- * disparaître au fil des lignes). `null` quand rien n'est à tabuler : pas de
- * racine de tirage, ou des branches qui ne s'accordent pas sur un montant
- * commun (`chestRewardQuantity`).
+ * disparaître au fil des lignes). `null` seulement quand il n'y a AUCUNE
+ * racine de tirage — jamais faute d'accord sur un montant commun
+ * (`chestRewardQuantity`) : `rowValues` retombe alors sur `1` (coffres/
+ * tickets ouverts), même convention que `describeChestEffect`. Sans ce repli,
+ * TOUT vault dont le seul coffre est hétérogène (Mongol, Polynesian,
+ * Thaïlandais…) perdait purement et simplement sa colonne.
  */
 function buildChestColumn(
   effect: ResolvedHeritageEffect,
@@ -226,7 +229,7 @@ function buildChestColumn(
 ): ProgressionColumn | null {
   if (effect.rewardsAtUnlock === null) return null;
   const [reward] = resolveChestRewards(effect.rewardsAtUnlock, effect.minLevel, era);
-  if (reward === undefined || chestRewardQuantity(reward) === null) return null;
+  if (reward === undefined) return null;
   return {
     key: `${effect.id}#chest`,
     effectId: effect.id,
@@ -378,7 +381,18 @@ export function toDelimitedText(
   matrix: ProgressionMatrix,
   visibleKeys: ReadonlySet<string>,
   format: "tsv" | "csv",
+  // Les 3 colonnes fixes sont désormais masquables depuis le popover
+  // « Columns » (même `hidden` que les colonnes de bonus) : l'export doit
+  // suivre le même choix, sans quoi une colonne décochée à l'écran
+  // réapparaîtrait quand même dans le copier-coller/CSV. Toutes à `true` par
+  // défaut — un appel qui ne les précise pas exporte tout, comme avant.
+  include: { amplifier?: boolean; levelCost?: boolean; totalCost?: boolean } = {},
 ): string {
+  const {
+    amplifier: includeAmplifier = true,
+    levelCost: includeLevelCost = true,
+    totalCost: includeTotalCost = true,
+  } = include;
   // Les INDICES visibles, pas les colonnes : `row.values` est aligné sur
   // `matrix.columns`, filtrer les colonnes sans garder leur position
   // décalerait les valeurs d'une colonne masquée à la suivante.
@@ -389,9 +403,9 @@ export function toDelimitedText(
   const header = [
     "Vault level",
     "Keeper level",
-    "Amplifier",
-    `Level ${costLabel}`,
-    `Total ${costLabel}`,
+    ...(includeAmplifier ? ["Amplifier"] : []),
+    ...(includeLevelCost ? [`Level ${costLabel}`] : []),
+    ...(includeTotalCost ? [`Total ${costLabel}`] : []),
     // Le palier désambiguïse deux colonnes homonymes (« Goods » au niveau 1
     // et au niveau 28 sur le vault Celtic) — même règle qu'en en-tête.
     ...visible.map(({ column }) => `${column.label} (lvl ${column.minLevel})`),
@@ -399,9 +413,9 @@ export function toDelimitedText(
   const lines = matrix.rows.map((row) => [
     String(row.vaultLevel),
     String(row.keeperLevel),
-    `+${row.amplifierPercent.toFixed(0)}%`,
-    String(row.levelCost),
-    String(row.cumulativeCost),
+    ...(includeAmplifier ? [`+${row.amplifierPercent.toFixed(0)}%`] : []),
+    ...(includeLevelCost ? [String(row.levelCost)] : []),
+    ...(includeTotalCost ? [String(row.cumulativeCost)] : []),
     ...visible.map(({ index }) => row.values[index] ?? ""),
   ]);
 

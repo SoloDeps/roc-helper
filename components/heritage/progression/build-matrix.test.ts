@@ -152,6 +152,26 @@ describe("`buildProgressionMatrix`", () => {
     expect(valueAt(42)).toBe("3");
   });
 
+  it("garde une colonne pour un coffre HÉTÉROGÈNE — repli sur `1`, jamais une colonne perdue", () => {
+    // Mongol, palier 21 : le tirage mélange des lots dont les montants ne
+    // s'accordent pas (`chestRewardQuantity` rend `null`). Avant le fix, ça
+    // faisait disparaître la colonne ENTIÈRE — le vault n'avait plus que 8/9
+    // colonnes au lieu de 9/9, un bug repéré en jeu sur Mongol/Polynesian/
+    // Mali/World Fair/Aztec/Halloween/Thai.
+    const matrix = buildProgressionMatrix({
+      ...BASE,
+      vaultKey: "heritage_mongol",
+      axis: "vault",
+      pinnedLevel: 1,
+    })!;
+    const chest = matrix.columns.find((column) => column.minLevel === 21)!;
+    expect(chest).toBeDefined();
+    const value =
+      matrix.rows.find((row) => row.vaultLevel === 21)!.values[matrix.columns.indexOf(chest)];
+    // Hétérogène ⇒ repli sur le nombre de coffres ouverts, toujours 1.
+    expect(value).toBe("1");
+  });
+
   it("rend `null` sur une clé de vault inconnue", () => {
     expect(
       buildProgressionMatrix({ ...BASE, vaultKey: "nope", axis: "vault", pinnedLevel: 1 }),
@@ -186,5 +206,18 @@ describe("`toDelimitedText`", () => {
     expect(csv.split("\n")[0]).toBe(
       '"Vault level","Keeper level","Amplifier","Level tokens","Total tokens"',
     );
+  });
+
+  it("omet une colonne fixe désactivée via `include` — même choix que le popover « Columns »", () => {
+    const matrix = buildProgressionMatrix({ ...BASE, axis: "vault", pinnedLevel: 1 })!;
+    const text = toDelimitedText(matrix, new Set(), "tsv", {
+      amplifier: false,
+      levelCost: false,
+    });
+    const header = text.split("\n")[0].split("\t");
+    expect(header).toEqual(["Vault level", "Keeper level", "Total tokens"]);
+    // Les valeurs suivent le même retrait — jamais de colonne fantôme.
+    const firstDataRow = text.split("\n")[1].split("\t");
+    expect(firstDataRow).toHaveLength(header.length);
   });
 });
