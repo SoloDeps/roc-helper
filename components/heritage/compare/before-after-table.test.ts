@@ -43,6 +43,26 @@ describe("buildBeforeAfterRows — lecture des séparateurs de milliers", () => 
     expect(rows[0].tone).toBe("down");
   });
 
+  // `describeHeritageBonus` (`CHEST_EXPECTED_VALUE_TYPES`) affiche l'espérance
+  // d'un coffre en `toLocaleString("fr-FR", …)` — virgule DÉCIMALE, sans
+  // suffixe ni groupement de milliers. Confondue avec la virgule de
+  // `formatBonusValue` (« 1,460 » = 1460), une baisse ressortait « up ».
+  it("2,6 → 2,35 descend (virgule décimale d'une espérance de coffre)", () => {
+    const rows = buildBeforeAfterRows(
+      [bonus("Research Points", "2,6")],
+      [bonus("Research Points", "2,35")],
+    );
+    expect(rows[0].tone).toBe("down");
+  });
+
+  it("1,2 → 3,6 monte (même virgule décimale, dans l'autre sens)", () => {
+    const rows = buildBeforeAfterRows(
+      [bonus("Research Points", "1,2")],
+      [bonus("Research Points", "3,6")],
+    );
+    expect(rows[0].tone).toBe("up");
+  });
+
   it("lit un pourcentage signé", () => {
     const rows = buildBeforeAfterRows(
       [bonus("Crit", "+6.0%")],

@@ -49,15 +49,34 @@ export interface BeforeAfterRow extends Omit<BonusLike, "value"> {
  */
 const MAGNITUDE_UNITS: Record<string, number> = { K: 1e3, M: 1e6, B: 1e9 };
 
+/**
+ * ⚠️ SANS SUFFIXE, LE NOMBRE DE CHIFFRES APRÈS LA VIRGULE TRANCHE AUSSI.
+ * `describeHeritageBonus` (`CHEST_EXPECTED_VALUE_TYPES`) affiche l'espérance
+ * d'un coffre en `toLocaleString("fr-FR", …)` — virgule DÉCIMALE, jamais
+ * groupée par milliers, et sans suffixe : « 2,6 », « 2,35 ». Traitées comme le
+ * reste (virgule = séparateur de milliers), elles devenaient 26 et 235 — une
+ * baisse de 2,6 à 2,35 ressortait « up » (235 > 26), verte au lieu de rouge.
+ * Un groupement de milliers, lui, aligne TOUJOURS 3 chiffres par groupe
+ * (« 99,999 », « 1,234,567 ») : la virgule est décimale quand le dernier
+ * groupe n'en compte pas 3, séparateur de milliers sinon — la seule règle qui
+ * distingue les deux sans jamais se tromper sur les valeurs vues ici.
+ */
 function parseNumericMagnitude(formatted: string): number {
   const match = formatted.match(/([+-]?\d[\d\s ,]*(?:\.\d+)?)\s*([KMB])?/);
   if (!match) return 0;
   const unit = match[2] === undefined ? 1 : MAGNITUDE_UNITS[match[2]];
-  const digits =
-    unit === 1
-      ? match[1].replace(/[\s ,]/g, "")
-      : match[1].replace(/[\s ]/g, "").replace(",", ".");
-  return parseFloat(digits) * unit;
+  if (unit !== 1) {
+    const digits = match[1].replace(/[\s ]/g, "").replace(",", ".");
+    return parseFloat(digits) * unit;
+  }
+  const raw = match[1].replace(/[\s ]/g, "");
+  const lastComma = raw.lastIndexOf(",");
+  if (lastComma === -1) return parseFloat(raw);
+  const isThousandsGroup = raw.length - lastComma - 1 === 3;
+  const digits = isThousandsGroup
+    ? raw.replace(/,/g, "")
+    : `${raw.slice(0, lastComma).replace(/,/g, "")}.${raw.slice(lastComma + 1)}`;
+  return parseFloat(digits);
 }
 
 export function buildBeforeAfterRows(
@@ -140,6 +159,24 @@ function afterColor(tone: BeforeAfterRow["tone"]) {
   return "text-foreground/70";
 }
 
+/**
+ * Le ton de la ligne « Level » elle-même, sur le même barème que les lignes de
+ * bonus (`buildBeforeAfterRows`) — dans l'onglet Sacrifice, le niveau après
+ * baisse presque toujours : sans couleur, cette ligne restait neutre pendant
+ * que chaque bonus qu'elle explique ressortait en rouge, la seule ligne du
+ * tableau à ne pas dire visuellement qu'on perd quelque chose.
+ *
+ * `parseNumericMagnitude` fait déjà ce travail pour les valeurs de bonus — un
+ * texte comme « Lv. 5 » ou « Lv. 12 (+3/20) » lui suffit, le niveau est
+ * toujours le premier nombre de la chaîne.
+ */
+function levelTone(before: string, after: string): BeforeAfterRow["tone"] {
+  const from = parseNumericMagnitude(before);
+  const to = parseNumericMagnitude(after);
+  if (to === from) return "neutral";
+  return to > from ? "up" : "down";
+}
+
 export function BeforeAfterTable({
   rows,
   emptyLabel,
@@ -192,7 +229,13 @@ export function BeforeAfterTable({
           <div className={cn("text-center font-semibold tabular-nums text-muted-foreground", fontSize)}>
             {levelRow.before}
           </div>
-          <div className={cn("text-center font-semibold tabular-nums text-foreground/70", fontSize)}>
+          <div
+            className={cn(
+              "text-center font-semibold tabular-nums",
+              fontSize,
+              afterColor(levelTone(levelRow.before, levelRow.after)),
+            )}
+          >
             {levelRow.after}
           </div>
         </div>

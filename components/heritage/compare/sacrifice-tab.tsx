@@ -54,7 +54,11 @@ interface CardState {
   id: string;
   buildingId: string;
   currentLevel: number;
-  /** Niveau visé après sacrifice, ≥ 1. */
+  /**
+   * Niveau visé après sacrifice, ≥ 0. `0` = démontage intégral : le bâtiment
+   * disparaît, jusqu'au jeton de sa construction (voir `bonusesAt`, qui ne
+   * clampe plus à 1 pour ce cas, et `getUpgradeCostTiers` côté domaine).
+   */
   sacrificeLevel: number;
   era?: EraCode;
 }
@@ -169,13 +173,23 @@ function SacrificeCard({
   );
 
   const bonusesAt = (level: number) => {
+    // `0` = bâtiment démonté : rien à montrer, pas les bonus du niveau 1.
+    // `resolveEvolvingBuilding` clampe tout niveau à `[1, maxLevel]` — un
+    // appel avec `0` rendrait donc le niveau 1 par erreur si on ne le
+    // court-circuitait pas ici.
+    if (level < 1) return [];
     const resolved = resolveEvolvingBuilding(building.key, level, era);
     if (resolved === null) return [];
 
     const describe = (bonuses: typeof resolved.production) =>
       bonuses.map((bonus) => ({
         key: bonusKey(bonus),
-        ...describeHeritageBonus(bonus, selections),
+        // ⚠️ `era` transmise : certains bâtiments (Celtic Broch…) portent un
+        // rang de bien NU (« secondary », sans suffixe d'ère) sur leur palier
+        // couvrant plusieurs ères d'un coup — sans elle, `describeHeritageBonus`
+        // ne peut pas le résoudre en bien concret et retombe sur l'icône
+        // générique (`effect-display.ts`, doc de `GOOD_RANK`).
+        ...describeHeritageBonus(bonus, selections, false, era),
       }));
 
     // Culture : `resolved.culture` isole déjà les deux bonus
@@ -191,12 +205,13 @@ function SacrificeCard({
     return [...describe(resolved.production), ...cultureRows, ...describe(resolved.bonuses)];
   };
 
-  // Baisser le niveau courant rabote les niveaux retirés : on ne descend jamais
-  // sous le niveau 1.
+  // Baisser le niveau courant rabote les niveaux retirés : le démontage peut
+  // désormais aller jusqu'à 0 (construction comprise), donc le plafond est
+  // `value` lui-même, pas `value - 1`.
   const handleCurrentLevelChange = (value: number) => {
     onUpdate({
       currentLevel: value,
-      sacrificeLevel: value - Math.min(levelsRemoved, value - 1),
+      sacrificeLevel: value - Math.min(levelsRemoved, value),
     });
   };
 
@@ -275,7 +290,10 @@ function SacrificeCard({
                 onValueChange={(value) =>
                   onUpdate({ sacrificeLevel: card.currentLevel - Number(value) })
                 }
-                options={Array.from({ length: card.currentLevel }, (_, i) => ({
+                // 0 … `currentLevel` inclus : un démontage total (retirer le
+                // niveau courant en entier) reste une option, même depuis le
+                // niveau 1 — ce n'est plus jamais désactivé.
+                options={Array.from({ length: card.currentLevel + 1 }, (_, i) => ({
                   value: String(i),
                   label: String(i),
                 }))}
@@ -283,7 +301,6 @@ function SacrificeCard({
                 className="w-28"
                 selectClassName="h-9 rounded-lg"
                 drawerBtnClassName="h-9"
-                disabled={card.currentLevel === 1}
               />
             </div>
             <span

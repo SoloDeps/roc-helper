@@ -118,7 +118,10 @@ export function EvolvingCardStats({
     if (culture !== null) return [{ key: `${group}#culture`, ...culture }];
     return carried.map((bonus) => ({
       key: `${group}#${bonusKey(bonus)}`,
-      ...describeHeritageBonus(bonus, selections),
+      // ⚠️ `resolved.era` transmise : certains bâtiments (Celtic Broch…)
+      // portent un rang de bien NU sur leur palier couvrant plusieurs ères
+      // d'un coup — voir le même passage dans `sacrifice-tab.tsx`.
+      ...describeHeritageBonus(bonus, selections, false, resolved.era),
     }));
   };
 

@@ -137,13 +137,51 @@ describe("valeurs calculées en Lua — mêmes fonctions de lecture", () => {
 describe("axe niveau seul — production sans dimension d'âge", () => {
   const bonus = only("evolvingElysianField", "research_points_output");
 
-  it("la formule verse des points là où la table ne tabule qu'un coffre", () => {
+  it("la table rend l'espérance du coffre, la formule prend le relais au-delà", () => {
     expect(bonus.ageCurve).toBeNull();
-    // …_RP_Chest : 16 lignes sans ressource nommée (arbre de récompense, §7),
-    // puis "(#level / 6) - 1.7" au-delà du palier 38.
-    expect(resolveByLevel(bonus.curve!, 10)).toBeNull();
-    expect(resolveByLevel(bonus.curve!, 60)).toBe(8.3);
+    // …_RP_Chest, palier 9→11 : 10 %→1, 70 %→2, 20 %→3 PR (source/gamedesign.json)
+    // → espérance (10×1 + 70×2 + 20×3) / 100 = 2,1 — jamais livrée en un coup,
+    // c'est la moyenne sur beaucoup de tirages (même convention que le wiki).
+    // Puis "(#level / 6) - 1.7" au-delà du dernier palier tabulé (38) — 8,3 en
+    // brut au niveau 60, mais arrondi vers le bas : au-delà du coffre, c'est
+    // une quantité RÉELLE livrée chaque cycle, jamais une fraction de point.
+    expect(resolveByLevel(bonus.curve!, 10)).toBe(2.1);
+    expect(resolveByLevel(bonus.curve!, 60)).toBe(8);
     expect(bonus.resource).toBe("research_points");
+  });
+});
+
+describe("valeur attendue d'un tirage pondéré (coffre)", () => {
+  const bonus = only("evolvingCelticBroch", "research_points_output");
+
+  it("rend l'espérance du coffre, palier par palier — relevé dans source/gamedesign.json", () => {
+    // Dac_..._CelticBroch_1_RP_Chest : chaque palier tire entre plusieurs
+    // montants de PR (`MysteryChestRewardDTO.chances`/`rewards`), jamais un
+    // montant fixe avant le niveau 41. Espérance = Σ(poids × montant) / Σ(poids).
+    expect(bonus.ageCurve).toBeNull();
+    expect(resolveByLevel(bonus.curve!, 1)).toBeNull(); // niveaux 1-3 : pas de PR du tout
+    expect(resolveByLevel(bonus.curve!, 4)).toBe(1.2); // 80 %→1, 20 %→2
+    expect(resolveByLevel(bonus.curve!, 7)).toBe(1.4); // 65 %→1, 30 %→2, 5 %→3
+    expect(resolveByLevel(bonus.curve!, 10)).toBe(1.6); // 50 %→1, 40 %→2, 10 %→3
+    expect(resolveByLevel(bonus.curve!, 27)).toBe(2.6); // 5 %→1, 60 %→2, 20 %→3, 15 %→5
+    expect(resolveByLevel(bonus.curve!, 40)).toBe(3.6); // dernier palier tabulé
+    expect(bonus.resource).toBe("research_points");
+  });
+
+  // Au-delà du niveau 40, ce n'est plus un coffre : la formule
+  // "(#level / 5) - 3.2" livre une quantité RÉELLE, entière — vérifié contre
+  // riseofcultures.wiki.gg, qui documente ce palier PAR TRANCHE DE 5 NIVEAUX
+  // (41-45 → 5 PR, 46-50 → 6, 51-55 → 7, 56-60 → 8), jamais les 5,0/5,2/5,4…
+  // continus que la formule brute rendrait sans arrondi vers le bas.
+  it("passé le coffre, la formule est entière — un palier par tranche de 5 niveaux", () => {
+    expect(resolveByLevel(bonus.curve!, 41)).toBe(5);
+    expect(resolveByLevel(bonus.curve!, 45)).toBe(5);
+    expect(resolveByLevel(bonus.curve!, 46)).toBe(6);
+    expect(resolveByLevel(bonus.curve!, 50)).toBe(6);
+    expect(resolveByLevel(bonus.curve!, 51)).toBe(7);
+    expect(resolveByLevel(bonus.curve!, 55)).toBe(7);
+    expect(resolveByLevel(bonus.curve!, 56)).toBe(8);
+    expect(resolveByLevel(bonus.curve!, 60)).toBe(8);
   });
 });
 

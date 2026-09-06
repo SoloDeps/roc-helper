@@ -86,6 +86,58 @@ describe("chaîne de l'overlay — rendu", () => {
   });
 });
 
+describe("rang de bien NU sur un bâtiment évolutif", () => {
+  it("`goods_output` du Celtic Broch (rang `secondary` sans suffixe) se résout avec l'ère de la carte", () => {
+    // Le palier « RomanEmpireAndLater » du Celtic Broch écrit son rang NU
+    // (`secondary`, pas `secondary_lg`) : une même courbe y couvre 9 ères
+    // d'un coup. Sans `contextEra`, ce rang ne se résout jamais — voir la doc
+    // de `GOOD_RANK` dans effect-display.ts.
+    const resolved = resolveEvolvingBuilding("evolving_celtic_broch", 34, "LG")!;
+    const bonus = resolved.production.find((candidate) => candidate.type === "goods_output")!;
+    expect(bonus.resources).toEqual(["secondary"]);
+
+    // Sans `contextEra` : rien à affirmer, repli générique.
+    expect(describeHeritageBonus(bonus, [], false).label).toBe("Goods");
+
+    // Avec `contextEra` et le classement d'ateliers du joueur (Alchemist en
+    // second choix, ère Gothique tardive) : le VRAI bien, nommé et illustré.
+    const selections: string[][] = [[], [], ["Jeweler", "Alchemist", "Glassblower"]];
+    const display = describeHeritageBonus(bonus, selections, false, "LG");
+    expect(display.label).toBe("Elixirs");
+    expect(display.src).toBe("/images/goods/elixier.webp");
+  });
+});
+
+describe("valeur attendue d'un coffre de bâtiment évolutif", () => {
+  it("le palier à coffre s'affiche en décimal — espérance d'un tirage, jamais livrée en un coup", () => {
+    // Celtic Broch niveau 4 : coffre 80 %→1 PR, 20 %→2 PR (source/gamedesign.json)
+    // → espérance 1,2. Vérifié contre riseofcultures.wiki.gg, qui affiche le
+    // même chiffre pour ce palier.
+    const resolved = resolveEvolvingBuilding("evolving_celtic_broch", 4, "LG")!;
+    const bonus = resolved.production.find(
+      (candidate) => candidate.type === "research_points_output",
+    )!;
+    expect(bonus.value).toBe(1.2);
+    expect(describeHeritageBonus(bonus, []).value).toBe("1,2");
+  });
+
+  it("au-delà du dernier palier tabulé, la quantité RÉELLE est entière — jamais l'espérance d'un coffre", () => {
+    // Celtic Broch niveau 41 : la formule "(#level / 5) - 3.2" vaut 5,2 en
+    // brut, mais le jeu ne livre plus un coffre à ce niveau — c'est une
+    // quantité fixe, et riseofcultures.wiki.gg l'affiche « 5 », pas « 5,2 ».
+    // Même palier pour la Forteresse Pirate ("(#level / 5) - 3", 5,2 en brut
+    // aussi) : les deux doivent arrondir vers le bas, jamais rester décimaux.
+    for (const key of ["evolving_celtic_broch", "evolving_pirate_fortress"]) {
+      const resolved = resolveEvolvingBuilding(key, 41, "LG")!;
+      const bonus = resolved.production.find(
+        (candidate) => candidate.type === "research_points_output",
+      )!;
+      expect(bonus.value, key).toBe(5);
+      expect(describeHeritageBonus(bonus, []).value, key).toBe("5");
+    }
+  });
+});
+
 describe("échelle des pourcentages", () => {
   it("un ratio de bonus est affiché en points de pourcentage", () => {
     const bonus = heavyInfantryDamage();

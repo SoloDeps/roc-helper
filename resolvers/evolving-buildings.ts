@@ -205,6 +205,21 @@ export function getUpgradeCost(key: string, level: number): EvolvingUpgradeCost 
 }
 
 /**
+ * Jetons facturés pour CONSTRUIRE le bâtiment, c'est-à-dire obtenir son
+ * niveau 1 — distinct de `getUpgradeCost`, qui ne facture que les montées
+ * ultérieures. `ConstructionComponentDTO.start` du premier maillon, sur les
+ * 44 bâtiments évolutifs, ne porte jamais qu'une seule ligne : le jeton
+ * propre au bâtiment (vérifié à l'extraction, aucune exception).
+ *
+ * `null` sur une clé inconnue ou un premier maillon sans coût déclaré.
+ */
+export function getConstructionCost(key: string): number | null {
+  const chain = chainOf(key);
+  const line = chain?.levels[0]?.construction?.[0] ?? null;
+  return line === null ? null : Math.trunc(line.amount);
+}
+
+/**
  * Tout ce qu'un exemplaire rend à un couple (ère, niveau) donné.
  *
  * Rend `null` si la clé est inconnue. Le niveau est borné à `[1, maxLevel]`

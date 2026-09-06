@@ -49,6 +49,7 @@ import type { EraCode } from "@/types/shared";
 import { bonusKey, getBonusLabel } from "./bonus";
 import { resolveBonus, resolveByAgeAndLevel, resolveByLevel } from "./building-curves";
 import {
+  getConstructionCost as getEvolvingConstructionCost,
   getEvolvingBuilding,
   getEvolvingBuildingByDefinitionId,
   getUpgradeCost as getEvolvingUpgradeCost,
@@ -738,7 +739,15 @@ export interface HeritageTokenTier {
 }
 
 /**
- * Tous les paliers de montée d'un évolutif, du niveau 1 à `maxLevel - 1`.
+ * Tous les paliers de montée d'un évolutif, du niveau 0 (sa CONSTRUCTION) à
+ * `maxLevel - 1`.
+ *
+ * ⚠️ LE PALIER 0→1 EST LA CONSTRUCTION, PAS UNE MONTÉE. `getConstructionCost`
+ * facture le jeton dépensé pour obtenir le bâtiment — un coût réel, mais que
+ * le domaine évolutifs (`getUpgradeCost`) ne connaît pas, puisqu'il n'indexe
+ * que les montées. Il rejoint les autres paliers ici pour qu'un démontage
+ * intégral (`tokensFromBuildingLevels` jusqu'à 0) restitue le VRAI total
+ * dépensé, construction comprise — pas seulement les montées.
  *
  * Rend un tableau vide sur une clé inconnue — l'appelant affiche « aucun
  * palier », il n'a pas à distinguer l'inconnu du sans-palier.
@@ -747,6 +756,10 @@ export function getUpgradeCostTiers(evolvingKey: string): HeritageTokenTier[] {
   const building = getEvolvingBuilding(evolvingKey);
   if (building === null) return [];
   const tiers: HeritageTokenTier[] = [];
+  const construction = getEvolvingConstructionCost(evolvingKey);
+  if (construction !== null) {
+    tiers.push({ fromLevel: 0, toLevel: 1, tokens: construction });
+  }
   for (let level = 1; level < building.maxLevel; level += 1) {
     const cost = getEvolvingUpgradeCost(evolvingKey, level);
     if (cost === null) continue;
@@ -774,16 +787,19 @@ export function resolveTierCost(tiers: HeritageTokenTier[], level: number): numb
  * niveau `L` rend ce qu'il a coûté de quitter `L - 1`. C'est la seule lecture
  * qui rende le sacrifice neutre à la remontée, et elle tient en cette fonction.
  *
- * `levelsRemoved` est borné à ce qui reste au-dessus du niveau 1 : on ne
- * descend pas sous le premier niveau.
+ * `levelsRemoved` est borné à `currentLevel` : le démontage peut aller jusqu'au
+ * niveau 0, c'est-à-dire jusqu'à la construction elle-même — `tiers` porte ce
+ * palier 0→1 depuis `getUpgradeCostTiers`. Un démontage total rend donc le
+ * TOTAL de jetons jamais dépensés sur ce bâtiment, construction comprise, pas
+ * seulement ses montées.
  */
 export function tokensFromBuildingLevels(
   tiers: HeritageTokenTier[],
   currentLevel: number,
   levelsRemoved: number,
 ): number {
-  const from = Math.max(Math.trunc(currentLevel), 1);
-  const removed = Math.min(Math.max(Math.trunc(levelsRemoved), 0), from - 1);
+  const from = Math.max(Math.trunc(currentLevel), 0);
+  const removed = Math.min(Math.max(Math.trunc(levelsRemoved), 0), from);
   let total = 0;
   for (let level = from - removed; level < from; level += 1) {
     total += resolveTierCost(tiers, level) ?? 0;

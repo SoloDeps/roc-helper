@@ -73,18 +73,36 @@ const STAT_OVERLAYS: [suffix: string, iconKey: string][] = [
   ["_cap", "icon_arrow_boost"],
 ];
 
-/** `primary_ba`, `tertiary_cg`… — un RANG de bien, pas un bien. */
-const GOOD_RANK = /^(primary|secondary|tertiary)_([a-z]{2})$/;
+/**
+ * `primary_ba`, `tertiary_cg`… — un RANG de bien, pas un bien. Le suffixe
+ * d'ère est OPTIONNEL : les bâtiments évolutifs dont une même courbe couvre
+ * plusieurs ères d'un coup (« RomanEmpireAndLater » du Celtic Broch, par ex.)
+ * écrivent le rang NU (`secondary`), sans dire laquelle — c'est l'ère de
+ * l'INSTANCE (`contextEra`, ci-dessous) qui tranche alors, pas la ressource.
+ */
+const GOOD_RANK = /^(primary|secondary|tertiary)(?:_([a-z]{2}))?$/;
 
 /**
- * Le bien concret désigné par un RANG (`primary_ba`…), résolu depuis le
- * classement d'ateliers du joueur. `null` pour une ressource qui n'est pas un
- * rang, ou pour un rang que le joueur n'a pas classé.
+ * Le bien concret désigné par un RANG (`primary_ba`, ou `primary` NU), résolu
+ * depuis le classement d'ateliers du joueur. `null` pour une ressource qui
+ * n'est pas un rang, ou pour un rang que le joueur n'a pas classé.
+ *
+ * ⚠️ `contextEra` NE SERT QUE POUR LES RANGS NUS. Un rang déjà suffixé
+ * (`secondary_cg`) garde SA propre ère : c'est celle du palier de courbe où le
+ * game design l'a écrite, pas celle de l'instance qui l'affiche — un bâtiment
+ * dont la courbe date de l'ère Classique reste sur ses biens Classiques même
+ * consulté en ère Gothique tardive.
  */
-function resolveRankGood(resource: string, selections: string[][]): string | null {
+function resolveRankGood(
+  resource: string,
+  selections: string[][],
+  contextEra?: EraCode | null,
+): string | null {
   const rank = GOOD_RANK.exec(resource);
   if (rank === null) return null;
-  return getGoodNameFromPriorityEra(rank[1], rank[2], selections);
+  const era = rank[2] ?? contextEra?.toLowerCase();
+  if (era === undefined || era === null) return null;
+  return getGoodNameFromPriorityEra(rank[1], era, selections);
 }
 
 /** Le repli quand un tirage porte des biens sans pouvoir en nommer un seul. */
@@ -112,12 +130,14 @@ function qualifyWithEra(label: string, era: string | null): string {
   return era === null ? label : `${label} · ${era}`;
 }
 
-function rankEraLabel(resources: string[]): string | null {
+function rankEraLabel(resources: string[], contextEra?: EraCode | null): string | null {
   const eras = new Set<string>();
   for (const resource of resources) {
     const rank = GOOD_RANK.exec(resource);
     if (rank === null) return null;
-    eras.add(rank[2].toUpperCase());
+    const era = rank[2] ?? contextEra?.toLowerCase();
+    if (era === undefined || era === null) return null;
+    eras.add(era.toUpperCase());
   }
   if (eras.size !== 1) return null;
   const [abbr] = [...eras];
@@ -169,8 +189,9 @@ const FALLBACK_OVERLAYS: [matches: (type: string) => boolean, iconKey: string][]
 function bonusIcons(
   bonus: DisplayableBonus,
   selections: string[][],
+  contextEra?: EraCode | null,
 ): { src: string; overlaySrc: string | null; good: string | null } {
-  const base = bonusIconsBase(bonus, selections);
+  const base = bonusIconsBase(bonus, selections, contextEra);
   if (base.overlaySrc !== null) return base;
   const fallback = FALLBACK_OVERLAYS.find(([matches]) => matches(bonus.type));
   if (fallback === undefined) return base;
@@ -180,6 +201,7 @@ function bonusIcons(
 function bonusIconsBase(
   bonus: DisplayableBonus,
   selections: string[][],
+  contextEra?: EraCode | null,
 ): { src: string; overlaySrc: string | null; good: string | null } {
   const scope = bonus.scope;
 
@@ -233,7 +255,7 @@ function bonusIconsBase(
 
   const resource = bonus.resources[0];
   if (resource !== undefined) {
-    const good = resolveRankGood(resource, selections);
+    const good = resolveRankGood(resource, selections, contextEra);
     return { src: resourceIcon(resource, good), overlaySrc: null, good };
   }
 
@@ -291,9 +313,11 @@ function bonusIconsBase(
  *
  * ⚠️ PORTÉE : le Heritage Vault SEULEMENT, d'où l'arrondi ici plutôt que dans
  * `formatBonusValue`. Ce formateur est partagé avec les Wonders, les
- * Technologies et les Bâtiments, où rien n'a été mesuré et où des décimales
- * naissent SANS gardien — la production de PR de la Forteresse Pirate vaut 5,2
- * au niveau 41. Y imposer l'arrondi haut affirmerait « 6 PR » sans l'avoir vu.
+ * Technologies et les Bâtiments, où rien n'a été mesuré et où l'imposer
+ * affirmerait une valeur sans l'avoir vue en jeu. Seule exception connue :
+ * `research_points_output`, dont l'extraction (`scripts/extract/buildings.ts`,
+ * `flooredFormula`) arrondit déjà VERS LE BAS au-delà du dernier palier
+ * tabulé — voir `CHEST_EXPECTED_VALUE_TYPES` ci-dessous.
  *
  * Aucun effet de bord sur les valeurs non amplifiées : les 24 360 valeurs
  * `absolute`/`integer` des 13 vaults sont ENTIÈRES sur les 8 ères jouables
@@ -323,19 +347,72 @@ function scaleForDisplay(format: DisplayableBonus["format"], raw: number): numbe
 }
 
 /**
+ * Types dont la courbe peut rendre une VALEUR ATTENDUE de coffre, pas
+ * toujours une livraison entière — `research_points_output` en tête.
+ *
+ * En dessous d'un certain niveau, plusieurs `evolving` ne versent pas un
+ * montant fixe de points de recherche mais un COFFRE qui tire au sort entre
+ * plusieurs montants (Celtic Broch, palier 4 : 80 % de chances de 1 PR, 20 %
+ * de 2 PR) : `resolveEvolvingBuilding` y rend directement l'ESPÉRANCE du
+ * tirage (`scripts/extract/buildings.ts`, `expectedChestValue`) — 1,2 dans cet
+ * exemple, jamais livré en un coup, mais la moyenne sur beaucoup de tirages.
+ * C'est la présentation du wiki (riseofcultures.wiki.gg) pour ces mêmes
+ * paliers, vérifiée palier par palier contre `source/gamedesign.json`.
+ *
+ * Au-delà de ce palier, le coffre se transforme en un montant RÉEL et FIXE :
+ * l'extraction (`flooredFormula`) arrondit alors déjà vers le bas — la valeur
+ * qui arrive ici est une quantité entière (5, 6, 7…), jamais une décimale.
+ * `Math.ceil`/`Math.round` (`displayQuantity`, format `absolute`) n'ont donc
+ * plus rien à corriger à ce stade ; ce cas reste néanmoins hors de leur
+ * chemin, pour ne jamais dépendre de leur convention (mesurée pour le seul
+ * Heritage Vault, cf. sa doc) sur un domaine où elle n'a pas été vérifiée.
+ *
+ * Rien à amplifier ici : ces bâtiments n'ont pas de gardien, `raw` reste
+ * `bonus.value` quel que soit `amplified`.
+ */
+const CHEST_EXPECTED_VALUE_TYPES = new Set(["research_points_output"]);
+
+/**
  * Ce qu'une carte d'effet affiche pour un bonus.
  *
  * `amplified` demande la valeur amplifiée par le rang de gardien (convention
  * (b) du resolver) plutôt que la valeur nue.
+ *
+ * `contextEra` ne sert qu'aux RANGS NUS d'un bâtiment évolutif (`secondary`
+ * sans suffixe, cf. `GOOD_RANK`) : sans elle un tel rang ne peut pas se
+ * résoudre en bien concret et retombe sur l'icône générique — c'est
+ * l'appelant qui la connaît (l'ère choisie sur la carte), jamais le bonus
+ * lui-même. Sans effet sur le Heritage Vault, dont tous les rangs sont déjà
+ * suffixés à l'extraction.
  */
 export function describeHeritageBonus(
   bonus: DisplayableBonus,
   selections: string[][],
   amplified = false,
+  contextEra?: EraCode | null,
 ): HeritageBonusDisplay {
   const raw = amplified ? (bonus.amplified ?? bonus.value) : bonus.value;
+  const { src, overlaySrc, good } = bonusIcons(bonus, selections, contextEra);
+  // ⚠️ Rang non résolu : l'ère qualifie le libellé, sans quoi deux paliers de
+  // biens du même vault sont indiscernables (cf. `rankEraLabel`).
+  const label =
+    good === null
+      ? qualifyWithEra(bonus.label, rankEraLabel(bonus.resources, contextEra))
+      : (GOOD_META_BY_KEY[good]?.name ?? good);
+  const detail =
+    bonus.periodSeconds === null ? null : `/ ${formatDuration(bonus.periodSeconds)}`;
+
+  if (CHEST_EXPECTED_VALUE_TYPES.has(bonus.type)) {
+    return {
+      src,
+      overlaySrc,
+      label,
+      value: raw === null ? "—" : raw.toLocaleString("fr-FR", { maximumFractionDigits: 2 }),
+      detail,
+    };
+  }
+
   const scaled = raw === null ? null : scaleForDisplay(bonus.format, raw);
-  const { src, overlaySrc, good } = bonusIcons(bonus, selections);
   return {
     src,
     overlaySrc,
@@ -344,15 +421,9 @@ export function describeHeritageBonus(
     // technique soulignée (« fine_jewelry » dans la liste des paliers) au lieu
     // du nom du bien (« Fine Jewelry »). Même dernier pas que
     // `chestRewardLabel`, qui le faisait déjà de son côté.
-    // Rang non résolu : l'ère qualifie le libellé, sans quoi deux paliers de
-    // biens du même vault sont indiscernables (cf. `rankEraLabel`).
-    label:
-      good === null
-        ? qualifyWithEra(bonus.label, rankEraLabel(bonus.resources))
-        : (GOOD_META_BY_KEY[good]?.name ?? good),
+    label,
     value: scaled === null ? "—" : formatBonusValue(bonus.format, scaled),
-    detail:
-      bonus.periodSeconds === null ? null : `/ ${formatDuration(bonus.periodSeconds)}`,
+    detail,
   };
 }
 

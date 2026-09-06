@@ -46,6 +46,7 @@ import {
 import {
   getEvolvingBuilding,
   resolveEvolvingBuilding,
+  getConstructionCost as getEvolvingConstructionCost,
   getUpgradeCost as getEvolvingUpgradeCost,
 } from "./evolving-buildings";
 import { getHeritageVaultPortraitUrl } from "./heritage-portraits";
@@ -870,12 +871,19 @@ describe("paliers de montée d'un évolutif", () => {
   const celtic = getEligibleEvolvingBuildings("heritage_celtic");
   const smithy = celtic.find((b) => b.key === "evolving_grand_smithy")!;
 
-  it("un palier par niveau quittable, jamais le dernier", () => {
+  it("un palier par niveau quittable, jamais le dernier, plus la construction", () => {
     const building = getEvolvingBuilding(smithy.key)!;
-    expect(smithy.tiers).toHaveLength(building.maxLevel - 1);
-    expect(smithy.tiers[0].fromLevel).toBe(1);
+    // maxLevel - 1 montées + 1 palier de construction (0→1).
+    expect(smithy.tiers).toHaveLength(building.maxLevel);
+    expect(smithy.tiers[0].fromLevel).toBe(0);
+    expect(smithy.tiers[1].fromLevel).toBe(1);
     expect(smithy.tiers.at(-1)!.toLevel).toBe(building.maxLevel);
     expect(resolveTierCost(smithy.tiers, building.maxLevel)).toBeNull();
+  });
+
+  it("le palier de construction (0→1) vaut le coût du domaine évolutifs", () => {
+    expect(resolveTierCost(smithy.tiers, 0)).toBe(getEvolvingConstructionCost(smithy.key));
+    expect(resolveTierCost(smithy.tiers, 0)).toBeGreaterThan(0);
   });
 
   it("les paliers valent le barème du domaine évolutifs, sans recalcul", () => {
@@ -895,10 +903,14 @@ describe("paliers de montée d'un évolutif", () => {
     expect(tokensFromBuildingLevels(smithy.tiers, 11, 0)).toBe(0);
   });
 
-  it("ne descend jamais sous le niveau 1, quoi qu'on lui demande", () => {
-    const whole = tokensFromBuildingLevels(smithy.tiers, 11, 10);
+  it("peut démonter jusqu'au niveau 0, jetons de construction compris", () => {
+    const whole = tokensFromBuildingLevels(smithy.tiers, 11, 11);
     expect(tokensFromBuildingLevels(smithy.tiers, 11, 999)).toBe(whole);
-    expect(tokensFromBuildingLevels(smithy.tiers, 1, 5)).toBe(0);
+    // Depuis le niveau 1, démonter « 5 » niveaux ne peut rendre que le seul
+    // palier restant : la construction (0→1), jamais plus.
+    expect(tokensFromBuildingLevels(smithy.tiers, 1, 5)).toBe(
+      resolveTierCost(smithy.tiers, 0),
+    );
   });
 
   it("`levelsFromTokens` est l'inverse exact de `tokensFromBuildingLevels`", () => {

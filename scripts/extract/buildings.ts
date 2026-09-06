@@ -710,6 +710,7 @@ function assembleCurve(
   formula: string | null,
   valueLimit: number | null,
   luaScript: string | null,
+  flooredFormula = false,
 ): BuildingCurve {
   const keys = Array.from({ length: maxLevel }, (_, i) => i + 1);
   const stepped = resolveByStep(table, keys);
@@ -722,9 +723,25 @@ function assembleCurve(
     }
     return stepped[i];
   });
-  const effective = resolved.map((v) =>
-    v === null ? null : modifier === null ? round(v) : round(modifier * v),
-  );
+  const effective = resolved.map((v, i) => {
+    if (v === null) return null;
+    const scaled = modifier === null ? v : modifier * v;
+    // ⚠️ AU-DELÀ DU DERNIER PALIER TABULÉ, LA FORMULE LIVRE UNE QUANTITÉ
+    // RÉELLE, PAS UNE ESPÉRANCE — voir `flooredFormula` sur `buildCurve`. Sur
+    // l'`effective` (APRÈS `modifier`), pas sur `resolved` : le barème de
+    // montée porte `modifier: -1` (la formule écrit un coût négatif, `resolved`
+    // en garde le signe brut), et flooer AVANT ce signe inverserait le sens —
+    // `Math.floor(-11.8) × -1` rend 12, jamais les 11 tronqués attendus.
+    //
+    // ⚠️ NETTOYER AVANT DE FLOORER. `8.2 - 3.2` vaut `4.999999999999999` en
+    // flottant IEEE 754 — `Math.floor` de cette valeur BRUTE rend 4 au lieu de
+    // 5 pile sur les niveaux de transition (41, 46, 51…), l'inverse de ce que
+    // `round()` corrige d'ordinaire pour l'affichage.
+    const isFormulaContinuation =
+      formula !== null && (lastWhen === null || keys[i] > lastWhen);
+    const cleaned = round(scaled);
+    return flooredFormula && isFormulaContinuation ? Math.floor(cleaned) : cleaned;
+  });
 
   return {
     indexedBy: "buildingLevel",
@@ -755,6 +772,21 @@ function levelSteps(mapping: JsonObject, read: (then: JsonObject) => number | nu
  *
  * Seul `BuildingLevelDynamicChangeDTO` est traité ici ; l'axe des âges passe par
  * `buildAgeCurve()`.
+ *
+ * ⚠️ `read === actionAmount` FAIT FLOORER LA FORMULE DE CONTINUATION.
+ * `actionAmount` lit une quantité RÉELLEMENT LIVRÉE (`ActionChangeDTO` —
+ * production, coût de montée) : au-delà du dernier palier tabulé, sa formule
+ * n'a pas de raison de rendre un entier (`(#level / 5) - 3.2` vaut 5,2 au
+ * niveau 42), mais le jeu ne livre jamais une fraction d'unité — vérifié en
+ * jeu sur le Celtic Broch, dont le wiki (riseofcultures.wiki.gg) documente un
+ * PALIER PAR TRANCHE DE 5 NIVEAUX (41-45 → 5 PR, 46-50 → 6, 51-55 → 7,
+ * 56-60 → 8), exactement `Math.floor` de la formule brute — jamais les
+ * 5,0/5,2/5,4… continus qu'elle rendrait sans ce plancher. Les PALIERS TABULÉS
+ * eux-mêmes (`table`, en dessous du dernier `when`) ne passent PAS par cette
+ * formule et gardent leur décimale : un coffre à tirage (`expectedChestValue`)
+ * rend une ESPÉRANCE statistique, jamais une livraison unique — la seule
+ * chose que la Q42-là ne délivre jamais en une fois, contrairement à la
+ * quantité fixe post-palier.
  */
 function buildCurve(
   mapping: JsonObject,
@@ -778,6 +810,7 @@ function buildCurve(
     formula,
     asNumber(formulaCase.valueLimit),
     null,
+    read === actionAmount,
   );
 }
 
@@ -873,9 +906,117 @@ function curveFromDefinition(
 // vers un nombre unique.
 
 /**
+ * Une feuille de tirage pondérée : `weight` est déjà la probabilité ABSOLUE
+ * (pas le poids brut du game design) de tomber sur `amount` unités de
+ * `resource` — le produit des chances de chaque conteneur traversé pour
+ * l'atteindre. Voir `chestLeaves`.
+ */
+interface ChestLeaf {
+  resource: string;
+  amount: number;
+  weight: number;
+}
+
+/**
+ * Descend un nœud de récompense (`then.rewards[]`, éventuellement encore
+ * emballé dans un `RewardDefinitionDTO`) jusqu'à ses feuilles `ResourceRewardDTO`,
+ * en pondérant chacune par les `chances` de tout `MysteryChestRewardDTO`
+ * traversé en chemin.
+ *
+ * `null` dès que la donnée sort de ce cas simple : un `chances`/`rewards` de
+ * longueur différente ou une chance manquante (donnée incohérente), ou tout
+ * type de feuille qui n'est PAS un `ResourceRewardDTO` (relique, ticket, kit
+ * d'inventaire, pièce de bâtiment…) — un lot de ce genre n'a pas de
+ * « montant » à faire remonter en espérance, et rester `null` laisse
+ * `actionAmount`/`actionResourceDescriptors` hors de ce cas, exactement comme
+ * avant cette fonction (§7/§8 de `03-batiments.md`, toujours hors scope pour
+ * eux).
+ */
+function chestLeaves(node: JsonObject, weight: number): ChestLeaf[] | null {
+  const type = shortType(node);
+  if (type === "RewardDefinitionDTO") {
+    const children = asArray(node.rewards).map(asObject);
+    if (children.length !== 1) return null;
+    return chestLeaves(children[0], weight);
+  }
+  if (type === "ResourceRewardDTO") {
+    const resource = asString(node.resource);
+    const amount = asNumber(node.amount);
+    return resource === null || amount === null ? null : [{ resource, amount, weight }];
+  }
+  if (type === "MysteryChestRewardDTO") {
+    const children = asArray(node.rewards).map(asObject);
+    const chances = asArray(node.chances).map(asNumber);
+    if (children.length === 0 || children.length !== chances.length) return null;
+    const total = chances.reduce((sum: number, c) => sum + (c ?? 0), 0);
+    if (total <= 0) return null;
+    const leaves: ChestLeaf[] = [];
+    for (const [i, child] of children.entries()) {
+      const chance = chances[i];
+      if (chance === null) return null;
+      const sub = chestLeaves(child, weight * (chance / total));
+      if (sub === null) return null;
+      leaves.push(...sub);
+    }
+    return leaves;
+  }
+  return null;
+}
+
+/**
+ * La ressource UNIQUE versée par un tirage pondéré (`then.rewards[]`), quand
+ * tout le tirage ne verse que cette ressource — plusieurs ressources
+ * mélangées (ou un tirage hors scope, cf. `chestLeaves`) rendent `null`, la
+ * clé de la ressource sinon.
+ */
+function chestResource(then: JsonObject): string | null {
+  for (const raw of asArray(then.rewards)) {
+    const leaves = chestLeaves(asObject(raw), 1);
+    if (leaves === null || leaves.length === 0) continue;
+    const resources = new Set(leaves.map((leaf) => leaf.resource));
+    if (resources.size === 1) return [...resources][0];
+  }
+  return null;
+}
+
+/**
+ * ⚠️ VALEUR ATTENDUE D'UN TIRAGE — CONVENTION DU WIKI, PAS UNE LIVRAISON RÉELLE.
+ *
+ * En dessous d'un certain niveau, plusieurs `evolving` ne versent pas un
+ * montant de points de recherche fixe mais un COFFRE (`RewardDefinitionDTO` →
+ * `MysteryChestRewardDTO`) qui tire au sort entre plusieurs montants —
+ * `Dac_..._CelticBroch_1_RP_Chest`, palier 4 : 80 % de chances de 1 PR, 20 %
+ * de 2 PR. Le jeu ne verse donc JAMAIS 1,2 PR en une fois ; c'est la moyenne
+ * pondérée sur un grand nombre de tirages, exactement la présentation que le
+ * wiki (riseofcultures.wiki.gg) donne pour ces mêmes paliers — vérifié
+ * palier par palier contre les poids ci-dessus (1,2 / 1,4 / 1,6 / 1,8 / 2,0 /
+ * 2,2 / 2,35 / 2,6 / 2,9 / 2,95 / 3,2 / 3,6 pour le Celtic Broch, paliers 4 à
+ * 40, chacun recalculé depuis `source/gamedesign.json` plutôt que recopié).
+ *
+ * `CHEST_EXPECTED_VALUE_TYPES` (`components/heritage/effect-display.ts`)
+ * affiche déjà ce genre de décimale sans l'arrondir à l'entier pour
+ * `research_points_output` — cette fonction n'a donc qu'à rendre la bonne
+ * valeur, l'affichage suit sans changement.
+ *
+ * `null` (tirage hors scope, ressources mélangées) laisse `actionAmount`
+ * rendre `null` comme avant — la table continue de n'être qu'un « arbre de
+ * récompense » pour ce palier, faute de mieux.
+ */
+function expectedChestValue(then: JsonObject): number | null {
+  for (const raw of asArray(then.rewards)) {
+    const leaves = chestLeaves(asObject(raw), 1);
+    if (leaves === null || leaves.length === 0) continue;
+    if (new Set(leaves.map((leaf) => leaf.resource)).size !== 1) continue;
+    return round(leaves.reduce((sum, leaf) => sum + leaf.amount * leaf.weight, 0));
+  }
+  return null;
+}
+
+/**
  * Désignation d'une ressource dans un `ActionChangeDTO` : soit un
  * `ResourceDefinition.id`, soit `Good1|Good2|Good3` pour un `GoodRewardDTO`, qui
- * nomme un RANG sans dater le bien.
+ * nomme un RANG sans dater le bien, soit la ressource UNIQUE d'un tirage
+ * pondéré (`chestResource` — cf. `expectedChestValue`).
  */
 function actionResourceDescriptors(payload: JsonObject): string[] {
   const descriptors: string[] = [];
@@ -889,6 +1030,8 @@ function actionResourceDescriptors(payload: JsonObject): string[] {
     const number = asNumber(object.number);
     if (number !== null) descriptors.push(`Good${number}`);
   }
+  const chest = chestResource(payload);
+  if (chest !== null) descriptors.push(chest);
   return descriptors;
 }
 
@@ -898,6 +1041,9 @@ function actionResourceDescriptors(payload: JsonObject): string[] {
  * Une ligne peut lister plusieurs ressources ; leurs montants sont alors
  * identiques (vérifié sur les 874 lignes multi-ressources des `evolving`, zéro
  * hétérogène). Un seul nombre suffit donc à décrire la ligne.
+ *
+ * En dernier recours, la valeur ATTENDUE d'un tirage pondéré — voir
+ * `expectedChestValue`.
  */
 function actionAmount(then: JsonObject): number | null {
   for (const change of asArray(then.resourceChanges)) {
@@ -910,7 +1056,7 @@ function actionAmount(then: JsonObject): number | null {
     const amount = asNumber(object.amount);
     if (amount !== null) return amount;
   }
-  return null;
+  return expectedChestValue(then);
 }
 
 /**
