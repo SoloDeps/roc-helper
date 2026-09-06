@@ -174,7 +174,7 @@ export const KEEPER_OFFER_CATALOG: KeeperOffer[] = [
   // propre sous `/images/goods/`.
   { id: "ExoticGood_1", label: "Exotic goods I", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["porcelain", "ceramic_treasure", "spice_treasure"] },
   { id: "ExoticGood_2", label: "Exotic goods II", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["ankh", "golden_mask", "syrup", "incense", "oil_lamp", "calendar_stone", "ritual_dagger", "tea"] },
-  { id: "ExoticGood_3", label: "Exotic goods III", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["papyrus_scroll", "ceremonial_dress", "silk"] },
+  { id: "ExoticGood_3", label: "Exotic goods III", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["papyrus_scroll", "ceremonial_dress", "silk", "stockfish"] },
 
   // ─── Inventory ────────────────────────────────────────────────────────────
   { id: "ConstructionUpgrade_Skip", label: "Construction skip item", category: "inventory", reputation: 1, scalesWithPlayerAge: false },
