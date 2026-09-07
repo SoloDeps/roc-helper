@@ -123,7 +123,7 @@ const EMPTY_SLOT: SlotState = {
 };
 const SLOT_COUNT = 4;
 const EMPTY_KEEPER: KeeperState = { level: 1, points: 0 };
-const DEFAULT_WEEKS = 4;
+const DEFAULT_WEEKS = 1;
 
 function emptySlots(): SlotState[] {
   return Array.from({ length: SLOT_COUNT }, () => ({ ...EMPTY_SLOT }));
@@ -264,7 +264,7 @@ function KeeperPanel({
   // régler, le gardien, plutôt que par un rappel décoratif qui repoussait le
   // sélecteur d'un demi-écran vers le bas.
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm min-h-67.5">
+    <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm min-h-[287px]">
       <div>
         <h3 className="text-sm font-bold text-foreground">Keeper</h3>
         <p className="text-[12px] text-muted-foreground">
@@ -568,7 +568,7 @@ function OfferSlotCard({
     return (
       <button
         onClick={onPickerOpen}
-        className="flex min-h-67.5 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border px-2 text-center text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+        className="flex min-h-[287px] w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border px-2 text-center text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
       >
         <Plus className="size-4" aria-hidden="true" />
         <span className="text-[12px] font-semibold">{SLOT_META[slotIndex].title}</span>
