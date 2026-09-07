@@ -350,10 +350,10 @@ function OfferSectionTitle({ children }: { children: ReactNode }) {
 function GrowthRateChip({ growthRate }: { growthRate: number }) {
   return (
     <span
-      className="inline-flex items-center gap-0.5 rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-bold tabular-nums text-amber-600 dark:text-amber-400"
+      className="inline-flex items-center gap-1 rounded-sm bg-amber-500/15 px-1.5 py-0.5 text-xs font-bold tabular-nums text-amber-600 dark:text-amber-300"
       title={`Price rises by ${growthRate}% with every purchase this week`}
     >
-      <TrendingUp size={10} aria-hidden="true" strokeWidth={2.5} />+{growthRate}%
+      <TrendingUp size={13} aria-hidden="true" strokeWidth={2.5} />+{growthRate}%
     </span>
   );
 }
@@ -368,8 +368,8 @@ function ReputationBadge({ offer }: { offer: KeeperOffer }) {
   const growthRate = keeperOfferGrowthRatePercent(offer.id);
   return (
     <span className="flex flex-wrap items-center justify-center gap-1">
-      <span className="rounded-sm bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary">
-        +{offer.reputation} rep
+      <span className="rounded-sm bg-primary/15 px-1.5 py-0.5 text-xs font-bold tabular-nums text-primary">
+        + {offer.reputation} rep
       </span>
       {growthRate !== null && <GrowthRateChip growthRate={growthRate} />}
     </span>
@@ -626,8 +626,8 @@ function OfferSlotCard({
           {nextCost === null ? "—" : formatNumber(nextCost)}
         </span>
         <span className="flex flex-wrap items-center justify-center gap-1">
-          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-            +{offer.reputation} reputation
+          <span className="rounded-sm bg-primary/15 px-2 py-0.5 text-xs font-bold tabular-nums text-primary">
+            + {offer.reputation} rep
           </span>
           {growthRate !== null && <GrowthRateChip growthRate={growthRate} />}
         </span>
