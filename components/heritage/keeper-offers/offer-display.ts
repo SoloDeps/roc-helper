@@ -180,10 +180,10 @@ export function describeKeeperOffer(
     return { src: getItemIconLocal(candidate), label: alliedGoodName(candidate) };
   }
 
-  // `Orb` est un BIEN, pas un objet d'inventaire : son asset vit sous
+  // `WonderOrb` est un BIEN, pas un objet d'inventaire : son asset vit sous
   // `/images/goods/wonder_orb.webp`. La clé est explicite parce qu'elle ne se
-  // dérive pas de l'identifiant — `orb` ne correspond à aucun fichier.
-  if (offer.id === "Orb") return { src: getItemIconLocal("wonder_orb"), label: offer.label };
+  // dérive pas de l'identifiant — `wonderorb` ne correspond à aucun fichier.
+  if (offer.id === "WonderOrb") return { src: getItemIconLocal("wonder_orb"), label: offer.label };
 
   const localSlug = INVENTORY_ICON_LOCAL[offer.id];
   if (localSlug !== undefined) {

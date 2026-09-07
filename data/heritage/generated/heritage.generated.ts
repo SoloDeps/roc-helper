@@ -11,8 +11,8 @@ import type { HeritageExtractBundle } from "./types";
 /** Extraction complète et fidèle du domaine Heritage Vault. */
 export const HERITAGE_EXTRACT: HeritageExtractBundle = {
   "generatedFrom": {
-    "gameDesignChecksum": "klSMVaOasuuT_c3f7a67c84112e8d27c89ebccd70b9e9",
-    "locaChecksum": "tzzVTHxBlRow",
+    "gameDesignChecksum": "9v/7PztyAEqO_c3f7a67c84112e8d27c89ebccd70b9e9",
+    "locaChecksum": "vAi9HNKf5kIv",
     "locale": "en_DK"
   },
   "playerAgeOrderByAge": {
@@ -304742,6 +304742,17 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
       "id": "WonderBP_Rare",
       "definitionId": "dynamic_lua_long.Lua_HeritageVault_KeeperOffer_WonderBP_Rare",
       "luaScript": "return math.floor(-1 * 1.08^keeperPurchaseCount)",
+      "variables": [
+        "keeperPurchaseCount"
+      ],
+      "direction": "give",
+      "firstValue": -1,
+      "scalesWithPlayerAge": false
+    },
+    {
+      "id": "WonderOrb",
+      "definitionId": "dynamic_lua_long.Lua_HeritageVault_KeeperOffer_WonderOrb",
+      "luaScript": "return math.floor(-1 * 1.07^keeperPurchaseCount)",
       "variables": [
         "keeperPurchaseCount"
       ],

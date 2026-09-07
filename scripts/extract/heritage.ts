@@ -16,7 +16,7 @@
 //     Ils sont déjà dans `BUILDING_EXTRACT` (`scope: "decoration"`,
 //     `chainKey = City_Capital|heritage<Theme>`). Seule la clé de chaîne est
 //     reprise, comme pont.
-//  2. Il ne fabrique AUCUN catalogue d'offres du gardien. Les 29 formules
+//  2. Il ne fabrique AUCUN catalogue d'offres du gardien. Les 30 formules
 //     `Lua_HeritageVault_KeeperOffer_*` ont 0 référence entrante dans les 66 Mo :
 //     le game design donne les prix et rien d'autre. Voir
 //     `HeritageKeeperOfferFormula` dans les types.
@@ -1704,7 +1704,7 @@ function extractKeeperAmplifier(
 }
 
 /**
- * Les 29 courbes de prix du gardien.
+ * Les 30 courbes de prix du gardien.
  *
  * ⚠️ Ce sont les SEULES données d'offre du game design. Aucune n'est référencée
  * par quoi que ce soit : il n'y a ni offre, ni rotation, ni tirage à extraire.

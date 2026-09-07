@@ -16,6 +16,7 @@ import {
   cumulativeKeeperOfferCost,
   keeperExchangeForecast,
   keeperOfferCost,
+  keeperOfferGrowthRatePercent,
   keeperOfferSlot,
   keeperOffersForSlot,
   type KeeperExchangeForecast,
@@ -338,6 +339,29 @@ function OfferSectionTitle({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * Le badge « +N rep », et — quand la formule le permet — le pourcentage
+ * d'augmentation du prix à CHAQUE achat de la semaine, en dessous. Répond à
+ * la demande de la communauté (07/09/2026) : la réputation seule ne dit rien
+ * de ce qui change d'un échange à l'autre, une donnée qui n'apparaît nulle
+ * part ailleurs à l'écran.
+ */
+function ReputationBadge({ offer }: { offer: KeeperOffer }) {
+  const growthRate = keeperOfferGrowthRatePercent(offer.id);
+  return (
+    <span className="flex flex-col items-center gap-0.5">
+      <span className="rounded-sm bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary">
+        +{offer.reputation} rep
+      </span>
+      {growthRate !== null && (
+        <span className="text-[10px] font-medium text-muted-foreground">
+          +{growthRate}% per purchase
+        </span>
+      )}
+    </span>
+  );
+}
+
 /** Une carte d'offre — un bien précis (`good`) pour les offres à candidats, l'offre seule sinon. */
 function OfferCard({
   offer,
@@ -366,9 +390,7 @@ function OfferCard({
       <span className="text-[14px] font-bold tabular-nums text-foreground">
         {firstCost === null ? "—" : formatNumber(firstCost)}
       </span>
-      <span className="rounded-sm bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary">
-        + {offer.reputation} rep
-      </span>
+      <ReputationBadge offer={offer} />
     </button>
   );
 }
@@ -548,6 +570,7 @@ function OfferSlotCard({
   // d'échanges est une SORTIE : le seul montant qui a du sens à afficher est
   // celui du premier échange de la semaine, exactement ce qu'affiche le jeu.
   const nextCost = keeperOfferCost(offer.id, mode === "manual" ? slot.count : 0, vault.era);
+  const growthRate = keeperOfferGrowthRatePercent(offer.id);
 
   const manualCost = cumulativeKeeperOfferCost(offer.id, vault.era, slot.count);
   const manualReputation = slot.count * offer.reputation;
@@ -591,6 +614,11 @@ function OfferSlotCard({
         <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
           +{offer.reputation} reputation
         </span>
+        {growthRate !== null && (
+          <span className="text-[10px] font-medium text-muted-foreground">
+            +{growthRate}% per purchase
+          </span>
+        )}
       </button>
 
       {mode === "manual" ? (

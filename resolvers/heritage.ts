@@ -214,7 +214,7 @@ export function heritageXpFromDonation(levels: number): number {
  *
  * INCONNUE DE MODÈLE, TRANCHÉE PAR CONVENTION EXPLICITE.
  *
- * Les 29 formules de prix du gardien lisent `keeperPurchaseCount`, et cette
+ * Les 30 formules de prix du gardien lisent `keeperPurchaseCount`, et cette
  * variable n'apparaît NULLE PART ailleurs dans les 66 Mo du game design : rien
  * ne dit si le compteur est global au joueur, par vault, par offre.
  *
@@ -316,7 +316,7 @@ export function getHeritageVaultBySlug(slug: string): HeritageVault | null {
   return HERITAGE_VAULTS.find((vault) => heritageVaultSlug(vault.key) === slug) ?? null;
 }
 
-/** Les 29 courbes de prix du gardien. ⚠️ Les OFFRES, elles, n'existent pas. */
+/** Les 30 courbes de prix du gardien. ⚠️ Les OFFRES, elles, n'existent pas. */
 export const KEEPER_OFFER_FORMULAS: HeritageKeeperOfferFormula[] =
   HERITAGE_EXTRACT.keeperOfferFormulas;
 

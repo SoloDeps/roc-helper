@@ -259,8 +259,8 @@ export interface HeritageKeeperAmplifier {
 /**
  * Le PRIX d'une offre du gardien, et rien d'autre.
  *
- * ⚠️ POINT CENTRAL DU DOMAINE — le game design contient 29 formules de prix
- * `Lua_HeritageVault_KeeperOffer_*` et **zéro offre**. Chacune de ces 29
+ * ⚠️ POINT CENTRAL DU DOMAINE — le game design contient 30 formules de prix
+ * `Lua_HeritageVault_KeeperOffer_*` et **zéro offre**. Chacune de ces 30
  * définitions a exactement 0 référence entrante dans les 66 Mo : aucun
  * `ShopOfferGroupDefinitionDTO`, aucun `SelectionKitDefinitionDTO`, aucun DTO
  * quelconque ne dit quelle ressource s'échange contre quelle autre, combien
@@ -341,7 +341,7 @@ export interface HeritageExtractBundle {
   playerAgeOrderByAge: Record<string, number>;
   vaults: HeritageVaultExtract[];
   keeperAmplifier: HeritageKeeperAmplifier | null;
-  /** Les 29 courbes de prix, sans le catalogue qui n'existe pas. */
+  /** Les 30 courbes de prix, sans le catalogue qui n'existe pas. */
   keeperOfferFormulas: HeritageKeeperOfferFormula[];
   /** Types de bonus rencontrés sans équivalent dans `BONUS_LABELS`. */
   bonusGaps: BuildingBonusGap[];

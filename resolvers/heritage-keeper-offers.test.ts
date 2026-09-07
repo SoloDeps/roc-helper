@@ -8,6 +8,7 @@ import {
   eraForRank,
   keeperExchangeForecast,
   keeperOfferCost,
+  keeperOfferGrowthRatePercent,
   keeperOfferSlot,
   keeperOffersForSlot,
   previousEra,
@@ -15,17 +16,15 @@ import {
 } from "./heritage-keeper-offers";
 
 describe("KEEPER_OFFER_CATALOG", () => {
-  it("couvre les 29 courbes extraites plus `Orb`, sans doublon", () => {
+  it("couvre les 30 courbes extraites, sans doublon", () => {
     expect(KEEPER_OFFER_CATALOG.length).toBe(30);
     const ids = KEEPER_OFFER_CATALOG.map((offer) => offer.id);
     expect(new Set(ids).size).toBe(30);
-    // `Orb` est la seule entrée sans courbe : son prix est fixe (voir
-    // l'en-tête du module), toutes les autres doivent avoir été extraites.
+    // Depuis la correction du 07/09/2026 (voir l'en-tête du module), les 30
+    // offres du catalogue ont toutes une courbe extraite — plus d'exception.
     for (const offer of KEEPER_OFFER_CATALOG) {
-      if (offer.fixedCost !== undefined) continue;
       expect(KEEPER_OFFER_FORMULA_IDS.has(offer.id)).toBe(true);
     }
-    expect(KEEPER_OFFER_CATALOG.filter((offer) => offer.fixedCost !== undefined)).toHaveLength(1);
   });
 
   it("répartit les offres en 5 catégories : capital, goods, allied, blueprint, inventory", () => {
@@ -101,7 +100,7 @@ describe("emplacements du gardien (`offerGroup`)", () => {
     expect(keeperOfferSlot("ExoticGood_2")).toBe(2);
     expect(keeperOfferSlot("WonderBP_Rare")).toBe(3);
     expect(keeperOfferSlot("WonderBP_Legendary")).toBe(3);
-    expect(keeperOfferSlot("Orb")).toBe(3);
+    expect(keeperOfferSlot("WonderOrb")).toBe(3);
     expect(keeperOfferSlot("AgeUpKit")).toBe(4);
     expect(keeperOfferSlot("RefillBarracks_All")).toBe(4);
   });
@@ -111,22 +110,23 @@ describe("emplacements du gardien (`offerGroup`)", () => {
   });
 });
 
-describe("Orb — la seule offre à prix fixe", () => {
-  // `KeeperOffer_WonderOrb_3` porte `amount: "-1"` en dur dans les instantanés
-  // de compte, sans `dynamicAmount` : le prix ne bouge ni avec l'ère ni avec
-  // le nombre d'achats déjà faits cette semaine.
-  it("coûte 1 orbe, quels que soient l'ère et le compteur d'achats", () => {
-    expect(keeperOfferCost("Orb", 0, "CG")).toBe(1);
-    expect(keeperOfferCost("Orb", 12, "CG")).toBe(1);
-    expect(keeperOfferCost("Orb", 0, "SA")).toBe(1);
+describe("WonderOrb — +7 % par achat, comme les autres courbes depuis le 07/09/2026", () => {
+  // `math.floor(-1 * 1.07^keeperPurchaseCount)` : plus une offre est achetée
+  // dans la semaine, plus le prochain orbe coûte cher — voir la correction en
+  // tête du module (l'offre portait auparavant un prix fixe, `amount: "-1"`
+  // en dur dans les instantanés de compte).
+  it("grimpe de 1 à 3 orbes entre le 1er et le 13e achat de la semaine, indépendamment de l'ère", () => {
+    expect(keeperOfferCost("WonderOrb", 0, "CG")).toBe(1);
+    expect(keeperOfferCost("WonderOrb", 12, "CG")).toBe(3);
+    expect(keeperOfferCost("WonderOrb", 0, "SA")).toBe(1);
   });
 
-  it("se cumule linéairement, contrairement à toutes les autres", () => {
-    expect(cumulativeKeeperOfferCost("Orb", "CG", 5)).toBe(5);
+  it("cumule plus vite que linéairement sur 5 achats", () => {
+    expect(cumulativeKeeperOfferCost("WonderOrb", "CG", 5)).toBe(9);
   });
 
   it("rapporte 3 réputation — la valeur du wiki", () => {
-    expect(KEEPER_OFFER_CATALOG.find((offer) => offer.id === "Orb")?.reputation).toBe(3);
+    expect(KEEPER_OFFER_CATALOG.find((offer) => offer.id === "WonderOrb")?.reputation).toBe(3);
   });
 });
 
@@ -268,5 +268,22 @@ describe("keeperExchangeForecast", () => {
 
   it("rend null pour une offre inconnue", () => {
     expect(keeperExchangeForecast("Offre_Inexistante", "CG", 1000, 300, 4)).toBeNull();
+  });
+});
+
+describe("keeperOfferGrowthRatePercent", () => {
+  // Une valeur par ratio distinct observé dans les 30 courbes (5, 6, 7, 8,
+  // 10 %) plutôt que les 30 : le patron est le même pour toutes, seul le
+  // ratio littéral change.
+  it("lit le ratio littéral de la formule, pas un rapport de deux coûts arrondis", () => {
+    expect(keeperOfferGrowthRatePercent("RP")).toBe(5); // 1.05
+    expect(keeperOfferGrowthRatePercent("WonderBP_Legendary")).toBe(6); // 1.06
+    expect(keeperOfferGrowthRatePercent("WonderOrb")).toBe(7); // 1.07
+    expect(keeperOfferGrowthRatePercent("Coins_S")).toBe(8); // 1.08
+    expect(keeperOfferGrowthRatePercent("RefillBarracks_Cavalry")).toBe(10); // 1.10
+  });
+
+  it("rend null pour une offre inconnue", () => {
+    expect(keeperOfferGrowthRatePercent("Offre_Inexistante")).toBeNull();
   });
 });

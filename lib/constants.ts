@@ -462,6 +462,15 @@ export const goodsByCivilization: Record<
       "gold_treasure",
       "spice_treasure",
       "jewel_treasure",
+      // ⚠️ `gem_treasure` — AJOUTÉ 07/09/2026, PAS UN REMPLACEMENT DE
+      // `jewel_treasure` ICI. `source/gamedesign.json` ne porte plus aucune
+      // occurrence de `jewel_treasure` (0/228 vs `gem_treasure`), ce qui
+      // ressemble à un renommage en jeu — mais `jewel_treasure` reste utilisé
+      // ailleurs dans ce dépôt (`data/allieds/vikings/*`, `data/capital/*`,
+      // `scripts/extract/buildings.ts`) et n'a pas été audité pour ce
+      // changement. Voir `resolvers/heritage-keeper-offers.ts` (doc de
+      // `goodCandidates`) pour le contexte complet.
+      "gem_treasure",
       "pennies",
       "stockfish",
       "fish",

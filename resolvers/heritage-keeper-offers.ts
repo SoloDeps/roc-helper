@@ -6,7 +6,7 @@
 // l'échanger contre de la réputation avant la fin de la semaine, sachant que
 // chaque échange coûte plus cher que le précédent ? »
 //
-// ⚠️ CE QUE CE MODULE COUVRE. Le game design porte 29 courbes de prix
+// ⚠️ CE QUE CE MODULE COUVRE. Le game design porte 30 courbes de prix
 // `Lua_HeritageVault_KeeperOffer_*` (`KEEPER_OFFER_FORMULAS`, dans
 // `heritage.ts`), mais AUCUN catalogue ne dit quel vault propose quelle offre —
 // ni combien de réputation chacune rapporte. Ce module n'essaie donc PAS de
@@ -34,17 +34,21 @@
 // `Module:Heritage_Vault` (riseofcultures.wiki.gg) porte une table `offers_list`
 // qui associe à chaque type d'offre un montant ET une réputation FIXE — une
 // donnée que le jeu ne livre nulle part ailleurs. Elle recoupe parfaitement les
-// 29 courbes trouvées (même montant au premier achat, à l'unité près :
+// 30 courbes trouvées (même montant au premier achat, à l'unité près :
 // `RP` → 20, `Negotiation_Wildcard` → 3, `WonderBP_Rare/Legendary` → 1, cf.
 // `heritage-keeper-offers.test.ts`) — une coïncidence sur autant de valeurs
-// indépendantes vaudrait comme confirmation, pas comme hasard. La seule offre
-// du wiki SANS courbe correspondante est `Orb` (réputation 3), et les
-// instantanés de compte tranchent : `KeeperOffer_WonderOrb_3` porte un
-// `amount: "-1"` EN DUR, sans `dynamicAmount`. C'est donc bien un PRIX FIXE
-// d'un orbe qui ne grimpe jamais — invisible pour notre extraction, qui ne
-// retient que les scripts lisant `keeperPurchaseCount`. Elle entre au
-// catalogue avec `fixedCost` (voir `KeeperOffer.fixedCost`), 30ᵉ et dernière
-// offre connue.
+// indépendantes vaudrait comme confirmation, pas comme hasard.
+//
+// ⚠️ CORRECTION DU 07/09/2026 — `WonderOrb` A DÉSORMAIS UNE COURBE. Le jeu ne
+// livrait auparavant, pour cette offre, qu'un `amount: "-1"` EN DUR dans les
+// instantanés de compte (`KeeperOffer_WonderOrb_3`), sans `dynamicAmount` —
+// d'où un `fixedCost` saisi à la main. Le game design porte désormais
+// `Lua_HeritageVault_KeeperOffer_WonderOrb`
+// (`math.floor(-1 * 1.07^keeperPurchaseCount)`) : un orbe grimpe donc de 7 %
+// par achat de la semaine, exactement comme les 29 autres courbes. Le
+// mécanisme `fixedCost` n'a plus d'utilisateur et a été retiré — voir
+// `git log` pour la version qui le portait si une offre à prix fixe
+// réapparaît un jour.
 //
 // ⚠️ CORRECTION SUR LE SIGNE — `CEGood1/2/3` ET `PEGood1/2/3`. Notre extraction
 // les marque `direction: "receive"` (montant positif), ce qui les excluait
@@ -110,13 +114,6 @@ export interface KeeperOffer {
   /** Réputation gagnée par échange — fixe, source : wiki communautaire. */
   reputation: number;
   scalesWithPlayerAge: boolean;
-  /**
-   * Prix FIXE, pour la seule offre qui n'a pas de courbe (`Orb`) : son coût ne
-   * dépend ni de l'ère ni du nombre d'achats déjà faits cette semaine (voir
-   * l'en-tête du module). Absent partout ailleurs — c'est alors la formule Lua
-   * qui fait foi, jamais une valeur en dur.
-   */
-  fixedCost?: number;
   /** Uniquement pour un bien de RANG (`CEGood*`/`PEGood*`). */
   rank?: KeeperOfferRank;
   /**
@@ -129,27 +126,40 @@ export interface KeeperOffer {
    * ⚠️ TROIS PALIERS DE PRIX, PAS TROIS BIENS. Chaque offre en jeu
    * (`KeeperOffer_ExoticGood_<Culture>_<n>`) tire un bien allié précis selon
    * la civilisation ET le tirage du joueur — confirmé en confrontant deux
-   * comptes (`source/startup_stable.json`, `source/startup_beta.json`) : le
-   * MÊME palier de prix (`ExoticGood_1/2/3`, donc la même courbe et le même
+   * comptes (les anciens `source/startup_stable.json`/`startup_beta.json`,
+   * remplacés depuis par le seul `source/startup.json`) : le MÊME palier de
+   * prix (`ExoticGood_1/2/3`, donc la même courbe et le même
    * `keeperPurchaseCount`) sert pour des biens différents selon la
    * civilisation (`porcelain` en Chine, `spice_treasure`/`ceramic_treasure`
    * chez les Vikings, tous au palier `ExoticGood_1`). Cette liste ne prétend
-   * donc PAS être exhaustive — seulement les biens confirmés dans nos deux
-   * échantillons de compte — mais couvre déjà Égypte, Chine, Maya, Arabie,
-   * Ottomans et Vikings. Toutes désignées comme autant de CARTES DISTINCTES
-   * dans le sélecteur, jamais fondues sous un unique libellé générique
-   * (« Exotic goods II ») : le joueur reconnaît son écran par le bien, pas
-   * par un numéro de palier qui ne veut rien dire en jeu.
+   * donc PAS être exhaustive — seulement les biens confirmés dans les
+   * échantillons de compte disponibles — mais couvre déjà Égypte, Chine,
+   * Maya, Arabie, Ottomans et Vikings. Toutes désignées comme autant de
+   * CARTES DISTINCTES dans le sélecteur, jamais fondues sous un unique
+   * libellé générique (« Exotic goods II ») : le joueur reconnaît son écran
+   * par le bien, pas par un numéro de palier qui ne veut rien dire en jeu.
+   *
+   * ⚠️ AJOUTS DU 07/09/2026 (`source/startup.json` mis à jour) : `ancestor_mask`
+   * et `headdress` (Maya, palier I), `confection` et `brocade` (Ottoman,
+   * palier II). Le jeu y liste aussi `gem_treasure` (Vikings, palier II) —
+   * un bien ABSENT de `goodsByCivilization.VIKING KINGDOM` (`lib/constants.ts`),
+   * qui ne connaît que `jewel_treasure`, introuvable nulle part dans
+   * `source/*.json` (0 occurrence). Tout indique un bien renommé en jeu
+   * (`jewel_treasure` → `gem_treasure`) qui touche potentiellement bien plus
+   * que ce catalogue — bâtiments vikings, fermes, habitations (voir
+   * `data/allieds/vikings/*`, `data/capital/*`) — et qui n'est PAS traité ici :
+   * seule la clé `gem_treasure` a été ajoutée à `goodsByCivilization`, sans
+   * toucher à `jewel_treasure` ni aux données qui la portent encore ailleurs.
    */
   goodCandidates?: string[];
 }
 
 /**
- * Le catalogue complet — les 29 courbes extraites, toutes retrouvées dans le
- * wiki (`Orb`, seule entrée du wiki SANS courbe, n'a pas de contrepartie ici —
- * voir l'en-tête du module). Dans l'ordre CAPITAL → GOODS → ALLIED → INVENTORY,
- * l'ordre d'affichage voulu par sections plutôt que celui, arbitraire, du game
- * design.
+ * Le catalogue complet — les 30 courbes extraites, toutes retrouvées dans le
+ * wiki (voir l'en-tête du module pour la correction du 07/09/2026 sur
+ * `WonderOrb`, longtemps sans courbe). Dans l'ordre CAPITAL → GOODS → ALLIED →
+ * INVENTORY, l'ordre d'affichage voulu par sections plutôt que celui,
+ * arbitraire, du game design.
  */
 export const KEEPER_OFFER_CATALOG: KeeperOffer[] = [
   // ─── Capital ──────────────────────────────────────────────────────────────
@@ -171,9 +181,10 @@ export const KEEPER_OFFER_CATALOG: KeeperOffer[] = [
   // voir la doc de `goodCandidates`. `tea` couvre `medical_tea`, l'identifiant
   // brut du bien ottoman (`RESOURCE_KEY_ALIAS`, `scripts/extract/technologies.ts`) :
   // même bien affiché ailleurs dans le projet, `medical_tea` n'a pas d'icône
-  // propre sous `/images/goods/`.
-  { id: "ExoticGood_1", label: "Exotic goods I", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["porcelain", "ceramic_treasure", "spice_treasure"] },
-  { id: "ExoticGood_2", label: "Exotic goods II", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["ankh", "golden_mask", "syrup", "incense", "oil_lamp", "calendar_stone", "ritual_dagger", "tea"] },
+  // propre sous `/images/goods/`. Idem pour `confection`, qui couvre
+  // `confections` — même alias.
+  { id: "ExoticGood_1", label: "Exotic goods I", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["porcelain", "ceramic_treasure", "spice_treasure", "ancestor_mask", "headdress"] },
+  { id: "ExoticGood_2", label: "Exotic goods II", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["ankh", "golden_mask", "syrup", "incense", "oil_lamp", "calendar_stone", "ritual_dagger", "tea", "confection", "brocade", "gold_treasure", "gem_treasure"] },
   { id: "ExoticGood_3", label: "Exotic goods III", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["papyrus_scroll", "ceremonial_dress", "silk", "stockfish"] },
 
   // ─── Inventory ────────────────────────────────────────────────────────────
@@ -199,7 +210,7 @@ export const KEEPER_OFFER_CATALOG: KeeperOffer[] = [
   // maintenant que chaque case ne montre que son thème.
   { id: "WonderBP_Rare", label: "Rare wonder blueprint", category: "blueprint", reputation: 4, scalesWithPlayerAge: false },
   { id: "WonderBP_Legendary", label: "Legendary wonder blueprint", category: "blueprint", reputation: 5, scalesWithPlayerAge: false },
-  { id: "Orb", label: "Wonder orb", category: "blueprint", reputation: 3, scalesWithPlayerAge: false, fixedCost: 1 },
+  { id: "WonderOrb", label: "Wonder orb", category: "blueprint", reputation: 3, scalesWithPlayerAge: false },
 ];
 
 /** Les offres proposées par un emplacement donné, dans l'ordre du catalogue. */
@@ -214,8 +225,9 @@ export function keeperOfferSlot(offerId: string): KeeperSlot | null {
 }
 
 /**
- * Vérifie, en test, que chaque entrée a bien une courbe de prix extraite —
- * `Orb` exceptée, seule offre à prix fixe (voir `KeeperOffer.fixedCost`).
+ * Vérifie, en test, que chaque entrée du catalogue a bien une courbe de prix
+ * extraite — les 30 offres, sans exception depuis la correction du 07/09/2026
+ * sur `WonderOrb` (voir l'en-tête du module).
  */
 export const KEEPER_OFFER_FORMULA_IDS = new Set(KEEPER_OFFER_FORMULAS.map((o) => o.id));
 
@@ -248,13 +260,37 @@ export function keeperOfferCost(
   purchaseCount: number,
   era: EraCode,
 ): number | null {
-  // Le prix fixe prime — c'est justement le cas où AUCUNE formule n'existe
-  // (`Orb`), et il ne bouge ni avec l'ère ni avec le compteur d'achats.
-  const offer = KEEPER_OFFER_CATALOG.find((candidate) => candidate.id === offerId);
-  if (offer?.fixedCost !== undefined) return offer.fixedCost;
-
   const raw = keeperOfferValue(offerId, purchaseCount, era);
   return raw === null ? null : Math.abs(raw);
+}
+
+/**
+ * Le ratio de croissance par achat, tel qu'il apparaît littéralement dans la
+ * formule (`1.07^keeperPurchaseCount` → `1.07`). Les 30 courbes connues sont
+ * toutes de la forme `base [× playerAgeOrder²] × ratio^keeperPurchaseCount` —
+ * voir `heritage-keeper-offers.test.ts` — donc un ratio CONSTANT plutôt qu'un
+ * résultat déduit de deux coûts consécutifs, que l'arrondi `math.floor` du
+ * jeu rendrait imprécis sur les tout premiers achats (ex. `WonderOrb` : 1 → 2
+ * orbes, soit +100 % en apparence, quand la formule dit +7 %).
+ */
+const GROWTH_RATIO_PATTERN = /([\d.]+)\s*\^\s*keeperPurchaseCount/;
+
+/**
+ * Le pourcentage d'augmentation du prix à CHAQUE achat de la semaine — ex. `7`
+ * pour `WonderOrb` (`1.07^keeperPurchaseCount`). Répond à la demande de la
+ * communauté (07/09/2026) de voir ce qui change d'un échange à l'autre, pas
+ * seulement le prix du prochain. `null` si l'offre est inconnue ou si sa
+ * formule ne suit pas ce patron — ne devrait jamais arriver pour les 30
+ * courbes actuelles, mais une forme neuve du jeu ne doit pas afficher un
+ * pourcentage inventé.
+ */
+export function keeperOfferGrowthRatePercent(offerId: string): number | null {
+  const formula = KEEPER_OFFER_FORMULAS.find((candidate) => candidate.id === offerId);
+  if (formula === undefined) return null;
+  const match = GROWTH_RATIO_PATTERN.exec(formula.luaScript);
+  if (match === null) return null;
+  // Flottants IEEE 754 : `(1.08 - 1) * 100` vaut `8.000000000000007`.
+  return Math.round((Number(match[1]) - 1) * 1000) / 10;
 }
 
 /**

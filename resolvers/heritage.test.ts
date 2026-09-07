@@ -606,9 +606,9 @@ describe("convention — portée de `keeperPurchaseCount`", () => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe("offres du gardien", () => {
-  it("expose 29 courbes de prix — et AUCUN catalogue", () => {
-    expect(KEEPER_OFFER_FORMULAS).toHaveLength(29);
-    expect(KEEPER_OFFER_FORMULAS.filter((o) => o.direction === "give")).toHaveLength(11);
+  it("expose 30 courbes de prix — et AUCUN catalogue", () => {
+    expect(KEEPER_OFFER_FORMULAS).toHaveLength(30);
+    expect(KEEPER_OFFER_FORMULAS.filter((o) => o.direction === "give")).toHaveLength(12);
     expect(KEEPER_OFFER_FORMULAS.filter((o) => o.direction === "receive")).toHaveLength(18);
     // ⚠️ Rien dans le bundle ne dit ce qui s'échange contre quoi : le game design
     // ne le déclare nulle part. Aucun champ de ce genre ne doit apparaître ici
