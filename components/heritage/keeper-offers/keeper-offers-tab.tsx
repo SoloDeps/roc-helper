@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, Download, Info, Plus, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Download, Info, Plus, TrendingUp, X } from "lucide-react";
 
 import { cn, formatNumber } from "@/lib/utils";
 import {
@@ -340,24 +340,38 @@ function OfferSectionTitle({ children }: { children: ReactNode }) {
 }
 
 /**
- * Le badge « +N rep », et — quand la formule le permet — le pourcentage
- * d'augmentation du prix à CHAQUE achat de la semaine, en dessous. Répond à
- * la demande de la communauté (07/09/2026) : la réputation seule ne dit rien
- * de ce qui change d'un échange à l'autre, une donnée qui n'apparaît nulle
- * part ailleurs à l'écran.
+ * Le pourcentage d'augmentation du prix à CHAQUE achat de la semaine — un
+ * chip compact, dans le genre des indicateurs de tendance des dashboards
+ * financiers (Stripe, Robinhood) : icône + valeur en gras sur un fond
+ * ambré, pour qu'il se distingue du badge de réputation (vert/primaire, un
+ * GAIN) sans lui faire concurrence — ici c'est un COÛT qui grimpe, la
+ * couleur le dit avant même de lire le chiffre.
+ */
+function GrowthRateChip({ growthRate }: { growthRate: number }) {
+  return (
+    <span
+      className="inline-flex items-center gap-0.5 rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-bold tabular-nums text-amber-600 dark:text-amber-400"
+      title={`Price rises by ${growthRate}% with every purchase this week`}
+    >
+      <TrendingUp size={10} aria-hidden="true" strokeWidth={2.5} />+{growthRate}%
+    </span>
+  );
+}
+
+/**
+ * Le badge « +N rep », et — quand la formule le permet — le chip de
+ * croissance juste à côté. Répond à la demande de la communauté (07/09/2026) :
+ * la réputation seule ne dit rien de ce qui change d'un échange à l'autre,
+ * une donnée qui n'apparaît nulle part ailleurs à l'écran.
  */
 function ReputationBadge({ offer }: { offer: KeeperOffer }) {
   const growthRate = keeperOfferGrowthRatePercent(offer.id);
   return (
-    <span className="flex flex-col items-center gap-0.5">
+    <span className="flex flex-wrap items-center justify-center gap-1">
       <span className="rounded-sm bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary">
         +{offer.reputation} rep
       </span>
-      {growthRate !== null && (
-        <span className="text-[10px] font-medium text-muted-foreground">
-          +{growthRate}% per purchase
-        </span>
-      )}
+      {growthRate !== null && <GrowthRateChip growthRate={growthRate} />}
     </span>
   );
 }
@@ -611,14 +625,12 @@ function OfferSlotCard({
         <span className="text-lg font-bold tabular-nums text-foreground">
           {nextCost === null ? "—" : formatNumber(nextCost)}
         </span>
-        <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
-          +{offer.reputation} reputation
-        </span>
-        {growthRate !== null && (
-          <span className="text-[10px] font-medium text-muted-foreground">
-            +{growthRate}% per purchase
+        <span className="flex flex-wrap items-center justify-center gap-1">
+          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
+            +{offer.reputation} reputation
           </span>
-        )}
+          {growthRate !== null && <GrowthRateChip growthRate={growthRate} />}
+        </span>
       </button>
 
       {mode === "manual" ? (

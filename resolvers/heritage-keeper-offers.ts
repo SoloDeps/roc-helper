@@ -141,14 +141,12 @@ export interface KeeperOffer {
    *
    * ⚠️ AJOUTS DU 07/09/2026 (`source/startup.json` mis à jour) : `ancestor_mask`
    * et `headdress` (Maya, palier I), `confection` et `brocade` (Ottoman,
-   * palier II) — confirmés par le snapshot. Complétés par le RESTE des biens
-   * ottomans de `goodsByCivilization.OTTOMAN EMPIRE` (`wheat`, `pomegranate`,
-   * `apricot`, `mohair`, `aspers`), sur le même palier `ExoticGood_2` que les
-   * quatre confirmés — demande explicite du joueur d'afficher TOUS les biens
-   * ottomans, pas seulement ceux vus dans un snapshot. `aspers` couvre
-   * `asper`, l'identifiant brut du jeu (`RESOURCE_KEY_ALIAS`,
-   * `scripts/extract/technologies.ts`). Le jeu y liste aussi `gem_treasure`
-   * (Vikings, palier II) — un bien ABSENT de
+   * palier II) — les seuls confirmés par le snapshot. Le RESTE des biens de
+   * `goodsByCivilization.OTTOMAN EMPIRE` (`wheat`, `pomegranate`, `apricot`,
+   * `mohair`, `aspers`) a été ajouté puis RETIRÉ sur demande du joueur : cette
+   * liste ne prétend PAS être exhaustive (voir plus haut), seulement les
+   * biens confirmés dans un snapshot de compte. Le jeu y liste aussi
+   * `gem_treasure` (Vikings, palier II) — un bien ABSENT de
    * `goodsByCivilization.VIKING KINGDOM` (`lib/constants.ts`),
    * qui ne connaît que `jewel_treasure`, introuvable nulle part dans
    * `source/*.json` (0 occurrence). Tout indique un bien renommé en jeu
@@ -191,7 +189,7 @@ export const KEEPER_OFFER_CATALOG: KeeperOffer[] = [
   // propre sous `/images/goods/`. Idem pour `confection`, qui couvre
   // `confections` — même alias.
   { id: "ExoticGood_1", label: "Exotic goods I", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["porcelain", "ceramic_treasure", "spice_treasure", "ancestor_mask", "headdress"] },
-  { id: "ExoticGood_2", label: "Exotic goods II", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["ankh", "golden_mask", "syrup", "incense", "oil_lamp", "calendar_stone", "ritual_dagger", "tea", "confection", "brocade", "wheat", "pomegranate", "apricot", "mohair", "aspers", "gold_treasure", "gem_treasure"] },
+  { id: "ExoticGood_2", label: "Exotic goods II", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["ankh", "golden_mask", "syrup", "incense", "oil_lamp", "calendar_stone", "ritual_dagger", "tea", "confection", "brocade", "gold_treasure", "gem_treasure"] },
   { id: "ExoticGood_3", label: "Exotic goods III", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["papyrus_scroll", "ceremonial_dress", "silk", "stockfish"] },
 
   // ─── Inventory ────────────────────────────────────────────────────────────
