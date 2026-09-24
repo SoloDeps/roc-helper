@@ -71,7 +71,7 @@ const DrawerSelectContent = React.memo<{
   };
 
   return (
-    <div className="flex flex-col max-h-full h-full">
+    <div className="flex flex-col flex-1 min-h-0">
       <div className="sticky top-0 z-10 backdrop-blur-sm border-b border-alpha-400 bg-background shrink-0">
         <div className="flex items-center justify-center h-10 px-4">
           <h3 className="text-sm font-semibold">
@@ -80,7 +80,15 @@ const DrawerSelectContent = React.memo<{
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-2 pb-6 min-h-0">
+      <div
+        // Vaul capte le glisser vertical pour fermer le tiroir : sans
+        // `data-vaul-no-drag`, le scroll de la liste est avalé par le geste.
+        // `data-scroll-lock-ignore` évite que le scroll-lock d'un tiroir/modale
+        // parent (react-remove-scroll) bloque cette liste portalisée.
+        data-vaul-no-drag
+        data-scroll-lock-ignore
+        className="flex-1 overflow-y-auto overscroll-contain touch-pan-y p-2 pb-6 min-h-0"
+      >
         {options.map((option) => {
           const isSelected = option.value === value;
           return (
