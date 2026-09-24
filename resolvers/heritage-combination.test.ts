@@ -337,15 +337,28 @@ describe("lectures dérivées d'une jauge", () => {
     expect(compass.secondsToFill).toBe(2700 * 9);
   });
 
-  it("devient INSTANTANÉ à 100 %, et ne va jamais en négatif au-delà", () => {
-    const exact = regenerationReadouts(compassLines(1, null))[0];
-    expect(exact.instant).toBe(true);
-    expect(exact.secondsPerUnit).toBe(0);
-    expect(exact.secondsToFill).toBe(0);
-    // 110 % ne rend pas un temps négatif : la jauge est pleine, pas remontée.
-    const beyond = regenerationReadouts(compassLines(1.1, null))[0];
-    expect(beyond.instant).toBe(true);
-    expect(beyond.secondsPerUnit).toBe(0);
+  it("plafonne la réduction à 95 % : plus d'instantané, il reste 5 % du temps", () => {
+    for (const speed of [0.95, 1, 1.04]) {
+      const [compass] = regenerationReadouts(compassLines(speed, null));
+      expect(compass.speedBonus).toBe(0.95);
+      expect(compass.instant).toBe(false);
+      expect(compass.secondsPerUnit).toBeCloseTo(5400 * 0.05, 6);
+    }
+  });
+
+  it("plafonne aussi les réductions de recrutement, et signale le surplus perdu", () => {
+    const [line] = combineBonuses([
+      source("a", [bonus({ type: "recruitment_time_reduction", value: 0.6 })]),
+      source("b", [bonus({ type: "recruitment_time_reduction", value: 0.44 })]),
+    ]);
+    expect(line.total).toBe(0.95);
+    expect(line.uncappedTotal).toBeCloseTo(1.04, 9);
+    expect(line.capped).toBe(true);
+    const [under] = combineBonuses([
+      source("a", [bonus({ type: "recruitment_time_reduction", value: 0.5 })]),
+    ]);
+    expect(under.total).toBe(0.5);
+    expect(under.capped).toBe(false);
   });
 
   it("un plafond seul suffit à produire une lecture, sans bonus de vitesse", () => {

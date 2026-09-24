@@ -125,6 +125,27 @@ export function combinationRuleFor(type: string): CombinationRule {
   return "sum";
 }
 
+/**
+ * Le plafond de jeu des réductions de temps : 95 %.
+ *
+ * Depuis la bêta, les développeurs bornent à 95 % le cumul de TOUTES les
+ * réductions de temps de recharge — casernes (`*recruitment_time_reduction`) et
+ * régénération des jauges (`regeneration_speed`, boussoles comprises), tous
+ * bâtiments confondus. Au-delà, le surplus est perdu : 104 % vaut 95 %.
+ *
+ * ⚠️ Cela remplace la lecture « 100 % = instantané » : le temps restant ne
+ * tombe plus jamais à zéro (au mieux 5 % de la base).
+ */
+export const TIME_REDUCTION_CEILING = 0.95;
+
+/** Le plafond d'un type de bonus, ou `null` s'il n'en a pas. */
+export function totalCeilingFor(type: string): number | null {
+  if (type === "regeneration_speed" || type.endsWith("recruitment_time_reduction")) {
+    return TIME_REDUCTION_CEILING;
+  }
+  return null;
+}
+
 /** Ce qu'un porteur apporte à une ligne. */
 export interface CombinationContribution {
   sourceId: string;
@@ -153,6 +174,14 @@ export interface CombinationLine {
    * valeur lisible à son niveau.
    */
   total: number | null;
+  /**
+   * Le cumul AVANT plafond de jeu (cf. `totalCeilingFor`). Égal à `total` quand
+   * rien n'est plafonné ; supérieur quand le plafond a mordu — l'UI peut alors
+   * dire que le surplus est perdu.
+   */
+  uncappedTotal: number | null;
+  /** Le plafond a réduit le total. */
+  capped: boolean;
   /** Dans l'ordre des sources reçues. Jamais vide. */
   contributions: CombinationContribution[];
 }
@@ -232,6 +261,8 @@ export function combineBonuses(sources: CombinationSource[]): CombinationLine[] 
           sample: bonus,
           rule: combinationRuleFor(bonus.type),
           total: null,
+          uncappedTotal: null,
+          capped: false,
           contributions: [contribution],
         });
         continue;
@@ -242,13 +273,20 @@ export function combineBonuses(sources: CombinationSource[]): CombinationLine[] 
 
   // Le total est calculé APRÈS le regroupement : `max` a besoin de voir toutes
   // les contributions, et `sum` doit ajouter dans un ordre stable.
-  return [...lines.values()].map((line) => ({
-    ...line,
-    total: combineValues(
+  return [...lines.values()].map((line) => {
+    const uncappedTotal = combineValues(
       line.rule,
       line.contributions.map((contribution) => contribution.value),
-    ),
-  }));
+    );
+    const ceiling = totalCeilingFor(line.sample.type);
+    const capped = ceiling !== null && uncappedTotal !== null && uncappedTotal > ceiling;
+    return {
+      ...line,
+      uncappedTotal,
+      capped,
+      total: capped ? ceiling : uncappedTotal,
+    };
+  });
 }
 
 /**
@@ -318,10 +356,10 @@ export interface RegenerationReadout {
  * qui ne touche aucune jauge ne rend aucune lecture, plutôt que trois lignes
  * inertes récitant les bases du jeu.
  *
- * ⚠️ LE BONUS DE VITESSE EST BORNÉ À 100 %, PAS AU-DELÀ. Le temps ne devient pas
- * négatif : à 110 % la jauge est instantanée, exactement comme à 100 %. C'est ce
- * que fait le tableur communautaire (`IF(90*(1-total)<=0, "INSTANTANÉ", …)`), et
- * la seule lecture qui ne produise pas d'absurdité à l'écran.
+ * ⚠️ LE BONUS DE VITESSE EST PLAFONNÉ À 95 % par le jeu (`TIME_REDUCTION_CEILING`),
+ * déjà appliqué dans `line.total` : le temps restant vaut au moins 5 % de la
+ * base. Le `Math.max(0, …)` ci-dessous ne sert plus que de garde-fou si l'on
+ * passe des lignes construites à la main.
  *
  * ⚠️ `instant` est porté À PART plutôt que déduit d'un `secondsPerUnit === 0` par
  * l'appelant : le zéro est une valeur légitime de durée, et l'affichage doit
@@ -508,13 +546,16 @@ function prune(points: FrontierPoint[], target: number): FrontierPoint[] {
 export function maxReachableValue(
   sources: OptimizerSource[],
   rule: CombinationRule,
+  ceiling: number | null = null,
 ): number | null {
   if (rule === "none" || sources.length === 0) return null;
   const values = sources
     .map((source) => source.contributionAt(source.maxLevel))
     .filter((value): value is number => value !== null);
   if (values.length === 0) return null;
-  return combineValues(rule, values);
+  const total = combineValues(rule, values);
+  // Le plafond de jeu (`totalCeilingFor`) borne aussi ce qu'on peut viser.
+  return total !== null && ceiling !== null ? Math.min(total, ceiling) : total;
 }
 
 /**

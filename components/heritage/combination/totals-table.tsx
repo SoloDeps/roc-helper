@@ -127,6 +127,12 @@ function TotalRow({
               </span>
             )}
           </span>
+          {/* Le jeu plafonne les réductions de temps à 95 % : on dit ce qui est perdu. */}
+          {line.capped && line.uncappedTotal !== null && (
+            <span className="block truncate text-[12px] font-medium text-amber-700 dark:text-amber-400">
+              Capped — {describeTotal({ ...line, total: line.uncappedTotal }, selections).value} raw
+            </span>
+          )}
           {display.detail !== null && (
             <span className="block truncate text-[12px] text-muted-foreground">
               {display.detail}

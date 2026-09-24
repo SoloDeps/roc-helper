@@ -15,7 +15,7 @@ import type {
   OptimizerPlan,
   OptimizerSource,
 } from "@/resolvers/heritage-combination";
-import { maxReachableValue, planAcrossKeeper } from "@/resolvers/heritage-combination";
+import { maxReachableValue, planAcrossKeeper, totalCeilingFor } from "@/resolvers/heritage-combination";
 
 // ============================================================
 // « Il me manque combien, et où je mets mes jetons ? »
@@ -254,6 +254,8 @@ export function OptimizerPanel({
   const ceiling = maxReachableValue(
     buildSources(line)(keeper.multiplierAt(keeper.maxLevel)),
     line.rule,
+    // Plafond de jeu des réductions de temps (95 %) : inutile de viser au-delà.
+    totalCeilingFor(line.sample.type),
   );
   // ⚠️ ARRONDI VERS LE BAS. Le plafond du champ doit rester ATTEIGNABLE : à
   // `Math.ceil`, la valeur maximale du compteur dépassait le plafond réel d'une
@@ -261,7 +263,7 @@ export function OptimizerPanel({
   const typedCeiling =
     ceiling === null
       ? TARGET_MAX
-      : Math.min(TARGET_MAX, Math.max(1, Math.floor(toTyped(line.sample.format, ceiling))));
+      : Math.min(TARGET_MAX, Math.max(1, Math.floor(toTyped(line.sample.format, ceiling) + 1e-9)));
 
   const hasTarget = touched && target > 0;
   const outOfReach = hasTarget && ceiling !== null && toStored(line.sample.format, target) > ceiling;
@@ -328,21 +330,20 @@ export function OptimizerPanel({
                 ariaLabel={`Target ${display.label}`}
               />
               {isPercent && <span className="text-[13px] text-muted-foreground">%</span>}
-              {/* ⚠️ Le raccourci n'apparaît que sur un POURCENTAGE : « 100 » n'a
-                  de sens comme objectif que sur une stat qui plafonne à 100 % —
-                  la régénération instantanée, exactement ce que le jeu propose
-                  comme but. Sur une quantité, 100 biens ne veut rien dire. */}
+              {/* ⚠️ Le raccourci n'apparaît que sur un POURCENTAGE : il vise le
+                  maximum atteignable (95 % pour les réductions de temps, plafond
+                  du jeu). Sur une quantité, « le max » ne veut rien dire. */}
               {isPercent && (
                 <button
                   onClick={() => {
-                    setTarget(100);
+                    setTarget(typedCeiling);
                     setTouched(true);
                   }}
-                  title="Target 100% — instant regeneration"
+                  title={`Target ${typedCeiling}% — the most you can reach`}
                   className="flex h-9 shrink-0 cursor-pointer items-center gap-1 rounded-lg border border-border px-2 text-[12px] font-medium text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground"
                 >
                   <Zap size={11} aria-hidden="true" />
-                  100%
+                  {typedCeiling}%
                 </button>
               )}
             </div>
