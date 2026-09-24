@@ -717,7 +717,7 @@ export function SacrificeTab({
         onOpenChange={(open) => {
           if (!open) setPicker(null);
         }}
-        className="flex h-[80vh] flex-col gap-0 overflow-hidden p-0 md:h-[min(600px,57vh)] md:max-w-2xl"
+        className="flex h-[50vh] max-h-[50vh] flex-col gap-0 overflow-hidden p-0 md:h-[min(600px,57vh)] md:max-h-none md:max-w-2xl"
       >
         <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-4 py-3">
           <h3 className="text-sm font-bold">Choose an evolving building</h3>
@@ -736,7 +736,7 @@ export function SacrificeTab({
               No more buildings available.
             </p>
           ) : (
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3">
               {pickerBuildings.map((building) => (
                 <button
                   key={building.buildingId}
