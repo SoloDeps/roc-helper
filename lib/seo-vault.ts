@@ -3,7 +3,7 @@ import {
   heritageVaultSlug,
   type HeritageVault,
 } from "@/resolvers/heritage";
-import { getHeritageVaultPortraitUrl, HERITAGE_KEEPER_IMAGE_URL } from "@/resolvers/heritage-portraits";
+import { getHeritageVaultPortraitUrl } from "@/resolvers/heritage-portraits";
 import { PAGES, type PageSeo } from "@/lib/seo";
 
 // ============================================================
@@ -37,7 +37,7 @@ export function vaultPageSeo(vault: HeritageVault): PageSeo {
       buildings.length > 0
         ? `Eligible evolving buildings for the ${vault.buildingName} Heritage Vault: ${buildings.join(", ")}.`
         : undefined,
-    image: getHeritageVaultPortraitUrl(vault.themeId) ?? HERITAGE_KEEPER_IMAGE_URL,
+    image: getHeritageVaultPortraitUrl(vault.themeId) ?? PAGES.vault.image,
     keywords: [
       `${vault.name} Heritage Vault`,
       `${vault.buildingName} Heritage Vault`,

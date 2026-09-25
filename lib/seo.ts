@@ -85,7 +85,7 @@ export const PAGES = {
     title: "Heritage Vault Calculator",
     description:
       "Rise of Cultures Heritage Vault calculator for all 13 vaults: tier effects, slots, sacrifice and combination simulator, level table and keeper offers.",
-    image: "/images/vault/keeper.webp",
+    image: "/images/vault/icon_heritage.webp",
     keywords: [
       "Rise of Cultures Heritage Vault",
       "Heritage Vault calculator",
@@ -106,7 +106,7 @@ export const PAGES = {
     path: "/help",
     title: "Help & Guides",
     description: "How to use RoC Helper: guides for the calculator, technology planner, campaign tracker and Heritage Vault.",
-    image: "/images/vault/icon_heritage.webp",
+    image: "/images/technos/high_middle_ages/hm_16.webp",
     keywords: ["RoC Helper guide"],
   },
 } satisfies Record<string, PageSeo>;
