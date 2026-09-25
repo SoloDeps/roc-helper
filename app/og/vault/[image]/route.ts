@@ -1,8 +1,8 @@
-import { renderOgImage } from "@/lib/og/render-og-image";
+import { renderThumbnail } from "@/lib/og/render-thumbnail";
 import { vaultPageSeo } from "@/lib/seo-vault";
 import { HERITAGE_VAULTS, getHeritageVaultBySlug, heritageVaultSlug } from "@/resolvers/heritage";
 
-// Image de partage de chaque coffre : `/og/vault/<slug>.png`, générée AU BUILD.
+// Vignette de partage de chaque coffre (portrait du personnage) : `/og/vault/<slug>.png`, générée AU BUILD.
 // Même raison que `app/og/[image]/route.tsx` pour le `.png` dans le segment.
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -15,5 +15,5 @@ export async function GET(_request: Request, { params }: { params: Promise<{ ima
   const { image } = await params;
   const vault = getHeritageVaultBySlug(image.replace(/\.png$/, ""));
   if (vault === null) return new Response("Not found", { status: 404 });
-  return renderOgImage(vaultPageSeo(vault));
+  return renderThumbnail(vaultPageSeo(vault).image);
 }

@@ -40,20 +40,11 @@ export interface PageSeo {
   path: string;
   /** Titre court, complété par le template `%s | RoC Helper`. */
   title: string;
-  /** Titre affiché en gros sur l'image de partage. */
-  headline: string;
-  /** Surtitre de l'image de partage (ex. « Heritage Vault · Pirate Tradition »). */
-  eyebrow?: string;
   description: string;
-  /** Texte de l'image de partage, si `description` y est trop long. */
-  summary?: string;
   /** Complément rendu dans le HTML de la page (hors meta description). */
   details?: string;
-  /**
-   * Visuel(s) mis en avant sur l'image de partage (chemins sous `public/`).
-   * Plusieurs = grille 2×2 (accueil : un visuel par outil).
-   */
-  illustrations: string[];
+  /** Visuel de la vignette de partage (chemin sous `public/`). */
+  image: string;
   keywords: string[];
 }
 
@@ -61,50 +52,40 @@ export const PAGES = {
   home: {
     path: "",
     title: SITE_TAGLINE,
-    headline: "Tools to optimize your Rise of Cultures progress",
     description: SITE_DESCRIPTION,
-    illustrations: [
-      "/images/technos/high_middle_ages/hm_13.webp",
-      "/images/vault/icon_heritage.webp",
-      "/images/technos/kingdom_of_sicily/ks_41.webp",
-      "/images/technos/bronze_age/ba_8.webp",
-    ],
+    image: "/web-app-manifest-512x512.png",
     keywords: [],
   },
   calculator: {
     path: "/calculator",
     title: "Resource Calculator",
-    headline: "Resource Calculator",
     description:
       "Plan your Rise of Cultures buildings and see every coin, food and good you need, era by era, with your workshop setup.",
-    illustrations: ["/images/technos/high_middle_ages/hm_13.webp"],
+    image: "/images/technos/high_middle_ages/hm_13.webp",
     keywords: ["Rise of Cultures resource calculator", "Rise of Cultures goods", "building costs"],
   },
   campaign: {
     path: "/campaign",
     title: "Campaign Tracker",
-    headline: "Campaign Tracker",
     description:
       "Track your Rise of Cultures campaign progress era by era: regions, scouting and conquest costs, and what is left to do.",
-    illustrations: ["/images/technos/iberian_era/ie_31.webp"],
+    image: "/images/technos/iberian_era/ie_31.webp",
     keywords: ["Rise of Cultures campaign", "Rise of Cultures map", "scout regions"],
   },
   technologies: {
     path: "/technologies",
     title: "Technology Tree Planner",
-    headline: "Technology Tree Planner",
     description:
       "Explore every Rise of Cultures technology by era, plan your research path and get the total cost in coins, food and goods.",
-    illustrations: ["/images/technos/kingdom_of_sicily/ks_41.webp"],
+    image: "/images/technos/kingdom_of_sicily/ks_41.webp",
     keywords: ["Rise of Cultures technologies", "Rise of Cultures tech tree", "research planner"],
   },
   vault: {
     path: "/vault",
     title: "Heritage Vault Calculator",
-    headline: "Heritage Vault Calculator",
     description:
       "Rise of Cultures Heritage Vault calculator for all 13 vaults: tier effects, slots, sacrifice and combination simulator, level table and keeper offers.",
-    illustrations: ["/images/vault/keeper.webp"],
+    image: "/images/vault/keeper.webp",
     keywords: [
       "Rise of Cultures Heritage Vault",
       "Heritage Vault calculator",
@@ -116,25 +97,30 @@ export const PAGES = {
   wonders: {
     path: "/wonders",
     title: "World Wonders Planner",
-    headline: "World Wonders Planner",
     description:
       "Track your Rise of Cultures World Wonders levels, compare their bonuses and build the best presets for your city.",
-    illustrations: ["/images/technos/bronze_age/ba_8.webp"],
+    image: "/images/technos/bronze_age/ba_8.webp",
     keywords: ["Rise of Cultures wonders", "World Wonders", "wonder presets"],
   },
   help: {
     path: "/help",
     title: "Help & Guides",
-    headline: "Help & Guides",
     description: "How to use RoC Helper: guides for the calculator, technology planner, campaign tracker and Heritage Vault.",
-    illustrations: ["/images/vault/icon_heritage.webp"],
+    image: "/images/vault/icon_heritage.webp",
     keywords: ["RoC Helper guide"],
   },
 } satisfies Record<string, PageSeo>;
 
 export type PageKey = keyof typeof PAGES;
 
-export const OG_IMAGE_SIZE = { width: 1200, height: 630 };
+/**
+ * Vignette CARRÉE + carte `summary` : Discord et X affichent alors un embed
+ * compact (texte à gauche, petite vignette à droite) au lieu de la grande
+ * image. Carré ≥ 144 px exigé par X ; Facebook/WhatsApp/LinkedIn, qui
+ * ignorent `twitter:card`, basculent eux aussi en petite vignette sous
+ * 600 px de large.
+ */
+export const OG_IMAGE_SIZE = { width: 400, height: 400 };
 
 export function ogImagePath(key: PageKey): string {
   return `/og/${key}.png`;
@@ -146,7 +132,7 @@ export function absoluteUrl(path: string): string {
 
 /**
  * Métadonnées complètes d'une page fixe (voir `PAGES`).
- * L'image est générée au build par `app/og/[image]/route.tsx`.
+ * La vignette est générée au build par `app/og/[image]/route.tsx`.
  */
 export function pageMetadata(key: PageKey): Metadata {
   const page: PageSeo = PAGES[key];
@@ -174,7 +160,7 @@ export function seoMetadata(
     url: imagePath,
     width: OG_IMAGE_SIZE.width,
     height: OG_IMAGE_SIZE.height,
-    alt: `${page.headline} – ${SITE_NAME}`,
+    alt: page.title,
     type: "image/png",
   };
 
@@ -195,7 +181,7 @@ export function seoMetadata(
       images: [image],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: shareTitle,
       description: page.description,
       images: [image],

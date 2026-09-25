@@ -28,8 +28,6 @@ export function vaultPageSeo(vault: HeritageVault): PageSeo {
   return {
     path: vaultPath(vault),
     title: `${vault.buildingName} Heritage Vault`,
-    headline: vault.name,
-    eyebrow: `Heritage Vault · ${vault.buildingName}`,
     // ≤ ~155 caractères (coupure Google) : les évolutifs éligibles vont dans
     // `details` et les mots-clés, pas ici.
     description:
@@ -39,11 +37,7 @@ export function vaultPageSeo(vault: HeritageVault): PageSeo {
       buildings.length > 0
         ? `Eligible evolving buildings for the ${vault.buildingName} Heritage Vault: ${buildings.join(", ")}.`
         : undefined,
-    summary:
-      `Effects up to level ${vault.maxLevel}, ${vault.slots.length} slots, ` +
-      `${buildings.length} eligible evolving building${buildings.length > 1 ? "s" : ""}, ` +
-      "sacrifice simulator and keeper offers.",
-    illustrations: [getHeritageVaultPortraitUrl(vault.themeId) ?? HERITAGE_KEEPER_IMAGE_URL],
+    image: getHeritageVaultPortraitUrl(vault.themeId) ?? HERITAGE_KEEPER_IMAGE_URL,
     keywords: [
       `${vault.name} Heritage Vault`,
       `${vault.buildingName} Heritage Vault`,

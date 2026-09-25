@@ -1,7 +1,7 @@
-import { renderPageOgImage } from "@/lib/og/render-og-image";
+import { renderThumbnail } from "@/lib/og/render-thumbnail";
 import { PAGES, type PageKey } from "@/lib/seo";
 
-// Images de partage servies en `/og/<page>.png`, générées AU BUILD.
+// Vignettes de partage servies en `/og/<page>.png`, générées AU BUILD.
 //
 // ⚠️ Pas la convention `opengraph-image.tsx` : l'export statique l'écrit SANS
 // extension (`out/vault/opengraph-image`), et GitHub Pages déduit le type MIME
@@ -16,5 +16,5 @@ export function generateStaticParams() {
 
 export async function GET(_request: Request, { params }: { params: Promise<{ image: string }> }) {
   const { image } = await params;
-  return renderPageOgImage(image.replace(/\.png$/, "") as PageKey);
+  return renderThumbnail(PAGES[image.replace(/\.png$/, "") as PageKey].image);
 }

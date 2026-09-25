@@ -65,7 +65,7 @@ function checks(m) {
   if (m.title.length > 70) issues.push(`<title> long (${m.title.length} car., Google coupe vers 60)`);
   if ((m.description ?? "").length > 160)
     issues.push(`description longue (${m.description.length} car., Google coupe vers 155)`);
-  if (m["twitter:card"] !== "summary_large_image") issues.push("Carte X non « large image »");
+  if (!m["twitter:card"]) issues.push("Pas de twitter:card");
   return issues;
 }
 
@@ -85,6 +85,8 @@ const cards = pages
     const image = localImage(m["og:image"]);
     const host = m.canonical ? new URL(m.canonical).host : "";
     const issues = checks(m);
+    // `summary` = embed compact (vignette à droite) ; `summary_large_image` = grande image.
+    const large = m["twitter:card"] === "summary_large_image";
     return `
 <section class="page" data-path="${esc(path)}">
   <header>
@@ -94,19 +96,28 @@ const cards = pages
   <div class="row">
     <div>
       <h3>Discord</h3>
-      <div class="discord" style="border-left-color:${esc(m["theme-color"] ?? "#202225")}">
-        <div class="d-site">${esc(m["og:site_name"])}</div>
-        <div class="d-title">${esc(m["og:title"])}</div>
-        <div class="d-desc">${esc(m["og:description"])}</div>
+      <div class="discord${large ? "" : " compact"}" style="border-left-color:${esc(m["theme-color"] ?? "#202225")}">
+        <div class="d-text">
+          <div class="d-site">${esc(m["og:site_name"])}</div>
+          <div class="d-title">${esc(m["og:title"])}</div>
+          <div class="d-desc">${esc(m["og:description"])}</div>
+        </div>
         ${image ? `<img src="${esc(image)}" alt="">` : ""}
       </div>
     </div>
     <div>
       <h3>X / Twitter</h3>
-      <div class="x">
+      ${
+        large
+          ? `<div class="x">
         ${image ? `<div class="x-img"><img src="${esc(image)}" alt=""><span>${esc(m["twitter:title"] ?? m["og:title"])}</span></div>` : ""}
         <div class="x-host">From ${esc(host)}</div>
-      </div>
+      </div>`
+          : `<div class="x-small">
+        ${image ? `<img src="${esc(image)}" alt="">` : ""}
+        <div><div class="x-host">${esc(host)}</div><div>${esc(m["twitter:title"] ?? m["og:title"])}</div><div class="x-host">${esc(m["twitter:description"] ?? "")}</div></div>
+      </div>`
+      }
       <h3>Google</h3>
       <div class="g">
         <div class="g-host">${esc(host)} › ${esc(path.slice(1))}</div>
@@ -140,6 +151,12 @@ writeFileSync(
   .d-title{color:#00a8fc;font-weight:600;margin-top:8px}
   .d-desc{font-size:14px;margin-top:8px;color:#dbdee1}
   .discord img{display:block;width:100%;border-radius:4px;margin-top:16px}
+  .discord.compact{display:flex;gap:16px;align-items:flex-start}
+  .discord.compact .d-text{flex:1;min-width:0}
+  .discord.compact img{width:80px;height:80px;object-fit:contain;flex:none;margin-top:8px}
+  .x-small{display:flex;max-width:504px;border:1px solid #2f3336;border-radius:16px;overflow:hidden;margin-bottom:16px;font-size:14px}
+  .x-small img{width:130px;height:130px;object-fit:contain;background:#16181c;border-right:1px solid #2f3336;flex:none}
+  .x-small>div{padding:12px;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
   .x{max-width:504px;margin-bottom:16px}
   .x-img{position:relative;border:1px solid #2f3336;border-radius:16px;overflow:hidden}
   .x-img img{display:block;width:100%}
