@@ -58,18 +58,30 @@ import {
 } from "@/components/heritage/vault-view/constants";
 
 /**
- * Query string de `/vault` : `?b=<bâtiment>&tab=<onglet>` (ex. `?b=ath&tab=progression`).
- * Une seule route statique, jamais de segment dynamique — copier-coller l'URL
- * suffit à partager le même bâtiment/onglet SANS provoquer la moindre
- * navigation Next (voir `syncQueryString` : `history.replaceState` brut, pas
- * `router.replace`, pour ne jamais redéclencher le layout ni refetcher quoi
- * que ce soit en changeant simplement d'onglet).
+ * URL du coffre : `/vault/<bâtiment>?tab=<onglet>` (ex. `/vault/ath?tab=progression`).
+ *
+ * Le bâtiment est dans le CHEMIN, pas en query string : chaque `/vault/<slug>`
+ * est une page statique avec son propre titre et sa propre image de partage
+ * (`app/vault/[slug]/page.tsx`), et les crawlers (Discord, X, Google) ignorent
+ * la query string. Copier la barre d'adresse donne donc le bon aperçu.
+ *
+ * Changer de bâtiment ou d'onglet ne NAVIGUE pas : `history.replaceState`
+ * brut (voir `syncVaultUrl`), pas `router.replace` — rien n'est rechargé,
+ * seule la barre d'adresse est réécrite. La vue lit donc toujours le coffre
+ * dans `window.location`, jamais dans les `params` de la page, qui restent
+ * ceux du premier chargement.
+ *
+ * `?b=<bâtiment>` (ancien format) reste lu, puis réécrit en chemin.
  */
-const BUILDING_QUERY_PARAM = "b";
+const LEGACY_BUILDING_QUERY_PARAM = "b";
 const TAB_QUERY_PARAM = "tab";
+const VAULT_PATH_PATTERN = /^\/vault\/([^/]+)\/?$/;
 
 function readVaultKeyFromLocation(): string | null {
-  const slug = new URLSearchParams(window.location.search).get(BUILDING_QUERY_PARAM);
+  const slug =
+    new URLSearchParams(window.location.search).get(LEGACY_BUILDING_QUERY_PARAM) ??
+    VAULT_PATH_PATTERN.exec(window.location.pathname)?.[1] ??
+    null;
   return slug ? (getHeritageVaultBySlug(slug)?.key ?? null) : null;
 }
 
@@ -95,11 +107,15 @@ function readStoredTab(): HeritageTab | null {
   }
 }
 
-function syncQueryString(vaultKey: string, tab: HeritageTab) {
+function syncVaultUrl(vaultKey: string, tab: HeritageTab) {
   const params = new URLSearchParams(window.location.search);
-  params.set(BUILDING_QUERY_PARAM, heritageVaultSlug(vaultKey));
+  params.delete(LEGACY_BUILDING_QUERY_PARAM);
   params.set(TAB_QUERY_PARAM, heritageTabSlug(tab));
-  window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+  window.history.replaceState(
+    null,
+    "",
+    `/vault/${heritageVaultSlug(vaultKey)}?${params.toString()}`,
+  );
 }
 
 // ============================================================
@@ -164,7 +180,7 @@ function readStoredVaultKey(): string {
 }
 
 function HeritageVaultContent() {
-  // Bâtiment et onglet : `?b=`/`?tab=` s'ils sont présents (lien partagé),
+  // Bâtiment et onglet : ceux de l'URL s'ils sont présents (lien partagé),
   // sinon le dernier consulté — le bâtiment en `localStorage` (survit à la
   // fermeture du navigateur), l'onglet en `sessionStorage` (voir
   // `readStoredTab` : ne doit survivre qu'à une navigation dans le même
@@ -175,7 +191,7 @@ function HeritageVaultContent() {
   // `mounted` de `HeritageVaultView` — `window` existe donc déjà au premier
   // rendu. Un effet aurait introduit une course avec `useLocalStorageState`
   // (son hydratation passe par une microtask) : la valeur par défaut de CE
-  // hook écrasait alors le `?b=` de l'URL, lu de façon synchrone juste après.
+  // hook écrasait alors le bâtiment de l'URL, lu de façon synchrone juste après.
   const [vaultKey, setVaultKey] = useState<string>(
     () => readVaultKeyFromLocation() ?? readStoredVaultKey(),
   );
@@ -183,7 +199,7 @@ function HeritageVaultContent() {
     () => readTabFromLocation() ?? readStoredTab() ?? DEFAULT_HERITAGE_TAB,
   );
   // Bâtiment persisté (localStorage) pour la prochaine visite de `/vault` sans
-  // `?b=`.
+  // bâtiment dans l'URL.
   useEffect(() => {
     try {
       localStorage.setItem("heritage-vault-key", JSON.stringify(vaultKey));
@@ -205,7 +221,7 @@ function HeritageVaultContent() {
   // (pas `router.replace`) : un simple changement d'onglet ne doit RIEN
   // recharger, ni layout ni page, juste réécrire la barre d'adresse.
   useEffect(() => {
-    syncQueryString(vaultKey, activeTab);
+    syncVaultUrl(vaultKey, activeTab);
   }, [vaultKey, activeTab]);
   // Persisté (localStorage), pas en session : voir `heritage-vault-page-store`.
   // `null` tant que rien n'a jamais été choisi (première visite, ou storage

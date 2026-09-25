@@ -131,7 +131,7 @@ export function SiteHeader() {
             <NavLink
               key={link.href}
               {...link}
-              active={pathname === link.href}
+              active={pathname === link.href || pathname.startsWith(`${link.href}/`)}
             />
           ))}
         </div>
@@ -140,7 +140,7 @@ export function SiteHeader() {
             <NavLink
               key={link.href}
               {...link}
-              active={pathname === link.href}
+              active={pathname === link.href || pathname.startsWith(`${link.href}/`)}
             />
           ))}
         </div>

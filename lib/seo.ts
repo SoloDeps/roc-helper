@@ -12,11 +12,16 @@ import type { Metadata } from "next";
 // qu'ils voient. Seul le chemin compte.
 // ============================================================
 
-export const SITE_URL = "https://roc-helper.com";
+/**
+ * Domaine absolu des URL de partage. Surchargeable AU BUILD (`SITE_URL=…
+ * pnpm build`) pour tester les aperçus Discord/X derrière un tunnel public,
+ * les crawlers n'ayant pas accès à `localhost`.
+ */
+export const SITE_URL = (process.env.SITE_URL ?? "https://roc-helper.com").replace(/\/$/, "");
 export const SITE_NAME = "RoC Helper";
 export const SITE_TAGLINE = "Rise of Cultures calculator & planner";
 export const SITE_DESCRIPTION =
-  "Free Rise of Cultures tools: resource calculator, technology tree planner, campaign tracker, Heritage Vault calculator and World Wonders planner. No account, no login.";
+  "Free Rise of Cultures tools: resource calculator, tech tree planner, campaign tracker, Heritage Vault calculator and World Wonders planner. No login.";
 
 export const BRAND_COLOR = "#307498";
 
@@ -37,7 +42,13 @@ export interface PageSeo {
   title: string;
   /** Titre affiché en gros sur l'image de partage. */
   headline: string;
+  /** Surtitre de l'image de partage (ex. « Heritage Vault · Pirate Tradition »). */
+  eyebrow?: string;
   description: string;
+  /** Texte de l'image de partage, si `description` y est trop long. */
+  summary?: string;
+  /** Complément rendu dans le HTML de la page (hors meta description). */
+  details?: string;
   /**
    * Visuel(s) mis en avant sur l'image de partage (chemins sous `public/`).
    * Plusieurs = grille 2×2 (accueil : un visuel par outil).
@@ -134,19 +145,33 @@ export function absoluteUrl(path: string): string {
 }
 
 /**
- * Métadonnées complètes d'une page.
- *
- * ⚠️ Next fusionne `openGraph`/`twitter` de façon SUPERFICIELLE : un segment
- * qui n'en redéfinit pas hérite tel quel de celui du layout racine (titre et
- * description de l'accueil). D'où l'objet complet ici, pour chaque page.
+ * Métadonnées complètes d'une page fixe (voir `PAGES`).
  * L'image est générée au build par `app/og/[image]/route.tsx`.
  */
 export function pageMetadata(key: PageKey): Metadata {
   const page: PageSeo = PAGES[key];
-  const fullTitle = key === "home" ? `${SITE_NAME} – ${page.title}` : `${page.title} | ${SITE_NAME}`;
+  return seoMetadata(page, ogImagePath(key), {
+    fullTitle: key === "home" ? `${SITE_NAME} – ${page.title}` : undefined,
+  });
+}
+
+/**
+ * Métadonnées complètes de n'importe quelle page (fixe ou générée, ex. un
+ * coffre `/vault/<slug>`), avec son image de partage `imagePath`.
+ *
+ * ⚠️ Next fusionne `openGraph`/`twitter` de façon SUPERFICIELLE : un segment
+ * qui n'en redéfinit pas hérite tel quel de celui du layout racine (titre et
+ * description de l'accueil). D'où l'objet complet ici, pour chaque page.
+ */
+export function seoMetadata(
+  page: PageSeo,
+  imagePath: string,
+  { fullTitle }: { fullTitle?: string } = {},
+): Metadata {
+  const shareTitle = fullTitle ?? `${page.title} | ${SITE_NAME}`;
   const url = absoluteUrl(page.path);
   const image = {
-    url: ogImagePath(key),
+    url: imagePath,
     width: OG_IMAGE_SIZE.width,
     height: OG_IMAGE_SIZE.height,
     alt: `${page.headline} – ${SITE_NAME}`,
@@ -154,7 +179,9 @@ export function pageMetadata(key: PageKey): Metadata {
   };
 
   return {
-    title: key === "home" ? { absolute: fullTitle } : page.title,
+    // Titre absolu : un layout intermédiaire au titre simple (ex. `/vault`)
+    // couperait le `template` du layout racine pour ses enfants.
+    title: { absolute: shareTitle },
     description: page.description,
     keywords: [...page.keywords, ...SITE_KEYWORDS],
     alternates: { canonical: url },
@@ -163,13 +190,13 @@ export function pageMetadata(key: PageKey): Metadata {
       siteName: SITE_NAME,
       locale: "en_US",
       url,
-      title: fullTitle,
+      title: shareTitle,
       description: page.description,
       images: [image],
     },
     twitter: {
       card: "summary_large_image",
-      title: fullTitle,
+      title: shareTitle,
       description: page.description,
       images: [image],
     },

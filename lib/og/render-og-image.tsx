@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import sharp from "sharp";
 
-import { BRAND_COLOR, OG_IMAGE_SIZE, PAGES, SITE_NAME, type PageKey } from "@/lib/seo";
+import { BRAND_COLOR, OG_IMAGE_SIZE, PAGES, SITE_NAME, type PageKey, type PageSeo } from "@/lib/seo";
 
 // ============================================================
 // Images de partage (Open Graph / X) — générées AU BUILD par
@@ -25,8 +25,11 @@ async function publicImageAsPngDataUrl(publicPath: string, maxSize: number): Pro
   return `data:image/png;base64,${png.toString("base64")}`;
 }
 
-export async function renderPageOgImage(key: PageKey): Promise<ImageResponse> {
-  const page = PAGES[key];
+export function renderPageOgImage(key: PageKey): Promise<ImageResponse> {
+  return renderOgImage(PAGES[key]);
+}
+
+export async function renderOgImage(page: PageSeo): Promise<ImageResponse> {
   const grid = page.illustrations.length > 1;
   const [regular, bold, logo, ...illustrations] = await Promise.all([
     fontRegular,
@@ -65,11 +68,25 @@ export async function renderPageOgImage(key: PageKey): Promise<ImageResponse> {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            {page.eyebrow && (
+              <span
+                style={{
+                  fontSize: page.eyebrow.length > 36 ? 20 : 24,
+                  fontWeight: 700,
+                  letterSpacing: 1.5,
+                  textTransform: "uppercase",
+                  color: "#ffd98a",
+                  marginBottom: -8,
+                }}
+              >
+                {page.eyebrow}
+              </span>
+            )}
             <span style={{ fontSize: page.headline.length > 30 ? 56 : 68, fontWeight: 700, lineHeight: 1.05, letterSpacing: -1 }}>
               {page.headline}
             </span>
             <span style={{ fontSize: 28, lineHeight: 1.35, color: "rgba(255,255,255,0.85)" }}>
-              {page.description}
+              {page.summary ?? page.description}
             </span>
           </div>
 

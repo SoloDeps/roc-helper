@@ -8,6 +8,7 @@
     "start": "npx serve out",
     "lint": "eslint",
     "test": "vitest run",
+    "og:preview": "node scripts/og-preview.mjs",
     "extract:wonders": "tsc scripts/extract/wonders.ts --outDir .extract-build --rootDir . --module commonjs --target es2022 --moduleResolution node --esModuleInterop --strict --skipLibCheck && node .extract-build/scripts/extract/wonders.js",
     "extract:technos": "tsc scripts/extract/technologies.ts --outDir .extract-build --rootDir . --module commonjs --target es2022 --moduleResolution node --esModuleInterop --strict --skipLibCheck && node .extract-build/scripts/extract/technologies.js",
     "diff:technos": "tsc -p tsconfig.scripts.json && node .extract-build/scripts/diff/technologies.js",
