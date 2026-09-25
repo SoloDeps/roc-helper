@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { HomeCards } from "@/components/cards/home-card";
+import { SITE_TAGLINE } from "@/lib/seo";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
                   <div className="bg-black/45 backdrop-blur-sm rounded-lg px-3 py-2">
                     <h1 className="text-xl md:text-3xl font-bold text-white">
                       Welcome to RoC Helper
+                      <span className="sr-only"> – {SITE_TAGLINE}</span>
                     </h1>
                     <p className="text-md text-white font-semibold hidden md:block">
                       Tools to optimize your game progress

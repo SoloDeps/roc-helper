@@ -5,6 +5,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { SiteHeader } from "@/components/header/site-header";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
+import { JsonLd } from "@/components/seo/json-ld";
 import {
   BRAND_COLOR,
   SITE_DESCRIPTION,
@@ -79,11 +80,7 @@ export default function RootLayout({
         className={`${fontPro.variable} ${fontCanv.variable} antialiased`}
         suppressHydrationWarning
       >
-        <script
-          type="application/ld+json"
-          // Contenu statique défini ci-dessus, aucune donnée utilisateur.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-        />
+        <JsonLd data={jsonLd} />
         <Providers>
           <div id="app-scroll-container" className="max-h-screen-patched min-h-screen-patched flex w-full flex-col overflow-auto bg-background-200">
             <TailwindIndicator />

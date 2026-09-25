@@ -68,7 +68,7 @@ export const PAGES = {
     path: "/campaign",
     title: "Campaign Tracker",
     description:
-      "Track your Rise of Cultures campaign progress era by era: regions, scouting and conquest costs, and what is left to do.",
+      "Track your Rise of Cultures campaign progress era by era: regions, scout costs, rewards and what is left to do.",
     image: "/images/technos/iberian_era/ie_31.webp",
     keywords: ["Rise of Cultures campaign", "Rise of Cultures map", "scout regions"],
   },
@@ -186,5 +186,22 @@ export function seoMetadata(
       description: page.description,
       images: [image],
     },
+  };
+}
+
+/**
+ * Fil d'Ariane schema.org (`BreadcrumbList`) — Google l'affiche à la place de
+ * l'URL brute dans ses résultats. L'accueil est ajouté en tête.
+ */
+export function breadcrumbJsonLd(trail: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [{ name: SITE_NAME, path: "" }, ...trail].map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
   };
 }

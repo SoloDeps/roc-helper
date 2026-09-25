@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { HeritageVaultView } from "@/components/heritage/heritage-vault-view";
-import { seoMetadata } from "@/lib/seo";
+import { PageIntro } from "@/components/seo/page-intro";
+import { PAGES, seoMetadata } from "@/lib/seo";
 import { vaultOgImagePath, vaultPageSeo } from "@/lib/seo-vault";
 import { HERITAGE_VAULTS, getHeritageVaultBySlug, heritageVaultSlug } from "@/resolvers/heritage";
 
@@ -31,12 +32,11 @@ export default async function VaultBySlugPage({ params }: Props) {
 
   return (
     <>
-      {/* Titre et résumé présents dans le HTML statique (la vue, elle, ne se
-          rend qu'après montage client) : lus par les moteurs de recherche et
-          les lecteurs d'écran. */}
-      <h1 className="sr-only">{seo.title}</h1>
-      <p className="sr-only">{seo.description}</p>
-      {seo.details && <p className="sr-only">{seo.details}</p>}
+      <PageIntro
+        page={seo}
+        details={seo.details}
+        breadcrumb={[{ name: PAGES.vault.title, path: PAGES.vault.path }]}
+      />
       <HeritageVaultView />
     </>
   );

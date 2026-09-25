@@ -9,6 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { HELP_FAQ } from "./faq";
 
 export default function Help() {
   const [fancyboxRef] = useFancybox({
@@ -36,9 +37,9 @@ export default function Help() {
       <div className="material-medium relative mb-0 md:mb-2 mt-0 flex-1 grow overflow-hidden xl:max-w-4xl">
         <header className="flex shrink-0 flex-col w-full transition-colors bg-roc-blue dark:border-b">
           <div className="flex shrink-0 w-full justify-between items-center gap-3 pl-4 pr-3 sm:pl-3 sm:pr-2 h-12 sm:mx-0">
-            <h2 className="text-[15px] font-bold text-white">
+            <h1 className="text-[15px] font-bold text-white">
               Help - RoC Helper (Beta)
-            </h2>
+            </h1>
           </div>
         </header>
 
@@ -159,35 +160,20 @@ export default function Help() {
                     type="multiple"
                     className="space-y-3 text-base p-4 rounded-lg border border-alpha-300 bg-background-300/50"
                   >
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger className="text-base font-semibold">
-                        Can I lose my data?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base">
-                        Your data is safe and will stay in the app. It can only
-                        be lost if you manually clear your browser data.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="item-2">
-                      <AccordionTrigger className="text-base font-semibold">
-                        Does the app read my game data?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base">
-                        No. RoC Helper works completely offline and never
-                        accesses your game account.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="item-3" className="border-none">
-                      <AccordionTrigger className="text-base font-semibold">
-                        What should I do if I find a bug?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base">
-                        If you find a bug, report it on our Discord with details
-                        and screenshots. This helps us improve the app.
-                      </AccordionContent>
-                    </AccordionItem>
+                    {HELP_FAQ.map((item, index) => (
+                      <AccordionItem
+                        key={item.question}
+                        value={`item-${index + 1}`}
+                        className={index === HELP_FAQ.length - 1 ? "border-none" : undefined}
+                      >
+                        <AccordionTrigger className="text-base font-semibold">
+                          {item.question}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-base">
+                          {item.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
                   </Accordion>
                 </div>
               </section>
