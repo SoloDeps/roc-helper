@@ -1,9 +1,6 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Help | RoC Helper",
-  description: "Documentation and guides for using RoC Helper",
-};
+export const metadata = pageMetadata("help");
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return children;

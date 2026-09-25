@@ -1,10 +1,6 @@
-// app/calculator/layout.tsx
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Calculator | RoC Helper",
-  description: "Calculate resources and production costs for Rise of Cultures",
-};
+export const metadata = pageMetadata("calculator");
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return children;

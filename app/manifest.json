@@ -1,6 +1,8 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "RoC Helper – Rise of Cultures calculator & planner",
+  "short_name": "RoC Helper",
+  "description": "Free Rise of Cultures tools: resource calculator, technology tree planner, campaign tracker, Heritage Vault calculator and World Wonders planner.",
+  "start_url": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +17,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#307498",
   "background_color": "#ffffff",
   "display": "standalone"
 }
