@@ -189,7 +189,7 @@ export const KEEPER_OFFER_CATALOG: KeeperOffer[] = [
   // propre sous `/images/goods/`. Idem pour `confection`, qui couvre
   // `confections` — même alias.
   { id: "ExoticGood_1", label: "Exotic goods I", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["porcelain", "ceramic_treasure", "spice_treasure", "ancestor_mask", "headdress"] },
-  { id: "ExoticGood_2", label: "Exotic goods II", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["ankh", "golden_mask", "syrup", "incense", "oil_lamp", "calendar_stone", "ritual_dagger", "tea", "confection", "brocade", "gold_treasure", "gem_treasure"] },
+  { id: "ExoticGood_2", label: "Exotic goods II", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["ankh", "golden_mask", "syrup", "incense", "oil_lamp", "carpet", "coffee", "calendar_stone", "ritual_dagger", "tea", "confection", "brocade", "gold_treasure", "gem_treasure"] },
   { id: "ExoticGood_3", label: "Exotic goods III", category: "allied", reputation: 1, scalesWithPlayerAge: false, goodCandidates: ["papyrus_scroll", "ceremonial_dress", "silk", "stockfish"] },
 
   // ─── Inventory ────────────────────────────────────────────────────────────
