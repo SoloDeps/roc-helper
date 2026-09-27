@@ -1,9 +1,18 @@
 import type { ReactNode } from "react";
+import { Info } from "lucide-react";
 import type { HeritageEffectGroup } from "@/data/heritage/generated/types";
-import type { ResolvedHeritageVault } from "@/resolvers/heritage";
+import type { ResolvedHeritageSlot, ResolvedHeritageVault } from "@/resolvers/heritage";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { EffectCase } from "./effect-case";
 
-/** Les slots d'un groupe, triés par niveau de déblocage. */
+/** Gratuit < kit d'évolution (badges) < gemmes — l'ordre de colonnes du jeu. */
+function unlockRank(slot: ResolvedHeritageSlot): number {
+  if (slot.unlock === null) return 0;
+  if (slot.unlock.kind === "item") return 1;
+  return 2;
+}
+
+/** Les slots d'un groupe, triés par type de coût puis par ordre du jeu. */
 export function EffectBlock({
   title,
   group,
@@ -26,9 +35,15 @@ export function EffectBlock({
   titleAction?: ReactNode;
   action?: ReactNode;
 }) {
+  // Le jeu ordonne les slots par TYPE de coût, pas par niveau : gratuit
+  // d'abord, puis kits d'évolution (badges), puis gemmes en dernier — même
+  // quand un slot à kit se déverrouille à un niveau plus élevé qu'un slot à
+  // gemmes. `slotIndex` (l'ordre de définition côté jeu) respecte déjà cette
+  // hiérarchie, donc il sert de repère stable à égalité de rang.
   const slots = vault.slots
     .filter((slot) => slot.group === group)
-    .sort((a, b) => a.minLevel - b.minLevel);
+    .sort((a, b) => unlockRank(a) - unlockRank(b) || a.slotIndex - b.slotIndex);
+  const hasPremiumSlot = slots.some((slot) => slot.premiumSeconds !== null);
 
   return (
     <div>
@@ -38,6 +53,24 @@ export function EffectBlock({
             {title}
           </h2>
           {titleAction}
+          {hasPremiumSlot && (
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="About premium slots"
+                  className="cursor-pointer rounded-full p-0.5 text-muted-foreground/90 hover:text-foreground"
+                >
+                  <Info size={14} aria-hidden="true" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-72 p-3 text-xs text-muted-foreground">
+                Slots in <span className="font-semibold text-emerald-600 dark:text-emerald-400">green</span> are
+                premium: unlocking them costs gems or evolution kits, and only lasts 14 days before they close
+                again.
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
         {action}
       </div>

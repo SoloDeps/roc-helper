@@ -48,7 +48,7 @@ export function UnlockCost({ slot }: { slot: ResolvedHeritageSlot }) {
         </>
       )}
       {premiumSeconds !== null && (
-        <Badge variant="secondary" className="mt-1 px-1 text-[10px] md:px-2 md:text-[11px]">
+        <Badge variant="outline" className="mt-1 px-1 text-[10px] md:px-2 md:text-[11px] bg-background rounded-sm">
           {formatDuration(premiumSeconds)} premium
         </Badge>
       )}

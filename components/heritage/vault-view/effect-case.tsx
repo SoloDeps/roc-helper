@@ -39,15 +39,31 @@ export function EffectCase({
     </>
   );
 
+  // Un slot premium coûte des gemmes et ne reste ouvert que 14 jours — le jeu
+  // le distingue toujours en vert, sur tous ses états (verrouillé, vide, équipé).
+  const isPremium = slot.premiumSeconds !== null;
+
   // Slot verrouillé : jamais interactif. En mode coûts il montre quand même son
   // prix d'ouverture, c'est l'intérêt du mode.
   if (!slot.reachable) {
     return showCosts ? (
-      <div className="flex h-28 w-full sm:h-32 md:h-36 flex-col items-center justify-center gap-1 rounded-lg border border-border bg-card p-2 shadow-sm">
+      <div
+        className={
+          isPremium
+            ? "flex h-28 w-full sm:h-32 md:h-36 flex-col items-center justify-center gap-1 rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-2 shadow-sm"
+            : "flex h-28 w-full sm:h-32 md:h-36 flex-col items-center justify-center gap-1 rounded-lg border border-border bg-card p-2 shadow-sm"
+        }
+      >
         {lockedCost}
       </div>
     ) : (
-      <div className="flex h-28 w-full sm:h-32 md:h-36 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-border/70 bg-muted/30 text-muted-foreground">
+      <div
+        className={
+          isPremium
+            ? "flex h-28 w-full sm:h-32 md:h-36 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-emerald-500/50 bg-emerald-500/5 text-emerald-600 dark:text-emerald-400"
+            : "flex h-28 w-full sm:h-32 md:h-36 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-border/70 bg-muted/30 text-muted-foreground"
+        }
+      >
         <Lock size={18} aria-hidden="true" />
         <span className="text-[11px] font-medium">Lv. {slot.minLevel}</span>
       </div>
@@ -80,7 +96,13 @@ export function EffectCase({
   );
 
   const trigger = equippedEffect ? (
-    <button className="flex h-28 w-full sm:h-32 md:h-36 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-lg border border-border bg-card p-2 shadow-sm transition-colors hover:bg-muted/50">
+    <button
+      className={
+        isPremium
+          ? "flex h-28 w-full sm:h-32 md:h-36 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-lg border border-emerald-500/50 bg-emerald-500/5 p-2 shadow-sm transition-colors hover:bg-emerald-500/10"
+          : "flex h-28 w-full sm:h-32 md:h-36 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-lg border border-border bg-card p-2 shadow-sm transition-colors hover:bg-muted/50"
+      }
+    >
       {showCosts ? (
         lockedCost
       ) : (
@@ -90,7 +112,13 @@ export function EffectCase({
       )}
     </button>
   ) : (
-    <button className="flex h-28 w-full sm:h-32 md:h-36 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">
+    <button
+      className={
+        isPremium
+          ? "flex h-28 w-full sm:h-32 md:h-36 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-emerald-500/50 bg-emerald-500/5 text-emerald-600 transition-colors hover:border-emerald-500 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
+          : "flex h-28 w-full sm:h-32 md:h-36 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+      }
+    >
       {showCosts ? (
         lockedCost
       ) : (
