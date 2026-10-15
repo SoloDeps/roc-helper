@@ -21,6 +21,7 @@ export interface BonusLike {
   key: string;
   src: string;
   overlaySrc?: string | null;
+  extraSrcs?: string[];
   label: string;
   value: string;
   detail?: string | null;
@@ -85,10 +86,11 @@ export function buildBeforeAfterRows(
 ): BeforeAfterRow[] {
   const afterByKey = new Map(after.map((bonus) => [bonus.key, bonus]));
 
-  const base = ({ key, src, overlaySrc, label, detail }: BonusLike) => ({
+  const base = ({ key, src, overlaySrc, extraSrcs, label, detail }: BonusLike) => ({
     key,
     src,
     overlaySrc,
+    extraSrcs,
     label,
     detail,
   });
@@ -261,6 +263,7 @@ export function BeforeAfterTable({
                   <EffectIcon
                     src={row.src}
                     overlaySrc={row.overlaySrc}
+                    extraSrcs={row.extraSrcs}
                     alt={row.label}
                     size={iconSize}
                   />

@@ -24,12 +24,14 @@ import type { ResolvedHeritageEffect, ResolvedHeritageVault } from "@/resolvers/
 export function BonusBadge({
   src,
   overlaySrc,
+  extraSrcs,
   label,
   value,
   muted,
 }: {
   src: string;
   overlaySrc: string | null;
+  extraSrcs?: string[];
   label: string;
   value: string;
   muted?: boolean;
@@ -41,7 +43,7 @@ export function BonusBadge({
         muted && "opacity-70",
       )}
     >
-      <EffectIcon src={src} overlaySrc={overlaySrc} alt={label} size={25} />
+      <EffectIcon src={src} overlaySrc={overlaySrc} extraSrcs={extraSrcs} alt={label} size={25} />
       <span className="truncate text-sm font-medium tabular-nums">{value}</span>
     </div>
   );
@@ -93,11 +95,12 @@ export function EffectSummaryRow({
 
   return (
     <>
-      {entries.map(({ key, src, overlaySrc, label, value }) => (
+      {entries.map(({ key, src, overlaySrc, extraSrcs, label, value }) => (
         <BonusBadge
           key={key}
           src={src}
           overlaySrc={overlaySrc}
+          extraSrcs={extraSrcs}
           label={label}
           value={value}
           muted={muted}

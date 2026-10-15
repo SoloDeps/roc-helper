@@ -50,6 +50,7 @@ export function OverviewTable({
           key: `${effect.id}-culture`,
           src: culture.src,
           overlaySrc: culture.overlaySrc,
+          extraSrcs: undefined,
           label: culture.label,
         },
       ];
@@ -86,6 +87,7 @@ export function OverviewTable({
               ? resolveIconPath("chest_good")
               : chestRewardIcon(reward, selections),
           overlaySrc: null,
+          extraSrcs: undefined,
           // Exception : le Crocodile Aztèque (voir `isChestReward`) n'est pas
           // un coffre — son nom tient lieu de libellé, pas « Chest reward ».
           // Le Celtic (`chestRootLabel`) EST un coffre au sens du code, mais
@@ -120,7 +122,7 @@ export function OverviewTable({
         data-layout="list"
         className="divide-y divide-border overflow-hidden rounded-xl border border-border md:hidden"
       >
-        {allRows.map(({ key, src, overlaySrc, label, effect }) => (
+        {allRows.map(({ key, src, overlaySrc, extraSrcs, label, effect }) => (
           <li key={key} className="flex items-center gap-2.5 px-3 py-2.5">
             <span
               aria-hidden="true"
@@ -130,7 +132,7 @@ export function OverviewTable({
               )}
               title={GROUP_LABELS[effect.group]}
             />
-            <EffectIcon src={src} overlaySrc={overlaySrc} alt={label} size={20} />
+            <EffectIcon src={src} overlaySrc={overlaySrc} extraSrcs={extraSrcs} alt={label} size={20} />
             <span className="min-w-0 flex-1 truncate text-[13px] font-medium capitalize text-foreground">
               {label}
             </span>
@@ -160,7 +162,7 @@ export function OverviewTable({
             </tr>
           </thead>
           <tbody>
-            {allRows.map(({ key, src, overlaySrc, label, effect }) => (
+            {allRows.map(({ key, src, overlaySrc, extraSrcs, label, effect }) => (
               <tr key={key} className="h-11 border-t border-border capitalize">
                 <td className="px-3 py-2">
                   <GroupBadge group={effect.group} />
@@ -170,7 +172,7 @@ export function OverviewTable({
                 </td>
                 <td className="px-3 py-2">
                   <div className="flex items-center gap-2">
-                    <EffectIcon src={src} overlaySrc={overlaySrc} alt={label} size={24} />
+                    <EffectIcon src={src} overlaySrc={overlaySrc} extraSrcs={extraSrcs} alt={label} size={24} />
                     <span className="truncate font-medium text-muted-foreground">
                       {label}
                     </span>

@@ -52,6 +52,12 @@ export interface HeritageBonusDisplay {
   value: string;
   /** Période du cycle de production, ex. « / 1d ». `null` hors production. */
   detail: string | null;
+  /**
+   * Icônes suivant `src` quand le bonus verse PLUSIEURS biens nommés — les
+   * trois biens d'un « All goods of Current Era », comme le wiki les aligne.
+   * Absent (ou vide) sinon : une seule icône.
+   */
+  extraSrcs?: string[];
 }
 
 const UNIT_ICONS: Record<string, string> = {
@@ -103,6 +109,29 @@ function resolveRankGood(
   const era = rank[2] ?? contextEra?.toLowerCase();
   if (era === undefined || era === null) return null;
   return getGoodNameFromPriorityEra(rank[1], era, selections);
+}
+
+/**
+ * Les biens concrets de TOUS les rangs d'un bonus (« All goods of Current
+ * Era » → les trois biens de l'ère), dans l'ordre des ressources.
+ *
+ * `null` dès qu'un seul rang reste sans bien (ateliers non classés) ou qu'une
+ * ressource n'est pas un rang : trois caisses génériques identiques ne diraient
+ * rien de plus qu'une seule.
+ */
+function resolveAllRankGoods(
+  resources: string[],
+  selections: string[][],
+  contextEra?: EraCode | null,
+): string[] | null {
+  if (resources.length < 2) return null;
+  const goods: string[] = [];
+  for (const resource of resources) {
+    const good = resolveRankGood(resource, selections, contextEra);
+    if (good === null) return null;
+    goods.push(good);
+  }
+  return goods;
 }
 
 /** Le repli quand un tirage porte des biens sans pouvoir en nommer un seul. */
@@ -415,6 +444,8 @@ export function describeHeritageBonus(
   const raw = amplified ? (bonus.amplified ?? bonus.value) : bonus.value;
   const { src, overlaySrc, good } = bonusIcons(bonus, selections, contextEra);
   const chestItem = CHEST_ITEM_RESOURCES[bonus.resources[0] ?? ""];
+  const goods = good === null ? null : resolveAllRankGoods(bonus.resources, selections, contextEra);
+  const extraSrcs = goods === null ? [] : goods.slice(1).map((key) => getItemIconLocal(key));
   // ⚠️ Rang non résolu : l'ère qualifie le libellé, sans quoi deux paliers de
   // biens du même vault sont indiscernables (cf. `rankEraLabel`).
   const label =
@@ -422,7 +453,7 @@ export function describeHeritageBonus(
       ? chestItem.label
       : good === null
         ? qualifyWithEra(bonus.label, rankEraLabel(bonus.resources, contextEra))
-        : (GOOD_META_BY_KEY[good]?.name ?? good);
+        : (goods ?? [good]).map((key) => GOOD_META_BY_KEY[key]?.name ?? key).join(" / ");
   const detail =
     bonus.periodSeconds === null ? null : `/ ${formatDuration(bonus.periodSeconds)}`;
 
@@ -433,6 +464,7 @@ export function describeHeritageBonus(
       label,
       value: raw === null ? "—" : raw.toLocaleString("fr-FR", { maximumFractionDigits: 2 }),
       detail,
+      extraSrcs,
     };
   }
 
@@ -448,6 +480,7 @@ export function describeHeritageBonus(
     label,
     value: scaled === null ? "—" : formatBonusValue(bonus.format, scaled),
     detail,
+    extraSrcs,
   };
 }
 

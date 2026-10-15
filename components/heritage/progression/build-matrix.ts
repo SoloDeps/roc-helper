@@ -61,6 +61,8 @@ export interface ProgressionColumn {
   label: string;
   src: string;
   overlaySrc: string | null;
+  /** Biens suivants d'un bonus multi-biens — cf. `HeritageBonusDisplay`. */
+  extraSrcs?: string[];
   /**
    * `false` sur les compteurs discrets exemptés d'amplification (convention
    * (b bis) du resolver) ET sur les colonnes à coffre (`kind: "chest"`, pas de
@@ -202,6 +204,7 @@ export function buildProgressionColumns(
         label: display.label,
         src: display.src,
         overlaySrc: display.overlaySrc,
+        extraSrcs: display.extraSrcs,
         keeperAmplified: !KEEPER_AMPLIFIER_EXEMPT_TYPES.has(bonus.type),
         kind: "bonus",
       });

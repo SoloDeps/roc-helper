@@ -18,6 +18,8 @@ import { cn } from "@/lib/utils";
 export interface EffectIconProps {
   src: string;
   overlaySrc?: string | null;
+  /** Biens suivants d'un bonus multi-biens, posés à droite de `src`. */
+  extraSrcs?: string[];
   alt: string;
   size: number;
   overlaySize?: number;
@@ -27,11 +29,48 @@ export interface EffectIconProps {
 export const EffectIcon = memo(function EffectIcon({
   src,
   overlaySrc,
+  extraSrcs,
   alt,
   size,
   overlaySize,
   className,
 }: EffectIconProps) {
+  // Plusieurs biens : alignés et légèrement chevauchés, comme le wiki aligne
+  // les trois biens d'un « All goods of Current Era ». Aucun overlay dans ce
+  // cas — un bien nommé n'en porte jamais.
+  //
+  // Empilés comme un jeu de cartes posé : la première au fond, chaque suivante
+  // par-dessus la précédente.
+  if (extraSrcs !== undefined && extraSrcs.length > 0) {
+    const step = Math.round(size * 0.6);
+    const all = [src, ...extraSrcs];
+    return (
+      <div
+        className={cn("relative shrink-0", className)}
+        style={{ width: size + step * extraSrcs.length, height: size }}
+        role="img"
+        aria-label={alt}
+      >
+        {all.map((itemSrc, index) => (
+          <div
+            key={`${itemSrc}#${index}`}
+            className="absolute top-0"
+            style={{ left: index * step, width: size, height: size, zIndex: index + 1 }}
+          >
+            <FallbackImage
+              src={itemSrc}
+              alt=""
+              ariaHidden
+              width={size}
+              height={size}
+              className="h-full w-full select-none object-contain drop-shadow-sm"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   const resolvedOverlaySize = overlaySize ?? Math.max(10, Math.round(size * 0.65));
   // Les fichiers `icon_flat_*` sont dessinés en blanc plein : lisibles sur fond
   // sombre, invisibles en thème clair sans inversion. Les autres gardent leurs

@@ -111,7 +111,7 @@ function TotalRow({
             moitié, et serrait l'overlay — qui déborde volontairement de la
             boîte (`-right-1.5`) pour rester lisible. On veut reconnaître la
             stat d'un coup d'œil, pas décorer. */}
-        <EffectIcon src={display.src} overlaySrc={display.overlaySrc} alt={display.label} size={25} />
+        <EffectIcon src={display.src} overlaySrc={display.overlaySrc} extraSrcs={display.extraSrcs} alt={display.label} size={25} />
         <span className="min-w-0 flex-1 leading-tight">
           <span className="flex items-center gap-1.5">
             <span className="truncate text-[13px] font-medium text-foreground">

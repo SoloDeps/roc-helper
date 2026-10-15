@@ -424,6 +424,7 @@ export function ProgressionTab({
                     <EffectIcon
                       src={column.src}
                       overlaySrc={column.overlaySrc}
+                      extraSrcs={column.extraSrcs}
                       alt={column.label}
                       size={18}
                     />
@@ -515,6 +516,7 @@ export function ProgressionTab({
                 <EffectIcon
                   src={column.src}
                   overlaySrc={column.overlaySrc}
+                  extraSrcs={column.extraSrcs}
                   alt={column.label}
                   size={20}
                 />

@@ -133,8 +133,15 @@ export function EvolvingCardStats({
 
   return (
     <StatsSection empty={entries.length === 0 ? "No bonus at this level yet." : null}>
-      {entries.map(({ key, src, overlaySrc, label, value }) => (
-        <BonusBadge key={key} src={src} overlaySrc={overlaySrc} label={label} value={value} />
+      {entries.map(({ key, src, overlaySrc, extraSrcs, label, value }) => (
+        <BonusBadge
+          key={key}
+          src={src}
+          overlaySrc={overlaySrc}
+          extraSrcs={extraSrcs}
+          label={label}
+          value={value}
+        />
       ))}
     </StatsSection>
   );

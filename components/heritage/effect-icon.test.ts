@@ -108,6 +108,40 @@ describe("rang de bien NU sur un bâtiment évolutif", () => {
   });
 });
 
+describe("bonus versant les trois biens d'une ère", () => {
+  it("le Water Pavilion aligne les trois biens du joueur, comme le wiki", () => {
+    // « All goods of Current Era » : trois rangs NUS sur une seule ligne. Seule
+    // la première icône était rendue — le badge ne montrait que le bien primaire.
+    const resolved = resolveEvolvingBuilding("evolving_water_pavilion", 1, "LG")!;
+    const bonus = resolved.production.find((candidate) => candidate.type === "goods_output")!;
+    expect(bonus.resources).toEqual(["primary", "secondary", "tertiary"]);
+
+    const selections: string[][] = [[], [], ["Jeweler", "Alchemist", "Glassblower"]];
+    const display = describeHeritageBonus(bonus, selections, false, "LG");
+    expect([display.src, ...(display.extraSrcs ?? [])]).toMatchInlineSnapshot(`
+      [
+        "/images/goods/embellishment.webp",
+        "/images/goods/elixier.webp",
+        "/images/goods/stained_glass.webp",
+      ]
+    `);
+    expect(display.label).toMatchInlineSnapshot(`"Embellishments / Elixirs / Stained Glass"`);
+
+    const html = renderToStaticMarkup(
+      createElement(EffectIcon, { src: display.src, extraSrcs: display.extraSrcs, alt: "", size: 25 }),
+    );
+    for (const src of [display.src, ...(display.extraSrcs ?? [])]) {
+      expect(html).toContain(src.replace("/images/goods/", ""));
+    }
+  });
+
+  it("ateliers non classés : une seule caisse générique, jamais trois identiques", () => {
+    const resolved = resolveEvolvingBuilding("evolving_water_pavilion", 1, "LG")!;
+    const bonus = resolved.production.find((candidate) => candidate.type === "goods_output")!;
+    expect(describeHeritageBonus(bonus, [], false, "LG").extraSrcs).toEqual([]);
+  });
+});
+
 describe("valeur attendue d'un coffre de bâtiment évolutif", () => {
   it("le palier à coffre s'affiche en décimal — espérance d'un tirage, jamais livrée en un coup", () => {
     // Celtic Broch niveau 4 : coffre 80 %→1 PR, 20 %→2 PR (source/gamedesign.json)

@@ -16,12 +16,14 @@ import type { ResolvedHeritageEffect, ResolvedHeritageVault } from "@/resolvers/
 function CardEntry({
   src,
   overlaySrc,
+  extraSrcs,
   label,
   value,
   isPrimary,
 }: {
   src: string;
   overlaySrc: string | null;
+  extraSrcs?: string[];
   label: string;
   value: string;
   isPrimary: boolean;
@@ -31,6 +33,7 @@ function CardEntry({
       <EffectIcon
         src={src}
         overlaySrc={overlaySrc}
+        extraSrcs={extraSrcs}
         alt={label}
         size={isPrimary ? 36 : 22}
       />
@@ -109,7 +112,7 @@ export function EffectCardContents({
   return (
     <>
       {effect.bonuses.map((bonus, i) => {
-        const { src, overlaySrc, label, value } = describeHeritageBonus(
+        const { src, overlaySrc, extraSrcs, label, value } = describeHeritageBonus(
           bonus,
           selections,
           amplified,
@@ -119,6 +122,7 @@ export function EffectCardContents({
             key={`${bonus.type}-${bonus.instance}`}
             src={src}
             overlaySrc={overlaySrc}
+            extraSrcs={extraSrcs}
             label={label}
             value={value}
             isPrimary={i === 0}

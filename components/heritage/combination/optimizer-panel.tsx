@@ -352,7 +352,7 @@ export function OptimizerPanel({
 
         <div className="flex items-center gap-3 rounded-md bg-background-100 px-2.5 py-1.5">
           {/* Icône nue, taille du badge de stat — voir `totals-table.tsx`. */}
-          <EffectIcon src={display.src} overlaySrc={display.overlaySrc} alt={display.label} size={25} />
+          <EffectIcon src={display.src} overlaySrc={display.overlaySrc} extraSrcs={display.extraSrcs} alt={display.label} size={25} />
           <span className="min-w-0 flex-1 truncate text-[13px] font-medium text-foreground">
             {display.label}
           </span>
