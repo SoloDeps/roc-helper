@@ -14,6 +14,7 @@
 // ============================================================
 
 import Dexie, { type Table } from "dexie";
+import { profileDbName } from "@/lib/profiles";
 
 // ─── Entities ────────────────────────────────────────────────────────────────
 
@@ -81,7 +82,7 @@ export class RocHeritageDB extends Dexie {
   userHeritageVaults!: Table<UserHeritageVaultEntity, string>;
 
   constructor() {
-    super("roc_heritage_db");
+    super(profileDbName("roc_heritage_db"));
 
     // v1 — table initiale.
     // Clé primaire = themeId. Seuls les scalaires sont indexés : `equipped` et

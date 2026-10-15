@@ -8,6 +8,7 @@
 // ============================================================
 
 import Dexie, { type Table } from "dexie";
+import { profileDbName } from "@/lib/profiles";
 
 // ─── Entities ────────────────────────────────────────────────────────────────
 
@@ -34,7 +35,7 @@ export class RocWondersDB extends Dexie {
   userWonders!: Table<UserWonderEntity, string>;
 
   constructor() {
-    super("roc_wonders_db");
+    super(profileDbName("roc_wonders_db"));
 
     // v1 — initial wonders table.
     // Primary key = wonder code (e.g. "SH").

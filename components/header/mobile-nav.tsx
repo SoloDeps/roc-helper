@@ -106,8 +106,9 @@ function MobileLink({
     <Link
       href={href}
       target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       onClick={() => {
-        router.push(href.toString());
+        if (!external) router.push(href.toString());
         onOpenChange?.(false);
       }}
       className={cn("flex items-center gap-2 text-2xl font-medium", className)}

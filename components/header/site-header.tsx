@@ -3,12 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ModeToggle } from "./mode-toggle";
 import { WorkshopModal } from "../modals/workshop-modal";
 import { MobileNav } from "./mobile-nav";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Info } from "lucide-react";
-import { siteConfig } from "@/lib/config";
+import { ExternalLink, Heart, Info } from "lucide-react";
+import { SUPPORT_URL, siteConfig } from "@/lib/config";
+import { ProfileMenu } from "./profile-menu";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
@@ -23,16 +23,6 @@ const leftNavLinks = [
   },
   { href: "/vault", label: "Vault", external: false, icon: null },
   { href: "/wonders", label: "Wonders", external: false, icon: null },
-];
-
-const rightNavLinks = [
-  { href: "/help", label: "Help", external: false, icon: "info" },
-  {
-    href: "https://riseofcultures.wiki.gg/",
-    label: "Wiki",
-    external: true,
-    icon: "external",
-  },
 ];
 
 function NavLink({
@@ -79,6 +69,22 @@ function NavLink({
         {iconEl}
         {label}
       </Link>
+    </Button>
+  );
+}
+
+function SupportButton() {
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      className="text-rose-600 hover:bg-rose-500/10 hover:text-rose-600 dark:text-rose-400 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
+      asChild
+    >
+      <a href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">
+        <Heart className="size-4" />
+        Support
+      </a>
     </Button>
   );
 }
@@ -135,25 +141,23 @@ export function SiteHeader() {
             />
           ))}
         </div>
-        <div className="flex items-center gap-0.5">
-          {rightNavLinks.map((link) => (
-            <NavLink
-              key={link.href}
-              {...link}
-              active={pathname === link.href || pathname.startsWith(`${link.href}/`)}
-            />
-          ))}
+        <div className="flex items-center gap-1.5">
+          <SupportButton />
+          <ProfileMenu />
         </div>
       </div>
 
       {/* Mobile */}
       <div className="flex md:hidden justify-between flex-1 items-center gap-1.5 mr-1.5">
-        <MobileNav items={siteConfig.navItems} />
+        <MobileNav
+          items={[
+            ...siteConfig.navItems,
+            { href: SUPPORT_URL, label: "Support", external: true },
+          ]}
+        />
         <WorkshopModal />
+        <ProfileMenu />
       </div>
-
-      {/* ModeToggle */}
-      <ModeToggle />
     </header>
   );
 }

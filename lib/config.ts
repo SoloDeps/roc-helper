@@ -40,3 +40,9 @@ export const siteConfig = {
     },
   ],
 }
+
+/**
+ * Page de soutien (dons). Ko-fi : 0 % de commission sur les dons ponctuels,
+ * paiement par carte ou PayPal sans création de compte côté donateur.
+ */
+export const SUPPORT_URL = "https://ko-fi.com/rochelper";

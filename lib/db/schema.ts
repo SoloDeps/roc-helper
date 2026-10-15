@@ -1,6 +1,7 @@
 "use client";
 
 import Dexie, { type Table } from "dexie";
+import { profileDbName } from "@/lib/profiles";
 
 export interface TechnoEntity {
   id: string; // "eg_0"
@@ -67,7 +68,7 @@ export class RocWikiDB extends Dexie {
   userWonders!: Table<UserWonderEntity, string>;
 
   constructor() {
-    super("roc_wiki_db");
+    super(profileDbName("roc_wiki_db"));
 
     this.version(1).stores({
       buildings: "id,hidden",

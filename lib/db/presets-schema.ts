@@ -8,6 +8,7 @@
 // ============================================================
 
 import Dexie, { type Table } from "dexie";
+import { profileDbName } from "@/lib/profiles";
 import type { UserPreset } from "@/data/wonders/types";
 
 // ─── Database class ──────────────────────────────────────────────────────────
@@ -16,7 +17,7 @@ export class RocPresetsDB extends Dexie {
   userPresets!: Table<UserPreset, string>;
 
   constructor() {
-    super("roc_presets_db");
+    super(profileDbName("roc_presets_db"));
 
     // v1 — initial presets table. Primary key = preset id.
     this.version(1).stores({
