@@ -38,6 +38,7 @@ export const eraColors: Record<EraAbbr, string> = {
   HM: "232, 149, 47",
   EG: "93, 194, 152",
   LG: "90, 152, 189",
+  HE: "104, 109, 196", // pas encore sortie (cf. `released` dans data/config.ts)
 };
 
 export const alliedCityColors: Record<alliedCity, string> = {
@@ -375,6 +376,8 @@ export const goodsUrlByEra: Record<
       url: "/images/thumb/e/e2/Stained_Glass.png/32px-Stained_Glass.png",
     },
   },
+  // Pas encore sortie : les biens des ateliers se renseigneront à la sortie.
+  HE: {},
 } as const;
 
 // ========================================

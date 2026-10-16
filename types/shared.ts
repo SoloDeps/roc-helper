@@ -23,7 +23,7 @@ export type PreAlliedCity =
   | "arabia"
   | "ottoman";
 
-export type PostLGEra = "LG"; // next eras
+export type PostLGEra = "LG" | "HE"; // next eras — HE (Hanseatic Era) : pas encore sortie, cf. `released` dans data/config.ts
 export type EraCode = PreLGEra | PostLGEra;
 
 export interface Good {

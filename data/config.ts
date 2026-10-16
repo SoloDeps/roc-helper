@@ -31,9 +31,20 @@ export interface EraDefinition {
   name: string;
   /** Visuel de couverture */
   image: string;
+  /**
+   * L'ère est-elle sortie en production ? `true` par défaut.
+   *
+   * ⚠️ MÊME GARDE-FOU QUE LE JEU : le game design déclare une ère avant sa
+   * sortie et la laisse désactivée. On fait pareil — une ère `released: false`
+   * est connue du projet (types, formules, données préparées) mais ABSENTE de
+   * `ERAS` et `ERA_ORDER`, donc de tous les sélecteurs, pages et calculs. La
+   * faire sortir = passer ce drapeau à `true`, rien d'autre.
+   */
+  released?: boolean;
 }
 
-export const ERAS: EraDefinition[] = [
+/** Toutes les ères connues, sorties ou non — n'est lu que par `ERAS` et les outils de préparation. */
+export const ALL_ERAS: EraDefinition[] = [
   {
     abbr: "SA",
     gameDesignAge: "StoneAge",
@@ -132,7 +143,19 @@ export const ERAS: EraDefinition[] = [
     name: "Late Gothic Era",
     image: "/eras/14_LGE_cover.webp",
   },
+  {
+    abbr: "HE",
+    gameDesignAge: "HanseaticEra",
+    id: "hanseatic_era",
+    name: "Hanseatic Era",
+    // Pas encore de visuel : la couverture s'ajoutera à la sortie.
+    image: "/eras/15_HE_cover.webp",
+    released: false,
+  },
 ];
+
+/** Les ères SORTIES — la source de vérité de toute l'application. */
+export const ERAS: EraDefinition[] = ALL_ERAS.filter((era) => era.released !== false);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAX QTY PAR BÂTIMENT ET PAR ÈRE — SOURCE DE VÉRITÉ UNIQUE
@@ -216,7 +239,7 @@ export interface MaxQtyPerBuilding {
 
 export type BuildingId = keyof MaxQtyPerBuilding;
 
-export const MAX_QTY_BY_ERA: Record<PostLGEra, MaxQtyPerBuilding> = {
+export const MAX_QTY_BY_ERA: Partial<Record<PostLGEra, MaxQtyPerBuilding>> = {
   LG: {
     small_home: 31,
     average_home: 15,
@@ -230,7 +253,7 @@ export const MAX_QTY_BY_ERA: Record<PostLGEra, MaxQtyPerBuilding> = {
     large_culture_site: 1,
     luxurious_culture_site: 8,
   },
-  // next era here
+  // HE : à renseigner à l'approche de la sortie (aucune valeur dans le game design).
 };
 
 /**
@@ -243,7 +266,7 @@ export function getMaxQtyForBuilding(
   buildingId: BuildingId,
 ): number | undefined {
   if (era in MAX_QTY_BY_ERA) {
-    return MAX_QTY_BY_ERA[era as PostLGEra][buildingId];
+    return MAX_QTY_BY_ERA[era as PostLGEra]?.[buildingId];
   }
   return undefined;
 }
