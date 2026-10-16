@@ -142,6 +142,39 @@ describe("bonus versant les trois biens d'une ère", () => {
   });
 });
 
+describe("biens de l'ère PRÉCÉDENTE (PE) d'un bâtiment évolutif", () => {
+  it("le Celtic Arch lit ses biens à l'ère d'avant celle du bâtiment, pas à la sienne", () => {
+    // À partir de RomanEmpire, le game design écrit le rang NU avec
+    // `offset: -1` — seul signe qui sépare les biens PE des biens CE. Perdu à
+    // l'extraction, le bâtiment affichait les biens de SON ère.
+    const resolved = resolveEvolvingBuilding("evolving_celtic_arch", 1, "LG")!;
+    const bonus = resolved.production.find((candidate) => candidate.type === "goods_output")!;
+    expect(bonus.resources).toEqual(["primary@-1", "secondary@-1", "tertiary@-1"]);
+
+    // Ateliers classés par tranche d'ères : les biens d'EG et de LG diffèrent.
+    const selections: string[][] = [
+      [],
+      ["Jeweler", "Alchemist", "Glassblower"],
+      ["Glassblower", "Jeweler", "Alchemist"],
+    ];
+    const previous = describeHeritageBonus(bonus, selections, false, "LG");
+    const current = describeHeritageBonus(
+      { ...bonus, resources: ["primary", "secondary", "tertiary"] },
+      selections,
+      false,
+      "LG",
+    );
+    expect(previous.src).not.toBe("/images/goods/default.webp");
+    expect(previous.label).not.toBe(current.label);
+  });
+
+  it("hors catalogue (ère avant la première), le rang PE reste générique", () => {
+    const resolved = resolveEvolvingBuilding("evolving_celtic_arch", 1, "LG")!;
+    const bonus = resolved.production.find((candidate) => candidate.type === "goods_output")!;
+    expect(describeHeritageBonus(bonus, [], false, "LG").extraSrcs).toEqual([]);
+  });
+});
+
 describe("valeur attendue d'un coffre de bâtiment évolutif", () => {
   it("le palier à coffre s'affiche en décimal — espérance d'un tirage, jamais livrée en un coup", () => {
     // Celtic Broch niveau 4 : coffre 80 %→1 PR, 20 %→2 PR (source/gamedesign.json)

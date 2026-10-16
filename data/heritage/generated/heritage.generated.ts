@@ -11,8 +11,8 @@ import type { HeritageExtractBundle } from "./types";
 /** Extraction complète et fidèle du domaine Heritage Vault. */
 export const HERITAGE_EXTRACT: HeritageExtractBundle = {
   "generatedFrom": {
-    "gameDesignChecksum": "9v/7PztyAEqO_c3f7a67c84112e8d27c89ebccd70b9e9",
-    "locaChecksum": "vAi9HNKf5kIv",
+    "gameDesignChecksum": "45gEaibPziT8_c3f7a67c84112e8d27c89ebccd70b9e9",
+    "locaChecksum": "1+O0wMFBKpPJ",
     "locale": "en_DK"
   },
   "playerAgeOrderByAge": {
@@ -130311,7 +130311,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 780000
+                                      "value": 480000
                                     },
                                     {
                                       "when": 37,
@@ -130357,7 +130357,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -130419,7 +130419,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -130518,7 +130518,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 858000
+                                      "value": 528000
                                     },
                                     {
                                       "when": 37,
@@ -130564,7 +130564,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -130626,7 +130626,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -130725,7 +130725,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 943800
+                                      "value": 580800
                                     },
                                     {
                                       "when": 37,
@@ -130771,7 +130771,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -130833,7 +130833,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -133436,7 +133436,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 780000
+                                      "value": 480000
                                     },
                                     {
                                       "when": 37,
@@ -133482,7 +133482,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -133544,7 +133544,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -133643,7 +133643,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 858000
+                                      "value": 528000
                                     },
                                     {
                                       "when": 37,
@@ -133689,7 +133689,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -133751,7 +133751,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -133850,7 +133850,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 943800
+                                      "value": 580800
                                     },
                                     {
                                       "when": 37,
@@ -133896,7 +133896,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -133958,7 +133958,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -136561,7 +136561,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 780000
+                                      "value": 480000
                                     },
                                     {
                                       "when": 37,
@@ -136607,7 +136607,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -136669,7 +136669,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -136768,7 +136768,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 858000
+                                      "value": 528000
                                     },
                                     {
                                       "when": 37,
@@ -136814,7 +136814,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -136876,7 +136876,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -136975,7 +136975,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 943800
+                                      "value": 580800
                                     },
                                     {
                                       "when": 37,
@@ -137021,7 +137021,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -137083,7 +137083,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -139686,7 +139686,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 780000
+                                      "value": 480000
                                     },
                                     {
                                       "when": 37,
@@ -139732,7 +139732,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -139794,7 +139794,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     445000,
                                     460000,
                                     460000,
-                                    780000,
+                                    480000,
                                     490000,
                                     493500,
                                     497000,
@@ -139893,7 +139893,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 858000
+                                      "value": 528000
                                     },
                                     {
                                       "when": 37,
@@ -139939,7 +139939,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -140001,7 +140001,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     489500,
                                     506000,
                                     506000,
-                                    858000,
+                                    528000,
                                     539000,
                                     543300,
                                     547150,
@@ -140100,7 +140100,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     },
                                     {
                                       "when": 36,
-                                      "value": 943800
+                                      "value": 580800
                                     },
                                     {
                                       "when": 37,
@@ -140146,7 +140146,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -140208,7 +140208,7 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
                                     538450,
                                     556600,
                                     556600,
-                                    943800,
+                                    580800,
                                     592900,
                                     597630,
                                     601865,
@@ -244811,10 +244811,12 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
       "order": 11,
       "maxLevel": 60,
       "eligibleResourceIds": [
+        "EvolutionToken|Building_EventThai_Evolving_WaterPavilion_1",
         "EvolutionToken|Building_EventThai_Evolving_RoyalTemple_1",
         "EvolutionToken|Building_EventThai2022_Evolving_ShrineOfReflection_1"
       ],
       "eligibleEvolvingBuildingIds": [
+        "Building_EventThai_Evolving_WaterPavilion_1",
         "Building_EventThai_Evolving_RoyalTemple_1",
         "Building_EventThai2022_Evolving_ShrineOfReflection_1"
       ],
@@ -276267,12 +276269,14 @@ export const HERITAGE_EXTRACT: HeritageExtractBundle = {
       "order": 12,
       "maxLevel": 60,
       "eligibleResourceIds": [
+        "EvolutionToken|Building_EventWinter_Evolving_MailBox_1",
         "EvolutionToken|Building_EventWinter_Evolving_SleighStation_1",
         "EvolutionToken|Building_EventWinter2021_Evolving_WinterMarket_1",
         "EvolutionToken|Building_EventWinter_Evolving_HotAirBalloon_1",
         "EvolutionToken|Building_EventWinter2022_Evolving_Bakery_1"
       ],
       "eligibleEvolvingBuildingIds": [
+        "Building_EventWinter_Evolving_MailBox_1",
         "Building_EventWinter_Evolving_SleighStation_1",
         "Building_EventWinter2021_Evolving_WinterMarket_1",
         "Building_EventWinter_Evolving_HotAirBalloon_1",

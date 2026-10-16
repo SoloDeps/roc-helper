@@ -109,6 +109,24 @@ sémantiquement importantes. À signaler explicitement dans `03-technologies.md`
 ⚠️ **`TechnologyDefinitionDTO…rewards[].incident` (13 occ.)** : idem, 13 technologies accordent un
 incident (`Incident_BronzeAge_Capital_Mammoth_3`) — récompense non résolvable en scope actuel.
 
+### Incidents et coffres d'incidents — hors périmètre, à ignorer (2026-10-14)
+
+Le game design du 2026-10-14 ajoute un volume important de contenu « incidents » : coffres et
+paquets d'incidents (`Lua_Incident_Dynamic_MysteryFood_*`, `…_MysteryCoins_*`,
+`…_CombinedPackage_*`, `Dac_Reward_Incident_VideoIncident_Chest_1`), incidents de cité d'alliance
+(`AllianceCityIncidentDefinitionDTO`, `AllianceCityIncidentQualityDefinitionDTO`,
+`AllianceCityIncidentComponentDTO`, `Selection_Kit_AllianceIncident_*`) et `player_power.IncidentPower`.
+
+**Décision : tout ce qui relève des incidents est hors périmètre et doit être ignoré** — l'app ne
+gère pas les coffres d'incidents. Ces formules lisent pour la plupart `playerAgeOrder`, comme le
+`Lua_Building_Event_Evolving_Generic_Food_1` des évolutifs : la ressemblance n'en fait pas une
+donnée à extraire.
+
+Vérifié sur cette source : aucune entité des domaines retenus ne les référence, en dehors des
+13 `IncidentRewardDTO` des technologies (déjà dans `OUT_OF_SCOPE_REWARDS`,
+scripts/extract/technologies.ts). Aucun extracteur ne les lit ; un avertissement qui les citerait
+signalerait une nouvelle arête à classer, pas un manque à combler.
+
 ## 5. Faux positifs écartés
 
 L'heuristique « champ suffixé `Id` dont la valeur n'est pas un id racine connu » a levé des alertes

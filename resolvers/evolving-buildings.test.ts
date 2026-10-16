@@ -18,8 +18,8 @@ function pick(bonuses: ResolvedEvolvingBonus[], type: string): ResolvedEvolvingB
 }
 
 describe("catalogue", () => {
-  it("expose les 44 bâtiments évolutifs, tous à 60 niveaux", () => {
-    expect(EVOLVING_BUILDINGS).toHaveLength(44);
+  it("expose les 46 bâtiments évolutifs, tous à 60 niveaux", () => {
+    expect(EVOLVING_BUILDINGS).toHaveLength(46);
     for (const building of EVOLVING_BUILDINGS) {
       expect(building.maxLevel, building.key).toBe(60);
       expect(building.key, building.chainKey).toMatch(/^evolving_/);
@@ -28,7 +28,7 @@ describe("catalogue", () => {
 
   it("`starLevels` reprend les paliers d'étoiles du game design", () => {
     expect(getEvolvingBuilding("evolving_aqueduct")?.starLevels).toEqual([10, 20, 30, 40, 60]);
-    // 3 des 44 sont décalés d'un niveau (03-batiments.md B9).
+    // 3 des 46 sont décalés d'un niveau (03-batiments.md B9).
     expect(getEvolvingBuilding("evolving_hydra")?.starLevels).toEqual([11, 21, 31, 41, 60]);
   });
 
@@ -63,10 +63,11 @@ describe("evolving_aqueduct — production, culture et bonus passif", () => {
     // Sous MinoanEra le bâtiment verse les biens de l'ère précédente.
     expect(production.resources).toEqual(["primary_me", "secondary_me", "tertiary_me"]);
 
-    // Dac_…_CEGoods_RomanEmpireAndLater : values[when=1] = 75, en rang nu.
+    // Dac_…_CEGoods_RomanEmpireAndLater : palier unique values[when=1] = 75, mais
+    // la formule gouverne le niveau 1 (⌊74.5⌋ = 74, valeur du jeu). En rang nu.
     const re = resolveEvolvingBuilding("evolving_aqueduct", 1, "RE")!;
     const late = pick(re.production, "goods_output");
-    expect(late.value).toBe(75);
+    expect(late.value).toBe(74);
     expect(late.resources).toEqual(["primary", "secondary", "tertiary"]);
     // "(#level * 5.5) + 69" au niveau 60.
     expect(pick(resolveEvolvingBuilding("evolving_aqueduct", 60, "RE")!.production, "goods_output").value).toBe(399);
@@ -142,7 +143,7 @@ describe("coût de montée en jetons d'évolution", () => {
     expect(resolved.upgradeCost).toBeNull();
   });
 
-  it("les 44 ont un barème, au niveau 1 comme au niveau 59", () => {
+  it("les 46 ont un barème, au niveau 1 comme au niveau 59", () => {
     for (const building of EVOLVING_BUILDINGS) {
       expect(getUpgradeCost(building.key, 1)?.evolution_tokens, building.key).toBeGreaterThan(0);
       expect(getUpgradeCost(building.key, 59)?.evolution_tokens, building.key).toBeGreaterThan(0);

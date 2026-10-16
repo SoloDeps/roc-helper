@@ -14,8 +14,8 @@ import type {
 /** Extraction complète et fidèle du domaine Technologies. */
 export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
   "generatedFrom": {
-    "gameDesignChecksum": "T3rQfllrrK7Q_c3f7a67c84112e8d27c89ebccd70b9e9",
-    "locaChecksum": "MktHieEX38ba",
+    "gameDesignChecksum": "45gEaibPziT8_c3f7a67c84112e8d27c89ebccd70b9e9",
+    "locaChecksum": "1+O0wMFBKpPJ",
     "locale": "en_DK"
   },
   "ages": [
@@ -36927,7 +36927,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 2,
       "uiColumn": 1,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -36994,9 +36996,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_GOOD|DYN|EarlyGothicEra_Good1",
@@ -37155,7 +37155,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 3,
       "uiColumn": 2,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -37221,9 +37223,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_ShipwrightGuilds",
@@ -37237,7 +37237,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 3,
       "uiColumn": 2,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -37310,9 +37312,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_GothicBridgeBuilding",
@@ -37403,7 +37403,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 4,
       "uiColumn": 3,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -37485,7 +37487,6 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "bonuses": [],
       "finishRequirements": [],
       "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données",
         "`IncreaseLimitRewardDTO` sans `type` : limite cible inconnue (T5)"
       ]
     },
@@ -37501,7 +37502,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 4,
       "uiColumn": 3,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -37570,9 +37573,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_WharfConstruction",
@@ -37586,7 +37587,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 4,
       "uiColumn": 3,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -37653,9 +37656,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_MasonryTechniques",
@@ -37818,7 +37819,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 5,
       "uiColumn": 4,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -37893,9 +37896,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_PortWarehouseInnovations",
@@ -37909,7 +37910,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 5,
       "uiColumn": 4,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -37978,9 +37981,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_CivicSelfGovernment",
@@ -38179,7 +38180,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 6,
       "uiColumn": 5,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -38258,9 +38261,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_HullClinkerConstruction",
@@ -38274,7 +38275,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 6,
       "uiColumn": 5,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -38341,9 +38344,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_ThreeFieldCropRotation",
@@ -38508,7 +38509,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 7,
       "uiColumn": 6,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -38580,9 +38583,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_Cavalrymen",
@@ -38663,7 +38664,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 8,
       "uiColumn": 7,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -38742,9 +38745,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_CaravelDesign",
@@ -38758,7 +38759,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 8,
       "uiColumn": 7,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -38825,9 +38828,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_VeterinaryScience",
@@ -39005,7 +39006,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 9,
       "uiColumn": 8,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -39082,9 +39085,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_StowagePlanning",
@@ -39098,7 +39099,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 9,
       "uiColumn": 8,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -39177,9 +39180,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_GargoyleDrainageSystems",
@@ -39342,7 +39343,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 10,
       "uiColumn": 9,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -39409,9 +39412,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_TidalCalculationTables",
@@ -39425,7 +39426,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 10,
       "uiColumn": 9,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -39503,9 +39506,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_PaperMillingProcesses",
@@ -39658,7 +39659,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 11,
       "uiColumn": 10,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -39738,9 +39741,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_WheeledOnagers",
@@ -39823,7 +39824,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 12,
       "uiColumn": 11,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -39919,9 +39922,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_AnchorageTechniques",
@@ -39935,7 +39936,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 12,
       "uiColumn": 11,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -40023,9 +40026,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_BaronialHallDesign",
@@ -40190,7 +40191,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 13,
       "uiColumn": 12,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -40276,9 +40279,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_EarlyGothicEra_MechanicalClock",
@@ -40359,7 +40360,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 14,
       "uiColumn": 13,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -40439,9 +40442,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_FlamboyantGothic",
@@ -40816,7 +40817,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 2,
       "uiColumn": 1,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -40878,9 +40881,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_RoseWindows",
@@ -41038,7 +41039,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 3,
       "uiColumn": 2,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -41098,9 +41101,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_LighthouseDesign",
@@ -41114,7 +41115,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 3,
       "uiColumn": 2,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -41201,9 +41204,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_CranequinCrossbows",
@@ -41284,7 +41285,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 4,
       "uiColumn": 3,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -41382,9 +41385,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_CounterweightCranes",
@@ -41398,7 +41399,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 4,
       "uiColumn": 3,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -41477,9 +41480,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_WaterPoweredHammers",
@@ -41676,7 +41677,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 5,
       "uiColumn": 4,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -41747,9 +41750,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_CarvelPlanking",
@@ -41763,7 +41764,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 5,
       "uiColumn": 4,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -41823,9 +41826,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_LanceRestHarness",
@@ -41908,7 +41909,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 6,
       "uiColumn": 5,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -41975,9 +41978,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_OttomanTaxRegister",
@@ -41991,7 +41992,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 6,
       "uiColumn": 5,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -42068,9 +42071,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_PortDuesAdministration",
@@ -42084,7 +42085,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 6,
       "uiColumn": 5,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -42171,9 +42174,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_PerpendicularTracery",
@@ -42335,7 +42336,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 7,
       "uiColumn": 6,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -42404,9 +42407,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_CustomsHouses",
@@ -42420,7 +42421,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 7,
       "uiColumn": 6,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -42506,9 +42509,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_GOOD|DYN|LateGothicEra_Good2",
@@ -42591,7 +42592,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 8,
       "uiColumn": 7,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -42653,9 +42656,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_DoubleEntryBookkeeping",
@@ -42669,7 +42670,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 8,
       "uiColumn": 7,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -42731,9 +42734,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_CoatOfPlates",
@@ -42895,7 +42896,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 9,
       "uiColumn": 8,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -42981,9 +42984,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_Quarantine",
@@ -42997,7 +42998,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 9,
       "uiColumn": 8,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -43083,9 +43086,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_GelatinSizing",
@@ -43268,7 +43269,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 10,
       "uiColumn": 9,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -43347,9 +43350,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_CityWatch",
@@ -43592,7 +43593,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 11,
       "uiColumn": 10,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -43678,9 +43681,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_CameGlasswork",
@@ -43857,7 +43858,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 12,
       "uiColumn": 11,
       "order": 3,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -43935,9 +43938,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_MonteDiPieta",
@@ -43951,7 +43952,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 12,
       "uiColumn": 11,
       "order": 4,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -44029,9 +44032,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_GOOD|DYN|LateGothicEra_Good3",
@@ -44116,7 +44117,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 13,
       "uiColumn": 12,
       "order": 2,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -44185,9 +44188,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     },
     {
       "id": "Technology_LateGothicEra_OttomanEmpireConsensus",
@@ -44201,7 +44202,9 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       "column": 14,
       "uiColumn": 13,
       "order": 1,
-      "cities": [],
+      "cities": [
+        "trading_culture.OttomanEmpire"
+      ],
       "allied": "ottoman",
       "costs": [
         {
@@ -44264,9 +44267,7 @@ export const TECHNOLOGY_EXTRACT: TechnologyExtractBundle = {
       ],
       "bonuses": [],
       "finishRequirements": [],
-      "warnings": [
-        "Aucune `cities` : branche commerce supposée (T3, §1.4) — non déclaré par les données"
-      ]
+      "warnings": []
     }
   ]
 };

@@ -24,16 +24,16 @@ const ERA_GOOD = /^(primary|secondary|tertiary)_([a-z]{2})$/;
 const ERA_ABBRS: Set<string> = new Set(ERAS.map((era) => era.abbr));
 
 describe("bâtiments — extraction", () => {
-  it("192 chaînes pour 693 définitions, 144 projetées vers l'app", () => {
-    expect(BUILDING_EXTRACT.buildings.length).toBe(192);
+  it("194 chaînes pour 695 définitions, 146 projetées vers l'app", () => {
+    expect(BUILDING_EXTRACT.buildings.length).toBe(194);
     const definitions = BUILDING_EXTRACT.buildings.reduce(
       (total, building) => total + building.levels.length,
       0,
     );
-    expect(definitions).toBe(693);
-    expect(BUILDING_RAW_DATA.length).toBe(144);
+    expect(definitions).toBe(695);
+    expect(BUILDING_RAW_DATA.length).toBe(146);
     expect(BUILDING_EXTRACT.buildings.filter((b) => b.scope === "app").length).toBe(100);
-    expect(BUILDING_EXTRACT.buildings.filter((b) => b.scope === "evolving").length).toBe(44);
+    expect(BUILDING_EXTRACT.buildings.filter((b) => b.scope === "evolving").length).toBe(46);
   });
 
   // `BuildingRawEntry` porte les dimensions par chaîne : ce serait une perte si
@@ -225,10 +225,11 @@ describe("bâtiments — vocabulaire de bonus", () => {
   // scripts/extract/buildings.ts.
   it("`building_type_production` porte le TYPE dans `scope`, pas la cité", () => {
     const typed = allBonuses.filter((b) => b.type === "building_type_production");
-    expect(typed).toHaveLength(3);
+    expect(typed).toHaveLength(4);
     expect(typed.map((b) => b.scope).sort((a, z) => String(a?.value).localeCompare(String(z?.value)))).toEqual([
       { kind: "buildingType", value: "beehive" },
       { kind: "buildingType", value: "home" },
+      { kind: "buildingType", value: "workshop" },
       { kind: "buildingType", value: "workshop" },
     ]);
     // La clé reste générique, et la ressource nulle : le game design ne nomme
@@ -262,9 +263,9 @@ describe("bâtiments — vocabulaire de bonus", () => {
     }
   });
 
-  it("les 44 `evolving` plafonnent à 60 (§1.3)", () => {
+  it("les 46 `evolving` plafonnent à 60 (§1.3)", () => {
     const evolving = BUILDING_EXTRACT.buildings.filter((b) => b.buildingType === "evolving");
-    expect(evolving.length).toBe(44);
+    expect(evolving.length).toBe(46);
     for (const building of evolving) {
       expect(building.levelUp?.maxLevel, building.chainKey).toBe(60);
       expect(building.levels.length, building.chainKey).toBe(1);

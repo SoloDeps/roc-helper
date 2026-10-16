@@ -55,10 +55,10 @@ function extraire(data: BuildingData, champs: readonly (keyof BuildingData)[]) {
 }
 
 describe("corpus", () => {
-  it("les 100 bâtiments à la main sont tous au registre, plus les 44 `evolving`", () => {
+  it("les 100 bâtiments à la main sont tous au registre, plus les 46 `evolving`", () => {
     expect(CLES_MAIN.length).toBe(100);
-    expect(CLES_EVOLVING.length).toBe(44);
-    expect(Object.keys(ELEMENT_DATA_REGISTRY).length).toBe(144);
+    expect(CLES_EVOLVING.length).toBe(46);
+    expect(Object.keys(ELEMENT_DATA_REGISTRY).length).toBe(146);
 
     for (const cle of [...CLES_MAIN, ...CLES_EVOLVING]) {
       expect(ELEMENT_DATA_REGISTRY[cle], `clé ${cle}`).toBeDefined();
@@ -177,7 +177,7 @@ describe("bascule — les champs apportés par l'extraction", () => {
     expect(divergences).toEqual([]);
   });
 
-  it("les 44 `evolving` entrent sans niveaux", () => {
+  it("les 46 `evolving` entrent sans niveaux", () => {
     for (const cle of CLES_EVOLVING) {
       const data = ELEMENT_DATA_REGISTRY[cle];
       expect(data.buildingType, cle).toBe("evolving");

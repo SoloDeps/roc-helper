@@ -110,6 +110,18 @@ const AGES: { age: string; abbr: string; eraId: string }[] = [
 
 const AGE_INDEX = new Map(AGES.map((a, i) => [a.age, i]));
 
+/**
+ * Les 44 technologies de la branche commerce/maritime des deux derniers âges.
+ * Le projet l'affiche sous le blason ottoman.
+ *
+ * Historiquement (T3, §1.4) ces technologies n'avaient AUCUNE `cities` et la
+ * branche était une supposition du projet. Le game design la déclare désormais
+ * explicitement : `cities: ["trading_culture.OttomanEmpire"]` (cf.
+ * `CITY_ALLIED_SLUG`). L'absence de `cities` reste lue comme cette branche, pour
+ * les sources antérieures.
+ */
+const TRADE_BRANCH_SLUG = "ottoman";
+
 /** `CityDefinition.id` → slug de blason (`imagesUrl` dans lib/catalog.ts). */
 const CITY_ALLIED_SLUG: Record<string, string> = {
   City_Capital: "",
@@ -118,15 +130,9 @@ const CITY_ALLIED_SLUG: Record<string, string> = {
   City_Mayas: "maya",
   City_Vikings: "vikings",
   City_Arabia: "arabia",
+  // Pas une cité : la culture commerçante qui porte la branche commerce/maritime.
+  "trading_culture.OttomanEmpire": TRADE_BRANCH_SLUG,
 };
-
-/**
- * Les 44 technologies sans `cities` (T3, §1.4) forment la branche
- * commerce/maritime des deux derniers âges. Le game design ne la nomme pas :
- * aucun champ de branche, aucun marqueur. Le projet l'affiche sous le blason
- * ottoman — c'est une décision de présentation, pas une lecture des données.
- */
-const TRADE_BRANCH_SLUG = "ottoman";
 
 /**
  * `Good1` | `Good2` | `Good3` → rang de bien côté projet (§2.1 de data-contracts).

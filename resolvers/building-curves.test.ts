@@ -44,13 +44,40 @@ describe("axe âge × niveau — points de culture", () => {
   });
 });
 
+describe("table et formule — qui gouverne le palier tabulé", () => {
+  it("palier unique d'une production : la formule l'emporte (Water Pavilion, constaté en jeu)", () => {
+    const bonus = only("evolvingWaterPavilion", "goods_output");
+    // Table : when=1 → 75. Formule : (#level * 5.5) + 69 → 74.5, plancher 74.
+    expect(resolveByAgeAndLevel(bonus.ageCurve!, "RomanEmpire", 1)?.amount).toBe(74);
+    expect(resolveByAgeAndLevel(bonus.ageCurve!, "RomanEmpire", 60)?.amount).toBe(399);
+    // StoneAge : table 35, formule (#level * 3.5) + 33 → 36.5, plancher 36 (wiki : 36).
+    expect(resolveByAgeAndLevel(bonus.ageCurve!, "StoneAge", 1)?.amount).toBe(36);
+  });
+
+  it("palier unique d'une culture : la table reste l'autorité (Royal Temple, wiki)", () => {
+    const culture = only("evolvingRoyalTemple", "culture_points");
+    // Table : when=1 → 48. Formule : (#level + 15) * 3 → 48 au niveau 1 n'est
+    // PAS ce qu'elle donne ; le wiki affiche bien 48.
+    expect(resolveBonus(culture, "StoneAge", 1)?.amount).toBe(48);
+  });
+
+  it("plusieurs paliers : la table fait autorité jusqu'à son dernier palier inclus (Trojan Horse, wiki)", () => {
+    const food = only("evolvingTrojanHorse", "food_output");
+    // _Food_IberianEra : palier 39 → 311 000, la formule donnerait 312 000.
+    expect(resolveByAgeAndLevel(food.ageCurve!, "IberianEra", 39)?.amount).toBe(311_000);
+    expect(resolveByAgeAndLevel(food.ageCurve!, "IberianEra", 40)?.amount).toBe(320_000);
+  });
+});
+
 describe("axe âge × niveau — production de biens", () => {
   const bonus = only("evolvingAqueduct", "goods_output");
 
   it("le montant et la RESSOURCE changent avec l'âge", () => {
-    // Dac_…_CEGoods_RomanEmpireAndLater : values[when=1] = 75, en rang nu.
+    // Dac_…_CEGoods_RomanEmpireAndLater : palier unique values[when=1] = 75,
+    // mais c'est la formule qui gouverne le niveau 1 (⌊1 × 5.5 + 69⌋ = 74,
+    // valeur constatée en jeu) — cf. `formulaStartLevel`. En rang nu.
     expect(resolveByAgeAndLevel(bonus.ageCurve!, "RomanEmpire", 1)).toEqual({
-      amount: 75,
+      amount: 74,
       resources: ["primary", "secondary", "tertiary"],
     });
     // Sous MinoanEra le game design verse les biens de l'ère PRÉCÉDENTE.
@@ -107,17 +134,19 @@ describe("axe âge × niveau — table qui saute un âge", () => {
 });
 
 describe("valeurs calculées en Lua — mêmes fonctions de lecture", () => {
-  it("la nourriture d'`evolvingAztecGardenBath` vient d'un script", () => {
+  it("la nourriture d'`evolvingAztecGardenBath` vient d'un script, lu à la dernière ère", () => {
+    // ⚠️ Le script lit `playerAgeOrder` (ère courante du joueur) : la courbe est
+    // évaluée à LateGothicEra (order 15), la dernière ère sortie.
     const bonus = only("evolvingAztecGardenBath", "food_output");
     expect(bonus.ageCurve).toBeNull();
     expect(bonus.curve!.luaScript).toBe(
-      "return math.floor((4191 * entityLevel ^ 0.6) / 50 + 0.5) * 50",
+      "return math.floor(400 * playerAgeOrder * entityLevel + 5500 * playerAgeOrder)",
     );
-    expect(resolveByLevel(bonus.curve!, 1)).toBe(4200);
-    expect(resolveByLevel(bonus.curve!, 10)).toBe(16_700);
-    expect(resolveByLevel(bonus.curve!, 60)).toBe(48_900);
+    expect(resolveByLevel(bonus.curve!, 1)).toBe(88_500);
+    expect(resolveByLevel(bonus.curve!, 10)).toBe(142_500);
+    expect(resolveByLevel(bonus.curve!, 60)).toBe(442_500);
     expect(resolveBonus(bonus, "ClassicGreece", 1)).toEqual({
-      amount: 4200,
+      amount: 88_500,
       resources: ["food"],
     });
   });
@@ -185,10 +214,18 @@ describe("valeur attendue d'un tirage pondéré (coffre)", () => {
   });
 });
 
-describe("non-régression sur les 44 `evolving`", () => {
+describe("non-régression sur les 46 `evolving`", () => {
   it("plus aucun avertissement", () => {
     const warnings = EVOLVING.flatMap((c) => [...c.warnings, ...c.levels.flatMap((l) => l.warnings)]);
-    expect(warnings).toEqual([]);
+    // Avertissements tolérés :
+    //  - la lecture à la dernière ère d'un script qui dépend de `playerAgeOrder`
+    //    (l'Aztec Garden Bath) — voir `referencePlayerAge` ;
+    //  - le Water Pavilion (événement Thaï) n'a pas encore de libellé de groupe
+    //    dans la loca : le nom vient du maillon racine, identique.
+    const tolerated = (w: string) =>
+      w.includes("playerAgeOrder") || w.includes("Base.BuildingGroups.evolvingWaterPavilion_Name");
+    expect(warnings.filter((w) => !tolerated(w))).toEqual([]);
+    expect(warnings.filter((w) => w.includes("playerAgeOrder"))).toHaveLength(1);
   });
 
   it("toute production dynamique et tout point de culture porte une courbe", () => {

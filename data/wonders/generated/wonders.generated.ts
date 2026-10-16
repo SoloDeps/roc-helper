@@ -14,8 +14,8 @@ import type {
 /** Extraction complète et fidèle du domaine Wonders. */
 export const WONDER_EXTRACT: WonderExtractBundle = {
   "generatedFrom": {
-    "gameDesignChecksum": "T3rQfllrrK7Q_c3f7a67c84112e8d27c89ebccd70b9e9",
-    "locaChecksum": "MktHieEX38ba",
+    "gameDesignChecksum": "45gEaibPziT8_c3f7a67c84112e8d27c89ebccd70b9e9",
+    "locaChecksum": "1+O0wMFBKpPJ",
     "locale": "en_DK"
   },
   "constants": {

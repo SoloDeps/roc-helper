@@ -141,8 +141,8 @@ describe("catalogue", () => {
       "Building_EventJapan_Evolving_Shrine_1",
     ]);
     const total = HERITAGE_VAULTS.reduce((n, v) => n + v.eligibleEvolvingBuildingIds.length, 0);
-    // Les 41 jetons portant un `HeritageContributionTraitDTO`, sur 44 évolutifs.
-    expect(total).toBe(41);
+    // Les 43 jetons portant un `HeritageContributionTraitDTO`, sur 46 évolutifs.
+    expect(total).toBe(43);
   });
 });
 

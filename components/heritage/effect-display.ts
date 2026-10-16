@@ -86,7 +86,27 @@ const STAT_OVERLAYS: [suffix: string, iconKey: string][] = [
  * écrivent le rang NU (`secondary`), sans dire laquelle — c'est l'ère de
  * l'INSTANCE (`contextEra`, ci-dessous) qui tranche alors, pas la ressource.
  */
-const GOOD_RANK = /^(primary|secondary|tertiary)(?:_([a-z]{2}))?$/;
+const GOOD_RANK = /^(primary|secondary|tertiary)(?:_([a-z]{2}))?(?:@(-\d+))?$/;
+
+/**
+ * L'ère à laquelle un rang se lit : la sienne si elle est suffixée, sinon
+ * `contextEra` — décalée de `@<offset>` (`primary@-1` = ère PRÉCÉDENTE, les
+ * biens « PE » du jeu). `null` quand l'ère manque ou sort du catalogue.
+ *
+ * ⚠️ Le décalage ne s'applique qu'à `contextEra` : un rang daté dit déjà SA ère.
+ */
+function rankReadingEra(
+  rank: RegExpExecArray,
+  contextEra?: EraCode | null,
+): string | null {
+  if (rank[2] !== undefined) return rank[2];
+  if (contextEra === undefined || contextEra === null) return null;
+  const offset = rank[3] === undefined ? 0 : Number(rank[3]);
+  if (offset === 0) return contextEra.toLowerCase();
+  const index = ERAS.findIndex((era) => era.abbr === contextEra);
+  const shifted = index < 0 ? undefined : ERAS[index + offset];
+  return shifted === undefined ? null : shifted.abbr.toLowerCase();
+}
 
 /**
  * Le bien concret désigné par un RANG (`primary_ba`, ou `primary` NU), résolu
@@ -106,8 +126,8 @@ function resolveRankGood(
 ): string | null {
   const rank = GOOD_RANK.exec(resource);
   if (rank === null) return null;
-  const era = rank[2] ?? contextEra?.toLowerCase();
-  if (era === undefined || era === null) return null;
+  const era = rankReadingEra(rank, contextEra);
+  if (era === null) return null;
   return getGoodNameFromPriorityEra(rank[1], era, selections);
 }
 
@@ -164,8 +184,8 @@ function rankEraLabel(resources: string[], contextEra?: EraCode | null): string 
   for (const resource of resources) {
     const rank = GOOD_RANK.exec(resource);
     if (rank === null) return null;
-    const era = rank[2] ?? contextEra?.toLowerCase();
-    if (era === undefined || era === null) return null;
+    const era = rankReadingEra(rank, contextEra);
+    if (era === null) return null;
     eras.add(era.toUpperCase());
   }
   if (eras.size !== 1) return null;

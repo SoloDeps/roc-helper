@@ -696,11 +696,41 @@ function resolveByStep(steps: BuildingCurveStep[], keys: number[]): (number | nu
 }
 
 /**
+ * Premier niveau gouverné par la formule, quand une formule accompagne la table.
+ *
+ * Cas général (02-dynamic.md §5.1) : la table fait autorité jusqu'à son dernier
+ * `when` INCLUS, la formule prend le relais au-delà — vérifié contre le wiki sur
+ * le Trojan Horse (niveau 39 = palier tabulé, pas la formule).
+ *
+ * ⚠️ EXCEPTION : une table à UN SEUL palier ne fait pas autorité sur ce palier,
+ * la formule le gouverne aussi — pour les productions
+ * (`DynamicFormulaActionChangeCaseDefinitionDTO`) et les boosts d'unités
+ * (`DynamicFormulaFloatCaseDefinitionDTO`). Constaté en jeu sur le Water Pavilion
+ * (biens RE+ au niveau 1 : 74 = ⌊5.5 + 69⌋, pas les 75 tabulés) et contre le
+ * wiki sur l'Aqueduct, le Celtic Arch, le Dracula's Castle, le Palace of Fine
+ * Arts et le Mongolian Mother Tree — dont l'unique palier `when: 1` porte même
+ * la valeur du niveau 2 (décalage d'un niveau dans le game design).
+ *
+ * ⚠️ PAS pour la culture (`DynamicFormulaValueCaseDefinitionDTO`) : le wiki y
+ * suit le palier tabulé (Royal Temple : 48 en SA au niveau 1, la formule donne
+ * 80 ; Aztec Main Temple : 222 en LG, la formule donne 221). Seul le Celtic Arch
+ * en LG (304, formule) le contredit — point ouvert.
+ *
+ * En dessous du premier palier, toujours rien : pas d'extrapolation (D13).
+ */
+function formulaStartLevel(table: BuildingCurveStep[], formulaCaseType: string): number {
+  if (table.length === 0) return 1;
+  if (table.length === 1 && formulaCaseType !== "DynamicFormulaValueCaseDefinitionDTO") {
+    return table[0].when;
+  }
+  return Math.max(...table.map((s) => s.when)) + 1;
+}
+
+/**
  * Assemble une courbe par niveau à partir de ses trois sources possibles.
  *
- * Articulation table / formule : la table fait autorité sur sa plage, la formule
- * prend le relais au-delà du dernier `when` (02-dynamic.md §5.1). En dessous du
- * premier `when`, aucun palier n'est applicable — `null`, pas d'extrapolation (D13).
+ * Articulation table / formule : voir `formulaStartLevel`. En dessous du premier
+ * `when`, aucun palier n'est applicable — `null`, pas d'extrapolation (D13).
  */
 function assembleCurve(
   definitionId: string,
@@ -711,14 +741,17 @@ function assembleCurve(
   valueLimit: number | null,
   luaScript: string | null,
   flooredFormula = false,
+  luaContext: Record<string, number> = {},
+  /** `@type` court du `dynamicFormulaChangeCase` — cf. `formulaStartLevel`. */
+  formulaCaseType = "",
 ): BuildingCurve {
   const keys = Array.from({ length: maxLevel }, (_, i) => i + 1);
   const stepped = resolveByStep(table, keys);
-  const lastWhen = table.length === 0 ? null : Math.max(...table.map((s) => s.when));
+  const formulaFrom = formulaStartLevel(table, formulaCaseType);
 
   const resolved = keys.map((level, i) => {
-    if (luaScript !== null) return round(evaluateLuaFormula(luaScript, { entityLevel: level }));
-    if (formula !== null && (lastWhen === null || level > lastWhen)) {
+    if (luaScript !== null) return round(evaluateLuaFormula(luaScript, { ...luaContext, entityLevel: level }));
+    if (formula !== null && level >= formulaFrom) {
       return round(evaluateCurveFormula(formula, { level }));
     }
     return stepped[i];
@@ -737,8 +770,7 @@ function assembleCurve(
     // flottant IEEE 754 — `Math.floor` de cette valeur BRUTE rend 4 au lieu de
     // 5 pile sur les niveaux de transition (41, 46, 51…), l'inverse de ce que
     // `round()` corrige d'ordinaire pour l'affichage.
-    const isFormulaContinuation =
-      formula !== null && (lastWhen === null || keys[i] > lastWhen);
+    const isFormulaContinuation = formula !== null && keys[i] >= formulaFrom;
     const cleaned = round(scaled);
     return flooredFormula && isFormulaContinuation ? Math.floor(cleaned) : cleaned;
   });
@@ -820,30 +852,61 @@ function buildCurve(
     asNumber(formulaCase.valueLimit),
     null,
     flooredFormula ?? read === actionAmount,
+    {},
+    shortType(formulaCase),
   );
 }
 
 /**
- * Un script Lua dont `entityLevel` est la seule variable — les autres n'ont pas
- * de convention établie ici, et sont signalées plutôt qu'inventées.
+ * L'âge de LECTURE des scripts Lua qui lisent `playerAgeOrder` : la DERNIÈRE ère
+ * sortie du projet (`AGES`), lue en `AgeDefinition.order` comme le fait le
+ * domaine Heritage.
+ *
+ * ⚠️ `playerAgeOrder` est l'ère COURANTE du joueur, lue au runtime : une même
+ * courbe existe donc une fois par ère. Ce domaine n'en affiche qu'une (l'encyclopédie
+ * montre un bâtiment, pas une famille de bâtiments) ; on retient la plus récente,
+ * et chaque lecture le signale dans les `warnings`. Quand une ère sort, elle
+ * entre dans `AGES` et cette lecture avance d'elle-même.
+ */
+function referencePlayerAge(src: SourceIndex): { age: string; order: number } {
+  const age = AGES[AGES.length - 1].age;
+  const order = asNumber(asObject(src.byId.get(age)).order);
+  if (order === null) throw new Error(`Âge sans \`order\` dans le game design : ${age}`);
+  return { age, order };
+}
+
+/**
+ * Un script Lua lisible ici : `entityLevel` seul, ou avec `playerAgeOrder` — les
+ * autres variables n'ont pas de convention établie, et sont signalées plutôt
+ * qu'inventées.
  */
 function levelOnlyLuaScript(
   src: SourceIndex,
   definitionId: string,
   warnings: string[],
-): string | null {
+): { script: string; context: Record<string, number> } | null {
   const definition = src.byId.get(definitionId);
   const script = definition === undefined ? null : asString(definition.luaScript);
   if (script === null) {
     warnings.push(`Script Lua introuvable : ${definitionId}`);
     return null;
   }
-  const foreign = collectLuaVariables(script).filter((name) => name !== "entityLevel");
+  const variables = collectLuaVariables(script);
+  const foreign = variables.filter((name) => name !== "entityLevel" && name !== "playerAgeOrder");
   if (foreign.length > 0) {
     warnings.push(`Script Lua non résolu : ${definitionId} lit ${foreign.join(", ")}`);
     return null;
   }
-  return script;
+  const context: Record<string, number> = {};
+  if (variables.includes("playerAgeOrder")) {
+    const reference = referencePlayerAge(src);
+    context.playerAgeOrder = reference.order;
+    warnings.push(
+      `Script Lua lisant playerAgeOrder : ${definitionId} — évalué à ${reference.age} (${reference.order}), ` +
+        "l'ère courante du joueur n'étant pas connue",
+    );
+  }
+  return { script, context };
 }
 
 /** Courbe d'un script Lua balayé sur l'axe du niveau RUNTIME (`evolving` seuls). */
@@ -853,9 +916,9 @@ function luaCurve(
   maxLevel: number,
   warnings: string[],
 ): BuildingCurve | null {
-  const script = levelOnlyLuaScript(src, definitionId, warnings);
-  if (script === null) return null;
-  return assembleCurve(definitionId, null, maxLevel, [], null, null, script);
+  const resolved = levelOnlyLuaScript(src, definitionId, warnings);
+  if (resolved === null) return null;
+  return assembleCurve(definitionId, null, maxLevel, [], null, null, resolved.script, false, resolved.context);
 }
 
 /**
@@ -869,13 +932,13 @@ function luaValueAt(
   entityLevel: number | null,
   warnings: string[],
 ): number | null {
-  const script = levelOnlyLuaScript(src, definitionId, warnings);
-  if (script === null) return null;
+  const resolved = levelOnlyLuaScript(src, definitionId, warnings);
+  if (resolved === null) return null;
   if (entityLevel === null) {
     warnings.push(`Script Lua non résolu : ${definitionId} — niveau du maillon inconnu`);
     return null;
   }
-  return round(evaluateLuaFormula(script, { entityLevel }));
+  return round(evaluateLuaFormula(resolved.script, { ...resolved.context, entityLevel }));
 }
 
 /**
@@ -1169,7 +1232,13 @@ function actionResourceDescriptors(payload: JsonObject): string[] {
     const object = asObject(reward);
     if (shortType(object) !== "GoodRewardDTO") continue;
     const number = asNumber(object.number);
-    if (number !== null) descriptors.push(`Good${number}`);
+    if (number === null) continue;
+    // ⚠️ `offset` : `-1` = ÉRE PRÉCÉDENTE. C'est le seul champ qui sépare les
+    // `…_CEGoods_…` des `…_PEGoods_…` à partir de RomanEmpire — sans lui, les
+    // biens PE se lisaient comme des biens de l'ère courante. Porté par le
+    // récompense elle-même ET par son `dynamicGood` (toujours identiques).
+    const offset = asNumber(object.offset) ?? asNumber(asObject(object.dynamicGood).offset) ?? 0;
+    descriptors.push(offset === 0 ? `Good${number}` : `Good${number}@${offset}`);
   }
   const chest = chestResource(payload);
   if (chest !== null) descriptors.push(chest);
@@ -1501,14 +1570,21 @@ function projectProduction(definitionId: string): Projection {
  *
  * `Good1|2|3` vient d'un `GoodRewardDTO` : le game design ne date pas le bien,
  * la clé reste donc un RANG nu (`primary`) là où un `DYN|<Age>_GoodN` donne un
- * rang daté (`primary_cg`).
+ * rang daté (`primary_cg`). Avec un `offset`, le rang nu porte son décalage
+ * (`primary@-1`).
  */
 function projectProducedResource(descriptor: string): { key: string; projection: Projection } {
-  const rank = GOOD_RANK[descriptor];
-  if (rank !== undefined) {
+  // `Good1@-1` = rang 1 de l'ère PRÉCÉDENTE. L'ère de lecture n'est pas connue
+  // ici (une courbe « RomanEmpireAndLater » couvre neuf ères) : le décalage
+  // reste donc dans la clé (`primary@-1`) et se résout à l'affichage, avec
+  // l'ère de l'instance — même mécanisme que le rang nu.
+  const ranked = /^(Good\d)(?:@(-?\d+))?$/.exec(descriptor);
+  const rank = ranked === null ? undefined : GOOD_RANK[ranked[1]];
+  if (ranked !== null && rank !== undefined) {
+    const key = ranked[2] === undefined || Number(ranked[2]) === 0 ? rank : `${rank}@${Number(ranked[2])}`;
     return {
-      key: rank,
-      projection: { type: "goods_output", format: "absolute", scope: null, scale: 1, resource: rank },
+      key,
+      projection: { type: "goods_output", format: "absolute", scope: null, scale: 1, resource: key },
     };
   }
   const projection = projectProduction(descriptor);

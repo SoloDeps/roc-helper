@@ -11,7 +11,7 @@ import type { BuildingData, BuildingLevel, Costs, Good } from "@/types/shared";
  *  - Tout ce qui n'est pas `levels` vient de l'extraction. `buildingType`,
  *    `width` et `height` n'existent nulle part à la main ; les cinq champs de
  *    présentation y sont identiques des deux côtés (test ci-contre).
- *  - Les 44 chaînes `evolving`, absentes de la saisie à la main, entrent telles
+ *  - Les 46 chaînes `evolving`, absentes de la saisie à la main, entrent telles
  *    que l'extraction les projette — sans niveaux : leur unique définition n'a
  *    pas d'ère et se paie en `EvolutionToken`.
  *  - `levels` reste la saisie à la main, À UNE EXCEPTION PRÈS : le coût de
