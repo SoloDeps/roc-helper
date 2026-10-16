@@ -58,7 +58,9 @@ export function useUserPresets() {
   const hasHydrated = presetsQuery !== undefined;
   const presets = presetsQuery ?? [];
 
-  const [activePresetId, setActivePresetId] = useState<string | null>(null);
+  // Choix explicite de l'utilisateur ; `null` (ou un id disparu) retombe sur le
+  // premier preset — dérivé au rendu plutôt que recopié par un effet.
+  const [selectedPresetId, setActivePresetId] = useState<string | null>(null);
 
   // Crée un preset par défaut pour un nouvel utilisateur, une fois la DB chargée.
   useEffect(() => {
@@ -67,15 +69,9 @@ export function useUserPresets() {
     }
   }, [hasHydrated, presets.length, db]);
 
-  // Sélectionne le premier preset dès qu'aucun n'est actif.
-  useEffect(() => {
-    if (!activePresetId && presets.length > 0) {
-      setActivePresetId(presets[0].id);
-    }
-  }, [activePresetId, presets]);
-
   const activePreset =
-    presets.find((p) => p.id === activePresetId) ?? presets[0] ?? null;
+    presets.find((p) => p.id === selectedPresetId) ?? presets[0] ?? null;
+  const activePresetId = activePreset?.id ?? null;
 
   // ── Mutators ──
 

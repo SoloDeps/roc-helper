@@ -82,7 +82,7 @@ export function FiltersDrawer() {
   }, [tableType, location, filters.hideHidden, filters.hideTechnos, filters.hideCampaigns]);
 
   // Active filters component
-  const ActiveFilters = ({ className = "" }: { className?: string }) => {
+  const renderActiveFilters = (className = "") => {
     if (!hasActiveFilters) return null;
 
     const badgeSize = isDesktop ? "sm" : "default";
@@ -186,7 +186,7 @@ export function FiltersDrawer() {
   };
 
   // Filter content (vertical layout)
-  const FilterContent = () => {
+  const renderFilterContent = () => {
     const buttonSize = isDesktop ? "sm" : "default";
 
     return (
@@ -194,7 +194,7 @@ export function FiltersDrawer() {
         {/* Active Filters - Top on mobile/drawer, bottom on desktop */}
         {!isDesktop && hasActiveFilters && (
           <div className="p-4 border-b">
-            <ActiveFilters />
+            {renderActiveFilters()}
           </div>
         )}
 
@@ -373,7 +373,7 @@ export function FiltersDrawer() {
         {/* Active Filters - Bottom on desktop */}
         {isDesktop && hasActiveFilters && (
           <div className="p-4 border-t mt-auto">
-            <ActiveFilters />
+            {renderActiveFilters()}
           </div>
         )}
       </>
@@ -419,7 +419,7 @@ export function FiltersDrawer() {
         </DrawerHeader>
 
         <div className="overflow-y-auto flex-1 flex flex-col">
-          <FilterContent />
+          {renderFilterContent()}
         </div>
       </DrawerContent>
     </Drawer>
