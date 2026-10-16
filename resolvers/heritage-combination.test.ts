@@ -42,6 +42,7 @@ function bonus(overrides: Partial<CombinableBonus> & { type: string }): Combinab
     instance: 1,
     resources: [],
     periodSeconds: null,
+    isChestExpectation: false,
     ...overrides,
   };
 }
