@@ -44,7 +44,7 @@ interface BuildingCounterProps {
 /**
  * Custom hook for debounced value updates
  */
-function useDebouncedCallback<T extends (...args: any[]) => void>(
+function useDebouncedCallback<T extends (...args: never[]) => void>(
   callback: T,
   delay: number,
 ): T {

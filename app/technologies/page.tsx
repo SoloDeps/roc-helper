@@ -67,6 +67,9 @@ import { WorkshopModal } from "@/components/modals/workshop-modal";
 import Image from "next/image";
 import { parseRankGoodKey } from "@/resolvers/goods-keys";
 
+/** Une techno de l'ère, enrichie de son état en base (`technosWithStatus`). */
+type TechnoWithStatus = TechnoData & { hidden: boolean; cp: boolean };
+
 /**
  * Les biens d'une ère, rangés par SLOT du joueur.
  *
@@ -259,9 +262,9 @@ function CostGrid({
   );
 }
 
-function StatsContent({ technologies }: { technologies: TechnoData[] }) {
-  const completed = technologies.filter((t) => (t as any).cp);
-  const remaining = technologies.filter((t) => !(t as any).cp);
+function StatsContent({ technologies }: { technologies: TechnoWithStatus[] }) {
+  const completed = technologies.filter((t) => t.cp);
+  const remaining = technologies.filter((t) => !t.cp);
   return (
     <Tabs defaultValue="remaining">
       <TabsList className="w-full">
@@ -295,7 +298,7 @@ function EraStatsButton({
   desktopOpen,
   onDesktopOpenChange,
 }: {
-  technologies: TechnoData[];
+  technologies: TechnoWithStatus[];
   desktopOpen?: boolean;
   onDesktopOpenChange?: (open: boolean) => void;
 }) {

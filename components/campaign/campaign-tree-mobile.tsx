@@ -177,7 +177,7 @@ export function CampaignTreeMobile({ regions, eraId }: CampaignTreeMobileProps) 
   }, [pathRawNodeIds, pathToId, excludeCompleted, completedIds]);
 
   const pathRegions = useMemo(
-    () => getOrderedTechs(pathNodeIds, regions as any) as unknown as CampaignRegion[],
+    () => getOrderedTechs(pathNodeIds, regions),
     [pathNodeIds, regions],
   );
 
@@ -331,7 +331,7 @@ export function CampaignTreeMobile({ regions, eraId }: CampaignTreeMobileProps) 
   const handleCardClick = useCallback(
     (region: CampaignRegion) => {
       if (mode === "ancestors-pick") {
-        const { nodeIds, edgeIds } = getAllAncestors(region.id, regions as any);
+        const { nodeIds, edgeIds } = getAllAncestors(region.id, regions);
         setPathRawNodeIds(nodeIds);
         setPathRawEdgeIds(edgeIds);
         setPathFound(true);
@@ -349,7 +349,7 @@ export function CampaignTreeMobile({ regions, eraId }: CampaignTreeMobileProps) 
         const { nodeIds, edgeIds, found } = getSubgraphBetween(
           pathFromId!,
           region.id,
-          regions as any,
+          regions,
         );
         setPathRawNodeIds(nodeIds);
         setPathRawEdgeIds(edgeIds);

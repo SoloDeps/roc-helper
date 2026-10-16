@@ -266,8 +266,8 @@ export function TechTreeMobile({ technologies }: TechTreeMobileProps) {
   // This wires the shared state into the desktop component when used in mobile
   const externalControl: TechTreeExternalControl = useMemo(
     () => ({
-      mode: mode as any,
-      setMode: setMode as any,
+      mode,
+      setMode,
       pathFromId,
       setPathFromId,
       pathToId,

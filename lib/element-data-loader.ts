@@ -1,4 +1,4 @@
-import type { BuildingData } from "@/types/shared";
+import type { BuildingData, Costs } from "@/types/shared";
 import { ELEMENT_DATA_REGISTRY } from "@/data/registry";
 import { DEFAULT_MAX_QTY } from "@/data/config";
 import { ERAS } from "./catalog";
@@ -44,14 +44,14 @@ export function getLevelsForEraAndType(
   data: BuildingData,
   era: string,
   type: "construction" | "upgrade",
-): Array<{ level: number; costs: any; maxQty: number }> {
+): Array<{ level: number; costs: Costs; maxQty: number }> {
   if (!data?.levels) return [];
 
   return data.levels
     .filter((l) => l.era === era && l[type])
     .map((l) => ({
       level: l.level,
-      costs: l[type],
+      costs: l[type]!,
       maxQty: l.max_qty || DEFAULT_MAX_QTY,
     }))
     .sort((a, b) => a.level - b.level);

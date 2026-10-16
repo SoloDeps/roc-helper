@@ -30,7 +30,7 @@ import { WonderDetailModal } from "@/components/wonders/wonder-detail-modal";
 
 // ─── Debounced callback ───────────────────────────────────────────────────────
 
-function useDebouncedCallback<T extends (...args: any[]) => void>(
+function useDebouncedCallback<T extends (...args: never[]) => void>(
   callback: T,
   delay: number,
 ): T {

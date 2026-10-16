@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { WONDERS, WONDER_CODES } from "@/data/wonders/index";
-import type { WonderGroup, MaterialType } from "@/data/wonders/types";
+import type { Wonder, WonderGroup, MaterialType } from "@/data/wonders/types";
 
 import {
   useUserWondersMap,
@@ -141,18 +141,14 @@ function GroupedGrid({
   wonders,
   ownedMap,
 }: {
-  wonders: ReturnType<(typeof WONDER_CODES)["map"]> extends Array<infer T>
-    ? Array<NonNullable<T>>
-    : never;
+  wonders: Wonder[];
   ownedMap: Record<string, { code: string; lvl: number }>;
 }) {
   const grouped = useMemo(
     () =>
       WONDER_GROUPS.map((group) => ({
         group,
-        items: (
-          wonders as Array<{ meta: { group: WonderGroup; code: string } }>
-        ).filter((w) => w.meta.group === group),
+        items: wonders.filter((w) => w.meta.group === group),
       })).filter((g) => g.items.length > 0),
     [wonders],
   );
@@ -174,7 +170,7 @@ function GroupedGrid({
             {items.map((wonder) => (
               <WonderGameCard
                 key={wonder.meta.code}
-                wonder={wonder as any}
+                wonder={wonder}
                 currentLevel={ownedMap[wonder.meta.code]?.lvl}
               />
             ))}
@@ -218,7 +214,7 @@ function AllWondersTabContent({
     [material, slot, hideMaxed, ownedMap],
   );
 
-  return <GroupedGrid wonders={filtered as any} ownedMap={ownedMap} />;
+  return <GroupedGrid wonders={filtered} ownedMap={ownedMap} />;
 }
 
 // ─── Filter selects (partagés) ────────────────────────────────────────────────

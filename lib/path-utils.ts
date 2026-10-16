@@ -1,4 +1,12 @@
-import type { TechnoData } from "@/types/shared";
+/**
+ * Ce que les parcours lisent d'un nœud — partagé par les technos et les
+ * régions de campagne.
+ */
+export interface GraphItem {
+  id: string;
+  column: number;
+  required?: string[];
+}
 
 /**
  * Collecte TOUS les ancêtres d'un node cible (toutes branches récursivement).
@@ -6,7 +14,7 @@ import type { TechnoData } from "@/types/shared";
  */
 export function getAllAncestors(
   targetId: string,
-  technologies: TechnoData[]
+  technologies: GraphItem[]
 ): { nodeIds: Set<string>; edgeIds: Set<string> } {
   // Build map id → required[]
   const techMap = new Map(technologies.map((t) => [t.id, t]));
@@ -40,7 +48,7 @@ export function getAllAncestors(
 export function getSubgraphBetween(
   fromId: string,
   toId: string,
-  technologies: TechnoData[]
+  technologies: GraphItem[]
 ): { nodeIds: Set<string>; edgeIds: Set<string>; found: boolean } {
   const techMap = new Map(technologies.map((t) => [t.id, t]));
 
@@ -107,10 +115,10 @@ export function getSubgraphBetween(
 /**
  * Retourne les technos ordonnées par colonne pour affichage
  */
-export function getOrderedTechs(
+export function getOrderedTechs<T extends GraphItem>(
   nodeIds: Set<string>,
-  technologies: TechnoData[]
-): TechnoData[] {
+  technologies: T[]
+): T[] {
   return technologies
     .filter((t) => nodeIds.has(t.id))
     .sort((a, b) => a.column - b.column);

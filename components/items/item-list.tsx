@@ -56,6 +56,12 @@ import { WORKSHOP_ERAS, type EraAbbr } from "@/lib/constants";
 // import type { TechnoEntity } from "@/lib/db/schema";
 import type { HydratedTechno } from "@/lib/db/data-hydration";
 
+/** Un tiroir d'actions groupées, tel que `AccordionActionsDrawer` le reçoit. */
+type DrawerEntry = Pick<
+  React.ComponentProps<typeof AccordionActionsDrawer>,
+  "title" | "allHidden" | "onToggleAllHidden" | "onDeleteAll" | "deleteConfirmMessage"
+>;
+
 // ============================================================================
 // CATALOG ORDER MAPS
 // Precompute sort keys from CATALOG for O(1) lookup
@@ -477,7 +483,7 @@ export function ItemList() {
 
   // Drawer data memoization
   const drawerData = useMemo(() => {
-    const data: Record<string, any> = {};
+    const data: Record<string, DrawerEntry> = {};
 
     // Campaigns drawer
     if (filteredCampaignsByEra.size > 0) {

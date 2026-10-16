@@ -19,6 +19,7 @@ import {
   ReactFlowProvider,
   Node,
   Edge,
+  type NodeProps,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import {
@@ -129,7 +130,18 @@ const SelectionContext = createContext<SelectionCtx>({
 // ============================================================
 // CampaignNode — mirrors TechNodeWithContext exactly
 // ============================================================
-function CampaignNodeWithContext({ id, data, selected }: any) {
+/** Nœud de région tel que `baseNodes` le construit. */
+type CampaignFlowNode = Node<
+  Pick<CampaignRegion, "name" | "parts"> &
+    Partial<Pick<CampaignRegion, "scout" | "boss">>,
+  "custom"
+>;
+
+function CampaignNodeWithContext({
+  id,
+  data,
+  selected,
+}: NodeProps<CampaignFlowNode>) {
   const {
     selectedNodeId,
     connectedNodeIds,
@@ -445,8 +457,8 @@ export function CampaignTreeDesktop({
     () =>
       getOrderedTechs(
         pathNodeIds,
-        regions as any,
-      ) as unknown as CampaignRegion[],
+        regions,
+      ),
     [pathNodeIds, regions],
   );
 
@@ -536,7 +548,7 @@ export function CampaignTreeDesktop({
         parts: regions.find((r) => r.id === n.id)?.parts ?? [],
       },
     }));
-    const { edges: rawEdges } = buildGraphData(techNodes as any);
+    const { edges: rawEdges } = buildGraphData(techNodes);
     // Deduplicate edges — buildGraphData may produce duplicate IDs when multiple
     // regions share the same source-target pair (e.g. "sa_9-sa_11" appearing twice)
     const seenEdgeIds = new Set<string>();
@@ -546,7 +558,7 @@ export function CampaignTreeDesktop({
       return true;
     });
     return {
-      baseNodes: layoutGraphVertical(graphNodes, uniqueEdges, techNodes as any),
+      baseNodes: layoutGraphVertical(graphNodes, uniqueEdges, techNodes),
       baseEdges: uniqueEdges.map((e) => ({
         ...e,
         sourceHandle: "top",
@@ -735,9 +747,9 @@ export function CampaignTreeDesktop({
   }, [campaignEntities, baseNodes, completedIds]);
 
   const onNodeClick = useCallback(
-    (_e: React.MouseEvent, node: any) => {
+    (_e: React.MouseEvent, node: Node) => {
       if (mode === "ancestors-pick") {
-        const { nodeIds, edgeIds } = getAllAncestors(node.id, regions as any);
+        const { nodeIds, edgeIds } = getAllAncestors(node.id, regions);
         applyResult(nodeIds, edgeIds, true, node.id);
         setMode("ancestors-result");
         return;
@@ -752,7 +764,7 @@ export function CampaignTreeDesktop({
         const { nodeIds, edgeIds, found } = getSubgraphBetween(
           pathFromId!,
           node.id,
-          regions as any,
+          regions,
         );
         applyResult(nodeIds, edgeIds, found, node.id, pathFromId!);
         setMode("path-result");

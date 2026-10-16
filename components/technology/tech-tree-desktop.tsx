@@ -19,9 +19,14 @@ import {
   ReactFlowProvider,
   Node,
   Edge,
+  type NodeProps,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { buildGraphData, layoutGraph } from "@/lib/layout-graph";
+import {
+  buildGraphData,
+  layoutGraph,
+  type TechNode,
+} from "@/lib/layout-graph";
 import { TechDetailsPanel } from "./tech-details-panel";
 import { TechPathPanel } from "./tech-path-panel";
 import type { TechnoData } from "@/types/shared";
@@ -123,7 +128,13 @@ const SelectionContext = createContext<SelectionCtx>({
 // ============================================================
 // TechNode — image-based game-style node
 // ============================================================
-function TechNodeWithContext({ id, data, selected }: any) {
+/** Nœud de techno tel que `buildGraphData` le construit. */
+type TechFlowNode = Node<
+  Pick<TechNode, "name" | "costs" | "allied" | "hidden">,
+  "custom"
+>;
+
+function TechNodeWithContext({ id, data, selected }: NodeProps<TechFlowNode>) {
   const {
     selectedNodeId,
     connectedNodeIds,
@@ -517,9 +528,9 @@ export function TechTreeDesktop({
       ...tech,
       completed: technosInDB?.find((t) => t.id === tech.id)?.hidden ?? false,
     }));
-    const { nodes, edges } = buildGraphData(enriched as any);
+    const { nodes, edges } = buildGraphData(enriched);
     return {
-      baseNodes: layoutGraph(nodes, edges, "LR", enriched as any),
+      baseNodes: layoutGraph(nodes, edges, "LR", enriched),
       baseEdges: edges,
     };
   }, [technologies, technosInDB]);
@@ -714,7 +725,7 @@ export function TechTreeDesktop({
   }, [technosInDB, baseNodes, completedIds]);
 
   const onNodeClick = useCallback(
-    (_e: React.MouseEvent, node: any) => {
+    (_e: React.MouseEvent, node: Node) => {
       if (mode === "ancestors-pick") {
         const { nodeIds, edgeIds } = getAllAncestors(node.id, technologies);
         applyResult(nodeIds, edgeIds, true, node.id);
