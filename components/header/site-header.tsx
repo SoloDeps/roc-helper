@@ -76,7 +76,7 @@ function NavLink({
 function SupportButton() {
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="sm"
       className="text-rose-600 hover:bg-rose-500/10 hover:text-rose-600 dark:text-rose-400 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
       asChild
