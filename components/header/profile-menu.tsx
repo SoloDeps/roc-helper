@@ -81,11 +81,11 @@ export function ProfileMenu({ className }: { className?: string }) {
           <Button
             variant="outline"
             size="sm"
-            className={cn("max-w-40", className)}
+            className={cn("max-w-[90px]", className)}
             aria-label={`Profile: ${active.name}`}
           >
             <CircleUserRound />
-            <span className="hidden truncate sm:inline">{active.name}</span>
+            <span className="min-w-0 truncate">{active.name}</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
@@ -110,7 +110,7 @@ export function ProfileMenu({ className }: { className?: string }) {
             onSelect={() => setDialog("create")}
           >
             <Plus /> New profile
-            <span className="text-muted-foreground ml-auto text-xs">
+            <span className="bg-muted text-foreground ml-auto rounded-sm px-2 py-0.5 text-sm font-semibold tabular-nums">
               {profiles.length}/{MAX_PROFILES}
             </span>
           </DropdownMenuItem>
@@ -209,10 +209,18 @@ function ManageProfiles({
   profiles: Profile[];
   activeId: string;
 }) {
+  const [newId, setNewId] = useState<string | null>(null);
+  const emptySlots = Math.max(0, MAX_PROFILES - profiles.length);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <p className="font-semibold">Manage profiles</p>
+        <p className="font-semibold">
+          Manage profiles
+          <span className="bg-muted text-foreground ml-2 rounded-sm px-2 py-0.5 text-sm font-semibold tabular-nums">
+            {profiles.length}/{MAX_PROFILES}
+          </span>
+        </p>
         <p className="text-muted-foreground">
           The active profile can&apos;t be deleted — switch to another one
           first.
@@ -220,7 +228,29 @@ function ManageProfiles({
       </div>
       <ul className="flex flex-col gap-2">
         {profiles.map((p) => (
-          <ProfileRow key={p.id} profile={p} isActive={p.id === activeId} />
+          <ProfileRow
+            key={p.id}
+            profile={p}
+            isActive={p.id === activeId}
+            startEditing={p.id === newId}
+          />
+        ))}
+        {Array.from({ length: emptySlots }, (_, i) => (
+          <li key={`empty-${i}`}>
+            <button
+              type="button"
+              className="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-11 w-full items-center justify-center gap-2 rounded-md border border-dashed px-3 text-sm transition-colors"
+              onClick={() => {
+                try {
+                  setNewId(createProfile(`Profile ${profiles.length + 1}`).id);
+                } catch {
+                  toast.error(`You can have up to ${MAX_PROFILES} profiles`);
+                }
+              }}
+            >
+              <Plus className="size-4" /> Create profile
+            </button>
+          </li>
         ))}
       </ul>
     </div>
@@ -230,22 +260,24 @@ function ManageProfiles({
 function ProfileRow({
   profile,
   isActive,
+  startEditing = false,
 }: {
   profile: Profile;
   isActive: boolean;
+  startEditing?: boolean;
 }) {
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(startEditing);
   const [name, setName] = useState(profile.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const cancelled = useRef(false);
 
   if (editing) {
     return (
-      <li>
+      <li className="focus-within:border-ring focus-within:ring-ring/50 flex h-11 items-center rounded-md border px-3 focus-within:ring-[3px]">
         {/* Entrée ou perte de focus = sauvegarde ; Échap = annule. */}
         <input
           autoFocus
-          className={inputCls}
+          className="h-full w-full min-w-0 bg-transparent text-sm outline-none"
           aria-label={`Name of ${profile.name}`}
           maxLength={PROFILE_NAME_MAX_LENGTH}
           value={name}
@@ -275,7 +307,7 @@ function ProfileRow({
   }
 
   return (
-    <li className="flex items-center gap-2 rounded-md border px-3 py-1.5">
+    <li className="flex h-11 items-center gap-2 rounded-md border px-3">
       <span className="flex-1 truncate">
         {profile.name}
         {isActive && (

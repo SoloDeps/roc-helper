@@ -58,7 +58,7 @@ function isProfileScopedKey(key: string): boolean {
 }
 
 const DEFAULT_REGISTRY: ProfileRegistry = {
-  profiles: [{ id: DEFAULT_PROFILE_ID, name: "Main", createdAt: 0 }],
+  profiles: [{ id: DEFAULT_PROFILE_ID, name: "Profile", createdAt: 0 }],
   activeId: DEFAULT_PROFILE_ID,
 };
 

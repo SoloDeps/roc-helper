@@ -35,7 +35,7 @@ export default function HomePage() {
           <div className="@container/page-layout relative flex size-full min-h-0 flex-col">
             {/* Header with actions */}
             <header className="flex shrink-0 flex-col w-full transition-colors border-b bg-roc-blue">
-              <div className="flex shrink-0 w-full justify-between items-center gap-3 px-3 h-12 sm:mx-0">
+              <div className="flex shrink-0 w-full justify-between items-center gap-3 container-wrapper h-12 sm:mx-0 md:px-3">
                 {/* Left side */}
                 <div className="flex gap-2">
                   {/* Desktop: Add button */}

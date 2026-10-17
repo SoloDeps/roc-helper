@@ -4,6 +4,7 @@ import * as React from "react";
 import Link, { type LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 
+import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +15,11 @@ import {
 
 export function MobileNav({
   items,
+  supportHref,
   className,
 }: {
   items: { href: string; label: string; external?: boolean }[];
+  supportHref?: string;
   className?: string;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -80,6 +83,20 @@ export function MobileNav({
                   {item.label}
                 </MobileLink>
               ))}
+              {supportHref && (
+                <MobileLink
+                  href={supportHref}
+                  external
+                  onOpenChange={setOpen}
+                  className="mt-3 text-rose-600 dark:text-rose-400"
+                >
+                  Support
+                  <Heart
+                    aria-hidden
+                    className="size-5 fill-current [animation:support-heartbeat_1.1s_ease-in-out_infinite] motion-reduce:[animation:none]"
+                  />
+                </MobileLink>
+              )}
             </div>
           </div>
         </div>

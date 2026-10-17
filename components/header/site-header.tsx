@@ -137,7 +137,7 @@ export function SiteHeader() {
       </Link>
 
       {/* Nav: left links + right links with justify-between */}
-      <div className="hidden md:flex flex-1 items-center justify-between px-2.5">
+      <div className="hidden md:flex flex-1 items-center justify-between pl-2.5">
         <div className="flex items-center gap-0.5">
           {leftNavLinks.map((link) => (
             <NavLink
@@ -153,16 +153,14 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile */}
-      <div className="flex md:hidden justify-between flex-1 items-center gap-1.5 mr-1.5">
-        <MobileNav
-          items={[
-            ...siteConfig.navItems,
-            { href: SUPPORT_URL, label: "Support", external: true },
-          ]}
-        />
-        <WorkshopModal />
-        <ProfileMenu />
+      {/* Mobile : Support vit dans le menu (voir MobileNav) */}
+      <div className="flex md:hidden flex-1 items-center gap-1.5">
+        <MobileNav items={siteConfig.navItems} supportHref={SUPPORT_URL} />
+        {/* Workshops + profil collés à droite */}
+        <div className="ml-auto flex items-center gap-1.5">
+          <WorkshopModal />
+          <ProfileMenu />
+        </div>
       </div>
     </header>
   );
