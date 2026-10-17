@@ -78,11 +78,17 @@ function SupportButton() {
     <Button
       variant="ghost"
       size="sm"
-      className="text-rose-600 hover:bg-rose-500/10 hover:text-rose-600 dark:text-rose-400 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
+      className="support-btn text-rose-600 hover:bg-rose-500/10 hover:text-rose-600 dark:text-rose-400 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
       asChild
     >
       <a href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">
-        <Heart className="size-4" />
+        <span className="relative inline-flex">
+          <Heart className="support-heart size-4" />
+          {/* Petits cœurs qui s'envolent au survol */}
+          <Heart aria-hidden className="support-float support-float-1" />
+          <Heart aria-hidden className="support-float support-float-2" />
+          <Heart aria-hidden className="support-float support-float-3" />
+        </span>
         Support
       </a>
     </Button>

@@ -1,16 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   Check,
+  CircleUserRound,
   ExternalLink,
   Info,
   Pencil,
   Plus,
   Settings2,
   Trash2,
-  UserRound,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -84,7 +84,7 @@ export function ProfileMenu({ className }: { className?: string }) {
             className={cn("max-w-40", className)}
             aria-label={`Profile: ${active.name}`}
           >
-            <UserRound />
+            <CircleUserRound />
             <span className="hidden truncate sm:inline">{active.name}</span>
           </Button>
         </DropdownMenuTrigger>
@@ -237,29 +237,39 @@ function ProfileRow({
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(profile.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const cancelled = useRef(false);
 
   if (editing) {
     return (
       <li>
-        <form
-          className="flex items-center gap-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            renameProfile(profile.id, name);
+        {/* Entrée ou perte de focus = sauvegarde ; Échap = annule. */}
+        <input
+          autoFocus
+          className={inputCls}
+          aria-label={`Name of ${profile.name}`}
+          maxLength={PROFILE_NAME_MAX_LENGTH}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          onFocus={(e) => e.currentTarget.select()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              e.currentTarget.blur();
+            } else if (e.key === "Escape") {
+              // Évite que Radix ferme la modale
+              e.stopPropagation();
+              cancelled.current = true;
+              e.currentTarget.blur();
+            }
+          }}
+          onBlur={() => {
+            if (!cancelled.current && name.trim() !== profile.name) {
+              renameProfile(profile.id, name);
+            }
+            cancelled.current = false;
             setEditing(false);
           }}
-        >
-          <input
-            autoFocus
-            className={inputCls}
-            maxLength={PROFILE_NAME_MAX_LENGTH}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Button type="submit" size="sm">
-            Save
-          </Button>
-        </form>
+        />
       </li>
     );
   }
